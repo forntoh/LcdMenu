@@ -19,33 +19,30 @@ char keys[KEYPAD_ROWS][KEYPAD_COLS] = {{'1', '2', '3', 'A'},
 byte colPins[KEYPAD_ROWS] = {5, 4, 3, 2};
 byte rowPins[KEYPAD_COLS] = {9, 8, 7, 6};
 
-String menuItems[] = {"Item 1", "ITEM 2", "ITEM 3", "ITEM 4",
-                      "ITEM 5", "ITEM 6", "ITEM 7", "ITEM 8"};
+String menuItems[] = {
+    "Start service",  "Connect to WiFi", "Configure server",
+    "Reset settings", "Menu Item 5",     "Menu Item 6",
+};
 
-Menus menu1(LCD_ROWS, LCD_COLS, menuItems);
+Menus menu1(LCD_ROWS, LCD_COLS, menuItems, 6);
 
 Keypad keypad =
     Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-void setup() {
-    Serial.begin(9600);
-    menu1.setupLCD(LCD_ADDR);
-    menu1.drawMenu();
-    menu1.drawCursor();
-}
+void setup() { menu1.setupLCD(LCD_ADDR); }
 
 void loop() {
     char key = keypad.getKey();
-    if (key != NO_KEY) {
-        switch (key) {
-            case 'A':
-                menu1.up();
-                break;
-            case 'B':
-                menu1.down();
-                break;
-            default:
-                break;
-        }
+    if (key == NO_KEY) return;
+
+    switch (key) {
+        case 'A':
+            menu1.up();
+            break;
+        case 'B':
+            menu1.down();
+            break;
+        default:
+            break;
     }
 }

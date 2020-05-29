@@ -1,4 +1,3 @@
-#pragma once
 #ifndef Menus_H
 #define Menus_H
 #include <Arduino.h>
@@ -6,12 +5,12 @@
 
 class Menus {
    private:
-    unsigned int top;
+    int cursorPosition = 0;
+    unsigned int top = 0;
     unsigned int bottom;
     unsigned int maxRows;
     unsigned int maxCols;
-    unsigned int cursorPosition = 0;
-    unsigned int maxMenuPages;
+    unsigned int lastIndex;
     LiquidCrystal_I2C* lcd;
     String* menuItems;
     byte downArrow[8] = {
@@ -46,13 +45,15 @@ class Menus {
         0B01000,  //  *
         0B00000   //
     };
-
-   public:
-    Menus(int maxRows, int maxCols, String menuItems[]);
-    void setupLCD(uint8_t lcd_Addr);
     void drawCursor();
     void drawMenu();
+
+   public:
+    Menus(int maxRows, int maxCols, String menuItems[], int size);
+    int getCursorPosition();
+    void setupLCD(uint8_t lcd_Addr);
     void up();
     void down();
+    void refresh();
 };
 #endif

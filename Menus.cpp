@@ -1,13 +1,11 @@
 #include "Menus.h"
 
-Menus::Menus(int maxRows, int maxCols, String menuItems[]) {
+Menus::Menus(int maxRows, int maxCols, String menuItems[], int size) {
     this->maxRows = maxRows;
     this->maxCols = maxCols;
     this->menuItems = menuItems;
-    maxMenuPages = round(((sizeof(menuItems) / sizeof(String)) / maxRows) + .5);
-
-    top = 0;
-    bottom = maxRows;
+    this->lastIndex = size - 1;
+    this->bottom = maxRows - 1;
 }
 
 void Menus::setupLCD(uint8_t lcd_Addr) {
@@ -18,6 +16,14 @@ void Menus::setupLCD(uint8_t lcd_Addr) {
     lcd->createChar(0, menuCursor);
     lcd->createChar(1, upArrow);
     lcd->createChar(2, downArrow);
+    refresh();
+}
+
+int Menus::getCursorPosition() { return cursorPosition; }
+
+void Menus::refresh() {
+    drawMenu();
+    drawCursor();
 }
 
 void Menus::drawCursor() {
@@ -26,7 +32,8 @@ void Menus::drawCursor() {
         lcd->setCursor(0, x);
         lcd->print(" ");
     }
-    int line = constrain(cursorPosition, 0, maxRows - 1);
+
+    int line = constrain(cursorPosition - top, 0, maxRows - 1);
     lcd->setCursor(0, line);
     lcd->write(byte(0));
 }
@@ -34,25 +41,23 @@ void Menus::drawCursor() {
 void Menus::drawMenu() {
     lcd->clear();
 
-    for (int i = top; i < bottom; i++) {
-        // int item = menuPage * maxRows + i;
-        // if (item > sizeof(menuItems) / sizeof(String)) break;
-        lcd->setCursor(1, i);
-        lcd->print(menuItems[menuPage + i]);
+    for (int i = top; i <= bottom; i++) {
+        lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
+        lcd->print(menuItems[i]);
     }
 
-    if (menuPage == 0) {
+    if (top == 0) {
         // Print the down arrow only
         lcd->setCursor(maxCols - 1, maxRows - 1);
         lcd->write(byte(2));
-    } else if (menuPage > 0 && menuPage < maxMenuPages) {
+    } else if (top > 0 && bottom < lastIndex) {
         // Print the down arrow
         lcd->setCursor(maxCols - 1, maxRows - 1);
         lcd->write(byte(2));
         // Print the up arrow
         lcd->setCursor(maxCols - 1, 0);
         lcd->write(byte(1));
-    } else if (menuPage == maxMenuPages) {
+    } else if (bottom == lastIndex) {
         // Print the up arrow only
         lcd->setCursor(maxCols - 1, 0);
         lcd->write(byte(1));
@@ -60,29 +65,31 @@ void Menus::drawMenu() {
 }
 
 void Menus::up() {
-    cursorPosition -= 1;
-    cursorPosition = constrain(cursorPosition, 0,
-                               ((sizeof(menuItems) / sizeof(String)) - 1));
-
-    if (cursorPosition % maxRows == 0) {
-        menuPage--;
-        menuPage = constrain(menuPage, 0, maxMenuPages);
+    cursorPosition--;
+    if (cursorPosition < 0) {
+        cursorPosition = 0;
+        return;
     }
-
-    drawMenu();
-    drawCursor();
+    if (cursorPosition < top) {
+        top--;
+        bottom--;
+        top = constrain(top, 0, lastIndex);
+        bottom = constrain(bottom, 0, lastIndex);
+    }
+    refresh();
 }
 
 void Menus::down() {
-    cursorPosition += 1;
-    cursorPosition = constrain(cursorPosition, 0,
-                               ((sizeof(menuItems) / sizeof(String)) - 1));
-
-    if (cursorPosition % maxRows == 0) {
-        menuPage++;
-        menuPage = constrain(menuPage, 0, maxMenuPages);
+    cursorPosition++;
+    if (cursorPosition > lastIndex) {
+        cursorPosition = lastIndex;
+        return;
     }
-
-    drawMenu();
-    drawCursor();
+    if (cursorPosition > bottom) {
+        top++;
+        bottom++;
+        top = constrain(top, 0, lastIndex);
+        bottom = constrain(bottom, 0, lastIndex);
+    }
+    refresh();
 }
