@@ -1,6 +1,6 @@
-#include "Menus.h"
+#include "LcdMenu.h"
 
-Menus::Menus(int maxRows, int maxCols, String menuItems[], int size) {
+LcdMenu::LcdMenu(int maxRows, int maxCols, String menuItems[], int size) {
     this->maxRows = maxRows;
     this->maxCols = maxCols;
     this->menuItems = menuItems;
@@ -8,7 +8,7 @@ Menus::Menus(int maxRows, int maxCols, String menuItems[], int size) {
     this->bottom = maxRows - 1;
 }
 
-void Menus::setupLCD(uint8_t lcd_Addr) {
+void LcdMenu::setupLCD(uint8_t lcd_Addr) {
     lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
     lcd->init();
     lcd->backlight();
@@ -19,14 +19,14 @@ void Menus::setupLCD(uint8_t lcd_Addr) {
     refresh();
 }
 
-int Menus::getCursorPosition() { return cursorPosition; }
+int LcdMenu::getCursorPosition() { return cursorPosition; }
 
-void Menus::refresh() {
+void LcdMenu::refresh() {
     drawMenu();
     drawCursor();
 }
 
-void Menus::drawCursor() {
+void LcdMenu::drawCursor() {
     // Erases current cursor
     for (int x = 0; x < maxRows; x++) {
         lcd->setCursor(0, x);
@@ -38,7 +38,7 @@ void Menus::drawCursor() {
     lcd->write(byte(0));
 }
 
-void Menus::drawMenu() {
+void LcdMenu::drawMenu() {
     lcd->clear();
 
     for (int i = top; i <= bottom; i++) {
@@ -64,7 +64,7 @@ void Menus::drawMenu() {
     }
 }
 
-void Menus::up() {
+void LcdMenu::up() {
     cursorPosition--;
     if (cursorPosition < 0) {
         cursorPosition = 0;
@@ -79,7 +79,7 @@ void Menus::up() {
     refresh();
 }
 
-void Menus::down() {
+void LcdMenu::down() {
     cursorPosition++;
     if (cursorPosition > lastIndex) {
         cursorPosition = lastIndex;

@@ -1,9 +1,9 @@
-#ifndef Menus_H
-#define Menus_H
+#ifndef LcdMenu_H
+#define LcdMenu_H
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
-class Menus {
+class LcdMenu {
    private:
     int cursorPosition = 0;
     unsigned int top = 0;
@@ -49,7 +49,7 @@ class Menus {
     void drawMenu();
 
    public:
-    Menus(int maxRows, int maxCols, String menuItems[], int size);
+    LcdMenu(int maxRows, int maxCols, String menuItems[], int size);
     int getCursorPosition();
     void setupLCD(uint8_t lcd_Addr);
     void up();
