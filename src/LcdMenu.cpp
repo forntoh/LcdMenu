@@ -190,6 +190,9 @@ void LcdMenu::select() {
             paint();
             break;
         }
+        case MENU_ITEM_TYPE_INPUT: {
+                        break;
+        }
     }
 }
 //
