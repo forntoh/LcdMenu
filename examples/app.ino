@@ -1,7 +1,7 @@
 #include <Key.h>
 #include <Keypad.h>
 
-#include "Menus.h"
+#include "LcdMenu.h"
 
 #define LCD_ADDR 0x27
 
@@ -19,17 +19,31 @@ char keys[KEYPAD_ROWS][KEYPAD_COLS] = {{'1', '2', '3', 'A'},
 byte colPins[KEYPAD_ROWS] = {5, 4, 3, 2};
 byte rowPins[KEYPAD_COLS] = {9, 8, 7, 6};
 
-String menuItems[] = {
-    "Start service",  "Connect to WiFi", "Configure server",
-    "Reset settings", "Menu Item 5",     "Menu Item 6",
-};
+extern MENU_ITEM mainMenu[];
+extern MENU_ITEM subMenu[];
 
-Menus menu1(LCD_ROWS, LCD_COLS, menuItems, 6);
+MENU_ITEM subMenu[] = {{MENU_ITEM_TYPE_SUB_MENU_HEADER, "", NULL, mainMenu},
+                       {MENU_ITEM_TYPE_COMMAND, "Sub slow", NULL, NULL},
+                       {MENU_ITEM_TYPE_COMMAND, "Sub fast", NULL, NULL},
+                       {MENU_ITEM_TYPE_COMMAND, "Sub heart", NULL, NULL},
+                       {MENU_ITEM_TYPE_COMMAND, "Sub SOS", NULL, NULL},
+                       {MENU_ITEM_TYPE_COMMAND, "Sub random", NULL, NULL},
+                       {MENU_ITEM_TYPE_END_OF_MENU, "", NULL, NULL}};
+
+MENU_ITEM mainMenu[] = {{MENU_ITEM_TYPE_MAIN_MENU_HEADER, "", NULL, mainMenu},
+                        {MENU_ITEM_TYPE_SUB_MENU, "Blink slow", NULL, NULL},
+                        {MENU_ITEM_TYPE_COMMAND, "Blink fast", NULL, NULL},
+                        {MENU_ITEM_TYPE_SUB_MENU, "Blink heart", NULL, subMenu},
+                        {MENU_ITEM_TYPE_COMMAND, "Blink SOS", NULL, NULL},
+                        {MENU_ITEM_TYPE_COMMAND, "Blink random", NULL, NULL},
+                        {MENU_ITEM_TYPE_END_OF_MENU, "", NULL, NULL}};
+
+LcdMenu menu1(LCD_ROWS, LCD_COLS);
 
 Keypad keypad =
     Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-void setup() { menu1.setupLCD(LCD_ADDR); }
+void setup() { menu1.setupLcdWithMenu(LCD_ADDR, mainMenu); }
 
 void loop() {
     char key = keypad.getKey();
@@ -41,6 +55,12 @@ void loop() {
             break;
         case 'B':
             menu1.down();
+            break;
+        case 'C':
+            menu1.select();
+            break;
+        case 'D':
+            menu1.back();
             break;
         default:
             break;
