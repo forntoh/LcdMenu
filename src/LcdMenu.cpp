@@ -45,7 +45,7 @@ void LcdMenu::reset() {
 //
 // this function checks if the cursor is at the start of the menu items
 //
-boolean LcdMenu::isAtTheTop() {
+boolean LcdMenu::isAtTheStart() {
     byte menuType = currentMenuTable[cursorPosition - 1].MenuItemType;
     return menuType == MENU_ITEM_TYPE_MAIN_MENU_HEADER ||
            menuType == MENU_ITEM_TYPE_SUB_MENU_HEADER;
@@ -96,7 +96,7 @@ void LcdMenu::drawMenu() {
         //
         lcd->setCursor(maxCols - 1, maxRows - 1);
         lcd->write(byte(1));
-    } else if (!isAtTheTop() && !isAtTheEnd()) {
+    } else if (!isAtTheStart() && !isAtTheEnd()) {
         //
         // Print the down arrow
         //
@@ -120,9 +120,9 @@ void LcdMenu::drawMenu() {
 //
 void LcdMenu::up() {
     //
-    // determine if cursor has passed the top
+    // determine if cursor ia at start of menu items
     //
-    if (isAtTheTop()) return;
+    if (isAtTheStart()) return;
     cursorPosition--;
     //
     // determine if cursor is at the top of the screen

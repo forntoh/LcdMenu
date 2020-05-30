@@ -90,7 +90,7 @@ class LcdMenu {
     //
     // this function checks if the cursor is at the start of the menu items
     //
-    boolean isAtTheTop();
+    boolean isAtTheStart();
     //
     // this function checks if the cursor is at the end of the menu items
     //
