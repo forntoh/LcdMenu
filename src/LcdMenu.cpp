@@ -122,13 +122,7 @@ void LcdMenu::up() {
     //
     // determine if cursor has passed the top
     //
-    if (isAtTheTop()) {
-        //
-        // increment the cursor
-        //
-        cursorPosition++;
-        return;
-    }
+    if (isAtTheTop()) return;
     cursorPosition--;
     //
     // determine if cursor is at the top of the screen
@@ -149,13 +143,7 @@ void LcdMenu::down() {
     //
     // determine if cursor has passed the end
     //
-    if (isAtTheEnd()) {
-        //
-        // decrement the cursor
-        //
-        cursorPosition--;
-        return;
-    }
+    if (isAtTheEnd()) return;
     cursorPosition++;
     //
     // determine if cursor is at the bottom of the screen
