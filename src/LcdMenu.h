@@ -136,5 +136,9 @@ class LcdMenu {
     // call this function to execute a "backpress"
     //
     void back();
+    //
+    //
+    //
+    void setText(String text, boolean isPassword);
 };
 #endif
