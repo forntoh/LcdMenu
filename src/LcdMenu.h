@@ -19,6 +19,7 @@ const byte MENU_ITEM_TYPE_MAIN_MENU_HEADER = 0;
 const byte MENU_ITEM_TYPE_SUB_MENU_HEADER = 1;
 const byte MENU_ITEM_TYPE_SUB_MENU = 2;
 const byte MENU_ITEM_TYPE_COMMAND = 3;
+const byte MENU_ITEM_TYPE_INPUT = 4;
 const byte MENU_ITEM_TYPE_END_OF_MENU = 5;
 //
 // the LcdMenu class
