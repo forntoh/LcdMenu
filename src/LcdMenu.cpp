@@ -74,6 +74,13 @@ void LcdMenu::drawCursor() {
     int line = constrain(cursorPosition - top, 0, maxRows - 1);
     lcd->setCursor(0, line);
     lcd->write(0x3E);
+    //
+    // If cursor is at MENU_ITEM_TYPE_INPUT enable blinking
+    //
+    if (currentMenuTable[cursorPosition].MenuItemType == MENU_ITEM_TYPE_INPUT)
+        lcd->blink();
+    else
+        lcd->noBlink();
 }
 //
 // this function draws the menu items with up and down indicators
