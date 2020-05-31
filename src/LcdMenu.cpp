@@ -249,37 +249,29 @@ void LcdMenu::back() {
 //
 // display text at the cursor position
 //  text: String        = text to display
-//  isPassword: boolean = determines wether text should be hidden or not
 //
-void LcdMenu::setText(String text, boolean isPassword) {
+void LcdMenu::setText(String text) {
+    MenuItem *item = &currentMenuTable[cursorPosition];
     //
     // get the type of the currently displayed menu
     //
-    byte menuItemType = currentMenuTable[cursorPosition].getType();
+    byte menuItemType = item->getType();
     //
     // check if this is input menu type, if so print text
     //
     if (menuItemType == MENU_ITEM_INPUT) {
         //
-        // clear the line where the cursor is
+        // set the value
         //
-        lcd->noBlink();
-        for (int i = text.length() + 1; i < maxCols; i++) {
-            lcd->setCursor(i, cursorPosition - 1);
-            lcd->write(0x10);
-        }
-        lcd->blink();
-        lcd->setCursor(1, cursorPosition - 1);
+        item->value = text;
         //
-        // print the text
+        // repaint menu
         //
-        for (int i = 0; i < constrain(text.length(), 0, maxCols - 2); i++) {
-            lcd->setCursor(i + 1, cursorPosition - 1);
-            if (isPassword) {
-                lcd->print('*');
-            } else {
-                lcd->print(text[i]);
-            }
-        }
+        paint();
+        //
+        // place cursor at end of text
+        //
+        int col = ((String)item->getText()).length() + 3 + text.length();
+        lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 }

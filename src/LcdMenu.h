@@ -121,8 +121,7 @@ class LcdMenu {
     //
     // display text at the cursor position
     //  text: String        = text to display
-    //  isPassword: boolean = determines wether text should be hidden or not
     //
-    void setText(String text, boolean isPassword);
+    void setText(String text);
 };
 #endif
