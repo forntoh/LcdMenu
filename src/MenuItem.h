@@ -11,7 +11,8 @@ const byte MENU_ITEM_SUB_MENU = 2;
 const byte MENU_ITEM_COMMAND = 3;
 const byte MENU_ITEM_INPUT = 4;
 const byte MENU_ITEM_NONE = 5;
-const byte MENU_ITEM_END_OF_MENU = 6;
+const byte MENU_ITEM_TOGGLE = 5;
+const byte MENU_ITEM_END_OF_MENU = 7;
 //
 // the MenuItem class
 //
@@ -73,6 +74,18 @@ class ItemInput : public MenuItem {
 class ItemSubMenu : public MenuItem {
    public:
     ItemSubMenu(char* text, MenuItem* parent) : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
+};
+
+class ItemToggle : public MenuItem {
+   private:
+    boolean isOn = false;
+    char* textOn = "ON";
+    char* textOff = "OFF";
+
+   public:
+    ItemToggle(char* key, fptr callback) : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
+    ItemToggle(char* key, char* textOn, char* textOff, fptr callback)
+        : textOn(textOn), textOff(textOff), MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
 };
 
 #endif
