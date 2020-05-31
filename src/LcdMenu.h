@@ -30,10 +30,6 @@ class LcdMenu {
     //
     unsigned int maxCols;
     //
-    // LCD Display
-    //
-    LiquidCrystal_I2C* lcd;
-    //
     // array of menu items
     //
     MenuItem* currentMenuTable;
@@ -89,6 +85,10 @@ class LcdMenu {
     void reset();
 
    public:
+    //
+    // LCD Display
+    //
+    LiquidCrystal_I2C* lcd;
     //
     // constructor for the LcdMenu class
     //  Enter:  maxRows = rows on lcd display e.g. 4

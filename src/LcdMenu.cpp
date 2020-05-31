@@ -171,15 +171,16 @@ void LcdMenu::down() {
 // call this function to execute a "select"
 //
 void LcdMenu::select() {
+    MenuItem *item = &currentMenuTable[cursorPosition];
     //
     // determine the type of menu entry, then execute it
     //
-    switch (currentMenuTable[cursorPosition].getType()) {
+    switch (item->getType()) {
         //
         // switch the menu to the selected sub menu
         //
         case MENU_ITEM_SUB_MENU: {
-            currentMenuTable = currentMenuTable[cursorPosition].getSubMenu();
+            currentMenuTable = item->getSubMenu();
             //
             // display the parent menu
             //
@@ -193,7 +194,22 @@ void LcdMenu::select() {
             //
             // execute the menu item's function
             //
-            (currentMenuTable[cursorPosition].getCallback())();
+            (item->getCallback())();
+            //
+            // display the menu again
+            //
+            paint();
+            break;
+        }
+        case MENU_ITEM_TOGGLE: {
+            //
+            // toggle the value of isOn
+            //
+            item->isOn = !item->isOn;
+            //
+            // execute the menu item's function
+            //
+            (item->getCallback())();
             //
             // display the menu again
             //
