@@ -44,4 +44,9 @@ class MenuItem {
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
 };
 
+class MenuHeader : public MenuItem {
+   public:
+    MenuHeader() : MenuItem("", NULL, this, MENU_ITEM_TYPE_MAIN_MENU_HEADER) {}
+};
+
 #endif
