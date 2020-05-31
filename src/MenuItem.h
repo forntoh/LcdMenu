@@ -49,4 +49,9 @@ class MenuHeader : public MenuItem {
     MenuHeader() : MenuItem("", NULL, this, MENU_ITEM_TYPE_MAIN_MENU_HEADER) {}
 };
 
+class MenuFooter : public MenuItem {
+   public:
+    MenuFooter() : MenuItem("", NULL, NULL, MENU_ITEM_TYPE_END_OF_MENU) {}
+};
+
 #endif
