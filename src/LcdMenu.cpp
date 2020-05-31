@@ -16,7 +16,7 @@ LcdMenu::LcdMenu(int maxRows, int maxCols) {
 //  Enter:  lcd_Addr = address of the LCD display on the I2C bus (default 0x27)
 //          menu     = menu to display
 //
-void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MENU_ITEM *menu) {
+void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
     lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
     lcd->init();
     lcd->backlight();
@@ -46,7 +46,7 @@ void LcdMenu::reset() {
 // this function checks if the cursor is at the start of the menu items
 //
 boolean LcdMenu::isAtTheStart() {
-    byte menuType = currentMenuTable[cursorPosition - 1].MenuItemType;
+    byte menuType = currentMenuTable[cursorPosition - 1].getType();
     return menuType == MENU_ITEM_TYPE_MAIN_MENU_HEADER ||
            menuType == MENU_ITEM_TYPE_SUB_MENU_HEADER;
 }
@@ -54,8 +54,7 @@ boolean LcdMenu::isAtTheStart() {
 // this function checks if the cursor is at the end of the menu items
 //
 boolean LcdMenu::isAtTheEnd() {
-    return currentMenuTable[cursorPosition + 1].MenuItemType ==
-           MENU_ITEM_TYPE_END_OF_MENU;
+    return currentMenuTable[cursorPosition + 1].getType() == MENU_ITEM_TYPE_END_OF_MENU;
 }
 //
 // this function draws the cursor
@@ -77,7 +76,7 @@ void LcdMenu::drawCursor() {
     //
     // If cursor is at MENU_ITEM_TYPE_INPUT enable blinking
     //
-    if (currentMenuTable[cursorPosition].MenuItemType == MENU_ITEM_TYPE_INPUT)
+    if (currentMenuTable[cursorPosition].getType() == MENU_ITEM_TYPE_INPUT)
         lcd->blink();
     else
         lcd->noBlink();
@@ -92,7 +91,7 @@ void LcdMenu::drawMenu() {
     //
     for (int i = top; i <= bottom; i++) {
         lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
-        lcd->print(currentMenuTable[i].MenuItemText);
+        lcd->print(currentMenuTable[i].getText());
     }
     //
     // determine if cursor is at the top
@@ -171,12 +170,12 @@ void LcdMenu::select() {
     //
     // determine the type of menu entry, then execute it
     //
-    switch (currentMenuTable[cursorPosition].MenuItemType) {
+    switch (currentMenuTable[cursorPosition].getType()) {
         //
         // switch the menu to the selected sub menu
         //
         case MENU_ITEM_TYPE_SUB_MENU: {
-            currentMenuTable = currentMenuTable[cursorPosition].MenuItemSubMenu;
+            currentMenuTable = currentMenuTable[cursorPosition].getSubMenu();
             //
             // display the parent menu
             //
@@ -190,7 +189,7 @@ void LcdMenu::select() {
             //
             // execute the menu item's function
             //
-            (currentMenuTable[cursorPosition].MenuItemFunction)();
+            (currentMenuTable[cursorPosition].getCallback())();
             //
             // display the menu again
             //
@@ -209,12 +208,12 @@ void LcdMenu::back() {
     //
     // get the type of the currently displayed menu
     //
-    byte menuItemType = currentMenuTable[0].MenuItemType;
+    byte menuItemType = currentMenuTable[0].getType();
     //
     // check if this is a sub menu, if so go back to its parent
     //
     if (menuItemType == MENU_ITEM_TYPE_SUB_MENU_HEADER) {
-        currentMenuTable = currentMenuTable[0].MenuItemSubMenu;
+        currentMenuTable = currentMenuTable[0].getSubMenu();
         reset();
     }
 }
@@ -227,7 +226,7 @@ void LcdMenu::setText(String text, boolean isPassword) {
     //
     // get the type of the currently displayed menu
     //
-    byte menuItemType = currentMenuTable[cursorPosition].MenuItemType;
+    byte menuItemType = currentMenuTable[cursorPosition].getType();
     //
     // check if this is input menu type, if so print text
     //

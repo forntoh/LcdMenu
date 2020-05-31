@@ -1,5 +1,7 @@
 #ifndef MenuItem_H
 #define MenuItem_H
+
+typedef void (*fptr)();
 //
 // menu item types
 //
@@ -16,7 +18,7 @@ const byte MENU_ITEM_END_OF_MENU = 6;
 class MenuItem {
    private:
     char* text = "";
-    void (*callback)() = NULL;
+    fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
 
@@ -25,9 +27,9 @@ class MenuItem {
     // constructors
     //
     MenuItem(char* text) : text(text) {}
-    MenuItem(char* text, void (*callback)(), byte type)
+    MenuItem(char* text, fptr callback, byte type)
         : text(text), callback(callback), type(type) {}
-    MenuItem(char* text, void (*callback)(), MenuItem* subMenu, byte type)
+    MenuItem(char* text, fptr callback, MenuItem* subMenu, byte type)
         : text(text), callback(callback), subMenu(subMenu), type(type) {}
     MenuItem(MenuItem* subMenu, byte type)
         : callback(callback), subMenu(subMenu), type(type) {}
@@ -37,14 +39,14 @@ class MenuItem {
     // getters
     //
     char* getText() { return text; }
-    void* getCallback() { return callback; }
+    fptr getCallback() { return callback; }
     MenuItem* getSubMenu() { return subMenu; }
     byte getType() { return type; }
     //
     // setters
     //
     void setText(char* text) { this->text = text; }
-    void setCallBack(void (*callback)()) { this->callback = callback; }
+    void setCallBack(fptr callback) { this->callback = callback; }
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
 };
 
@@ -65,7 +67,7 @@ class ItemFooter : public MenuItem {
 
 class ItemInput : public MenuItem {
    public:
-    ItemInput(char* text, void (*callback)()) : MenuItem(text, callback, MENU_ITEM_INPUT) {}
+    ItemInput(char* text, fptr callback) : MenuItem(text, callback, MENU_ITEM_INPUT) {}
 };
 
 class ItemSubMenu : public MenuItem {

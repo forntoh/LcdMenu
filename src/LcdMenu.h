@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
+#include "MenuItem.h"
+
 //
 // definition of an entry in the menu table
 //
@@ -54,7 +56,7 @@ class LcdMenu {
     //
     // array of menu items
     //
-    MENU_ITEM* currentMenuTable;
+    MenuItem* currentMenuTable;
     //
     // down arrow (↓)
     //
@@ -119,7 +121,7 @@ class LcdMenu {
     //  Enter:  lcd_Addr = address of the LCD on the I2C bus (default 0x27)
     //          menu     = menu to display
     //
-    void setupLcdWithMenu(uint8_t lcd_Addr, MENU_ITEM* menu);
+    void setupLcdWithMenu(uint8_t lcd_Addr, MenuItem* menu);
     //
     // call this function to execute an "up press"
     //
