@@ -15,7 +15,7 @@ const byte MENU_ITEM_END_OF_MENU = 6;
 //
 class MenuItem {
    private:
-    char* text;
+    char* text = "";
     void (*callback)() = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
@@ -30,6 +30,8 @@ class MenuItem {
     MenuItem(char* text, void (*callback)(), MenuItem* subMenu, byte type)
         : text(text), callback(callback), subMenu(subMenu), type(type) {}
     MenuItem(MenuItem* subMenu, byte type)
+        : callback(callback), subMenu(subMenu), type(type) {}
+    MenuItem(char* text, MenuItem* subMenu, byte type)
         : text(text), callback(callback), subMenu(subMenu), type(type) {}
     //
     // getters
@@ -63,7 +65,12 @@ class ItemFooter : public MenuItem {
 
 class ItemInput : public MenuItem {
    public:
-    ItemInput() : MenuItem(NULL, MENU_ITEM_INPUT) {}
+    ItemInput(char* text, void (*callback)()) : MenuItem(text, callback, MENU_ITEM_INPUT) {}
+};
+
+class ItemSubMenu : public MenuItem {
+   public:
+    ItemSubMenu(char* text, MenuItem* parent) : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
 };
 
 #endif
