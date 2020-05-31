@@ -1,12 +1,5 @@
 #include "LcdMenu.h"
 //
-// check if object is an instance of Base
-//
-template <typename Base, typename T>
-inline bool instanceof (const T *) {
-    return is_base_of<Base, T>::value;
-}
-//
 // constructor for the LcdMenu class
 //  Enter:  maxRows = rows on lcd display e.g. 4
 //          maxCols = columns on lcd display e.g. 20
@@ -95,8 +88,14 @@ void LcdMenu::drawMenu() {
     // print the menu items
     //
     for (int i = top; i <= bottom; i++) {
+        MenuItem item = currentMenuTable[i];
         lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
-        lcd->print(currentMenuTable[i].getText());
+        lcd->print(item.getText());
+
+        if (item.getType() == MENU_ITEM_TOGGLE) {
+            lcd->print(": ");
+            lcd->print(item.isOn ? item.textOn : item.textOff);
+        }
     }
     //
     // determine if cursor is at the top
