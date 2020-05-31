@@ -25,9 +25,10 @@ class MenuItem {
     // constructors
     //
     MenuItem(char* text) : text(text) {}
-    MenuItem(char* text, void (*callback)()) : text(text), callback(callback) {}
-    MenuItem(char* text, void (*callback)(), MenuItem* subMenu)
-        : text(text), callback(callback), subMenu(subMenu) {}
+    MenuItem(char* text, void (*callback)(), byte type)
+        : text(text), callback(callback), type(type) {}
+    MenuItem(char* text, void (*callback)(), MenuItem* subMenu, byte type)
+        : text(text), callback(callback), subMenu(subMenu), type(type) {}
     //
     // getters
     //
