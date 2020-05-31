@@ -88,13 +88,22 @@ void LcdMenu::drawMenu() {
     // print the menu items
     //
     for (int i = top; i <= bottom; i++) {
-        MenuItem item = currentMenuTable[i];
+        MenuItem *item = &currentMenuTable[i];
         lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
-        lcd->print(item.getText());
+        lcd->print(item->getText());
 
-        if (item.getType() == MENU_ITEM_TOGGLE) {
-            lcd->print(": ");
-            lcd->print(item.isOn ? item.textOn : item.textOff);
+        switch (item->getType()) {
+            case MENU_ITEM_TOGGLE:
+                lcd->print(": ");
+                lcd->print(item->isOn ? item->textOn : item->textOff);
+                break;
+            case MENU_ITEM_INPUT:
+                lcd->print(": ");
+                lcd->print(item->value.substring(
+                    0, maxCols - ((String)item->getText()).length() - 3));
+                break;
+            default:
+                break;
         }
     }
     //
