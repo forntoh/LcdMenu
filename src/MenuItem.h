@@ -29,6 +29,8 @@ class MenuItem {
         : text(text), callback(callback), type(type) {}
     MenuItem(char* text, void (*callback)(), MenuItem* subMenu, byte type)
         : text(text), callback(callback), subMenu(subMenu), type(type) {}
+    MenuItem(MenuItem* subMenu, byte type)
+        : text(text), callback(callback), subMenu(subMenu), type(type) {}
     //
     // getters
     //
@@ -46,12 +48,23 @@ class MenuItem {
 
 class ItemHeader : public MenuItem {
    public:
-    ItemHeader() : MenuItem("", NULL, this, MENU_ITEM_TYPE_MAIN_MENU_HEADER) {}
+    ItemHeader() : MenuItem(this, MENU_ITEM_TYPE_MAIN_MENU_HEADER) {}
+};
+
+class ItemSubHeader : public MenuItem {
+   public:
+    ItemSubHeader(MenuItem* parent)
+        : MenuItem(parent, MENU_ITEM_TYPE_SUB_MENU_HEADER) {}
 };
 
 class ItemFooter : public MenuItem {
    public:
-    ItemFooter() : MenuItem("", NULL, NULL, MENU_ITEM_TYPE_END_OF_MENU) {}
+    ItemFooter() : MenuItem(NULL, MENU_ITEM_TYPE_END_OF_MENU) {}
+};
+
+class ItemInput : public MenuItem {
+   public:
+    ItemInput() : MenuItem(NULL, MENU_ITEM_TYPE_INPUT) {}
 };
 
 #endif
