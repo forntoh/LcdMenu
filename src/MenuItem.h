@@ -18,6 +18,7 @@ class MenuItem {
     char* text;
     void (*callback)() = NULL;
     MenuItem* subMenu = NULL;
+    byte type = MENU_ITEM_TYPE_NONE;
 
    public:
     //
@@ -33,6 +34,7 @@ class MenuItem {
     char* getText() { return text; }
     void* getCallback() { return callback; }
     MenuItem* getSubMenu() { return subMenu; }
+    byte getType() { return type; }
     //
     // setters
     //
