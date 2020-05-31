@@ -32,10 +32,11 @@ class MenuItem {
         : text(text), callback(callback), type(type) {}
     MenuItem(char* text, fptr callback, MenuItem* subMenu, byte type)
         : text(text), callback(callback), subMenu(subMenu), type(type) {}
-    MenuItem(MenuItem* subMenu, byte type)
-        : callback(callback), subMenu(subMenu), type(type) {}
+    MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
     MenuItem(char* text, MenuItem* subMenu, byte type)
-        : text(text), callback(callback), subMenu(subMenu), type(type) {}
+        : text(text), subMenu(subMenu), type(type) {}
+    MenuItem(char* text, char* value, fptr callbac, byte type)
+        : text(text), value(value), callback(callback), type(type) {}
     //
     // getters
     //
@@ -55,6 +56,7 @@ class MenuItem {
     boolean isOn = false;
     char* textOn = "ON";
     char* textOff = "OFF";
+    String value = "";
 };
 
 class ItemHeader : public MenuItem {
@@ -74,7 +76,8 @@ class ItemFooter : public MenuItem {
 
 class ItemInput : public MenuItem {
    public:
-    ItemInput(char* text, fptr callback) : MenuItem(text, callback, MENU_ITEM_INPUT) {}
+    ItemInput(char* text, char* value, fptr callback)
+        : MenuItem(text, value, callback, MENU_ITEM_INPUT) {}
 };
 
 class ItemSubMenu : public MenuItem {
