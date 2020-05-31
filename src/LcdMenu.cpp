@@ -47,14 +47,13 @@ void LcdMenu::reset() {
 //
 boolean LcdMenu::isAtTheStart() {
     byte menuType = currentMenuTable[cursorPosition - 1].getType();
-    return menuType == MENU_ITEM_TYPE_MAIN_MENU_HEADER ||
-           menuType == MENU_ITEM_TYPE_SUB_MENU_HEADER;
+    return menuType == MENU_ITEM_MAIN_MENU_HEADER || menuType == MENU_ITEM_SUB_MENU_HEADER;
 }
 //
 // this function checks if the cursor is at the end of the menu items
 //
 boolean LcdMenu::isAtTheEnd() {
-    return currentMenuTable[cursorPosition + 1].getType() == MENU_ITEM_TYPE_END_OF_MENU;
+    return currentMenuTable[cursorPosition + 1].getType() == MENU_ITEM_END_OF_MENU;
 }
 //
 // this function draws the cursor
@@ -74,9 +73,9 @@ void LcdMenu::drawCursor() {
     lcd->setCursor(0, line);
     lcd->write(0x7E);
     //
-    // If cursor is at MENU_ITEM_TYPE_INPUT enable blinking
+    // If cursor is at MENU_ITEM_INPUT enable blinking
     //
-    if (currentMenuTable[cursorPosition].getType() == MENU_ITEM_TYPE_INPUT)
+    if (currentMenuTable[cursorPosition].getType() == MENU_ITEM_INPUT)
         lcd->blink();
     else
         lcd->noBlink();
@@ -174,7 +173,7 @@ void LcdMenu::select() {
         //
         // switch the menu to the selected sub menu
         //
-        case MENU_ITEM_TYPE_SUB_MENU: {
+        case MENU_ITEM_SUB_MENU: {
             currentMenuTable = currentMenuTable[cursorPosition].getSubMenu();
             //
             // display the parent menu
@@ -185,7 +184,7 @@ void LcdMenu::select() {
         //
         // execute the menu item's function
         //
-        case MENU_ITEM_TYPE_COMMAND: {
+        case MENU_ITEM_COMMAND: {
             //
             // execute the menu item's function
             //
@@ -196,7 +195,7 @@ void LcdMenu::select() {
             paint();
             break;
         }
-        case MENU_ITEM_TYPE_INPUT: {
+        case MENU_ITEM_INPUT: {
             break;
         }
     }
@@ -212,7 +211,7 @@ void LcdMenu::back() {
     //
     // check if this is a sub menu, if so go back to its parent
     //
-    if (menuItemType == MENU_ITEM_TYPE_SUB_MENU_HEADER) {
+    if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
         currentMenuTable = currentMenuTable[0].getSubMenu();
         reset();
     }
@@ -230,7 +229,7 @@ void LcdMenu::setText(String text, boolean isPassword) {
     //
     // check if this is input menu type, if so print text
     //
-    if (menuItemType == MENU_ITEM_TYPE_INPUT) {
+    if (menuItemType == MENU_ITEM_INPUT) {
         //
         // clear the line where the cursor is
         //

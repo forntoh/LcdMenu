@@ -4,26 +4,6 @@
 #include <LiquidCrystal_I2C.h>
 
 #include "MenuItem.h"
-
-//
-// definition of an entry in the menu table
-//
-typedef struct _MENU_ITEM {
-    byte MenuItemType;
-    char* MenuItemText;
-    void (*MenuItemFunction)();
-    _MENU_ITEM* MenuItemSubMenu;
-} MENU_ITEM;
-//
-// menu item types
-//
-const byte MENU_ITEM_TYPE_MAIN_MENU_HEADER = 0;
-const byte MENU_ITEM_TYPE_SUB_MENU_HEADER = 1;
-const byte MENU_ITEM_TYPE_SUB_MENU = 2;
-const byte MENU_ITEM_TYPE_COMMAND = 3;
-const byte MENU_ITEM_TYPE_INPUT = 4;
-const byte MENU_ITEM_TYPE_NONE = 5;
-const byte MENU_ITEM_TYPE_END_OF_MENU = 6;
 //
 // the LcdMenu class
 //
