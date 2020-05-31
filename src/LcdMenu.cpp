@@ -1,5 +1,11 @@
 #include "LcdMenu.h"
-
+//
+// check if object is an instance of Base
+//
+template <typename Base, typename T>
+inline bool instanceof (const T *) {
+    return is_base_of<Base, T>::value;
+}
 //
 // constructor for the LcdMenu class
 //  Enter:  maxRows = rows on lcd display e.g. 4
