@@ -66,7 +66,8 @@ class ItemHeader : public MenuItem {
 
 class ItemSubHeader : public MenuItem {
    public:
-    ItemSubHeader(MenuItem* parent) : MenuItem(parent, MENU_ITEM_SUB_MENU_HEADER) {}
+    ItemSubHeader(MenuItem* parent)
+        : MenuItem(parent, MENU_ITEM_SUB_MENU_HEADER) {}
 };
 
 class ItemFooter : public MenuItem {
@@ -82,12 +83,14 @@ class ItemInput : public MenuItem {
 
 class ItemSubMenu : public MenuItem {
    public:
-    ItemSubMenu(char* text, MenuItem* parent) : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
+    ItemSubMenu(char* text, MenuItem* parent)
+        : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
 };
 
 class ItemToggle : public MenuItem {
    public:
-    ItemToggle(char* key, fptr callback) : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
+    ItemToggle(char* key, fptr callback)
+        : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
     ItemToggle(char* key, char* textOn, char* textOff, fptr callback)
         : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
 };
