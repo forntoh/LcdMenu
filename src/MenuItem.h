@@ -3,13 +3,13 @@
 //
 // menu item types
 //
-const byte MENU_ITEM_TYPE_MAIN_MENU_HEADER = 0;
-const byte MENU_ITEM_TYPE_SUB_MENU_HEADER = 1;
-const byte MENU_ITEM_TYPE_SUB_MENU = 2;
-const byte MENU_ITEM_TYPE_COMMAND = 3;
-const byte MENU_ITEM_TYPE_INPUT = 4;
-const byte MENU_ITEM_TYPE_NONE = 5;
-const byte MENU_ITEM_TYPE_END_OF_MENU = 6;
+const byte MENU_ITEM_MAIN_MENU_HEADER = 0;
+const byte MENU_ITEM_SUB_MENU_HEADER = 1;
+const byte MENU_ITEM_SUB_MENU = 2;
+const byte MENU_ITEM_COMMAND = 3;
+const byte MENU_ITEM_INPUT = 4;
+const byte MENU_ITEM_NONE = 5;
+const byte MENU_ITEM_END_OF_MENU = 6;
 //
 // the MenuItem class
 //
@@ -18,7 +18,7 @@ class MenuItem {
     char* text;
     void (*callback)() = NULL;
     MenuItem* subMenu = NULL;
-    byte type = MENU_ITEM_TYPE_NONE;
+    byte type = MENU_ITEM_NONE;
 
    public:
     //
@@ -48,23 +48,22 @@ class MenuItem {
 
 class ItemHeader : public MenuItem {
    public:
-    ItemHeader() : MenuItem(this, MENU_ITEM_TYPE_MAIN_MENU_HEADER) {}
+    ItemHeader() : MenuItem(this, MENU_ITEM_MAIN_MENU_HEADER) {}
 };
 
 class ItemSubHeader : public MenuItem {
    public:
-    ItemSubHeader(MenuItem* parent)
-        : MenuItem(parent, MENU_ITEM_TYPE_SUB_MENU_HEADER) {}
+    ItemSubHeader(MenuItem* parent) : MenuItem(parent, MENU_ITEM_SUB_MENU_HEADER) {}
 };
 
 class ItemFooter : public MenuItem {
    public:
-    ItemFooter() : MenuItem(NULL, MENU_ITEM_TYPE_END_OF_MENU) {}
+    ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
 };
 
 class ItemInput : public MenuItem {
    public:
-    ItemInput() : MenuItem(NULL, MENU_ITEM_TYPE_INPUT) {}
+    ItemInput() : MenuItem(NULL, MENU_ITEM_INPUT) {}
 };
 
 #endif
