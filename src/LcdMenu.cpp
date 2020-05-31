@@ -73,7 +73,7 @@ void LcdMenu::drawCursor() {
     //
     int line = constrain(cursorPosition - top, 0, maxRows - 1);
     lcd->setCursor(0, line);
-    lcd->write(0x3E);
+    lcd->write(0x7E);
     //
     // If cursor is at MENU_ITEM_TYPE_INPUT enable blinking
     //
