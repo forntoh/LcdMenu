@@ -94,13 +94,13 @@ void LcdMenu::drawMenu() {
 
         switch (item->getType()) {
             case MENU_ITEM_TOGGLE:
-                lcd->print(": ");
+                lcd->print(":");
                 lcd->print(item->isOn ? item->textOn : item->textOff);
                 break;
             case MENU_ITEM_INPUT:
-                lcd->print(": ");
+                lcd->print(":");
                 lcd->print(item->value.substring(
-                    0, maxCols - ((String)item->getText()).length() - 3));
+                    0, maxCols - ((String)item->getText()).length() - 2));
                 break;
             default:
                 break;
@@ -260,6 +260,7 @@ void LcdMenu::setText(String text) {
     // check if this is input menu type, if so print text
     //
     if (menuItemType == MENU_ITEM_INPUT) {
+        lcd->noBlink();
         //
         // set the value
         //
@@ -271,7 +272,7 @@ void LcdMenu::setText(String text) {
         //
         // place cursor at end of text
         //
-        int col = ((String)item->getText()).length() + 3 + text.length();
+        int col = ((String)item->getText()).length() + 2 + text.length();
         lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 }
