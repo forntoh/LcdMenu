@@ -47,7 +47,7 @@ class MenuItem {
     //
     // setters
     //
-    virtual void setText(char* text) { this->text = text; }
+    void setText(char* text) { this->text = text; }
     void setCallBack(fptr callback) { this->callback = callback; }
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
     //

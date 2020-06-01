@@ -19,31 +19,43 @@ char keys[KEYPAD_ROWS][KEYPAD_COLS] = {{'1', '2', '3', 'A'},
 byte colPins[KEYPAD_ROWS] = {5, 4, 3, 2};
 byte rowPins[KEYPAD_COLS] = {9, 8, 7, 6};
 
-extern MENU_ITEM mainMenu[];
-extern MENU_ITEM subMenu[];
+extern MenuItem mainMenu[];
+extern MenuItem wifiItemsMenu[];
+extern MenuItem wifiParamsMenu[];
+extern MenuItem settingsMenu[];
 
-MENU_ITEM subMenu[] = {{MENU_ITEM_TYPE_SUB_MENU_HEADER, "", NULL, mainMenu},
-                       {MENU_ITEM_TYPE_COMMAND, "Sub slow", NULL, NULL},
-                       {MENU_ITEM_TYPE_COMMAND, "Sub fast", NULL, NULL},
-                       {MENU_ITEM_TYPE_COMMAND, "Sub heart", NULL, NULL},
-                       {MENU_ITEM_TYPE_COMMAND, "Sub SOS", NULL, NULL},
-                       {MENU_ITEM_TYPE_COMMAND, "Sub random", NULL, NULL},
-                       {MENU_ITEM_TYPE_END_OF_MENU, "", NULL, NULL}};
+String password = "";
 
-MENU_ITEM mainMenu[] = {{MENU_ITEM_TYPE_MAIN_MENU_HEADER, "", NULL, mainMenu},
-                        {MENU_ITEM_TYPE_SUB_MENU, "Blink slow", NULL, NULL},
-                        {MENU_ITEM_TYPE_COMMAND, "Blink fast", NULL, NULL},
-                        {MENU_ITEM_TYPE_SUB_MENU, "Blink heart", NULL, subMenu},
-                        {MENU_ITEM_TYPE_COMMAND, "Blink SOS", NULL, NULL},
-                        {MENU_ITEM_TYPE_COMMAND, "Blink random", NULL, NULL},
-                        {MENU_ITEM_TYPE_END_OF_MENU, "", NULL, NULL}};
+MenuItem mainMenu[] = {ItemHeader(),
+                       MenuItem("Start service"),
+                       ItemSubMenu("Connect to WiFi", wifiItemsMenu),
+                       ItemSubMenu("Settings", settingsMenu),
+                       MenuItem("Blink SOS"),
+                       MenuItem("Blink random"),
+                       ItemFooter()};
 
-LcdMenu menu1(LCD_ROWS, LCD_COLS);
+MenuItem wifiItemsMenu[] = {ItemSubHeader(mainMenu),
+                            ItemSubMenu("TP-LINK_AP_F558", wifiParamsMenu),
+                            ItemSubMenu("iH2K-7539", wifiParamsMenu),
+                            ItemSubMenu("KTA-CONNECT", wifiParamsMenu),
+                            ItemSubMenu("SM-G955U241", wifiParamsMenu),
+                            ItemSubMenu("DIRECT-dc-SM-G950N", wifiParamsMenu),
+                            ItemFooter()};
+
+MenuItem wifiParamsMenu[] = {ItemSubHeader(wifiItemsMenu),
+                             MenuItem("TP-LINK_AP_F558"),
+                             ItemInput("Pass", "", NULL), ItemFooter()};
+
+MenuItem settingsMenu[] = {ItemSubHeader(mainMenu),
+                           ItemToggle("Backlight", toggleBacklight),
+                           MenuItem("Contrast"), ItemFooter()};
+
+LcdMenu menu(LCD_ROWS, LCD_COLS);
 
 Keypad keypad =
     Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-void setup() { menu1.setupLcdWithMenu(LCD_ADDR, mainMenu); }
+void setup() { menu.setupLcdWithMenu(LCD_ADDR, mainMenu); }
 
 void loop() {
     char key = keypad.getKey();
@@ -51,18 +63,27 @@ void loop() {
 
     switch (key) {
         case 'A':
-            menu1.up();
+            menu.up();
             break;
         case 'B':
-            menu1.down();
+            menu.down();
             break;
         case 'C':
-            menu1.select();
+            menu.select();
             break;
         case 'D':
-            menu1.back();
+            password = "";
+            menu.back();
+            break;
+        case '*':
+            password = password.substring(0, password.length() - 1);
+            menu.setText(password);
             break;
         default:
+            password += key;
+            menu.setText(password);
             break;
     }
 }
+
+void toggleBacklight() { menu.lcd->setBacklight(settingsMenu[1].isOn); }
