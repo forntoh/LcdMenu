@@ -46,13 +46,15 @@ void LcdMenu::reset() {
 //
 boolean LcdMenu::isAtTheStart() {
     byte menuType = currentMenuTable[cursorPosition - 1].getType();
-    return menuType == MENU_ITEM_MAIN_MENU_HEADER || menuType == MENU_ITEM_SUB_MENU_HEADER;
+    return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
+           menuType == MENU_ITEM_SUB_MENU_HEADER;
 }
 //
 // this function checks if the cursor is at the end of the menu items
 //
 boolean LcdMenu::isAtTheEnd() {
-    return currentMenuTable[cursorPosition + 1].getType() == MENU_ITEM_END_OF_MENU;
+    return currentMenuTable[cursorPosition + 1].getType() ==
+           MENU_ITEM_END_OF_MENU;
 }
 //
 // this function draws the cursor
@@ -91,13 +93,21 @@ void LcdMenu::drawMenu() {
         MenuItem *item = &currentMenuTable[i];
         lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
         lcd->print(item->getText());
-
+        //
+        // determine the type of item
+        //
         switch (item->getType()) {
             case MENU_ITEM_TOGGLE:
+                //
+                // append textOn or textOff depending on the state
+                //
                 lcd->print(":");
                 lcd->print(item->isOn ? item->textOn : item->textOff);
                 break;
             case MENU_ITEM_INPUT:
+                //
+                // append the value the value of the input
+                //
                 lcd->print(":");
                 lcd->print(item->value.substring(
                     0, maxCols - ((String)item->getText()).length() - 2));
