@@ -98,9 +98,10 @@ void LcdMenu::drawCursor() {
     //
     // If cursor is at MENU_ITEM_INPUT enable blinking
     //
-    if (currentMenuTable[cursorPosition].getType() == MENU_ITEM_INPUT)
+    if (currentMenuTable[cursorPosition].getType() == MENU_ITEM_INPUT) {
+        placeCursorAtEnd(&currentMenuTable[cursorPosition]);
         lcd->blink();
-    else
+    } else
         lcd->noBlink();
 }
 //
@@ -308,7 +309,13 @@ void LcdMenu::setText(String text) {
         //
         // place cursor at end of text
         //
-        int col = ((String)item->getText()).length() + 2 + text.length();
-        lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
+        placeCursorAtEnd(item);
     }
+}
+//
+// 
+//
+void LcdMenu::placeCursorAtEnd(MenuItem *item) {
+    int col = ((String)item->getText()).length() + 2 + item->value.length();
+    lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
 }
