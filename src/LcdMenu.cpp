@@ -28,7 +28,12 @@ void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
 //
 //
 //
-void LcdMenu::setMenuItemsAt(int position, MenuItem *items, uint8_t size) {
+void LcdMenu::setMenuItemsAt(int position, MenuItem *items) {
+    currentMenuTable[position + 1].setSubMenu(items); 
+    paint();
+}
+
+MenuItem *LcdMenu::generateSubMenu(MenuItem *items, uint8_t size) {
     MenuItem *tempItems = new MenuItem[size + 2];
 
     tempItems[0] = ItemSubHeader(currentMenuTable);
@@ -42,10 +47,7 @@ void LcdMenu::setMenuItemsAt(int position, MenuItem *items, uint8_t size) {
         tempItems[i + 1] = items[i];
     }
     tempItems[size + 1] = ItemFooter();
-
-    currentMenuTable[position + 1].setSubMenu(tempItems);
-
-    paint();
+    return tempItems;
 }
 //
 // call this function to draw the menu items and cursor
