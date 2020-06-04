@@ -83,7 +83,10 @@ class LcdMenu {
     // call this function to reset the display
     //
     void reset();
-
+    //
+    //
+    //
+    void placeCursorAtEnd(MenuItem *item);
    public:
     //
     // LCD Display
@@ -127,9 +130,5 @@ class LcdMenu {
     //  text: String        = text to display
     //
     void setText(String text);
-    //
-    //
-    //
-    void placeCursorAtEnd(MenuItem *item);
 };
 #endif
