@@ -221,9 +221,13 @@ void LcdMenu::select() {
         // switch the menu to the selected sub menu
         //
         case MENU_ITEM_SUB_MENU: {
+            //
+            // check if there is a sub menu
+            //
+            if (item->getSubMenu() == NULL) return;
             currentMenuTable = item->getSubMenu();
             //
-            // display the parent menu
+            // display the sub menu
             //
             reset();
             break;
