@@ -27,6 +27,7 @@ class MenuItem {
     //
     // constructors
     //
+    MenuItem();
     MenuItem(char* text) : text(text) {}
     MenuItem(char* text, fptr callback, byte type)
         : text(text), callback(callback), type(type) {}
@@ -58,6 +59,10 @@ class MenuItem {
     char* textOff = "OFF";
     String value = "";
 };
+
+MenuItem::MenuItem() {
+    
+}
 
 class ItemHeader : public MenuItem {
    public:

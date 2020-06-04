@@ -22,7 +22,29 @@ void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
     lcd->clear();
     lcd->createChar(0, upArrow);
     lcd->createChar(1, downArrow);
-    currentMenuTable = menu;
+    this->currentMenuTable = menu;
+    paint();
+}
+//
+//
+//
+void LcdMenu::setMenuItemsAt(int position, MenuItem *items, uint8_t size) {
+    MenuItem *tempItems = new MenuItem[size + 2];
+
+    tempItems[0] = ItemSubHeader(currentMenuTable);
+    for (uint8_t i = 0; i < size; i++) {
+        MenuItem *itemSubMenu = items[i].getSubMenu();
+
+        if (itemSubMenu != NULL) {
+            itemSubMenu[0].setSubMenu(tempItems);
+        }
+
+        tempItems[i + 1] = items[i];
+    }
+    tempItems[size + 1] = ItemFooter();
+
+    currentMenuTable[position + 1].setSubMenu(tempItems);
+
     paint();
 }
 //

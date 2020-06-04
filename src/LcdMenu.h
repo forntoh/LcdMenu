@@ -103,6 +103,10 @@ class LcdMenu {
     //
     void setupLcdWithMenu(uint8_t lcd_Addr, MenuItem* menu);
     //
+    //
+    //
+    void setMenuItemsAt(int position, MenuItem* items, uint8_t size);
+    //
     // call this function to execute an "up press"
     //
     void up();
