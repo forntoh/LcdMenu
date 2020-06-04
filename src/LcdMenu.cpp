@@ -313,7 +313,8 @@ void LcdMenu::setText(String text) {
     }
 }
 //
-// 
+// place cursor at end of text
+//  item: MenuItem = menu item which contains an input value
 //
 void LcdMenu::placeCursorAtEnd(MenuItem *item) {
     int col = ((String)item->getText()).length() + 2 + item->value.length();

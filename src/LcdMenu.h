@@ -84,9 +84,11 @@ class LcdMenu {
     //
     void reset();
     //
+    // place cursor at end of text
+    //  item: MenuItem = menu item which contains an input value
     //
-    //
-    void placeCursorAtEnd(MenuItem *item);
+    void placeCursorAtEnd(MenuItem* item);
+
    public:
     //
     // LCD Display
