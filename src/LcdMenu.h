@@ -111,6 +111,12 @@ class LcdMenu {
     //
     //
     void setMenuItemsAt(int position, MenuItem* items);
+    //
+    // builder function for a sub menu
+    // this functions appends a header and a footer to the final item list
+    //  items = array of MenuItems for the sub menu
+    //  size  = size of items array
+    //
     MenuItem* buildSubMenu(MenuItem* items, uint8_t size);
     //
     // call this function to execute an "up press"

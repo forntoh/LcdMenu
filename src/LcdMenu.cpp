@@ -29,23 +29,43 @@ void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
 //
 //
 void LcdMenu::setMenuItemsAt(int position, MenuItem *items) {
-    currentMenuTable[position + 1].setSubMenu(items); 
+    currentMenuTable[position + 1].setSubMenu(items);
     paint();
 }
-
+//
+// builder function for a sub menu
+// this functions appends a header and a footer to the final item list
+//  items = array of MenuItems for the sub menu
+//  size  = size of items array
+//
 MenuItem *LcdMenu::buildSubMenu(MenuItem *items, uint8_t size) {
+    //
+    // create a temporary array
+    //
     MenuItem *tempItems = new MenuItem[size + 2];
-
+    //
+    // append a Header to first position
+    //
     tempItems[0] = ItemSubHeader(currentMenuTable);
     for (uint8_t i = 0; i < size; i++) {
+        //
+        // child menu of this submenu item
+        //
         MenuItem *itemSubMenu = items[i].getSubMenu();
-
+        //
+        // set the parent menu of the child menu of this menu
+        //
         if (itemSubMenu != NULL) {
             itemSubMenu[0].setSubMenu(tempItems);
         }
-
+        //
+        // add to temporary array
+        //
         tempItems[i + 1] = items[i];
     }
+    //
+    // create a Footer to the last position
+    //
     tempItems[size + 1] = ItemFooter();
     return tempItems;
 }
