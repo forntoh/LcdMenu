@@ -33,7 +33,7 @@ void LcdMenu::setMenuItemsAt(int position, MenuItem *items) {
     paint();
 }
 
-MenuItem *LcdMenu::generateSubMenu(MenuItem *items, uint8_t size) {
+MenuItem *LcdMenu::buildSubMenu(MenuItem *items, uint8_t size) {
     MenuItem *tempItems = new MenuItem[size + 2];
 
     tempItems[0] = ItemSubHeader(currentMenuTable);

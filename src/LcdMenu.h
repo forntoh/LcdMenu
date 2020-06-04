@@ -111,7 +111,7 @@ class LcdMenu {
     //
     //
     void setMenuItemsAt(int position, MenuItem* items);
-    MenuItem* generateSubMenu(MenuItem* items, uint8_t size);
+    MenuItem* buildSubMenu(MenuItem* items, uint8_t size);
     //
     // call this function to execute an "up press"
     //
