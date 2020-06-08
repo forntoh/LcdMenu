@@ -108,7 +108,7 @@ class LcdMenu {
     //
     void setupLcdWithMenu(uint8_t lcd_Addr, MenuItem* menu);
     //
-    //
+    // TODO: Rename setMenuItemsAt function
     //
     void setMenuItemsAt(uint8_t position, MenuItem* items);
     //
@@ -118,6 +118,13 @@ class LcdMenu {
     //  size  = size of items array
     //
     MenuItem* buildSubMenu(MenuItem* items, uint8_t size);
+    //
+    // builder function for main menu
+    // this functions appends a header and a footer to the final item list
+    //  items = array of MenuItems for the sub menu
+    //  size  = size of items array
+    //
+    MenuItem* buildMainMenu(MenuItem* items, uint8_t size);
     //
     // call this function to execute an "up press"
     //
