@@ -119,13 +119,6 @@ class LcdMenu {
     //
     MenuItem* buildSubMenu(MenuItem* items, uint8_t size);
     //
-    // builder function for main menu
-    // this functions appends a header and a footer to the final item list
-    //  items = array of MenuItems for the sub menu
-    //  size  = size of items array
-    //
-    MenuItem* buildMainMenu(MenuItem* items, uint8_t size);
-    //
     // call this function to execute an "up press"
     //
     void up();
