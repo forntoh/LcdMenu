@@ -108,9 +108,11 @@ class LcdMenu {
     //
     void setupLcdWithMenu(uint8_t lcd_Addr, MenuItem* menu);
     //
-    // TODO: Rename setMenuItemsAt function
+    // call this function to set sub menu items for any main menu item
+    //  position = main menu item/where to place the sub menu
+    //  items    = sub menu items
     //
-    void setMenuItemsAt(uint8_t position, MenuItem* items);
+    void setSubMenu(uint8_t position, MenuItem* items);
     //
     // builder function for a sub menu
     // this functions appends a header and a footer to the final item list

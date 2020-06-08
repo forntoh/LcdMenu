@@ -26,9 +26,11 @@ void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
     paint();
 }
 //
+// call this function to set sub menu items for any main menu item
+//  position = main menu item/where to place the sub menu
+//  items    = sub menu items
 //
-//
-void LcdMenu::setMenuItemsAt(uint8_t position, MenuItem *items) {
+void LcdMenu::setSubMenu(uint8_t position, MenuItem *items) {
     currentMenuTable[position + 1].setSubMenu(items);
     paint();
 }
