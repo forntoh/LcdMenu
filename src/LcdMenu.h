@@ -12,23 +12,23 @@ class LcdMenu {
     //
     // cursor position
     //
-    int cursorPosition = 1;
+    uint8_t cursorPosition = 1;
     //
     // first visible item's position in the menu array
     //
-    unsigned int top = 1;
+    uint8_t top = 1;
     //
     // last visible item's position in the menu array
     //
-    unsigned int bottom;
+    uint8_t bottom;
     //
     // rows of LCD Display
     //
-    unsigned int maxRows;
+    uint8_t maxRows;
     //
     // columns of LCD Display
     //
-    unsigned int maxCols;
+    uint8_t maxCols;
     //
     // array of menu items
     //
@@ -99,7 +99,7 @@ class LcdMenu {
     //  Enter:  maxRows = rows on lcd display e.g. 4
     //          maxCols = columns on lcd display e.g. 20
     //
-    LcdMenu(int maxRows, int maxCols);
+    LcdMenu(uint8_t maxRows, uint8_t maxCols);
     //
     // call this function in setup() to initialize the LCD and the custom
     // characters used as up and down arrows

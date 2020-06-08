@@ -4,7 +4,7 @@
 //  Enter:  maxRows = rows on lcd display e.g. 4
 //          maxCols = columns on lcd display e.g. 20
 //
-LcdMenu::LcdMenu(int maxRows, int maxCols) {
+LcdMenu::LcdMenu(uint8_t maxRows, uint8_t maxCols) {
     this->maxRows = maxRows;
     this->maxCols = maxCols;
     this->bottom = maxRows;
@@ -107,14 +107,14 @@ void LcdMenu::drawCursor() {
     //
     // Erases current cursor
     //
-    for (int x = 0; x < maxRows; x++) {
+    for (uint8_t x = 0; x < maxRows; x++) {
         lcd->setCursor(0, x);
         lcd->print(" ");
     }
     //
     // draws a new cursor at [line]
     //
-    int line = constrain(cursorPosition - top, 0, maxRows - 1);
+    uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
     lcd->setCursor(0, line);
     lcd->write(0x7E);
     //
@@ -134,7 +134,7 @@ void LcdMenu::drawMenu() {
     //
     // print the menu items
     //
-    for (int i = top; i <= bottom; i++) {
+    for (uint8_t i = top; i <= bottom; i++) {
         MenuItem *item = &currentMenuTable[i];
         lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
         lcd->print(item->getText());
@@ -339,6 +339,6 @@ void LcdMenu::setText(String text) {
 //  item: MenuItem = menu item which contains an input value
 //
 void LcdMenu::placeCursorAtEnd(MenuItem *item) {
-    int col = ((String)item->getText()).length() + 2 + item->value.length();
+    uint8_t col = ((String)item->getText()).length() + 2 + item->value.length();
     lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
 }
