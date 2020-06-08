@@ -20,35 +20,23 @@ byte colPins[KEYPAD_ROWS] = {5, 4, 3, 2};
 byte rowPins[KEYPAD_COLS] = {9, 8, 7, 6};
 
 extern MenuItem mainMenu[];
-extern MenuItem wifiItemsMenu[];
-extern MenuItem wifiParamsMenu[];
 extern MenuItem settingsMenu[];
 
 String password = "";
 
 MenuItem mainMenu[] = {ItemHeader(),
                        MenuItem("Start service"),
-                       ItemSubMenu("Connect to WiFi", wifiItemsMenu),
+                       ItemSubMenu("Connect to WiFi", NULL),
                        ItemSubMenu("Settings", settingsMenu),
                        MenuItem("Blink SOS"),
                        MenuItem("Blink random"),
                        ItemFooter()};
 
-MenuItem wifiItemsMenu[] = {ItemSubHeader(mainMenu),
-                            ItemSubMenu("TP-LINK_AP_F558", wifiParamsMenu),
-                            ItemSubMenu("iH2K-7539", wifiParamsMenu),
-                            ItemSubMenu("KTA-CONNECT", wifiParamsMenu),
-                            ItemSubMenu("SM-G955U241", wifiParamsMenu),
-                            ItemSubMenu("DIRECT-dc-SM-G950N", wifiParamsMenu),
-                            ItemFooter()};
-
-MenuItem wifiParamsMenu[] = {ItemSubHeader(wifiItemsMenu),
-                             MenuItem("TP-LINK_AP_F558"),
-                             ItemInput("Pass", "", NULL), ItemFooter()};
-
 MenuItem settingsMenu[] = {ItemSubHeader(mainMenu),
                            ItemToggle("Backlight", toggleBacklight),
                            MenuItem("Contrast"), ItemFooter()};
+
+char* names[] = {"TP-LINK_AP_F558", "iH2K-7539", "KTA-CONNECT", "SM-G955U241"};
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
@@ -61,6 +49,8 @@ void loop() {
     char key = keypad.getKey();
     if (key == NO_KEY) return;
 
+    MenuItem myItems[5];
+
     switch (key) {
         case 'A':
             menu.up();
@@ -69,7 +59,7 @@ void loop() {
             menu.down();
             break;
         case 'C':
-            menu.select();
+            menu.enter();
             break;
         case 'D':
             password = "";
@@ -78,6 +68,15 @@ void loop() {
         case '*':
             password = password.substring(0, password.length() - 1);
             menu.setText(password);
+            break;
+        case '#':
+            for (uint8_t i = 0; i < 4; i++) {
+                MenuItem wifiParamsMenu[] = {MenuItem(names[i]),
+                                             ItemInput("Pass", "", NULL)};
+
+                myItems[i] = ItemSubMenu(names[i], menu.buildSubMenu(wifiParamsMenu, 2));
+            }
+            menu.setMenuItemsAt(1, menu.buildSubMenu(myItems, 4));
             break;
         default:
             password += key;
