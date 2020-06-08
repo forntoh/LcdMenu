@@ -134,9 +134,9 @@ class LcdMenu {
     //
     void down();
     //
-    // call this function to execute a "select"
+    // call this function to execute a "enter"
     //
-    void select();
+    void enter();
     //
     // call this function to execute a "backpress"
     //

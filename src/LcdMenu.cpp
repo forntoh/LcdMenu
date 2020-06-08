@@ -232,9 +232,9 @@ void LcdMenu::down() {
     paint();
 }
 //
-// call this function to execute a "select"
+// call this function to execute a "enter"
 //
-void LcdMenu::select() {
+void LcdMenu::enter() {
     MenuItem *item = &currentMenuTable[cursorPosition];
     //
     // determine the type of menu entry, then execute it
