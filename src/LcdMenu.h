@@ -110,7 +110,7 @@ class LcdMenu {
     //
     //
     //
-    void setMenuItemsAt(int position, MenuItem* items);
+    void setMenuItemsAt(uint8_t position, MenuItem* items);
     //
     // builder function for a sub menu
     // this functions appends a header and a footer to the final item list

@@ -28,7 +28,7 @@ void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
 //
 //
 //
-void LcdMenu::setMenuItemsAt(int position, MenuItem *items) {
+void LcdMenu::setMenuItemsAt(uint8_t position, MenuItem *items) {
     currentMenuTable[position + 1].setSubMenu(items);
     paint();
 }
