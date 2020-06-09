@@ -1,7 +1,7 @@
 #include <Key.h>
 #include <Keypad.h>
 
-#include "LcdMenu.h"
+#include <LcdMenu.h>
 
 #define LCD_ADDR 0x27
 
