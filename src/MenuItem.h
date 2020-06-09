@@ -60,10 +60,6 @@ class MenuItem {
     String value = "";
 };
 
-MenuItem::MenuItem() {
-    
-}
-
 class ItemHeader : public MenuItem {
    public:
     ItemHeader() : MenuItem(this, MENU_ITEM_MAIN_MENU_HEADER) {}
