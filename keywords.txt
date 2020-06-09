@@ -7,15 +7,40 @@
 #######################################
 
 LcdMenu KEYWORD1
+MenuItem KEYWORD1
+ItemHeader KEYWORD1
+ItemSubHeader KEYWORD1
+ItemFooter KEYWORD1
+ItemInput KEYWORD1
+ItemSubMenu KEYWORD1
+ItemToggle KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-getCursorPosition	KEYWORD2
-setupLCD	KEYWORD2
+drawCursor	KEYWORD2
+drawMenu	KEYWORD2
+isAtTheStart	KEYWORD2
+isAtTheEnd	KEYWORD2
+paint	KEYWORD2
+reset	KEYWORD2
+placeCursorAtEnd	KEYWORD2
+setupLcdWithMenu	KEYWORD2
+setSubMenu	KEYWORD2
+buildSubMenu	KEYWORD2
 up	KEYWORD2
 down	KEYWORD2
+enter	KEYWORD2
+back	KEYWORD2
+setText	KEYWORD2
+getText	KEYWORD2
+getCallback	KEYWORD2
+getSubMenu	KEYWORD2
+getType	KEYWORD2
+setText	KEYWORD2
+setCallBack	KEYWORD2
+setSubMenu	KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)
