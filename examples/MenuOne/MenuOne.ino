@@ -76,7 +76,7 @@ void loop() {
 
                 myItems[i] = ItemSubMenu(names[i], menu.buildSubMenu(wifiParamsMenu, 2));
             }
-            menu.setMenuItemsAt(1, menu.buildSubMenu(myItems, 4));
+            menu.setSubMenu(1, menu.buildSubMenu(myItems, 4));
             break;
         default:
             password += key;
