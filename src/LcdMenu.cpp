@@ -287,6 +287,10 @@ void LcdMenu::enter() {
             break;
         }
         case MENU_ITEM_INPUT: {
+            //
+            // execute the menu item's function
+            //
+            (item->getCallback())();
             break;
         }
     }
