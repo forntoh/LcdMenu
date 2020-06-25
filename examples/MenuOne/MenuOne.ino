@@ -1,6 +1,5 @@
 #include <Key.h>
 #include <Keypad.h>
-
 #include <LcdMenu.h>
 
 #define LCD_ADDR 0x27
@@ -10,6 +9,8 @@
 
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
+
+void toggleBacklight();
 
 char keys[KEYPAD_ROWS][KEYPAD_COLS] = {{'1', '2', '3', 'A'},
                                        {'4', '5', '6', 'B'},
@@ -43,13 +44,23 @@ LcdMenu menu(LCD_ROWS, LCD_COLS);
 Keypad keypad =
     Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-void setup() { menu.setupLcdWithMenu(LCD_ADDR, mainMenu); }
+void setup() {
+    menu.setupLcdWithMenu(LCD_ADDR, mainMenu);
+
+    MenuItem myItems[4];
+    for (uint8_t i = 0; i < 4; i++) {
+        MenuItem wifiParamsMenu[] = {MenuItem(names[i]),
+                                     ItemInput("Pass", "", NULL)};
+
+        myItems[i] =
+            ItemSubMenu(names[i], menu.buildSubMenu(wifiParamsMenu, 2));
+    }
+    menu.setSubMenu(1, menu.buildSubMenu(myItems, 4));
+}
 
 void loop() {
     char key = keypad.getKey();
     if (key == NO_KEY) return;
-
-    MenuItem myItems[5];
 
     switch (key) {
         case 'A':
@@ -70,13 +81,6 @@ void loop() {
             menu.setText(password);
             break;
         case '#':
-            for (uint8_t i = 0; i < 4; i++) {
-                MenuItem wifiParamsMenu[] = {MenuItem(names[i]),
-                                             ItemInput("Pass", "", NULL)};
-
-                myItems[i] = ItemSubMenu(names[i], menu.buildSubMenu(wifiParamsMenu, 2));
-            }
-            menu.setSubMenu(1, menu.buildSubMenu(myItems, 4));
             break;
         default:
             password += key;
