@@ -141,5 +141,10 @@ class LcdMenu {
     //  text: String        = text to display
     //
     void setText(String text);
+    //
+    // call this function to get the current cursor position
+    //    values: 1, 2, 3...
+    //
+    uint8_t getCursorPosition();
 };
 #endif
