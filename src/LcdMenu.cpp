@@ -1,20 +1,23 @@
 #include "LcdMenu.h"
-//
-// constructor for the LcdMenu class
-//  Enter:  maxRows = rows on lcd display e.g. 4
-//          maxCols = columns on lcd display e.g. 20
-//
+/**
+ * Constructor for the LcdMenu class
+ *
+ * @param maxRows rows on lcd display e.g. 4
+ * @param maxCols columns on lcd display e.g. 20
+ * @return new `LcdMenu` object
+ */
 LcdMenu::LcdMenu(uint8_t maxRows, uint8_t maxCols) {
     this->maxRows = maxRows;
     this->maxCols = maxCols;
     this->bottom = maxRows;
 }
-//
-// call this function in setup() to initialize the LCD and the custom characters
-// used as up and down arrows
-//  Enter:  lcd_Addr = address of the LCD display on the I2C bus (default 0x27)
-//          menu     = menu to display
-//
+/**
+ * Call this function in `setup()` to initialize the LCD and the custom
+ * characters used as up and down arrows
+ *
+ * @param lcd_Addr address of the LCD on the I2C bus (default 0x27)
+ * @param menu menu to display
+ */
 void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
     lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
     lcd->init();
@@ -25,21 +28,24 @@ void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
     this->currentMenuTable = menu;
     paint();
 }
-//
-// call this function to set sub menu items for any main menu item
-//  position = main menu item/where to place the sub menu
-//  items    = sub menu items
-//
+/**
+ * Call this function to set sub menu items for any main menu item
+ *
+ * @param position main menu item/where to place the sub menu
+ * @param items    sub menu items
+ */
 void LcdMenu::setSubMenu(uint8_t position, MenuItem *items) {
     currentMenuTable[position + 1].setSubMenu(items);
     paint();
 }
-//
-// builder function for a sub menu
-// this functions appends a header and a footer to the final item list
-//  items = array of MenuItems for the sub menu
-//  size  = size of items array
-//
+/**
+ * Builder function for a sub menu
+ * this functions appends a header and a footer to the final item list
+ *
+ * @param items array of MenuItems for the sub menu
+ * @param size size of items array
+ * @return MenuItem list (pointer) with header and footer items included
+ */
 MenuItem *LcdMenu::buildSubMenu(MenuItem *items, uint8_t size) {
     //
     // create a temporary array
@@ -71,40 +77,44 @@ MenuItem *LcdMenu::buildSubMenu(MenuItem *items, uint8_t size) {
     tempItems[size + 1] = ItemFooter();
     return tempItems;
 }
-//
-// call this function to draw the menu items and cursor
-//
+/*
+ * Draw the menu items and cursor
+ */
 void LcdMenu::paint() {
     drawMenu();
     drawCursor();
 }
-//
-// call this function to reset the display
-//
+/**
+ * Reset the display
+ */
 void LcdMenu::reset() {
     cursorPosition = 1;
     top = 1;
     bottom = maxRows;
     paint();
 }
-//
-// this function checks if the cursor is at the start of the menu items
-//
+/**
+ * Check if the cursor is at the start of the menu items
+ *
+ * @return true : `boolean` if it is at the start
+ */
 boolean LcdMenu::isAtTheStart() {
     byte menuType = currentMenuTable[cursorPosition - 1].getType();
     return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
            menuType == MENU_ITEM_SUB_MENU_HEADER;
 }
-//
-// this function checks if the cursor is at the end of the menu items
-//
+/**
+ * Check if the cursor is at the end of the menu items
+ *
+ * @return true : `boolean` if it is at the end
+ */
 boolean LcdMenu::isAtTheEnd() {
     return currentMenuTable[cursorPosition + 1].getType() ==
            MENU_ITEM_END_OF_MENU;
 }
-//
-// this function draws the cursor
-//
+/**
+ * Draws the cursor
+ */
 void LcdMenu::drawCursor() {
     //
     // Erases current cursor
@@ -128,9 +138,9 @@ void LcdMenu::drawCursor() {
     } else
         lcd->noBlink();
 }
-//
-// this function draws the menu items with up and down indicators
-//
+/**
+ * Draw the menu items with up and down indicators
+ */
 void LcdMenu::drawMenu() {
     lcd->clear();
     //
@@ -191,9 +201,9 @@ void LcdMenu::drawMenu() {
         lcd->write(byte(0));
     }
 }
-//
-// call this function to execute an "up press"
-//
+/**
+ * Execute an "up press" on menu
+ */
 void LcdMenu::up() {
     //
     // determine if cursor ia at start of menu items
@@ -212,9 +222,9 @@ void LcdMenu::up() {
     }
     paint();
 }
-//
-// call this function to execute a "down press"
-//
+/**
+ * Execute a "down press" on menu
+ */
 void LcdMenu::down() {
     //
     // determine if cursor has passed the end
@@ -233,9 +243,9 @@ void LcdMenu::down() {
     }
     paint();
 }
-//
-// call this function to execute a "enter"
-//
+/**
+ * Execute an "enter" action on menu
+ */
 void LcdMenu::enter() {
     MenuItem *item = &currentMenuTable[cursorPosition];
     //
@@ -295,9 +305,9 @@ void LcdMenu::enter() {
         }
     }
 }
-//
-// call this function to execute a "backpress"
-//
+/**
+ * Execute a "backpress" action on menu
+ */
 void LcdMenu::back() {
     //
     // get the type of the currently displayed menu
@@ -311,10 +321,12 @@ void LcdMenu::back() {
         reset();
     }
 }
-//
-// display text at the cursor position
-//  text: String        = text to display
-//
+/**
+ * Display text at the cursor position
+ * used for `Input` type menu items
+ *
+ * @param text text to display
+ */
 void LcdMenu::setText(String text) {
     MenuItem *item = &currentMenuTable[cursorPosition];
     //
@@ -340,17 +352,18 @@ void LcdMenu::setText(String text) {
         placeCursorAtEnd(item);
     }
 }
-//
-// call this function to get the current cursor position
-//    values: 1, 2, 3...
-//
-uint8_t LcdMenu::uint8_t getCursorPosition() {
-    return this->cursorPosition;
-}
-//
-// place cursor at end of text
-//  item: MenuItem = menu item which contains an input value
-//
+/**
+ * Get the current cursor position
+ *
+ * @return `cursorPosition` e.g. 1, 2, 3...
+ */
+uint8_t LcdMenu::uint8_t getCursorPosition() { return this->cursorPosition; }
+/**
+ * Places the cursor at end of Menu's text.
+ *
+ * @param item MenuItem where the cursor should be placed
+ * @relatesalso MenuItem
+ */
 void LcdMenu::placeCursorAtEnd(MenuItem *item) {
     uint8_t col = ((String)item->getText()).length() + 2 + item->value.length();
     lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);

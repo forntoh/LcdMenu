@@ -1,3 +1,29 @@
+/*
+  LcdMenu.h - Main include file for the LcdMenu Library
+
+  MIT License
+
+  Copyright (c) 2020 Forntoh Thomas
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
+
 #ifndef LcdMenu_H
 #define LcdMenu_H
 #include <Arduino.h>
@@ -8,34 +34,34 @@
 // the LcdMenu class
 //
 class LcdMenu {
-   private:
-    //
-    // cursor position
-    //
+private:
+    /**
+     * Cursor position
+     */
     uint8_t cursorPosition = 1;
-    //
-    // first visible item's position in the menu array
-    //
+    /**
+     * First visible item's position in the menu array
+     */
     uint8_t top = 1;
-    //
-    // last visible item's position in the menu array
-    //
+    /**
+     * Last visible item's position in the menu array
+     */
     uint8_t bottom;
-    //
-    // rows of LCD Display
-    //
+    /**
+     * Rows on the LCD Display
+     */
     uint8_t maxRows;
-    //
-    // columns of LCD Display
-    //
+    /**
+     * Columns on the LCD Display
+     */
     uint8_t maxCols;
-    //
-    // array of menu items
-    //
+    /**
+     * Array of menu items
+     */
     MenuItem* currentMenuTable;
-    //
-    // down arrow (↓)
-    //
+    /**
+     * Down arrow (↓)
+     */
     byte downArrow[8] = {
         0b00100,  //   *
         0b00100,  //   *
@@ -46,9 +72,9 @@ class LcdMenu {
         0b01110,  //  ***
         0b00100   //   *
     };
-    //
-    // up arrow (↑)
-    //
+    /**
+     * Up arrow (↑)
+     */
     byte upArrow[8] = {
         0b00100,  //   *
         0b01110,  //  ***
@@ -59,92 +85,107 @@ class LcdMenu {
         0b00100,  //   *
         0b00100   //   *
     };
-    //
-    // this function draws the cursor
-    //
+    /**
+     * Draws the cursor
+     */
     void drawCursor();
-    //
-    // this function draws the menu items with up and down indicators
-    //
+    /**
+     * Draw the menu items with up and down indicators
+     */
     void drawMenu();
-    //
-    // this function checks if the cursor is at the start of the menu items
-    //
+    /**
+     * Check if the cursor is at the start of the menu items
+     *
+     * @return true : `boolean` if it is at the start
+     */
     boolean isAtTheStart();
-    //
-    // this function checks if the cursor is at the end of the menu items
-    //
+    /**
+     * Check if the cursor is at the end of the menu items
+     *
+     * @return true : `boolean` if it is at the end
+     */
     boolean isAtTheEnd();
-    //
-    // call this function to draw the menu items and cursor
-    //
+    /*
+     * Draw the menu items and cursor
+     */
     void paint();
-    //
-    // call this function to reset the display
-    //
+    /**
+     * Reset the display
+     */
     void reset();
-    //
-    // place cursor at end of text
-    //  item: MenuItem = menu item which contains an input value
-    //
+    /**
+     * Places the cursor at end of Menu's text.
+     *
+     * @param item MenuItem where the cursor should be placed
+     * @relatesalso MenuItem
+     */
     void placeCursorAtEnd(MenuItem* item);
 
-   public:
-    //
-    // LCD Display
-    //
+public:
+    /**
+     * LCD Display
+     */
     LiquidCrystal_I2C* lcd;
-    //
-    // constructor for the LcdMenu class
-    //  Enter:  maxRows = rows on lcd display e.g. 4
-    //          maxCols = columns on lcd display e.g. 20
-    //
+    /**
+     * Constructor for the LcdMenu class
+     *
+     * @param maxRows rows on lcd display e.g. 4
+     * @param maxCols columns on lcd display e.g. 20
+     * @return new `LcdMenu` object
+     */
     LcdMenu(uint8_t maxRows, uint8_t maxCols);
-    //
-    // call this function in setup() to initialize the LCD and the custom
-    // characters used as up and down arrows
-    //  Enter:  lcd_Addr = address of the LCD on the I2C bus (default 0x27)
-    //          menu     = menu to display
-    //
+    /**
+     * Call this function in `setup()` to initialize the LCD and the custom
+     * characters used as up and down arrows
+     *
+     * @param lcd_Addr address of the LCD on the I2C bus (default 0x27)
+     * @param menu menu to display
+     */
     void setupLcdWithMenu(uint8_t lcd_Addr, MenuItem* menu);
-    //
-    // call this function to set sub menu items for any main menu item
-    //  position = main menu item/where to place the sub menu
-    //  items    = sub menu items
-    //
+    /**
+     * Call this function to set sub menu items for any main menu item
+     *
+     * @param position main menu item/where to place the sub menu
+     * @param items    sub menu items
+     */
     void setSubMenu(uint8_t position, MenuItem* items);
-    //
-    // builder function for a sub menu
-    // this functions appends a header and a footer to the final item list
-    //  items = array of MenuItems for the sub menu
-    //  size  = size of items array
-    //
+    /**
+     * Builder function for a sub menu
+     * this functions appends a header and a footer to the final item list
+     *
+     * @param items array of MenuItems for the sub menu
+     * @param size size of items array
+     * @return MenuItem list (pointer) with header and footer items included
+     */
     MenuItem* buildSubMenu(MenuItem* items, uint8_t size);
-    //
-    // call this function to execute an "up press"
-    //
+    /**
+     * Execute an "up press" on menu
+     */
     void up();
-    //
-    // call this function to execute a "down press"
-    //
+    /**
+     * Execute a "down press" on menu
+     */
     void down();
-    //
-    // call this function to execute a "enter"
-    //
+    /**
+     * Execute an "enter" action on menu
+     */
     void enter();
-    //
-    // call this function to execute a "backpress"
-    //
+    /**
+     * Execute a "backpress" action on menu
+     */
     void back();
-    //
-    // display text at the cursor position
-    //  text: String        = text to display
-    //
+    /**
+     * Display text at the cursor position
+     * used for `Input` type menu items
+     *
+     * @param text text to display
+     */
     void setText(String text);
-    //
-    // call this function to get the current cursor position
-    //    values: 1, 2, 3...
-    //
+    /**
+     * Get the current cursor position
+     *
+     * @return `cursorPosition` e.g. 1, 2, 3...
+     */
     uint8_t getCursorPosition();
 };
 #endif
