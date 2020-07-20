@@ -26,13 +26,15 @@
 
 #ifndef LcdMenu_H
 #define LcdMenu_H
+
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
 #include "MenuItem.h"
-//
-// the LcdMenu class
-//
+
+/**
+ * the LcdMenu class
+ */
 class LcdMenu {
 private:
     /**
