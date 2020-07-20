@@ -36,7 +36,7 @@
  * the LcdMenu class
  */
 class LcdMenu {
-private:
+   private:
     /**
      * Cursor position
      */
@@ -123,7 +123,7 @@ private:
      */
     void placeCursorAtEnd(MenuItem* item);
 
-public:
+   public:
     /**
      * LCD Display
      */
