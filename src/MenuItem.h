@@ -122,4 +122,10 @@ class ItemToggle : public MenuItem {
         : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
 };
 
+class ItemCommand : public MenuItem {
+   public:
+    ItemToggle(char* key, fptr callback)
+        : MenuItem(key, callback, MENU_ITEM_COMMAND) {}
+};
+
 #endif
