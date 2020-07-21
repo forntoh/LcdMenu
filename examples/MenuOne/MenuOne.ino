@@ -1,4 +1,3 @@
-#include <Key.h>
 #include <Keypad.h>
 #include <LcdMenu.h>
 

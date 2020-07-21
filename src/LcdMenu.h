@@ -125,6 +125,14 @@ class LcdMenu {
 
    public:
     /**
+     * Time when the toast started showing in milliseconds
+     */
+    unsigned long startTime;
+    /**
+     * How long the toast should Last in milliseconds
+     */
+    unsigned int duration;
+    /**
      * LCD Display
      */
     LiquidCrystal_I2C* lcd;
@@ -189,5 +197,16 @@ class LcdMenu {
      * @return `cursorPosition` e.g. 1, 2, 3...
      */
     uint8_t getCursorPosition();
+    /**
+     * Show a message at the bottom of the screen
+     *
+     * @param message message to display
+     * @param duration how long to display the message
+     */
+    void displayNotification(char* message, unsigned int duration);
+    /**
+     * Executes any delayed task when appropriate time reaches
+     */
+    void updateTimer();
 };
 #endif

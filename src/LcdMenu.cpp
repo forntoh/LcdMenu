@@ -384,7 +384,48 @@ void LcdMenu::setText(String text) {
  *
  * @return `cursorPosition` e.g. 1, 2, 3...
  */
-uint8_t LcdMenu::uint8_t getCursorPosition() { return this->cursorPosition; }
+uint8_t LcdMenu::getCursorPosition() { return this->cursorPosition; }
+
+/**
+ * Show a message at the bottom of the screen
+ *
+ * @param message message to display
+ * @param callback function to call after duration expired
+ * @param duration how long to display the message
+ */
+void LcdMenu::displayNotification(char *message, unsigned int duration) {
+    /**
+     * Calculate the position to start writing
+     * (centralize text)
+     */
+    uint8_t centerPos = maxCols / 2 - (strlen(message) / 2);
+    /**
+     * Set cursor potion and clear lane
+     */
+    lcd->setCursor(0, maxRows - 1);
+    lcd->print("                   ");
+    lcd->setCursor(centerPos - 1, maxRows - 1);
+    /**
+     * Draw each independent character
+     */
+    lcd->write(0xA5);
+    for (unsigned int i = 0; i < strlen(message); i++) {
+        char character = message[i];
+        lcd->write(character);
+    }
+    lcd->write(0xA5);
+    /*
+     * initialize the timer
+     */
+    this->duration = duration;
+    startTime = millis();
+}
+/**
+ * Executes any delayed task when appropriate time reaches
+ */
+void LcdMenu::updateTimer() {
+    if (millis() == startTime + duration) paint();
+}
 /**
  * Places the cursor at end of Menu's text.
  *
