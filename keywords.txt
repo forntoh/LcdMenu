@@ -41,6 +41,10 @@ getType	KEYWORD2
 setText	KEYWORD2
 setCallBack	KEYWORD2
 setSubMenu	KEYWORD2
+getCursorPosition   KEYWORD2
+displayNotification KEYWORD2
+updateTimer KEYWORD2
+getItemAt   KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)

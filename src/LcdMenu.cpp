@@ -427,6 +427,14 @@ void LcdMenu::updateTimer() {
     if (millis() == startTime + duration) paint();
 }
 /**
+ * Get a `MenuItem` at position
+ *
+ * @return `MenuItem` - item at `position`
+ */
+MenuItem LcdMenu::getItemAt(uint8_t position) {
+    return &currentMenuTable[position];
+}
+/**
  * Places the cursor at end of Menu's text.
  *
  * @param item MenuItem where the cursor should be placed

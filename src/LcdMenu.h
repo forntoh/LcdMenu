@@ -208,5 +208,11 @@ class LcdMenu {
      * Executes any delayed task when appropriate time reaches
      */
     void updateTimer();
+    /**
+     * Get a `MenuItem` at position
+     * 
+     * @return `MenuItem` - item at `position`
+     */
+    MenuItem getItemAt(uint8_t position);
 };
 #endif

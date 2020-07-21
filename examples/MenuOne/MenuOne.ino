@@ -1,10 +1,12 @@
 #include <Keypad.h>
+#include <Timer.h>
+
 #include <LcdMenu.h>
 
 #define LCD_ADDR 0x27
 
-#define LCD_ROWS 4
-#define LCD_COLS 20
+#define LCD_ROWS 2
+#define LCD_COLS 16
 
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
@@ -44,6 +46,7 @@ Keypad keypad =
     Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
 void setup() {
+    Serial.begin(115200);
     menu.setupLcdWithMenu(LCD_ADDR, mainMenu);
 
     MenuItem myItems[4];
@@ -55,9 +58,14 @@ void setup() {
             ItemSubMenu(names[i], menu.buildSubMenu(wifiParamsMenu, 2));
     }
     menu.setSubMenu(1, menu.buildSubMenu(myItems, 4));
+
+    delay(3500);
+    menu.displayNotification("Helo", 25000);
 }
 
 void loop() {
+    menu.updateTimer();
+
     char key = keypad.getKey();
     if (key == NO_KEY) return;
 
