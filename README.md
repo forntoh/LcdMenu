@@ -31,3 +31,7 @@ See [Wiki - Callbacks](https://github.com/forntoh/LcdMenu/wiki/Example-03-Callba
 ### 04 Dynamic Menus
 
 See [Wiki - Dynamic Menu](https://github.com/forntoh/LcdMenu/wiki/Example-04-Dynamic-Menu)
+
+### 05 Menu Notifications
+
+See [Wiki - Menu Notifications](https://github.com/forntoh/LcdMenu/wiki/Example-05-Menu-Notifications)

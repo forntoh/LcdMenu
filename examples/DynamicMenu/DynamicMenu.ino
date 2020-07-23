@@ -77,6 +77,7 @@ void loop() {
             break;
         case '*':
             createSubMenu();
+            break;
         default:
             break;
     }
