@@ -1,7 +1,7 @@
 /*
- Basic Menu Navigation
+ Sub Menu
 
- This sketch demostrates how to get started with the LcdMenu library
+ This sketch demostrates how to create menus which contain other menus
 
  Circuit:
  * Arduino Board
@@ -21,7 +21,7 @@
 
  This example is in the public domain.
 
- https://github.com/forntoh/LcdMenu/tree/master/examples/Basic/Basic.ino
+ https://github.com/forntoh/LcdMenu/tree/master/examples/SubMenu/SubMenu.ino
 
 */
 
@@ -36,31 +36,34 @@ char keys[4][4] = {{'1', '2', '3', 'A'},
                    {'4', '5', '6', 'B'},
                    {'7', '8', '9', 'C'},
                    {'*', '0', '#', 'D'}};
+                   
 // Configure keypad pins
 byte colPins[4] = {5, 4, 3, 2};
 byte rowPins[4] = {9, 8, 7, 6};
 
-// Define the main menu
 extern MenuItem mainMenu[];
+extern MenuItem settingsMenu[];
 
-// Initialize the main menu items
 MenuItem mainMenu[] = {ItemHeader(),
                        MenuItem("Start service"),
                        MenuItem("Connect to WiFi"),
-                       MenuItem("Settings"),
+                       ItemSubMenu("Settings", settingsMenu),
                        MenuItem("Blink SOS"),
                        MenuItem("Blink random"),
                        ItemFooter()};
-// Construct the LcdMenu
+/**
+ * Create submenu and precise its parent
+ */
+MenuItem settingsMenu[] = {ItemSubHeader(mainMenu),
+                           MenuItem("Backlight"),
+                           MenuItem("Contrast"),
+                           ItemFooter()};
+
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
-// Setup keypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, 4, 4);
 
-void setup() {
-    // Initialize LcdMenu with the menu items
-    menu.setupLcdWithMenu(0x27, mainMenu);
-}
+void setup() { menu.setupLcdWithMenu(0x27, mainMenu); }
 
 void loop() {
     char key = keypad.getKey();

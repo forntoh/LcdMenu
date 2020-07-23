@@ -18,8 +18,8 @@ Follow this guide to install the library https://www.arduino.cc/en/guide/librari
 
 ### Basic Navigation
 
-See [Basic-Navigation](https://github.com/forntoh/LcdMenu/wiki/Basic-Navigation)
+See [Wiki - Basic-Navigation](https://github.com/forntoh/LcdMenu/wiki/Basic-Navigation)
 
 ### Submenus
 
-See [Basic-Navigation](https://github.com/forntoh/LcdMenu/wiki/Submenus)
+See [Wiki - Submenus](https://github.com/forntoh/LcdMenu/wiki/Submenus)

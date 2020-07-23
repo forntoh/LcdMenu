@@ -1,5 +1,4 @@
 #include <Keypad.h>
-#include <Timer.h>
 
 #include <LcdMenu.h>
 
