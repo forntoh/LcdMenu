@@ -204,10 +204,10 @@ class LcdMenu {
      * @param duration how long to display the message
      */
     void displayNotification(char* message, unsigned int duration);
-    /**
-     * Executes any delayed task when appropriate time reaches
-     */
-    void updateTimer();
+/**
+ * Executes any delayed task when appropriate time reaches
+ */
+void updateTimer();
     /**
      * Get a `MenuItem` at position
      * 
