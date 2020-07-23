@@ -16,10 +16,18 @@ Follow this guide to install the library https://www.arduino.cc/en/guide/librari
 
 ## Examples
 
-### Basic Navigation
+### 01 Basic Navigation
 
-See [Wiki - Basic-Navigation](https://github.com/forntoh/LcdMenu/wiki/Basic-Navigation)
+See [Wiki - Basic-Navigation](https://github.com/forntoh/LcdMenu/wiki/Example-01-Basic-Navigation)
 
-### Submenus
+### 02 Sub Menus
 
-See [Wiki - Submenus](https://github.com/forntoh/LcdMenu/wiki/Submenus)
+See [Wiki - Sub Menus](https://github.com/forntoh/LcdMenu/wiki/Example-02-Sub-Menu)
+
+### 03 Callbacks
+
+See [Wiki - Callbacks](https://github.com/forntoh/LcdMenu/wiki/Example-03-Callback)
+
+### 04 Dynamic Menus
+
+See [Wiki - Dynamic Menu](https://github.com/forntoh/LcdMenu/wiki/Example-04-Dynamic-Menu)
