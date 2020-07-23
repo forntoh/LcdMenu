@@ -1,23 +1,3 @@
-# LcdMenu
-
-Display navigable menu items on your LCD display with Arduino
-
-## Features
-
-- Dynamic menus
-- Compatible with all Character LCD Display Modules and VATN Alphanumeric LCD Displays
-- Many menu types available
-- Callback functions.
-
-## Installation
-
-Follow this guide to install the library https://www.arduino.cc/en/guide/libraries
-
-## Usage
-
-### Basic Navigation
-
-```c++
 #include <Keypad.h>
 #include <LcdMenu.h>
 
@@ -71,4 +51,3 @@ void loop() {
             break;
     }
 }
-```
