@@ -213,6 +213,6 @@ void updateTimer();
      * 
      * @return `MenuItem` - item at `position`
      */
-    MenuItem getItemAt(uint8_t position);
+    MenuItem* getItemAt(uint8_t position);
 };
 #endif

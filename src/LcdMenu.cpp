@@ -431,7 +431,7 @@ void LcdMenu::updateTimer() {
  *
  * @return `MenuItem` - item at `position`
  */
-MenuItem LcdMenu::getItemAt(uint8_t position) {
+MenuItem* LcdMenu::getItemAt(uint8_t position) {
     return &currentMenuTable[position];
 }
 /**
