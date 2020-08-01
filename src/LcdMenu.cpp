@@ -45,16 +45,7 @@ LcdMenu::LcdMenu(uint8_t maxRows, uint8_t maxCols) {
  * @param lcd_Addr address of the LCD on the I2C bus (default 0x27)
  * @param menu menu to display
  */
-void LcdMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem *menu) {
-    lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
-    lcd->init();
-    lcd->backlight();
-    lcd->clear();
-    lcd->createChar(0, upArrow);
-    lcd->createChar(1, downArrow);
-    this->currentMenuTable = menu;
-    paint();
-}
+
 /**
  * Call this function to set sub menu items for any main menu item
  *
