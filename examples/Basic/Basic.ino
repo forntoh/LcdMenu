@@ -1,8 +1,6 @@
 /*
  Basic Menu Navigation
-
  This sketch demostrates how to get started with the LcdMenu library
-
  Circuit:
  * Arduino Board
  * Keypad pin 1 to digital pin 9
@@ -15,17 +13,16 @@
  * Keypad pin 8 to digital pin 2
  * LCD SLC pin to arduino SLC pin
  * LCD SDA pin to arduino SDA pin
-
  created 22 July 2020
  by Forntoh Thomas
-
  This example is in the public domain.
-
  https://github.com/forntoh/LcdMenu/tree/master/examples/Basic/Basic.ino
-
 */
 
 #include <Keypad.h>
+
+#define LCD_NO_I2C  // comment this line for using I2C LCD
+
 #include <LcdMenu.h>
 
 #define LCD_ROWS 2
@@ -59,7 +56,20 @@ Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, 4, 4);
 
 void setup() {
     // Initialize LcdMenu with the menu items
-    menu.setupLcdWithMenu(0x27, mainMenu);
+/*  For non I2C LCD
+Digital pin 4 > DB4
+Digital pin 5 > DB5
+Digital pin 6 > DB6
+Digital pin 7 > DB7
+Digital pin 8  > RS (Data or Select LCD)
+Digital pin 9 > Enable
+*/    
+#ifdef LCD_NO_I2C
+  menu.setupLcdWithMenu( 8, 9, 4, 5, 6, 7, mainMenu);
+#else
+  menu.setupLcdWithMenu(0x27, mainMenu); 
+#endif
+
 }
 
 void loop() {
