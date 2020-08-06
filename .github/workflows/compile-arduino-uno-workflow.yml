@@ -33,9 +33,8 @@ jobs:
 
       - name: Install LCD Menu Library
         run: |
-          cd /home/runner/Arduino
-          ls
-          mkdir -p /home/runner/arduino/libraries/LcdMenu/ && cp -r * /usr/share/arduino/libraries/LcdMenu/
+          mkdir -p /home/runner/Arduino/libraries/LcdMenu/ && cp -r * /home/runner/Arduino/libraries/LcdMenu/
+          ls /home/runner/Arduino/libraries/
 
       - name: Compile Sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/Basic
