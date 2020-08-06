@@ -33,7 +33,10 @@ jobs:
 
       - name: Install LCD Menu Library
         run: |
-          arduino-cli lib list
+          cd /usr/share/
+          ls
+          cd arduino/
+          ls
           mkdir -p /usr/share/arduino/libraries/LcdMenu/ && cp -r * /usr/share/arduino/libraries/LcdMenu/
 
       - name: Compile Sketch
