@@ -114,10 +114,20 @@ void LcdMenu::paint() {
 /**
  * Reset the display
  */
-void LcdMenu::reset() {
-    cursorPosition = 1;
-    top = 1;
-    bottom = maxRows;
+void LcdMenu::reset(boolean isHistoryAvailable) {
+    if (isHistoryAvailable) {
+        cursorPosition = previousCursorPosition;
+        top = previousTop;
+        bottom = previousBottom;
+    } else {
+        previousCursorPosition = cursorPosition;
+        previousTop = top;
+        previousBottom = bottom;
+
+        cursorPosition = 1;
+        top = 1;
+        bottom = maxRows;
+    }
     paint();
 }
 /**
@@ -291,7 +301,7 @@ void LcdMenu::enter() {
             //
             // display the sub menu
             //
-            reset();
+            reset(false);
             break;
         }
         //
@@ -345,7 +355,7 @@ void LcdMenu::back() {
     //
     if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
         currentMenuTable = currentMenuTable[0].getSubMenu();
-        reset();
+        reset(true);
     }
 }
 /**
@@ -431,7 +441,7 @@ void LcdMenu::updateTimer() {
  *
  * @return `MenuItem` - item at `position`
  */
-MenuItem* LcdMenu::getItemAt(uint8_t position) {
+MenuItem *LcdMenu::getItemAt(uint8_t position) {
     return &currentMenuTable[position];
 }
 /**

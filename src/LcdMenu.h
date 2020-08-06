@@ -41,14 +41,17 @@ class LcdMenu {
      * Cursor position
      */
     uint8_t cursorPosition = 1;
+    uint8_t previousCursorPosition = 1;
     /**
      * First visible item's position in the menu array
      */
     uint8_t top = 1;
+    uint8_t previousTop = 1;
     /**
      * Last visible item's position in the menu array
      */
     uint8_t bottom;
+    uint8_t previousBottom;
     /**
      * Rows on the LCD Display
      */
@@ -113,8 +116,10 @@ class LcdMenu {
     void paint();
     /**
      * Reset the display
+     * @param isHistoryAvailable indicates if there is a previous position
+     * Cursor position to go to
      */
-    void reset();
+    void reset(boolean isHistoryAvailable);
     /**
      * Places the cursor at end of Menu's text.
      *
