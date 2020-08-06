@@ -1,6 +1,6 @@
 name: Compile LCD Menu on Arduino
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   compile-arduino:
