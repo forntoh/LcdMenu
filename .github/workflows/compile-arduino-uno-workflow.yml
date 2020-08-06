@@ -33,11 +33,7 @@ jobs:
 
       - name: Install LCD Menu Library
         run: |
-          cd /home/runner/
-          ls
-          cd work/
-          ls
-          cd _temp/
+          cd /home/runner/Arduino
           ls
           mkdir -p /home/runner/arduino/libraries/LcdMenu/ && cp -r * /usr/share/arduino/libraries/LcdMenu/
 
