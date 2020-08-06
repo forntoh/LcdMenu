@@ -16,17 +16,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
       - name: Setup Arduino CLI
         uses: arduino/setup-arduino-cli@v1.0.0
+
       - name: Install platform
         run: |
           arduino-cli core update-index
           arduino-cli core install ${{ matrix.arduino-platform }}
-      - name: Install Keypad library
-        run: arduino-cli lib install Keypad
-      - name: Install LiquidCrystal library
-        run: arduino-cli lib install LiquidCrystal
-      - name: Install LiquidCrystal_I2C library
-        run: arduino-cli lib install "LiquidCrystal I2C"
+
+      - name: Install Keypad and LCD libraries
+        run: |
+          arduino-cli lib install Keypad
+          arduino-cli lib install LiquidCrystal
+          arduino-cli lib install "LiquidCrystal I2C"
+
+      - name: Install LCD Menu Library
+        run: cp * /usr/share/arduino/libraries/LcdMenu/
+        
       - name: Compile Sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/Basic
