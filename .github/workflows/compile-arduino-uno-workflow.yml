@@ -23,4 +23,4 @@ jobs:
           arduino-cli core update-index
           arduino-cli core install ${{ matrix.arduino-platform }}
       - name: Compile Sketch
-        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} /examples/Basic
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} /examples/Basic/Basic.ino
