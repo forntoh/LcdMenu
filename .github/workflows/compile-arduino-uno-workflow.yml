@@ -31,10 +31,8 @@ jobs:
           arduino-cli lib install LiquidCrystal
           arduino-cli lib install "LiquidCrystal I2C"
 
-      - name: Install LCD Menu Library
-        run: |
-          mkdir -p /home/runner/Arduino/libraries/LcdMenu/ && cp -r * /home/runner/Arduino/libraries/LcdMenu/
-          ls /home/runner/Arduino/libraries/
+      - name: Install LcdMenu Library
+        run: mkdir -p /home/runner/Arduino/libraries/LcdMenu/ && cp -r * /home/runner/Arduino/libraries/LcdMenu/
 
       - name: Compile Sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/Basic
