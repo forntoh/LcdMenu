@@ -22,5 +22,11 @@ jobs:
         run: |
           arduino-cli core update-index
           arduino-cli core install ${{ matrix.arduino-platform }}
+      - name: Install Keypad library
+        run: arduino-cli lib install Keypad
+      - name: Install LiquidCrystal library
+        run: arduino-cli lib install LiquidCrystal
+      - name: Install LiquidCrystal_I2C library
+        run: arduino-cli lib install LiquidCrystal_I2C
       - name: Compile Sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/Basic
