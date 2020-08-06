@@ -32,7 +32,7 @@ jobs:
           arduino-cli lib install "LiquidCrystal I2C"
 
       - name: Install LCD Menu Library
-        run: cp * /usr/share/arduino/libraries/LcdMenu/
-        
+        run: mkdir -p /usr/share/arduino/libraries/LcdMenu/ && cp * /usr/share/arduino/libraries/LcdMenu/
+
       - name: Compile Sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/Basic
