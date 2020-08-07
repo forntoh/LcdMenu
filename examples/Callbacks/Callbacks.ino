@@ -1,52 +1,41 @@
-/*
- Menu Item Callbacks
-
- This sketch demostrates how to use callback functions in the LcdMenu library
-
- Circuit:
- * Arduino Board
- * Keypad pin 1 to digital pin 9
- * Keypad pin 2 to digital pin 8
- * Keypad pin 3 to digital pin 7
- * Keypad pin 4 to digital pin 6
- * Keypad pin 5 to digital pin 5
- * Keypad pin 6 to digital pin 4
- * Keypad pin 7 to digital pin 3
- * Keypad pin 8 to digital pin 2
- * LCD SLC pin to arduino SLC pin
- * LCD SDA pin to arduino SDA pin
-
- created 23 July 2020
- by Forntoh Thomas
-
- This example is in the public domain.
-
- https://github.com/forntoh/LcdMenu/tree/master/examples/Callbacks/Callbacks.ino
-
-*/
-
-#include <Keypad.h>
-#include <LcdMenu.h>
-
 #define LCD_ROWS 2
 #define LCD_COLS 16
+
+#define ENNE        0xEE      // la letra ñ es char (0xEE) en el LCD
+#define MICRA       0xE4      // el símbolo micra u es char(0xE4) en el LCD
+#define GRADO       0xDF      // el símbologrado º es char(0xDF) en el LCD
+
+#define KEY_IN      A0
+#define DEBOUNCE_DELAY  70    // 70 milisegundos
+ 
+#define NADA             0    // Ningún movimiento de Joystick
+#define MAS              1    // derecha
+#define MASMAS           2    // derecha rápido
+#define MENOS            3    // izquierda
+#define MENOSMENOS       4    // izquierda rápido
+#define ARRIBA           5    // arriba
+#define ARRIBAARRIBA     6    // arriba rápido
+#define ABAJO            7    // abajo
+#define ABAJOABAJO       8    // abajo rápido
+#define BOTON            9    // botón pulsado
+
+#include <LcdNOI2CMenu.h>
+
+
+
+//Variables Joystick
+byte joyRead, joyPos, lastJoyRead, lastJoyPos;    
+boolean joyPosValido;           // si la posición de joystick o botón es válida        
+long lastDebounceTime = 0;      // Tiempo que el joystick está en esa posición
 
 // Declare the call back function
 void toggleBacklight();
 
-// Configure keypad keys
-char keys[4][4] = {{'1', '2', '3', 'A'},
-                   {'4', '5', '6', 'B'},
-                   {'7', '8', '9', 'C'},
-                   {'*', '0', '#', 'D'}};
-                   
-// Configure keypad pins
-byte colPins[4] = {5, 4, 3, 2};
-byte rowPins[4] = {9, 8, 7, 6};
-
+// Define the main menu
 extern MenuItem mainMenu[];
 extern MenuItem settingsMenu[];
 
+// Initialize the main menu items
 MenuItem mainMenu[] = {ItemHeader(),
                        MenuItem("Start service"),
                        MenuItem("Connect to WiFi"),
@@ -65,35 +54,85 @@ MenuItem settingsMenu[] = {ItemSubHeader(mainMenu),
                            MenuItem("Contrast"),
                            ItemFooter()};
 
+// Construct the LcdMenu
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
-Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, 4, 4);
 
-void setup() { menu.setupLcdWithMenu(0x27, mainMenu); }
+void setup()
+{
+  menu.setupLcdWithMenu( 8, 9, 4, 5, 6, 7, mainMenu);
+//settingsMenu[1].isOn = true;
+}
 
-void loop() {
-    char key = keypad.getKey();
-    if (key == NO_KEY) return;
+void loop()
+{
+  leeKeyPad();
+  if (joyPosValido)
+  {
+    joyPosValido = false;     
 
-    switch (key) {
-        case 'A':
+    switch (joyPos)
+    {
+        case ARRIBA:
+        case ARRIBAARRIBA:
             menu.up();
             break;
-        case 'B':
+        case ABAJO:
+        case ABAJOABAJO:
             menu.down();
             break;
-        case 'C':
-            // callback funtion will be executed when enter is pressed
+        case BOTON:
+        case MAS:
+        case MASMAS:
             menu.enter();
             break;
-        case 'D':
+        case MENOS:
+        case MENOSMENOS:
             menu.back();
             break;
-        default:
-            break;
     }
+  }
 }
+
+void leeKeyPad()  // para keypad
+{
+  int x = analogRead(KEY_IN);  // se deben ajustar los valores a un keypad determinado
+
+    if (x < 60) joyRead = MAS;     
+    else if (x < 200) joyRead = ARRIBA;
+    else if (x < 400) joyRead = ABAJO;
+    else if (x < 600) joyRead = MENOS;
+    else if (x < 800) joyRead = BOTON; // botón SELECT
+    else joyRead = NADA;
+
+  if (joyRead != lastJoyRead) lastDebounceTime = millis();  
+  else if ((millis() - lastDebounceTime) > DEBOUNCE_DELAY)
+  {
+     if (lastJoyPos != joyRead)
+     {
+       lastJoyPos = joyPos = joyRead;
+       if (!joyPosValido) joyPosValido = true;           
+     }  
+     else if (((millis() - lastDebounceTime) > (7 * DEBOUNCE_DELAY)) && (joyRead != BOTON))  // por si está pulsado el mismo botón de movimiento mucho tiempo
+     {
+       if ((millis() - lastDebounceTime) > (10 * DEBOUNCE_DELAY))                            // activa la opción doble sólo para movimiento
+         switch (joyRead)
+         {
+           case MAS: joyPos = MASMAS; break;
+           case MENOS: joyPos = MENOSMENOS; break;
+           case ARRIBA: joyPos = ARRIBAARRIBA; break;
+           case ABAJO: joyPos = ABAJOABAJO; break;
+         }                    
+         if (!joyPosValido) joyPosValido = true;           
+    }     
+  }         
+  lastJoyRead = joyRead;  // guarda posición actual
+}  
 /**
  * Define callback
  */
-void toggleBacklight() { menu.lcd->setBacklight(settingsMenu[1].isOn); }
+void toggleBacklight()
+{
+  if (settingsMenu[1].isOn) menu.lcd->display();
+  else menu.lcd->noDisplay(); 
+}
