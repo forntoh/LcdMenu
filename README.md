@@ -22,6 +22,8 @@ Follow this guide to install the library https://www.arduino.cc/en/guide/librari
 
 ### Callbacks
 
+Sample with LCD keypad Shield
+
 See [Wiki - Callbacks](https://github.com/forntoh/LcdMenu/wiki/Example-03-Callback)
 
 
