@@ -1,6 +1,6 @@
 # LcdNOI2CMenu
 
-Display navigable menu items on your LCD no I2C display with Arduino, version with hisistory
+Display navigable menu items on your LCD no I2C display with Arduino, version with history
 see original forntoh / LcdMenu experimental branch
 
 ![Basic](https://i.imgur.com/nViET8b.gif)
