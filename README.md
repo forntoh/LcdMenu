@@ -9,7 +9,7 @@ see original forntoh / LcdMenu experimental branch
 
 - Dynamic menus.
 - Return to previous menuitem from submenu.
-- Compatible with all Character LCD Display Modules and VATN Alphanumeric LCD Displays.
+- Compatible with LCD Keypad shield module.
 - Many menu types available
 - Callback functions.
 - Display timed notifications.
