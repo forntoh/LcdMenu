@@ -1,12 +1,14 @@
 # LcdMenu
 
-Display navigable menu items on your LCD no I2C display with Arduino
+Display navigable menu items on your LCD no I2C display with Arduino, verion with Historics
+see original Lcdmenu branch experimental
 
 ![Basic](https://i.imgur.com/nViET8b.gif)
 
 ## Features
 
 - Dynamic menus.
+- Return to previous menuitem from submenu.
 - Compatible with all Character LCD Display Modules and VATN Alphanumeric LCD Displays.
 - Many menu types available
 - Callback functions.
@@ -18,22 +20,8 @@ Follow this guide to install the library https://www.arduino.cc/en/guide/librari
 
 ## Examples
 
-### 01 Basic Navigation
-
-See [Wiki - Basic-Navigation](https://github.com/forntoh/LcdMenu/wiki/Example-01-Basic-Navigation)
-
-### 02 Sub Menus
-
-See [Wiki - Sub Menus](https://github.com/forntoh/LcdMenu/wiki/Example-02-Sub-Menu)
-
-### 03 Callbacks
+### Callbacks
 
 See [Wiki - Callbacks](https://github.com/forntoh/LcdMenu/wiki/Example-03-Callback)
 
-### 04 Dynamic Menus
 
-See [Wiki - Dynamic Menu](https://github.com/forntoh/LcdMenu/wiki/Example-04-Dynamic-Menu)
-
-### 05 Menu Notifications
-
-See [Wiki - Menu Notifications](https://github.com/forntoh/LcdMenu/wiki/Example-05-Menu-Notifications)
