@@ -28,7 +28,6 @@
 #define LcdMenu_H
 
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
 
 #include "MenuItem.h"
 
@@ -140,7 +139,11 @@ class LcdMenu {
     /**
      * LCD Display
      */
+#ifdef LiquidCrystal_I2C_h
     LiquidCrystal_I2C* lcd;
+#else
+    LiquidCrystal* lcd;
+#endif
     /**
      * Constructor for the LcdMenu class
      *
@@ -149,6 +152,8 @@ class LcdMenu {
      * @return new `LcdMenu` object
      */
     LcdMenu(uint8_t maxRows, uint8_t maxCols);
+
+#ifdef LiquidCrystal_I2C_h
     /**
      * Call this function in `setup()` to initialize the LCD and the custom
      * characters used as up and down arrows
@@ -157,6 +162,22 @@ class LcdMenu {
      * @param menu menu to display
      */
     void setupLcdWithMenu(uint8_t lcd_Addr, MenuItem* menu);
+#else
+    /**
+     * Call this function in `setup()` to initialize the LCD and the custom
+     * characters used as up and down arrows
+     *
+     * @param rs reset pin
+     * @param en enable pin
+     * @param d0 data pin zero
+     * @param d1 data pin one
+     * @param d2 data pin two
+     * @param d3 data pin three
+     * @param menu menu to display
+     */
+    void setupLcdWithMenu(uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1,
+                          uint8_t d2, uint8_t d3, MenuItem* menu);
+#endif
     /**
      * Call this function to set sub menu items for any main menu item
      *
