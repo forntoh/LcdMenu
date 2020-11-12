@@ -316,7 +316,9 @@ void LcdMenu::enter() {
             //
             // execute the menu item's function
             //
-            (item->getCallback())();
+            if (item->getCallback() != NULL) {
+                (item->getCallback())();
+            }
             //
             // display the menu again
             //
@@ -327,7 +329,9 @@ void LcdMenu::enter() {
             //
             // execute the menu item's function
             //
-            (item->getCallback())();
+            if (item->getCallback() != NULL) {
+                (item->getCallback())();
+            }
             break;
         }
     }
@@ -431,7 +435,7 @@ void LcdMenu::updateTimer() {
  *
  * @return `MenuItem` - item at `position`
  */
-MenuItem* LcdMenu::getItemAt(uint8_t position) {
+MenuItem *LcdMenu::getItemAt(uint8_t position) {
     return &currentMenuTable[position];
 }
 /**
