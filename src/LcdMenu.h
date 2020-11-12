@@ -46,10 +46,12 @@ class LcdMenu {
      * First visible item's position in the menu array
      */
     uint8_t top = 1;
+    uint8_t previousTop = 1;
     /**
      * Last visible item's position in the menu array
      */
     uint8_t bottom;
+    uint8_t previousBottom = 1;
     /**
      * Rows on the LCD Display
      */
