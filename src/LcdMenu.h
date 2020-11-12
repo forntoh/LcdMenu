@@ -41,6 +41,7 @@ class LcdMenu {
      * Cursor position
      */
     uint8_t cursorPosition = 1;
+    uint8_t previousCursorPosition = 1;
     /**
      * First visible item's position in the menu array
      */
@@ -114,7 +115,7 @@ class LcdMenu {
     /**
      * Reset the display
      */
-    void reset();
+    void reset(boolean isHistoryAvailable);
     /**
      * Places the cursor at end of Menu's text.
      *
