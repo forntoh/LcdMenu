@@ -62,7 +62,7 @@ class MenuItem {
     MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
     MenuItem(char* text, MenuItem* subMenu, byte type)
         : text(text), subMenu(subMenu), type(type) {}
-    MenuItem(char* text, char* value, fptr callbac, byte type)
+    MenuItem(char* text, char* value, fptr callback, byte type)
         : text(text), value(value), callback(callback), type(type) {}
     //
     // getters
