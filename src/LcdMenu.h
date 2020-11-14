@@ -420,7 +420,7 @@ class LcdMenu {
                 //
                 // execute the menu item's function
                 //
-                (item->getCallback())();
+                if (item->getCallback() != NULL) (item->getCallback())();
                 //
                 // display the menu again
                 //
@@ -435,7 +435,7 @@ class LcdMenu {
                 //
                 // execute the menu item's function
                 //
-                (item->getCallback())();
+                if (item->getCallback() != NULL) (item->getCallback())();
                 //
                 // display the menu again
                 //
@@ -446,7 +446,7 @@ class LcdMenu {
                 //
                 // execute the menu item's function
                 //
-                (item->getCallback())();
+                if (item->getCallback() != NULL) (item->getCallback())();
                 break;
             }
         }
