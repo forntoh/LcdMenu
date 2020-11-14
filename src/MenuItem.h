@@ -44,7 +44,7 @@ const byte MENU_ITEM_END_OF_MENU = 7;
 //
 class MenuItem {
    private:
-    char* text = "";
+    char* text = (char*)"";
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
@@ -62,7 +62,7 @@ class MenuItem {
     MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
     MenuItem(char* text, MenuItem* subMenu, byte type)
         : text(text), subMenu(subMenu), type(type) {}
-    MenuItem(char* text, char* value, fptr callbac, byte type)
+    MenuItem(char* text, char* value, fptr callback, byte type)
         : text(text), value(value), callback(callback), type(type) {}
     //
     // getters
@@ -81,8 +81,8 @@ class MenuItem {
     //
     //
     boolean isOn = false;
-    char* textOn = "ON";
-    char* textOff = "OFF";
+    char* textOn = (char*)"ON";
+    char* textOff = (char*)"OFF";
     String value = "";
 };
 
