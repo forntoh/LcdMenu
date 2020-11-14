@@ -26,6 +26,7 @@
 */
 
 #include <Keypad.h>
+#include <LiquidCrystal_I2C.h>
 #include <LcdMenu.h>
 
 #define LCD_ROWS 2
