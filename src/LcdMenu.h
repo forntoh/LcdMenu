@@ -28,9 +28,9 @@
 #define LcdMenu_H
 
 #ifndef USE_STANDARD_LCD
-    #include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal_I2C.h>
 #else
-    #include <LiquidCrystal.h>
+#include <LiquidCrystal.h>
 #endif
 
 #include <Arduino.h>
@@ -130,7 +130,7 @@ class LcdMenu {
         // print the menu items
         //
         for (uint8_t i = top; i <= bottom; i++) {
-            MenuItem *item = &currentMenuTable[i];
+            MenuItem* item = &currentMenuTable[i];
             lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
             lcd->print(item->getText());
             //
@@ -192,7 +192,7 @@ class LcdMenu {
     boolean isAtTheStart() {
         byte menuType = currentMenuTable[cursorPosition - 1].getType();
         return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
-            menuType == MENU_ITEM_SUB_MENU_HEADER;
+               menuType == MENU_ITEM_SUB_MENU_HEADER;
     }
     /**
      * Check if the cursor is at the end of the menu items
@@ -201,21 +201,21 @@ class LcdMenu {
      */
     boolean isAtTheEnd() {
         return currentMenuTable[cursorPosition + 1].getType() ==
-            MENU_ITEM_END_OF_MENU;
+               MENU_ITEM_END_OF_MENU;
     }
     /*
      * Draw the menu items and cursor
      */
     void paint() {
         drawMenu();
-        drawCursor();   
+        drawCursor();
     }
     /**
      * Reset the display
      * @param isHistoryAvailable indicates if there is a previous position
      * Cursor position to go to
      */
-    void reset(boolean isHistoryAvailable){
+    void reset(boolean isHistoryAvailable) {
         if (isHistoryAvailable) {
             cursorPosition = previousCursorPosition;
             top = previousTop;
@@ -238,7 +238,8 @@ class LcdMenu {
      * @relatesalso MenuItem
      */
     void placeCursorAtEnd(MenuItem* item) {
-        uint8_t col = ((String)item->getText()).length() + 2 + item->value.length();
+        uint8_t col =
+            ((String)item->getText()).length() + 2 + item->value.length();
         lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 
@@ -280,17 +281,17 @@ class LcdMenu {
      * @param menu menu to display
      */
     void LcdMenu::setupLcdWithMenu(
-    #ifndef USE_STANDARD_LCD
-        uint8_t lcd_Addr, MenuItem *menu) {
+#ifndef USE_STANDARD_LCD
+        uint8_t lcd_Addr, MenuItem* menu) {
         lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
         lcd->init();
         lcd->backlight();
-    #else
+#else
         uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-        MenuItem *menu) {
+        MenuItem* menu) {
         this->lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3);
         this->lcd->begin(maxCols, maxRows);
-    #endif
+#endif
         lcd->clear();
         lcd->createChar(0, upArrow);
         lcd->createChar(1, downArrow);
@@ -319,7 +320,7 @@ class LcdMenu {
         //
         // create a temporary array
         //
-        MenuItem *tempItems = new MenuItem[size + 2];
+        MenuItem* tempItems = new MenuItem[size + 2];
         //
         // append a Header to first position
         //
@@ -328,7 +329,7 @@ class LcdMenu {
             //
             // child menu of this submenu item
             //
-            MenuItem *itemSubMenu = items[i].getSubMenu();
+            MenuItem* itemSubMenu = items[i].getSubMenu();
             //
             // set the parent menu of the child menu of this menu
             //
@@ -392,7 +393,7 @@ class LcdMenu {
      * Execute an "enter" action on menu
      */
     void enter() {
-        MenuItem *item = &currentMenuTable[cursorPosition];
+        MenuItem* item = &currentMenuTable[cursorPosition];
         //
         // determine the type of menu entry, then execute it
         //
@@ -473,7 +474,7 @@ class LcdMenu {
      * @param text text to display
      */
     void setText(String text) {
-        MenuItem *item = &currentMenuTable[cursorPosition];
+        MenuItem* item = &currentMenuTable[cursorPosition];
         //
         // get the type of the currently displayed menu
         //
@@ -531,8 +532,8 @@ class LcdMenu {
         }
         lcd->write(0xA5);
         /*
-        * initialize the timer
-        */
+         * initialize the timer
+         */
         this->duration = duration;
         startTime = millis();
     }
@@ -547,6 +548,8 @@ class LcdMenu {
      *
      * @return `MenuItem` - item at `position`
      */
-    MenuItem* getItemAt(uint8_t position) { return &currentMenuTable[position]; }
+    MenuItem* getItemAt(uint8_t position) {
+        return &currentMenuTable[position];
+    }
 };
 #endif
