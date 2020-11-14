@@ -53,3 +53,5 @@ getItemAt   KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
+
+USE_STANDARD_LCD    LITERAL1
