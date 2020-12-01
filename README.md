@@ -16,7 +16,9 @@ Display navigable menu items on your LCD display with Arduino
 
 ## Installation
 
-Follow this guide to install the library https://www.arduino.cc/en/guide/libraries
+Follow this 👇 guide to install the library
+
+[![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
 
 ## Examples
 
