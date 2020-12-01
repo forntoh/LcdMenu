@@ -1,5 +1,7 @@
 # LcdMenu
 
+[![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
+
 Display navigable menu items on your LCD display with Arduino
 
 ![Basic](https://i.imgur.com/nViET8b.gif)
