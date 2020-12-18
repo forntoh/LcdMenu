@@ -267,7 +267,7 @@ class LcdMenu {
      * @param maxCols columns on lcd display e.g. 20
      * @return new `LcdMenu` object
      */
-    LcdMenu::LcdMenu(uint8_t maxRows, uint8_t maxCols) {
+    LcdMenu(uint8_t maxRows, uint8_t maxCols) {
         this->maxRows = maxRows;
         this->maxCols = maxCols;
         this->bottom = maxRows;
@@ -280,7 +280,7 @@ class LcdMenu {
      * @param lcd_Addr address of the LCD on the I2C bus (default 0x27)
      * @param menu menu to display
      */
-    void LcdMenu::setupLcdWithMenu(
+    void setupLcdWithMenu(
 #ifndef USE_STANDARD_LCD
         uint8_t lcd_Addr, MenuItem* menu) {
         lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
