@@ -83,7 +83,7 @@ class MenuItem {
     boolean isOn = false;
     char* textOn = (char*)"ON";
     char* textOff = (char*)"OFF";
-    String value = "";
+    char* value = "";
 };
 
 class ItemHeader : public MenuItem {

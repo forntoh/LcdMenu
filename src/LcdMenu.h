@@ -487,7 +487,7 @@ class LcdMenu {
             //
             // set the value
             //
-            item->value = text;
+            item->value = text.c_str();
             //
             // repaint menu
             //
