@@ -238,8 +238,7 @@ class LcdMenu {
      * @relatesalso MenuItem
      */
     void placeCursorAtEnd(MenuItem* item) {
-        uint8_t col =
-            ((String)item->getText()).length() + 2 + item->value.length();
+        uint8_t col = strlen(item->getText()) + 2 + strlen(item->value);
         lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 
