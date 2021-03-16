@@ -238,7 +238,7 @@ class LcdMenu {
      * @relatesalso MenuItem
      */
     void placeCursorAtEnd(MenuItem* item) {
-        uint8_t col = strlen(item->getText()) + 2 + strlen(item->value);
+        uint8_t col = item->getText().length() + 2 + item->value.length();
         lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 
@@ -486,7 +486,7 @@ class LcdMenu {
             //
             // set the value
             //
-            item->value = text.c_str();
+            item->value = text;
             //
             // repaint menu
             //
@@ -509,12 +509,12 @@ class LcdMenu {
      * @param message message to display
      * @param duration how long to display the message
      */
-    void displayNotification(char* message, unsigned int duration) {
+    void displayNotification(String message, unsigned int duration) {
         /**
          * Calculate the position to start writing
          * (centralize text)
          */
-        uint8_t centerPos = maxCols / 2 - (strlen(message) / 2);
+        uint8_t centerPos = maxCols / 2 - (message.length() / 2);
         /**
          * Set cursor potion and clear lane
          */
@@ -525,8 +525,8 @@ class LcdMenu {
          * Draw each independent character
          */
         lcd->write(0xA5);
-        for (unsigned int i = 0; i < strlen(message); i++) {
-            char character = message[i];
+        for (unsigned int i = 0; i < message.length(); i++) {
+            char character = message.charAt(i);
             lcd->write(character);
         }
         lcd->write(0xA5);
