@@ -55,8 +55,8 @@ class LcdMenu {
     /**
      * Last visible item's position in the menu array
      */
-    uint8_t bottom;
-    uint8_t previousBottom;
+    uint8_t bottom = 0;
+    uint8_t previousBottom = 0;
     /**
      * Rows on the LCD Display
      */
@@ -142,14 +142,14 @@ class LcdMenu {
                     // append textOn or textOff depending on the state
                     //
                     lcd->print(":");
-                    lcd->print(item->isOn ? item->textOn : item->textOff);
+                    lcd->print(item->isOn ? item->getTextOn() : item->getTextOff());
                     break;
                 case MENU_ITEM_INPUT:
                     //
                     // append the value the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->value.substring(
+                    lcd->print(item->getValue().substring(
                         0, maxCols - ((String)item->getText()).length() - 2));
                     break;
                 default:
@@ -238,7 +238,7 @@ class LcdMenu {
      * @relatesalso MenuItem
      */
     void placeCursorAtEnd(MenuItem* item) {
-        uint8_t col = item->getText().length() + 2 + item->value.length();
+        uint8_t col = item->getText().length() + 2 + item->getValue().length();
         lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 
@@ -486,7 +486,7 @@ class LcdMenu {
             //
             // set the value
             //
-            item->value = text;
+            item->getValue() = text;
             //
             // repaint menu
             //

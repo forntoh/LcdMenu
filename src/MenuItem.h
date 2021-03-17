@@ -44,19 +44,18 @@ const byte MENU_ITEM_END_OF_MENU = 7;
 //
 class MenuItem {
    private:
-    String text = (String) "";
+    String text;
+    String value;
+    String textOn;
+    String textOff;
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
-
    public:
     //
     //
     //
     boolean isOn = false;
-    String textOn = (String) "ON";
-    String textOff = (String) "OFF";
-    String value;
     //
     // constructors
     //
@@ -71,6 +70,8 @@ class MenuItem {
         : text(text), subMenu(subMenu), type(type) {}
     MenuItem(String text, String value, fptr callback, byte type)
         : text(text), value(value), callback(callback), type(type) {}
+    MenuItem(String text, String textOn, String textOff, fptr callback, byte type)
+        : text(text), textOn(textOn), textOff(textOff), callback(callback), type(type) {}
     //
     // getters
     //
@@ -78,6 +79,9 @@ class MenuItem {
     fptr getCallback() { return callback; }
     MenuItem* getSubMenu() { return subMenu; }
     byte getType() { return type; }
+    String getValue() { return value; }
+    String getTextOn() { return textOn; }
+    String getTextOff() { return textOff; }
     //
     // setters
     //
@@ -117,9 +121,9 @@ class ItemSubMenu : public MenuItem {
 class ItemToggle : public MenuItem {
    public:
     ItemToggle(String key, fptr callback)
-        : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
+        : MenuItem(key, "", "", callback, MENU_ITEM_TOGGLE) {}
     ItemToggle(String key, String textOn, String textOff, fptr callback)
-        : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
+        : MenuItem(key, textOn, textOff, callback, MENU_ITEM_TOGGLE) {}
 };
 
 class ItemCommand : public MenuItem {
