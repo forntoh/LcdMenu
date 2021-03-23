@@ -51,6 +51,7 @@ class MenuItem {
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
+
    public:
     //
     //
@@ -70,8 +71,13 @@ class MenuItem {
         : text(text), subMenu(subMenu), type(type) {}
     MenuItem(String text, String value, fptr callback, byte type)
         : text(text), value(value), callback(callback), type(type) {}
-    MenuItem(String text, String textOn, String textOff, fptr callback, byte type)
-        : text(text), textOn(textOn), textOff(textOff), callback(callback), type(type) {}
+    MenuItem(String text, String textOn, String textOff, fptr callback,
+             byte type)
+        : text(text),
+          textOn(textOn),
+          textOff(textOff),
+          callback(callback),
+          type(type) {}
     //
     // getters
     //
