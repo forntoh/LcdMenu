@@ -96,4 +96,4 @@ void loop() {
 /**
  * Define callback
  */
-void toggleBacklight() { menu.lcd->setBacklight(settingsMenu[1].isOn); }
+void toggleBacklight() { menu.lcd->setBacklight(menu.getItemAt(menu.getCursorPosition()).isOn); }
