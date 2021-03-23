@@ -55,8 +55,8 @@ class LcdMenu {
     /**
      * Last visible item's position in the menu array
      */
-    uint8_t bottom;
-    uint8_t previousBottom;
+    uint8_t bottom = 0;
+    uint8_t previousBottom = 0;
     /**
      * Rows on the LCD Display
      */
@@ -142,14 +142,14 @@ class LcdMenu {
                     // append textOn or textOff depending on the state
                     //
                     lcd->print(":");
-                    lcd->print(item->isOn ? item->textOn : item->textOff);
+                    lcd->print(item->isOn ? item->getTextOn() : item->getTextOff());
                     break;
                 case MENU_ITEM_INPUT:
                     //
                     // append the value the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->value.substring(
+                    lcd->print(item->getValue().substring(
                         0, maxCols - ((String)item->getText()).length() - 2));
                     break;
                 default:
@@ -238,8 +238,7 @@ class LcdMenu {
      * @relatesalso MenuItem
      */
     void placeCursorAtEnd(MenuItem* item) {
-        uint8_t col =
-            ((String)item->getText()).length() + 2 + item->value.length();
+        uint8_t col = item->getText().length() + 2 + item->getValue().length();
         lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 
@@ -487,7 +486,7 @@ class LcdMenu {
             //
             // set the value
             //
-            item->value = text;
+            item->getValue() = text;
             //
             // repaint menu
             //
@@ -510,12 +509,12 @@ class LcdMenu {
      * @param message message to display
      * @param duration how long to display the message
      */
-    void displayNotification(char* message, unsigned int duration) {
+    void displayNotification(String message, unsigned int duration) {
         /**
          * Calculate the position to start writing
          * (centralize text)
          */
-        uint8_t centerPos = maxCols / 2 - (strlen(message) / 2);
+        uint8_t centerPos = maxCols / 2 - (message.length() / 2);
         /**
          * Set cursor potion and clear lane
          */
@@ -526,8 +525,8 @@ class LcdMenu {
          * Draw each independent character
          */
         lcd->write(0xA5);
-        for (unsigned int i = 0; i < strlen(message); i++) {
-            char character = message[i];
+        for (unsigned int i = 0; i < message.length(); i++) {
+            char character = message.charAt(i);
             lcd->write(character);
         }
         lcd->write(0xA5);

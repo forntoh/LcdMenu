@@ -44,46 +44,56 @@ const byte MENU_ITEM_END_OF_MENU = 7;
 //
 class MenuItem {
    private:
-    char* text = (char*)"";
+    String text;
+    String value;
+    String textOn;
+    String textOff;
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
 
    public:
     //
-    // constructors
-    //
-    MenuItem() = default;
-    MenuItem(char* text) : text(text) {}
-    MenuItem(char* text, fptr callback, byte type)
-        : text(text), callback(callback), type(type) {}
-    MenuItem(char* text, fptr callback, MenuItem* subMenu, byte type)
-        : text(text), callback(callback), subMenu(subMenu), type(type) {}
-    MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
-    MenuItem(char* text, MenuItem* subMenu, byte type)
-        : text(text), subMenu(subMenu), type(type) {}
-    MenuItem(char* text, char* value, fptr callback, byte type)
-        : text(text), value(value), callback(callback), type(type) {}
-    //
-    // getters
-    //
-    char* getText() { return text; }
-    fptr getCallback() { return callback; }
-    MenuItem* getSubMenu() { return subMenu; }
-    byte getType() { return type; }
-    //
-    // setters
-    //
-    void setText(char* text) { this->text = text; }
-    void setCallBack(fptr callback) { this->callback = callback; }
-    void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
-    //
     //
     //
     boolean isOn = false;
-    char* textOn = (char*)"ON";
-    char* textOff = (char*)"OFF";
-    String value = "";
+    //
+    // constructors
+    //
+    MenuItem() = default;
+    MenuItem(String text) : text(text) {}
+    MenuItem(String text, fptr callback, byte type)
+        : text(text), callback(callback), type(type) {}
+    MenuItem(String text, fptr callback, MenuItem* subMenu, byte type)
+        : text(text), callback(callback), subMenu(subMenu), type(type) {}
+    MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
+    MenuItem(String text, MenuItem* subMenu, byte type)
+        : text(text), subMenu(subMenu), type(type) {}
+    MenuItem(String text, String value, fptr callback, byte type)
+        : text(text), value(value), callback(callback), type(type) {}
+    MenuItem(String text, String textOn, String textOff, fptr callback,
+             byte type)
+        : text(text),
+          textOn(textOn),
+          textOff(textOff),
+          callback(callback),
+          type(type) {}
+    //
+    // getters
+    //
+    String getText() { return text; }
+    fptr getCallback() { return callback; }
+    MenuItem* getSubMenu() { return subMenu; }
+    byte getType() { return type; }
+    String getValue() { return value; }
+    String getTextOn() { return textOn; }
+    String getTextOff() { return textOff; }
+    //
+    // setters
+    //
+    void setText(String text) { this->text = text; }
+    void setCallBack(fptr callback) { this->callback = callback; }
+    void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
 };
 
 class ItemHeader : public MenuItem {
@@ -104,27 +114,27 @@ class ItemFooter : public MenuItem {
 
 class ItemInput : public MenuItem {
    public:
-    ItemInput(char* text, char* value, fptr callback)
+    ItemInput(String text, String value, fptr callback)
         : MenuItem(text, value, callback, MENU_ITEM_INPUT) {}
 };
 
 class ItemSubMenu : public MenuItem {
    public:
-    ItemSubMenu(char* text, MenuItem* parent)
+    ItemSubMenu(String text, MenuItem* parent)
         : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
 };
 
 class ItemToggle : public MenuItem {
    public:
-    ItemToggle(char* key, fptr callback)
-        : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
-    ItemToggle(char* key, char* textOn, char* textOff, fptr callback)
-        : MenuItem(key, callback, MENU_ITEM_TOGGLE) {}
+    ItemToggle(String key, fptr callback)
+        : MenuItem(key, "", "", callback, MENU_ITEM_TOGGLE) {}
+    ItemToggle(String key, String textOn, String textOff, fptr callback)
+        : MenuItem(key, textOn, textOff, callback, MENU_ITEM_TOGGLE) {}
 };
 
 class ItemCommand : public MenuItem {
    public:
-    ItemCommand(char* key, fptr callback)
+    ItemCommand(String key, fptr callback)
         : MenuItem(key, callback, MENU_ITEM_COMMAND) {}
 };
 

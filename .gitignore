@@ -1,3 +1,4 @@
+.pio
 .vscode/
-src/app.ino
+src/main.cpp
 debug.log
