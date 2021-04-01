@@ -495,6 +495,9 @@ class LcdMenu {
      */
     void backspace() { 
         MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        if (item->getType() != MENU_ITEM_INPUT) return;
+        //
         uint8_t p = blinkerPosition - (item->getText().length() + 2) - 1;
         item->value.remove(p, 1);
         blinkerPosition--;
@@ -508,6 +511,8 @@ class LcdMenu {
      */
     void type(String character) {
         MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        if (item->getType() != MENU_ITEM_INPUT) return;
         //
         // calculate lower and upper bound
         //
@@ -537,6 +542,8 @@ class LcdMenu {
      */
     void clear() {
         MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        if (item->getType() != MENU_ITEM_INPUT) return;
         //
         // set the value
         //
