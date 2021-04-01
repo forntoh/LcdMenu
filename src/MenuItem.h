@@ -70,7 +70,7 @@ class MenuItem {
     MenuItem(String text, MenuItem* subMenu, byte type)
         : text(text), subMenu(subMenu), type(type) {}
     MenuItem(String text, String value, fptr callback, byte type)
-        : text(text), value(value), callback(callback), type(type) {}
+        : text(text), callback(callback), type(type), value(value) {}
     MenuItem(String text, String textOn, String textOff, fptr callback,
              byte type)
         : text(text),

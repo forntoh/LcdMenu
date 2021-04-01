@@ -470,32 +470,38 @@ class LcdMenu {
      * Display text at the cursor position
      * used for `Input` type menu items
      *
-     * @param text text to display
+     * @param character character to append
      */
-    void setText(String text) {
+    void type(String character) {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
-        // get the type of the currently displayed menu
+        // set the value
         //
-        byte menuItemType = item->getType();
+        item->value.concat(character);
         //
-        // check if this is input menu type, if so print text
+        // repaint menu
         //
-        if (menuItemType == MENU_ITEM_INPUT) {
-            lcd->noBlink();
-            //
-            // set the value
-            //
-            item->value = text;
-            //
-            // repaint menu
-            //
-            paint();
-            //
-            // place cursor at end of text
-            //
-            placeCursorAtEnd(item);
-        }
+        paint();
+        //
+        // place cursor at end of text
+        //
+        placeCursorAtEnd(item);
+    }
+
+    void clear() {
+        MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        // set the value
+        //
+        item->value = "";
+        //
+        // repaint menu
+        //
+        paint();
+        //
+        // place cursor at end of text
+        //
+        placeCursorAtEnd(item);
     }
     /**
      * Get the current cursor position
