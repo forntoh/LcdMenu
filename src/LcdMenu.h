@@ -64,6 +64,7 @@ class LcdMenu {
     /**
      * Columns on the LCD Display
      */
+    uint8_t blinkerPosition;
     uint8_t maxCols;
     /**
      * Array of menu items
@@ -115,8 +116,9 @@ class LcdMenu {
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
         //
-        if (currentMenuTable[cursorPosition].getType() == MENU_ITEM_INPUT) {
-            placeCursorAtEnd(&currentMenuTable[cursorPosition]);
+        MenuItem* item = &currentMenuTable[cursorPosition];
+        if (item->getType() == MENU_ITEM_INPUT) {
+            resetBlinker();
             lcd->blink();
         } else
             lcd->noBlink();
@@ -149,8 +151,7 @@ class LcdMenu {
                     // append the value the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->value.substring(
-                        0, maxCols - ((String)item->getText()).length() - 2));
+                    lcd->print(item->value.substring(0, maxCols - item->getText().length() - 2));
                     break;
                 default:
                     break;
@@ -231,15 +232,14 @@ class LcdMenu {
         }
         paint();
     }
-    /**
-     * Places the cursor at end of Menu's text.
-     *
-     * @param item MenuItem where the cursor should be placed
-     * @relatesalso MenuItem
-     */
-    void placeCursorAtEnd(MenuItem* item) {
-        uint8_t col = item->getText().length() + 2 + item->value.length();
-        lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
+
+    void resetBlinker() {
+        uint8_t lb = currentMenuTable[cursorPosition].getText().length() + 2;
+        uint8_t ub = lb + currentMenuTable[cursorPosition].value.length();
+        ub = constrain(ub, lb, maxCols - 2);
+        //
+        blinkerPosition = constrain(blinkerPosition, lb, ub);
+        lcd->setCursor(blinkerPosition, cursorPosition - top);
     }
 
    public:
@@ -466,6 +466,14 @@ class LcdMenu {
             reset(true);
         }
     }
+    void left() {
+        blinkerPosition--;
+        resetBlinker();
+    }
+    void right() {
+        blinkerPosition++;
+        resetBlinker();
+    }
     /**
      * Display text at the cursor position
      * used for `Input` type menu items
@@ -485,7 +493,8 @@ class LcdMenu {
         //
         // place cursor at end of text
         //
-        placeCursorAtEnd(item);
+        blinkerPosition++;
+        resetBlinker();
     }
 
     void clear() {
@@ -501,7 +510,8 @@ class LcdMenu {
         //
         // place cursor at end of text
         //
-        placeCursorAtEnd(item);
+        blinkerPosition = 0;
+        resetBlinker();
     }
     /**
      * Get the current cursor position
