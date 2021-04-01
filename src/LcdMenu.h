@@ -64,8 +64,11 @@ class LcdMenu {
     /**
      * Columns on the LCD Display
      */
-    uint8_t blinkerPosition;
     uint8_t maxCols;
+    /**
+     * Colum location of Blinker
+     */
+    uint8_t blinkerPosition;
     /**
      * Array of menu items
      */
@@ -232,11 +235,18 @@ class LcdMenu {
         }
         paint();
     }
-
+    /**
+     * Calculate and set the new blinker position
+     */
     void resetBlinker() {
+        //
+        // calculate lower and upper bound
+        //
         uint8_t lb = currentMenuTable[cursorPosition].getText().length() + 2;
         uint8_t ub = lb + currentMenuTable[cursorPosition].value.length();
         ub = constrain(ub, lb, maxCols - 2);
+        //
+        // set cursor position
         //
         blinkerPosition = constrain(blinkerPosition, lb, ub);
         lcd->setCursor(blinkerPosition, cursorPosition - top);
@@ -466,10 +476,16 @@ class LcdMenu {
             reset(true);
         }
     }
+    /**
+     * Execute an "left press" on menu
+     */
     void left() {
         blinkerPosition--;
         resetBlinker();
     }
+    /**
+     * Execute an "right press" on menu
+     */
     void right() {
         blinkerPosition++;
         resetBlinker();
@@ -483,20 +499,31 @@ class LcdMenu {
     void type(String character) {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
-        // set the value
+        // calculate lower and upper bound
         //
-        item->value.concat(character);
+        uint8_t lb = item->getText().length() + 2;
+        uint8_t ub = lb + item->value.length();
+        ub = constrain(ub, lb, maxCols - 2);
+        //
+        // update text
+        //
+        if (blinkerPosition < ub)
+            item->value.setCharAt(blinkerPosition - lb, character.charAt(0));
+        else
+            item->value.concat(character);
         //
         // repaint menu
         //
         paint();
         //
-        // place cursor at end of text
+        // update blinker position
         //
         blinkerPosition++;
         resetBlinker();
     }
-
+    /**
+     * Clear the value of the input field
+     */
     void clear() {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
@@ -508,7 +535,7 @@ class LcdMenu {
         //
         paint();
         //
-        // place cursor at end of text
+        // update blinker position
         //
         blinkerPosition = 0;
         resetBlinker();
