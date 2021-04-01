@@ -45,7 +45,6 @@ const byte MENU_ITEM_END_OF_MENU = 7;
 class MenuItem {
    private:
     String text;
-    String value;
     String textOn;
     String textOff;
     fptr callback = NULL;
@@ -57,6 +56,7 @@ class MenuItem {
     //
     //
     boolean isOn = false;
+    String value;
     //
     // constructors
     //
@@ -85,7 +85,6 @@ class MenuItem {
     fptr getCallback() { return callback; }
     MenuItem* getSubMenu() { return subMenu; }
     byte getType() { return type; }
-    String getValue() { return value; }
     String getTextOn() { return textOn; }
     String getTextOff() { return textOff; }
     //

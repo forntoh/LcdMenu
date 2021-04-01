@@ -149,7 +149,7 @@ class LcdMenu {
                     // append the value the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->getValue().substring(
+                    lcd->print(item->value.substring(
                         0, maxCols - ((String)item->getText()).length() - 2));
                     break;
                 default:
@@ -238,7 +238,7 @@ class LcdMenu {
      * @relatesalso MenuItem
      */
     void placeCursorAtEnd(MenuItem* item) {
-        uint8_t col = item->getText().length() + 2 + item->getValue().length();
+        uint8_t col = item->getText().length() + 2 + item->value.length();
         lcd->setCursor(constrain(col, 0, maxCols - 1), cursorPosition - top);
     }
 
@@ -486,7 +486,7 @@ class LcdMenu {
             //
             // set the value
             //
-            item->getValue() = text;
+            item->value = text;
             //
             // repaint menu
             //
