@@ -477,18 +477,28 @@ class LcdMenu {
         }
     }
     /**
-     * Execute an "left press" on menu
+     * Execute a "left press" on menu
      */
     void left() {
         blinkerPosition--;
         resetBlinker();
     }
     /**
-     * Execute an "right press" on menu
+     * Execute a "right press" on menu
      */
     void right() {
         blinkerPosition++;
         resetBlinker();
+    }
+    /**
+     * Execute a "backspace cmd" on menu
+     */
+    void backspace() { 
+        MenuItem* item = &currentMenuTable[cursorPosition];
+        uint8_t p = blinkerPosition - (item->getText().length() + 2) - 1;
+        item->value.remove(p, 1);
+        blinkerPosition--;
+        paint();
     }
     /**
      * Display text at the cursor position
@@ -507,19 +517,20 @@ class LcdMenu {
         //
         // update text
         //
-        if (blinkerPosition < ub)
-            item->value.setCharAt(blinkerPosition - lb, character.charAt(0));
-        else
-            item->value.concat(character);
-        //
-        // repaint menu
-        //
-        paint();
+        if (blinkerPosition < ub) {
+            String start = item->value.substring(0, blinkerPosition - lb);
+            String end = item->value.substring(blinkerPosition - lb, item->value.length());
+            item->value = start + character + end;
+        }
+        else item->value.concat(character);
         //
         // update blinker position
         //
         blinkerPosition++;
-        resetBlinker();
+        //
+        // repaint menu
+        //
+        paint();
     }
     /**
      * Clear the value of the input field
@@ -531,14 +542,13 @@ class LcdMenu {
         //
         item->value = "";
         //
-        // repaint menu
-        //
-        paint();
-        //
         // update blinker position
         //
         blinkerPosition = 0;
-        resetBlinker();
+        //
+        // repaint menu
+        //
+        paint();
     }
     /**
      * Get the current cursor position
