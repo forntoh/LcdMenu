@@ -21,6 +21,9 @@ jobs:
         with:
           ref: gh-pages
 
+      - name: Merge changes from master
+        run: git merge origin/master
+
       - name: Embed code into examples
         run: npx embedme docs/examples/*.md
 
