@@ -417,7 +417,13 @@ class LcdMenu {
         paint();
     }
     /**
-     * Execute an "enter" action on menu
+     * Execute an "enter" action on menu.
+     * 
+     * It does the following depending on the type of the current menu item:
+     * 
+     * - Open a sub menu.
+     * - Execute a callback action.
+     * - Toggle the state of an item.
      */
     void enter() {
         MenuItem* item = &currentMenuTable[cursorPosition];
@@ -479,7 +485,9 @@ class LcdMenu {
         }
     }
     /**
-     * Execute a "backpress" action on menu
+     * Execute a "backpress" action on menu.
+     * 
+     * Navigates up once.
      */
     void back() {
         //
@@ -496,6 +504,10 @@ class LcdMenu {
     }
     /**
      * Execute a "left press" on menu
+     * 
+     * *NB: Works only for `ItemInput` type*
+     * 
+     * Moves the cursor one step to the left.
      */
     void left() {
         blinkerPosition--;
@@ -503,6 +515,10 @@ class LcdMenu {
     }
     /**
      * Execute a "right press" on menu
+     * 
+     * *NB: Works only for `ItemInput` type*
+     * 
+     * Moves the cursor one step to the right.
      */
     void right() {
         blinkerPosition++;
@@ -510,6 +526,10 @@ class LcdMenu {
     }
     /**
      * Execute a "backspace cmd" on menu
+     * 
+     * *NB: Works only for `ItemInput` type*
+     * 
+     * Removes the character at the current cursor position.
      */
     void backspace() { 
         MenuItem* item = &currentMenuTable[cursorPosition];
