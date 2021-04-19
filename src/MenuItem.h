@@ -140,37 +140,50 @@ class MenuItem {
 };
 
 /**
- * <br>
- * 
+ *
  * # ItemHeader
+ *
+ * This item must be present at the all menus collections *(the first item in
+ * the array)*.
+ *
+ * **Example**
+ *
+ * ```cpp
+ * MenuItem mainMenu[] = {ItemHeader(),
+ *                        MenuItem("Item 1"),
+ *                        MenuItem("Item 2"),
+ *                        ...
+ * ```
  */
 
-/**
- */
 class ItemHeader : public MenuItem {
    public:
     /**
-     * ### Constructor
      */
-
-    /**
-     */
-    ItemHeader()
-        : MenuItem(this, MENU_ITEM_MAIN_MENU_HEADER) {}
+    ItemHeader() : MenuItem(this, MENU_ITEM_MAIN_MENU_HEADER) {}
 };
 
 /**
+ * ---
+ *
  * # ItemSubHeader
+ *
+ * This item must be present at the all submenu menu collections *(the first
+ * item in the array)*. It is used instead of `ItemHeader` when you're on a
+ * submenu.
+ *
+ * **Example**
+ *
+ * ```cpp
+ * MenuItem subMenu[] = {ItemSubHeader(),
+ *                       MenuItem("Item 1"),
+ *                       MenuItem("Item 2"),
+ *                       ...
+ * ```
  */
 
-/**
- */
 class ItemSubHeader : public MenuItem {
    public:
-    /**
-     * ### Constructor
-     */
-
     /**
      * @param parent the parent menu item
      */
@@ -179,35 +192,42 @@ class ItemSubHeader : public MenuItem {
 };
 
 /**
+ * ---
+ *
  * # ItemFooter
+ *
+ * This item must be present at the all menus *(the last item in the array)*
+ *
+ * **Example**
+ *
+ * ```cpp
+ * MenuItem mainMenu[] = {ItemHeader(),
+ *                        MenuItem("Item 1"),
+ *                        MenuItem("Item 2"),
+ *                        ...
+ *                        ItemFooter()};
+ * ```
  */
 
-/**
- */
 class ItemFooter : public MenuItem {
    public:
     /**
-     * ### Constructor
      */
-
-    /**
-     */
-    ItemFooter()
-        : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
+    ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
 };
 
-/** 
+/**
+ * ---
+ *
  * # ItemInput
+ *
+ * This is an item type where a user can type in information,
+ * the information is persisted in the item and can be gotten later by
+ * using `item->value`
  */
 
-/**
- */
 class ItemInput : public MenuItem {
    public:
-    /**
-     * ### Constructor
-     */
-
     /**
      * @param text text to display for the item
      * @param value the input value
@@ -218,17 +238,16 @@ class ItemInput : public MenuItem {
 };
 
 /**
+ * ---
+ *
  * # ItemSubMenu
+ *
+ * This item type indicates that the current item contains a sub menu.
+ * The sub menu is opened when `enter()` is invoked.
  */
 
-/**
- */
 class ItemSubMenu : public MenuItem {
    public:
-    /**
-     * ### Constructor
-     */
-
     /**
      * @param text text to display for the item
      * @param parent the parent of the sub menu item
@@ -236,19 +255,17 @@ class ItemSubMenu : public MenuItem {
     ItemSubMenu(String text, MenuItem* parent)
         : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
 };
-
 /**
+ * ---
+ *
  * # ItemToggle
+ *
+ * This item type indicates that the current item is **toggleable**.
+ * When `enter()` is invoked, the state of `isOn` is toggled.
  */
 
-/**
- */
 class ItemToggle : public MenuItem {
    public:
-    /**
-     * ### Constructor
-     */
-
     /**
      * @param key key of the item
      * @param callback reference to callback function
@@ -266,17 +283,17 @@ class ItemToggle : public MenuItem {
 };
 
 /**
+ * ---
+ *
  * # ItemCommand
+ *
+ * This item type indicates that the current item is a **command**.
+ * When `enter()` is invoked, the command *(callback)* bound to this item is
+ * invoked.
  */
 
-/**
- */
 class ItemCommand : public MenuItem {
    public:
-    /**
-     * ### Constructor
-     */
-
     /**
      * @param key key of the item
      * @param callback reference to callback function
