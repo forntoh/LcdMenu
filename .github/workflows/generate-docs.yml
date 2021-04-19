@@ -1,12 +1,13 @@
 name: Generate Docs
 
 on:
-  push
+  release:
+    types: [created]
 
 jobs:
   generate:
     name: Generate
-    runs-on: ubuntu-latesta
+    runs-on: ubuntu-latest
 
     steps:
       - name: Setup Node.js environment
