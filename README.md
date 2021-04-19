@@ -20,24 +20,6 @@ Follow this 👇 guide to install the library
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
 
-## Examples
+For Usage & Examples,
 
-### 01 Basic Navigation
-
-See [Wiki - Basic-Navigation](https://github.com/forntoh/LcdMenu/wiki/Example-01-Basic-Navigation)
-
-### 02 Sub Menus
-
-See [Wiki - Sub Menus](https://github.com/forntoh/LcdMenu/wiki/Example-02-Sub-Menu)
-
-### 03 Callbacks
-
-See [Wiki - Callbacks](https://github.com/forntoh/LcdMenu/wiki/Example-03-Callback)
-
-### 04 Dynamic Menus
-
-See [Wiki - Dynamic Menu](https://github.com/forntoh/LcdMenu/wiki/Example-04-Dynamic-Menu)
-
-### 05 Menu Notifications
-
-See [Wiki - Menu Notifications](https://github.com/forntoh/LcdMenu/wiki/Example-05-Menu-Notifications)
+## Visit the official [Docs](https://forntoh.github.io/LcdMenu/) of this Library
