@@ -1,0 +1,43 @@
+name: Generate Docs
+
+on:
+  push
+
+jobs:
+  generate:
+    name: Generate
+    runs-on: ubuntu-latesta
+
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+        run: npm install
+        run: npm test
+      
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
+      - name: Embed code into examples
+        run: npx embedme docs/examples/*.md
+
+      - name: Generate Ref docs
+        run: |
+          for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; npx mdcdoc -o docs/ref/$TMP $FILE; done
+      
+      - name: Add Jekyll headers
+        run: |
+          for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; sed -i '1i---\nlayout: default\ntitle: '"${FILE//src\//}"'\nparent: Reference\n---\n' docs/ref/$TMP; done
+
+      - name: Commit changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Bumb app version to ${RELEASE_VERSION}"
+
+      - name: Push changes
+        run: git push
