@@ -31,6 +31,7 @@ jobs:
         run: |
           for FILE in examples/*/*.md; do TMP=$FILE; TMP=${TMP//examples\//}; TMP=${TMP//\/README/}; cp $FILE 'docs/examples/'"$TMP"; done
           for FILE in examples/*/*.md; do TMP=$FILE; TMP=${TMP//examples\//}; TMP=${TMP//\/README/}; sed -i '1i---\nlayout: default\ntitle: '"${TMP//.md/}"'\nparent: Examples\n---\n' docs/examples/$TMP; done
+          for FILE in docs/examples/*.md; do sed -i 's/\!\[Circuit\](https:\/\/github.com\/forntoh\/LcdMenu\/blob\/gh-pages\/assets\/img\/circuit.png?raw=true)/<img src="{{ site.baseurl }}\/assets\/img\/circuit.png" alt="Circuit">/' $FILE; done
 
       - name: Embed code into examples
         run: npx embedme docs/examples/*.md

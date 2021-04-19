@@ -19,4 +19,4 @@ Go to [.../examples/Basic/Basic.ino](https://github.com/forntoh/LcdMenu/tree/mas
 
 ## Circuit
 
-<img src="{{ site.baseurl }}/assets/img/circuit.png" alt="Circuit">
+![Circuit](https://github.com/forntoh/LcdMenu/blob/gh-pages/assets/img/circuit.png?raw=true)

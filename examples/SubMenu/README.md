@@ -19,4 +19,4 @@ Go to [.../examples/SubMenu/SubMenu.ino](https://github.com/forntoh/LcdMenu/tree
 
 ## Circuit
 
-<img src="{{ site.baseurl }}/assets/img/circuit.png" alt="Circuit">
+![Circuit](https://github.com/forntoh/LcdMenu/blob/gh-pages/assets/img/circuit.png?raw=true)
