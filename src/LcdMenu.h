@@ -38,10 +38,17 @@
 #include "MenuItem.h"
 
 /**
- * the LcdMenu class
+ * The LcdMenu class contains all fields and methods to manipulate the menu
+ * items.
  */
 class LcdMenu {
    private:
+    /**
+     * ---
+     *
+     * ## Private Fields
+     */
+
     /**
      * Cursor position
      */
@@ -99,6 +106,11 @@ class LcdMenu {
         0b00100,  //   *
         0b00100   //   *
     };
+
+    /**
+     * ## Private Methods
+     */
+
     /**
      * Draws the cursor
      */
@@ -190,7 +202,6 @@ class LcdMenu {
     }
     /**
      * Check if the cursor is at the start of the menu items
-     *
      * @return true : `boolean` if it is at the start
      */
     boolean isAtTheStart() {
@@ -200,7 +211,6 @@ class LcdMenu {
     }
     /**
      * Check if the cursor is at the end of the menu items
-     *
      * @return true : `boolean` if it is at the end
      */
     boolean isAtTheEnd() {
@@ -217,7 +227,6 @@ class LcdMenu {
     /**
      * Reset the display
      * @param isHistoryAvailable indicates if there is a previous position
-     * Cursor position to go to
      */
     void reset(boolean isHistoryAvailable) {
         if (isHistoryAvailable) {
@@ -254,6 +263,10 @@ class LcdMenu {
 
    public:
     /**
+     * ## Public Fields
+     */
+
+    /**
      * Time when the toast started showing in milliseconds
      */
     unsigned long startTime;
@@ -269,9 +282,13 @@ class LcdMenu {
 #else
     LiquidCrystal* lcd;
 #endif
+
+    /**
+     * # Constructor
+     */
+
     /**
      * Constructor for the LcdMenu class
-     *
      * @param maxRows rows on lcd display e.g. 4
      * @param maxCols columns on lcd display e.g. 20
      * @return new `LcdMenu` object
@@ -283,9 +300,12 @@ class LcdMenu {
     }
 
     /**
+     * ## Public Methods
+     */
+
+    /**
      * Call this function in `setup()` to initialize the LCD and the custom
      * characters used as up and down arrows
-     *
      * @param lcd_Addr address of the LCD on the I2C bus (default 0x27)
      * @param menu menu to display
      */
@@ -309,7 +329,6 @@ class LcdMenu {
     }
     /**
      * Call this function to set sub menu items for any main menu item
-     *
      * @param position main menu item/where to place the sub menu
      * @param items    sub menu items
      */
@@ -320,7 +339,6 @@ class LcdMenu {
     /**
      * Builder function for a sub menu
      * this functions appends a header and a footer to the final item list
-     *
      * @param items array of MenuItems for the sub menu
      * @param size size of items array
      * @return MenuItem list (pointer) with header and footer items included
@@ -506,7 +524,6 @@ class LcdMenu {
     /**
      * Display text at the cursor position
      * used for `Input` type menu items
-     *
      * @param character character to append
      */
     void type(String character) {
@@ -559,40 +576,38 @@ class LcdMenu {
     }
     /**
      * Get the current cursor position
-     *
      * @return `cursorPosition` e.g. 1, 2, 3...
      */
     uint8_t getCursorPosition() { return this->cursorPosition; }
     /**
      * Show a message at the bottom of the screen
-     *
      * @param message message to display
      * @param duration how long to display the message
      */
     void displayNotification(String message, unsigned int duration) {
-        /**
-         * Calculate the position to start writing
-         * (centralize text)
-         */
+        //
+        // Calculate the position to start writing
+        // (centralize text)
+        //
         uint8_t centerPos = maxCols / 2 - (message.length() / 2);
-        /**
-         * Set cursor potion and clear lane
-         */
+        //
+        // Set cursor potion and clear lane
+        //
         lcd->setCursor(0, maxRows - 1);
         lcd->print("                   ");
         lcd->setCursor(centerPos - 1, maxRows - 1);
-        /**
-         * Draw each independent character
-         */
+        //
+        // Draw each independent character
+        //
         lcd->write(0xA5);
         for (unsigned int i = 0; i < message.length(); i++) {
             char character = message.charAt(i);
             lcd->write(character);
         }
         lcd->write(0xA5);
-        /*
-         * initialize the timer
-         */
+        //
+        // initialize the timer
+        //
         this->duration = duration;
         startTime = millis();
     }
@@ -604,7 +619,6 @@ class LcdMenu {
     }
     /**
      * Get a `MenuItem` at position
-     *
      * @return `MenuItem` - item at `position`
      */
     MenuItem* getItemAt(uint8_t position) {
