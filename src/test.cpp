@@ -8,7 +8,7 @@ struct Pair {
 };
 
 Pair getPair(JsonObject obj);
-void read(Pair tmp, uint8_t step);
+MenuItem* read(Pair tmp, uint8_t step);
 
 void setup() {
     Serial.begin(9600);
@@ -44,19 +44,23 @@ void setup() {
     Pair tmp0;
     tmp0.value = arr;
 
-    read(tmp0, 0);
+    MenuItem* answer = read(tmp0, 0);
+
+    for (uint8_t i = 0; i < (tmp0.value.size() + 2); i++) {
+        // Serial.print(answer[i].getText());
+    }
 }
 
-void read(Pair tmp, uint8_t step) {
+MenuItem* read(Pair tmp, uint8_t step) {
     bool a = false;
     bool b = false;
 
     /////////////////////// TestMenu Start/////////////////////////////////
-    String* tempItems = new String[tmp.value.size() + 2];
+    // String* tempItems = new String[tmp.value.size() + 2];
     //
     //
     //
-    MenuItem* tempItemsA = new MenuItem[tmp.value.size() + 2];
+    // MenuItem* tempItemsA = new MenuItem[tmp.value.size() + 2];
     /////////////////////// TestMenu END///////////////////////////////////
 
     for (uint8_t i = 0; i < tmp.value.size(); i++) {
@@ -68,42 +72,42 @@ void read(Pair tmp, uint8_t step) {
                 b = true;
             }
 
-            // Serial.print((String)step);
-            // Serial.print(" ");
+            Serial.print((String)step);
+            Serial.print(" ");
 
-            // if (strlen(tmp1.key) != 1) {
-            //     Serial.print((String)tmp1.value.size());
-            // } else {
-            //     Serial.print(" ");
-            // }
+            if (strlen(tmp1.key) != 1) {
+                Serial.print((String)tmp1.value.size());
+            } else {
+                Serial.print("0");
+            }
 
-            // Serial.print(" |");
-            // for (uint8_t t = 0; t <= step; t++) Serial.print(" ");
+            Serial.print(" |");
+            for (uint8_t t = 0; t <= step; t++) Serial.print(" ");
 
-            // Serial.println(tmp1.key);
+            Serial.println(tmp1.key);
 
             read(tmp1, step);
 
             ////////////// TestMenu Start ///////////////////////////////////
-            String head = "SubHead";
-            if (step == 1) head = "Head";
-
-            tempItems[0] = head;
-            tempItems[i + 1] = tmp1.key;
+            // String head = "SubHead";
+            // if (step == 1) head = "Head";
+            // 
+            // tempItems[0] = head;
+            // tempItems[i + 1] = tmp1.key;
             //
             //
             //
-            MenuItem headA = ItemHeader();
-            if (step == 1) headA = ItemSubHeader(NULL);
-
-            tempItemsA[0] = headA;
-            tempItemsA[i + 1] = MenuItem((String)tmp1.key);
+            // MenuItem headA = ItemHeader();
+            // if (step == 1) headA = ItemHeader(NULL);
+            // 
+            // tempItemsA[0] = headA;
+            // tempItemsA[i + 1] = MenuItem((String)tmp1.key);
             ////////////// TestMenu END /////////////////////////////////////
         } else {
             char* val = tmp.value[i];
 
             ////////////// TestMenu Start////////////////////////////////////
-            tempItems[i + 1] = val;
+            // tempItems[i + 1] = val;
             ////////////// TestMenu END//////////////////////////////////////
 
             if (!a) {
@@ -111,80 +115,77 @@ void read(Pair tmp, uint8_t step) {
                 a = true;
 
                 ///////////// TestMenu Start////////////////////////////////
-                String tit;
-
-                switch (tmp.key[0]) {
-                    case 'C':
-                        tit = "  ItemCommand";
-                        break;
-                    case 'T':
-                        tit = "  ItemToggle";
-                        break;
-                    case 'I':
-                        tit = "  ItemInput";
-                        break;
-                    default:
-                        tit = "  MenuItem";
-                        break;
-                }
-
-
-
-                tempItems[i] = tit;
-                tempItems[i + 1] = val;
+                // String tit;
+                // 
+                // switch (tmp.key[0]) {
+                //     case 'C':
+                //         tit = "  ItemCommand";
+                //         break;
+                //     case 'T':
+                //         tit = "  ItemToggle";
+                //         break;
+                //     case 'I':
+                //         tit = "  ItemInput";
+                //         break;
+                //     default:
+                //         tit = "  MenuItem";
+                //         break;
+                // }
+                // tempItems[i] = tit;
+                // tempItems[i + 1] = val;
                 //
                 //
                 //
-                MenuItem titA;
-
-                switch (tmp.key[0]) {
-                    case 'C':
-                        titA = ItemCommand(val, NULL);
-                        break;
-                    case 'T':
-                        titA = ItemToggle(val, NULL);
-                        break;
-                    case 'I':
-                        titA = ItemInput(val, "", NULL);
-                        break;
-                    default:
-                        titA = MenuItem(val);
-                        break;
-                }
-
-                
-                tempItemsA[i] = titA;
+                // MenuItem titA;
+                // 
+                // switch (tmp.key[0]) {
+                //     case 'C':
+                //         titA = ItemCommand(val, NULL);
+                //         break;
+                //     case 'T':
+                //         titA = ItemToggle(val, NULL);
+                //         break;
+                //     case 'I':
+                //         titA = ItemInput(val, "", NULL);
+                //         break;
+                //     default:
+                //         titA = MenuItem(val);
+                //         break;
+                // }
+                // tempItemsA[i] = titA;
                 ////////////// TestMenu END////////////////////////////////
             }
 
-            // Serial.print("    |");
-            // for (uint8_t t = 0; t <= step; t++) Serial.print(" ");
-            // Serial.print(val);
+            Serial.print("    |");
+            for (uint8_t t = 0; t <= step; t++) Serial.print(" ");
+            Serial.print(val);
         }
     }
 
     ////////////////// TestMenu Start//////////////////////////////////////
-    if (tempItems[0] == "Head" || tempItems[0] == "SubHead")
-        tempItems[tmp.value.size() + 1] = "Foot";
-
-    for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
-        Serial.print(tempItems[i]);
-        Serial.print(",");
-    }
+    // if (tempItems[0] == "Head" || tempItems[0] == "SubHead")
+    //     tempItems[tmp.value.size() + 1] = "Foot";
+    // 
+    // for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
+    //     Serial.print(tempItems[i]);
+    //     Serial.print(",");
+    // }
     //
     //
     //
-    if (tempItemsA[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
-        tempItemsA[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
-        tempItems[tmp.value.size() + 1] = "Foot";
-
-    for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
-        Serial.print(tempItems[i]);
-        Serial.print(",");
-    }
+    // if (tempItemsA[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
+    //     tempItemsA[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
+    //     tempItemsA[tmp.value.size() + 1] = ItemFooter();
+    // 
+    // for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
+    //     Serial.print(tempItemsA[i].getText());
+    //     // Serial.print(",");
+    // }
     /////////////////////// TestMenu END///////////////////////////////////
 
     Serial.println();
+
+    return NULL;
 }
 
 Pair getPair(JsonObject obj) {
