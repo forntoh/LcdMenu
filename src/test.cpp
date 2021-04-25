@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
+#include <LcdMenu.h>
 
 struct Pair {
     char* key;
@@ -13,6 +14,8 @@ void setup() {
     Serial.begin(9600);
     while (!Serial) continue;
 
+    Serial.println();
+    Serial.println();
     Serial.println();
 
     // Allocate the JSON document
@@ -50,6 +53,10 @@ void read(Pair tmp, uint8_t step) {
 
     /////////////////////// TestMenu Start/////////////////////////////////
     String* tempItems = new String[tmp.value.size() + 2];
+    //
+    //
+    //
+    MenuItem* tempItemsA = new MenuItem[tmp.value.size() + 2];
     /////////////////////// TestMenu END///////////////////////////////////
 
     for (uint8_t i = 0; i < tmp.value.size(); i++) {
@@ -83,6 +90,14 @@ void read(Pair tmp, uint8_t step) {
 
             tempItems[0] = head;
             tempItems[i + 1] = tmp1.key;
+            //
+            //
+            //
+            MenuItem headA = ItemHeader();
+            if (step == 1) headA = ItemSubHeader(NULL);
+
+            tempItemsA[0] = headA;
+            tempItemsA[i + 1] = MenuItem((String)tmp1.key);
             ////////////// TestMenu END /////////////////////////////////////
         } else {
             char* val = tmp.value[i];
@@ -113,8 +128,32 @@ void read(Pair tmp, uint8_t step) {
                         break;
                 }
 
+
+
                 tempItems[i] = tit;
                 tempItems[i + 1] = val;
+                //
+                //
+                //
+                MenuItem titA;
+
+                switch (tmp.key[0]) {
+                    case 'C':
+                        titA = ItemCommand(val, NULL);
+                        break;
+                    case 'T':
+                        titA = ItemToggle(val, NULL);
+                        break;
+                    case 'I':
+                        titA = ItemInput(val, "", NULL);
+                        break;
+                    default:
+                        titA = MenuItem(val);
+                        break;
+                }
+
+                
+                tempItemsA[i] = titA;
                 ////////////// TestMenu END////////////////////////////////
             }
 
@@ -126,6 +165,17 @@ void read(Pair tmp, uint8_t step) {
 
     ////////////////// TestMenu Start//////////////////////////////////////
     if (tempItems[0] == "Head" || tempItems[0] == "SubHead")
+        tempItems[tmp.value.size() + 1] = "Foot";
+
+    for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
+        Serial.print(tempItems[i]);
+        Serial.print(",");
+    }
+    //
+    //
+    //
+    if (tempItemsA[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
+        tempItemsA[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
         tempItems[tmp.value.size() + 1] = "Foot";
 
     for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
