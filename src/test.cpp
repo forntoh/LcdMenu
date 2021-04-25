@@ -78,8 +78,8 @@ void read(Pair tmp, uint8_t step) {
             read(tmp1, step);
 
             ////////////// TestMenu Start ///////////////////////////////////
-            String head = "SUB_HEAD";
-            if (step == 1) head = "HEAD";
+            String head = "SubHead";
+            if (step == 1) head = "Head";
 
             tempItems[0] = head;
             tempItems[i + 1] = tmp1.key;
@@ -100,16 +100,16 @@ void read(Pair tmp, uint8_t step) {
 
                 switch (tmp.key[0]) {
                     case 'C':
-                        tit = "  ItemCommand[";
+                        tit = "  ItemCommand";
                         break;
                     case 'T':
-                        tit = "  ItemToggle[";
+                        tit = "  ItemToggle";
                         break;
                     case 'I':
-                        tit = "  ItemInput[";
+                        tit = "  ItemInput";
                         break;
                     default:
-                        tit = "  MenuItem[";
+                        tit = "  MenuItem";
                         break;
                 }
 
@@ -125,8 +125,8 @@ void read(Pair tmp, uint8_t step) {
     }
 
     ////////////////// TestMenu Start//////////////////////////////////////
-    if (tempItems[0] == "HEAD" || tempItems[0] == "SUB_HEAD")
-        tempItems[tmp.value.size() + 1] = "FOOT";
+    if (tempItems[0] == "Head" || tempItems[0] == "SubHead")
+        tempItems[tmp.value.size() + 1] = "Foot";
 
     for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
         Serial.print(tempItems[i]);
