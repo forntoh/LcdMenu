@@ -351,7 +351,7 @@ class LcdMenu {
         //
         // append a Header to first position
         //
-        tempItems[0] = ItemSubHeader(currentMenuTable);
+        tempItems[0] = ItemHeader(currentMenuTable);
         for (uint8_t i = 0; i < size; i++) {
             //
             // child menu of this submenu item
