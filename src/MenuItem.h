@@ -161,33 +161,10 @@ class ItemHeader : public MenuItem {
     /**
      */
     ItemHeader() : MenuItem(this, MENU_ITEM_MAIN_MENU_HEADER) {}
-};
-
-/**
- * ---
- *
- * # ItemSubHeader
- *
- * This item must be present at the all submenu menu collections *(the first
- * item in the array)*. It is used instead of `ItemHeader` when you're on a
- * submenu.
- *
- * **Example**
- *
- * ```cpp
- * MenuItem subMenu[] = {ItemSubHeader(),
- *                       MenuItem("Item 1"),
- *                       MenuItem("Item 2"),
- *                       ...
- * ```
- */
-
-class ItemSubHeader : public MenuItem {
-   public:
     /**
      * @param parent the parent menu item
      */
-    ItemSubHeader(MenuItem* parent)
+    ItemHeader(MenuItem* parent)
         : MenuItem(parent, MENU_ITEM_SUB_MENU_HEADER) {}
 };
 
@@ -213,7 +190,8 @@ class ItemFooter : public MenuItem {
    public:
     /**
      */
-    ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
+    ItemFooter()
+        : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
 };
 
 /**
