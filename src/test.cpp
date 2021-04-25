@@ -48,9 +48,9 @@ void read(Pair tmp, uint8_t step) {
     bool a = false;
     bool b = false;
 
-    // TestMenu Start//////////////////////////////////////////////////////
+    /////////////////////// TestMenu Start/////////////////////////////////
     String* tempItems = new String[tmp.value.size() + 2];
-    // TestMenu END////////////////////////////////////////////////////////
+    /////////////////////// TestMenu END///////////////////////////////////
 
     for (uint8_t i = 0; i < tmp.value.size(); i++) {
         if (tmp.value[i].is<JsonObject>()) {
@@ -77,25 +77,25 @@ void read(Pair tmp, uint8_t step) {
 
             read(tmp1, step);
 
-            // TestMenu Start//////////////////////////////////////////////
+            ////////////// TestMenu Start ///////////////////////////////////
             String head = "SUB_HEAD";
             if (step == 1) head = "HEAD";
 
             tempItems[0] = head;
             tempItems[i + 1] = tmp1.key;
-            // TestMenu END////////////////////////////////////////////////
+            ////////////// TestMenu END /////////////////////////////////////
         } else {
             char* val = tmp.value[i];
 
-            // TestMenu Start//////////////////////////////////////////////
+            ////////////// TestMenu Start////////////////////////////////////
             tempItems[i + 1] = val;
-            // TestMenu END////////////////////////////////////////////////
+            ////////////// TestMenu END//////////////////////////////////////
 
             if (!a) {
                 step++;
                 a = true;
 
-                // TestMenu Start//////////////////////////////////////////
+                ///////////// TestMenu Start////////////////////////////////
                 String tit;
 
                 switch (tmp.key[0]) {
@@ -115,7 +115,7 @@ void read(Pair tmp, uint8_t step) {
 
                 tempItems[i] = tit;
                 tempItems[i + 1] = val;
-                // TestMenu END////////////////////////////////////////////
+                ////////////// TestMenu END////////////////////////////////
             }
 
             // Serial.print("    |");
@@ -124,7 +124,7 @@ void read(Pair tmp, uint8_t step) {
         }
     }
 
-    // TestMenu Start//////////////////////////////////////////////////////
+    ////////////////// TestMenu Start//////////////////////////////////////
     if (tempItems[0] == "HEAD" || tempItems[0] == "SUB_HEAD")
         tempItems[tmp.value.size() + 1] = "FOOT";
 
@@ -132,7 +132,7 @@ void read(Pair tmp, uint8_t step) {
         Serial.print(tempItems[i]);
         Serial.print(",");
     }
-    // TestMenu END////////////////////////////////////////////////////////
+    /////////////////////// TestMenu END///////////////////////////////////
 
     Serial.println();
 }
