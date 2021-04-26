@@ -36,7 +36,8 @@ jobs:
           pip install --upgrade platformio
           
       - name: Install library dependencies
-        run: pio lib -g install 1
+        run: |
+          pio lib install "bblanchon/ArduinoJson@^6.17.3"
 
       - name: Run PlatformIO
         run: pio ci --board=uno
