@@ -37,7 +37,7 @@ jobs:
           
       - name: Install library dependencies
         run: |
-          pio lib install "bblanchon/ArduinoJson@^6.17.3"
+          pio lib -g install "bblanchon/ArduinoJson@^6.17.3"
 
       - name: Run PlatformIO
         run: pio ci --board=uno
