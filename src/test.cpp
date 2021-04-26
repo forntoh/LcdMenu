@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
-#include <LcdMenu.h>
+#include "LcdMenu.h"
 
 const JsonVariant getPair(JsonObject obj, char*& outKey);
 const JsonVariant read(JsonVariant obj, char*& outKey, MenuItem*& outMenu,
