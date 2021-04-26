@@ -40,6 +40,6 @@ jobs:
           pio lib -g install "bblanchon/ArduinoJson@^6.17.3"
 
       - name: Run PlatformIO
-        run: pio ci --board=uno
+        run: pio ci -l -b=uno
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
