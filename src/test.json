@@ -1,32 +1,32 @@
 [
   {
-    "Settings": [
+    "Hh": [
       {
-        "C": ["Selp", "Selp"]
+        "C": ["A", "a"]
       },
       {
-        "T": ["Sl", "Sl"]
+        "T": ["BB", "bb"]
       }
     ]
   },
   {
-    "Wifi": [
+    "Ii": [
       {
-        "C": ["Welp", "Welp"]
+        "C": ["CC", "cc"]
       },
       {
-        "T": ["Wl", "Wl"]
+        "T": ["DD", "dd"]
       },
       {
-        "I": ["Wan"]
+        "I": ["EE", "ee"]
       },
       {
-        "WoonLight": [
+        "Wo": [
           {
-            "M": ["West"]
+            "M": ["FF", "ff"]
           },
           {
-            "I": ["Win", "Han"]
+            "I": ["GG", "gg"]
           }
         ]
       }
