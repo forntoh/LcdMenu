@@ -79,6 +79,26 @@ void setup() {
     }
 }
 
+MenuItem getMenuItem(char key, JsonVariant json) {
+    char* val = json[0];
+    MenuItem item;
+    switch (key) {
+        case 'C':
+            item = ItemCommand(val, NULL);
+            break;
+        case 'T':
+            item = ItemToggle(val, NULL);
+            break;
+        case 'I':
+            item = ItemInput(val, "", NULL);
+            break;
+        default:
+            item = MenuItem(val);
+            break;
+    }
+    return item;
+}
+
 const JsonVariant read(JsonVariant value, char*& outKey, MenuItem*& outMenu) {
     uint8_t size = value.size();
     JsonVariant nextValue;
@@ -93,27 +113,8 @@ const JsonVariant read(JsonVariant value, char*& outKey, MenuItem*& outMenu) {
 
             if (strlen(outKey) != 1)
                 outMenu[i + 1] = MenuItem((String)outKey);
-            else {
-                char* val = nextValue[0];
-
-                MenuItem titA;
-
-                switch (outKey[0]) {
-                    case 'C':
-                        titA = ItemCommand(val, NULL);
-                        break;
-                    case 'T':
-                        titA = ItemToggle(val, NULL);
-                        break;
-                    case 'I':
-                        titA = ItemInput(val, "", NULL);
-                        break;
-                    default:
-                        titA = MenuItem(val);
-                        break;
-                }
-                outMenu[i + 1] = titA;
-            }
+            else
+                outMenu[i + 1] = getMenuItem(outKey[0], nextValue);
         }
 
     if (outMenu[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
