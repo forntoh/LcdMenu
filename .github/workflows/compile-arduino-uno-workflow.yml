@@ -1,4 +1,4 @@
-name: Compile LCD Menu on Arduino
+name: CI Arduino
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -6,34 +6,39 @@ jobs:
   compile-arduino:
     strategy:
       matrix:
-        arduino-platform: ["arduino:avr"]
-        include:
-          - arduino-platform: "arduino:avr"
-            fqbn: "arduino:avr:uno"
+        example: [src/test.cpp]
 
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@master
-
-      - name: Setup Arduino CLI
-        uses: arduino/setup-arduino-cli@v1.1.1
-
-      - name: Install platform
+        
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip
+          
+      - name: Cache PlatformIO
+        uses: actions/cache@v2
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        
+      - name: Install PlatformIO
         run: |
-          arduino-cli core update-index
-          arduino-cli core install ${{ matrix.arduino-platform }}
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+          
+      - name: Install library dependencies
+        run: pio lib -g install 1
 
-      - name: Install Keypad and LCD libraries
-        run: |
-          arduino-cli lib install Keypad
-          arduino-cli lib install LiquidCrystal
-          arduino-cli lib install "LiquidCrystal I2C"
-          arduino-cli lib install ArduinoJson
-
-      - name: Install LcdMenu Library
-        run: mkdir -p /home/runner/Arduino/libraries/LcdMenu/ && cp -r * /home/runner/Arduino/libraries/LcdMenu/
-
-      - name: Compile Sketch
-        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/Basic
+      - name: Run PlatformIO
+        run: pio ci --board=uno
+        env:
+          PLATFORMIO_CI_SRC: ${{ matrix.example }}
