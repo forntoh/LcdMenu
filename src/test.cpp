@@ -50,6 +50,7 @@ void setup() {
 
         for (uint8_t j = 0; j < ending; j++) {
             Serial.print(menu[j].getText());
+            Serial.print((String)menu[j].getType());
             Serial.print(F(","));
         }
         Serial.println();
@@ -67,6 +68,7 @@ void setup() {
 
             for (uint8_t j = 0; j < ending1; j++) {
                 Serial.print(menu1[j].getText());
+                Serial.print((String)menu1[j].getType());
                 Serial.print(F(","));
             }
             Serial.println();
@@ -101,11 +103,10 @@ const JsonVariant read(JsonVariant value, char*& outKey, MenuItem*& outMenu) {
 
     for (uint8_t i = 0; i < size; i++)
         if (value[i].is<JsonObject>()) {
-
             nextValue = getPair(value[i], outKey);
 
             if (strlen(outKey) != 1)
-                outMenu[i + 1] = MenuItem((String)outKey);
+                outMenu[i + 1] = ItemSubMenu(outKey, NULL);
             else
                 outMenu[i + 1] = getMenuItem(outKey[0], nextValue);
         }
