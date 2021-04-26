@@ -10,8 +10,6 @@ void setup() {
     while (!Serial) continue;
 
     Serial.println();
-    Serial.println();
-    Serial.println();
 
     // Allocate the JSON document
     //
@@ -34,10 +32,8 @@ void setup() {
         return;
     }
 
-    JsonVariant arr = doc.as<JsonVariant>();
-
     char* ansKey;
-    JsonVariant ansValue = getPair(arr, ansKey);
+    JsonVariant ansValue = getPair(doc.as<JsonVariant>(), ansKey);
 
     for (uint8_t i = 0; i < ansValue.size(); i++) {
         char* pKey;
@@ -57,7 +53,7 @@ void setup() {
             Serial.print(F(","));
         }
         Serial.println();
-        delete[] menu;
+        // delete[] menu;
 
         if (strlen(nextKey) != 1) {
             // Serial.print("-> ");
@@ -74,7 +70,7 @@ void setup() {
                 Serial.print(F(","));
             }
             Serial.println();
-            delete[] menu1;
+            // delete[] menu1;
         }
     }
 }
@@ -105,11 +101,8 @@ const JsonVariant read(JsonVariant value, char*& outKey, MenuItem*& outMenu) {
 
     for (uint8_t i = 0; i < size; i++)
         if (value[i].is<JsonObject>()) {
+
             nextValue = getPair(value[i], outKey);
-
-            MenuItem headA = ItemHeader(NULL);
-
-            outMenu[0] = headA;
 
             if (strlen(outKey) != 1)
                 outMenu[i + 1] = MenuItem((String)outKey);
@@ -117,10 +110,8 @@ const JsonVariant read(JsonVariant value, char*& outKey, MenuItem*& outMenu) {
                 outMenu[i + 1] = getMenuItem(outKey[0], nextValue);
         }
 
-    if (outMenu[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
-        outMenu[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
-        outMenu[size + 1] = ItemFooter();
-
+    outMenu[0] = ItemHeader(NULL);
+    outMenu[size + 1] = ItemFooter();
     return nextValue;
 }
 
