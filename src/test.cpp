@@ -2,19 +2,8 @@
 #include <ArduinoJson.h>
 #include <LcdMenu.h>
 
-struct Pair {
-    char* key;
-    JsonVariant value;
-};
-
-struct MenuPair {
-    MenuItem* menu;
-    struct Pair next;
-    uint8_t step;
-};
-
-Pair getPair(JsonObject obj);
-MenuPair read(Pair tmp, uint8_t step);
+const JsonVariant getPair(JsonObject obj, char*& outKey);
+const JsonVariant read(JsonVariant obj, char*& outKey, MenuItem*& outMenu);
 
 void setup() {
     Serial.begin(9600);
@@ -47,64 +36,69 @@ void setup() {
 
     JsonVariant arr = doc.as<JsonVariant>();
 
-    struct Pair answer0 = getPair(arr);
+    char* ansKey;
+    JsonVariant ansValue = getPair(arr, ansKey);
 
-    for (uint8_t i = 0; i < answer0.value.size(); i++) {
-        struct Pair p = getPair(answer0.value[i]);
+    for (uint8_t i = 0; i < ansValue.size(); i++) {
+        char* pKey;
+        JsonVariant pValue = getPair(ansValue[i], pKey);
 
         // Serial.print("-> ");
         // Serial.println(p.key);
 
-        uint8_t ending = p.value.size() + 2;
-        struct MenuPair a = read(p, 0);
+        uint8_t ending = pValue.size() + 2;
+
+        char* nextKey;
+        MenuItem* menu = new MenuItem[ending];
+        JsonVariant nextValue = read(pValue, nextKey, menu);
 
         for (uint8_t j = 0; j < ending; j++) {
-            Serial.print(a.menu[j].getText());
+            Serial.print(menu[j].getText());
             Serial.print(F(","));
         }
         Serial.println();
+        delete[] menu;
 
-        if (strlen(a.next.key) != 1) {
-
+        if (strlen(nextKey) != 1) {
             // Serial.print("-> ");
             // Serial.println(a.next.key);
 
-            uint8_t ending1 = a.next.value.size() + 2;
-            struct MenuPair a1 = read(a.next, 0);
+            uint8_t ending1 = nextValue.size() + 2;
+
+            char* key1;
+            MenuItem* menu1 = new MenuItem[ending1];
+            read(nextValue, key1, menu1);
 
             for (uint8_t j = 0; j < ending1; j++) {
-                Serial.print(a1.menu[j].getText());
+                Serial.print(menu1[j].getText());
                 Serial.print(F(","));
             }
             Serial.println();
+            delete[] menu1;
         }
     }
 }
 
-MenuPair read(Pair tmp, uint8_t step) {
-    struct MenuPair data;
+const JsonVariant read(JsonVariant value, char*& outKey, MenuItem*& outMenu) {
+    uint8_t size = value.size();
+    JsonVariant nextValue;
 
-    MenuItem* tempItemsA = new MenuItem[tmp.value.size() + 2];
+    for (uint8_t i = 0; i < size; i++)
+        if (value[i].is<JsonObject>()) {
+            nextValue = getPair(value[i], outKey);
 
-    for (uint8_t i = 0; i < tmp.value.size(); i++) {
-        if (tmp.value[i].is<JsonObject>()) {
-            Pair tmp1 = getPair(tmp.value[i]);
+            MenuItem headA = ItemHeader(NULL);
 
-            data.next = tmp1;
+            outMenu[0] = headA;
 
-            MenuItem headA = ItemHeader();
-            if (step == 0) headA = ItemHeader(NULL);
-
-            tempItemsA[0] = headA;
-
-            if (strlen(tmp1.key) != 1)
-                tempItemsA[i + 1] = MenuItem((String)tmp1.key);
+            if (strlen(outKey) != 1)
+                outMenu[i + 1] = MenuItem((String)outKey);
             else {
-                char* val = tmp1.value[0];
+                char* val = nextValue[0];
 
                 MenuItem titA;
 
-                switch (tmp1.key[0]) {
+                switch (outKey[0]) {
                     case 'C':
                         titA = ItemCommand(val, NULL);
                         break;
@@ -118,26 +112,20 @@ MenuPair read(Pair tmp, uint8_t step) {
                         titA = MenuItem(val);
                         break;
                 }
-                tempItemsA[i + 1] = titA;
+                outMenu[i + 1] = titA;
             }
         }
-    }
 
-    if (tempItemsA[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
-        tempItemsA[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
-        tempItemsA[tmp.value.size() + 1] = ItemFooter();
+    if (outMenu[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
+        outMenu[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
+        outMenu[size + 1] = ItemFooter();
 
-    data.menu = tempItemsA;
-    return data;
+    return nextValue;
 }
 
-Pair getPair(JsonObject obj) {
-    struct Pair data;
-    for (JsonObject::iterator it = obj.begin(); it != obj.end(); ++it) {
-        data.key = (char*)(it->key()).c_str();
-        data.value = it->value();
-    }
-    return data;
+const JsonVariant getPair(JsonObject obj, char*& outKey) {
+    outKey = (char*)obj.begin()->key().c_str();
+    return obj.begin()->value();
 }
 
 void loop() {}
