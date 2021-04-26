@@ -30,6 +30,7 @@ jobs:
           arduino-cli lib install Keypad
           arduino-cli lib install LiquidCrystal
           arduino-cli lib install "LiquidCrystal I2C"
+          arduino-cli lib install ArduinoJson
 
       - name: Install LcdMenu Library
         run: mkdir -p /home/runner/Arduino/libraries/LcdMenu/ && cp -r * /home/runner/Arduino/libraries/LcdMenu/
