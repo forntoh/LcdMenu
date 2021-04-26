@@ -7,8 +7,14 @@ struct Pair {
     JsonVariant value;
 };
 
+struct MenuPair {
+    MenuItem* menu;
+    struct Pair next;
+    uint8_t step;
+};
+
 Pair getPair(JsonObject obj);
-MenuItem* read(Pair tmp, uint8_t step);
+MenuPair read(Pair tmp, uint8_t step);
 
 void setup() {
     Serial.begin(9600);
@@ -23,13 +29,13 @@ void setup() {
     // Inside the brackets, 200 is the capacity of the memory pool in bytes.
     // Don't forget to change this value to match your JSON document.
     // Use arduinojson.org/v6/assistant to compute the capacity.
-    StaticJsonDocument<256> doc;
+    StaticJsonDocument<280> doc;
 
     char json[] =
-        "[{\"Settings\":[{\"C\":[\"Selp\",\"Selp\"]},{\"T\":[\"Sl\",\"Sl\"]}]},"
-        "{\"Wifi\":[{\"C\":[\"Welp\",\"Walp\"]},{\"T\":[\"Wl\",\"Wl\"]},{\"I\":"
-        "[\"Wan\"]},{\"WoonLight\":[{\"M\":[\"West\"]},{\"I\":[\"Win\",\"Han\"]"
-        "}]}]}]";
+        "{\"\":[{\"Settings\":[{\"C\":[\"Selp\",\"Selp\"]},{\"T\":[\"Sl\","
+        "\"Sl\"]}]},{\"Wifi\":[{\"C\":[\"Welp\",\"Welp\"]},{\"T\":[\"Wl\","
+        "\"Wl\"]},{\"I\":[\"Wan\",\"Han\"]},{\"WoonLight\":[{\"M\":[\"West\","
+        "\"kkk\"]},{\"I\":[\"Win\",\"Han\"]}]}]}]}";
 
     DeserializationError error = deserializeJson(doc, json);
 
@@ -41,151 +47,88 @@ void setup() {
 
     JsonVariant arr = doc.as<JsonVariant>();
 
-    Pair tmp0;
-    tmp0.value = arr;
+    struct Pair answer0 = getPair(arr);
 
-    MenuItem* answer = read(tmp0, 0);
+    for (uint8_t i = 0; i < answer0.value.size(); i++) {
+        struct Pair p = getPair(answer0.value[i]);
 
-    for (uint8_t i = 0; i < (tmp0.value.size() + 2); i++) {
-        // Serial.print(answer[i].getText());
+        // Serial.print("-> ");
+        // Serial.println(p.key);
+
+        uint8_t ending = p.value.size() + 2;
+        struct MenuPair a = read(p, 0);
+
+        for (uint8_t j = 0; j < ending; j++) {
+            Serial.print(a.menu[j].getText());
+            Serial.print(F(","));
+        }
+        Serial.println();
+
+        if (strlen(a.next.key) != 1) {
+
+            // Serial.print("-> ");
+            // Serial.println(a.next.key);
+
+            uint8_t ending1 = a.next.value.size() + 2;
+            struct MenuPair a1 = read(a.next, 0);
+
+            for (uint8_t j = 0; j < ending1; j++) {
+                Serial.print(a1.menu[j].getText());
+                Serial.print(F(","));
+            }
+            Serial.println();
+        }
     }
 }
 
-MenuItem* read(Pair tmp, uint8_t step) {
-    bool a = false;
-    bool b = false;
+MenuPair read(Pair tmp, uint8_t step) {
+    struct MenuPair data;
 
-    /////////////////////// TestMenu Start/////////////////////////////////
-    // String* tempItems = new String[tmp.value.size() + 2];
-    //
-    //
-    //
-    // MenuItem* tempItemsA = new MenuItem[tmp.value.size() + 2];
-    /////////////////////// TestMenu END///////////////////////////////////
+    MenuItem* tempItemsA = new MenuItem[tmp.value.size() + 2];
 
     for (uint8_t i = 0; i < tmp.value.size(); i++) {
         if (tmp.value[i].is<JsonObject>()) {
             Pair tmp1 = getPair(tmp.value[i]);
 
-            if (!b) {
-                step++;
-                b = true;
+            data.next = tmp1;
+
+            MenuItem headA = ItemHeader();
+            if (step == 0) headA = ItemHeader(NULL);
+
+            tempItemsA[0] = headA;
+
+            if (strlen(tmp1.key) != 1)
+                tempItemsA[i + 1] = MenuItem((String)tmp1.key);
+            else {
+                char* val = tmp1.value[0];
+
+                MenuItem titA;
+
+                switch (tmp1.key[0]) {
+                    case 'C':
+                        titA = ItemCommand(val, NULL);
+                        break;
+                    case 'T':
+                        titA = ItemToggle(val, NULL);
+                        break;
+                    case 'I':
+                        titA = ItemInput(val, "", NULL);
+                        break;
+                    default:
+                        titA = MenuItem(val);
+                        break;
+                }
+                tempItemsA[i + 1] = titA;
             }
-
-            Serial.print((String)step);
-            Serial.print(" ");
-
-            if (strlen(tmp1.key) != 1) {
-                Serial.print((String)tmp1.value.size());
-            } else {
-                Serial.print("0");
-            }
-
-            Serial.print(" |");
-            for (uint8_t t = 0; t <= step; t++) Serial.print(" ");
-
-            Serial.println(tmp1.key);
-
-            read(tmp1, step);
-
-            ////////////// TestMenu Start ///////////////////////////////////
-            // String head = "SubHead";
-            // if (step == 1) head = "Head";
-            // 
-            // tempItems[0] = head;
-            // tempItems[i + 1] = tmp1.key;
-            //
-            //
-            //
-            // MenuItem headA = ItemHeader();
-            // if (step == 1) headA = ItemHeader(NULL);
-            // 
-            // tempItemsA[0] = headA;
-            // tempItemsA[i + 1] = MenuItem((String)tmp1.key);
-            ////////////// TestMenu END /////////////////////////////////////
-        } else {
-            char* val = tmp.value[i];
-
-            ////////////// TestMenu Start////////////////////////////////////
-            // tempItems[i + 1] = val;
-            ////////////// TestMenu END//////////////////////////////////////
-
-            if (!a) {
-                step++;
-                a = true;
-
-                ///////////// TestMenu Start////////////////////////////////
-                // String tit;
-                // 
-                // switch (tmp.key[0]) {
-                //     case 'C':
-                //         tit = "  ItemCommand";
-                //         break;
-                //     case 'T':
-                //         tit = "  ItemToggle";
-                //         break;
-                //     case 'I':
-                //         tit = "  ItemInput";
-                //         break;
-                //     default:
-                //         tit = "  MenuItem";
-                //         break;
-                // }
-                // tempItems[i] = tit;
-                // tempItems[i + 1] = val;
-                //
-                //
-                //
-                // MenuItem titA;
-                // 
-                // switch (tmp.key[0]) {
-                //     case 'C':
-                //         titA = ItemCommand(val, NULL);
-                //         break;
-                //     case 'T':
-                //         titA = ItemToggle(val, NULL);
-                //         break;
-                //     case 'I':
-                //         titA = ItemInput(val, "", NULL);
-                //         break;
-                //     default:
-                //         titA = MenuItem(val);
-                //         break;
-                // }
-                // tempItemsA[i] = titA;
-                ////////////// TestMenu END////////////////////////////////
-            }
-
-            Serial.print("    |");
-            for (uint8_t t = 0; t <= step; t++) Serial.print(" ");
-            Serial.print(val);
         }
     }
 
-    ////////////////// TestMenu Start//////////////////////////////////////
-    // if (tempItems[0] == "Head" || tempItems[0] == "SubHead")
-    //     tempItems[tmp.value.size() + 1] = "Foot";
-    // 
-    // for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
-    //     Serial.print(tempItems[i]);
-    //     Serial.print(",");
-    // }
-    //
-    //
-    //
-    // if (tempItemsA[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
-    //     tempItemsA[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
-    //     tempItemsA[tmp.value.size() + 1] = ItemFooter();
-    // 
-    // for (uint8_t i = 0; i < (tmp.value.size() + 2); i++) {
-    //     Serial.print(tempItemsA[i].getText());
-    //     // Serial.print(",");
-    // }
-    /////////////////////// TestMenu END///////////////////////////////////
+    if (tempItemsA[0].getType() == MENU_ITEM_MAIN_MENU_HEADER ||
+        tempItemsA[0].getType() == MENU_ITEM_SUB_MENU_HEADER)
+        tempItemsA[tmp.value.size() + 1] = ItemFooter();
 
-    Serial.println();
-
-    return NULL;
+    data.menu = tempItemsA;
+    return data;
 }
 
 Pair getPair(JsonObject obj) {

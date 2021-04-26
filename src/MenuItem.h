@@ -160,12 +160,12 @@ class ItemHeader : public MenuItem {
    public:
     /**
      */
-    ItemHeader() : MenuItem(this, MENU_ITEM_MAIN_MENU_HEADER) {}
+    ItemHeader() : MenuItem("H", this, MENU_ITEM_MAIN_MENU_HEADER) {}
     /**
      * @param parent the parent menu item
      */
     ItemHeader(MenuItem* parent)
-        : MenuItem(parent, MENU_ITEM_SUB_MENU_HEADER) {}
+        : MenuItem("H", parent, MENU_ITEM_SUB_MENU_HEADER) {}
 };
 
 /**
@@ -190,8 +190,7 @@ class ItemFooter : public MenuItem {
    public:
     /**
      */
-    ItemFooter()
-        : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
+    ItemFooter() : MenuItem("F", this, MENU_ITEM_END_OF_MENU) {}
 };
 
 /**
