@@ -8,7 +8,7 @@ jobs:
       matrix:
         example:
           [
-            example/Basic/Basic.ino,
+            examples/Basic/Basic.ino,
             examples/Callbacks/Callbacks.ino,
             examples/SubMenu/SubMenu.ino,
           ]
