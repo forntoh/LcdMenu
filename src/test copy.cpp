@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <LcdMenu.h>
-
 String readLine(char* file);
 MenuItem* creatMenu(uint8_t size, MenuItem* parent);
 
@@ -21,9 +20,10 @@ void setup() {
     String line;
     while ((line = readLine(input)).length() > 0) {
         uint8_t pos = line.charAt(0) - '0';
+        uint8_t size = line.charAt(2) - '0';
 
         if (line.charAt(1) - '0' == MENU_ITEM_SUB_MENU) {
-            nextMenu = creatMenu(line.charAt(2) - '0', currMenu);
+            nextMenu = creatMenu(size, currMenu);
             currMenu[pos + 1] = ItemSubMenu(line.substring(3), nextMenu);
         } else {
             nextMenu[pos + 1] = MenuItem(line.substring(3));
