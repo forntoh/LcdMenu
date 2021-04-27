@@ -6,41 +6,48 @@ jobs:
   compile-arduino:
     strategy:
       matrix:
-        example: [src/test.cpp]
+        example:
+          [
+            example/Basic/Basic.ino,
+            examples/Callbacks/Callbacks.ino,
+            examples/SubMenu/SubMenu.ino,
+          ]
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@master
-        
+
       - name: Cache pip
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: ${{ runner.os }}-pip
-          
+
       - name: Cache PlatformIO
         uses: actions/cache@v2
         with:
           path: ~/.platformio
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-          
+
       - name: Set up Python
         uses: actions/setup-python@v2
-        
+
       - name: Install PlatformIO
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade platformio
-          
+
       - name: Install library dependencies
         run: |
-          pio lib -g install "bblanchon/ArduinoJson@^6.17.3"
+          pio lib -g install "chris--a/Keypad@^3.1.1"
           pio lib -g install "marcoschwartz/LiquidCrystal_I2C@^1.1.4"
+          pio lib -g install "z3t0/IRremote@^3.1.0"
+          pio lib -g install "jrullan/Neotimer@^1.1.6"
 
       - name: Run PlatformIO
-        run: pio ci --lib="src/LcdMenu.h" --lib="src/MenuItem.h" --board=uno
+        run: pio ci --lib="src/LcdMenu.h" --lib="src/MenuItem.h"  --lib="src/GenerateMenu.h" --board=uno
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
