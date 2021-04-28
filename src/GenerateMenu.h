@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define _H
 
-#include <LcdMenu.h>
+#include <MenuItem.h>
 
 uint8_t index = 0;
 
