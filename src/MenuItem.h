@@ -27,6 +27,8 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
+#include <Arduino.h>
+
 typedef void (*fptr)();
 //
 // menu item types

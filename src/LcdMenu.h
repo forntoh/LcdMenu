@@ -33,9 +33,7 @@
 #include <LiquidCrystal.h>
 #endif
 
-#include <Arduino.h>
-
-#include "MenuItem.h"
+#include <MenuItem.h>
 
 /**
  * The LcdMenu class contains all fields and methods to manipulate the menu
