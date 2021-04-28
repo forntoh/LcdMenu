@@ -7,8 +7,8 @@ void setup() {
     while (!Serial) continue;
 
     char input[] =
-        "0020\n0320Settings\n1320WiFi\n0701Backlight\n1601Contrast\n0501User\n1"
-        "321Android\n0502Password\n1402Connect\n";
+        "0200\n0203Settings\n1203WiFi\n0017Backlight\n1015Contrast\n0015User\n1"
+        "213Android\n0025Password\n1024Connect\n";
 
     MenuItem* currMenu = generateMenu(input);
 

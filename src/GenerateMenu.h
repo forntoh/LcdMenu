@@ -45,10 +45,11 @@ MenuItem* generateMenu(char* input) {
 
     String line;
     while ((line = readLine(input)).length() > 0) {
+
         uint8_t pos = line.charAt(0) - '0';
-        uint8_t type = line.charAt(1) - '0';
-        uint8_t size = line.charAt(2) - '0';
-        uint8_t i = line.charAt(3) - '0';
+        uint8_t size = line.charAt(1) - '0';
+        uint8_t i = line.charAt(2) - '0';
+        uint8_t type = line.charAt(3) - '0';
 
         if (type == 0)
             currMenu = creatMenu(size, NULL);
