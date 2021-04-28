@@ -50,27 +50,26 @@ MenuItem* generateMenu(char* input) {
         uint8_t size = line.charAt(2) - '0';
         uint8_t i = line.charAt(3) - '0';
 
-        if (type == 0) {
+        if (type == 0)
             currMenu = creatMenu(size, NULL);
-        } else if (type == MENU_ITEM_SUB_MENU) {
+        else if (type == MENU_ITEM_SUB_MENU) {
             prevPos = pos + 1;
 
-            if (i == 1) {
-                currMenu[step].getSubMenu()[prevPos] =
+            if (i == 1)
+                currMenu[step][prevPos] =
                     ItemSubMenu(line.substring(4), creatMenu(size, currMenu));
-            } else
+            else
                 currMenu[pos + 1] =
                     ItemSubMenu(line.substring(4), creatMenu(size, currMenu));
 
         } else {
             if (pos == 0) ++step;
 
-            if (i == 2) {
+            if (i == 2)
                 currMenu[step - 1][prevPos][pos + 1] =
                     MenuItem(line.substring(4));
-            } else
-                currMenu[step][pos + 1] =
-                    MenuItem(line.substring(4));
+            else
+                currMenu[step][pos + 1] = MenuItem(line.substring(4));
         }
     }
     index = 0;
