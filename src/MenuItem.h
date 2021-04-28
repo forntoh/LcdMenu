@@ -137,6 +137,18 @@ class MenuItem {
      * @param subMenu for the item
      */
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
+
+    /**
+     * Operators
+     */
+
+    /**
+     * Get item at index from the submenu
+     * @param index for the item
+     */
+    MenuItem& operator[](const uint8_t index) {
+        return this->getSubMenu()[index];
+    }
 };
 
 /**

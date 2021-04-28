@@ -66,10 +66,10 @@ MenuItem* generateMenu(char* input) {
             if (pos == 0) ++step;
 
             if (i == 2) {
-                currMenu[step - 1].getSubMenu()[prevPos].getSubMenu()[pos + 1] =
+                currMenu[step - 1][prevPos][pos + 1] =
                     MenuItem(line.substring(4));
             } else
-                currMenu[step].getSubMenu()[pos + 1] =
+                currMenu[step][pos + 1] =
                     MenuItem(line.substring(4));
         }
     }
