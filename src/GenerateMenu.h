@@ -30,9 +30,19 @@
 #include <MenuItem.h>
 
 /**
- * ## Menu Generator
+ * # Menu Generator
  * 
  * Used to generate menu's from strings.
+ * 
+ * ## Todos
+ * 
+ * - Get parameters from the line
+ * 
+ * - Use a map to for `ftpr` (string name to function map)
+ */
+
+/**
+ * ## Methods
  */
 
 /**

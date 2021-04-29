@@ -1,6 +1,6 @@
 name: CI Arduino
 
-on: [push, pull_request, workflow_dispatch]
+on: [push, pull_request]
 
 jobs:
   compile-arduino:
@@ -9,8 +9,9 @@ jobs:
         example:
           [
             examples/Basic/Basic.ino,
-            examples/Callbacks/Callbacks.ino,
             examples/SubMenu/SubMenu.ino,
+            examples/Callbacks/Callbacks.ino,
+            examples/GenerateMenu/GenerateMenu.ino,
           ]
 
     runs-on: ubuntu-latest
