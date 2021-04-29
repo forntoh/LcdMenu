@@ -65,26 +65,25 @@ void loop() {
     if (IrReceiver.decode()) {
         uint8_t command = IrReceiver.decodedIRData.command;
 
-        if (command != previousCommand) {
-            if (command == UP)
-                menu.up();
-            else if (command == DOWN)
-                menu.down();
-            else if (command == LEFT)
-                menu.left();
-            else if (command == RIGHT)
-                menu.right();
-            else if (command == ENTER)
-                menu.enter();
-            else if (command == BACK)
-                menu.back();
-            else if (command == CLEAR)
-                menu.clear();
-            else if (command == BACKSPACE)
-                menu.backspace();
-            else
-                menu.type((String)command);
-        }
+        if (command == previousCommand) {
+        } else if (command == UP)
+            menu.up();
+        else if (command == DOWN)
+            menu.down();
+        else if (command == LEFT)
+            menu.left();
+        else if (command == RIGHT)
+            menu.right();
+        else if (command == ENTER)
+            menu.enter();
+        else if (command == BACK)
+            menu.back();
+        else if (command == CLEAR)
+            menu.clear();
+        else if (command == BACKSPACE)
+            menu.backspace();
+        else
+            menu.type((String)command);
 
         previousCommand = command;
 
