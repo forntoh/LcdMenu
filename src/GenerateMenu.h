@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define _H
+#ifndef MENU_GENERATOR_H
+#define MENU_GENERATOR_H
 
 #include <MenuItem.h>
 
@@ -39,21 +39,22 @@ String readLine(char* file) {
 
 MenuItem* generateMenu(char* input) {
     uint8_t step = 0;
-    uint8_t prevPos;
+    uint8_t prevPos = 0;
+    uint8_t maxSize = 0;
 
     MenuItem* currMenu;
 
     String line;
     while ((line = readLine(input)).length() > 0) {
-
         uint8_t pos = line.charAt(0) - '0';
         uint8_t size = line.charAt(1) - '0';
         uint8_t i = line.charAt(2) - '0';
         uint8_t type = line.charAt(3) - '0';
 
-        if (type == 0)
+        if (type == 0) {
+            maxSize = size;
             currMenu = creatMenu(size, NULL);
-        else if (type == MENU_ITEM_SUB_MENU) {
+        } else if (type == MENU_ITEM_SUB_MENU) {
             prevPos = pos + 1;
 
             if (i == 1)
@@ -66,12 +67,26 @@ MenuItem* generateMenu(char* input) {
         } else {
             if (pos == 0) ++step;
 
+            step = step > maxSize ? step - 1 : step;
+
             if (i == 2)
                 currMenu[step - 1][prevPos][pos + 1] =
                     MenuItem(line.substring(4));
             else
                 currMenu[step][pos + 1] = MenuItem(line.substring(4));
         }
+
+        // Serial.print(pos, DEC);
+        // Serial.print(' ');
+        // Serial.print(size, DEC);
+        // Serial.print(' ');
+        // Serial.print(i, DEC);
+        // Serial.print(' ');
+        // Serial.print(type, DEC);
+        // Serial.print(F(" | "));
+        // Serial.print(prevPos, DEC);
+        // Serial.print(' ');
+        // Serial.println(step, DEC);
     }
     index = 0;
     return currMenu;
