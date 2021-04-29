@@ -15,7 +15,7 @@ MenuItem* creatMenu(uint8_t size, MenuItem* parent) {
 char* readLine(char* file) {
     uint8_t i = 0;
     bool EOL = false;
-    static char line[35];
+    static char line[30];
 
     while (!EOL) {
         char c = file[index];
@@ -51,14 +51,16 @@ MenuItem* generateMenu(char* input) {
         uint8_t i = line[2] - '0';
         uint8_t type = line[3] - '0';
 
-        char name[31];
+        uint8_t n = 5;
+        while (line[n] != '\0') n++;
+
+        char* name = new char[n - 3];
         sprintf(name, line + 4);
 
         if (type == 0) {
             maxSize = size;
             currMenu = creatMenu(size, NULL);
-        }
-        else if (type == MENU_ITEM_SUB_MENU) {
+        } else if (type == MENU_ITEM_SUB_MENU) {
             prevPos = pos + 1;
 
             if (i == 1)
@@ -67,15 +69,13 @@ MenuItem* generateMenu(char* input) {
             else
                 currMenu[pos + 1] =
                     ItemSubMenu(name, creatMenu(size, currMenu));
-        }
-        else {
+        } else {
             if (pos == 0) ++step;
 
             step = step > maxSize ? step - 1 : step;
 
             if (i == 2)
-                currMenu[step - 1][prevPos][pos + 1] =
-                    MenuItem(name);
+                currMenu[step - 1][prevPos][pos + 1] = MenuItem(name);
             else
                 currMenu[step][pos + 1] = MenuItem(name);
         }
