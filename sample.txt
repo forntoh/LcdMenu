@@ -20,14 +20,3 @@ T:Dammas
 Manangular
  C:Manangu
  T:Menoasd
-
-
-### What's new
-
-- Removed build submenu from LcdMenu.
-- Eliminated `ItemSubHeader` class (use `ItemHeader(parent)`).
-- Memory optimizations.
-
-### ⭐ NEW: Added menu generator ⭐
-
-Generate menus from strings
