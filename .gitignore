@@ -1,6 +1,6 @@
 .pio
 .vscode/
-src/*.cpp
+src/main.cpp
 debug.log
 _site/
 .jekyll-cache/

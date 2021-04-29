@@ -27,26 +27,28 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
+#include <Arduino.h>
+
 typedef void (*fptr)();
 //
 // menu item types
 //
-const byte MENU_ITEM_MAIN_MENU_HEADER = 0;
-const byte MENU_ITEM_SUB_MENU_HEADER = 1;
-const byte MENU_ITEM_SUB_MENU = 2;
-const byte MENU_ITEM_COMMAND = 3;
-const byte MENU_ITEM_INPUT = 4;
-const byte MENU_ITEM_NONE = 5;
-const byte MENU_ITEM_TOGGLE = 6;
-const byte MENU_ITEM_END_OF_MENU = 7;
+const byte MENU_ITEM_MAIN_MENU_HEADER = 1;
+const byte MENU_ITEM_SUB_MENU_HEADER = 2;
+const byte MENU_ITEM_SUB_MENU = 3;
+const byte MENU_ITEM_COMMAND = 4;
+const byte MENU_ITEM_INPUT = 5;
+const byte MENU_ITEM_NONE = 6;
+const byte MENU_ITEM_TOGGLE = 7;
+const byte MENU_ITEM_END_OF_MENU = 8;
 /**
  * The MenuItem class
  */
 class MenuItem {
    private:
-    String text;
-    String textOn;
-    String textOff;
+    char* text;
+    char* textOn;
+    char* textOff;
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
@@ -66,18 +68,17 @@ class MenuItem {
     String value;
 
     MenuItem() = default;
-    MenuItem(String text) : text(text) {}
-    MenuItem(String text, fptr callback, byte type)
+    MenuItem(char* text) : text(text) {}
+    MenuItem(char* text, fptr callback, byte type)
         : text(text), callback(callback), type(type) {}
-    MenuItem(String text, fptr callback, MenuItem* subMenu, byte type)
+    MenuItem(char* text, fptr callback, MenuItem* subMenu, byte type)
         : text(text), callback(callback), subMenu(subMenu), type(type) {}
     MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
-    MenuItem(String text, MenuItem* subMenu, byte type)
+    MenuItem(char* text, MenuItem* subMenu, byte type)
         : text(text), subMenu(subMenu), type(type) {}
-    MenuItem(String text, String value, fptr callback, byte type)
+    MenuItem(char* text, String value, fptr callback, byte type)
         : text(text), callback(callback), type(type), value(value) {}
-    MenuItem(String text, String textOn, String textOff, fptr callback,
-             byte type)
+    MenuItem(char* text, char* textOn, char* textOff, fptr callback, byte type)
         : text(text),
           textOn(textOn),
           textOff(textOff),
@@ -91,7 +92,7 @@ class MenuItem {
      * Get the text of the item
      * @return `String` - Item's text
      */
-    String getText() { return text; }
+    char* getText() { return text; }
     /**
      * Get the callback of the item
      * @return `ftpr` - Item's callback
@@ -111,12 +112,12 @@ class MenuItem {
      * Get the text when toggle is ON
      * @return `String` - ON text
      */
-    String getTextOn() { return textOn; }
+    char* getTextOn() { return textOn; }
     /**
      * Get the text when toggle is OFF
      * @return `String` - OFF text
      */
-    String getTextOff() { return textOff; }
+    char* getTextOff() { return textOff; }
 
     /**
      * ## Setters
@@ -126,7 +127,7 @@ class MenuItem {
      * Set the text of the item
      * @param text text to display for the item
      */
-    void setText(String text) { this->text = text; }
+    void setText(char* text) { this->text = text; }
     /**
      * Set the callback on the item
      * @param callback reference to callback function
@@ -137,6 +138,18 @@ class MenuItem {
      * @param subMenu for the item
      */
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
+
+    /**
+     * Operators
+     */
+
+    /**
+     * Get item at index from the submenu
+     * @param index for the item
+     */
+    MenuItem& operator[](const uint8_t index) {
+        return this->getSubMenu()[index];
+    }
 };
 
 /**
@@ -160,12 +173,12 @@ class ItemHeader : public MenuItem {
    public:
     /**
      */
-    ItemHeader() : MenuItem(this, MENU_ITEM_MAIN_MENU_HEADER) {}
+    ItemHeader() : MenuItem((char*)"H", this, MENU_ITEM_MAIN_MENU_HEADER) {}
     /**
      * @param parent the parent menu item
      */
     ItemHeader(MenuItem* parent)
-        : MenuItem(parent, MENU_ITEM_SUB_MENU_HEADER) {}
+        : MenuItem((char*)"H", parent, MENU_ITEM_SUB_MENU_HEADER) {}
 };
 
 /**
@@ -190,8 +203,7 @@ class ItemFooter : public MenuItem {
    public:
     /**
      */
-    ItemFooter()
-        : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
+    ItemFooter() : MenuItem((char*)"F", this, MENU_ITEM_END_OF_MENU) {}
 };
 
 /**
@@ -211,7 +223,7 @@ class ItemInput : public MenuItem {
      * @param value the input value
      * @param callback reference to callback function
      */
-    ItemInput(String text, String value, fptr callback)
+    ItemInput(char* text, String value, fptr callback)
         : MenuItem(text, value, callback, MENU_ITEM_INPUT) {}
 };
 
@@ -230,7 +242,7 @@ class ItemSubMenu : public MenuItem {
      * @param text text to display for the item
      * @param parent the parent of the sub menu item
      */
-    ItemSubMenu(String text, MenuItem* parent)
+    ItemSubMenu(char* text, MenuItem* parent)
         : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
 };
 /**
@@ -248,15 +260,16 @@ class ItemToggle : public MenuItem {
      * @param key key of the item
      * @param callback reference to callback function
      */
-    ItemToggle(String key, fptr callback)
-        : MenuItem(key, "", "", callback, MENU_ITEM_TOGGLE) {}
+    ItemToggle(char* key, fptr callback)
+        : MenuItem(key, (char*)"ON", (char*)"OFF", callback, MENU_ITEM_TOGGLE) {
+    }
     /**
      * @param key key of the item
      * @param textOn display text when ON
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(String key, String textOn, String textOff, fptr callback)
+    ItemToggle(char* key, char* textOn, char* textOff, fptr callback)
         : MenuItem(key, textOn, textOff, callback, MENU_ITEM_TOGGLE) {}
 };
 
@@ -276,7 +289,7 @@ class ItemCommand : public MenuItem {
      * @param key key of the item
      * @param callback reference to callback function
      */
-    ItemCommand(String key, fptr callback)
+    ItemCommand(char* key, fptr callback)
         : MenuItem(key, callback, MENU_ITEM_COMMAND) {}
 };
 

@@ -57,7 +57,7 @@ MenuItem mainMenu[] = {ItemHeader(),
 /**
  * Create submenu and precise its parent
  */
-MenuItem settingsMenu[] = {ItemSubHeader(mainMenu),
+MenuItem settingsMenu[] = {ItemHeader(mainMenu),
                            //
                            // Include callback in ItemToggle
                            //

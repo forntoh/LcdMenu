@@ -33,9 +33,7 @@
 #include <LiquidCrystal.h>
 #endif
 
-#include <Arduino.h>
-
-#include "MenuItem.h"
+#include <MenuItem.h>
 
 /**
  * The LcdMenu class contains all fields and methods to manipulate the menu
@@ -166,7 +164,7 @@ class LcdMenu {
                     // append the value the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->value.substring(0, maxCols - item->getText().length() - 2));
+                    lcd->print(item->value.substring(0, maxCols - strlen(item->getText()) - 2));
                     break;
                 default:
                     break;
@@ -251,7 +249,7 @@ class LcdMenu {
         //
         // calculate lower and upper bound
         //
-        uint8_t lb = currentMenuTable[cursorPosition].getText().length() + 2;
+        uint8_t lb = strlen(currentMenuTable[cursorPosition].getText()) + 2;
         uint8_t ub = lb + currentMenuTable[cursorPosition].value.length();
         ub = constrain(ub, lb, maxCols - 2);
         //
@@ -335,44 +333,6 @@ class LcdMenu {
     void setSubMenu(uint8_t position, MenuItem* items) {
         currentMenuTable[position + 1].setSubMenu(items);
         paint();
-    }
-    /**
-     * Builder function for a sub menu
-     * this functions appends a header and a footer to the final item list
-     * @param items array of MenuItems for the sub menu
-     * @param size size of items array
-     * @return MenuItem list (pointer) with header and footer items included
-     */
-    MenuItem* buildSubMenu(MenuItem* items, uint8_t size) {
-        //
-        // create a temporary array
-        //
-        MenuItem* tempItems = new MenuItem[size + 2];
-        //
-        // append a Header to first position
-        //
-        tempItems[0] = ItemHeader(currentMenuTable);
-        for (uint8_t i = 0; i < size; i++) {
-            //
-            // child menu of this submenu item
-            //
-            MenuItem* itemSubMenu = items[i].getSubMenu();
-            //
-            // set the parent menu of the child menu of this menu
-            //
-            if (itemSubMenu != NULL) {
-                itemSubMenu[0].setSubMenu(tempItems);
-            }
-            //
-            // add to temporary array
-            //
-            tempItems[i + 1] = items[i];
-        }
-        //
-        // create a Footer to the last position
-        //
-        tempItems[size + 1] = ItemFooter();
-        return tempItems;
     }
     /**
      * Execute an "up press" on menu
@@ -536,7 +496,7 @@ class LcdMenu {
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
         //
-        uint8_t p = blinkerPosition - (item->getText().length() + 2) - 1;
+        uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
         item->value.remove(p, 1);
         blinkerPosition--;
         paint();
@@ -553,7 +513,7 @@ class LcdMenu {
         //
         // calculate lower and upper bound
         //
-        uint8_t lb = item->getText().length() + 2;
+        uint8_t lb = strlen(item->getText()) + 2;
         uint8_t ub = lb + item->value.length();
         ub = constrain(ub, lb, maxCols - 2);
         //
