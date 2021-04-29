@@ -14,14 +14,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-      
+
+      - name: Merge master -> gh-pages
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          from_branch: master
+          target_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2
         with:
           ref: gh-pages
-
-      - name: Merge changes from master
-        run: git merge origin/master
 
       - name: Add examples to docs
         run: |
