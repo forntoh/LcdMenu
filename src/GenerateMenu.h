@@ -12,7 +12,7 @@ MenuItem* creatMenu(uint8_t size, MenuItem* parent) {
     return menu;
 }
 
-String readLine(char* file) {
+char* readLine(char* file) {
     uint8_t i = 0;
     bool EOL = false;
     static char line[35];
@@ -21,7 +21,7 @@ String readLine(char* file) {
         char c = file[index];
         switch (c) {
             case '\0':
-                return String("");
+                return NULL;
             case '\n':
                 line[i] = 0;
                 i = 0;
@@ -34,7 +34,7 @@ String readLine(char* file) {
         }
         index++;
     }
-    return String(line);
+    return line;
 }
 
 MenuItem* generateMenu(char* input) {
@@ -44,36 +44,40 @@ MenuItem* generateMenu(char* input) {
 
     MenuItem* currMenu;
 
-    String line;
-    while ((line = readLine(input)).length() > 0) {
-        uint8_t pos = line.charAt(0) - '0';
-        uint8_t size = line.charAt(1) - '0';
-        uint8_t i = line.charAt(2) - '0';
-        uint8_t type = line.charAt(3) - '0';
+    char* line;
+    while ((line = readLine(input)) != NULL) {
+        uint8_t pos = line[0] - '0';
+        uint8_t size = line[1] - '0';
+        uint8_t i = line[2] - '0';
+        uint8_t type = line[3] - '0';
+
+        char name[31];
+        sprintf(name, line + 4);
 
         if (type == 0) {
             maxSize = size;
             currMenu = creatMenu(size, NULL);
-        } else if (type == MENU_ITEM_SUB_MENU) {
+        }
+        else if (type == MENU_ITEM_SUB_MENU) {
             prevPos = pos + 1;
 
             if (i == 1)
                 currMenu[step][prevPos] =
-                    ItemSubMenu(line.substring(4), creatMenu(size, currMenu));
+                    ItemSubMenu(name, creatMenu(size, currMenu));
             else
                 currMenu[pos + 1] =
-                    ItemSubMenu(line.substring(4), creatMenu(size, currMenu));
-
-        } else {
+                    ItemSubMenu(name, creatMenu(size, currMenu));
+        }
+        else {
             if (pos == 0) ++step;
 
             step = step > maxSize ? step - 1 : step;
 
             if (i == 2)
                 currMenu[step - 1][prevPos][pos + 1] =
-                    MenuItem(line.substring(4));
+                    MenuItem(name);
             else
-                currMenu[step][pos + 1] = MenuItem(line.substring(4));
+                currMenu[step][pos + 1] = MenuItem(name);
         }
 
         // Serial.print(pos, DEC);

@@ -164,7 +164,7 @@ class LcdMenu {
                     // append the value the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->value.substring(0, maxCols - item->getText().length() - 2));
+                    lcd->print(item->value.substring(0, maxCols - strlen(item->getText()) - 2));
                     break;
                 default:
                     break;
@@ -249,7 +249,7 @@ class LcdMenu {
         //
         // calculate lower and upper bound
         //
-        uint8_t lb = currentMenuTable[cursorPosition].getText().length() + 2;
+        uint8_t lb = strlen(currentMenuTable[cursorPosition].getText()) + 2;
         uint8_t ub = lb + currentMenuTable[cursorPosition].value.length();
         ub = constrain(ub, lb, maxCols - 2);
         //
@@ -496,7 +496,7 @@ class LcdMenu {
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
         //
-        uint8_t p = blinkerPosition - (item->getText().length() + 2) - 1;
+        uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
         item->value.remove(p, 1);
         blinkerPosition--;
         paint();
@@ -513,7 +513,7 @@ class LcdMenu {
         //
         // calculate lower and upper bound
         //
-        uint8_t lb = item->getText().length() + 2;
+        uint8_t lb = strlen(item->getText()) + 2;
         uint8_t ub = lb + item->value.length();
         ub = constrain(ub, lb, maxCols - 2);
         //
