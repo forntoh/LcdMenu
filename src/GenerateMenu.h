@@ -1,10 +1,51 @@
+/*
+  GenerateMenu.h - Main include file for the LcdMenu Menu Generator
+
+  MIT License
+
+  Copyright (c) 2020 Forntoh Thomas
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
+
 #ifndef MENU_GENERATOR_H
 #define MENU_GENERATOR_H
 
 #include <MenuItem.h>
 
+/**
+ * ## Menu Generator
+ * 
+ * Used to generate menu's from strings.
+ */
+
+/**
+ * Current character position
+ */
 uint8_t index = 0;
 
+/**
+ * Create a new menu and assign it's parent
+ * @param size number of items in the menu to create
+ * @param parent parent for the new menu
+ * @return `MenuItem*` the created menu
+ */
 MenuItem* creatMenu(uint8_t size, MenuItem* parent) {
     MenuItem* menu = new MenuItem[size + 2];
     menu[0] = parent != NULL ? ItemHeader(parent) : ItemHeader();
@@ -12,6 +53,11 @@ MenuItem* creatMenu(uint8_t size, MenuItem* parent) {
     return menu;
 }
 
+/**
+ * Read a single line separated by `\n`
+ * @param file input to read
+ * @return `char*` the line read
+ */
 char* readLine(char* file) {
     uint8_t i = 0;
     bool EOL = false;
@@ -37,6 +83,11 @@ char* readLine(char* file) {
     return line;
 }
 
+/**
+ * Generate a menu from a string input
+ * @param input number of items in the menu to create
+ * @return `MenuItem*` the created menu
+ */
 MenuItem* generateMenu(char* input) {
     uint8_t step = 0;
     uint8_t prevPos = 0;
