@@ -1,54 +1,32 @@
-# Example 04 Dynamic Menu
+# Example 04 Generate Menu
 
-This example will show you how to dynamically create sub menu's during runtime using the LcdMenu library.
+This example will show you how to generate a menu from formatted text during runtime using.
 
 ![Dynamic](https://i.imgur.com/7eqko4N.gif)
 
+Use the [Menu Formatter](https://forntoh.github.io/LcdMenu/docs/generator/) I created to format your menus so that they can be used in the **Menu Generator**
+
+> This tool still under development, so, be expecting to encounter some problems while using it.
+
 ## Requirements
 
-- 4x4 Keypad
+- IR Receiver
 - LcdDisplay
 
 ## Usage
 
-Building a menu from a list of text
+Building a menu from text
 
 ```cpp
-// ../../examples/DynamicMenu/DynamicMenu.ino#L53-L54
-```
-
-```cpp
-// ../../examples/DynamicMenu/DynamicMenu.ino#L86-L105
-```
-
-## Function reference
-
-```cpp
-/**
- * Call this function to set sub menu items for any main menu item
- *
- * @param position main menu item/where to place the sub menu
- * @param items    sub menu items
- */
-void setSubMenu(uint8_t position, MenuItem* items);
-```
-
-```cpp
-/**
- * Builder function for a sub menu
- * this functions appends a header and a footer to the final item list
- *
- * @param items array of MenuItems for the sub menu
- * @param size size of items array
- * @return MenuItem list (pointer) with header and footer items included
- */
-MenuItem* buildSubMenu(MenuItem* items, uint8_t size);
+// ../../examples/GenerateMenu/GenerateMenu.ino#L49-L59
 ```
 
 ## Complete Code
 
-Go to [.../examples/DynamicMenu/DynamicMenu.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/DynamicMenu/DynamicMenu.ino)
+Go to [.../examples/GenerateMenu/GenerateMenu.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/GenerateMenu/GenerateMenu.ino)
 
-## Circuit
+## Reference
 
-![Circuit](https://github.com/forntoh/LcdMenu/blob/gh-pages/assets/img/circuit.png?raw=true)
+- [Simple IR Receiver Code](https://github.com/Arduino-IRremote/Arduino-IRremote/blob/master/examples/SimpleReceiver/SimpleReceiver.ino)
+
+- [Decode IR Signals](https://github.com/Arduino-IRremote/Arduino-IRremote/blob/master/examples/ReceiveDemo/ReceiveDemo.ino)
