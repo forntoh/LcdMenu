@@ -14,11 +14,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-
-      - name: Install and test Node
-        run: |
-          npm install
-          npm test
       
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2
