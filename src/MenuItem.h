@@ -46,9 +46,9 @@ const byte MENU_ITEM_END_OF_MENU = 8;
  */
 class MenuItem {
    private:
-    char* text;
-    char* textOn;
-    char* textOff;
+    char* text = NULL;
+    char* textOn = NULL;
+    char* textOff = NULL;
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
@@ -68,7 +68,7 @@ class MenuItem {
     String value;
 
     MenuItem() = default;
-    MenuItem(char* text) : text(text) {}
+    explicit MenuItem(char* text) : text(text) {}
     MenuItem(char* text, fptr callback, byte type)
         : text(text), callback(callback), type(type) {}
     MenuItem(char* text, fptr callback, MenuItem* subMenu, byte type)
@@ -173,12 +173,12 @@ class ItemHeader : public MenuItem {
    public:
     /**
      */
-    ItemHeader() : MenuItem((char*)"H", this, MENU_ITEM_MAIN_MENU_HEADER) {}
+    ItemHeader() : MenuItem(NULL, this, MENU_ITEM_MAIN_MENU_HEADER) {}
     /**
      * @param parent the parent menu item
      */
-    ItemHeader(MenuItem* parent)
-        : MenuItem((char*)"H", parent, MENU_ITEM_SUB_MENU_HEADER) {}
+    explicit ItemHeader(MenuItem* parent)
+        : MenuItem(NULL, parent, MENU_ITEM_SUB_MENU_HEADER) {}
 };
 
 /**
@@ -203,7 +203,7 @@ class ItemFooter : public MenuItem {
    public:
     /**
      */
-    ItemFooter() : MenuItem((char*)"F", this, MENU_ITEM_END_OF_MENU) {}
+    ItemFooter() : MenuItem(NULL, this, MENU_ITEM_END_OF_MENU) {}
 };
 
 /**
