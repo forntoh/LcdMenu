@@ -1,18 +1,16 @@
 name: CI Arduino
 
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
   compile-arduino:
     strategy:
       matrix:
-        example:
-          [
-            examples/Basic/Basic.ino,
-            examples/SubMenu/SubMenu.ino,
-            examples/Callbacks/Callbacks.ino,
-            examples/GenerateMenu/GenerateMenu.ino,
-          ]
+        example: [examples/Basic/Basic.ino, examples/SubMenu/SubMenu.ino, examples/Callbacks/Callbacks.ino, examples/GenerateMenu/GenerateMenu.ino]
 
     runs-on: ubuntu-latest
 
