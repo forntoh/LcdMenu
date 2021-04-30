@@ -18,7 +18,7 @@ Use the [Menu Formatter](https://forntoh.github.io/LcdMenu/docs/generator/) I cr
 Building a menu from text
 
 ```cpp
-// ../../examples/GenerateMenu/GenerateMenu.ino#L49-L59
+// ../../examples/GenerateMenu/GenerateMenu.ino#L49-L58
 ```
 
 ## Complete Code
