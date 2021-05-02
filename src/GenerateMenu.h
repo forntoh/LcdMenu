@@ -31,13 +31,13 @@
 
 /**
  * # Menu Generator
- * 
+ *
  * Used to generate menu's from strings.
- * 
+ *
  * ## Todos
- * 
+ *
  * - Get parameters from the line
- * 
+ *
  * - Use a map to for `ftpr` (string name to function map)
  */
 
@@ -93,6 +93,12 @@ char* readLine(char* file) {
     return line;
 }
 
+uint8_t n(char* line, uint8_t start, char delimiter) {
+    uint8_t n = start;
+    while (line[n] != delimiter) n++;
+    return n;
+}
+
 /**
  * Generate a menu from a string input
  * @param input number of items in the menu to create
@@ -112,11 +118,9 @@ MenuItem* generateMenu(char* input) {
         uint8_t i = line[2] - '0';
         uint8_t type = line[3] - '0';
 
-        uint8_t n = 5;
-        while (line[n] != '\0') n++;
-
-        char* name = new char[n - 3];
-        sprintf(name, line + 4);
+        char name[16];
+        uint8_t p = n(line, 5, '\0');
+        strncpy(name, line + 4, p - 3);
 
         if (type == 0) {
             maxSize = size;
