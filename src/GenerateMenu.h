@@ -107,6 +107,7 @@ uint8_t n(char* line, uint8_t start, char delimiter) {
 MenuItem* generateMenu(char* input) {
     uint8_t step = 0;
     uint8_t prevPos = 0;
+    uint8_t prevI = 0;
     uint8_t maxSize = 0;
 
     MenuItem* currMenu;
@@ -130,6 +131,8 @@ MenuItem* generateMenu(char* input) {
         } else if (type == MENU_ITEM_SUB_MENU) {
             step = fromNorm ? step + 1 : step;
 
+            step = (step) < (1) ? (1) : (step);
+
             prevPos = pos + 1;
 
             if (i == 1)
@@ -141,7 +144,11 @@ MenuItem* generateMenu(char* input) {
 
             fromNorm = false;
         } else {
-            if (pos == 0) ++step;
+            if (pos == 0) {
+                ++step;
+                if (i > 0)
+                    prevPos = fromNorm && prevI == i ? prevPos + 1 : pos + 1;
+            }
 
             step = step > maxSize + 1 ? step - 1 : step;
 
@@ -152,8 +159,10 @@ MenuItem* generateMenu(char* input) {
 
             fromNorm = true;
         }
+        prevI = i;
 
 #ifdef DEBUG
+        if (type == 0) continue;
         Serial.print(pos, DEC);
         Serial.print(' ');
         Serial.print(size, DEC);
@@ -162,11 +171,19 @@ MenuItem* generateMenu(char* input) {
         Serial.print(' ');
         Serial.print(type, DEC);
         Serial.print(F(" | "));
-        Serial.print(prevPos, DEC);
-        Serial.print(' ');
-        Serial.print(step, DEC);
-        Serial.print(F(" | "));
-        Serial.println(maxSize, DEC);
+        if (type == MENU_ITEM_SUB_MENU && i >= 1) {
+            Serial.print(i == 2 ? step - 1 : step, DEC);
+            Serial.print(' ');
+        }
+        if (type != MENU_ITEM_SUB_MENU) {
+            Serial.print(i == 2 ? step - 1 : step, DEC);
+            Serial.print(' ');
+        }
+        if (i == 2) {
+            Serial.print(prevPos);
+            Serial.print(' ');
+        }
+        Serial.println(pos + 1, DEC);
 #endif
     }
     index = 0;
