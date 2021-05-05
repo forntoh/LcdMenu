@@ -111,6 +111,8 @@ MenuItem* generateMenu(char* input) {
 
     MenuItem* currMenu;
 
+    boolean fromNorm = false;
+
     char* line;
     while ((line = readLine(input)) != NULL) {
         uint8_t pos = line[0] - '0';
@@ -118,14 +120,16 @@ MenuItem* generateMenu(char* input) {
         uint8_t i = line[2] - '0';
         uint8_t type = line[3] - '0';
 
-        char name[16];
         uint8_t p = n(line, 5, '\0');
+        char* name = new char[p - 3];
         strncpy(name, line + 4, p - 3);
 
         if (type == 0) {
             maxSize = size;
             currMenu = creatMenu(size, NULL);
         } else if (type == MENU_ITEM_SUB_MENU) {
+            step = fromNorm ? step + 1 : step;
+
             prevPos = pos + 1;
 
             if (i == 1)
@@ -134,15 +138,19 @@ MenuItem* generateMenu(char* input) {
             else
                 currMenu[pos + 1] =
                     ItemSubMenu(name, creatMenu(size, currMenu));
+
+            fromNorm = false;
         } else {
             if (pos == 0) ++step;
 
-            step = step > maxSize ? step - 1 : step;
+            step = step > maxSize + 1 ? step - 1 : step;
 
             if (i == 2)
                 currMenu[step - 1][prevPos][pos + 1] = MenuItem(name);
             else
                 currMenu[step][pos + 1] = MenuItem(name);
+
+            fromNorm = true;
         }
 
         // Serial.print(pos, DEC);
