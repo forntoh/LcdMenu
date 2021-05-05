@@ -153,17 +153,21 @@ MenuItem* generateMenu(char* input) {
             fromNorm = true;
         }
 
-        // Serial.print(pos, DEC);
-        // Serial.print(' ');
-        // Serial.print(size, DEC);
-        // Serial.print(' ');
-        // Serial.print(i, DEC);
-        // Serial.print(' ');
-        // Serial.print(type, DEC);
-        // Serial.print(F(" | "));
-        // Serial.print(prevPos, DEC);
-        // Serial.print(' ');
-        // Serial.println(step, DEC);
+#ifdef DEBUG
+        Serial.print(pos, DEC);
+        Serial.print(' ');
+        Serial.print(size, DEC);
+        Serial.print(' ');
+        Serial.print(i, DEC);
+        Serial.print(' ');
+        Serial.print(type, DEC);
+        Serial.print(F(" | "));
+        Serial.print(prevPos, DEC);
+        Serial.print(' ');
+        Serial.print(step, DEC);
+        Serial.print(F(" | "));
+        Serial.println(maxSize, DEC);
+#endif
     }
     index = 0;
     return currMenu;
