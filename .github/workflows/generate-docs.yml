@@ -45,6 +45,9 @@ jobs:
         run: |
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; sed -i '1i---\nlayout: default\ntitle: '"${FILE//src\//}"'\nparent: Reference\n---\n' docs/ref/$TMP; done
 
+      - name: Cleanup tree
+        run: rm -rf src debug.log platformio.ini *.txt library.properties .github CONTRIBUTING.md Gemfile* LICENSE README.md
+
       - name: Commit changes
         run: |
           git add .
