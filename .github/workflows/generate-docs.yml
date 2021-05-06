@@ -16,17 +16,29 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Get Release Tag
+        id: check-tag
+        run: |
+          echo "RELEASE_BRANCH=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          if [[ ${RELEASE_BRANCH} != *[a-z]* ]]; then
+            echo ::set-output name=match::true
+          fi
+
+      - name: Set branch to checkout
+        if: steps.check-tag.outputs.match == 'true'
+        env: echo "RELEASE_BRANCH=master" >> $GITHUB_ENV
+
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2
         with:
           ref: gh-pages
 
-      - name: Merge master -> gh-pages
+      - name: Merge ${{ env.RELEASE_BRANCH }} -> gh-pages
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git fetch origin
-          git merge origin/master --strategy-option theirs --allow-unrelated-histories
+          git merge origin/${RELEASE_BRANCH} --strategy-option theirs --allow-unrelated-histories
 
       - name: Add examples to docs
         run: |
