@@ -105,61 +105,40 @@ uint8_t n(char* line, uint8_t start, char delimiter) {
  * @return `MenuItem*` the created menu
  */
 MenuItem* generateMenu(char* input) {
-    uint8_t step = 0;
-    uint8_t prevPos = 0;
-    uint8_t prevI = 0;
-    uint8_t maxSize = 0;
-
     MenuItem* currMenu;
-
-    boolean fromNorm = false;
 
     char* line;
     while ((line = readLine(input)) != NULL) {
+        uint8_t count = 0;
+        while (line[count] - '0' < 10 && count < strlen(line)) count++;
+
         uint8_t pos = line[0] - '0';
         uint8_t size = line[1] - '0';
-        uint8_t i = line[2] - '0';
-        uint8_t type = line[3] - '0';
+        uint8_t type = line[count - 1] - '0';
 
-        uint8_t p = n(line, 5, '\0');
+        uint8_t p = n(line, count + 1, '\0');
         char* name = new char[p - 3];
-        strncpy(name, line + 4, p - 3);
+        strncpy(name, line + count, p - 3);
 
-        if (type == 0) {
-            maxSize = size;
+        if (type == 0)
             currMenu = creatMenu(size, NULL);
-        } else if (type == MENU_ITEM_SUB_MENU) {
-            step = fromNorm ? step + 1 : step;
-
-            step = (step) < (1) ? (1) : (step);
-
-            prevPos = pos + 1;
-
-            if (i == 1)
-                currMenu[step][prevPos] =
-                    ItemSubMenu(name, creatMenu(size, currMenu));
-            else
-                currMenu[pos + 1] =
-                    ItemSubMenu(name, creatMenu(size, currMenu));
-
-            fromNorm = false;
-        } else {
-            if (pos == 0) {
-                ++step;
-                if (i > 0)
-                    prevPos = fromNorm && prevI == i ? prevPos + 1 : pos + 1;
+        else if (type == MENU_ITEM_SUB_MENU) {
+            switch (count) {
+                case 4:
+                    currMenu[pos + 1] =
+                        ItemSubMenu(name, creatMenu(size, currMenu));
+                    break;
+                case 5:
+                    currMenu[line[2] - '0' + 1][pos + 1] =
+                        ItemSubMenu(name, creatMenu(size, currMenu));
+                    break;
             }
-
-            step = step > maxSize + 1 ? step - 1 : step;
-
-            if (i == 2)
-                currMenu[step - 1][prevPos][pos + 1] = MenuItem(name);
-            else
-                currMenu[step][pos + 1] = MenuItem(name);
-
-            fromNorm = true;
+        } else {
+            MenuItem item = currMenu[line[1] - '0' + 1];
+            for (uint8_t m = 2; m < count - 2; m++)
+                item = item[line[m] - '0' + 1];
+            item[pos + 1] = MenuItem(name);
         }
-        prevI = i;
 
 #ifdef DEBUG
         if (type == 0) continue;
@@ -167,23 +146,9 @@ MenuItem* generateMenu(char* input) {
         Serial.print(' ');
         Serial.print(size, DEC);
         Serial.print(' ');
-        Serial.print(i, DEC);
-        Serial.print(' ');
         Serial.print(type, DEC);
         Serial.print(F(" | "));
-        if (type == MENU_ITEM_SUB_MENU && i >= 1) {
-            Serial.print(i == 2 ? step - 1 : step, DEC);
-            Serial.print(' ');
-        }
-        if (type != MENU_ITEM_SUB_MENU) {
-            Serial.print(i == 2 ? step - 1 : step, DEC);
-            Serial.print(' ');
-        }
-        if (i == 2) {
-            Serial.print(prevPos);
-            Serial.print(' ');
-        }
-        Serial.println(pos + 1, DEC);
+        Serial.println(count, DEC);
 #endif
     }
     index = 0;
