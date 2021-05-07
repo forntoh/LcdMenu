@@ -122,34 +122,22 @@ MenuItem* generateMenu(char* input) {
 
         if (type == 0)
             currMenu = creatMenu(size, NULL);
-        else if (type == MENU_ITEM_SUB_MENU) {
-            switch (count) {
-                case 4:
-                    currMenu[pos + 1] =
-                        ItemSubMenu(name, creatMenu(size, currMenu));
-                    break;
-                case 5:
-                    currMenu[line[2] - '0' + 1][pos + 1] =
-                        ItemSubMenu(name, creatMenu(size, currMenu));
-                    break;
+        else if (type == MENU_ITEM_SUB_MENU)
+            if (count == 4)
+                currMenu[pos + 1] =
+                    ItemSubMenu(name, creatMenu(size, currMenu));
+            else {
+                MenuItem item = currMenu[line[2] - '0' + 1];
+                for (uint8_t m = 3; m < count - 2; m++)
+                    item = item[line[m] - '0' + 1];
+                item[pos + 1] = ItemSubMenu(name, creatMenu(size, currMenu));
             }
-        } else {
+        else {
             MenuItem item = currMenu[line[1] - '0' + 1];
             for (uint8_t m = 2; m < count - 2; m++)
                 item = item[line[m] - '0' + 1];
             item[pos + 1] = MenuItem(name);
         }
-
-#ifdef DEBUG
-        if (type == 0) continue;
-        Serial.print(pos, DEC);
-        Serial.print(' ');
-        Serial.print(size, DEC);
-        Serial.print(' ');
-        Serial.print(type, DEC);
-        Serial.print(F(" | "));
-        Serial.println(count, DEC);
-#endif
     }
     index = 0;
     return currMenu;
