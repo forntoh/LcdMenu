@@ -26,7 +26,7 @@ jobs:
 
       - name: Set branch to checkout
         if: steps.check-tag.outputs.match == 'true'
-        env: echo "RELEASE_BRANCH=master" >> $GITHUB_ENV
+        run: echo "RELEASE_BRANCH=master" >> $GITHUB_ENV
 
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2
