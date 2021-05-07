@@ -116,27 +116,32 @@ MenuItem* generateMenu(char* input) {
         uint8_t size = line[1] - '0';
         uint8_t type = line[count - 1] - '0';
 
-        uint8_t p = n(line, count + 1, '\0');
-        char* name = new char[p - 3];
-        strncpy(name, line + count, p - 3);
-
         if (type == 0)
             currMenu = creatMenu(size, NULL);
-        else if (type == MENU_ITEM_SUB_MENU)
-            if (count == 4)
-                currMenu[pos + 1] =
-                    ItemSubMenu(name, creatMenu(size, currMenu));
-            else {
-                MenuItem item = currMenu[line[2] - '0' + 1];
-                for (uint8_t m = 3; m < count - 2; m++)
-                    item = item[line[m] - '0' + 1];
-                item[pos + 1] = ItemSubMenu(name, creatMenu(size, currMenu));
-            }
         else {
-            MenuItem item = currMenu[line[1] - '0' + 1];
-            for (uint8_t m = 2; m < count - 2; m++)
-                item = item[line[m] - '0' + 1];
-            item[pos + 1] = MenuItem(name);
+            uint8_t p = n(line, count + 1, '\0');
+            char* name = new char[p - 2];
+
+            strncpy(name, line + count, p - 3);
+            name[p - 2] = '\0';
+
+            if (type == MENU_ITEM_SUB_MENU)
+                if (count == 3)
+                    currMenu[pos + 1] =
+                        ItemSubMenu(name, creatMenu(size, currMenu));
+                else {
+                    MenuItem item = currMenu[line[2] - '0' + 1];
+                    for (uint8_t m = 3; m < count - 1; m++)
+                        item = item[line[m] - '0' + 1];
+                    item[pos + 1] =
+                        ItemSubMenu(name, creatMenu(size, currMenu));
+                }
+            else {
+                MenuItem item = currMenu[line[1] - '0' + 1];
+                for (uint8_t m = 2; m < count - 1; m++)
+                    item = item[line[m] - '0' + 1];
+                item[pos + 1] = MenuItem(name);
+            }
         }
     }
     index = 0;
