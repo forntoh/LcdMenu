@@ -55,21 +55,9 @@ jobs:
       - name: Generate Ref docs
         run: |
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; npx mdcdoc -o docs/ref/$TMP $FILE; done
-      
-      - name: Add Jekyll headers
-        run: |
-          sleep 5
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; sed -i '1i---\nlayout: default\ntitle: '"${FILE//src\//}"'\nparent: Reference\n---\n' docs/ref/$TMP; done
-
-      - name: Cleanup tree
-        run: |
-          sleep 10
           rm -rf src debug.log platformio.ini *.txt library.properties .github CONTRIBUTING.md Gemfile* LICENSE README.md
-
-      - name: Commit changes
-        run: |
+          
           git add .
           git commit -m "Generated docs"
-
-      - name: Push changes
-        run: git push
+          git push
