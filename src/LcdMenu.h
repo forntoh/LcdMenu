@@ -159,6 +159,20 @@ class LcdMenu {
                     lcd->print(":");
                     lcd->print(item->isOn ? item->getTextOn() : item->getTextOff());
                     break;
+                case MENU_ITEM_STRING_LIST:
+                    //
+                    // display selected item
+                    //
+                    lcd->print(" ");
+                    lcd->print(item->getItems().at(item->getSelectedIndex()));
+                    break;
+                case MENU_ITEM_INT_LIST:
+                    //
+                    // display selected item
+                    //
+                    lcd->print(" ");
+                    lcd->print(item->getIntItems().at(item->getSelectedIndex()));
+                    break;
                 case MENU_ITEM_INPUT:
                     //
                     // append the value the value of the input
@@ -314,9 +328,9 @@ class LcdMenu {
         lcd->init();
         lcd->backlight();
 #else
-        uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+        uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, uint8_t backlight,
         MenuItem* menu) {
-        this->lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3);
+        this->lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3, backlight, POSITIVE);
         this->lcd->begin(maxCols, maxRows);
 #endif
         lcd->clear();
@@ -378,9 +392,9 @@ class LcdMenu {
     }
     /**
      * Execute an "enter" action on menu.
-     * 
+     *
      * It does the following depending on the type of the current menu item:
-     * 
+     *
      * - Open a sub menu.
      * - Execute a callback action.
      * - Toggle the state of an item.
@@ -435,6 +449,46 @@ class LcdMenu {
                 paint();
                 break;
             }
+            case MENU_ITEM_STRING_LIST: {
+                //
+                // toggle the selected index
+                //
+                int currentIndex = item->getSelectedIndex();
+                if (currentIndex < item->getItems().size() - 1) {
+                    item->setSelectedIndex(currentIndex + 1);
+                } else {
+                    item->setSelectedIndex(0);
+                }
+                //
+                // execute the menu item's function
+                //
+                if (item->getCallback() != NULL) (item->getCallback())();
+                //
+                // display the menu again
+                //
+                paint();
+                break;
+            }
+            case MENU_ITEM_INT_LIST: {
+                //
+                // toggle the selected index
+                //
+                int currentIndex = item->getSelectedIndex();
+                if (currentIndex < item->getIntItems().size() - 1) {
+                    item->setSelectedIndex(currentIndex + 1);
+                } else {
+                    item->setSelectedIndex(0);
+                }
+                //
+                // execute the menu item's function
+                //
+                if (item->getCallback() != NULL) (item->getCallback())();
+                //
+                // display the menu again
+                //
+                paint();
+                break;
+            }
             case MENU_ITEM_INPUT: {
                 //
                 // execute the menu item's function
@@ -446,7 +500,7 @@ class LcdMenu {
     }
     /**
      * Execute a "backpress" action on menu.
-     * 
+     *
      * Navigates up once.
      */
     void back() {
@@ -464,9 +518,9 @@ class LcdMenu {
     }
     /**
      * Execute a "left press" on menu
-     * 
+     *
      * *NB: Works only for `ItemInput` type*
-     * 
+     *
      * Moves the cursor one step to the left.
      */
     void left() {
@@ -475,9 +529,9 @@ class LcdMenu {
     }
     /**
      * Execute a "right press" on menu
-     * 
+     *
      * *NB: Works only for `ItemInput` type*
-     * 
+     *
      * Moves the cursor one step to the right.
      */
     void right() {
@@ -486,12 +540,12 @@ class LcdMenu {
     }
     /**
      * Execute a "backspace cmd" on menu
-     * 
+     *
      * *NB: Works only for `ItemInput` type*
-     * 
+     *
      * Removes the character at the current cursor position.
      */
-    void backspace() { 
+    void backspace() {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
         if (item->getType() != MENU_ITEM_INPUT) return;

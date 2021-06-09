@@ -41,6 +41,9 @@ const byte MENU_ITEM_INPUT = 5;
 const byte MENU_ITEM_NONE = 6;
 const byte MENU_ITEM_TOGGLE = 7;
 const byte MENU_ITEM_END_OF_MENU = 8;
+const byte MENU_ITEM_STRING_LIST = 9;
+const byte MENU_ITEM_INT_LIST = 10;
+
 /**
  * The MenuItem class
  */
@@ -49,6 +52,9 @@ class MenuItem {
     char* text;
     char* textOn;
     char* textOff;
+    std::vector<String> items;
+    std::vector<int> int_items;
+    int index;
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
@@ -84,6 +90,18 @@ class MenuItem {
           textOff(textOff),
           callback(callback),
           type(type) {}
+    MenuItem(char* text, std::vector<String> items, int index, fptr callback, byte type)
+        : text(text),
+          items(items),
+          index(index),
+          callback(callback),
+          type(type) {}
+    MenuItem(char* text, std::vector<int> items, int index, fptr callback, byte type)
+        : text(text),
+          int_items(items),
+          index(index),
+          callback(callback),
+          type(type) {}
     /**
      * ## Getters
      */
@@ -93,6 +111,23 @@ class MenuItem {
      * @return `String` - Item's text
      */
     char* getText() { return text; }
+    /**
+     * Get the items list.
+     * @return `vector<String>` - Items
+     */
+    std::vector<String> getItems() { return items; }
+    /**
+     * Get the int items list.
+     * @return `vector<int>` - Items
+     */
+    std::vector<int> getIntItems() { return int_items; }
+
+    /**
+     * Get selected index
+     * @return `int` - Item's text
+     */
+    int getSelectedIndex() { return index; }
+
     /**
      * Get the callback of the item
      * @return `ftpr` - Item's callback
@@ -138,6 +173,8 @@ class MenuItem {
      * @param subMenu for the item
      */
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
+
+    void setSelectedIndex(int index) { this->index = index; }
 
     /**
      * Operators
@@ -271,6 +308,42 @@ class ItemToggle : public MenuItem {
      */
     ItemToggle(char* key, char* textOn, char* textOff, fptr callback)
         : MenuItem(key, textOn, textOff, callback, MENU_ITEM_TOGGLE) {}
+};
+
+/**
+ * ---
+ *
+ * # ItemStringList
+ */
+
+class ItemStringList : public MenuItem {
+   public:
+    /**
+     * @param key key of the item
+     * @param items
+     * @param index
+     * @param callback reference to callback function
+     */
+    ItemStringList(char* key, std::vector<String> items, int index, fptr callback)
+        : MenuItem(key, items, index, callback, MENU_ITEM_STRING_LIST) {}
+};
+
+/**
+ * ---
+ *
+ * # ItemIntList
+ */
+
+class ItemIntList : public MenuItem {
+   public:
+    /**
+     * @param key key of the item
+     * @param items
+     * @param index
+     * @param callback reference to callback function
+     */
+    ItemIntList(char* key, std::vector<int> items, int index, fptr callback)
+        : MenuItem(key, items, index, callback, MENU_ITEM_INT_LIST) {}
 };
 
 /**
