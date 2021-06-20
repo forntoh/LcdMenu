@@ -451,7 +451,7 @@ class LcdMenu {
             }
             case MENU_ITEM_STRING_LIST: {
                 //
-                // toggle the selected index
+                // cycle through strings
                 //
                 int currentIndex = item->getSelectedIndex();
                 if (currentIndex < item->getItems().size() - 1) {
@@ -471,7 +471,7 @@ class LcdMenu {
             }
             case MENU_ITEM_INT_LIST: {
                 //
-                // toggle the selected index
+                // cycle through integers
                 //
                 int currentIndex = item->getSelectedIndex();
                 if (currentIndex < item->getIntItems().size() - 1) {
@@ -650,6 +650,10 @@ class LcdMenu {
      */
     void updateTimer() {
         if (millis() == startTime + duration) paint();
+    }
+
+    void redraw() {
+        paint();
     }
     /**
      * Get a `MenuItem` at position
