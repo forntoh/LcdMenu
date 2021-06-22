@@ -110,7 +110,7 @@ class LcdMenu {
      */
 
     /**
-     * Draws the cursor
+     * Draws the cursor (→)
      */
     void drawCursor() {
         //
@@ -125,6 +125,7 @@ class LcdMenu {
         //
         uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
         lcd->setCursor(0, line);
+        // draw right arrow
         lcd->write(0x7E);
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
@@ -625,7 +626,7 @@ class LcdMenu {
         //
         uint8_t centerPos = maxCols / 2 - (message.length() / 2);
         //
-        // Set cursor potion and clear lane
+        // Set cursor position and clear lane
         //
         lcd->setCursor(0, maxRows - 1);
         lcd->print("                   ");
