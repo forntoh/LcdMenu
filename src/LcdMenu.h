@@ -455,14 +455,9 @@ class LcdMenu {
             }
             case MENU_ITEM_STRING_LIST: {
                 //
-                // cycle through strings
+                // toggle the value of isOn
                 //
-                int currentIndex = item->getSelectedIndex();
-                if (currentIndex < item->getItems().size() - 1) {
-                    item->setSelectedIndex(currentIndex + 1);
-                } else {
-                    item->setSelectedIndex(0);
-                }
+                item->isOn = !item->isOn;
                 //
                 // execute the menu item's function
                 //
@@ -475,14 +470,9 @@ class LcdMenu {
             }
             case MENU_ITEM_INT_LIST: {
                 //
-                // cycle through integers
+                // toggle the value of isOn
                 //
-                int currentIndex = item->getSelectedIndex();
-                if (currentIndex < item->getIntItems().size() - 1) {
-                    item->setSelectedIndex(currentIndex + 1);
-                } else {
-                    item->setSelectedIndex(0);
-                }
+                item->isOn = !item->isOn;
                 //
                 // execute the menu item's function
                 //
@@ -613,11 +603,13 @@ class LcdMenu {
         paint();
     }
     /**
-     * Set the character used to visualize the cursor.
+     * Set the character used to visualize the cursor
+     * and redraws the cursor.
      * @param newIcon character to display
      */
     void setCursorIcon(uint8_t newIcon) {
         cursorIcon = newIcon;
+        drawCursor();
     }
     /**
      * Get the current cursor position
