@@ -104,13 +104,16 @@ class LcdMenu {
         0b00100,  //   *
         0b00100   //   *
     };
-
+    /**
+     * Cursor icon. Defaults to right arrow (→).
+    */
+    uint8_t cursorIcon = 0x7E;
     /**
      * ## Private Methods
      */
 
     /**
-     * Draws the cursor (→)
+     * Draws the cursor.
      */
     void drawCursor() {
         //
@@ -125,8 +128,8 @@ class LcdMenu {
         //
         uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
         lcd->setCursor(0, line);
-        // draw right arrow
-        lcd->write(0x7E);
+        // draw cursor
+        lcd->write(cursorIcon);
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
         //
@@ -608,6 +611,13 @@ class LcdMenu {
         // repaint menu
         //
         paint();
+    }
+    /**
+     * Set the character used to visualize the cursor.
+     * @param newIcon character to display
+     */
+    void setCursorIcon(uint8_t newIcon) {
+        cursorIcon = newIcon;
     }
     /**
      * Get the current cursor position
