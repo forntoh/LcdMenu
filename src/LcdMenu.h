@@ -165,14 +165,14 @@ class LcdMenu {
                     break;
                 case MENU_ITEM_STRING_LIST:
                     //
-                    // display selected item
+                    // display selected string item
                     //
                     lcd->print(" ");
                     lcd->print(item->getItems().at(item->getSelectedIndex()));
                     break;
                 case MENU_ITEM_INT_LIST:
                     //
-                    // display selected item
+                    // display selected integer item
                     //
                     lcd->print(" ");
                     lcd->print(item->getIntItems().at(item->getSelectedIndex()));
