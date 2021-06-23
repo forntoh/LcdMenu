@@ -562,7 +562,10 @@ class LcdMenu {
      * Set the character used to visualize the cursor.
      * @param newIcon character to display
      */
-    void setCursorIcon(uint8_t newIcon) { cursorIcon = newIcon; }
+    void setCursorIcon(uint8_t newIcon) {
+      cursorIcon = newIcon;
+      drawCursor();
+    }
     /**
      * Get the current cursor position
      * @return `cursorPosition` e.g. 1, 2, 3...
