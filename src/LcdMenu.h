@@ -341,7 +341,8 @@ class LcdMenu {
         lcd->createChar(0, upArrow);
         lcd->createChar(1, downArrow);
         this->currentMenuTable = menu;
-        paint();
+        // call later on
+        //paint();
     }
     /**
      * Call this function to set sub menu items for any main menu item
