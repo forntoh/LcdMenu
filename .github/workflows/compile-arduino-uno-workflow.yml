@@ -3,10 +3,24 @@ name: CI Arduino
 on: [pull_request, push]
 
 jobs:
+  provide-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: set-matrix
+        run: |
+          TMP="["
+          for FILE in examples/*/*.ino; do TMP="$TMP\"$FILE\","; done
+          TMP="${TMP::-1}]"
+          echo "::set-output name=matrix::$TMP"
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
   compile-arduino:
+    needs: provide-examples
     strategy:
       matrix:
-        example: [examples/Basic/Basic.ino, examples/SubMenu/SubMenu.ino, examples/Callbacks/Callbacks.ino, examples/GenerateMenu/GenerateMenu.ino]
+        example: ${{ fromJson(needs.provide-examples.outputs.matrix) }}
 
     runs-on: ubuntu-latest
 
@@ -37,10 +51,7 @@ jobs:
 
       - name: Install library dependencies
         run: |
-          pio lib -g install "chris--a/Keypad@^3.1.1"
-          pio lib -g install "marcoschwartz/LiquidCrystal_I2C@^1.1.4"
-          pio lib -g install "z3t0/IRremote@^3.1.0"
-          pio lib -g install "jrullan/Neotimer@^1.1.6"
+          pio lib install
 
       - name: Run PlatformIO
         run: pio ci --lib="src/LcdMenu.h" --lib="src/MenuItem.h"  --lib="src/GenerateMenu.h" --board=uno
