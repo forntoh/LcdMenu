@@ -618,6 +618,11 @@ class LcdMenu {
      */
     uint8_t getCursorPosition() { return this->cursorPosition; }
     /**
+     * Set the current cursor position
+     * @param position
+     */
+    void setCursorPosition(uint8_t position) { this->cursorPosition = position; }
+    /**
      * Show a message at the bottom of the screen
      * @param message message to display
      * @param duration how long to display the message
