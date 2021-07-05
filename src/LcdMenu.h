@@ -436,7 +436,7 @@ class LcdMenu {
                 //
                 // display the menu again
                 //
-                paint();
+                //paint();
                 break;
             }
             case MENU_ITEM_TOGGLE: {
