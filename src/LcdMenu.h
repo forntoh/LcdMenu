@@ -73,11 +73,11 @@ class LcdMenu {
     /**
      * Colum location of Blinker
      */
-    uint8_t blinkerPosition;
+    uint8_t blinkerPosition = 0;
     /**
      * Array of menu items
      */
-    MenuItem* currentMenuTable;
+    MenuItem* currentMenuTable = NULL;
     /**
      * Down arrow (↓)
      */
@@ -157,14 +157,16 @@ class LcdMenu {
                     // append textOn or textOff depending on the state
                     //
                     lcd->print(":");
-                    lcd->print(item->isOn ? item->getTextOn() : item->getTextOff());
+                    lcd->print(item->isOn ? item->getTextOn()
+                                          : item->getTextOff());
                     break;
                 case MENU_ITEM_INPUT:
                     //
                     // append the value the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->value.substring(0, maxCols - strlen(item->getText()) - 2));
+                    lcd->print(item->value.substring(
+                        0, maxCols - strlen(item->getText()) - 2));
                     break;
                 default:
                     break;
@@ -267,18 +269,18 @@ class LcdMenu {
     /**
      * Time when the toast started showing in milliseconds
      */
-    unsigned long startTime;
+    unsigned long startTime = 0;
     /**
      * How long the toast should Last in milliseconds
      */
-    unsigned int duration;
+    unsigned int duration = 0;
     /**
      * LCD Display
      */
 #ifndef USE_STANDARD_LCD
-    LiquidCrystal_I2C* lcd;
+    LiquidCrystal_I2C* lcd = NULL;
 #else
-    LiquidCrystal* lcd;
+    LiquidCrystal* lcd = NULL;
 #endif
 
     /**
@@ -291,11 +293,8 @@ class LcdMenu {
      * @param maxCols columns on lcd display e.g. 20
      * @return new `LcdMenu` object
      */
-    LcdMenu(uint8_t maxRows, uint8_t maxCols) {
-        this->maxRows = maxRows;
-        this->maxCols = maxCols;
-        this->bottom = maxRows;
-    }
+    LcdMenu(uint8_t maxRows, uint8_t maxCols)
+        : bottom(maxRows), maxRows(maxRows), maxCols(maxCols) {}
 
     /**
      * ## Public Methods
@@ -378,9 +377,9 @@ class LcdMenu {
     }
     /**
      * Execute an "enter" action on menu.
-     * 
+     *
      * It does the following depending on the type of the current menu item:
-     * 
+     *
      * - Open a sub menu.
      * - Execute a callback action.
      * - Toggle the state of an item.
@@ -446,7 +445,7 @@ class LcdMenu {
     }
     /**
      * Execute a "backpress" action on menu.
-     * 
+     *
      * Navigates up once.
      */
     void back() {
@@ -464,9 +463,9 @@ class LcdMenu {
     }
     /**
      * Execute a "left press" on menu
-     * 
+     *
      * *NB: Works only for `ItemInput` type*
-     * 
+     *
      * Moves the cursor one step to the left.
      */
     void left() {
@@ -475,9 +474,9 @@ class LcdMenu {
     }
     /**
      * Execute a "right press" on menu
-     * 
+     *
      * *NB: Works only for `ItemInput` type*
-     * 
+     *
      * Moves the cursor one step to the right.
      */
     void right() {
@@ -486,12 +485,12 @@ class LcdMenu {
     }
     /**
      * Execute a "backspace cmd" on menu
-     * 
+     *
      * *NB: Works only for `ItemInput` type*
-     * 
+     *
      * Removes the character at the current cursor position.
      */
-    void backspace() { 
+    void backspace() {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
@@ -521,10 +520,11 @@ class LcdMenu {
         //
         if (blinkerPosition < ub) {
             String start = item->value.substring(0, blinkerPosition - lb);
-            String end = item->value.substring(blinkerPosition - lb, item->value.length());
+            String end = item->value.substring(blinkerPosition - lb,
+                                               item->value.length());
             item->value = start + character + end;
-        }
-        else item->value.concat(character);
+        } else
+            item->value.concat(character);
         //
         // update blinker position
         //
@@ -564,12 +564,12 @@ class LcdMenu {
      * @param message message to display
      * @param duration how long to display the message
      */
-    void displayNotification(String message, unsigned int duration) {
+    void displayNotification(char* message, unsigned int duration) {
         //
         // Calculate the position to start writing
         // (centralize text)
         //
-        uint8_t centerPos = maxCols / 2 - (message.length() / 2);
+        uint8_t centerPos = maxCols / 2 - (strlen(message) / 2);
         //
         // Set cursor potion and clear lane
         //
@@ -580,8 +580,8 @@ class LcdMenu {
         // Draw each independent character
         //
         lcd->write(0xA5);
-        for (unsigned int i = 0; i < message.length(); i++) {
-            char character = message.charAt(i);
+        for (unsigned int i = 0; i < strlen(message); i++) {
+            char character = message[i];
             lcd->write(character);
         }
         lcd->write(0xA5);

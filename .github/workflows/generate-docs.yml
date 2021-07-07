@@ -16,17 +16,32 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Get Release Tag
+        run: echo "RELEASE_BRANCH=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Check Release Tag
+        id: check-tag
+        run: |
+          echo ${RELEASE_BRANCH}
+          if [[ ${RELEASE_BRANCH} != *[a-z]* ]]; then
+            echo ::set-output name=match::true
+          fi
+
+      - name: Set branch to checkout
+        if: steps.check-tag.outputs.match == 'true'
+        run: echo "RELEASE_BRANCH=master" >> $GITHUB_ENV
+
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2
         with:
           ref: gh-pages
 
-      - name: Merge master -> gh-pages
+      - name: Merge v${{ env.RELEASE_BRANCH }} -> gh-pages
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git fetch origin
-          git merge origin/master --strategy-option theirs --allow-unrelated-histories
+          git merge origin/v${RELEASE_BRANCH} --strategy-option theirs --allow-unrelated-histories
 
       - name: Add examples to docs
         run: |
@@ -40,15 +55,9 @@ jobs:
       - name: Generate Ref docs
         run: |
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; npx mdcdoc -o docs/ref/$TMP $FILE; done
-      
-      - name: Add Jekyll headers
-        run: |
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; sed -i '1i---\nlayout: default\ntitle: '"${FILE//src\//}"'\nparent: Reference\n---\n' docs/ref/$TMP; done
+          rm -rf debug.log platformio.ini *.txt library.properties .github CONTRIBUTING.md Gemfile* LICENSE README.md
 
-      - name: Commit changes
-        run: |
           git add .
           git commit -m "Generated docs"
-
-      - name: Push changes
-        run: git push
+          git push
