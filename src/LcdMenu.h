@@ -48,11 +48,6 @@ class LcdMenu {
      */
 
     /**
-     * Cursor position
-     */
-    uint8_t cursorPosition = 1;
-    uint8_t previousCursorPosition = 1;
-    /**
      * First visible item's position in the menu array
      */
     uint8_t top = 1;
@@ -240,26 +235,7 @@ class LcdMenu {
         drawMenu();
         drawCursor();
     }
-    /**
-     * Reset the display
-     * @param isHistoryAvailable indicates if there is a previous position
-     */
-    void reset(boolean isHistoryAvailable) {
-        if (isHistoryAvailable) {
-            cursorPosition = previousCursorPosition;
-            top = previousTop;
-            bottom = previousBottom;
-        } else {
-            previousCursorPosition = cursorPosition;
-            previousTop = top;
-            previousBottom = bottom;
 
-            cursorPosition = 1;
-            top = 1;
-            bottom = maxRows;
-        }
-        paint();
-    }
     /**
      * Calculate and set the new blinker position
      */
@@ -281,6 +257,12 @@ class LcdMenu {
     /**
      * ## Public Fields
      */
+
+    /**
+     * Cursor position
+     */
+    uint8_t cursorPosition = 1;
+    uint8_t previousCursorPosition = 1;
 
     /**
      * Time when the toast started showing in milliseconds
@@ -662,6 +644,26 @@ class LcdMenu {
     }
 
     void redraw() {
+        paint();
+    }
+    /**
+     * Reset the display
+     * @param isHistoryAvailable indicates if there is a previous position
+     */
+    void reset(boolean isHistoryAvailable) {
+        if (isHistoryAvailable) {
+            cursorPosition = previousCursorPosition;
+            top = previousTop;
+            bottom = previousBottom;
+        } else {
+            previousCursorPosition = cursorPosition;
+            previousTop = top;
+            previousBottom = bottom;
+
+            cursorPosition = 1;
+            top = 1;
+            bottom = maxRows;
+        }
         paint();
     }
     /**

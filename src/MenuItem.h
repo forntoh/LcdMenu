@@ -173,7 +173,10 @@ class MenuItem {
      * @param subMenu for the item
      */
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
-
+    /**
+     * Set selected index
+     * @param index new index
+     */
     void setSelectedIndex(int index) { this->index = index; }
 
     /**
