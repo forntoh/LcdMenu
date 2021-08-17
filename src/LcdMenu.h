@@ -482,13 +482,9 @@ class LcdMenu {
      */
     void back() {
         //
-        // get the type of the currently displayed menu
+        //  check if this is a sub menu, if so go back to its parent
         //
-        byte menuItemType = currentMenuTable[0].getType();
-        //
-        // check if this is a sub menu, if so go back to its parent
-        //
-        if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
+        if (isSubMenu()) {
             currentMenuTable = currentMenuTable[0].getSubMenu();
             reset(true);
         }
@@ -665,6 +661,22 @@ class LcdMenu {
             bottom = maxRows;
         }
         paint();
+    }
+    /**
+     * Check if currently displayed menu is a sub menu.
+     */
+    bool isSubMenu() {
+        //
+        // get the type of the
+        //
+        byte menuItemType = currentMenuTable[0].getType();
+        //
+        // check if this is a sub menu
+        //
+        if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
+            return true;
+        }
+        return false;
     }
     /**
      * Get a `MenuItem` at position
