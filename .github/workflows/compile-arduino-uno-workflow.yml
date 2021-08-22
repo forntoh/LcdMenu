@@ -51,7 +51,7 @@ jobs:
 
       - name: Install library dependencies
         run: |
-          pio lib -g install 1
+          pio lib -g install
 
       - name: Run PlatformIO
         run: pio ci --board=uno
