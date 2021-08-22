@@ -52,7 +52,6 @@ jobs:
       - name: Install library dependencies
         run: |
           pio lib install
-          pio lib -g install chris--a/Keypad@^3.1.1
 
       - name: Run PlatformIO
         run: pio ci --board=uno
