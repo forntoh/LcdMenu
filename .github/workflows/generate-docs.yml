@@ -58,12 +58,10 @@ jobs:
 
       - name: Generate Ref docs
         run: |
-          for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; npx mdcdoc -o docs/ref/$TMP $FILE; done
-          sleep 2s
+          npm install -g mdcdoc
+          for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; mdcdoc -o docs/ref/$TMP $FILE; done
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; sed -i '1i---\nlayout: default\ntitle: '"${FILE//src\//}"'\nparent: Reference\n---\n' docs/ref/$TMP; done
-          sleep 2s
-          rm -rf debug.log platformio.ini *.txt library.properties .github CONTRIBUTING.md Gemfile* LICENSE README.md
-          sleep 2s
+          rm -rf debug.log platformio.ini *.txt library.properties CONTRIBUTING.md Gemfile* LICENSE README.md
 
           git add .
           git commit -m "Generated docs"
