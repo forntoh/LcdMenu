@@ -54,6 +54,6 @@ jobs:
           pio lib install
 
       - name: Run PlatformIO
-        run: pio ci --lib="src/LcdMenu.h" --lib="src/MenuItem.h"  --lib="src/GenerateMenu.h" --board=uno
+        run: pio ci --lib="src/LcdMenu.h" --lib="src/MenuItem.h" --board=uno
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}

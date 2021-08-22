@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
 
       - name: Get Release Tag
         run: echo "RELEASE_BRANCH=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -46,17 +46,24 @@ jobs:
       - name: Add examples to docs
         run: |
           for FILE in examples/*/*.md; do TMP=$FILE; TMP=${TMP//examples\//}; TMP=${TMP//\/README/}; cp $FILE 'docs/examples/'"$TMP"; done
+          sleep 2s
           for FILE in examples/*/*.md; do TMP=$FILE; TMP=${TMP//examples\//}; TMP=${TMP//\/README/}; sed -i '1i---\nlayout: default\ntitle: '"${TMP//.md/}"'\nparent: Examples\n---\n' docs/examples/$TMP; done
+          sleep 2s
           for FILE in docs/examples/*.md; do sed -i 's/\!\[Circuit\](https:\/\/github.com\/forntoh\/LcdMenu\/blob\/gh-pages\/assets\/img\/circuit.png?raw=true)/<img src="{{ site.baseurl }}\/assets\/img\/circuit.png" alt="Circuit">/' $FILE; done
 
       - name: Embed code into examples
-        run: npx embedme docs/examples/*.md
+        run: |
+          npx embedme docs/examples/*.md
+          sleep 30s
 
       - name: Generate Ref docs
         run: |
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; npx mdcdoc -o docs/ref/$TMP $FILE; done
+          sleep 2s
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; sed -i '1i---\nlayout: default\ntitle: '"${FILE//src\//}"'\nparent: Reference\n---\n' docs/ref/$TMP; done
+          sleep 2s
           rm -rf debug.log platformio.ini *.txt library.properties .github CONTRIBUTING.md Gemfile* LICENSE README.md
+          sleep 2s
 
           git add .
           git commit -m "Generated docs"
