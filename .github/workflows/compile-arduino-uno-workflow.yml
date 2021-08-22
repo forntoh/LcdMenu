@@ -54,6 +54,6 @@ jobs:
           pio lib install
 
       - name: Run PlatformIO
-        run: pio ci --board=uno
+        run: sleep 1s #pio ci --board=uno
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
