@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020 Forntoh Thomas
+  Copyright (c) 2020-2021 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -103,6 +103,7 @@ class LcdMenu {
      * Cursor icon. Defaults to right arrow (→).
     */
     uint8_t cursorIcon = 0x7E;
+
     /**
      * ## Private Methods
      */
@@ -123,6 +124,7 @@ class LcdMenu {
         //
         uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
         lcd->setCursor(0, line);
+
         // draw cursor
         lcd->write(cursorIcon);
         //
@@ -582,13 +584,12 @@ class LcdMenu {
         paint();
     }
     /**
-     * Set the character used to visualize the cursor
-     * and redraws the cursor.
+     * Set the character used to visualize the cursor.
      * @param newIcon character to display
      */
     void setCursorIcon(uint8_t newIcon) {
-        cursorIcon = newIcon;
-        drawCursor();
+      cursorIcon = newIcon;
+      drawCursor();
     }
     /**
      * Get the current cursor position
