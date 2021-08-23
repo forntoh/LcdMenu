@@ -172,10 +172,18 @@ class LcdMenu {
                     break;
                 case MENU_ITEM_INPUT:
                     //
-                    // append the value the value of the input
+                    // append the value of the input
                     //
                     lcd->print(":");
                     lcd->print(item->value.substring(
+                        0, maxCols - strlen(item->getText()) - 2));
+                    break;
+                case MENU_ITEM_LIST:
+                    //
+                    // append the value of the item at current list position 
+                    //
+                    lcd->print(":");
+                    lcd->print(item->getItems()[item->itemIndex].substring(
                         0, maxCols - strlen(item->getText()) - 2));
                     break;
                 default:
@@ -480,8 +488,22 @@ class LcdMenu {
      * Moves the cursor one step to the left.
      */
     void left() {
-        blinkerPosition--;
-        resetBlinker();
+        MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        // get the type of the currently displayed menu
+        //
+        switch (item->getType()) {
+            case MENU_ITEM_LIST: {
+                item->itemIndex =
+                    constrain(item->itemIndex - 1, 0, item->itemCount - 1);
+                paint();
+                break;
+            }
+            default:
+                blinkerPosition--;
+                resetBlinker();
+                break;
+        }
     }
     /**
      * Execute a "right press" on menu
@@ -491,8 +513,22 @@ class LcdMenu {
      * Moves the cursor one step to the right.
      */
     void right() {
-        blinkerPosition++;
-        resetBlinker();
+        MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        // get the type of the currently displayed menu
+        //
+        switch (item->getType()) {
+            case MENU_ITEM_LIST: {
+                item->itemIndex = (item->itemIndex + 1) % item->itemCount;
+                // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
+                paint();
+                break;
+            }
+            default:
+                blinkerPosition++;
+                resetBlinker();
+                break;
+        }
     }
     /**
      * Execute a "backspace cmd" on menu
@@ -574,9 +610,9 @@ class LcdMenu {
         drawCursor();
     }
     /**
-     * When you want to display any other content on the screen then call this
-     * function then display your content, later call `show()` to show
-     * the menu
+     * When you want to display any other content on the screen then
+     * call this function then display your content, later call
+     * `show()` to show the menu
      */
     void hide() {
         enableUpdate = false;
