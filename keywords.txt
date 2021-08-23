@@ -1,19 +1,19 @@
 #######################################
-# Syntax Coloring Map For Test
+# Syntax Coloring Map
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-LcdMenu KEYWORD1
-MenuItem KEYWORD1
-ItemHeader KEYWORD1
-ItemSubHeader KEYWORD1
-ItemFooter KEYWORD1
-ItemInput KEYWORD1
-ItemSubMenu KEYWORD1
-ItemToggle KEYWORD1
+LcdMenu	KEYWORD1
+MenuItem	KEYWORD1
+ItemHeader	KEYWORD1
+ItemFooter	KEYWORD1
+ItemInput	KEYWORD1
+ItemSubMenu	KEYWORD1
+ItemToggle	KEYWORD1
+ItemCommand	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -25,36 +25,38 @@ isAtTheStart	KEYWORD2
 isAtTheEnd	KEYWORD2
 paint	KEYWORD2
 reset	KEYWORD2
-placeCursorAtEnd	KEYWORD2
+resetBlinker	KEYWORD2
 setupLcdWithMenu	KEYWORD2
 setSubMenu	KEYWORD2
-buildSubMenu	KEYWORD2
 up	KEYWORD2
 down	KEYWORD2
 enter	KEYWORD2
 back	KEYWORD2
-setText	KEYWORD2
+left	KEYWORD2
+right	KEYWORD2
+backspace	KEYWORD2
+type	KEYWORD2
+clear	KEYWORD2
+setCursorIcon	KEYWORD2
+hide	KEYWORD2
+show	KEYWORD2
+getCursorPosition	KEYWORD2
+displayNotification	KEYWORD2
+updateTimer	KEYWORD2
+getItemAt	KEYWORD2
+toggleBacklight	KEYWORD2
 getText	KEYWORD2
 getCallback	KEYWORD2
 getSubMenu	KEYWORD2
 getType	KEYWORD2
+getTextOn	KEYWORD2
+getTextOff	KEYWORD2
 setText	KEYWORD2
 setCallBack	KEYWORD2
 setSubMenu	KEYWORD2
-getCursorPosition   KEYWORD2
-displayNotification KEYWORD2
-updateTimer KEYWORD2
-getItemAt   KEYWORD2
-hide   KEYWORD2
-show   KEYWORD2
-setCursorIcon   KEYWORD2
-
-#######################################
-# Instances (KEYWORD2)
-#######################################
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
-USE_STANDARD_LCD    LITERAL1
+USE_STANDARD_LCD	LITERAL1

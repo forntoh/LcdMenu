@@ -58,7 +58,7 @@ jobs:
 
       - name: Generate Ref docs
         run: |
-          for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; npx mdcdoc -o docs/ref/$TMP $FILE; sleep 5s; done
+          for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; npx mdcdoc -o docs/ref/$TMP $FILE; sleep 15s; done
           for FILE in src/*.h; do TMP=$FILE; TMP=${TMP//src\//}; TMP=${TMP//.h/.md}; TMP=${TMP,,}; sed -i '1i---\nlayout: default\ntitle: '"${FILE//src\//}"'\nparent: Reference\n---\n' docs/ref/$TMP; done
           rm -rf debug.log platformio.ini *.txt library.properties CONTRIBUTING.md Gemfile* LICENSE README.md .github/workflows/compile-arduino-uno-workflow.yml
 
