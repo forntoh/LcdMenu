@@ -41,6 +41,7 @@ const byte MENU_ITEM_INPUT = 5;
 const byte MENU_ITEM_NONE = 6;
 const byte MENU_ITEM_TOGGLE = 7;
 const byte MENU_ITEM_END_OF_MENU = 8;
+const byte MENU_ITEM_LIST = 9;
 /**
  * The MenuItem class
  */
@@ -52,6 +53,7 @@ class MenuItem {
     fptr callback = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
+    String* items = NULL;
 
    public:
     /**
@@ -66,6 +68,14 @@ class MenuItem {
      * String value of an `ItemInput`
      */
     String value;
+    /**
+     * Current inded of list for `ItemList`
+     */
+    uint8_t itemIndex = 0;
+    /**
+     * Number of items in the list for `ItemList`
+     */
+    uint8_t itemCount = 0;
 
     MenuItem() = default;
     explicit MenuItem(char* text) : text(text) {}
@@ -84,6 +94,13 @@ class MenuItem {
           textOff(textOff),
           callback(callback),
           type(type) {}
+    MenuItem(char* text, String* items, uint8_t itemCount, fptr callback,
+             byte type)
+        : text(text),
+          callback(callback),
+          type(type),
+          items(items),
+          itemCount(itemCount) {}
     /**
      * ## Getters
      */
@@ -118,6 +135,11 @@ class MenuItem {
      * @return `String` - OFF text
      */
     char* getTextOff() { return textOff; }
+    /**
+     * Get the list of items
+     * @return `String*` - List of items
+     */
+    String* getItems() { return items; }
 
     /**
      * ## Setters
@@ -291,6 +313,35 @@ class ItemCommand : public MenuItem {
      */
     ItemCommand(char* key, fptr callback)
         : MenuItem(key, callback, MENU_ITEM_COMMAND) {}
+};
+
+/**
+ * ---
+ *
+ * # ItemList
+ *
+ * This item type indicates that the current item is a **list**.
+ * - When `left()` is invoked the view cycles down the list
+ * - When `right()` is invoked the view cycles up the list, you can use only
+ *   `right()` if you have a single button, because once the menu reaches the
+ *   end of the list, it automatically starts back from the begining.
+ * - When `enter()` is invoked, the command *(callback)* bound to this item is
+ *   invoked.
+ *
+ * > This can be used for other primitive data types, you just need to pass it
+ * > as string then parse the result to the desired datatype
+ */
+
+class ItemList : public MenuItem {
+   public:
+    /**
+     * @param key key of the items
+     * @param items items to display
+     * @param itemCount number of items in `items`
+     * @param callback reference to callback function
+     */
+    ItemList(char* key, String* items, uint8_t itemCount, fptr callback)
+        : MenuItem(key, items, itemCount, callback, MENU_ITEM_LIST) {}
 };
 
 #endif
