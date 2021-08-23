@@ -262,6 +262,10 @@ class ItemInput : public MenuItem {
      */
     ItemInput(char* text, String value, fptrStr callback)
         : MenuItem(text, value, callback, MENU_ITEM_INPUT) {}
+    /**
+     */
+    ItemInput(char* text, fptrStr callback)
+        : MenuItem(text, "", callback, MENU_ITEM_INPUT) {}
 };
 
 /**
