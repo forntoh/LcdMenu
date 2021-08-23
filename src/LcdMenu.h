@@ -460,6 +460,13 @@ class LcdMenu {
                 if (item->getCallback() != NULL) (item->getCallback())();
                 break;
             }
+            case MENU_ITEM_LIST: {
+                //
+                // execute the menu item's function
+                //
+                if (item->getCallback() != NULL) (item->getCallback())();
+                break;
+            }
         }
     }
     /**
