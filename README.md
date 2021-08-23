@@ -23,3 +23,5 @@ Follow this 👇 guide to install the library
 For Usage & Examples,
 
 ## Visit the official [Docs](https://forntoh.github.io/LcdMenu/) of this Library
+
+**Have a question/doubt? Check the [Discussions](https://github.com/forntoh/LcdMenu/discussions) tab, maybe your question has already been answered 😉**

@@ -39,7 +39,7 @@ char keys[4][4] = {{'1', '2', '3', 'A'},
                    {'4', '5', '6', 'B'},
                    {'7', '8', '9', 'C'},
                    {'*', '0', '#', 'D'}};
-                   
+
 // Configure keypad pins
 byte colPins[4] = {5, 4, 3, 2};
 byte rowPins[4] = {9, 8, 7, 6};
@@ -62,8 +62,7 @@ MenuItem settingsMenu[] = {ItemHeader(mainMenu),
                            // Include callback in ItemToggle
                            //
                            ItemToggle("Backlight", toggleBacklight),
-                           MenuItem("Contrast"),
-                           ItemFooter()};
+                           MenuItem("Contrast"), ItemFooter()};
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
@@ -96,4 +95,11 @@ void loop() {
 /**
  * Define callback
  */
-void toggleBacklight() { menu.lcd->setBacklight(menu.getItemAt(menu.getCursorPosition())->isOn); }
+void toggleBacklight() {
+    // This way (when you need the value for something else)
+    bool isOn = menu.getItemAt(menu.getCursorPosition())->isOn;
+    //
+    menu.lcd->setBacklight(isOn);
+    // Or this way
+    menu.toggleBacklight();
+}
