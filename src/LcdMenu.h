@@ -499,11 +499,12 @@ class LcdMenu {
         //
         // get the type of the currently displayed menu
         //
+        uint8_t previousIndex = item->itemIndex;
         switch (item->getType()) {
             case MENU_ITEM_LIST: {
                 item->itemIndex =
                     constrain(item->itemIndex - 1, 0, item->itemCount - 1);
-                paint();
+                if (previousIndex != item->itemIndex) paint();
                 break;
             }
             default:
