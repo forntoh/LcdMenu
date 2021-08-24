@@ -57,7 +57,10 @@ MenuItem settingsMenu[] = {ItemHeader(mainMenu),
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
-void setup() { menu.setupLcdWithMenu(0x27, mainMenu); }
+void setup() {
+    Serial.begin(9600);
+    menu.setupLcdWithMenu(0x27, mainMenu);
+}
 
 void loop() {
     if (!Serial.available()) return;
