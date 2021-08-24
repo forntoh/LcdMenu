@@ -180,7 +180,7 @@ class LcdMenu {
                     break;
                 case MENU_ITEM_LIST:
                     //
-                    // append the value of the item at current list position 
+                    // append the value of the item at current list position
                     //
                     lcd->print(":");
                     lcd->print(item->getItems()[item->itemIndex].substring(
@@ -680,6 +680,15 @@ class LcdMenu {
      * @return `MenuItem` - item at `position`
      */
     MenuItem* getItemAt(uint8_t position) {
+        return &currentMenuTable[position];
+    }
+    /**
+     * Get a `MenuItem` at position using operator function
+     * e.g `menu[men.getCursorPosition()]` will return the item at the current
+     * cursor position
+     * @return `MenuItem` - item at `position`
+     */
+    MenuItem* operator[](const uint8_t position) {
         return &currentMenuTable[position];
     }
     /**
