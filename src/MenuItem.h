@@ -69,7 +69,7 @@ class MenuItem {
      */
     String value;
     /**
-     * Current inded of list for `ItemList`
+     * Current index of list for `ItemList`
      */
     uint8_t itemIndex = 0;
     /**
