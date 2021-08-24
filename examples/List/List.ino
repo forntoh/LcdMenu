@@ -94,7 +94,7 @@ void loop() {
 }
 
 // Define the calbacks
-void listCallback() {
+void colorsCallback() {
     uint8_t activeListItem = menu[menu.getCursorPosition()]->itemIndex;
     // do something with the index
     Serial.println(colors[activeListItem]);

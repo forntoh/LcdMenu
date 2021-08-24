@@ -6,17 +6,21 @@ This example will show you how to get started with submenus
 
 ## Requirements
 
-- Keypad 4x4
+- Keyboard
 - LCD Display
 
 ## Code
 
-Go to [.../examples/SubMenu/SubMenu.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/SubMenu/SubMenu.ino)
+### 1 Create the main menu
 
 ```cpp
-// ../../examples/SubMenu/SubMenu.ino#L44-L88
+// ../../examples/SubMenu/SubMenu.ino#L39-L46
 ```
 
-## Circuit
+### 1 Create the sub menu
 
-![Circuit](https://github.com/forntoh/LcdMenu/blob/gh-pages/assets/img/circuit.png?raw=true)
+```cpp
+// ../../examples/SubMenu/SubMenu.ino#L47-L53
+```
+
+Go to [.../examples/SubMenu/SubMenu.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/SubMenu/SubMenu.ino)

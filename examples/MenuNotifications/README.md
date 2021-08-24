@@ -10,7 +10,7 @@ In this example When the **#** key is pressed, the notification displays for two
 
 ## Requirements
 
-- 4x4 Keypad
+- Keyboard
 - LcdDisplay
 
 ## Usage

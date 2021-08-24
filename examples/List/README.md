@@ -2,7 +2,7 @@
 
 This is a basic example, it will show you how to use lists in the LcdMenu library.
 
-> Requested inpired and based on previous work by [@thijstriemstra](https://github.com/forntoh/LcdMenu/pull/22) 🙏
+> Requested, inpired and based on previous work by [@thijstriemstra](https://github.com/forntoh/LcdMenu/pull/22) 🙏
 
 The supported datatype for the list is `String`. This can be used for other primitive datatypes, you just need to pass it as string then parse the result to the desired datatype.
 

@@ -6,7 +6,7 @@ This is a basic example, it will show you how to get started with the LcdMenu li
 
 ## Requirements
 
-- 4x4 Keypad
+- Keyboard
 - LcdDisplay
 
 ## Code
@@ -14,9 +14,5 @@ This is a basic example, it will show you how to get started with the LcdMenu li
 Go to [.../examples/Basic/Basic.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/Basic/Basic.ino)
 
 ```cpp
-// ../../examples/Basic/Basic.ino#L43-L85
+// ../../examples/Basic/Basic.ino#L35-L77
 ```
-
-## Circuit
-
-![Circuit](https://github.com/forntoh/LcdMenu/blob/gh-pages/assets/img/circuit.png?raw=true)
