@@ -2,9 +2,9 @@
 
 This is a basic example, it will show you how to use lists in the LcdMenu library.
 
-The supported datatype for the list is `String`. This can be used for other primitive datatypes, you just need to pass it as string then parse the result to the desired datatype.
+> Requested inpired and based on previous work by [@thijstriemstra](https://github.com/forntoh/LcdMenu/pull/22) 🙏
 
-![Callback](https://i.imgur.com/1CUPScl.gif)
+The supported datatype for the list is `String`. This can be used for other primitive datatypes, you just need to pass it as string then parse the result to the desired datatype.
 
 ## Requirements
 
@@ -42,14 +42,10 @@ Use `menu.left()` and/or `menu.right()` to cycle through the items
 
 ### 1 Run when item is selected
 
-When `enter()` is invoked, the command *(callback)* bound to the item is invoked.
+When `enter()` is invoked, the command _(callback)_ bound to the item is invoked.
 
 ```cpp
 // ../../examples/List/List.ino#L97-L101
 ```
 
-Full ecample 👉 [.../examples/List/List.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/List/List.ino)
-
-## Circuit
-
-![Circuit](https://github.com/forntoh/LcdMenu/blob/gh-pages/assets/img/circuit.png?raw=true)
+Full example 👉 [.../examples/List/List.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/List/List.ino)
