@@ -502,11 +502,12 @@ class LcdMenu {
         //
         // get the type of the currently displayed menu
         //
+        uint8_t previousIndex = item->itemIndex;
         switch (item->getType()) {
             case MENU_ITEM_LIST: {
                 item->itemIndex =
                     constrain(item->itemIndex - 1, 0, item->itemCount - 1);
-                paint();
+                if (previousIndex != item->itemIndex) paint();
                 break;
             }
             default:
@@ -683,6 +684,15 @@ class LcdMenu {
      * @return `MenuItem` - item at `position`
      */
     MenuItem* getItemAt(uint8_t position) {
+        return &currentMenuTable[position];
+    }
+    /**
+     * Get a `MenuItem` at position using operator function
+     * e.g `menu[men.getCursorPosition()]` will return the item at the current
+     * cursor position
+     * @return `MenuItem` - item at `position`
+     */
+    MenuItem* operator[](const uint8_t position) {
         return &currentMenuTable[position];
     }
     /**

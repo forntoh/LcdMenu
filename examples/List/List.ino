@@ -1,19 +1,20 @@
 /*
- Sub Menu
+ Menu Item List
 
- This sketch demostrates how to create menus which contain other menus
+ This sketch demostrates how to use list of values in the LcdMenu library.
+ This feature was requested and inpired by @thijstriemstra
 
  Circuit:
  * Arduino Board
  * LCD SLC pin to arduino SLC pin
  * LCD SDA pin to arduino SDA pin
 
- created 22 July 2020
+ created 24 August 2021
  by Forntoh Thomas
 
  This example is in the public domain.
 
- https://github.com/forntoh/LcdMenu/tree/master/examples/SubMenu/SubMenu.ino
+ https://github.com/forntoh/LcdMenu/tree/master/examples/List/List.ino
 
 */
 
@@ -32,30 +33,39 @@
 #define BACKSPACE 8  // BACKSPACE
 #define CLEAR 46     // NUMPAD .
 
+// Declare the calbacks
+void colorsCallback();
+void numsCallback();
+
+// Declare the array
+extern String colors[];
+// Initialize the array
+String colors[] = {"Red",  "Green",  "Blue",   "Orange",
+                   "Aqua", "Yellow", "Purple", "Pink"};
+
+// Declare the array
+extern String nums[];
+// Initialize the array
+String nums[] = {
+    "5", "7", "9", "12", "32",
+};
+
 // Declare the main menu
 extern MenuItem mainMenu[];
-extern MenuItem settingsMenu[];
-
-// Define the main menu
+// Initialize the main menu items
 MenuItem mainMenu[] = {ItemHeader(),
-                       MenuItem("Start service"),
-                       MenuItem("Connect to WiFi"),
-                       ItemSubMenu("Settings", settingsMenu),
-                       MenuItem("Blink SOS"),
-                       MenuItem("Blink random"),
+                       MenuItem("List demo"),
+                       ItemList("Col", colors, 9, colorsCallback),
+                       ItemList("Num", nums, 5, numsCallback),
+                       MenuItem("Example"),
                        ItemFooter()};
-/**
- * Create submenu and precise its parent
- */
-MenuItem settingsMenu[] = {ItemHeader(mainMenu),
-                           MenuItem("Backlight"),
-                           MenuItem("Contrast"),
-                           ItemFooter()};
 
+// Construct the LcdMenu
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
 void setup() {
     Serial.begin(9600);
+    // Initialize LcdMenu with the menu items
     menu.setupLcdWithMenu(0x27, mainMenu);
 }
 
@@ -81,4 +91,17 @@ void loop() {
         menu.backspace();
     else
         menu.type((String)command);
+}
+
+// Define the calbacks
+void colorsCallback() {
+    uint8_t activeListItem = menu[menu.getCursorPosition()]->itemIndex;
+    // do something with the index
+    Serial.println(colors[activeListItem]);
+}
+
+void numsCallback() {
+    uint8_t activeListItem = menu[menu.getCursorPosition()]->itemIndex;
+    // do something with the index
+    Serial.println(nums[activeListItem]);
 }
