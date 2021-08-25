@@ -14,6 +14,7 @@ ItemInput	KEYWORD1
 ItemSubMenu	KEYWORD1
 ItemToggle	KEYWORD1
 ItemCommand	KEYWORD1
+ItemList	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -45,12 +46,13 @@ displayNotification	KEYWORD2
 updateTimer	KEYWORD2
 getItemAt	KEYWORD2
 toggleBacklight	KEYWORD2
-getText	KEYWORD2
+char	KEYWORD2
 getCallback	KEYWORD2
 getSubMenu	KEYWORD2
 getType	KEYWORD2
 getTextOn	KEYWORD2
 getTextOff	KEYWORD2
+getItems	KEYWORD2
 setText	KEYWORD2
 setCallBack	KEYWORD2
 setSubMenu	KEYWORD2

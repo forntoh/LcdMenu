@@ -1,0 +1,3 @@
+#!/bin/sh
+
+python .scripts/version.py library.* $1
