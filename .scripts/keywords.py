@@ -43,7 +43,10 @@ def build(files):
 
                 if len(stripped_line) > 9 and not stripped_line.startswith(tuple(prefixes)) and not stripped_line.endswith(tuple(sufixes)):
                     if re.search(r"^.+\s[a-z][A-Za-z]+\(.*", stripped_line) != None:
-                        methodName = re.findall(r"\w+", stripped_line)[1]
+                        words = re.findall(r"\w+", stripped_line)
+                        methodName = words[1]
+                        if words[0] == 'const':
+                            methodName = words[2]
                         keyword_2_data += methodName + "	KEYWORD2\n"
                 if len(stripped_line) > 7 and stripped_line.startswith('class '):
                     if re.search(r"\w+", stripped_line) != None:
