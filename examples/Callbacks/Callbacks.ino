@@ -33,7 +33,7 @@
 #define CLEAR 46     // NUMPAD .
 
 // Declare the call back function
-void toggleBacklight();
+void toggleBacklight(uint8_t isOn);
 
 extern MenuItem mainMenu[];
 extern MenuItem settingsMenu[];
@@ -88,10 +88,7 @@ void loop() {
 /**
  * Define callback
  */
-void toggleBacklight() {
-    // This way (when you need the value for something else)
-    bool isOn = menu.getItemAt(menu.getCursorPosition())->isOn;
-    //
+void toggleBacklight(uint8_t isOn) {
     menu.lcd->setBacklight(isOn);
     // Or this way
     menu.toggleBacklight();

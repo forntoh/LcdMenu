@@ -446,7 +446,8 @@ class LcdMenu {
                 //
                 // execute the menu item's function
                 //
-                if (item->getCallback() != NULL) (item->getCallback())();
+                if (item->getCallbackInt() != NULL)
+                    (item->getCallbackInt())(item->isOn);
                 //
                 // display the menu again
                 //
@@ -457,14 +458,16 @@ class LcdMenu {
                 //
                 // execute the menu item's function
                 //
-                if (item->getCallback() != NULL) (item->getCallback())();
+                if (item->getCallbackStr() != NULL)
+                    (item->getCallbackStr())(item->value);
                 break;
             }
             case MENU_ITEM_LIST: {
                 //
                 // execute the menu item's function
                 //
-                if (item->getCallback() != NULL) (item->getCallback())();
+                if (item->getCallbackInt() != NULL)
+                    (item->getCallbackInt())(item->itemIndex);
                 break;
             }
         }

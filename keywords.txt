@@ -48,6 +48,8 @@ getItemAt	KEYWORD2
 toggleBacklight	KEYWORD2
 char	KEYWORD2
 getCallback	KEYWORD2
+getCallbackInt	KEYWORD2
+getCallbackStr	KEYWORD2
 getSubMenu	KEYWORD2
 getType	KEYWORD2
 getTextOn	KEYWORD2
