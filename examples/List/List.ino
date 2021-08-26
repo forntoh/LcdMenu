@@ -34,8 +34,8 @@
 #define CLEAR 46     // NUMPAD .
 
 // Declare the calbacks
-void colorsCallback();
-void numsCallback();
+void colorsCallback(uint8_t pos);
+void numsCallback(uint8_t pos);
 
 // Declare the array
 extern String colors[];
@@ -94,14 +94,12 @@ void loop() {
 }
 
 // Define the calbacks
-void colorsCallback() {
-    uint8_t activeListItem = menu[menu.getCursorPosition()]->itemIndex;
+void colorsCallback(uint8_t pos) {
     // do something with the index
-    Serial.println(colors[activeListItem]);
+    Serial.println(colors[pos]);
 }
 
-void numsCallback() {
-    uint8_t activeListItem = menu[menu.getCursorPosition()]->itemIndex;
+void numsCallback(uint8_t pos) {
     // do something with the index
-    Serial.println(nums[activeListItem]);
+    Serial.println(nums[pos]);
 }

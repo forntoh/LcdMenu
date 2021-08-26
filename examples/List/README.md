@@ -45,7 +45,7 @@ Use `menu.left()` and/or `menu.right()` to cycle through the items
 When `enter()` is invoked, the command _(callback)_ bound to the item is invoked.
 
 ```cpp
-// ../../examples/List/List.ino#L97-L101
+// ../../examples/List/List.ino#L97-L100
 ```
 
 Full example 👉 [.../examples/List/List.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/List/List.ino)
