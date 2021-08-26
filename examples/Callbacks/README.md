@@ -30,7 +30,7 @@ Callbacks can be used with menu items of type `ItemCommand`, `ItemInput`, `ItemL
 When `enter()` is invoked, the command _(callback)_ bound to the item is invoked.
 
 ```cpp
-// ../../examples/Callbacks/Callbacks.ino#L85-L95
+// ../../examples/Callbacks/Callbacks.ino#L88-L95
 ```
 
 Full code 👉 [.../examples/Callbacks/Callbacks.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/Callbacks/Callbacks.ino)

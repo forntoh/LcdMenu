@@ -30,6 +30,8 @@
 #include <Arduino.h>
 
 typedef void (*fptr)();
+typedef void (*fptrInt)(uint8_t);
+typedef void (*fptrStr)(String);
 //
 // menu item types
 //
@@ -51,6 +53,8 @@ class MenuItem {
     char* textOn = NULL;
     char* textOff = NULL;
     fptr callback = NULL;
+    fptrInt callbackInt = NULL;
+    fptrStr callbackStr = NULL;
     MenuItem* subMenu = NULL;
     byte type = MENU_ITEM_NONE;
     String* items = NULL;
@@ -86,18 +90,19 @@ class MenuItem {
     MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
     MenuItem(const char* text, MenuItem* subMenu, byte type)
         : text(text), subMenu(subMenu), type(type) {}
-    MenuItem(const char* text, String value, fptr callback, byte type)
-        : text(text), callback(callback), type(type), value(value) {}
-    MenuItem(const char* text, char* textOn, char* textOff, fptr callback, byte type)
+    MenuItem(const char* text, String value, fptrStr callback, byte type)
+        : text(text), callbackStr(callback), type(type), value(value) {}
+    MenuItem(const char* text, char* textOn, char* textOff, fptrInt callback,
+             byte type)
         : text(text),
           textOn(textOn),
           textOff(textOff),
-          callback(callback),
+          callbackInt(callback),
           type(type) {}
-    MenuItem(const char* text, String* items, uint8_t itemCount, fptr callback,
+    MenuItem(const char* text, String* items, uint8_t itemCount, fptrInt callback,
              byte type)
         : text(text),
-          callback(callback),
+          callbackInt(callback),
           type(type),
           items(items),
           itemCount(itemCount) {}
@@ -115,6 +120,16 @@ class MenuItem {
      * @return `ftpr` - Item's callback
      */
     fptr getCallback() { return callback; }
+    /**
+     * Get the callback of the item
+     * @return `fptrInt` - Item's callback
+     */
+    fptrInt getCallbackInt() { return callbackInt; }
+    /**
+     * Get the callback of the item
+     * @return `fptrStr` - Item's callback
+     */
+    fptrStr getCallbackStr() { return callbackStr; }
     /**
      * Get the sub menu at item
      * @return `MenuItem*` - Submenu at item
@@ -245,8 +260,12 @@ class ItemInput : public MenuItem {
      * @param value the input value
      * @param callback reference to callback function
      */
-    ItemInput(const char* text, String value, fptr callback)
+    ItemInput(const char* text, String value, fptrStr callback)
         : MenuItem(text, value, callback, MENU_ITEM_INPUT) {}
+    /**
+     */
+    ItemInput(char* text, fptrStr callback)
+        : MenuItem(text, "", callback, MENU_ITEM_INPUT) {}
 };
 
 /**
@@ -282,7 +301,7 @@ class ItemToggle : public MenuItem {
      * @param key key of the item
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, fptr callback)
+    ItemToggle(const char* key, fptrInt callback)
         : MenuItem(key, (char*)"ON", (char*)"OFF", callback, MENU_ITEM_TOGGLE) {
     }
     /**
@@ -291,7 +310,7 @@ class ItemToggle : public MenuItem {
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, char* textOn, char* textOff, fptr callback)
+    ItemToggle(const char* key, char* textOn, char* textOff, fptrInt callback)
         : MenuItem(key, textOn, textOff, callback, MENU_ITEM_TOGGLE) {}
 };
 
@@ -340,7 +359,7 @@ class ItemList : public MenuItem {
      * @param itemCount number of items in `items`
      * @param callback reference to callback function
      */
-    ItemList(const char* key, String* items, uint8_t itemCount, fptr callback)
+    ItemList(const char* key, String* items, uint8_t itemCount, fptrInt callback)
         : MenuItem(key, items, itemCount, callback, MENU_ITEM_LIST) {}
 };
 
