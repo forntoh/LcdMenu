@@ -56,6 +56,10 @@ class MenuItem {
     fptrInt callbackInt = NULL;
     fptrStr callbackStr = NULL;
     MenuItem* subMenu = NULL;
+    // track parent menu position
+    uint8_t previousMenuCursorPosition = 0;
+    uint8_t previousMenuTop = 0;
+        
     byte type = MENU_ITEM_NONE;
     String* items = NULL;
 
@@ -176,6 +180,20 @@ class MenuItem {
      */
     void setSubMenu(MenuItem* subMenu) { this->subMenu = subMenu; }
 
+    void saveParentMenuPosition(uint8_t cursorPosition, uint8_t top) { 
+        this->previousMenuCursorPosition = cursorPosition; 
+        this->previousMenuTop = top; 
+    }
+    
+    uint8_t getParentMenuCursorPosition() {
+        return this->previousMenuCursorPosition;
+    }
+
+    uint8_t getParentMenuTop() {
+        return this->previousMenuTop;
+    }
+    
+    
     /**
      * Operators
      */
