@@ -51,17 +51,14 @@ class LcdMenu {
      * Cursor position
      */
     uint8_t cursorPosition = 1;
-    uint8_t previousCursorPosition = 1;
     /**
      * First visible item's position in the menu array
      */
     uint8_t top = 1;
-    uint8_t previousTop = 1;
     /**
      * Last visible item's position in the menu array
      */
     uint8_t bottom = 0;
-    uint8_t previousBottom = 0;
     /**
      * Rows on the LCD Display
      */
@@ -189,6 +186,7 @@ class LcdMenu {
                 default:
                     break;
             }
+
         }
         //
         // determine if cursor is at the top
@@ -243,26 +241,13 @@ class LcdMenu {
         drawMenu();
         drawCursor();
     }
-    /**
-     * Reset the display
-     * @param isHistoryAvailable indicates if there is a previous position
-     */
-    void reset(boolean isHistoryAvailable) {
-        if (isHistoryAvailable) {
-            cursorPosition = previousCursorPosition;
-            top = previousTop;
-            bottom = previousBottom;
-        } else {
-            previousCursorPosition = cursorPosition;
-            previousTop = top;
-            previousBottom = bottom;
-
-            cursorPosition = 1;
-            top = 1;
-            bottom = maxRows;
-        }
-        paint();
+      
+    void setMenuPosition(uint8_t newCursorPosition, uint8_t newTop) {
+        cursorPosition = newCursorPosition;
+        top = newTop;
+        bottom = newTop + maxRows - 1;
     }
+    
     /**
      * Calculate and set the new blinker position
      */
@@ -418,10 +403,14 @@ class LcdMenu {
                 //
                 if (item->getSubMenu() == NULL) return;
                 currentMenuTable = item->getSubMenu();
+                // save the previous position in current menu header
+                currentMenuTable[0].saveParentMenuPosition(cursorPosition, top);
+                // reset menu position to top
+                setMenuPosition(1, 1);
                 //
                 // display the sub menu
                 //
-                reset(false);
+                paint();
                 break;
             }
             //
@@ -486,8 +475,13 @@ class LcdMenu {
         // check if this is a sub menu, if so go back to its parent
         //
         if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
+
+            // restore position before we go back to parent menu
+            setMenuPosition(currentMenuTable[0].getParentMenuCursorPosition(), currentMenuTable[0].getParentMenuTop());
+
             currentMenuTable = currentMenuTable[0].getSubMenu();
-            reset(true);
+
+            paint();
         }
     }
     /**
