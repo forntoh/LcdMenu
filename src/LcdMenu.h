@@ -193,7 +193,7 @@ class LcdMenu {
         //
         // determine if cursor is at the top
         //
-        if (top == 1) {
+        if (top == 1 && !isAtTheEnd()) {
             //
             // Print the down arrow only
             //
