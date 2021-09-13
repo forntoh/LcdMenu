@@ -189,6 +189,10 @@ class LcdMenu {
                 default:
                     break;
             }
+
+            // if we reached the end of menu, stop
+            if (currentMenuTable[i].getType() == MENU_ITEM_END_OF_MENU)
+                break;
         }
         //
         // determine if cursor is at the top
