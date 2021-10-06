@@ -58,6 +58,10 @@ class LcdMenu {
     uint8_t top = 1;
     uint8_t previousTop = 1;
     /**
+     * Edit mode
+     */
+    bool isEditModeEnabled = false;
+    /**
      * Last visible item's position in the menu array
      */
     uint8_t bottom = 0;
