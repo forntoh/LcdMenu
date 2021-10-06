@@ -195,8 +195,7 @@ class LcdMenu {
             }
 
             // if we reached the end of menu, stop
-            if (currentMenuTable[i].getType() == MENU_ITEM_END_OF_MENU)
-                break;
+            if (currentMenuTable[i].getType() == MENU_ITEM_END_OF_MENU) break;
         }
         //
         // determine if cursor is at the top
@@ -512,7 +511,7 @@ class LcdMenu {
     /**
      * Execute a "left press" on menu
      *
-     * *NB: Works only for `ItemInput` type*
+     * *NB: Works only for `ItemInput` and `ItemList` types*
      *
      * Moves the cursor one step to the left.
      */
@@ -538,7 +537,7 @@ class LcdMenu {
     /**
      * Execute a "right press" on menu
      *
-     * *NB: Works only for `ItemInput` type*
+     * *NB: Works only for `ItemInput` and `ItemList` types*
      *
      * Moves the cursor one step to the right.
      */
