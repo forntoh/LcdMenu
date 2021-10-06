@@ -37,7 +37,7 @@ left	KEYWORD2
 right	KEYWORD2
 backspace	KEYWORD2
 type	KEYWORD2
-replace	KEYWORD2
+drawChar	KEYWORD2
 clear	KEYWORD2
 setCursorIcon	KEYWORD2
 hide	KEYWORD2

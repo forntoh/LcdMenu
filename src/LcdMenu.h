@@ -465,19 +465,9 @@ class LcdMenu {
             }
             case MENU_ITEM_INPUT: {
                 //
-                // enter/exit editmode
+                // enter editmode
                 //
-                if (isEditModeEnabled)
-                    isEditModeEnabled = false;
-                else {
-                    isEditModeEnabled = true;
-                    break;
-                }
-                //
-                // execute callback function
-                //
-                if (item->getCallbackStr() != NULL)
-                    (item->getCallbackStr())(item->value);
+                isEditModeEnabled = true;
                 break;
             }
             case MENU_ITEM_LIST: {
