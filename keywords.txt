@@ -37,10 +37,12 @@ left	KEYWORD2
 right	KEYWORD2
 backspace	KEYWORD2
 type	KEYWORD2
+replace	KEYWORD2
 clear	KEYWORD2
 setCursorIcon	KEYWORD2
 hide	KEYWORD2
 show	KEYWORD2
+isInEditMode	KEYWORD2
 getCursorPosition	KEYWORD2
 displayNotification	KEYWORD2
 updateTimer	KEYWORD2

@@ -611,6 +611,11 @@ class LcdMenu {
         paint();
     }
     /**
+     * To know weather the menu is in edit mode or not
+     * @return `bool` - isEditModeEnabled
+     */
+    bool isInEditMode() { return isEditModeEnabled; }
+    /**
      * Clear the value of the input field
      */
     void clear() {
@@ -654,6 +659,11 @@ class LcdMenu {
         enableUpdate = true;
         paint();
     }
+    /**
+     * To know weather the menu is in edit mode or not
+     * @return `bool` - isEditModeEnabled
+     */
+    bool isInEditMode() { return isEditModeEnabled; }
     /**
      * Get the current cursor position
      * @return `cursorPosition` e.g. 1, 2, 3...
