@@ -491,6 +491,19 @@ class LcdMenu {
      * Navigates up once.
      */
     void back() {
+        MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        // Back action different when on ItemInput
+        //
+        if (item->getType() == MENU_ITEM_INPUT && isInEditMode()) {
+            // Disable edit mode
+            isEditModeEnabled = false;
+            // Execute callback function
+            if (item->getCallbackStr() != NULL)
+                (item->getCallbackStr())(item->value);
+            // Interrupt going back to parent menu
+            return;
+        }
         //
         // get the type of the currently displayed menu
         //
