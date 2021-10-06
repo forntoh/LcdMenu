@@ -362,12 +362,13 @@ class LcdMenu {
     }
     /**
      * Execute an "up press" on menu
+     * When edit mode is enabled, this action is skipped
      */
     void up() {
         //
         // determine if cursor ia at start of menu items
         //
-        if (isAtTheStart()) return;
+        if (isAtTheStart() || isEditModeEnabled) return;
         cursorPosition--;
         //
         // determine if cursor is at the top of the screen
@@ -383,12 +384,13 @@ class LcdMenu {
     }
     /**
      * Execute a "down press" on menu
+     * When edit mode is enabled, this action is skipped
      */
     void down() {
         //
         // determine if cursor has passed the end
         //
-        if (isAtTheEnd()) return;
+        if (isAtTheEnd() || isEditModeEnabled) return;
         cursorPosition++;
         //
         // determine if cursor is at the bottom of the screen
