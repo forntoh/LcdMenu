@@ -146,7 +146,7 @@ class LcdMenu {
         MenuItem* item = &currentMenuTable[cursorPosition];
         if (item->getType() == MENU_ITEM_INPUT) {
             resetBlinker();
-            lcd->blink();
+            if (isEditModeEnabled) lcd->blink();
         } else
             lcd->noBlink();
     }
