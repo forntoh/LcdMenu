@@ -467,7 +467,12 @@ class LcdMenu {
                 //
                 // enter editmode
                 //
-                isEditModeEnabled = true;
+                if (!isInEditMode()) {
+                    isEditModeEnabled = true;
+                    // blinker will be drawn
+                    drawCursor();
+                }
+
                 break;
             }
             case MENU_ITEM_LIST: {
