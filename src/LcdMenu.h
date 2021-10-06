@@ -584,7 +584,7 @@ class LcdMenu {
     void type(String character) {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
-        if (item->getType() != MENU_ITEM_INPUT) return;
+        if (item->getType() != MENU_ITEM_INPUT || !isEditModeEnabled) return;
         //
         // calculate lower and upper bound
         //
