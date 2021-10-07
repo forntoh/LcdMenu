@@ -589,7 +589,7 @@ class LcdMenu {
      * used for `Input` type menu items
      * @param character character to append
      */
-    void type(String character) {
+    void type(char character) {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
         if (item->getType() != MENU_ITEM_INPUT || !isEditModeEnabled) return;
