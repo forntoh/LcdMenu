@@ -146,9 +146,12 @@ class LcdMenu {
         MenuItem* item = &currentMenuTable[cursorPosition];
         if (item->getType() == MENU_ITEM_INPUT) {
             resetBlinker();
-            if (isEditModeEnabled) lcd->blink();
-        } else
-            lcd->noBlink();
+            if (isEditModeEnabled) {
+                lcd->blink();
+                return;
+            }
+        }
+        lcd->noBlink();
     }
     /**
      * Draw the menu items with up and down indicators
