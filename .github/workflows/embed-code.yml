@@ -1,0 +1,31 @@
+name: Embedd code
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  generate:
+    name: Generate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Embed code into examples
+        run: npx embedme examples/*.md
+
+      - name: Generate Ref docs
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Embedded code into examples"
+          git push
