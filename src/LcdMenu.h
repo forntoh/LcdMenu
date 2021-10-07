@@ -622,6 +622,11 @@ class LcdMenu {
         //
         paint();
     }
+    /**
+     * Draw a character on the display
+     * used for `Input` type menu items.
+     * @param c character to draw
+     */
     void drawChar(char c) {
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
