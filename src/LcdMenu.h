@@ -622,11 +622,18 @@ class LcdMenu {
         //
         paint();
     }
-    /**
-     * To know weather the menu is in edit mode or not
-     * @return `bool` - isEditModeEnabled
-     */
-    bool isInEditMode() { return isEditModeEnabled; }
+    void drawChar(char c) {
+        MenuItem* item = &currentMenuTable[cursorPosition];
+        //
+        if (item->getType() != MENU_ITEM_INPUT || !isEditModeEnabled) return;
+        //
+        // draw the character without updating the menu item
+        //
+        uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
+        lcd->setCursor(blinkerPosition, line);
+        lcd->print(c);
+        resetBlinker();
+    }
     /**
      * Clear the value of the input field
      */
