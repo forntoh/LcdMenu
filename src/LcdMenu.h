@@ -608,7 +608,7 @@ class LcdMenu {
         //
         if (blinkerPosition < ub) {
             String start = item->value.substring(0, blinkerPosition - lb);
-            String end = item->value.substring(blinkerPosition - lb,
+            String end = item->value.substring(blinkerPosition + 1 - lb,
                                                item->value.length());
             item->value = start + character + end;
         } else
