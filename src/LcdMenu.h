@@ -498,6 +498,7 @@ class LcdMenu {
         if (item->getType() == MENU_ITEM_INPUT && isInEditMode()) {
             // Disable edit mode
             isEditModeEnabled = false;
+            paint();
             // Execute callback function
             if (item->getCallbackStr() != NULL)
                 (item->getCallbackStr())(item->value);
