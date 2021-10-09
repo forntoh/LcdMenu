@@ -62,6 +62,11 @@ class LcdMenu {
      */
     bool isEditModeEnabled = false;
     /**
+     * Will prevent left and right movement when in edit mode and character
+     * picker is active
+     */
+    bool isCharPickerActive = false;
+    /**
      * Last visible item's position in the menu array
      */
     uint8_t bottom = 0;
@@ -528,6 +533,9 @@ class LcdMenu {
      * Moves the cursor one step to the left.
      */
     void left() {
+        //
+        if (isInEditMode() && isCharPickerActive) return;
+        //
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
         // get the type of the currently displayed menu
@@ -554,6 +562,11 @@ class LcdMenu {
      * Moves the cursor one step to the right.
      */
     void right() {
+        //
+        // Is the menu in edit mode and is the character picker active?
+        //
+        if (isInEditMode() && isCharPickerActive) return;
+        //
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
         // get the type of the currently displayed menu
@@ -614,6 +627,8 @@ class LcdMenu {
         } else
             item->value.concat(character);
         //
+        isCharPickerActive = false;
+        //
         // update blinker position
         //
         blinkerPosition++;
@@ -638,6 +653,8 @@ class LcdMenu {
         lcd->setCursor(blinkerPosition, line);
         lcd->print(c);
         resetBlinker();
+        //
+        isCharPickerActive = true;
     }
     /**
      * Clear the value of the input field
