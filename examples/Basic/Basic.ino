@@ -73,5 +73,5 @@ void loop() {
     else if (command == BACKSPACE)
         menu.backspace();
     else
-        menu.type((String)command);
+        menu.type(command);
 }
