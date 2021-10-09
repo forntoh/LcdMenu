@@ -47,10 +47,8 @@ MenuItem mainMenu[] = {ItemHeader(),
 /**
  * Create submenu and precise its parent
  */
-MenuItem settingsMenu[] = {ItemHeader(mainMenu),
-                           MenuItem("Backlight"),
-                           MenuItem("Contrast"),
-                           ItemFooter()};
+MenuItem settingsMenu[] = {ItemHeader(mainMenu), MenuItem("Backlight"),
+                           MenuItem("Contrast"), ItemFooter()};
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
@@ -80,5 +78,5 @@ void loop() {
     else if (command == BACKSPACE)
         menu.backspace();
     else
-        menu.type((String)command);
+        menu.type(command);
 }

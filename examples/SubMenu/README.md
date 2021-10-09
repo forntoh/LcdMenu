@@ -17,7 +17,7 @@ This example will show you how to get started with submenus
 // ../../examples/SubMenu/SubMenu.ino#L39-L46
 ```
 
-### 1 Create the sub menu
+### 2 Create the sub menu
 
 ```cpp
 // ../../examples/SubMenu/SubMenu.ino#L47-L53

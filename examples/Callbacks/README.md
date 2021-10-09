@@ -13,19 +13,19 @@ Callbacks can be used with menu items of type `ItemCommand`, `ItemInput`, `ItemL
 
 ## Code
 
-### 1 Declare the callback function
+### 1. Declare the callback function
 
 ```cpp
 // ../../examples/Callbacks/Callbacks.ino#L36-L36
 ```
 
-### 1 Add callback to MenuItem
+### 2. Add callback to MenuItem
 
 ```cpp
 // ../../examples/Callbacks/Callbacks.ino#L51-L56
 ```
 
-### 1 Define the callback function
+### 3. Define the callback function
 
 When `enter()` is invoked, the command _(callback)_ bound to the item is invoked.
 
