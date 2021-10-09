@@ -50,8 +50,8 @@ const byte MENU_ITEM_LIST = 9;
 class MenuItem {
    private:
     const char* text = NULL;
-    char* textOn = NULL;
-    char* textOff = NULL;
+    const char* textOn = NULL;
+    const char* textOff = NULL;
     fptr callback = NULL;
     fptrInt callbackInt = NULL;
     fptrStr callbackStr = NULL;
@@ -92,15 +92,15 @@ class MenuItem {
         : text(text), subMenu(subMenu), type(type) {}
     MenuItem(const char* text, String value, fptrStr callback, byte type)
         : text(text), callbackStr(callback), type(type), value(value) {}
-    MenuItem(const char* text, char* textOn, char* textOff, fptrInt callback,
-             byte type)
+    MenuItem(const char* text, const char* textOn, const char* textOff,
+             fptrInt callback, byte type)
         : text(text),
           textOn(textOn),
           textOff(textOff),
           callbackInt(callback),
           type(type) {}
-    MenuItem(const char* text, String* items, uint8_t itemCount, fptrInt callback,
-             byte type)
+    MenuItem(const char* text, String* items, uint8_t itemCount,
+             fptrInt callback, byte type)
         : text(text),
           callbackInt(callback),
           type(type),
@@ -144,12 +144,12 @@ class MenuItem {
      * Get the text when toggle is ON
      * @return `String` - ON text
      */
-    char* getTextOn() { return textOn; }
+    const char* getTextOn() { return textOn; }
     /**
      * Get the text when toggle is OFF
      * @return `String` - OFF text
      */
-    char* getTextOff() { return textOff; }
+    const char* getTextOff() { return textOff; }
     /**
      * Get the list of items
      * @return `String*` - List of items
@@ -264,7 +264,7 @@ class ItemInput : public MenuItem {
         : MenuItem(text, value, callback, MENU_ITEM_INPUT) {}
     /**
      */
-    ItemInput(char* text, fptrStr callback)
+    ItemInput(const char* text, fptrStr callback)
         : MenuItem(text, "", callback, MENU_ITEM_INPUT) {}
 };
 
@@ -302,8 +302,7 @@ class ItemToggle : public MenuItem {
      * @param callback reference to callback function
      */
     ItemToggle(const char* key, fptrInt callback)
-        : MenuItem(key, (char*)"ON", (char*)"OFF", callback, MENU_ITEM_TOGGLE) {
-    }
+        : MenuItem(key, "ON", "OFF", callback, MENU_ITEM_TOGGLE) {}
     /**
      * @param key key of the item
      * @param textOn display text when ON
@@ -359,7 +358,8 @@ class ItemList : public MenuItem {
      * @param itemCount number of items in `items`
      * @param callback reference to callback function
      */
-    ItemList(const char* key, String* items, uint8_t itemCount, fptrInt callback)
+    ItemList(const char* key, String* items, uint8_t itemCount,
+             fptrInt callback)
         : MenuItem(key, items, itemCount, callback, MENU_ITEM_LIST) {}
 };
 
