@@ -17,6 +17,9 @@ Use `menu.type(char character)` to type a character
 
 ```cpp
 // ../../examples/SimpleInput/SimpleInput.ino#L74-L75
+
+else  // Type the character you want
+    menu.type(command);
 ```
 
 ### 2. Run when item is selected
@@ -25,6 +28,11 @@ When `enter()` is invoked, the command _(callback)_ bound to the item is invoked
 
 ```cpp
 // ../../examples/SimpleInput/SimpleInput.ino#L80-L83
+
+void inputCallback(String value) {
+    Serial.print(F("# "));
+    Serial.println(value);
+}
 ```
 
 Full example 👉 [.../examples/SimpleInput/SimpleInput.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/SimpleInput/SimpleInput.ino)

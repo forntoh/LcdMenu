@@ -17,6 +17,12 @@ You also need to track the active index of the list
 
 ```cpp
 // ../../examples/CharsetInput/CharsetInput.ino#L36-L40
+
+#define CHARSET_SIZE 10
+// Create your charset
+char charset[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+// Active index of the charset
+uint8_t charsetPosition;
 ```
 
 ### 2. Move to an ItemInput menu item
@@ -33,6 +39,20 @@ Execute `enter()` to go to edit mode. _(cursor will start blinking 😉)_
 
 ```cpp
 // ../../examples/CharsetInput/CharsetInput.ino#L68-L80
+
+case UP:
+    if (menu.isInEditMode())  // Update the position only in edit mode
+        charsetPosition = (charsetPosition + 1) % CHARSET_SIZE;
+    menu.drawChar(charset[charsetPosition]);  // Works only in edit mode
+    menu.up();
+    break;
+case DOWN:
+    if (menu.isInEditMode())  // Update the position only in edit mode
+        charsetPosition =
+            constrain(charsetPosition - 1, 0, CHARSET_SIZE);
+    menu.drawChar(charset[charsetPosition]);  // Works only in edit mode
+    menu.down();
+    break;
 ```
 
 ### 5. Type the selected character
@@ -41,6 +61,9 @@ Use `menu.type(char character)` to type the selected character
 
 ```cpp
 // ../../examples/CharsetInput/CharsetInput.ino#L87-L88
+
+case ENTER:  // Press enter to go to edit mode : for ItemInput
+    menu.type(charset[charsetPosition]);  // Works only in edit mode
 ```
 
 ### 6. `menu.back()` will exit edit mode
