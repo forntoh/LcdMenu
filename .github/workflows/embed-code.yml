@@ -22,7 +22,7 @@ jobs:
       - name: Embed code into examples
         run: npx embedme examples/*.md
 
-      - name: Generate Ref docs
+      - name: Commit changes
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
