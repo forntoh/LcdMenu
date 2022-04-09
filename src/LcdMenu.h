@@ -169,7 +169,9 @@ class LcdMenu {
         for (uint8_t i = top; i <= bottom; i++) {
             MenuItem* item = &currentMenuTable[i];
             lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
-            lcd->print(item->getText());
+            if (currentMenuTable[i].getType() != MENU_ITEM_END_OF_MENU){
+                lcd->print(item->getText());
+            }
             //
             // determine the type of item
             //
@@ -201,7 +203,6 @@ class LcdMenu {
                 default:
                     break;
             }
-
             // if we reached the end of menu, stop
             if (currentMenuTable[i].getType() == MENU_ITEM_END_OF_MENU) break;
         }
