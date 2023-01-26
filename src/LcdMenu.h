@@ -169,7 +169,7 @@ class LcdMenu {
         for (uint8_t i = top; i <= bottom; i++) {
             MenuItem* item = &currentMenuTable[i];
             lcd->setCursor(1, map(i, top, bottom, 0, maxRows - 1));
-            if (currentMenuTable[i].getType() != MENU_ITEM_END_OF_MENU){
+            if (currentMenuTable[i].getType() != MENU_ITEM_END_OF_MENU) {
                 lcd->print(item->getText());
             }
             //
@@ -302,13 +302,13 @@ class LcdMenu {
      */
 
     /**
-     * Time when the toast started showing in milliseconds
+     * Time when the timer started in milliseconds
      */
     unsigned long startTime = 0;
     /**
-     * How long the toast should Last in milliseconds
+     * How long should the timer delay in milliseconds
      */
-    unsigned int duration = 0;
+    unsigned int delay = 0;
     /**
      * LCD Display
      */
@@ -740,14 +740,14 @@ class LcdMenu {
         //
         // initialize the timer
         //
-        this->duration = duration;
+        delay = duration;
         startTime = millis();
     }
     /**
      * Executes any delayed task when appropriate time reaches
      */
     void updateTimer() {
-        if (millis() == startTime + duration) paint();
+        if (millis() == startTime + delay) paint();
     }
     /**
      * Get a `MenuItem` at position
@@ -758,8 +758,10 @@ class LcdMenu {
     }
     /**
      * Get a `MenuItem` at position using operator function
-     * e.g `menu[men.getCursorPosition()]` will return the item at the current
+     * e.g `menu[menu.getCursorPosition()]` will return the item at the current
      * cursor position
+     * NB: This is relative positioning (i.e. if a submenu is currently being
+     * displayed, menu[1] will return item 1 in the current menu)
      * @return `MenuItem` - item at `position`
      */
     MenuItem* operator[](const uint8_t position) {
