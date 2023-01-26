@@ -758,8 +758,10 @@ class LcdMenu {
     }
     /**
      * Get a `MenuItem` at position using operator function
-     * e.g `menu[men.getCursorPosition()]` will return the item at the current
+     * e.g `menu[menu.getCursorPosition()]` will return the item at the current
      * cursor position
+     * NB: This is relative positioning (i.e. if a submenu is currently being
+     * displayed, menu[1] will return item 1 in the current menu)
      * @return `MenuItem` - item at `position`
      */
     MenuItem* operator[](const uint8_t position) {
