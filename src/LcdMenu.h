@@ -251,14 +251,6 @@ class LcdMenu {
         return currentMenuTable[cursorPosition + 1].getType() ==
                MENU_ITEM_END_OF_MENU;
     }
-    /*
-     * Draw the menu items and cursor
-     */
-    void update() {
-        if (!enableUpdate) return;
-        drawMenu();
-        drawCursor();
-    }
     /**
      * Reset the display
      * @param isHistoryAvailable indicates if there is a previous position
@@ -367,6 +359,14 @@ class LcdMenu {
     void setSubMenu(uint8_t position, MenuItem* items) {
         currentMenuTable[position + 1].setSubMenu(items);
         update();
+    }
+    /*
+     * Draw the menu items and cursor
+     */
+    void update() {
+        if (!enableUpdate) return;
+        drawMenu();
+        drawCursor();
     }
     /**
      * Execute an "up press" on menu
