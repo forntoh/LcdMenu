@@ -254,7 +254,7 @@ class LcdMenu {
     /*
      * Draw the menu items and cursor
      */
-    void paint() {
+    void update() {
         if (!enableUpdate) return;
         drawMenu();
         drawCursor();
@@ -277,7 +277,7 @@ class LcdMenu {
             top = 1;
             bottom = maxRows;
         }
-        paint();
+        update();
     }
     /**
      * Calculate and set the new blinker position
@@ -357,7 +357,7 @@ class LcdMenu {
         lcd->createChar(0, upArrow);
         lcd->createChar(1, downArrow);
         this->currentMenuTable = menu;
-        paint();
+        update();
     }
     /**
      * Call this function to set sub menu items for any main menu item
@@ -366,7 +366,7 @@ class LcdMenu {
      */
     void setSubMenu(uint8_t position, MenuItem* items) {
         currentMenuTable[position + 1].setSubMenu(items);
-        paint();
+        update();
     }
     /**
      * Execute an "up press" on menu
@@ -388,7 +388,7 @@ class LcdMenu {
             top--;
             bottom--;
         }
-        paint();
+        update();
     }
     /**
      * Execute a "down press" on menu
@@ -410,7 +410,7 @@ class LcdMenu {
             top++;
             bottom++;
         }
-        paint();
+        update();
     }
     /**
      * Execute an "enter" action on menu.
@@ -453,7 +453,7 @@ class LcdMenu {
                 //
                 // display the menu again
                 //
-                paint();
+                update();
                 break;
             }
             case MENU_ITEM_TOGGLE: {
@@ -469,7 +469,7 @@ class LcdMenu {
                 //
                 // display the menu again
                 //
-                paint();
+                update();
                 break;
             }
             case MENU_ITEM_INPUT: {
@@ -507,7 +507,7 @@ class LcdMenu {
         if (item->getType() == MENU_ITEM_INPUT && isInEditMode()) {
             // Disable edit mode
             isEditModeEnabled = false;
-            paint();
+            update();
             // Execute callback function
             if (item->getCallbackStr() != NULL)
                 (item->getCallbackStr())(item->value);
@@ -546,7 +546,7 @@ class LcdMenu {
             case MENU_ITEM_LIST: {
                 item->itemIndex =
                     constrain(item->itemIndex - 1, 0, item->itemCount - 1);
-                if (previousIndex != item->itemIndex) paint();
+                if (previousIndex != item->itemIndex) update();
                 break;
             }
             default:
@@ -576,7 +576,7 @@ class LcdMenu {
             case MENU_ITEM_LIST: {
                 item->itemIndex = (item->itemIndex + 1) % item->itemCount;
                 // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
-                paint();
+                update();
                 break;
             }
             default:
@@ -600,7 +600,7 @@ class LcdMenu {
         uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
         item->value.remove(p, 1);
         blinkerPosition--;
-        paint();
+        update();
     }
     /**
      * Display text at the cursor position
@@ -636,7 +636,7 @@ class LcdMenu {
         //
         // repaint menu
         //
-        paint();
+        update();
     }
     /**
      * Draw a character on the display
@@ -675,7 +675,7 @@ class LcdMenu {
         //
         // repaint menu
         //
-        paint();
+        update();
     }
     /**
      * Set the character used to visualize the cursor.
@@ -699,7 +699,7 @@ class LcdMenu {
      */
     void show() {
         enableUpdate = true;
-        paint();
+        update();
     }
     /**
      * To know weather the menu is in edit mode or not
@@ -711,6 +711,17 @@ class LcdMenu {
      * @return `cursorPosition` e.g. 1, 2, 3...
      */
     uint8_t getCursorPosition() { return this->cursorPosition; }
+    /**
+     * @brief Execute a callback after [delay] milliseconds
+     *
+     * @param callback The callback to be executed
+     * @param delay Deley time in milliseconds
+     */
+    void run(fptr callback, uint8_t delay) {
+        this->delay = delay;
+        this->startTime = millis();
+        if (millis() == startTime + delay) fptr();
+    }
     /**
      * Show a message at the bottom of the screen
      * @param message message to display
@@ -747,7 +758,7 @@ class LcdMenu {
      * Executes any delayed task when appropriate time reaches
      */
     void updateTimer() {
-        if (millis() == startTime + delay) paint();
+        if (millis() == startTime + delay) update();
     }
     /**
      * Get a `MenuItem` at position
