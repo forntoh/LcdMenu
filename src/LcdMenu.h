@@ -712,17 +712,6 @@ class LcdMenu {
      */
     uint8_t getCursorPosition() { return this->cursorPosition; }
     /**
-     * @brief Execute a callback after [delay] milliseconds
-     *
-     * @param callback The callback to be executed
-     * @param delay Deley time in milliseconds
-     */
-    void run(fptr callback, uint8_t delay) {
-        this->delay = delay;
-        this->startTime = millis();
-        if (millis() == startTime + delay) fptr();
-    }
-    /**
      * Show a message at the bottom of the screen
      * @param message message to display
      * @param duration how long to display the message
