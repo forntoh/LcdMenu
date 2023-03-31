@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2021 Forntoh Thomas
+  Copyright (c) 2020-2023 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -47,11 +47,6 @@ class LcdMenu {
      * ## Private Fields
      */
 
-    /**
-     * Cursor position
-     */
-    uint8_t cursorPosition = 1;
-    uint8_t previousCursorPosition = 1;
     /**
      * First visible item's position in the menu array
      */
@@ -293,6 +288,11 @@ class LcdMenu {
      * ## Public Fields
      */
 
+    /**
+     * Cursor position
+     */
+    uint8_t cursorPosition = 1;
+    uint8_t previousCursorPosition = 1;
     /**
      * Time when the timer started in milliseconds
      */
