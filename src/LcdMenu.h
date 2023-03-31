@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2021 Forntoh Thomas
+  Copyright (c) 2020-2023 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -252,26 +252,6 @@ class LcdMenu {
                MENU_ITEM_END_OF_MENU;
     }
     /**
-     * Reset the display
-     * @param isHistoryAvailable indicates if there is a previous position
-     */
-    void reset(boolean isHistoryAvailable) {
-        if (isHistoryAvailable) {
-            cursorPosition = previousCursorPosition;
-            top = previousTop;
-            bottom = previousBottom;
-        } else {
-            previousCursorPosition = cursorPosition;
-            previousTop = top;
-            previousBottom = bottom;
-
-            cursorPosition = 1;
-            top = 1;
-            bottom = maxRows;
-        }
-        update();
-    }
-    /**
      * Calculate and set the new blinker position
      */
     void resetBlinker() {
@@ -367,6 +347,26 @@ class LcdMenu {
         if (!enableUpdate) return;
         drawMenu();
         drawCursor();
+    }
+    /**
+     * Reset the display
+     * @param isHistoryAvailable indicates if there is a previous position
+     */
+    void reset(boolean isHistoryAvailable) {
+        if (isHistoryAvailable) {
+            cursorPosition = previousCursorPosition;
+            top = previousTop;
+            bottom = previousBottom;
+        } else {
+            previousCursorPosition = cursorPosition;
+            previousTop = top;
+            previousBottom = bottom;
+
+            cursorPosition = 1;
+            top = 1;
+            bottom = maxRows;
+        }
+        update();
     }
     /**
      * Execute an "up press" on menu
