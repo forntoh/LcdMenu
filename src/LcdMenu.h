@@ -515,13 +515,9 @@ class LcdMenu {
             return;
         }
         //
-        // get the type of the currently displayed menu
-        //
-        byte menuItemType = currentMenuTable[0].getType();
-        //
         // check if this is a sub menu, if so go back to its parent
         //
-        if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
+        if (isSubMenu()) {
             currentMenuTable = currentMenuTable[0].getSubMenu();
             reset(true);
         }
