@@ -761,10 +761,7 @@ class LcdMenu {
      */
     bool isSubMenu() {
         byte menuItemType = currentMenuTable[0].getType();
-        if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
-            return true;
-        }
-        return false;
+        return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
     }
     /**
      * Get a `MenuItem` at position
