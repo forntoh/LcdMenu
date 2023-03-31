@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2021 Forntoh Thomas
+  Copyright (c) 2020-2023 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -341,8 +341,8 @@ class LcdMenu {
         lcd->backlight();
 #else
         uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-        MenuItem* menu) {
-        this->lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3);
+        uint8_t backlight, MenuItem* menu) {
+        this->lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3, backlight, POSITIVE);
         this->lcd->begin(maxCols, maxRows);
 #endif
         lcd->clear();
