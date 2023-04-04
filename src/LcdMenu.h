@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2021 Forntoh Thomas
+  Copyright (c) 2020-2023 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -515,13 +515,9 @@ class LcdMenu {
             return;
         }
         //
-        // get the type of the currently displayed menu
-        //
-        byte menuItemType = currentMenuTable[0].getType();
-        //
         // check if this is a sub menu, if so go back to its parent
         //
-        if (menuItemType == MENU_ITEM_SUB_MENU_HEADER) {
+        if (isSubMenu()) {
             currentMenuTable = currentMenuTable[0].getSubMenu();
             reset(true);
         }
@@ -759,6 +755,13 @@ class LcdMenu {
      */
     void updateTimer() {
         if (millis() == startTime + delay) update();
+    }
+    /**
+     * Check if currently displayed menu is a sub menu.
+     */
+    bool isSubMenu() {
+        byte menuItemType = currentMenuTable[0].getType();
+        return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
     }
     /**
      * Get a `MenuItem` at position
