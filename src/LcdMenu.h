@@ -708,10 +708,15 @@ class LcdMenu {
      */
     uint8_t getCursorPosition() { return this->cursorPosition; }
     /**
+     * Set the current cursor position
+     * @param position
+     */
+    void setCursorPosition(uint8_t position) { this->cursorPosition = position; }
+    /**
      * @brief Execute a callback after [delay] milliseconds
      *
      * @param callback The callback to be executed
-     * @param delay Deley time in milliseconds
+     * @param delay Delay time in milliseconds
      */
     void run(fptr callback, uint8_t delay) {
         this->delay = delay;
@@ -730,7 +735,7 @@ class LcdMenu {
         //
         uint8_t centerPos = maxCols / 2 - (strlen(message) / 2);
         //
-        // Set cursor potion and clear lane
+        // Set cursor position and clear lane
         //
         lcd->setCursor(0, maxRows - 1);
         lcd->print("                   ");
