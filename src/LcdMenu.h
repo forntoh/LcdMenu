@@ -251,6 +251,26 @@ class LcdMenu {
         return currentMenuTable[cursorPosition + 1].getType() ==
                MENU_ITEM_END_OF_MENU;
     }
+        /**
+     * Reset the display
+     * @param isHistoryAvailable indicates if there is a previous position
+     */
+    void reset(boolean isHistoryAvailable) {
+        if (isHistoryAvailable) {
+            cursorPosition = previousCursorPosition;
+            top = previousTop;
+            bottom = previousBottom;
+        } else {
+            previousCursorPosition = cursorPosition;
+            previousTop = top;
+            previousBottom = bottom;
+
+            cursorPosition = 1;
+            top = 1;
+            bottom = maxRows;
+        }
+        update();
+    }
     /**
      * Calculate and set the new blinker position
      */
@@ -347,26 +367,6 @@ class LcdMenu {
         if (!enableUpdate) return;
         drawMenu();
         drawCursor();
-    }
-    /**
-     * Reset the display
-     * @param isHistoryAvailable indicates if there is a previous position
-     */
-    void reset(boolean isHistoryAvailable) {
-        if (isHistoryAvailable) {
-            cursorPosition = previousCursorPosition;
-            top = previousTop;
-            bottom = previousBottom;
-        } else {
-            previousCursorPosition = cursorPosition;
-            previousTop = top;
-            previousBottom = bottom;
-
-            cursorPosition = 1;
-            top = 1;
-            bottom = maxRows;
-        }
-        update();
     }
     /**
      * Execute an "up press" on menu
