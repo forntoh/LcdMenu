@@ -251,7 +251,7 @@ class LcdMenu {
         return currentMenuTable[cursorPosition + 1].getType() ==
                MENU_ITEM_END_OF_MENU;
     }
-        /**
+    /**
      * Reset the display
      * @param isHistoryAvailable indicates if there is a previous position
      */
@@ -367,6 +367,12 @@ class LcdMenu {
         if (!enableUpdate) return;
         drawMenu();
         drawCursor();
+    }
+    /**
+     * Reset the display
+     */
+    void resetMenu() {
+        this->reset(false);
     }
     /**
      * Execute an "up press" on menu
