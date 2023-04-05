@@ -52,7 +52,9 @@ class MenuItem {
     const char* text = NULL;
     const char* textOn = NULL;
     const char* textOff = NULL;
+#ifdef ItemCommand_H
     fptr callback = NULL;
+#endif
     fptrInt callbackInt = NULL;
     fptrStr callbackStr = NULL;
     MenuItem* subMenu = NULL;
@@ -68,6 +70,7 @@ class MenuItem {
      * `Boolean` state of the item *(either ON or OFF)*
      */
     boolean isOn = false;
+#ifdef ItemInput_H
     /**
      * String value of an `ItemInput`
      */
@@ -83,10 +86,10 @@ class MenuItem {
 
     MenuItem() = default;
     explicit MenuItem(const char* text) : text(text) {}
+#ifdef ItemCommand_H
     MenuItem(const char* text, fptr callback, byte type)
         : text(text), callback(callback), type(type) {}
-    MenuItem(const char* text, fptr callback, MenuItem* subMenu, byte type)
-        : text(text), callback(callback), subMenu(subMenu), type(type) {}
+#endif
     MenuItem(MenuItem* subMenu, byte type) : subMenu(subMenu), type(type) {}
     MenuItem(const char* text, MenuItem* subMenu, byte type)
         : text(text), subMenu(subMenu), type(type) {}
@@ -115,11 +118,13 @@ class MenuItem {
      * @return `String` - Item's text
      */
     const char* getText() { return text; }
+#ifdef ItemCommand_H
     /**
      * Get the callback of the item
      * @return `ftpr` - Item's callback
      */
     fptr getCallback() { return callback; }
+#endif
     /**
      * Get the callback of the item
      * @return `fptrInt` - Item's callback
@@ -165,11 +170,13 @@ class MenuItem {
      * @param text text to display for the item
      */
     void setText(const char* text) { this->text = text; }
+#ifdef ItemCommand_H
     /**
      * Set the callback on the item
      * @param callback reference to callback function
      */
     void setCallBack(fptr callback) { this->callback = callback; }
+#endif
     /**
      * Set the sub menu on the item
      * @param subMenu for the item
@@ -311,26 +318,6 @@ class ItemToggle : public MenuItem {
      */
     ItemToggle(const char* key, char* textOn, char* textOff, fptrInt callback)
         : MenuItem(key, textOn, textOff, callback, MENU_ITEM_TOGGLE) {}
-};
-
-/**
- * ---
- *
- * # ItemCommand
- *
- * This item type indicates that the current item is a **command**.
- * When `enter()` is invoked, the command *(callback)* bound to this item is
- * invoked.
- */
-
-class ItemCommand : public MenuItem {
-   public:
-    /**
-     * @param key key of the item
-     * @param callback reference to callback function
-     */
-    ItemCommand(const char* key, fptr callback)
-        : MenuItem(key, callback, MENU_ITEM_COMMAND) {}
 };
 
 /**
