@@ -23,9 +23,7 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
 */
-
-#ifndef LcdMenu_H
-#define LcdMenu_H
+#pragma once
 
 #ifndef USE_STANDARD_LCD
 #include <LiquidCrystal_I2C.h>
@@ -145,6 +143,7 @@ class LcdMenu {
         uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
         lcd->setCursor(0, line);
         lcd->write(cursorIcon);
+#ifdef ItemInput_H
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
         //
@@ -156,6 +155,7 @@ class LcdMenu {
                 return;
             }
         }
+#endif
         lcd->noBlink();
     }
     /**
@@ -176,6 +176,7 @@ class LcdMenu {
             // determine the type of item
             //
             switch (item->getType()) {
+#ifdef ItemToggle_H
                 case MENU_ITEM_TOGGLE:
                     //
                     // append textOn or textOff depending on the state
@@ -184,6 +185,8 @@ class LcdMenu {
                     lcd->print(item->isOn ? item->getTextOn()
                                           : item->getTextOff());
                     break;
+#endif
+#ifdef ItemInput_H
                 case MENU_ITEM_INPUT:
                     //
                     // append the value of the input
@@ -192,6 +195,8 @@ class LcdMenu {
                     lcd->print(item->value.substring(
                         0, maxCols - strlen(item->getText()) - 2));
                     break;
+#endif
+#ifdef ItemList_H
                 case MENU_ITEM_LIST:
                     //
                     // append the value of the item at current list position
@@ -200,6 +205,7 @@ class LcdMenu {
                     lcd->print(item->getItems()[item->itemIndex].substring(
                         0, maxCols - strlen(item->getText()) - 2));
                     break;
+#endif
                 default:
                     break;
             }
@@ -271,6 +277,7 @@ class LcdMenu {
         }
         update();
     }
+#ifdef ItemInput_H
     /**
      * Calculate and set the new blinker position
      */
@@ -287,6 +294,7 @@ class LcdMenu {
         blinkerPosition = constrain(blinkerPosition, lb, ub);
         lcd->setCursor(blinkerPosition, cursorPosition - top);
     }
+#endif
 
    public:
     /**
@@ -442,6 +450,7 @@ class LcdMenu {
                 reset(false);
                 break;
             }
+#ifdef ItemCommand_H
             //
             // execute the menu item's function
             //
@@ -456,6 +465,8 @@ class LcdMenu {
                 update();
                 break;
             }
+#endif
+#ifdef ItemToggle_H
             case MENU_ITEM_TOGGLE: {
                 //
                 // toggle the value of isOn
@@ -472,6 +483,8 @@ class LcdMenu {
                 update();
                 break;
             }
+#endif
+#ifdef ItemInput_H
             case MENU_ITEM_INPUT: {
                 //
                 // enter editmode
@@ -484,6 +497,8 @@ class LcdMenu {
 
                 break;
             }
+#endif
+#ifdef ItemList_H
             case MENU_ITEM_LIST: {
                 //
                 // execute the menu item's function
@@ -492,6 +507,7 @@ class LcdMenu {
                     (item->getCallbackInt())(item->itemIndex);
                 break;
             }
+#endif
         }
     }
     /**
@@ -500,6 +516,7 @@ class LcdMenu {
      * Navigates up once.
      */
     void back() {
+#ifdef ItemInput_H
         MenuItem* item = &currentMenuTable[cursorPosition];
         //
         // Back action different when on ItemInput
@@ -514,6 +531,7 @@ class LcdMenu {
             // Interrupt going back to parent menu
             return;
         }
+#endif
         //
         // check if this is a sub menu, if so go back to its parent
         //
@@ -537,18 +555,25 @@ class LcdMenu {
         //
         // get the type of the currently displayed menu
         //
+#ifdef ItemList_H
         uint8_t previousIndex = item->itemIndex;
+#endif
         switch (item->getType()) {
+#ifdef ItemList_H
             case MENU_ITEM_LIST: {
                 item->itemIndex =
                     constrain(item->itemIndex - 1, 0, item->itemCount - 1);
                 if (previousIndex != item->itemIndex) update();
                 break;
             }
-            default:
+#endif
+#ifdef ItemInput_H
+            case MENU_ITEM_INPUT: {
                 blinkerPosition--;
                 resetBlinker();
                 break;
+            }
+#endif
         }
     }
     /**
@@ -569,18 +594,24 @@ class LcdMenu {
         // get the type of the currently displayed menu
         //
         switch (item->getType()) {
+#ifdef ItemList_H
             case MENU_ITEM_LIST: {
                 item->itemIndex = (item->itemIndex + 1) % item->itemCount;
                 // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
                 update();
                 break;
             }
-            default:
+#endif
+#ifdef ItemInput_H
+            case MENU_ITEM_INPUT: {
                 blinkerPosition++;
                 resetBlinker();
                 break;
+            }
+#endif
         }
     }
+#ifdef ItemInput_H
     /**
      * Execute a "backspace cmd" on menu
      *
@@ -673,6 +704,7 @@ class LcdMenu {
         //
         update();
     }
+#endif
     /**
      * Set the character used to visualize the cursor.
      * @param newIcon character to display
@@ -711,17 +743,8 @@ class LcdMenu {
      * Set the current cursor position
      * @param position
      */
-    void setCursorPosition(uint8_t position) { this->cursorPosition = position; }
-    /**
-     * @brief Execute a callback after [delay] milliseconds
-     *
-     * @param callback The callback to be executed
-     * @param delay Delay time in milliseconds
-     */
-    void run(fptr callback, uint8_t delay) {
-        this->delay = delay;
-        this->startTime = millis();
-        if (millis() == startTime + delay) fptr();
+    void setCursorPosition(uint8_t position) {
+        this->cursorPosition = position;
     }
     /**
      * Show a message at the bottom of the screen
@@ -786,6 +809,7 @@ class LcdMenu {
     MenuItem* operator[](const uint8_t position) {
         return &currentMenuTable[position];
     }
+#ifdef ItemToggle_H
     /**
      * Toggle backlight
      */
@@ -795,5 +819,5 @@ class LcdMenu {
             lcd->setBacklight(item->isOn);
         }
     }
-};
 #endif
+};
