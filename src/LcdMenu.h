@@ -202,7 +202,7 @@ class LcdMenu {
                     // append the value of the item at current list position
                     //
                     lcd->print(":");
-                    lcd->print(item->getItems()[item->itemIndex].substring(
+                    lcd->print(item->getItems()[item->getItemIndex()].substring(
                         0, maxCols - strlen(item->getText()) - 2));
                     break;
 #endif
@@ -359,15 +359,6 @@ class LcdMenu {
         this->currentMenuTable = menu;
         update();
     }
-    /**
-     * Call this function to set sub menu items for any main menu item
-     * @param position main menu item/where to place the sub menu
-     * @param items    sub menu items
-     */
-    void setSubMenu(uint8_t position, MenuItem* items) {
-        currentMenuTable[position + 1].setSubMenu(items);
-        update();
-    }
     /*
      * Draw the menu items and cursor
      */
@@ -504,7 +495,7 @@ class LcdMenu {
                 // execute the menu item's function
                 //
                 if (item->getCallbackInt() != NULL)
-                    (item->getCallbackInt())(item->itemIndex);
+                    (item->getCallbackInt())(item->getItemIndex());
                 break;
             }
 #endif
@@ -556,14 +547,14 @@ class LcdMenu {
         // get the type of the currently displayed menu
         //
 #ifdef ItemList_H
-        uint8_t previousIndex = item->itemIndex;
+        uint8_t previousIndex = item->getItemIndex();
 #endif
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                item->itemIndex =
-                    constrain(item->itemIndex - 1, 0, item->itemCount - 1);
-                if (previousIndex != item->itemIndex) update();
+                item->setItemIndex(constrain(item->getItemIndex() - 1, 0,
+                                             item->getItemCount() - 1));
+                if (previousIndex != item->getItemIndex()) update();
                 break;
             }
 #endif
@@ -596,7 +587,8 @@ class LcdMenu {
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                item->itemIndex = (item->itemIndex + 1) % item->itemCount;
+                item->setItemIndex((item->getItemIndex() + 1) %
+                                   item->getItemCount());
                 // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
                 update();
                 break;

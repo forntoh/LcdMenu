@@ -19,6 +19,12 @@
 #include "MenuItem.h"
 
 class ItemList : public MenuItem {
+   private:
+    fptrInt callback = NULL;
+    String* items = NULL;
+    const uint8_t itemIndex = 0;
+    const uint8_t itemCount = 0;
+
    public:
     /**
      * @param key key of the items
@@ -28,5 +34,12 @@ class ItemList : public MenuItem {
      */
     ItemList(const char* key, String* items, uint8_t itemCount,
              fptrInt callback)
-        : MenuItem(key, items, itemCount, callback, MENU_ITEM_LIST) {}
+        : MenuItem(key, MENU_ITEM_LIST),
+          items(items),
+          itemCount(itemCount),
+          callback(callback) {}
+
+    uint8_t getItemIndex() override { return itemIndex; }
+    uint8_t getItemCount() override { return itemCount; };
+    String* getItems() override { return items; }
 };

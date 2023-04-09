@@ -11,12 +11,12 @@
 #define ItemSubMenu_H
 #include "MenuItem.h"
 
-class ItemSubMenu : public MenuItem {
+class ItemSubMenu : public ItemHeader {
    public:
     /**
      * @param text text to display for the item
      * @param parent the parent of the sub menu item
      */
     ItemSubMenu(const char* text, MenuItem* parent)
-        : MenuItem(text, parent, MENU_ITEM_SUB_MENU) {}
+        : ItemHeader(text, parent, MENU_ITEM_SUB_MENU) {}
 };

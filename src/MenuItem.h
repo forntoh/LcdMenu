@@ -36,21 +36,11 @@ class MenuItem {
    protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;
-    String* items = NULL;
 
    public:
     /**
      * ## Public Fields
      */
-
-    /**
-     * Current index of list for `ItemList`
-     */
-    uint8_t itemIndex = 0;
-    /**
-     * Number of items in the list for `ItemList`
-     */
-    uint8_t itemCount = 0;
 
     MenuItem() = default;
     MenuItem(const char* text) : text(text) {}
@@ -108,10 +98,18 @@ class MenuItem {
      */
     virtual const char* getTextOff() { return ""; }
     /**
+     * Current index of list for `ItemList`
+     */
+    virtual uint8_t getItemIndex() { return 0; }
+    /**
+     * Number of items in the list for `ItemList`
+     */
+    virtual uint8_t getItemCount() { return 0; };
+    /**
      * Get the list of items
      * @return `String*` - List of items
      */
-    virtual String* getItems() { return items; }
+    virtual String* getItems() { return NULL; }
 
     /**
      * ## Setters
@@ -136,10 +134,9 @@ class MenuItem {
      */
     virtual void setCallBack(fptr callback){};
     /**
-     * Set the sub menu on the item
-     * @param subMenu for the item
+     * Current index of list for `ItemList`
      */
-    void setSubMenu(MenuItem* subMenu){};
+    virtual void setItemIndex(uint8_t itemIndex){};
 
     /**
      * Operators
@@ -170,8 +167,11 @@ class MenuItem {
  */
 
 class ItemHeader : public MenuItem {
-   private:
+   protected:
     MenuItem* parent = NULL;
+
+    ItemHeader(const char* text, MenuItem* parent, byte type)
+        : MenuItem(NULL, type), parent(parent) {}
 
    public:
     /**
@@ -181,7 +181,7 @@ class ItemHeader : public MenuItem {
      * @param parent the parent menu item
      */
     ItemHeader(MenuItem* parent)
-        : MenuItem(NULL, MENU_ITEM_SUB_MENU_HEADER), parent(parent) {}
+        : ItemHeader("", parent, MENU_ITEM_SUB_MENU_HEADER) {}
 
     MenuItem* getSubMenu() override { return this->parent; };
 };
