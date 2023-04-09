@@ -32,7 +32,7 @@ class ItemList : public MenuItem {
     fptrInt callback = NULL;  ///< Pointer to a callback function
     String* items = NULL;     ///< Pointer to an array of items
     const uint8_t itemCount;  ///< The total number of items in the list
-    uint8_t itemIndex;        ///< The current selected item index
+    uint8_t itemIndex = 0;    ///< The current selected item index
 
    public:
     /**
@@ -49,7 +49,6 @@ class ItemList : public MenuItem {
         : MenuItem(key, MENU_ITEM_LIST),
           items(items),
           itemCount(itemCount),
-          itemIndex(0),
           callback(callback) {}
 
     /**

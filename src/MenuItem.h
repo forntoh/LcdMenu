@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2021 Forntoh Thomas
+  Copyright (c) 2020-2023 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,6 @@ class MenuItem {
     byte type = MENU_ITEM_NONE;
 
    public:
-    MenuItem() = default;
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
     /**
@@ -87,12 +86,12 @@ class MenuItem {
      * Get the text when toggle is ON
      * @return `String` - ON text
      */
-    virtual const char* getTextOn() { return ""; }
+    virtual const char* getTextOn() { return NULL; }
     /**
      * Get the text when toggle is OFF
      * @return `String` - OFF text
      */
-    virtual const char* getTextOff() { return ""; }
+    virtual const char* getTextOff() { return NULL; }
     /**
      * Current index of list for `ItemList`
      */
