@@ -68,10 +68,4 @@ void loop() {
         menu.enter();
     else if (command == BACK)
         menu.back();
-    else if (command == CLEAR)
-        menu.clear();
-    else if (command == BACKSPACE)
-        menu.backspace();
-    else
-        menu.type(command);
 }

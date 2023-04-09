@@ -17,6 +17,7 @@
 
 */
 
+#include <ItemInput.h>
 #include <LcdMenu.h>
 
 #define LCD_ROWS 2
