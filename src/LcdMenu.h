@@ -369,6 +369,12 @@ class LcdMenu {
         drawCursor();
     }
     /**
+     * Reset the display
+     */
+    void resetMenu() {
+        this->reset(false);
+    }
+    /**
      * Execute an "up press" on menu
      * When edit mode is enabled, this action is skipped
      */
