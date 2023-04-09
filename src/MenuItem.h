@@ -38,10 +38,6 @@ class MenuItem {
     byte type = MENU_ITEM_NONE;
 
    public:
-    /**
-     * ## Public Fields
-     */
-
     MenuItem() = default;
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}

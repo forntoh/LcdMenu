@@ -7,7 +7,7 @@
  * When `enter()` is invoked, the state of `isOn` is toggled.
  */
 
-#pragma once
+#ifndef ItemToggle_H
 #define ItemToggle_H
 #include "MenuItem.h"
 
@@ -25,7 +25,9 @@ class ItemToggle : public MenuItem {
      */
     ItemToggle(const char* key, fptrInt callback)
         : ItemToggle(key, "ON", "OFF", callback) {}
+
     /**
+     * @brief Create an ItemToggle object.
      * @param key key of the item
      * @param textOn display text when ON
      * @param textOff display text when OFF
@@ -38,9 +40,22 @@ class ItemToggle : public MenuItem {
           textOff(textOff),
           callback(callback) {}
 
+    /**
+     * @brief Get the integer callback function of this item.
+     * @return the integer callback function
+     */
     fptrInt getCallbackInt() override { return callback; }
 
+    /**
+     * @brief Get the current state of this toggle item.
+     * @return the current state
+     */
     boolean isOn() override { return enabled; }
 
+    /**
+     * @brief Set the current state of this toggle item.
+     * @param isOn the new state
+     */
     void setIsOn(boolean isOn) override { this->enabled = isOn; }
 };
+#endif

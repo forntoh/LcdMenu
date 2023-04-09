@@ -7,7 +7,7 @@
  * The sub menu is opened when `enter()` is invoked.
  */
 
-#pragma once
+#ifndef ItemSubMenu_H
 #define ItemSubMenu_H
 #include "MenuItem.h"
 
@@ -20,3 +20,4 @@ class ItemSubMenu : public ItemHeader {
     ItemSubMenu(const char* text, MenuItem* parent)
         : ItemHeader(text, parent, MENU_ITEM_SUB_MENU) {}
 };
+#endif
