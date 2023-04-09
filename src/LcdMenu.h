@@ -182,8 +182,8 @@ class LcdMenu {
                     // append textOn or textOff depending on the state
                     //
                     lcd->print(":");
-                    lcd->print(item->isOn ? item->getTextOn()
-                                          : item->getTextOff());
+                    lcd->print(item->isOn() ? item->getTextOn()
+                                            : item->getTextOff());
                     break;
 #endif
 #ifdef ItemInput_H
@@ -192,7 +192,7 @@ class LcdMenu {
                     // append the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->value.substring(
+                    lcd->print(item->getValue().substring(
                         0, maxCols - strlen(item->getText()) - 2));
                     break;
 #endif
@@ -286,7 +286,7 @@ class LcdMenu {
         // calculate lower and upper bound
         //
         uint8_t lb = strlen(currentMenuTable[cursorPosition].getText()) + 2;
-        uint8_t ub = lb + currentMenuTable[cursorPosition].value.length();
+        uint8_t ub = lb + currentMenuTable[cursorPosition].getValue().length();
         ub = constrain(ub, lb, maxCols - 2);
         //
         // set cursor position
@@ -471,12 +471,12 @@ class LcdMenu {
                 //
                 // toggle the value of isOn
                 //
-                item->isOn = !item->isOn;
+                item->setIsOn(!item->isOn());
                 //
                 // execute the menu item's function
                 //
                 if (item->getCallbackInt() != NULL)
-                    (item->getCallbackInt())(item->isOn);
+                    (item->getCallbackInt())(item->isOn());
                 //
                 // display the menu again
                 //
@@ -527,7 +527,7 @@ class LcdMenu {
             update();
             // Execute callback function
             if (item->getCallbackStr() != NULL)
-                (item->getCallbackStr())(item->value);
+                (item->getCallbackStr())(item->getValue());
             // Interrupt going back to parent menu
             return;
         }
@@ -625,7 +625,7 @@ class LcdMenu {
         if (item->getType() != MENU_ITEM_INPUT) return;
         //
         uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
-        item->value.remove(p, 1);
+        item->getValue().remove(p, 1);
         blinkerPosition--;
         update();
     }
@@ -642,18 +642,18 @@ class LcdMenu {
         // calculate lower and upper bound
         //
         uint8_t lb = strlen(item->getText()) + 2;
-        uint8_t ub = lb + item->value.length();
+        uint8_t ub = lb + item->getValue().length();
         ub = constrain(ub, lb, maxCols - 2);
         //
         // update text
         //
         if (blinkerPosition < ub) {
-            String start = item->value.substring(0, blinkerPosition - lb);
-            String end = item->value.substring(blinkerPosition + 1 - lb,
-                                               item->value.length());
-            item->value = start + character + end;
+            String start = item->getValue().substring(0, blinkerPosition - lb);
+            String end = item->getValue().substring(blinkerPosition + 1 - lb,
+                                                    item->getValue().length());
+            item->setValue(start + character + end);
         } else
-            item->value.concat(character);
+            item->getValue().concat(character);
         //
         isCharPickerActive = false;
         //
@@ -694,7 +694,7 @@ class LcdMenu {
         //
         // set the value
         //
-        item->value = "";
+        item->setValue("");
         //
         // update blinker position
         //
@@ -816,7 +816,7 @@ class LcdMenu {
     void toggleBacklight() {
         MenuItem* item = &currentMenuTable[cursorPosition];
         if (item->getType() == MENU_ITEM_TOGGLE) {
-            lcd->setBacklight(item->isOn);
+            lcd->setBacklight(item->isOn());
         }
     }
 #endif
