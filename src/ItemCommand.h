@@ -49,4 +49,6 @@ class ItemCommand : public MenuItem {
     void setCallBack(fptr callback) override { this->callback = callback; };
 };
 
+#define ITEM_COMMAND(...) (new ItemCommand(__VA_ARGS__))
+
 #endif  // ITEM_COMMAND_H

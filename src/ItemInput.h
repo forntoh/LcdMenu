@@ -67,4 +67,6 @@ class ItemInput : public MenuItem {
     fptrStr getCallbackStr() override { return callback; }
 };
 
+#define ITEM_INPUT(...) (new ItemInput(__VA_ARGS__))
+
 #endif  // ITEM_INPUT_H

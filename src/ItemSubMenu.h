@@ -17,7 +17,7 @@ class ItemSubMenu : public ItemHeader {
      * @param text text to display for the item
      * @param parent the parent of the sub menu item
      */
-    ItemSubMenu(const char* text, MenuItem* parent)
+    ItemSubMenu(const char* text, MenuItem** parent)
         : ItemHeader(text, parent, MENU_ITEM_SUB_MENU) {}
 };
 #endif

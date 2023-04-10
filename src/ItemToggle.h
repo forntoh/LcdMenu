@@ -33,7 +33,8 @@ class ItemToggle : public MenuItem {
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, char* textOn, char* textOff, fptrInt callback)
+    ItemToggle(const char* key, const char* textOn, const char* textOff,
+               fptrInt callback)
         : MenuItem(key, MENU_ITEM_TOGGLE),
           textOn(textOn),
           textOff(textOff),
@@ -56,5 +57,12 @@ class ItemToggle : public MenuItem {
      * @param isOn the new state
      */
     void setIsOn(boolean isOn) override { this->enabled = isOn; }
+
+    const char* getTextOn() override { return this->textOn; }
+
+    const char* getTextOff() override { return this->textOff; }
 };
+
+#define ITEM_TOGGLE(...) (new ItemToggle(__VA_ARGS__))
+
 #endif

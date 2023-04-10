@@ -163,22 +163,22 @@ class MenuItem {
 
 class ItemHeader : public MenuItem {
    protected:
-    MenuItem* parent = NULL;
+    MenuItem** parent = NULL;
 
-    ItemHeader(const char* text, MenuItem* parent, byte type)
+    ItemHeader(const char* text, MenuItem** parent, byte type)
         : MenuItem(NULL, type), parent(parent) {}
 
    public:
     /**
      */
-    ItemHeader() : ItemHeader(this) {}
+    ItemHeader() : ItemHeader(NULL) {}
     /**
      * @param parent the parent menu item
      */
-    ItemHeader(MenuItem* parent)
+    ItemHeader(MenuItem** parent)
         : ItemHeader("", parent, MENU_ITEM_SUB_MENU_HEADER) {}
 
-    MenuItem* getSubMenu() override { return this->parent; };
+    MenuItem** getSubMenu() override { return this->parent; };
 };
 
 /**
