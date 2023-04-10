@@ -76,7 +76,7 @@ class MenuItem {
      * Get the sub menu at item
      * @return `MenuItem*` - Submenu at item
      */
-    virtual MenuItem* getSubMenu() { return NULL; }
+    virtual MenuItem** getSubMenu() { return NULL; }
     /**
      * Get the type of the item
      * @return `byte` - type of menu item
@@ -143,6 +143,7 @@ class MenuItem {
      */
     MenuItem& operator[](const uint8_t index);
 };
+#define ITEM_BASIC(...) (new MenuItem(__VA_ARGS__))
 
 /**
  *
@@ -205,5 +206,9 @@ class ItemFooter : public MenuItem {
      */
     ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
 };
+
+#define MAIN_MENU(...)           \
+    extern MenuItem* mainMenu[]; \
+    MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, new ItemFooter()}
 
 #endif
