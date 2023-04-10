@@ -33,8 +33,7 @@ class ItemToggle : public MenuItem {
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, const char* textOn, const char* textOff,
-               fptrInt callback)
+    ItemToggle(const char* key, char* textOn, char* textOff, fptrInt callback)
         : MenuItem(key, MENU_ITEM_TOGGLE),
           textOn(textOn),
           textOff(textOff),
