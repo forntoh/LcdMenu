@@ -39,6 +39,7 @@ reset	KEYWORD2
 resetBlinker	KEYWORD2
 setupLcdWithMenu	KEYWORD2
 update	KEYWORD2
+resetMenu	KEYWORD2
 up	KEYWORD2
 down	KEYWORD2
 enter	KEYWORD2
