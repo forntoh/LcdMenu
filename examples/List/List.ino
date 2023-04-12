@@ -51,15 +51,13 @@ String nums[] = {
     "5", "7", "9", "12", "32",
 };
 
-// Declare the main menu
-extern MenuItem mainMenu[];
 // Initialize the main menu items
-MenuItem mainMenu[] = {ItemHeader(),
-                       MenuItem("List demo"),
-                       ItemList("Col", colors, 9, colorsCallback),
-                       ItemList("Num", nums, 5, numsCallback),
-                       MenuItem("Example"),
-                       ItemFooter()};
+MAIN_MENU(
+    ITEM_BASIC("List demo"),
+    ITEM_STRING_LIST("Col", colors, 9, colorsCallback),
+    ITEM_STRING_LIST("Num", nums, 5, numsCallback),
+    ITEM_BASIC("Example")
+);
 
 // Construct the LcdMenu
 LcdMenu menu(LCD_ROWS, LCD_COLS);
