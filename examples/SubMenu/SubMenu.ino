@@ -32,23 +32,23 @@
 #define BACKSPACE 8  // BACKSPACE
 #define CLEAR 46     // NUMPAD .
 
-// Declare the main menu
-extern MenuItem mainMenu[];
-extern MenuItem settingsMenu[];
+extern MenuItem* settingsMenu[];
 
 // Define the main menu
-MenuItem mainMenu[] = {ItemHeader(),
-                       MenuItem("Start service"),
-                       MenuItem("Connect to WiFi"),
-                       ItemSubMenu("Settings", settingsMenu),
-                       MenuItem("Blink SOS"),
-                       MenuItem("Blink random"),
-                       ItemFooter()};
+MAIN_MENU(
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_SUBMENU("Settings", settingsMenu),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 /**
  * Create submenu and precise its parent
  */
-MenuItem settingsMenu[] = {ItemHeader(mainMenu), MenuItem("Backlight"),
-                           MenuItem("Contrast"), ItemFooter()};
+SUB_MENU(settingsMenu, mainMenu,
+    ITEM_BASIC("Backlight"),
+    ITEM_BASIC("Contrast")
+);
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
