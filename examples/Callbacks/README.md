@@ -24,14 +24,16 @@ void toggleBacklight(uint8_t isOn);
 ### 2. Add callback to MenuItem
 
 ```cpp
-// ../../examples/Callbacks/Callbacks.ino#L51-L56
-
-MenuItem settingsMenu[] = {ItemHeader(mainMenu),
-                           //
-                           // Include callback in ItemToggle
-                           //
-                           ItemToggle("Backlight", toggleBacklight),
-                           MenuItem("Contrast"), ItemFooter()};
+MAIN_MENU(
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    //
+    // Include callback in ItemToggle
+    //
+    ITEM_TOGGLE("Backlight", toggleBacklight),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 ```
 
 ### 3. Define the callback function
@@ -39,8 +41,6 @@ MenuItem settingsMenu[] = {ItemHeader(mainMenu),
 When `enter()` is invoked, the command _(callback)_ bound to the item is invoked.
 
 ```cpp
-// ../../examples/Callbacks/Callbacks.ino#L88-L95
-
 /**
  * Define callback
  */

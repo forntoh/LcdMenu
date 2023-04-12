@@ -16,8 +16,6 @@ This is a basic example, it will show you how to use ItemInput in the LcdMenu li
 Use `menu.type(char character)` to type a character
 
 ```cpp
-// ../../examples/SimpleInput/SimpleInput.ino#L74-L75
-
 else  // Type the character you want
     menu.type(command);
 ```

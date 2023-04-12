@@ -24,20 +24,16 @@ extern String colors[];
 ### 2. Initialize the array
 
 ```cpp
-// ../../examples/List/List.ino#L43-L44
-
 String colors[] = {"Red",  "Green",  "Blue",   "Orange",
                    "Aqua", "Yellow", "Purple", "Pink"};
 ```
 
 ### 3. Add the array to your `MenuItem`
 
-You must add the size of the array in order for the menu to know when to stop or loop when cycling through the items in the list.
+You **must** add the size of the array in order for the menu to know when to stop or loop when cycling through the items in the list.
 
 ```cpp
-// ../../examples/List/List.ino#L58-L58
-
-ItemList("Col", colors, 9, colorsCallback),
+ITEM_STRING_LIST("Col", colors, 9, colorsCallback),
 ```
 
 ### 4. Cycle through list
@@ -52,8 +48,6 @@ Use `menu.left()` and/or `menu.right()` to cycle through the items
 When `enter()` is invoked, the command _(callback)_ bound to the item is invoked.
 
 ```cpp
-// ../../examples/List/List.ino#L97-L100
-
 void colorsCallback(uint8_t pos) {
     // do something with the index
     Serial.println(colors[pos]);
