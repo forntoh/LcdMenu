@@ -20,4 +20,7 @@ class ItemSubMenu : public ItemHeader {
     ItemSubMenu(const char* text, MenuItem** parent)
         : ItemHeader(text, parent, MENU_ITEM_SUB_MENU) {}
 };
+
+#define ITEM_SUBMENU(...) (new ItemSubMenu(__VA_ARGS__))
+
 #endif
