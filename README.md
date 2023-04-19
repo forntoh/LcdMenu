@@ -15,13 +15,13 @@ LcdMenu is an Arduino library that enables you to create interactive menus and n
 
 ## Installation
 
-#### with Arduino Library Manager
+#### With Arduino Library Manager
 
 Follow this 👇 guide to install the library
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
 
-#### with PlatformIO
+#### With PlatformIO
 
 1. Open the PlatformIO IDE or VSCode with PlatformIO extension installed.
 1. Create a new project or open an existing one.
@@ -87,7 +87,7 @@ The most essential actions are:
 - `menu.up()` and `menu.down()` - Go up and down the menu
 - `menu.left()` and `menu.right()` - if the menu is in edit mode,
   - for `ITEM_INPUT` it moves along the characters of the value.
-  - for `ITEM_LIST` it cycles through the items.
+  - for `ITEM_STRING_LIST` it cycles through the items.
 - `menu.enter()` - if the active item is
   - `ITEM_INPUT` or `ITEM_LIST` it goes into edit mode, if you call it again while in edit mode, it executes the callback bound to the item and exits edit mode.
   - `ITEM_COMAND` or `ITEM_TOGGLE` it executes the bound callback
