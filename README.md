@@ -15,13 +15,7 @@ LcdMenu is an Arduino library that enables you to create interactive menus and n
 
 ## Installation
 
-#### With Arduino Library Manager
-
-Follow this 👇 guide to install the library
-
-[![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
-
-#### With PlatformIO
+Follow [this guide](https://www.ardu-badge.com/LcdMenu) to install the library with **Arduino Library Manager** or install it with **PlatformIO** using the steps below:
 
 1. Open the PlatformIO IDE or VSCode with PlatformIO extension installed.
 1. Create a new project or open an existing one.
@@ -46,9 +40,9 @@ To use the LcdMenu library in your project, follow these steps:
 #include <LcdMenu.h>
 ```
 
-You also might need to add other includes for the types of menu items you wish to use e.g `#include <ItemCommand.h>`, the available types are described in the following step.
+You will need to add other includes for the types of menu items you wish to use, the available types are described in the next step.
 
-#### 2. Create the main menu, use the provided macro `MAIN_MENU()` e.g
+#### 2. Create the main menu, use the provided macro `MAIN_MENU()` e.g.
 
 ```js
 MAIN_MENU(
@@ -61,24 +55,26 @@ MAIN_MENU(
 
 Replace the sample menu items with your own menu items. Here are the different types of menu items available:
 
-- `ITEM_BASIC` - a basic menu item with no functionality
-- `ITEM_COMMAND` - a menu item that executes a function when selected
-- `ITEM_TOGGLE` - a menu item that toggles a value when selected
-- `ITEM_INPUT` - a menu item that prompts the user to enter a value
-- `ITEM_SUBMENU` - a menu item that leads to a sub-menu when selected
-- `ITEM_LIST` - a menu item that displays value that is chosen form a list
+| Type               | Description                                                                 | Import            |
+| ------------------ | --------------------------------------------------------------------------- | ----------------- |
+| `ITEM_BASIC`       | a basic menu item with **no functionality**                                 | N/A               |
+| `ITEM_COMMAND`     | a menu item that **executes** a function when selected                      | `<ItemCommand.h>` |
+| `ITEM_TOGGLE`      | a menu item that **toggles** a value when selected                          | `<ItemToggle.h>`  |
+| `ITEM_INPUT`       | a menu item that **prompts** the user to enter a value                      | `<ItemInput.h>`   |
+| `ITEM_SUBMENU`     | a menu item that leads to a **sub-menu** when selected                      | `<ItemSubMenu.h>` |
+| `ITEM_STRING_LIST` | a menu item that displays a value that is chosen form a **list of strings** | `<ItemList.h>`    |
 
 For each menu item, specify the menu item text, and any necessary parameters. For example, in `ITEM_COMMAND("Backlight", toggleBacklight)`, `"Backlight"` is the menu item text and `toggleBacklight` is the function to be executed when the item is selected.
 
-#### 3. In the `setup()` function, initialize your LCD display and set up any necessary pins
-
-#### 4. Once you have created your menu, initialize LcdMenu with the menu items in the `setup()`
+#### 3. Once you have created your menu, initialize LcdMenu with the menu items in the `setup()`
 
 ```cpp
 menu.setupLcdWithMenu(0x27, mainMenu); //I2C
+// or
+menu.setupLcdWithMenu(rs, en, d0, d1, d2, d3, mainMenu); // Standard
 ```
 
-#### 5. In the `loop()` function, define how you want to navigate the menu
+#### 4. In the `loop()` function, define how you want to navigate the menu
 
 You can use any input method of your choice to perform actions on the menu
 
@@ -89,13 +85,15 @@ The most essential actions are:
   - for `ITEM_INPUT` it moves along the characters of the value.
   - for `ITEM_STRING_LIST` it cycles through the items.
 - `menu.enter()` - if the active item is
-  - `ITEM_INPUT` or `ITEM_LIST` it goes into edit mode, if you call it again while in edit mode, it executes the callback bound to the item and exits edit mode.
+  - `ITEM_INPUT` or `ITEM_STRING_LIST` it goes into edit mode, if you call it again while in edit mode, it executes the callback bound to the item and exits edit mode.
   - `ITEM_COMAND` or `ITEM_TOGGLE` it executes the bound callback
   - `ITEM_SUBMENU` it enters the sub-menu.
 - `menu.back()` - either exits edit mode or goes to back to a parent menu depending on the active item.
 
-### And that's it! You should now have a fully functional LCD menu system for your Arduino project
+Full examples can be found [here](https://github.com/forntoh/LcdMenu/tree/master/examples) 👈
 
-More examples [here](https://github.com/forntoh/LcdMenu/tree/master/examples)
+## And that's it! You should now have a fully functional LCD menu system for your Arduino project
+
+---
 
 **Have a question/doubt? Check the [Discussions](https://github.com/forntoh/LcdMenu/discussions) tab, maybe your question has already been answered 😉**
