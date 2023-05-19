@@ -26,4 +26,4 @@ jobs:
           git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
           mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
 
-          bundle exec arduino_ci.rb --skip-examples-compilation
+          bundle exec .bundle/arduino_ci.rb --skip-examples-compilation
