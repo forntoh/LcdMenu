@@ -32,6 +32,7 @@
 #endif
 
 #include <MenuItem.h>
+#include <utils.h>
 
 /**
  * The LcdMenu class contains all fields and methods to manipulate the menu
@@ -192,8 +193,9 @@ class LcdMenu {
                     // append the value of the input
                     //
                     lcd->print(":");
-                    lcd->print(item->getValue().substring(
-                        0, maxCols - strlen(item->getText()) - 2));
+                    lcd->print(
+                        substring(item->getValue(), 0,
+                                  maxCols - strlen(item->getText()) - 2));
                     break;
 #endif
 #ifdef ItemList_H
@@ -286,7 +288,7 @@ class LcdMenu {
         // calculate lower and upper bound
         //
         uint8_t lb = strlen(currentMenuTable[cursorPosition]->getText()) + 2;
-        uint8_t ub = lb + currentMenuTable[cursorPosition]->getValue().length();
+        uint8_t ub = lb + strlen(currentMenuTable[cursorPosition]->getValue());
         ub = constrain(ub, lb, maxCols - 2);
         //
         // set cursor position
@@ -621,7 +623,8 @@ class LcdMenu {
         if (item->getType() != MENU_ITEM_INPUT) return;
         //
         uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
-        item->getValue().remove(p, 1);
+        remove(item->getValue(), p, 1);
+
         blinkerPosition--;
         update();
     }
@@ -638,18 +641,18 @@ class LcdMenu {
         // calculate lower and upper bound
         //
         uint8_t lb = strlen(item->getText()) + 2;
-        uint8_t ub = lb + item->getValue().length();
+        uint8_t ub = lb + strlen(item->getValue());
         ub = constrain(ub, lb, maxCols - 2);
         //
         // update text
-        //
+        //'char* str = "Hello World";
         if (blinkerPosition < ub) {
-            String start = item->getValue().substring(0, blinkerPosition - lb);
-            String end = item->getValue().substring(blinkerPosition + 1 - lb,
-                                                    item->getValue().length());
-            item->setValue(start + character + end);
+            char* start = substring(item->getValue(), 0, blinkerPosition - lb);
+            char* end = substring(item->getValue(), blinkerPosition + 1 - lb,
+                                  strlen(item->getValue()));
+            item->setValue(concat(start, character, end));
         } else {
-            item->setValue(item->getValue().concat(character) + "");
+            item->setValue(concat(item->getValue(), character));
         }
         //
         isCharPickerActive = false;
@@ -691,7 +694,7 @@ class LcdMenu {
         //
         // set the value
         //
-        item->setValue("");
+        item->setValue(nullptr);
         //
         // update blinker position
         //

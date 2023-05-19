@@ -3,7 +3,7 @@
 
 typedef void (*fptr)();
 typedef void (*fptrInt)(uint8_t);
-typedef void (*fptrStr)(String);
+typedef void (*fptrStr)(char*);
 //
 // menu item types
 //
