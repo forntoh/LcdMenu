@@ -1,1 +1,1 @@
-pio lib --storage-dir / install marcoschwartz/LiquidCrystal_I2C@^1.1.4
+pio lib --storage-dir $(bundle exec arduino_library_location.rb) install marcoschwartz/LiquidCrystal_I2C@^1.1.4
