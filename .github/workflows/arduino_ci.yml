@@ -29,10 +29,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install --upgrade platformio
 
-      - name: Install library dependencies
-        run: |
-          pio lib --storage-dir /pathTo/Arduino/libraries install
-
       - name: Start Arduino CI
         uses: Arduino-CI/action@latest
         env:
