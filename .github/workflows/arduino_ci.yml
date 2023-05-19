@@ -1,0 +1,12 @@
+---
+name: Arduino_CI
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+  arduino_ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Arduino-CI/action@latest
