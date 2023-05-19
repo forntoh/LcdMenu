@@ -32,4 +32,4 @@ jobs:
       - name: Start Arduino CI
         uses: Arduino-CI/action@latest
         env:
-          CUSTOM_INIT_SCRIPT: ./scripts/install_dependencies.sh
+          CUSTOM_INIT_SCRIPT: .scripts/install_dependencies.sh
