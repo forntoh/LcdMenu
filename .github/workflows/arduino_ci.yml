@@ -1,7 +1,7 @@
 ---
 name: Arduino_CI
 
-on: [pull_request, workflow_dispatch]
+on: [pull_request]
 
 jobs:
   arduino_ci:
@@ -11,8 +11,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Start Arduino CI
-        uses: Arduino-CI/action@latest
-        env:
-          EXPECT_EXAMPLES: false
-          CUSTOM_INIT_SCRIPT: .scripts/install_dependencies.sh
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+
+      - name: Run Unit Tests
+        run: |
+          bundle exec ensure_arduino_installation.rb
+
+          git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
+          mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
+
+          bundle exec arduino_ci.rb --skip-examples-compilation
