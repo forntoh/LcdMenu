@@ -19,6 +19,8 @@ jobs:
 
       - name: Run Unit Tests
         run: |
+          bundle install
+
           bundle exec ensure_arduino_installation.rb
 
           git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
