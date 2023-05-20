@@ -14,30 +14,26 @@ This example will show you how to get started with submenus
 ### 1 Create the main menu
 
 ```cpp
-// ../../examples/SubMenu/SubMenu.ino#L39-L46
-
 // Define the main menu
-MenuItem mainMenu[] = {ItemHeader(),
-                       MenuItem("Start service"),
-                       MenuItem("Connect to WiFi"),
-                       ItemSubMenu("Settings", settingsMenu),
-                       MenuItem("Blink SOS"),
-                       MenuItem("Blink random"),
-                       ItemFooter()};
+MAIN_MENU(
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_SUBMENU("Settings", settingsMenu),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 ```
 
 ### 2 Create the sub menu
 
 ```cpp
-// ../../examples/SubMenu/SubMenu.ino#L47-L53
-
 /**
  * Create submenu and precise its parent
  */
-MenuItem settingsMenu[] = {ItemHeader(mainMenu), MenuItem("Backlight"),
-                           MenuItem("Contrast"), ItemFooter()};
-
-LcdMenu menu(LCD_ROWS, LCD_COLS);
+SUB_MENU(settingsMenu, mainMenu,
+    ITEM_BASIC("Backlight"),
+    ITEM_BASIC("Contrast")
+);
 ```
 
 Go to [.../examples/SubMenu/SubMenu.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/SubMenu/SubMenu.ino)

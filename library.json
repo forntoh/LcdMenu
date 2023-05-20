@@ -1,8 +1,8 @@
 {
   "name": "LcdMenu",
-  "version": "2.1.3",
+  "version": "3.0.0",
   "keywords": "menu, display, lcdmenu, navigation",
-  "description": "Display navigable menu items on your LCD display with Arduino. You can show items bound to actions, list of items (can select one), sub menus, step menu items e.t.c. Compatible with all Character LCD Display Module and VATN Alphanumeric LCD Display",
+  "description": "LcdMenu is an Arduino library that enables you to create interactive menus and navigation systems for LCD displays. With LcdMenu, you can easily add menus to your projects and navigate through them using buttons or any input device you want. The library supports a wide range of LCD display modules, including character and alphanumeric displays.",
   "repository": {
     "type": "git",
     "url": "https://github.com/forntoh/LcdMenu"

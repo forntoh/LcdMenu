@@ -1,7 +1,8 @@
 import re
+
 import click
 
-prefixes = [':', '*', '}', '/', '#', 'for ', 'if ', 'switch ', 'case ', 'return ', 'class ', 'explicit ']
+prefixes = [':', '*', '}', '/', '#', 'for ', 'if ', 'switch ', 'case ', 'return ', 'class ', 'explicit ', 'virtual ']
 sufixes = [';', '-', '=', ',', '*', '.', '= {', '{}']
 
 pre_key_1 = """#######################################
@@ -41,7 +42,7 @@ def build(files):
             for line in a_file:
                 stripped_line = line.strip()
 
-                if len(stripped_line) > 9 and not stripped_line.startswith(tuple(prefixes)) and not stripped_line.endswith(tuple(sufixes)):
+                if len(stripped_line) > 9 and (not stripped_line.startswith(tuple(prefixes)) and not stripped_line.endswith(tuple(sufixes))):
                     if re.search(r"^.+\s[a-z][A-Za-z]+\(.*", stripped_line) != None:
                         words = re.findall(r"\w+", stripped_line)
                         methodName = words[1]
@@ -52,7 +53,7 @@ def build(files):
                     if re.search(r"\w+", stripped_line) != None:
                         methodName = re.findall(r"\w+", stripped_line)[1]
                         keyword_1_data += methodName + "	KEYWORD1\n"
-                if len(stripped_line) > 7 and stripped_line.startswith('#ifndef') and not stripped_line.endswith('_H'):
+                if len(stripped_line) > 7 and (stripped_line.startswith('#ifndef') or stripped_line.startswith('#define')) and not stripped_line.endswith('_H'):
                     if re.search(r"\w+", stripped_line) != None:
                         methodName = re.findall(r"\w+", stripped_line)[1]
                         if re.search(methodName, literal_1_data) == None:
