@@ -4,13 +4,13 @@
 unittest(concat_three) {
     char* result = concat("Lcd", 'M', "enu");
     assertEqual("LcdMenu", result);
-    delete (result);
+    delete[] result;
 }
 
 unittest(concat_two) {
     char* result = concat("Lcd", 'M');
     assertEqual("LcdM", result);
-    delete (result);
+    delete[] result;
 }
 
 unittest(substring) {
@@ -18,7 +18,7 @@ unittest(substring) {
     char* expected = "World";
     char* result = substring(str, 6, 5);
     assertEqual(expected, result);
-    delete (result);
+    delete[] result;
 }
 
 unittest(remove) {
