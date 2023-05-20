@@ -92,7 +92,7 @@ The most essential actions are:
 
 Full examples can be found [here](https://github.com/forntoh/LcdMenu/tree/master/examples) 👈
 
-## And that's it! You should now have a fully functional LCD menu system for your Arduino project
+### And that's it! You should now have a fully functional LCD menu system for your Arduino project
 
 ---
 
