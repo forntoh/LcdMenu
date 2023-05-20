@@ -1,10 +1,10 @@
 ---
-name: Arduino_CI
+name: Arduino CI
 
 on: [pull_request]
 
 jobs:
-  arduino_ci:
+  arduino-unit-tests:
     runs-on: ubuntu-latest
 
     steps:
