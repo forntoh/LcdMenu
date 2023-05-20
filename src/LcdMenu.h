@@ -650,7 +650,10 @@ class LcdMenu {
             char* start = substring(item->getValue(), 0, blinkerPosition - lb);
             char* end = substring(item->getValue(), blinkerPosition + 1 - lb,
                                   strlen(item->getValue()));
-            item->setValue(concat(start, character, end));
+            char* joined = concat(start, character, end);
+            item->setValue(joined);
+            delete[] start;
+            delete[] end;
         } else {
             item->setValue(concat(item->getValue(), character));
         }

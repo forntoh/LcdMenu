@@ -43,7 +43,7 @@ class ItemInput : public MenuItem {
      * the input is submitted.
      */
     ItemInput(const char* text, fptrStr callback)
-        : ItemInput(text, nullptr, callback) {}
+        : ItemInput(text, (char*)"", callback) {}
 
     /**
      * Get the current input value for this item.
