@@ -11,13 +11,11 @@ char* substring(char* str, uint8_t start, uint8_t size) {
 char* concat(char* first, char second, char* third) {
     int len1 = strlen(first);
     int len3 = strlen(third);
-
-    char* result = new char[len1 + 2 + len3];
-
+    char* result = new char[len1 + 2 + len3 + 1];
     strcpy(result, first);
     result[len1] = second;
     strcpy(result + len1 + 1, third);
-
+    result[len1 + 1 + len3] = '\0';
     return result;
 }
 
