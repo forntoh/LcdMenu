@@ -18,6 +18,16 @@
   "frameworks": "arduino",
   "platforms": "*",
   "export": {
-    "exclude": ["*.md", "examples/*/*.md", ".github/", ".scripts/", "version"]
+    "exclude": [
+      "*.md",
+      "examples/*/*.md",
+      ".github/",
+      ".scripts/",
+      "version",
+      "test/",
+      "diagram.json",
+      "Gemfile",
+      "*.toml"
+    ]
   }
 }
