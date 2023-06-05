@@ -172,7 +172,7 @@ class ItemHeader : public MenuItem {
    public:
     /**
      */
-    ItemHeader() : ItemHeader(NULL) {}
+    ItemHeader() : ItemHeader("", NULL, MENU_ITEM_MAIN_MENU_HEADER) {}
     /**
      * @param parent the parent menu item
      */
