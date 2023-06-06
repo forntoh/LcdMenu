@@ -645,7 +645,7 @@ class LcdMenu {
         ub = constrain(ub, lb, maxCols - 2);
         //
         // update text
-        //'char* str = "Hello World";
+        //
         if (blinkerPosition < ub) {
             char* start = substring(item->getValue(), 0, blinkerPosition - lb);
             char* end = substring(item->getValue(), blinkerPosition + 1 - lb,
