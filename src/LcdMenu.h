@@ -349,7 +349,7 @@ class LcdMenu {
         lcd->backlight();
 #else
         uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
-        MenuItem* menu) {
+        MenuItem** menu) {
         this->lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3);
         this->lcd->begin(maxCols, maxRows);
 #endif
