@@ -805,6 +805,7 @@ class LcdMenu {
         return currentMenuTable[position];
     }
 #ifdef ItemToggle_H
+#ifndef USE_STANDARD_LCD
     /**
      * Toggle backlight
      */
@@ -814,5 +815,6 @@ class LcdMenu {
             lcd->setBacklight(item->isOn() ? 1 : NULL);
         }
     }
-#endif
+#endif // USE_STANDARD_LCD
+#endif // ItemToggle_H
 };
