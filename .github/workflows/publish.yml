@@ -45,8 +45,13 @@ jobs:
           git config --global user.email "actions@github.com"
           git add .
           git commit -m "Update version to $UPDATED_VERSION"
-          git tag -a "$UPDATED_VERSION" -m "Tagging version $UPDATED_VERSION"
-          git push origin master --tags
+          git push origin master
+
+      - name: Create Tag
+        if: ${{ env.UPDATED_VERSION != '' }}
+        run: |
+          git tag -a "${{ env.UPDATED_VERSION }}" -m "Tagging version ${{ env.UPDATED_VERSION }}"
+          git push origin "${{ env.UPDATED_VERSION }}"
 
       - name: Publish to PlatformIO
-        run: pio run --target upload
+        run: pio pkg publish
