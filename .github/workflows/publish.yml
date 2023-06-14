@@ -46,7 +46,7 @@ jobs:
           git add .
           git commit -m "Update version to $UPDATED_VERSION"
           git tag -a "$UPDATED_VERSION" -m "Tagging version $UPDATED_VERSION"
-          git push origin main --tags
+          git push origin master --tags
 
       - name: Publish to PlatformIO
         run: pio run --target upload
