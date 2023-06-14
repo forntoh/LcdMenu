@@ -37,7 +37,7 @@ jobs:
         run: |
           chmod +x version
           ./version "$PART_TO_INCREMENT"
-          UPDATED_VERSION=$(grep "version=" library.properties | cut -d'=' -f2)
+          echo "UPDATED_VERSION=$(grep "version=" library.properties | cut -d'=' -f2)" >> $GITHUB_ENV
 
       - name: Commit changes
         run: |
