@@ -1,3 +1,70 @@
-#!/bin/sh
+#!/bin/bash
 
-python .scripts/version.py library.* $1
+# Read the file and extract the version number
+version=$(grep "version=" library.properties | cut -d'=' -f2)
+
+# Exit if the version is empty
+if [[ -z "$version" ]]; then
+    echo "Version not found in the file. Exiting."
+    exit 1
+fi
+
+# Function to increment the version number
+increment_version() {
+    # Split the version number into its parts
+    IFS='.' read -r -a parts <<< "$version"
+
+    # Get the chosen part to increment
+    part=${parts[$1-1]}
+
+    # Increment the chosen part
+    incremented=$((part + 1))
+
+    # Reset minor and patch parts to zero if major is incremented
+    if [[ $1 -eq 1 ]]; then
+        parts[1]=0
+        parts[2]=0
+    fi
+
+    # Reset patch part to zero if minor is incremented
+    if [[ $1 -eq 2 ]]; then
+        parts[2]=0
+    fi
+
+    # Update the chosen part in the array
+    parts[$1-1]=$incremented
+
+    # Join the parts back into a version number string
+    updated_version=$(IFS='.'; echo "${parts[*]}")
+
+    # Print the updated version number
+    echo "$updated_version"
+}
+
+# Check if the part to increment was provided as an argument
+if [ $# -eq 0 ]; then
+    echo "No part to increment provided. Please provide a valid part (1, 2, or 3) as an argument."
+    exit 1
+fi
+
+# Get the part to increment from the command-line argument
+part_to_increment=$1
+
+# Validate the user input
+if [[ "$part_to_increment" =~ ^[1-3]$ ]]; then
+    incremented_version=$(increment_version "$part_to_increment")
+    echo "Updated version: $incremented_version"
+
+    # Check if click is installed
+    if ! pip3 show click > /dev/null 2>&1; then
+        echo "click library is not installed. Installing..."
+        pip3 install click
+    fi
+    # Update version
+    python3 .scripts/version.py library.* $incremented_version
+    # Update keywords
+    python3 .scripts/keywords.py src/*.h
+else
+    echo "Invalid part to increment. Please provide a valid part (1, 2, or 3)."
+    exit 1
+fi

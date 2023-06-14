@@ -1,0 +1,52 @@
+name: Publish Library to PIO Registry
+
+on:
+  workflow_dispatch:
+    inputs:
+      part_to_increment:
+        description: "Part to increment (1 for major, 2 for minor, 3 for patch)"
+        required: true
+
+jobs:
+  publish:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install click
+          pip install --upgrade platformio
+
+      - name: Login to PlatformIO
+        run: |
+          pio account login -u "${{ secrets.PIO_USERNAME }}" -p "${{ secrets.PIO_PASSWORD }}"
+
+      - name: Update Version
+        env:
+          PART_TO_INCREMENT: ${{ github.event.inputs.part_to_increment }}
+        run: |
+          chmod +x version
+          UPDATED_VERSION=$(./version "$PART_TO_INCREMENT")
+          sed -i "s/version=.*/version=$UPDATED_VERSION/" file.txt
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Update version to $UPDATED_VERSION"
+          git tag -a "$UPDATED_VERSION" -m "Tagging version $UPDATED_VERSION"
+          git push origin main --tags
+
+      - name: Publish to PlatformIO
+        run: pio run --target upload
