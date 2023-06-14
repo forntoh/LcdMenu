@@ -36,8 +36,8 @@ jobs:
           PART_TO_INCREMENT: ${{ github.event.inputs.part_to_increment }}
         run: |
           chmod +x version
-          UPDATED_VERSION=$(./version "$PART_TO_INCREMENT")
-          sed -i "s/version=.*/version=$UPDATED_VERSION/" library.properties
+          ./version "$PART_TO_INCREMENT"
+          UPDATED_VERSION=$(grep "version=" library.properties | cut -d'=' -f2)
 
       - name: Commit changes
         run: |
