@@ -37,7 +37,7 @@ jobs:
         run: |
           chmod +x version
           UPDATED_VERSION=$(./version "$PART_TO_INCREMENT")
-          sed -i "s/version=.*/version=$UPDATED_VERSION/" file.txt
+          sed -i "s/version=.*/version=$UPDATED_VERSION/" library.properties
 
       - name: Commit changes
         run: |
