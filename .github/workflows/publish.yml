@@ -55,3 +55,18 @@ jobs:
 
       - name: Publish to PlatformIO
         run: yes y | pio pkg publish
+
+      - name: Create GitHub Release
+        if: ${{ env.UPDATED_VERSION != '' }}
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "tag_name": "${{ env.UPDATED_VERSION }}",
+              "target_commitish": "master",
+              "name": "LcdMenu ${{ env.UPDATED_VERSION }}",
+              "draft": true,
+              "prerelease": false
+            }' \
+            "https://api.github.com/repos/${{ github.repository }}/releases"
