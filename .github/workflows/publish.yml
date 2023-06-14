@@ -54,4 +54,4 @@ jobs:
           git push origin "${{ env.UPDATED_VERSION }}"
 
       - name: Publish to PlatformIO
-        run: pio pkg publish
+        run: yes y | pio pkg publish
