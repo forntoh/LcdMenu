@@ -697,7 +697,7 @@ class LcdMenu {
         //
         // set the value
         //
-        item->setValue(nullptr);
+        item->setValue((char*)"");
         //
         // update blinker position
         //
