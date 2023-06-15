@@ -41,7 +41,7 @@ char charset[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 uint8_t charsetPosition;
 
 // Declare the call back function
-void inputCallback(String value);
+void inputCallback(char* value);
 
 MAIN_MENU(
     ITEM_INPUT("Con", inputCallback),
@@ -103,7 +103,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(String value) {
+void inputCallback(char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);

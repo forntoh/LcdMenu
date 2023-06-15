@@ -51,7 +51,7 @@ class MenuItem {
     /**
      * String value of an `ItemInput`
      */
-    virtual String getValue() { return ""; }
+    virtual char* getValue() { return NULL; }
     /**
      * Get the text of the item
      * @return `String` - Item's text
@@ -117,7 +117,7 @@ class MenuItem {
     /**
      * String value of an `ItemInput`
      */
-    virtual void setValue(String value){};
+    virtual void setValue(char* value){};
     /**
      * Set the text of the item
      * @param text text to display for the item
@@ -172,7 +172,7 @@ class ItemHeader : public MenuItem {
    public:
     /**
      */
-    ItemHeader() : ItemHeader(NULL) {}
+    ItemHeader() : ItemHeader("", NULL, MENU_ITEM_MAIN_MENU_HEADER) {}
     /**
      * @param parent the parent menu item
      */
