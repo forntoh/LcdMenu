@@ -23,7 +23,6 @@
       "examples/*/*.md",
       ".github/",
       ".scripts/",
-      "version",
       "test/",
       "diagram.json",
       "Gemfile",
