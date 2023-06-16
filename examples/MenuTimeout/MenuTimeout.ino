@@ -37,25 +37,21 @@
 #define BACKSPACE 8  // BACKSPACE
 #define CLEAR 46     // NUMPAD .
 
-MAIN_MENU(
-    ITEM_BASIC("Start service"),
-    ITEM_BASIC("Connect to WiFi"),
-    ITEM_BASIC("Settings"),
-    ITEM_BASIC("Blink SOS"),
-    ITEM_BASIC("Blink random")
-);
+MAIN_MENU(ITEM_BASIC("Start service"), ITEM_BASIC("Connect to WiFi"),
+          ITEM_BASIC("Settings"), ITEM_BASIC("Blink SOS"),
+          ITEM_BASIC("Blink random"));
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
 void setup() {
     Serial.begin(9600);
-    menu.setupLcdWithMenu(0x27, mainMenu);
+    menu.setupLcdWithMenu(0x27, mainMenu, 20000);
 }
 
 void loop() {
     /**
-     * IMPORTANT: You must call this function for the notification to take time
-     * into account
+     * IMPORTANT: You must call this function for the timeout to work
+     * The default timeout is 10000ms
      */
     menu.updateTimer();
 
@@ -75,7 +71,4 @@ void loop() {
         menu.enter();
     else if (command == BACK)
         menu.back();
-    else {
-        menu.displayNotification("Success", 2000);
-    }
 }
