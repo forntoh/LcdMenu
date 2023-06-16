@@ -308,9 +308,9 @@ class LcdMenu {
      */
     unsigned long startTime = 0;
     /**
-     * How long should the timer delay in milliseconds
+     * How long should the display stay on
      */
-    unsigned int delay = 0;
+    uint16_t timeout = 10000;
     /**
      * LCD Display
      */
@@ -359,7 +359,20 @@ class LcdMenu {
         lcd->createChar(0, upArrow);
         lcd->createChar(1, downArrow);
         this->currentMenuTable = menu;
+        this->startTime = millis();
         update();
+    }
+
+    void setupLcdWithMenu(
+#ifndef USE_STANDARD_LCD
+        uint8_t lcd_Addr, MenuItem** menu, uint16_t timeout) {
+        this->setupLcdWithMenu(lcd_Addr, menu, timeout);
+#else
+        uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
+        MenuItem** menu, uint16_t timeout) {
+        this->setupLcdWithMenu(rs, en, d0, d1, d2, d3, menu, timeout);
+#endif
+        this->timeout = timeout;
     }
     /*
      * Draw the menu items and cursor
@@ -368,6 +381,8 @@ class LcdMenu {
         if (!enableUpdate) return;
         drawMenu();
         drawCursor();
+        lcd->setBacklight(HIGH);
+        startTime = millis();
     }
     /**
      * Reset the display
@@ -750,42 +765,13 @@ class LcdMenu {
         this->cursorPosition = position;
     }
     /**
-     * Show a message at the bottom of the screen
-     * @param message message to display
-     * @param duration how long to display the message
-     */
-    void displayNotification(char* message, unsigned int duration) {
-        //
-        // Calculate the position to start writing
-        // (centralize text)
-        //
-        uint8_t centerPos = maxCols / 2 - (strlen(message) / 2);
-        //
-        // Set cursor position and clear lane
-        //
-        lcd->setCursor(0, maxRows - 1);
-        lcd->print("                   ");
-        lcd->setCursor(centerPos - 1, maxRows - 1);
-        //
-        // Draw each independent character
-        //
-        lcd->write(0xA5);
-        for (unsigned int i = 0; i < strlen(message); i++) {
-            char character = message[i];
-            lcd->write(character);
-        }
-        lcd->write(0xA5);
-        //
-        // initialize the timer
-        //
-        delay = duration;
-        startTime = millis();
-    }
-    /**
-     * Executes any delayed task when appropriate time reaches
+     * Update timer and turn off display on timeout
      */
     void updateTimer() {
-        if (millis() == startTime + delay) update();
+        if (millis() == startTime + timeout) {
+            lcd->setBacklight(LOW);
+            lcd->clear();
+        }
     }
     /**
      * Check if currently displayed menu is a sub menu.
