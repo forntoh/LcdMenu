@@ -38,8 +38,7 @@ Execute `enter()` to go to edit mode. _(cursor will start blinking 😉)_
 `drawChar(char c)` is used to dispay the character without storing the value, the value will be stored only when `type(char character)` is executed.
 
 ```cpp
-// ../../examples/CharsetInput/CharsetInput.ino#L68-L80
-
+// ...
 case UP:
     if (menu.isInEditMode())  // Update the position only in edit mode
         charsetPosition = (charsetPosition + 1) % CHARSET_SIZE;
@@ -53,6 +52,7 @@ case DOWN:
     menu.drawChar(charset[charsetPosition]);  // Works only in edit mode
     menu.down();
     break;
+// ...
 ```
 
 ### 5. Type the selected character
@@ -60,10 +60,9 @@ case DOWN:
 Use `menu.type(char character)` to type the selected character
 
 ```cpp
-// ../../examples/CharsetInput/CharsetInput.ino#L87-L88
-
 case ENTER:  // Press enter to go to edit mode : for ItemInput
     menu.type(charset[charsetPosition]);  // Works only in edit mode
+    menu.enter();
 ```
 
 ### 6. `menu.back()` will exit edit mode

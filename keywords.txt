@@ -6,29 +6,40 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+ItemCommand	KEYWORD1
+ItemInput	KEYWORD1
+ItemList	KEYWORD1
+ItemSubMenu	KEYWORD1
+ItemToggle	KEYWORD1
 LcdMenu	KEYWORD1
 MenuItem	KEYWORD1
 ItemHeader	KEYWORD1
 ItemFooter	KEYWORD1
-ItemInput	KEYWORD1
-ItemSubMenu	KEYWORD1
-ItemToggle	KEYWORD1
-ItemCommand	KEYWORD1
-ItemList	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
+getCallback	KEYWORD2
+getValue	KEYWORD2
+setValue	KEYWORD2
+getCallbackStr	KEYWORD2
+getItemIndex	KEYWORD2
+getItems	KEYWORD2
+getCallbackInt	KEYWORD2
+isOn	KEYWORD2
+setIsOn	KEYWORD2
+getTextOn	KEYWORD2
+getTextOff	KEYWORD2
 drawCursor	KEYWORD2
 drawMenu	KEYWORD2
 isAtTheStart	KEYWORD2
 isAtTheEnd	KEYWORD2
-paint	KEYWORD2
 reset	KEYWORD2
 resetBlinker	KEYWORD2
 setupLcdWithMenu	KEYWORD2
-setSubMenu	KEYWORD2
+update	KEYWORD2
+resetMenu	KEYWORD2
 up	KEYWORD2
 down	KEYWORD2
 enter	KEYWORD2
@@ -44,25 +55,28 @@ hide	KEYWORD2
 show	KEYWORD2
 isInEditMode	KEYWORD2
 getCursorPosition	KEYWORD2
+setCursorPosition	KEYWORD2
 displayNotification	KEYWORD2
 updateTimer	KEYWORD2
+isSubMenu	KEYWORD2
 getItemAt	KEYWORD2
 toggleBacklight	KEYWORD2
-getText	KEYWORD2
-getCallback	KEYWORD2
-getCallbackInt	KEYWORD2
-getCallbackStr	KEYWORD2
-getSubMenu	KEYWORD2
 getType	KEYWORD2
-getTextOn	KEYWORD2
-getTextOff	KEYWORD2
-getItems	KEYWORD2
-setText	KEYWORD2
-setCallBack	KEYWORD2
-setSubMenu	KEYWORD2
+substring	KEYWORD2
+concat	KEYWORD2
+concat	KEYWORD2
+remove	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
+ITEM_COMMAND	LITERAL1
+ITEM_INPUT	LITERAL1
+ITEM_STRING_LIST	LITERAL1
+ITEM_SUBMENU	LITERAL1
+ITEM_TOGGLE	LITERAL1
 USE_STANDARD_LCD	LITERAL1
+ITEM_BASIC	LITERAL1
+MAIN_MENU	LITERAL1
+SUB_MENU	LITERAL1

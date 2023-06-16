@@ -17,6 +17,8 @@
 
 */
 
+#include <ItemSubMenu.h>
+#include <ItemToggle.h>
 #include <LcdMenu.h>
 
 #define LCD_ROWS 2
@@ -35,25 +37,14 @@
 // Declare the call back function
 void toggleBacklight(uint8_t isOn);
 
-extern MenuItem mainMenu[];
-extern MenuItem settingsMenu[];
-
-MenuItem mainMenu[] = {ItemHeader(),
-                       MenuItem("Start service"),
-                       MenuItem("Connect to WiFi"),
-                       ItemSubMenu("Settings", settingsMenu),
-                       MenuItem("Blink SOS"),
-                       MenuItem("Blink random"),
-                       ItemFooter()};
-/**
- * Create submenu and precise its parent
- */
-MenuItem settingsMenu[] = {ItemHeader(mainMenu),
-                           //
-                           // Include callback in ItemToggle
-                           //
-                           ItemToggle("Backlight", toggleBacklight),
-                           MenuItem("Contrast"), ItemFooter()};
+// prettier-ignore
+MAIN_MENU(
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_TOGGLE("Backlight", toggleBacklight),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
@@ -78,12 +69,6 @@ void loop() {
         menu.enter();
     else if (command == BACK)
         menu.back();
-    else if (command == CLEAR)
-        menu.clear();
-    else if (command == BACKSPACE)
-        menu.backspace();
-    else
-        menu.type(command);
 }
 /**
  * Define callback

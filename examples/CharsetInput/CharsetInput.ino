@@ -18,6 +18,7 @@
 
 */
 
+#include <ItemInput.h>
 #include <LcdMenu.h>
 
 #define LCD_ROWS 2
@@ -40,16 +41,14 @@ char charset[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 uint8_t charsetPosition;
 
 // Declare the call back function
-void inputCallback(String value);
+void inputCallback(char* value);
 
-extern MenuItem mainMenu[];
-
-MenuItem mainMenu[] = {ItemHeader(),
-                       ItemInput("Con", inputCallback),
-                       MenuItem("Connect to WiFi"),
-                       MenuItem("Blink SOS"),
-                       MenuItem("Blink random"),
-                       ItemFooter()};
+MAIN_MENU(
+    ITEM_INPUT("Con", inputCallback),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
@@ -104,7 +103,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(String value) {
+void inputCallback(char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);

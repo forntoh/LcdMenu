@@ -14,19 +14,16 @@ This is a basic example, it will show you how to get started with the LcdMenu li
 Go to [.../examples/Basic/Basic.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/Basic/Basic.ino)
 
 ```cpp
-// ../../examples/Basic/Basic.ino#L35-L77
-
-// Define the main menu
-extern MenuItem mainMenu[];
+// ../../examples/Basic/Basic.ino#L35-L68
 
 // Initialize the main menu items
-MenuItem mainMenu[] = {ItemHeader(),
-                       MenuItem("Start service"),
-                       MenuItem("Connect to WiFi"),
-                       MenuItem("Settings"),
-                       MenuItem("Blink SOS"),
-                       MenuItem("Blink random"),
-                       ItemFooter()};
+MAIN_MENU(
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_BASIC("Settings"),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 // Construct the LcdMenu
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
@@ -52,11 +49,5 @@ void loop() {
         menu.enter();
     else if (command == BACK)
         menu.back();
-    else if (command == CLEAR)
-        menu.clear();
-    else if (command == BACKSPACE)
-        menu.backspace();
-    else
-        menu.type(command);
 }
 ```

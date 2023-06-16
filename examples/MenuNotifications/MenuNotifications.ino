@@ -37,14 +37,13 @@
 #define BACKSPACE 8  // BACKSPACE
 #define CLEAR 46     // NUMPAD .
 
-extern MenuItem mainMenu[];
-
-MenuItem mainMenu[] = {ItemHeader(),
-                       MenuItem("Start service"),
-                       MenuItem("Connect to WiFi"),
-                       MenuItem("Settings"),
-                       MenuItem("Blink SOS"),
-                       ItemFooter()};
+MAIN_MENU(
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_BASIC("Settings"),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 
 LcdMenu menu(LCD_ROWS, LCD_COLS);
 
@@ -76,12 +75,7 @@ void loop() {
         menu.enter();
     else if (command == BACK)
         menu.back();
-    else if (command == CLEAR)
-        menu.clear();
-    else if (command == BACKSPACE)
-        menu.backspace();
     else {
-        menu.type(command);
         menu.displayNotification("Success", 2000);
     }
 }
