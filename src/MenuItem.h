@@ -167,7 +167,7 @@ class ItemHeader : public MenuItem {
     MenuItem** parent = NULL;
 
     ItemHeader(const char* text, MenuItem** parent, byte type)
-        : MenuItem(NULL, type), parent(parent) {}
+        : MenuItem(text, type), parent(parent) {}
 
    public:
     /**
