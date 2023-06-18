@@ -4,6 +4,7 @@
 typedef void (*fptr)();
 typedef void (*fptrInt)(uint8_t);
 typedef void (*fptrStr)(char*);
+typedef char* (*fptrMapping)(uint8_t);
 //
 // menu item types
 //
@@ -16,3 +17,4 @@ const byte MENU_ITEM_NONE = 6;
 const byte MENU_ITEM_TOGGLE = 7;
 const byte MENU_ITEM_END_OF_MENU = 8;
 const byte MENU_ITEM_LIST = 9;
+const byte MENU_ITEM_PROGRESS = 10;
