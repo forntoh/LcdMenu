@@ -515,16 +515,17 @@ class LcdMenu {
                 break;
             }
 #endif
-#ifdef ItemList_H
+            case MENU_ITEM_PROGRESS:
             case MENU_ITEM_LIST: {
                 //
                 // execute the menu item's function
                 //
-                if (item->getCallbackInt() != NULL)
-                    (item->getCallbackInt())(item->getItemIndex());
+                if (!isInEditMode()) {
+                    isEditModeEnabled = true;
+                    drawCursor();
+                }
                 break;
             }
-#endif
         }
     }
     /**
