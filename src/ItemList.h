@@ -59,6 +59,15 @@ class ItemList : public MenuItem {
     uint8_t getItemIndex() override { return itemIndex; }
 
     /**
+     * @brief Changes the index of the current item.
+     *
+     * @return The index of the item to be selected.
+     */
+    void setItemIndex(uint8_t itemIndex) override {
+        this->itemIndex = itemIndex;
+    }
+
+    /**
      * @brief Returns the total number of items in the list.
      *
      * @return The total number of items in the list.
