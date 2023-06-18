@@ -191,8 +191,9 @@ class LcdMenu {
                                             : item->getTextOff());
                     break;
 #endif
-#ifdef ItemInput_H
+#if defined(ItemProgress_H) || defined(ItemInput_H)
                 case MENU_ITEM_INPUT:
+                case MENU_ITEM_PROGRESS:
                     //
                     // append the value of the input
                     //
