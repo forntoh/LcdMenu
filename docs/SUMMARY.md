@@ -1,5 +1,9 @@
 # Table of contents
 
 * [Home](README.md)
-* [Usage](usage/README.md)
-  * [🎛 Menu controls](usage/menu-controls.md)
+* [Usage](usage.md)
+* [Controls](controls.md)
+* [Examples](examples/README.md)
+  * [Basic](examples/basic.md)
+  * [Submenu](examples/submenu.md)
+  * [Timeout](examples/timeout.md)
