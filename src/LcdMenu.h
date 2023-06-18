@@ -117,6 +117,10 @@ class LcdMenu {
      */
     uint8_t cursorIcon = 0x7E;
     /**
+     * Edit mode cursor icon. Defaults to left arrow (←).
+     */
+    uint8_t editCursorIcon = 0x7F;
+    /**
      * Determines whether the screen should be updated after an action. Set it
      * to `false` when you want to display any other content on the screen then
      * set it back to `true` to show the menu.
@@ -143,7 +147,7 @@ class LcdMenu {
         //
         uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
         lcd->setCursor(0, line);
-        lcd->write(cursorIcon);
+        lcd->write(isEditModeEnabled ? editCursorIcon : cursorIcon);
 #ifdef ItemInput_H
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
@@ -725,10 +729,12 @@ class LcdMenu {
 #endif
     /**
      * Set the character used to visualize the cursor.
-     * @param newIcon character to display
+     * @param newIcon character to use for default cursor
+     * @param newEditIcon character use for edit mode cursor
      */
-    void setCursorIcon(uint8_t newIcon) {
+    void setCursorIcon(uint8_t newIcon, uint8_t newEditIcon) {
         cursorIcon = newIcon;
+        editCursorIcon = newEditIcon;
         drawCursor();
     }
     /**
