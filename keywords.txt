@@ -25,6 +25,7 @@ getValue	KEYWORD2
 setValue	KEYWORD2
 getCallbackStr	KEYWORD2
 getItemIndex	KEYWORD2
+setItemIndex	KEYWORD2
 getItems	KEYWORD2
 getCallbackInt	KEYWORD2
 isOn	KEYWORD2
@@ -37,6 +38,7 @@ isAtTheStart	KEYWORD2
 isAtTheEnd	KEYWORD2
 reset	KEYWORD2
 resetBlinker	KEYWORD2
+setupLcdWithMenu	KEYWORD2
 setupLcdWithMenu	KEYWORD2
 update	KEYWORD2
 resetMenu	KEYWORD2
@@ -56,7 +58,6 @@ show	KEYWORD2
 isInEditMode	KEYWORD2
 getCursorPosition	KEYWORD2
 setCursorPosition	KEYWORD2
-displayNotification	KEYWORD2
 updateTimer	KEYWORD2
 isSubMenu	KEYWORD2
 getItemAt	KEYWORD2
