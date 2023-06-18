@@ -1,5 +1,7 @@
 import re
+
 import click
+
 
 @click.command()
 @click.argument('files', type=click.Path("r"), nargs=-1)
@@ -33,7 +35,7 @@ def build(files, version):
         with open(file, "w") as a_file:
             a_file.truncate()
             a_file.write(data)
-            print("Done")
+            print("Updated version in library.properties")
     
 if __name__ == '__main__':
     build()
