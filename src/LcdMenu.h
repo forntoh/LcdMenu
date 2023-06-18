@@ -534,22 +534,37 @@ class LcdMenu {
      * Navigates up once.
      */
     void back() {
-#ifdef ItemInput_H
         MenuItem* item = currentMenuTable[cursorPosition];
         //
         // Back action different when on ItemInput
         //
-        if (item->getType() == MENU_ITEM_INPUT && isInEditMode()) {
-            // Disable edit mode
-            isEditModeEnabled = false;
-            update();
-            // Execute callback function
-            if (item->getCallbackStr() != NULL)
-                (item->getCallbackStr())(item->getValue());
-            // Interrupt going back to parent menu
-            return;
-        }
+        if (isInEditMode()) switch (item->getType()) {
+#ifdef ItemInput_H
+                case MENU_ITEM_INPUT:
+                    // Disable edit mode
+                    isEditModeEnabled = false;
+                    update();
+                    // Execute callback function
+                    if (item->getCallbackStr() != NULL)
+                        (item->getCallbackStr())(item->getValue());
+                    // Interrupt going back to parent menu
+                    return;
 #endif
+#if defined(ItemProgress_H) || defined(ItemList_H)
+                case MENU_ITEM_LIST:
+                case MENU_ITEM_PROGRESS:
+                    // Disable edit mode
+                    isEditModeEnabled = false;
+                    update();
+                    // Execute callback function
+                    if (item->getCallbackInt() != NULL)
+                        (item->getCallbackInt())(item->getItemIndex());
+                    // Interrupt going back to parent menu
+                    return;
+#endif
+                default:
+                    break;
+            }
         //
         // check if this is a sub menu, if so go back to its parent
         //
