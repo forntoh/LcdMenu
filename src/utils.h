@@ -1,34 +1,31 @@
 #pragma once
 #include <Arduino.h>
 
-char* substring(char* str, uint8_t start, uint8_t size) {
-    char* substr = new char[size + 1];
+void substring(char* str, uint8_t start, uint8_t size, char* substr) {
     strncpy(substr, str + start, size);
     substr[size] = '\0';
-    return substr;
 }
 
-char* concat(char* first, char second, char* third) {
-    int len1 = strlen(first);
-    int len3 = strlen(third);
-    char* result = new char[len1 + 2 + len3 + 1];
-    strcpy(result, first);
+void concat(const char* first, char second, const char* third, char* result) {
+    size_t len1 = strlen(first);
+    size_t len3 = strlen(third);
+
+    memcpy(result, first, len1);
     result[len1] = second;
-    strcpy(result + len1 + 1, third);
+    memcpy(result + len1 + 1, third, len3);
     result[len1 + 1 + len3] = '\0';
-    return result;
 }
 
-char* concat(char* first, char second) {
-    int len1 = strlen(first);
-
-    char* result = new char[len1 + 2];
-
-    strcpy(result, first);
+void concat(const char* first, char second, char* result) {
+    size_t len1 = strlen(first);
+    memcpy(result, first, len1);
     result[len1] = second;
     result[len1 + 1] = '\0';
+}
 
-    return result;
+void concat(const char* first, const char* second, char* result) {
+    strcpy(result, first);
+    strcat(result, second);
 }
 
 void remove(char* str, uint8_t index, uint8_t count) {

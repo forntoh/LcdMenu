@@ -196,10 +196,11 @@ class LcdMenu {
                     //
                     // append the value of the input
                     //
+                    static char* buf = new char[maxCols];
+                    substring(item->getValue(), 0,
+                              maxCols - strlen(item->getText()) - 2, buf);
                     lcd->print(":");
-                    lcd->print(
-                        substring(item->getValue(), 0,
-                                  maxCols - strlen(item->getText()) - 2));
+                    lcd->print(buf);
                     break;
 #endif
 #ifdef ItemList_H
@@ -510,7 +511,6 @@ class LcdMenu {
                     // blinker will be drawn
                     drawCursor();
                 }
-
                 break;
             }
 #endif
@@ -577,8 +577,7 @@ class LcdMenu {
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                item->setItemIndex(constrain(item->getItemIndex() - 1, 0,
-                                             item->getItemCount() - 1));
+                item->setItemIndex(item->getItemIndex() - 1);
                 if (previousIndex != item->getItemIndex()) update();
                 break;
             }
@@ -659,22 +658,25 @@ class LcdMenu {
         //
         // calculate lower and upper bound
         //
+        uint8_t length = strlen(item->getValue());
         uint8_t lb = strlen(item->getText()) + 2;
-        uint8_t ub = lb + strlen(item->getValue());
+        uint8_t ub = lb + length;
         ub = constrain(ub, lb, maxCols - 2);
         //
         // update text
         //
         if (blinkerPosition < ub) {
-            char* start = substring(item->getValue(), 0, blinkerPosition - lb);
-            char* end = substring(item->getValue(), blinkerPosition + 1 - lb,
-                                  strlen(item->getValue()));
-            char* joined = concat(start, character, end);
+            static char start[10];
+            static char end[10];
+            static char* joined = new char[maxCols - lb];
+            substring(item->getValue(), 0, blinkerPosition - lb, start);
+            substring(item->getValue(), blinkerPosition + 1 - lb, length, end);
+            concat(start, character, end, joined);
             item->setValue(joined);
-            delete[] start;
-            delete[] end;
         } else {
-            item->setValue(concat(item->getValue(), character));
+            static char* buf = new char[length + 2];
+            concat(item->getValue(), character, buf);
+            item->setValue(buf);
         }
         //
         isCharPickerActive = false;
@@ -793,10 +795,10 @@ class LcdMenu {
     MenuItem* getItemAt(uint8_t position) { return currentMenuTable[position]; }
     /**
      * Get a `MenuItem` at position using operator function
-     * e.g `menu[menu.getCursorPosition()]` will return the item at the current
-     * cursor position
-     * NB: This is relative positioning (i.e. if a submenu is currently being
-     * displayed, menu[1] will return item 1 in the current menu)
+     * e.g `menu[menu.getCursorPosition()]` will return the item at the
+     * current cursor position NB: This is relative positioning (i.e. if a
+     * submenu is currently being displayed, menu[1] will return item 1 in
+     * the current menu)
      * @return `MenuItem` - item at `position`
      */
     MenuItem* operator[](const uint8_t position) {
