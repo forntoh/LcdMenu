@@ -64,8 +64,15 @@ class ItemList : public MenuItem {
      * @return The index of the item to be selected.
      */
     void setItemIndex(uint8_t itemIndex) override {
-        this->itemIndex = itemIndex;
+        this->itemIndex = constrain(itemIndex, 0, itemCount - 1);
     }
+
+    /**
+     * @brief Get the callback bound to the current item.
+     *
+     * @return The the callback bound to the current item.
+     */
+    fptrInt getCallbackInt() override { return callback; }
 
     /**
      * @brief Returns the total number of items in the list.
