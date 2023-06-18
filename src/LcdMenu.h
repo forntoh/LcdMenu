@@ -589,6 +589,14 @@ class LcdMenu {
                 break;
             }
 #endif
+#ifdef ItemProgress_H
+            case MENU_ITEM_PROGRESS: {
+                if (isInEditMode()) {
+                    item->decrement();
+                    update();
+                }
+            }
+#endif
         }
     }
     /**
@@ -622,6 +630,15 @@ class LcdMenu {
             case MENU_ITEM_INPUT: {
                 blinkerPosition++;
                 resetBlinker();
+                break;
+            }
+#endif
+#ifdef ItemProgress_H
+            case MENU_ITEM_PROGRESS: {
+                if (isInEditMode()) {
+                    item->increment();
+                    update();
+                }
                 break;
             }
 #endif
