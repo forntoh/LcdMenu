@@ -8,8 +8,8 @@
 
 #include "MenuItem.h"
 
-#define MIN 0
-#define MAX 100
+#define MIN_PROGRESS 0
+#define MAX_PROGRESS 100
 
 /**
  * @class ItemProgress
@@ -55,20 +55,25 @@ class ItemProgress : public MenuItem {
      * @brief Increments the progress of the list.
      */
     void increment() override {
-        progress = constrain(progress + precision, MIN, MAX);
+        progress = constrain(progress + precision, MIN_PROGRESS, MAX_PROGRESS);
     }
 
     /**
      * @brief Decrements the progress of the list.
      */
     void decrement() override {
-        progress = constrain(progress - precision, MIN, MAX);
+        progress = constrain(progress - precision, MIN_PROGRESS, MAX_PROGRESS);
     }
 
     /**
      * Return the progress
      */
     uint8_t getItemIndex() override { return progress; }
+
+    /**
+     * Return the callback
+     */
+    fptrInt getCallbackInt() override { return callback; }
 
     /**
      * @brief Returns the value to be displayed.
