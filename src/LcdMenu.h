@@ -845,7 +845,7 @@ class LcdMenu {
     void toggleBacklight() {
         MenuItem* item = currentMenuTable[cursorPosition];
         if (item->getType() == MENU_ITEM_TOGGLE) {
-            lcd->setBacklight(item->isOn() ? 1 : NULL);
+            lcd->setBacklight(item->isOn() ? HIGH : LOW);
         }
     }
 #endif
