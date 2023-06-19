@@ -36,7 +36,7 @@ void remove(char* str, uint8_t index, uint8_t count) {
     memmove(str + index, str + index + count, len - count - index + 1);
 }
 
-long mapProgress(uint16_t progress, uint16_t minValue, uint16_t maxValue) {
+long mapProgress(uint16_t progress, long minValue, long maxValue) {
     // Map the progress value to a new range (minValue to maxValue)
     return map(progress, MIN_PROGRESS, MAX_PROGRESS, minValue, maxValue);
 }

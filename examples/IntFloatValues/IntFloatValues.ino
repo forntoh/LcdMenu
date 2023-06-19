@@ -26,7 +26,7 @@ void callback(uint8_t pos);
 
 char* intMapping(uint16_t progress) {
     // Map the progress value to a new range (100 to 200)
-    long mapped = mapProgress(progress, 100, 200);
+    long mapped = mapProgress(progress, 100L, 200L);
 
     // Buffer to store the converted stringV
     static char buffer[10];

@@ -64,16 +64,16 @@ unittest(remove_partial_string) {
 
 unittest(mapProgressInteger) {
     // Test integer mapping
-    assertEqual(mapProgress(500, 0, 10000), 5000);
-    assertEqual(mapProgress(250, -1000, 1000), -500);
-    assertEqual(mapProgress(750, 0, 5000), 3750);
+    assertEqual(mapProgress(500, 0L, 10000L), 5000);
+    assertEqual(mapProgress(250, -1000L, 1000L), -500);
+    assertEqual(mapProgress(750, 0L, 5000L), 3750);
 }
 
 unittest(mapProgressFloat) {
     // Test float mapping
-    assertEqualFloat(mapProgress(500, 0.0, 1.0), 0.5, 0.001);
-    assertEqualFloat(mapProgress(250, -1.0, 1.0), -0.5, 0.001);
-    assertEqualFloat(mapProgress(750, 0.0, 0.5), 0.375, 0.001);
+    assertEqualFloat(mapProgress(500, 0.0f, 1.0f), 0.5, 0.001);
+    assertEqualFloat(mapProgress(250, -1.0f, 1.0f), -0.5, 0.001);
+    assertEqualFloat(mapProgress(750, 0.0f, 0.5f), 0.375, 0.001);
 }
 
 unittest_main()
