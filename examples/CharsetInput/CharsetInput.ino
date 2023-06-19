@@ -1,20 +1,7 @@
 /*
  Charset Input
 
- This sketch demostrates how to use ItemInput in the LcdMenu library with a
- predifined charset
-
- Circuit:
- * Arduino Board
- * LCD SLC pin to arduino SLC pin
- * LCD SDA pin to arduino SDA pin
-
- created 23 July 2020
- by Forntoh Thomas
-
- This example is in the public domain.
-
- https://github.com/forntoh/LcdMenu/tree/master/examples/CharsetInput/CharsetInput.ino
+ https://lcdmenu.forntoh.dev/examples/input-from-character-set
 
 */
 
