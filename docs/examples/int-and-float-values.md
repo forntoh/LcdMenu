@@ -40,7 +40,7 @@ Map from **1..1000** to **100..200** and add a unit
 ```cpp
 char* intMapping(uint16_t progress) {
     // Map the progress value to a new range (100 to 200)
-    long mapped = map(progress, MIN_PROGRESS, MAX_PROGRESS, 100, 200);
+    long mapped = mapProgress(progress, 100L, 200L);
 
     // Buffer to store the converted string
     static char buffer[10];
@@ -64,14 +64,9 @@ As you have seen before the default step length is **1**, and there are **100** 
 {% tab title="Float" %}
 ```cpp
 char* floatMapping(uint16_t progress) {
-    float minValue = -1.0;  // Minimum value of the floating-point range
-    float maxValue = 1.0;   // Maximum value of the floating-point range
-
     // Normalize the progress value and map it to the specified floating-point
     // range
-    float floatValue =
-        static_cast<float>(progress) / MAX_PROGRESS * (maxValue - minValue) +
-        minValue;
+    float floatValue = mapProgress(progress, -1.0f, 1.0f);
 
     // Buffer to store the converted string
     static char buffer[10];

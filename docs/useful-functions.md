@@ -99,3 +99,51 @@ This function removes a specified number of characters from a string, starting f
 The `remove()` function removes `count` characters from the `str` starting from the `index`. If the sum of `index` and `count` exceeds the length of the string, the function adjusts
 
 the `count` to remove only the available characters until the end of the string. The resulting string is modified in-place, and the remaining characters are shifted to fill the removed portion.
+
+Sure! Here's the markdown documentation for the `mapProgress` functions:
+
+## mapProgress (uint16\_t version)
+
+The `mapProgress` function maps a `progress` value from the range `MIN_PROGRESS` to `MAX_PROGRESS` to a new range specified by `minValue` and `maxValue`.
+
+#### Function Signature
+
+```cpp
+long mapProgress(uint16_t progress, long minValue, long maxValue)
+```
+
+#### Parameters
+
+* `progress`: The input progress value to be mapped.
+* `minValue`: The minimum value of the new range.
+* `maxValue`: The maximum value of the new range.
+
+#### Return Value
+
+* `long`: The mapped value in the new range.
+
+## mapProgress (float version)
+
+The `mapProgress` function maps a `progress` value from the range `MIN_PROGRESS` to `MAX_PROGRESS` to a new range specified by `minValue` and `maxValue` as floating-point values.
+
+#### Function Signature
+
+```cpp
+float mapProgress(uint16_t progress, float minValue, float maxValue)
+```
+
+#### Parameters
+
+* `progress`: The input progress value to be mapped.
+* `minValue`: The minimum value of the new range (floating-point).
+* `maxValue`: The maximum value of the new range (floating-point).
+
+#### Return Value
+
+* `float`: The mapped value in the new range.
+
+#### Additional Information
+
+The `mapProgress` functions provide a convenient way to map a progress value from one range to another. The uint16\_t version uses the `map` function from the Arduino library to perform the mapping, while the float version performs the mapping manually by normalizing the progress value and scaling it to the specified floating-point range.
+
+Please note that the progress value should be within the range `MIN_PROGRESS` to `MAX_PROGRESS` to ensure accurate mapping.
