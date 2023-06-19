@@ -54,7 +54,7 @@ char* floatMapping(uint16_t progress) {
     dtostrf(floatValue, 4, 2, buffer);
 
     // Concatenate the string with the character 'c'
-    concat(buffer, 'c', buffer);
+    concat(buffer, 'A', buffer);
 
     // Return the resulting string
     return buffer;
@@ -62,6 +62,7 @@ char* floatMapping(uint16_t progress) {
 
 // Initialize the main menu items
 MAIN_MENU(ITEM_BASIC("Con"), ITEM_PROGRESS("Dist", 1, intMapping, callback),
+          ITEM_PROGRESS("Curr", 1, floatMapping, callback),
           ITEM_BASIC("Blink SOS"), ITEM_BASIC("Blink random"));
 
 // Construct the LcdMenu
