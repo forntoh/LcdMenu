@@ -21,12 +21,12 @@ will display an integer value from **0** to **1000** and with a step length of *
 To customize the range, use the following constructors which provide a method for you to map the value from **0** to **1000** to any other range (float, int, or long).
 
 ```cpp
-ItemProgress(const char* key, uint8_t precision, fptrMapping mapping, fptrInt callback)
+ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
 ```
 
 * **key**: Text to display before the value.
-* **precision**: the step length for incrementing and decrementing.
-* **mapping**: reference to the mapping function which converts the progress displayed on the screen to any other range (in this mapping function you can also append any text to the progress).
+* **stepLength**: The length of each step for incrementing or decrementing the progress value.
+* **mapping**: A pointer to the mapping function that maps the progress value to a custom representation (in this mapping function you can also append any text to the progress).
 * **callback**: function to be executed after changing the value and leaving edit mode.
 
 ## Mapping to different range example functions
@@ -143,7 +143,6 @@ void callback(uint8_t pos) {
     // do something with the progress
     Serial.println(pos);
 }
-
 ```
 
 Full example 👉 [.../examples/IntFloatValues/IntFloatValues.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/IntFloatValues/IntFloatValues.ino)
