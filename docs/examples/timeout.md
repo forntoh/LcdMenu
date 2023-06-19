@@ -25,7 +25,7 @@ In the `loop` ensure that you have the following in the first line
 menu.updateTimer();
 ```
 
-## Complete Code
+### Complete Code
 
 Go to [.../examples/MenuTimeout/MenuTimeout.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/MenuTimeout/MenuTimeout.ino)
 
