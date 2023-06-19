@@ -28,8 +28,8 @@ String colors[] = {"Red",  "Green",  "Blue",   "Orange",
 <pre class="language-cpp"><code class="lang-cpp">ITEM_STRING_LIST("Col", colors, 9, <a data-footnote-ref href="#user-content-fn-1">colorsCallback</a>),
 </code></pre>
 
-{% hint style="info" %}
-You **must** add the size of the array in order for the menu to know when to stop or loop when cycling through the items in the list.
+{% hint style="danger" %}
+You **must** add the size of the array in order for the menu to know when to stop or loop while cycling through the items in the list.
 {% endhint %}
 
 ### Enter edit mode
