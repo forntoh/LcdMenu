@@ -17,7 +17,9 @@ In the setup function, use the following function to configure the timeout durat
 
 ### Usage
 
-In the `loop` ensure that you have this in the first line
+{% hint style="warning" %}
+In the `loop` ensure that you have the following in the first line
+{% endhint %}
 
 ```cpp
 menu.updateTimer();
