@@ -100,8 +100,6 @@ The `remove()` function removes `count` characters from the `str` starting from 
 
 the `count` to remove only the available characters until the end of the string. The resulting string is modified in-place, and the remaining characters are shifted to fill the removed portion.
 
-Sure! Here's the markdown documentation for the `mapProgress` functions:
-
 ## mapProgress (uint16\_t version)
 
 The `mapProgress` function maps a `progress` value from the range `MIN_PROGRESS` to `MAX_PROGRESS` to a new range specified by `minValue` and `maxValue`.
