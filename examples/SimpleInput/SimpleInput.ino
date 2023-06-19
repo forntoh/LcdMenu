@@ -1,5 +1,5 @@
 /*
- Simle Input
+ Simple Input
 
  https://lcdmenu.forntoh.dev/examples/simple-input
 

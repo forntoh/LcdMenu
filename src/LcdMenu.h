@@ -79,7 +79,7 @@ class LcdMenu {
      */
     uint8_t maxCols;
     /**
-     * Colum location of Blinker
+     * Column location of Blinker
      */
     uint8_t blinkerPosition = 0;
     /**
