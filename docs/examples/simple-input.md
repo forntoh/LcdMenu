@@ -22,7 +22,7 @@ ItemInput(const char* text, fptrStr callback)
 
 ### Create ItemInput item
 
-<pre class="language-cpp"><code class="lang-cpp">MAIN_MENU(
+<pre class="language-arduino"><code class="lang-arduino">MAIN_MENU(
     // ...
     ITEM_INPUT("Test", <a data-footnote-ref href="#user-content-fn-1">inputCallback</a>), 
     /// ...

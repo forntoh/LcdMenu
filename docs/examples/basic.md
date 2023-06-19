@@ -16,7 +16,7 @@ description: >-
 
 Go to [.../examples/Basic/Basic.ino](https://github.com/forntoh/LcdMenu/tree/master/examples/Basic/Basic.ino)
 
-```cpp
+```arduino
 // ../../examples/Basic/Basic.ino#L35-L68
 
 // Initialize the main menu items

@@ -16,7 +16,7 @@ You have the possibility to attach as many sub-menus as your microcontroller can
 
 #### Declare your menus
 
-```cpp
+```arduino
 extern MenuItem* settingsMenu[];
 ```
 
@@ -24,7 +24,7 @@ You do not need to define the `mainMenu`, it is already defined for you in the <
 
 #### Create the main menu
 
-<pre class="language-cpp"><code class="lang-cpp">// Define the main menu
+<pre class="language-arduino"><code class="lang-arduino">// Define the main menu
 MAIN_MENU(
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
@@ -36,7 +36,7 @@ MAIN_MENU(
 
 #### Create the submenu
 
-<pre class="language-cpp"><code class="lang-cpp">/**
+<pre class="language-arduino"><code class="lang-arduino">/**
  * Create the submenu and precise its parent
  */
 SUB_MENU(<a data-footnote-ref href="#user-content-fn-2">settingsMenu</a>, <a data-footnote-ref href="#user-content-fn-3">mainMenu</a>,
