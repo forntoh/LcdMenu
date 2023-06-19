@@ -9,3 +9,4 @@
   * [Timeout](examples/timeout.md)
   * [Simple Input](examples/simple-input.md)
   * [Input from Character Set](examples/input-from-character-set.md)
+  * [Command & Toggle](examples/command-and-toggle.md)
