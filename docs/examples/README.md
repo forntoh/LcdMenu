@@ -1,6 +1,6 @@
 # Examples
 
-For the following examples, the following are required
+Requirements for the examples.
 
 * Keyboard
 * LCD Display
