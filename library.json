@@ -26,7 +26,8 @@
       "test/",
       "diagram.json",
       "Gemfile",
-      "*.toml"
+      "*.toml",
+      "docs/"
     ]
   }
 }

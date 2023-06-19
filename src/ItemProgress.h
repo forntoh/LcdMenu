@@ -8,20 +8,16 @@
 
 #include "MenuItem.h"
 
-#define MIN_PROGRESS 0
-#define MAX_PROGRESS 100
-
 /**
  * @class ItemProgress
  * @brief ItemProgress indicates that the current item is a list.
  */
 class ItemProgress : public MenuItem {
    private:
-    fptrMapping mapping = NULL;  ///< Pointer to a callback function
+    fptrMapping mapping = NULL;  ///< Pointer to a mapping function
     fptrInt callback = NULL;     ///< Pointer to a callback function
-    uint8_t start = 0;           ///< The total number of items in the list
-    uint8_t progress = 0;        ///< The total number of items in the list
-    uint8_t precision = 1;
+    uint16_t progress = 0;       ///< The progress
+    uint8_t stepLength = 1;
 
    public:
     /**
@@ -33,36 +29,38 @@ class ItemProgress : public MenuItem {
      * @param callback A pointer to the callback function to execute when this
      * menu item is selected.
      */
-    ItemProgress(const char* key, uint8_t start, uint8_t precision,
+    ItemProgress(const char* key, uint16_t start, uint8_t stepLength,
                  fptrMapping mapping, fptrInt callback)
         : MenuItem(key, MENU_ITEM_PROGRESS),
           mapping(mapping),
           callback(callback),
-          start(start),
-          precision(precision) {}
+          progress(start),
+          stepLength(stepLength) {}
 
-    ItemProgress(const char* key, uint8_t start, fptrInt callback)
+    ItemProgress(const char* key, uint16_t start, fptrInt callback)
         : ItemProgress(key, start, 1, NULL, callback) {}
 
     ItemProgress(const char* key, fptrInt callback)
         : ItemProgress(key, 0, 1, NULL, callback) {}
 
-    ItemProgress(const char* key, uint8_t precision, fptrMapping mapping,
+    ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping,
                  fptrInt callback)
-        : ItemProgress(key, 0, precision, mapping, callback) {}
+        : ItemProgress(key, 0, stepLength, mapping, callback) {}
 
     /**
      * @brief Increments the progress of the list.
      */
     void increment() override {
-        progress = constrain(progress + precision, MIN_PROGRESS, MAX_PROGRESS);
+        if (progress >= MAX_PROGRESS) return;
+        progress += stepLength;
     }
 
     /**
      * @brief Decrements the progress of the list.
      */
     void decrement() override {
-        progress = constrain(progress - precision, MIN_PROGRESS, MAX_PROGRESS);
+        if (progress <= MIN_PROGRESS) return;
+        progress -= stepLength;
     }
 
     /**
@@ -84,7 +82,7 @@ class ItemProgress : public MenuItem {
      */
     char* getValue() override {
         if (mapping == NULL) {
-            static char buf[4];
+            static char buf[6];
             itoa(progress, buf, 10);
             return buf;
         } else {
