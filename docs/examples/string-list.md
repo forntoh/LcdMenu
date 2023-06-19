@@ -32,6 +32,17 @@ String colors[] = {"Red",  "Green",  "Blue",   "Orange",
 You **must** add the size of the array in order for the menu to know when to stop or loop while cycling through the items in the list.
 {% endhint %}
 
+Constructor reference:
+
+```cpp
+ItemList(const char key, String* items, const uint8_t itemCount, fptrInt callback)
+```
+
+* **key**: The key of the menu item.
+* **items**: The array of items to display.
+* **itemCount**: The number of items in the array.
+* **callback**: A pointer to the callback function to execute when this menu item is selected.
+
 ### Enter edit mode
 
 ```cpp
