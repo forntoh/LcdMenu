@@ -51,6 +51,14 @@ jobs:
           pio lib install
 
       - name: Run PlatformIO
-        run: pio ci -l src -c platformio.ini
+        run: |
+          FILE_NAME=$(echo "${{ matrix.example }}" | sed 's|.*/\(.*\)\.ino$|\1.json|')
+          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
+          pio ci -l src -c platformio.ini 2>&1 | tail -4 | sed '3,$d' | python3 .scripts/metrics.py > $FILE_NAME
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
+
+      - name: Upload compile metrics
+        uses: actions/upload-artifact@v3
+        with:
+          path: ${{ env.FILE_NAME }}
