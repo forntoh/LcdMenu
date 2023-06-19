@@ -7,3 +7,4 @@
   * [Basic](examples/basic.md)
   * [Submenu](examples/submenu.md)
   * [Timeout](examples/timeout.md)
+  * [Simple Input](examples/simple-input.md)
