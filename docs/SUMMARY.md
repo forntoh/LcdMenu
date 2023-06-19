@@ -12,3 +12,4 @@
   * [Command & Toggle](examples/command-and-toggle.md)
   * [String List](examples/string-list.md)
   * [🌟 Int & Float Values](examples/int-and-float-values.md)
+* [Useful functions](useful-functions.md)
