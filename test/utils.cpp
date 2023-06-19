@@ -1,8 +1,5 @@
 #include <ArduinoUnitTests.h>
-
-#define MIN_PROGRESS 0
-#define MAX_PROGRESS 1000
-
+#include <Constants.h>
 #include <utils.h>
 
 unittest(concat_same_strings) {
