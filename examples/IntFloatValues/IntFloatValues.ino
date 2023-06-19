@@ -61,9 +61,13 @@ char* floatMapping(uint16_t progress) {
 }
 
 // Initialize the main menu items
-MAIN_MENU(ITEM_BASIC("Con"), ITEM_PROGRESS("Dist", 1, intMapping, callback),
-          ITEM_PROGRESS("Curr", 1, floatMapping, callback),
-          ITEM_BASIC("Blink SOS"), ITEM_BASIC("Blink random"));
+MAIN_MENU(
+    ITEM_BASIC("Con"),
+    ITEM_PROGRESS("Dist", 10, intMapping, callback),
+    ITEM_PROGRESS("Curr", 5, floatMapping, callback),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 
 // Construct the LcdMenu
 LcdMenu menu(LCD_ROWS, LCD_COLS);
