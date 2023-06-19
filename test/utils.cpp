@@ -1,8 +1,9 @@
 #include <ArduinoUnitTests.h>
-#include <utils.h>
 
 #define MIN_PROGRESS 0
 #define MAX_PROGRESS 1000
+
+#include <utils.h>
 
 unittest(concat_same_strings) {
     char result[10];
@@ -71,9 +72,9 @@ unittest(mapProgressInteger) {
 
 unittest(mapProgressFloat) {
     // Test float mapping
-    assertEqualFloat(mapProgress(500, 0.0f, 1.0f), 0.5, 0.001);
-    assertEqualFloat(mapProgress(250, -1.0f, 1.0f), -0.5, 0.001);
-    assertEqualFloat(mapProgress(750, 0.0f, 0.5f), 0.375, 0.001);
+    assertEqualFloat(mapProgress(500, 0.0f, 1.0f), 0.5f, 0.001);
+    assertEqualFloat(mapProgress(250, -1.0f, 1.0f), -0.5f, 0.001);
+    assertEqualFloat(mapProgress(750, 0.0f, 0.5f), 0.375f, 0.001);
 }
 
 unittest_main()
