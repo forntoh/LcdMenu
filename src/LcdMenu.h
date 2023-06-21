@@ -79,7 +79,7 @@ class LcdMenu {
      */
     uint8_t maxCols;
     /**
-     * Colum location of Blinker
+     * Column location of Blinker
      */
     uint8_t blinkerPosition = 0;
     /**
@@ -191,8 +191,9 @@ class LcdMenu {
                                             : item->getTextOff());
                     break;
 #endif
-#ifdef ItemInput_H
+#if defined(ItemProgress_H) || defined(ItemInput_H)
                 case MENU_ITEM_INPUT:
+                case MENU_ITEM_PROGRESS:
                     //
                     // append the value of the input
                     //
@@ -514,16 +515,17 @@ class LcdMenu {
                 break;
             }
 #endif
-#ifdef ItemList_H
+            case MENU_ITEM_PROGRESS:
             case MENU_ITEM_LIST: {
                 //
                 // execute the menu item's function
                 //
-                if (item->getCallbackInt() != NULL)
-                    (item->getCallbackInt())(item->getItemIndex());
+                if (!isInEditMode()) {
+                    isEditModeEnabled = true;
+                    drawCursor();
+                }
                 break;
             }
-#endif
         }
     }
     /**
@@ -532,22 +534,37 @@ class LcdMenu {
      * Navigates up once.
      */
     void back() {
-#ifdef ItemInput_H
         MenuItem* item = currentMenuTable[cursorPosition];
         //
         // Back action different when on ItemInput
         //
-        if (item->getType() == MENU_ITEM_INPUT && isInEditMode()) {
-            // Disable edit mode
-            isEditModeEnabled = false;
-            update();
-            // Execute callback function
-            if (item->getCallbackStr() != NULL)
-                (item->getCallbackStr())(item->getValue());
-            // Interrupt going back to parent menu
-            return;
-        }
+        if (isInEditMode()) switch (item->getType()) {
+#ifdef ItemInput_H
+                case MENU_ITEM_INPUT:
+                    // Disable edit mode
+                    isEditModeEnabled = false;
+                    update();
+                    // Execute callback function
+                    if (item->getCallbackStr() != NULL)
+                        (item->getCallbackStr())(item->getValue());
+                    // Interrupt going back to parent menu
+                    return;
 #endif
+#if defined(ItemProgress_H) || defined(ItemList_H)
+                case MENU_ITEM_LIST:
+                case MENU_ITEM_PROGRESS:
+                    // Disable edit mode
+                    isEditModeEnabled = false;
+                    update();
+                    // Execute callback function
+                    if (item->getCallbackInt() != NULL)
+                        (item->getCallbackInt())(item->getItemIndex());
+                    // Interrupt going back to parent menu
+                    return;
+#endif
+                default:
+                    break;
+            }
         //
         // check if this is a sub menu, if so go back to its parent
         //
@@ -589,6 +606,14 @@ class LcdMenu {
                 break;
             }
 #endif
+#ifdef ItemProgress_H
+            case MENU_ITEM_PROGRESS: {
+                if (isInEditMode()) {
+                    item->decrement();
+                    update();
+                }
+            }
+#endif
         }
     }
     /**
@@ -622,6 +647,15 @@ class LcdMenu {
             case MENU_ITEM_INPUT: {
                 blinkerPosition++;
                 resetBlinker();
+                break;
+            }
+#endif
+#ifdef ItemProgress_H
+            case MENU_ITEM_PROGRESS: {
+                if (isInEditMode()) {
+                    item->increment();
+                    update();
+                }
                 break;
             }
 #endif
@@ -811,7 +845,7 @@ class LcdMenu {
     void toggleBacklight() {
         MenuItem* item = currentMenuTable[cursorPosition];
         if (item->getType() == MENU_ITEM_TOGGLE) {
-            lcd->setBacklight(item->isOn() ? 1 : NULL);
+            lcd->setBacklight(item->isOn() ? HIGH : LOW);
         }
     }
 #endif

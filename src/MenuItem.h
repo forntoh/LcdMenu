@@ -105,7 +105,14 @@ class MenuItem {
      * @return `String*` - List of items
      */
     virtual String* getItems() { return NULL; }
-
+    /**
+     * @brief Increments the progress of the list.
+     */
+    virtual void increment(){};
+    /**
+     * @brief Decrements the progress of the list.
+     */
+    virtual void decrement(){};
     /**
      * ## Setters
      */

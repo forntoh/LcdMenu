@@ -1,21 +1,8 @@
 /*
  Menu Item List
 
- This sketch demostrates how to use list of values in the LcdMenu library.
- This feature was requested and inpired by @thijstriemstra
-
- Circuit:
- * Arduino Board
- * LCD SLC pin to arduino SLC pin
- * LCD SDA pin to arduino SDA pin
-
- created 24 August 2021
- by Forntoh Thomas
-
- This example is in the public domain.
-
- https://github.com/forntoh/LcdMenu/tree/master/examples/List/List.ino
-
+ https://lcdmenu.forntoh.dev/examples/string-list
+ 
 */
 
 #include <ItemList.h>
