@@ -4,7 +4,7 @@ description: Display navigable menu items on your LCD display with Arduino
 
 # Home
 
-LcdMenu is an Arduino library that enables you to create interactive menus and navigation systems for LCD displays. With LcdMenu, you can easily add menus to your projects and navigate through them using buttons or any input device you want. The library supports a wide range of LCD display modules, including character and alphanumeric displays.
+**LcdMenu** is an Arduino library that enables you to create interactive menus and navigation systems for LCD displays. With LcdMenu, you can easily add menus to your projects and navigate through them using buttons or any input device you want. The library supports a wide range of LCD display modules, including character and alphanumeric displays.
 
 <div align="left">
 
@@ -28,7 +28,7 @@ Follow [this guide](https://www.ardu-badge.com/LcdMenu) to install the library w
 
     ```ini
     lib_deps =
-        forntoh/LcdMenu@^3.0.0
+        forntoh/LcdMenu@^3.3.0
     ```
 4. Save the changes to the `platformio.ini` file.
 5. Build and upload your project to your device.

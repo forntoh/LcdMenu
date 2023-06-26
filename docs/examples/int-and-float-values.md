@@ -29,6 +29,10 @@ ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping, fptrInt c
 * **mapping**: A pointer to the mapping function that maps the progress value to a custom representation (in this mapping function you can also append any text to the progress).
 * **callback**: function to be executed after changing the value and leaving edit mode.
 
+{% hint style="warning" %}
+The value passed to the callback function is the progress, so you also have to map it to get your desired value.
+{% endhint %}
+
 ## Mapping to different range example functions
 
 The following example mapping functions shows how to map the progress value in the range **0..1000** to any other range
@@ -62,6 +66,8 @@ As you have seen before the default step length is **1**, and there are **100** 
 {% endtab %}
 
 {% tab title="Float" %}
+Map from **1..1000** to **-1.0f..1.0f** and add a unit
+
 ```cpp
 char* floatMapping(uint16_t progress) {
     // Normalize the progress value and map it to the specified floating-point

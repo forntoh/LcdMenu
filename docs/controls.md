@@ -7,7 +7,7 @@ description: The following controls exist for the menu
 ### <mark style="color:blue;">`menu.up()`</mark> and <mark style="color:blue;">`menu.down()`</mark>&#x20;
 
 Navigate up and down the menu.\
-When the menu is in edit mode, this action does nothing
+When the menu is in edit mode, this action has no effect.
 
 ### <mark style="color:blue;">`menu.left()`</mark> and <mark style="color:blue;">`menu.right()`</mark>
 

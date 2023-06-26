@@ -100,7 +100,7 @@ The `remove()` function removes `count` characters from the `str` starting from 
 
 the `count` to remove only the available characters until the end of the string. The resulting string is modified in-place, and the remaining characters are shifted to fill the removed portion.
 
-## mapProgress (uint16\_t version)
+## mapProgress (long)
 
 The `mapProgress` function maps a `progress` value from the range `MIN_PROGRESS` to `MAX_PROGRESS` to a new range specified by `minValue` and `maxValue`.
 
@@ -120,7 +120,7 @@ long mapProgress(uint16_t progress, long minValue, long maxValue)
 
 * `long`: The mapped value in the new range.
 
-## mapProgress (float version)
+## mapProgress (float)
 
 The `mapProgress` function maps a `progress` value from the range `MIN_PROGRESS` to `MAX_PROGRESS` to a new range specified by `minValue` and `maxValue` as floating-point values.
 
@@ -144,4 +144,4 @@ float mapProgress(uint16_t progress, float minValue, float maxValue)
 
 The `mapProgress` functions provide a convenient way to map a progress value from one range to another. The uint16\_t version uses the `map` function from the Arduino library to perform the mapping, while the float version performs the mapping manually by normalizing the progress value and scaling it to the specified floating-point range.
 
-Please note that the progress value should be within the range `MIN_PROGRESS` to `MAX_PROGRESS` to ensure accurate mapping.
+Please note that the progress value should be within the range **`MIN_PROGRESS`** to **`MAX_PROGRESS`** to ensure accurate mapping.
