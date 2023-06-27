@@ -9,6 +9,7 @@
 ItemCommand	KEYWORD1
 ItemInput	KEYWORD1
 ItemList	KEYWORD1
+ItemProgress	KEYWORD1
 ItemSubMenu	KEYWORD1
 ItemToggle	KEYWORD1
 LcdMenu	KEYWORD1
@@ -25,7 +26,14 @@ getValue	KEYWORD2
 setValue	KEYWORD2
 getCallbackStr	KEYWORD2
 getItemIndex	KEYWORD2
+setItemIndex	KEYWORD2
+getCallbackInt	KEYWORD2
 getItems	KEYWORD2
+increment	KEYWORD2
+decrement	KEYWORD2
+getItemIndex	KEYWORD2
+getCallbackInt	KEYWORD2
+getValue	KEYWORD2
 getCallbackInt	KEYWORD2
 isOn	KEYWORD2
 setIsOn	KEYWORD2
@@ -37,6 +45,7 @@ isAtTheStart	KEYWORD2
 isAtTheEnd	KEYWORD2
 reset	KEYWORD2
 resetBlinker	KEYWORD2
+setupLcdWithMenu	KEYWORD2
 setupLcdWithMenu	KEYWORD2
 update	KEYWORD2
 resetMenu	KEYWORD2
@@ -56,20 +65,29 @@ show	KEYWORD2
 isInEditMode	KEYWORD2
 getCursorPosition	KEYWORD2
 setCursorPosition	KEYWORD2
-displayNotification	KEYWORD2
 updateTimer	KEYWORD2
 isSubMenu	KEYWORD2
 getItemAt	KEYWORD2
 toggleBacklight	KEYWORD2
 getType	KEYWORD2
+substring	KEYWORD2
+concat	KEYWORD2
+concat	KEYWORD2
+concat	KEYWORD2
+remove	KEYWORD2
+mapProgress	KEYWORD2
+mapProgress	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
+MIN_PROGRESS	LITERAL1
+MAX_PROGRESS	LITERAL1
 ITEM_COMMAND	LITERAL1
 ITEM_INPUT	LITERAL1
 ITEM_STRING_LIST	LITERAL1
+ITEM_PROGRESS	LITERAL1
 ITEM_SUBMENU	LITERAL1
 ITEM_TOGGLE	LITERAL1
 USE_STANDARD_LCD	LITERAL1

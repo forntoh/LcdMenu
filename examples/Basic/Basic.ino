@@ -1,19 +1,7 @@
 /*
- Basic Menu Navigation
+ Basic Menu
 
- This sketch demostrates how to get started with the LcdMenu library
-
- Circuit:
- * Arduino Board
- * LCD SLC pin to arduino SLC pin
- * LCD SDA pin to arduino SDA pin
-
- created 22 July 2020
- by Forntoh Thomas
-
- This example is in the public domain.
-
- https://github.com/forntoh/LcdMenu/tree/master/examples/Basic/Basic.ino
+ https://lcdmenu.forntoh.dev/examples/basic
 
 */
 

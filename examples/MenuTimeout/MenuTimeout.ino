@@ -1,24 +1,7 @@
 /*
- Menu Notifications
+ Menu Timeout
 
- This sketch demostrates how to display Notifications
- using the LcdMenu library. After the specified time, the notification message
- disappears. In this sketch When the # key is pressed, the notification displays
- for two (2) seconds
-
- N.B: You must call menu.updateTimer(); in the first line of the loop function
-
- Circuit:
- * Arduino Board
- * LCD SLC pin to arduino SLC pin
- * LCD SDA pin to arduino SDA pin
-
- created 23 July 2020
- by Forntoh Thomas
-
- This example is in the public domain.
-
- https://github.com/forntoh/LcdMenu/tree/master/examples/MenuNotifications/MenuNotifications.ino
+ https://lcdmenu.forntoh.dev/examples/timeout
 
 */
 
@@ -49,13 +32,13 @@ LcdMenu menu(LCD_ROWS, LCD_COLS);
 
 void setup() {
     Serial.begin(9600);
-    menu.setupLcdWithMenu(0x27, mainMenu);
+    menu.setupLcdWithMenu(0x27, mainMenu, 20000);
 }
 
 void loop() {
     /**
-     * IMPORTANT: You must call this function for the notification to take time
-     * into account
+     * IMPORTANT: You must call this function for the timeout to work
+     * The default timeout is 10000ms
      */
     menu.updateTimer();
 
@@ -75,7 +58,4 @@ void loop() {
         menu.enter();
     else if (command == BACK)
         menu.back();
-    else {
-        menu.displayNotification("Success", 2000);
-    }
 }

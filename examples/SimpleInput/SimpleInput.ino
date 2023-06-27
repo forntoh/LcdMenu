@@ -1,19 +1,7 @@
 /*
- Simle Input
+ Simple Input
 
- This sketch demostrates how to use ItemInput in the LcdMenu library
-
- Circuit:
- * Arduino Board
- * LCD SLC pin to arduino SLC pin
- * LCD SDA pin to arduino SDA pin
-
- created 23 July 2020
- by Forntoh Thomas
-
- This example is in the public domain.
-
- https://github.com/forntoh/LcdMenu/tree/master/examples/SimpleInput/SimpleInput.ino
+ https://lcdmenu.forntoh.dev/examples/simple-input
 
 */
 
@@ -34,7 +22,7 @@
 #define CLEAR 46     // NUMPAD .
 
 // Declare the call back function
-void inputCallback(String value);
+void inputCallback(char* value);
 
 MAIN_MENU(
     ITEM_INPUT("Con", inputCallback), 
@@ -76,7 +64,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(String value) {
+void inputCallback(char* value) {
     Serial.print(F("# "));
     Serial.println(value);
 }

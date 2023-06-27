@@ -1,20 +1,7 @@
 /*
  Charset Input
 
- This sketch demostrates how to use ItemInput in the LcdMenu library with a
- predifined charset
-
- Circuit:
- * Arduino Board
- * LCD SLC pin to arduino SLC pin
- * LCD SDA pin to arduino SDA pin
-
- created 23 July 2020
- by Forntoh Thomas
-
- This example is in the public domain.
-
- https://github.com/forntoh/LcdMenu/tree/master/examples/CharsetInput/CharsetInput.ino
+ https://lcdmenu.forntoh.dev/examples/input-from-character-set
 
 */
 
@@ -41,7 +28,7 @@ char charset[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 uint8_t charsetPosition;
 
 // Declare the call back function
-void inputCallback(String value);
+void inputCallback(char* value);
 
 MAIN_MENU(
     ITEM_INPUT("Con", inputCallback),
@@ -103,7 +90,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(String value) {
+void inputCallback(char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);

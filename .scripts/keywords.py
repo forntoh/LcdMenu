@@ -67,7 +67,7 @@ def build(files):
         a_file.write(keyword_2_data)
         a_file.write(pre_lit_1)
         a_file.write(literal_1_data)
-        print("Done")
+        print("Updated keywords")
     
 if __name__ == '__main__':
     build()

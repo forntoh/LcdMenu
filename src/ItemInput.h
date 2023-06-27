@@ -18,7 +18,7 @@
 class ItemInput : public MenuItem {
    private:
     // Declare a string to hold the input value.
-    String value;
+    char* value;
 
     // Declare a function pointer for the input callback.
     fptrStr callback;
@@ -32,7 +32,7 @@ class ItemInput : public MenuItem {
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
      */
-    ItemInput(const char* text, String value, fptrStr callback)
+    ItemInput(const char* text, char* value, fptrStr callback)
         : MenuItem(text, MENU_ITEM_INPUT), value(value), callback(callback) {}
 
     /**
@@ -43,21 +43,21 @@ class ItemInput : public MenuItem {
      * the input is submitted.
      */
     ItemInput(const char* text, fptrStr callback)
-        : ItemInput(text, "", callback) {}
+        : ItemInput(text, (char*)"", callback) {}
 
     /**
      * Get the current input value for this item.
      *
      * @return The current input value as a string.
      */
-    String getValue() override { return value; }
+    char* getValue() override { return value; }
 
     /**
      * Set the input value for this item.
      *
      * @param value The new input value.
      */
-    void setValue(String value) override { this->value = value; }
+    void setValue(char* value) override { this->value = value; }
 
     /**
      * Get the callback function for this item.
