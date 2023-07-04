@@ -10,6 +10,10 @@ To use the LcdMenu library in your project, follow these steps:
 
 You will need to add other includes for the types of menu items you wish to use, the available types are described in the next step.
 
+{% hint style="danger" %}
+Always place `LcdMenu.h` as the last line of imports after the menu-item types imports
+{% endhint %}
+
 #### **2. Create the main menu, using the provided macro `MAIN_MENU()` e.g.**
 
 ```arduino
