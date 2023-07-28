@@ -4,7 +4,7 @@ description: >-
   given range.
 ---
 
-# 🌟 Int & Float Values
+# Int & Float Values
 
 Using ItemProgress, you can display integer values in a given range and define the step length between each value.
 
