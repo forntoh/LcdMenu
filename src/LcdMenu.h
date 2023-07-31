@@ -41,8 +41,6 @@
 class LcdMenu {
    private:
     /**
-     * ---
-     *
      * ## Private Fields
      */
 
@@ -385,9 +383,9 @@ class LcdMenu {
      */
     void update() {
         if (!enableUpdate) return;
+        lcd->display();
         drawMenu();
         drawCursor();
-        lcd->setBacklight(HIGH);
         startTime = millis();
     }
     /**
@@ -811,8 +809,7 @@ class LcdMenu {
      */
     void updateTimer() {
         if (millis() == startTime + timeout) {
-            lcd->setBacklight(LOW);
-            lcd->clear();
+            lcd->noDisplay();
         }
     }
     /**
@@ -838,15 +835,4 @@ class LcdMenu {
     MenuItem* operator[](const uint8_t position) {
         return currentMenuTable[position];
     }
-#ifdef ItemToggle_H
-    /**
-     * Toggle backlight
-     */
-    void toggleBacklight() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        if (item->getType() == MENU_ITEM_TOGGLE) {
-            lcd->setBacklight(item->isOn() ? HIGH : LOW);
-        }
-    }
-#endif
 };
