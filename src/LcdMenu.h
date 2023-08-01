@@ -41,8 +41,6 @@
 class LcdMenu {
    private:
     /**
-     * ---
-     *
      * ## Private Fields
      */
 
@@ -126,6 +124,10 @@ class LcdMenu {
      * set it back to `true` to show the menu.
      */
     bool enableUpdate = true;
+    /**
+     * The backlight state of the lcd
+     */
+    uint8_t backlightState = HIGH;
 
     /**
      * ## Private Methods
@@ -372,11 +374,11 @@ class LcdMenu {
     void setupLcdWithMenu(
 #ifndef USE_STANDARD_LCD
         uint8_t lcd_Addr, MenuItem** menu, uint16_t timeout) {
-        this->setupLcdWithMenu(lcd_Addr, menu, timeout);
+        this->setupLcdWithMenu(lcd_Addr, menu);
 #else
         uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
         MenuItem** menu, uint16_t timeout) {
-        this->setupLcdWithMenu(rs, en, d0, d1, d2, d3, menu, timeout);
+        this->setupLcdWithMenu(rs, en, d0, d1, d2, d3, menu);
 #endif
         this->timeout = timeout;
     }
@@ -385,9 +387,10 @@ class LcdMenu {
      */
     void update() {
         if (!enableUpdate) return;
+        lcd->display();
+        lcd->setBacklight(backlightState);
         drawMenu();
         drawCursor();
-        lcd->setBacklight(HIGH);
         startTime = millis();
     }
     /**
@@ -811,8 +814,8 @@ class LcdMenu {
      */
     void updateTimer() {
         if (millis() == startTime + timeout) {
-            lcd->setBacklight(LOW);
-            lcd->clear();
+            lcd->noDisplay();
+            lcd->noBacklight();
         }
     }
     /**
@@ -838,15 +841,12 @@ class LcdMenu {
     MenuItem* operator[](const uint8_t position) {
         return currentMenuTable[position];
     }
-#ifdef ItemToggle_H
     /**
-     * Toggle backlight
+     * Set the Backlight state
+     * @param state
      */
-    void toggleBacklight() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        if (item->getType() == MENU_ITEM_TOGGLE) {
-            lcd->setBacklight(item->isOn() ? HIGH : LOW);
-        }
+    void setBacklight(uint8_t state) {
+        backlightState = state;
+        update();
     }
-#endif
 };
