@@ -47,9 +47,7 @@ When `enter()` is invoked, the command _(callback)_ bound to the item is invoked
  * Define the callback function
  */
 void myCallbackFunction(uint8_t isOn) {
-    menu.lcd->setBacklight(isOn);
-    // Or this way
-    menu.toggleBacklight();
+    menu.setBacklight(isOn);
 }
 ```
 
