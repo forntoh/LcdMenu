@@ -61,4 +61,4 @@ void loop() {
 /**
  * Define callback
  */
-void toggleBacklight(uint8_t isOn) { menu.lcd->setBacklight(isOn); }
+void toggleBacklight(uint8_t isOn) { menu.setBacklight(isOn); }

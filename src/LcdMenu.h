@@ -124,6 +124,10 @@ class LcdMenu {
      * set it back to `true` to show the menu.
      */
     bool enableUpdate = true;
+    /**
+     * The backlight state of the lcd
+     */
+    uint8_t backlightState = HIGH;
 
     /**
      * ## Private Methods
@@ -384,6 +388,7 @@ class LcdMenu {
     void update() {
         if (!enableUpdate) return;
         lcd->display();
+        lcd->setBacklight(backlightState);
         drawMenu();
         drawCursor();
         startTime = millis();
@@ -810,6 +815,7 @@ class LcdMenu {
     void updateTimer() {
         if (millis() == startTime + timeout) {
             lcd->noDisplay();
+            lcd->noBacklight();
         }
     }
     /**
@@ -834,5 +840,13 @@ class LcdMenu {
      */
     MenuItem* operator[](const uint8_t position) {
         return currentMenuTable[position];
+    }
+    /**
+     * Set the Backlight state
+     * @param state
+     */
+    void setBacklight(uint8_t state) {
+        backlightState = state;
+        update();
     }
 };
