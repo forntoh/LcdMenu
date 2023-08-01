@@ -68,7 +68,7 @@ setCursorPosition	KEYWORD2
 updateTimer	KEYWORD2
 isSubMenu	KEYWORD2
 getItemAt	KEYWORD2
-toggleBacklight	KEYWORD2
+setBacklight	KEYWORD2
 getType	KEYWORD2
 substring	KEYWORD2
 concat	KEYWORD2
