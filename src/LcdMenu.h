@@ -370,11 +370,11 @@ class LcdMenu {
     void setupLcdWithMenu(
 #ifndef USE_STANDARD_LCD
         uint8_t lcd_Addr, MenuItem** menu, uint16_t timeout) {
-        this->setupLcdWithMenu(lcd_Addr, menu, timeout);
+        this->setupLcdWithMenu(lcd_Addr, menu);
 #else
         uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
         MenuItem** menu, uint16_t timeout) {
-        this->setupLcdWithMenu(rs, en, d0, d1, d2, d3, menu, timeout);
+        this->setupLcdWithMenu(rs, en, d0, d1, d2, d3, menu);
 #endif
         this->timeout = timeout;
     }
