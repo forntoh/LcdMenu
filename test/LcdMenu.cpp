@@ -14,7 +14,7 @@
 #define ITEM_LIST_INDEX 99
 
 void commandCallback() {}
-void toggleCallback(uint8_t) {}
+void toggleCallback(uint16_t) {}
 
 MAIN_MENU(ITEM_INPUT("Random", NULL), ITEM_INPUT("Connect", NULL),
           ITEM_BASIC("Settings"), ITEM_COMMAND("Backlight", commandCallback),
