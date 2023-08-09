@@ -32,7 +32,7 @@ class ItemList : public MenuItem {
     fptrInt callback = NULL;  ///< Pointer to a callback function
     String* items = NULL;     ///< Pointer to an array of items
     const uint8_t itemCount;  ///< The total number of items in the list
-    uint8_t itemIndex = 0;    ///< The current selected item index
+    uint16_t itemIndex = 0;   ///< The current selected item index
 
    public:
     /**
@@ -63,7 +63,7 @@ class ItemList : public MenuItem {
      *
      * @return The index of the item to be selected.
      */
-    void setItemIndex(uint8_t itemIndex) override {
+    void setItemIndex(uint16_t itemIndex) override {
         this->itemIndex = constrain(itemIndex, 0, itemCount - 1);
     }
 

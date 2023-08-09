@@ -138,7 +138,7 @@ class MenuItem {
     /**
      * Current index of list for `ItemList`
      */
-    virtual void setItemIndex(uint8_t itemIndex){};
+    virtual void setItemIndex(uint16_t itemIndex){};
 
     /**
      * Operators
