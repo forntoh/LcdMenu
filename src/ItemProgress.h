@@ -66,7 +66,7 @@ class ItemProgress : public MenuItem {
     /**
      * Return the progress
      */
-    uint8_t getItemIndex() override { return progress; }
+    uint16_t getItemIndex() override { return progress; }
 
     /**
      * Return the callback
