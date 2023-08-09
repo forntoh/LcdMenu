@@ -22,7 +22,7 @@
 #define CLEAR 46     // NUMPAD .
 
 // Declare the calbacks
-void callback(uint8_t pos);
+void callback(uint16_t pos);
 
 char* intMapping(uint16_t progress) {
     // Map the progress value to a new range (100 to 200)
@@ -53,7 +53,7 @@ char* floatMapping(uint16_t progress) {
     // decimal point) and 2 decimal places
     dtostrf(floatValue, 4, 2, buffer);
 
-    // Concatenate the string with the character 'c'
+    // Concatenate the string with the character 'A'
     concat(buffer, 'A', buffer);
 
     // Return the resulting string
@@ -96,7 +96,7 @@ void loop() {
         menu.back();
 }
 
-void callback(uint8_t pos) {
+void callback(uint16_t pos) {
     // do something with the progress
     Serial.println(pos);
 }

@@ -56,7 +56,7 @@ class ItemList : public MenuItem {
      *
      * @return The index of the currently selected item.
      */
-    uint8_t getItemIndex() override { return itemIndex; }
+    uint16_t getItemIndex() override { return itemIndex; }
 
     /**
      * @brief Changes the index of the current item.

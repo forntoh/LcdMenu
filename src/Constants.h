@@ -2,7 +2,7 @@
 #include <Arduino.h>
 
 typedef void (*fptr)();
-typedef void (*fptrInt)(uint8_t);
+typedef void (*fptrInt)(uint16_t);
 typedef void (*fptrStr)(char*);
 typedef char* (*fptrMapping)(uint16_t);
 //

@@ -23,7 +23,7 @@
 #define CLEAR 46     // NUMPAD .
 
 // Declare the call back function
-void toggleBacklight(uint8_t isOn);
+void toggleBacklight(uint16_t isOn);
 
 // prettier-ignore
 MAIN_MENU(
@@ -61,4 +61,4 @@ void loop() {
 /**
  * Define callback
  */
-void toggleBacklight(uint8_t isOn) { menu.setBacklight(isOn); }
+void toggleBacklight(uint16_t isOn) { menu.setBacklight(isOn); }

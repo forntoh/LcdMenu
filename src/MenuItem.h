@@ -95,7 +95,7 @@ class MenuItem {
     /**
      * Current index of list for `ItemList`
      */
-    virtual uint8_t getItemIndex() { return 0; }
+    virtual uint16_t getItemIndex() { return 0; }
     /**
      * Number of items in the list for `ItemList`
      */
