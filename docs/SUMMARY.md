@@ -19,3 +19,4 @@
   * [ItemToggle](reference/itemtoggle.md)
   * [ItemProgress](reference/itemprogress.md)
   * [ItemSubMenu](reference/itemsubmenu.md)
+* [FAQs](faqs.md)
