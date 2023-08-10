@@ -20,3 +20,10 @@ You can also use `[menu.getCursorPosition()]` in place of `menu.[``your position
 
 </details>
 
+<details>
+
+<summary>How to completely hide the menu?</summary>
+
+There is a `hide()` and a `show()` function, calling hide will clear the display, thereby hiding the menu.
+
+</details>
