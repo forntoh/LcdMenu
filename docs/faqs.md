@@ -30,7 +30,7 @@ There is a <mark style="color:purple;">**`hide()`**</mark> and a <mark style="co
 
 <details>
 
-<summary>How to get the parent menu item from a submenu Item?</summary>
+<summary>How to get the parent menu item from a submenu?</summary>
 
 Getting the item at <mark style="color:orange;">**`index = 0`**</mark> from the menu will give you the **`ItemHeader`**, from there you can get the parent menu of the current menu.
 
