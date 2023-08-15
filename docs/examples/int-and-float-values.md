@@ -99,7 +99,7 @@ As you have seen before the default step length is **1**, and there are **200** 
 
 ```cpp
 // Declare the calbacks
-void callback(uint8_t pos);
+void callback(uint16_t pos);
 
 char* intMapping(uint16_t progress) {
     // See code in the above section
@@ -140,7 +140,7 @@ void loop() {
         menu.back();
 }
 
-void callback(uint8_t pos) {
+void callback(uint16_t pos) {
     // do something with the progress
     Serial.println(pos);
 }

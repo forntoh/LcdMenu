@@ -61,7 +61,7 @@ Use **`menu.left()`** and/or **`menu.right()`** to cycle through the items
 When `back()` is invoked, the command _(callback)_ bound to the item is invoked.
 
 ```cpp
-void colorsCallback(uint8_t pos) {
+void colorsCallback(uint16_t pos) {
     // do something with the index
     Serial.println(colors[pos]);
 }

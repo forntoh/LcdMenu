@@ -18,7 +18,7 @@ Callbacks can be used with menu items of type `ItemCommand`, `ItemInput`, `ItemL
 
 ```cpp
 // For ItemToggle
-void myCallbackFunction(uint8_t isOn);
+void myCallbackFunction(uint16_t isOn);
 // For ItemCommand
 void myCallbackFunction();
 ```
@@ -46,7 +46,7 @@ When `enter()` is invoked, the command _(callback)_ bound to the item is invoked
 /**
  * Define the callback function
  */
-void myCallbackFunction(uint8_t isOn) {
+void myCallbackFunction(uint16_t isOn) {
     menu.setBacklight(isOn);
 }
 ```
