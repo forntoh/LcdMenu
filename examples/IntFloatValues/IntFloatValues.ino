@@ -21,7 +21,7 @@
 #define BACKSPACE 8  // BACKSPACE
 #define CLEAR 46     // NUMPAD .
 
-// Declare the calbacks
+// Declare the callbacks
 void callback(uint16_t pos);
 
 char* intMapping(uint16_t progress) {
