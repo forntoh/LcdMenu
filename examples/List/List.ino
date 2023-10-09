@@ -2,7 +2,7 @@
  Menu Item List
 
  https://lcdmenu.forntoh.dev/examples/string-list
- 
+
 */
 
 #include <ItemList.h>
@@ -21,7 +21,7 @@
 #define BACKSPACE 8  // BACKSPACE
 #define CLEAR 46     // NUMPAD .
 
-// Declare the calbacks
+// Declare the callbacks
 void colorsCallback(uint16_t pos);
 void numsCallback(uint16_t pos);
 
@@ -73,7 +73,7 @@ void loop() {
         menu.back();
 }
 
-// Define the calbacks
+// Define the callbacks
 void colorsCallback(uint16_t pos) {
     // do something with the index
     Serial.println(colors[pos]);
