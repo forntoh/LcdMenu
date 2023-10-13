@@ -8,6 +8,13 @@ description: >-
 
 Using ItemProgress, you can display integer values in a given range and define the step length between each value.
 
+## Includes
+
+<pre class="language-cpp"><code class="lang-cpp"><strong>// other includes ...
+</strong><strong>#include &#x3C;ItemProgress.h>
+</strong>#include &#x3C;LcdMenu.h> // Always comes after every item type import
+</code></pre>
+
 ## Constructors
 
 ItemProgress has multiple constructors which will enable you to customize the base functionality, using the base constructor

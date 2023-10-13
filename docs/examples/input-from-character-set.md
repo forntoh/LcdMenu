@@ -6,6 +6,14 @@ description: This example will show you how to input using a charset.
 
 ## Process
 
+### Imports
+
+```cpp
+// other includes ...
+#include <ItemInput.h>
+#include <LcdMenu.h> // Always comes after every item type import
+```
+
 ### Define your charset (list of accepted/valid chars)
 
 {% hint style="warning" %}

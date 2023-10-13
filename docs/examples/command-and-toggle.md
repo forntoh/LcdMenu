@@ -14,6 +14,14 @@ Callbacks can be used with menu items of type `ItemCommand`, `ItemInput`, `ItemL
 
 </div>
 
+### Includes
+
+```cpp
+// other includes ...
+#include <ItemToggle.h>
+#include <LcdMenu.h> // Always comes after every item type import
+```
+
 ### Declare the callback function
 
 ```cpp

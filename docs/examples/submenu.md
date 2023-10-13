@@ -14,7 +14,17 @@ You have the possibility to attach as many sub-menus as your microcontroller can
 
 ### Code example
 
+#### Includes
+
+```cpp
+// other includes ...
+#include <ItemSubMenu.h>
+#include <LcdMenu.h> // Always comes after every item type import
+```
+
 #### Declare your menus
+
+
 
 ```arduino
 extern MenuItem* settingsMenu[];

@@ -10,6 +10,14 @@ description: >-
 
 The supported datatype for the list is `String`. This can be used for other primitive datatypes, you just need to pass it as a string and then parse the result to the desired datatype.
 
+### Includes
+
+```cpp
+// other includes ...
+#include <ItemList.h>
+#include <LcdMenu.h> // Always comes after every item type import
+```
+
 ### Declare the array
 
 ```cpp
