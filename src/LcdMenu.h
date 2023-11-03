@@ -388,7 +388,9 @@ class LcdMenu {
     void update() {
         if (!enableUpdate) return;
         lcd->display();
+        #ifndef USE_STANDARD_LCD
         lcd->setBacklight(backlightState);
+        #endif
         drawMenu();
         drawCursor();
         startTime = millis();
@@ -815,7 +817,9 @@ class LcdMenu {
     void updateTimer() {
         if (millis() == startTime + timeout) {
             lcd->noDisplay();
+            #ifndef USE_STANDARD_LCD
             lcd->noBacklight();
+            #endif
         }
     }
     /**
@@ -845,8 +849,10 @@ class LcdMenu {
      * Set the Backlight state
      * @param state
      */
+    #ifndef USE_STANDARD_LCD
     void setBacklight(uint8_t state) {
         backlightState = state;
         update();
     }
+    #endif
 };
