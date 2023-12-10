@@ -32,7 +32,7 @@
 #endif
 
 #include <MenuItem.h>
-#include <utils.h>
+#include <utils/utils.h>
 
 /**
  * The LcdMenu class contains all fields and methods to manipulate the menu
@@ -388,9 +388,9 @@ class LcdMenu {
     void update() {
         if (!enableUpdate) return;
         lcd->display();
-        #ifndef USE_STANDARD_LCD
+#ifndef USE_STANDARD_LCD
         lcd->setBacklight(backlightState);
-        #endif
+#endif
         drawMenu();
         drawCursor();
         startTime = millis();
@@ -817,9 +817,9 @@ class LcdMenu {
     void updateTimer() {
         if (millis() == startTime + timeout) {
             lcd->noDisplay();
-            #ifndef USE_STANDARD_LCD
+#ifndef USE_STANDARD_LCD
             lcd->noBacklight();
-            #endif
+#endif
         }
     }
     /**
@@ -845,14 +845,14 @@ class LcdMenu {
     MenuItem* operator[](const uint8_t position) {
         return currentMenuTable[position];
     }
+#ifndef USE_STANDARD_LCD
     /**
      * Set the Backlight state
      * @param state
      */
-    #ifndef USE_STANDARD_LCD
     void setBacklight(uint8_t state) {
         backlightState = state;
         update();
     }
-    #endif
+#endif
 };
