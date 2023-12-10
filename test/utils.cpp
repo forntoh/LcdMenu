@@ -1,6 +1,6 @@
 #include <ArduinoUnitTests.h>
-#include <Constants.h>
-#include <utils.h>
+#include <utils/constants.h>
+#include <utils/utils.h>
 
 unittest(concat_same_strings) {
     char result[10];
