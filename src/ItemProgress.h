@@ -64,6 +64,15 @@ class ItemProgress : public MenuItem {
     }
 
     /**
+     * Set the progress on the item
+     * @param uint8_t progress for the item
+     */
+    void setProgress(uint8_t value) override {
+        if (progress < MIN_PROGRESS || progress > MAX_PROGRESS) return;
+        progress = value;
+    }
+
+    /**
      * Return the progress
      */
     uint16_t getItemIndex() override { return progress; }
