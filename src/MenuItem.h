@@ -141,9 +141,9 @@ class MenuItem {
     virtual void setItemIndex(uint16_t itemIndex){};
     /**
      * Set the progress on the item
-     * @param uint8_t progress for the item
+     * @param uint16_t progress for the item
      */
-    virtual void setProgress(uint8_t value){};
+    virtual void setProgress(uint16_t value){};
 
     /**
      * Operators
