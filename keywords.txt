@@ -31,6 +31,7 @@ getCallbackInt	KEYWORD2
 getItems	KEYWORD2
 increment	KEYWORD2
 decrement	KEYWORD2
+setProgress	KEYWORD2
 getItemIndex	KEYWORD2
 getCallbackInt	KEYWORD2
 getValue	KEYWORD2
@@ -75,8 +76,6 @@ getType	KEYWORD2
 # Constants (LITERAL1)
 #######################################
 
-MIN_PROGRESS	LITERAL1
-MAX_PROGRESS	LITERAL1
 ITEM_COMMAND	LITERAL1
 ITEM_INPUT	LITERAL1
 ITEM_STRING_LIST	LITERAL1
