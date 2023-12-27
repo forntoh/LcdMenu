@@ -48,3 +48,15 @@ float mapProgress(uint16_t progress, float minValue, float maxValue) {
     return static_cast<float>(progress) / MAX_PROGRESS * (maxValue - minValue) +
            minValue;
 }
+
+void printCmd(const __FlashStringHelper* command) {
+    Serial.print(F("#CMD# "));
+    Serial.println(command);
+}
+
+void printCmd(const __FlashStringHelper* command, const char value) {
+    Serial.print(F("#CMD# "));
+    Serial.print(command);
+    Serial.print(F("="));
+    Serial.println(value);
+}
