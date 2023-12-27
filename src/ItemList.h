@@ -64,7 +64,7 @@ class ItemList : public MenuItem {
      * @return The index of the item to be selected.
      */
     void setItemIndex(uint16_t itemIndex) override {
-        this->itemIndex = constrain(itemIndex, 0, itemCount - 1);
+        this->itemIndex = constrain(itemIndex, 0, (uint16_t)(itemCount)-1);
     }
 
     /**
