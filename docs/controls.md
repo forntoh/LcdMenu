@@ -4,6 +4,30 @@ description: The following controls exist for the menu
 
 # Controls
 
+This library already contains pre-made menu control helpers that you can use and extend.
+
+To use the existing helpers, add the following import (preferably after all imports)
+
+```arduino
+//...
+#include <utils/commandProccesors.h>
+```
+
+Then do the following in the loop function
+
+```arduino
+void loop() {
+    byte command = // read my command from an input device (serial, keypad, etc);
+    // Process the command
+    processMenuCommand(menu, command, UP, DOWN, ENTER, BACK);
+    // UP, DOWN, ENTER, BACK are the values used to match the value of command
+}
+```
+
+`processMenuCommand` has multiple definitions depending on the type of menu items you have in your menu. See [commandProcessors.h](https://github.com/forntoh/LcdMenu/blob/master/src/utils/commandProccesors.h) and the example code.
+
+Under the hood, commandProcessors use the following functions, you can use them directly if you don't want to use the helpers provided.
+
 ### <mark style="color:blue;">`menu.up()`</mark> and <mark style="color:blue;">`menu.down()`</mark>&#x20;
 
 Navigate up and down the menu.\
