@@ -7,6 +7,7 @@
 
 #include <ItemList.h>
 #include <LcdMenu.h>
+#include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -18,8 +19,6 @@
 #define RIGHT 54     // NUMPAD 6
 #define ENTER 53     // NUMPAD 5
 #define BACK 55      // NUMPAD 7
-#define BACKSPACE 8  // BACKSPACE
-#define CLEAR 46     // NUMPAD .
 
 // Declare the callbacks
 void colorsCallback(uint16_t pos);
@@ -41,7 +40,7 @@ String nums[] = {
 // Initialize the main menu items
 MAIN_MENU(
     ITEM_BASIC("List demo"),
-    ITEM_STRING_LIST("Col", colors, 9, colorsCallback),
+    ITEM_STRING_LIST("Col", colors, 8, colorsCallback),
     ITEM_STRING_LIST("Num", nums, 5, numsCallback),
     ITEM_BASIC("Example")
 );
@@ -59,18 +58,7 @@ void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
 
-    if (command == UP)
-        menu.up();
-    else if (command == DOWN)
-        menu.down();
-    else if (command == LEFT)
-        menu.left();
-    else if (command == RIGHT)
-        menu.right();
-    else if (command == ENTER)
-        menu.enter();
-    else if (command == BACK)
-        menu.back();
+    processMenuCommand(menu, command, UP, DOWN, ENTER, BACK, LEFT, RIGHT);
 }
 
 // Define the callbacks

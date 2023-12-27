@@ -7,6 +7,7 @@
 
 #include <ItemInput.h>
 #include <LcdMenu.h>
+#include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -42,24 +43,8 @@ void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
 
-    if (command == UP)
-        menu.up();
-    else if (command == DOWN)
-        menu.down();
-    else if (command == LEFT)
-        menu.left();
-    else if (command == RIGHT)
-        menu.right();
-    else if (command == ENTER)  // Press enter to go to edit mode
-        menu.enter();
-    else if (command == BACK)
-        menu.back();
-    else if (command == CLEAR)
-        menu.clear();
-    else if (command == BACKSPACE)  // Remove one character from tail
-        menu.backspace();
-    else  // Type the character you want
-        menu.type(command);
+    processMenuCommand(menu, command, UP, DOWN, LEFT, RIGHT, ENTER, BACK, CLEAR,
+                       BACKSPACE);
 }
 /**
  * Define callback
