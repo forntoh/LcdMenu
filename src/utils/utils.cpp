@@ -60,3 +60,10 @@ void printCmd(const __FlashStringHelper* command, const char value) {
     Serial.print(F("="));
     Serial.println(value);
 }
+
+void printCmd(const __FlashStringHelper* command, const char* value) {
+    Serial.print(F("#CMD# "));
+    Serial.print(command);
+    Serial.print(F("="));
+    Serial.println(value);
+}

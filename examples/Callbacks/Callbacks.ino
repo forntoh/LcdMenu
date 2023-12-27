@@ -8,19 +8,16 @@
 #include <ItemSubMenu.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>
+#include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
 // Configure keyboard keys (ASCII)
-#define UP 56        // NUMPAD 8
-#define DOWN 50      // NUMPAD 2
-#define LEFT 52      // NUMPAD 4
-#define RIGHT 54     // NUMPAD 6
-#define ENTER 53     // NUMPAD 5
-#define BACK 55      // NUMPAD 7
-#define BACKSPACE 8  // BACKSPACE
-#define CLEAR 46     // NUMPAD .
+#define UP 56     // NUMPAD 8
+#define DOWN 50   // NUMPAD 2
+#define ENTER 53  // NUMPAD 5
+#define BACK 55   // NUMPAD 7
 
 // Declare the call back function
 void toggleBacklight(uint16_t isOn);
@@ -45,18 +42,7 @@ void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
 
-    if (command == UP)
-        menu.up();
-    else if (command == DOWN)
-        menu.down();
-    else if (command == LEFT)
-        menu.left();
-    else if (command == RIGHT)
-        menu.right();
-    else if (command == ENTER)
-        menu.enter();
-    else if (command == BACK)
-        menu.back();
+    processMenuCommand(menu, command, UP, DOWN, ENTER, BACK);
 }
 /**
  * Define callback

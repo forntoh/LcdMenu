@@ -21,4 +21,6 @@ void printCmd(const __FlashStringHelper* command);
 
 void printCmd(const __FlashStringHelper* command, const char value);
 
+void printCmd(const __FlashStringHelper* command, const char* value);
+
 #endif
