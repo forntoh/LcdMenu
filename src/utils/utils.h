@@ -17,4 +17,8 @@ long mapProgress(uint16_t progress, long minValue, long maxValue);
 
 float mapProgress(uint16_t progress, float minValue, float maxValue);
 
+void printCmd(const __FlashStringHelper* command);
+
+void printCmd(const __FlashStringHelper* command, const char value);
+
 #endif
