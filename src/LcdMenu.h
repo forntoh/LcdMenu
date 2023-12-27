@@ -610,7 +610,8 @@ class LcdMenu {
                 item->setItemIndex(item->getItemIndex() - 1);
                 if (previousIndex != item->getItemIndex()) update();
                 // Log
-                printCmd(F("LEFT"), item->getItemIndex());
+                printCmd(F("LEFT"),
+                         item->getItems()[item->getItemIndex()].c_str());
                 break;
             }
 #endif
@@ -666,7 +667,8 @@ class LcdMenu {
                 // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
                 update();
                 // Log
-                printCmd(F("RIGHT"), item->getItemIndex());
+                printCmd(F("RIGHT"),
+                         item->getItems()[item->getItemIndex()].c_str());
                 break;
             }
 #endif
