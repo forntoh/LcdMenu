@@ -124,9 +124,7 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, int8_t& pos,
     }
     return true;
 }
-#endif
 
-#ifdef ItemInput_H
 /**
  * @brief Process input commands for a menu with ItemInput.
  *
