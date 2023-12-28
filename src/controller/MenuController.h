@@ -1,7 +1,7 @@
 #ifndef MenuController_H
 #define MenuController_H
 
-#include <MenuItem.h>
+#include "../MenuItem.h"
 
 class MenuController {
    protected:
@@ -34,6 +34,14 @@ class MenuController {
      */
     uint8_t maxRows;
     /**
+     * Columns on the LCD Display
+     */
+    uint8_t maxCols;
+    /**
+     * Time when the timer started in milliseconds
+     */
+    unsigned long startTime = 0;
+    /**
      * Column location of Blinker relative to input value
      */
     uint8_t blinkerPosition = 0;
@@ -47,12 +55,6 @@ class MenuController {
      * set it back to `true` to show the menu.
      */
     bool enableUpdate = true;
-    /**
-     * Constructor for the MenuController class
-     * @param maxRows rows on used to render the menu
-     * @return new `MenuController` object
-     */
-    MenuController(uint8_t maxRows) : bottom(maxRows), maxRows(maxRows) {}
     /**
      * Draws the cursor
      */
@@ -106,6 +108,18 @@ class MenuController {
 #endif
 
    public:
+    /**
+     * How long should the display stay on
+     */
+    uint16_t timeout = 10000;
+    /**
+     * Constructor for the LcdMenu class
+     * @param maxRows rows on lcd display e.g. 4
+     * @param maxCols columns on lcd display e.g. 20
+     * @return new `LcdMenu` object
+     */
+    explicit MenuController(uint8_t maxRows, uint8_t maxCols)
+        : bottom(maxRows), maxRows(maxRows), maxCols(maxCols) {}
     /*
      * Update the menu
      */
@@ -124,6 +138,8 @@ class MenuController {
         //
         if (isAtTheStart() || isEditModeEnabled) return;
         cursorPosition--;
+        // Log
+        printCmd(F("UP"));
         //
         // determine if cursor is at the top of the screen
         //
@@ -146,6 +162,8 @@ class MenuController {
         //
         if (isAtTheEnd() || isEditModeEnabled) return;
         cursorPosition++;
+        // Log
+        printCmd(F("DOWN"));
         //
         // determine if cursor is at the bottom of the screen
         //
@@ -168,6 +186,9 @@ class MenuController {
      * - Toggle the state of an item.
      */
     void enter() {
+        // Log
+        printCmd(F("ENTER"));
+        //
         MenuItem* item = currentMenuTable[cursorPosition];
         //
         // determine the type of menu entry, then execute it
@@ -253,6 +274,9 @@ class MenuController {
      * Navigates up once.
      */
     void back() {
+        // Log
+        printCmd(F("BACK"));
+        //
 #ifdef ItemInput_H
         MenuItem* item = currentMenuTable[cursorPosition];
         //
@@ -298,9 +322,11 @@ class MenuController {
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                item->setItemIndex(constrain(item->getItemIndex() - 1, 0,
-                                             item->getItemCount() - 1));
+                item->setItemIndex(item->getItemIndex() - 1);
                 if (previousIndex != item->getItemIndex()) update();
+                // Log
+                printCmd(F("LEFT"),
+                         item->getItems()[item->getItemIndex()].c_str());
                 break;
             }
 #endif
@@ -308,9 +334,27 @@ class MenuController {
             case MENU_ITEM_INPUT: {
                 blinkerPosition--;
                 resetBlinker();
+                // Log
+                printCmd(F("LEFT"),
+                         item->getValue()[blinkerPosition -
+                                          (strlen(item->getText()) + 2)]);
                 break;
             }
 #endif
+#ifdef ItemProgress_H
+            case MENU_ITEM_PROGRESS: {
+                if (isInEditMode()) {
+                    item->decrement();
+                    update();
+                    // Log
+                    printCmd(F("LEFT"), item->getValue());
+                }
+            }
+#endif
+            default:
+                // Log
+                printCmd(F("LEFT"));
+                break;
         }
     }
     /**
@@ -337,6 +381,9 @@ class MenuController {
                                    item->getItemCount());
                 // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
                 update();
+                // Log
+                printCmd(F("RIGHT"),
+                         item->getItems()[item->getItemIndex()].c_str());
                 break;
             }
 #endif
@@ -344,9 +391,28 @@ class MenuController {
             case MENU_ITEM_INPUT: {
                 blinkerPosition++;
                 resetBlinker();
+                // Log
+                printCmd(F("RIGHT"),
+                         item->getValue()[blinkerPosition -
+                                          (strlen(item->getText()) + 2)]);
                 break;
             }
 #endif
+#ifdef ItemProgress_H
+            case MENU_ITEM_PROGRESS: {
+                if (isInEditMode()) {
+                    item->increment();
+                    update();
+                    // Log
+                    printCmd(F("RIGHT"), item->getValue());
+                }
+                break;
+            }
+#endif
+            default:
+                // Log
+                printCmd(F("RIGHT"));
+                break;
         }
     }
 #ifdef ItemInput_H
@@ -361,6 +427,8 @@ class MenuController {
         MenuItem* item = currentMenuTable[cursorPosition];
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
+        // Log
+        printCmd(F("BACKSPACE"));
         //
         uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
         remove(item->getValue(), p, 1);
@@ -380,22 +448,25 @@ class MenuController {
         //
         // calculate lower and upper bound
         //
+        uint8_t length = strlen(item->getValue());
         uint8_t lb = strlen(item->getText()) + 2;
-        uint8_t ub = lb + strlen(item->getValue());
-        // TODO ub = constrain(ub, lb, maxCols - 2);
+        uint8_t ub = lb + length;
+        ub = constrain(ub, lb, maxCols - 2);
         //
         // update text
         //
         if (blinkerPosition < ub) {
-            char* start = substring(item->getValue(), 0, blinkerPosition - lb);
-            char* end = substring(item->getValue(), blinkerPosition + 1 - lb,
-                                  strlen(item->getValue()));
-            char* joined = concat(start, character, end);
+            static char start[10];
+            static char end[10];
+            static char* joined = new char[maxCols - lb];
+            substring(item->getValue(), 0, blinkerPosition - lb, start);
+            substring(item->getValue(), blinkerPosition + 1 - lb, length, end);
+            concat(start, character, end, joined);
             item->setValue(joined);
-            delete[] start;
-            delete[] end;
         } else {
-            item->setValue(concat(item->getValue(), character));
+            static char* buf = new char[length + 2];
+            concat(item->getValue(), character, buf);
+            item->setValue(buf);
         }
         //
         isCharPickerActive = false;
@@ -407,6 +478,8 @@ class MenuController {
         // repaint menu
         //
         update();
+        // Log
+        printCmd(F("TYPE-CHAR"), character);
     }
     /**
      * Draw a character on the display
@@ -421,6 +494,8 @@ class MenuController {
         MenuItem* item = currentMenuTable[cursorPosition];
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
+        // Log
+        printCmd(F("CLEAR"));
         //
         // set the value
         //
