@@ -1,13 +1,15 @@
-#include <LiquidCrystal_I2C.h>
-#include <MenuController.h>
-#include <utils.h>
+#ifndef LiquidCrystalI2CMenu_H
+#define LiquidCrystalI2CMenu_H
 
-class LiquidCrystalI2CMenu : MenuController {
+#include <LiquidCrystal_I2C.h>
+
+#include "../utils/utils.h"
+#include "MenuController.h"
+
+class LiquidCrystalI2CMenu : public MenuController {
+    using MenuController::MenuController;
+
    private:
-    /**
-     * Columns on the LCD Display
-     */
-    uint8_t maxCols;
     /**
      * Down arrow (↓)
      */
@@ -38,6 +40,10 @@ class LiquidCrystalI2CMenu : MenuController {
      * Cursor icon. Defaults to right arrow (→).
      */
     uint8_t cursorIcon = 0x7E;
+    /**
+     * The backlight state of the lcd
+     */
+    uint8_t backlightState = HIGH;
     /**
      * Draws the cursor
      */
@@ -177,13 +183,36 @@ class LiquidCrystalI2CMenu : MenuController {
      * LCD Display
      */
     LiquidCrystal_I2C* lcd = NULL;
+    /**
+     * Call this function in `setup()` to initialize the LCD and the custom
+     * characters used as up and down arrows
+     * @param lcd_Addr address of the LCD on the I2C bus (default 0x27)
+     * @param menu menu to display
+     * @param timeout time to wait before putting display to sleep
+     */
+    void setupLcdWithMenu(uint8_t lcd_Addr, MenuItem** menu,
+                          uint16_t timeout = 10000) {
+        lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
+        lcd->init();
+        lcd->backlight();
+        lcd->clear();
+        lcd->createChar(0, upArrow);
+        lcd->createChar(1, downArrow);
+        this->currentMenuTable = menu;
+        this->startTime = millis();
+        this->timeout = timeout;
+        update();
+    }
     /*
      * Draw the menu items and cursor
      */
     void update() override {
         if (!enableUpdate) return;
+        lcd->display();
+        lcd->setBacklight(backlightState);
         drawMenu();
         drawCursor();
+        startTime = millis();
     }
 #ifdef ItemInput_H
     /**
@@ -223,15 +252,13 @@ class LiquidCrystalI2CMenu : MenuController {
         enableUpdate = false;
         lcd->clear();
     }
-#ifdef ItemToggle_H
     /**
-     * Toggle backlight
+     * Set the Backlight state
+     * @param state
      */
-    void toggleBacklight() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        if (item->getType() == MENU_ITEM_TOGGLE) {
-            lcd->setBacklight(item->isOn() ? 1 : NULL);
-        }
+    void setBacklight(uint8_t state) {
+        backlightState = state;
+        update();
     }
-#endif
 };
+#endif
