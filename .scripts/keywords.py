@@ -3,7 +3,7 @@ import re
 import click
 
 prefixes = [':', '*', '}', '/', '#', 'for ', 'if ', 'switch ', 'case ', 'return ', 'class ', 'explicit ', 'virtual ']
-sufixes = [';', '-', '=', ',', '*', '.', '= {', '{}']
+sufixes = [';', '-', '=', '*', '.', '= {', '{}']
 
 pre_key_1 = """#######################################
 # Syntax Coloring Map
@@ -33,9 +33,9 @@ pre_lit_1 = """
 @click.argument('files', type=click.Path("r"), nargs=-1)
 
 def build(files):
-    literal_1_data = ""
-    keyword_1_data = ""
-    keyword_2_data = ""
+    literal_1_data = set()
+    keyword_1_data = set()
+    keyword_2_data = set()
 
     for file in files:
         with open(file, "r") as a_file:
@@ -48,25 +48,24 @@ def build(files):
                         methodName = words[1]
                         if words[0] == 'const':
                             methodName = words[2]
-                        keyword_2_data += methodName + "	KEYWORD2\n"
+                        keyword_2_data.add(methodName + "	KEYWORD2\n")
                 if len(stripped_line) > 7 and stripped_line.startswith('class '):
                     if re.search(r"\w+", stripped_line) != None:
                         methodName = re.findall(r"\w+", stripped_line)[1]
-                        keyword_1_data += methodName + "	KEYWORD1\n"
+                        keyword_1_data.add(methodName + "	KEYWORD1\n")
                 if len(stripped_line) > 7 and (stripped_line.startswith('#ifndef') or stripped_line.startswith('#define')) and not stripped_line.endswith('_H'):
                     if re.search(r"\w+", stripped_line) != None:
                         methodName = re.findall(r"\w+", stripped_line)[1]
-                        if re.search(methodName, literal_1_data) == None:
-                            literal_1_data += methodName + "	LITERAL1\n"
+                        literal_1_data.add(methodName + "	LITERAL1\n")
 
     with open("keywords.txt", "w") as a_file:
         a_file.truncate()
         a_file.write(pre_key_1)
-        a_file.write(keyword_1_data)
+        a_file.writelines(keyword_1_data)
         a_file.write(pre_key_2)
-        a_file.write(keyword_2_data)
+        a_file.writelines(keyword_2_data)
         a_file.write(pre_lit_1)
-        a_file.write(literal_1_data)
+        a_file.writelines(literal_1_data)
         print("Updated keywords")
     
 if __name__ == '__main__':
