@@ -6,7 +6,7 @@
 */
 
 #include <ItemInput.h>
-#include <LcdMenu.h>
+#include <controller/LiquidCrystalI2CMenu.h>
 #include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
@@ -38,7 +38,7 @@ MAIN_MENU(
     ITEM_BASIC("Blink random")
 );
 
-LcdMenu menu(LCD_ROWS, LCD_COLS);
+LiquidCrystalI2CMenu menu(LCD_ROWS, LCD_COLS);
 
 void setup() {
     Serial.begin(9600);
@@ -48,7 +48,6 @@ void setup() {
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-
     processMenuCommand(menu, command, charsetPosition, charset, CHARSET_SIZE,
                        UP, DOWN, ENTER, BACK, CLEAR, BACKSPACE, LEFT, RIGHT);
 }

@@ -6,7 +6,7 @@
 */
 
 #include <ItemProgress.h>
-#include <LcdMenu.h>
+#include <controller/LiquidCrystalI2CMenu.h>
 #include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
@@ -69,7 +69,7 @@ MAIN_MENU(
 );
 
 // Construct the LcdMenu
-LcdMenu menu(LCD_ROWS, LCD_COLS);
+LiquidCrystalI2CMenu menu(LCD_ROWS, LCD_COLS);
 
 void setup() {
     Serial.begin(9600);
@@ -80,7 +80,6 @@ void setup() {
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-
     processMenuCommand(menu, command, UP, DOWN, ENTER, BACK, LEFT, RIGHT);
 }
 
