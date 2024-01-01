@@ -19,7 +19,7 @@ const byte MENU_ITEM_END_OF_MENU = 8;
 const byte MENU_ITEM_LIST = 9;
 const byte MENU_ITEM_PROGRESS = 10;
 //
-extern const byte DOWN_ARROW[8] = {
+const byte DOWN_ARROW[8] = {
     0b00100,  //   *
     0b00100,  //   *
     0b00100,  //   *
@@ -29,7 +29,7 @@ extern const byte DOWN_ARROW[8] = {
     0b01110,  //  ***
     0b00100   //   *
 };
-extern const byte UP_ARROW[8] = {
+const byte UP_ARROW[8] = {
     0b00100,  //   *
     0b01110,  //  ***
     0b10101,  // * * *
