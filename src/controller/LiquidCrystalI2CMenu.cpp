@@ -116,6 +116,8 @@ void LiquidCrystalI2CMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem** menu,
     lcd->init();
     lcd->backlight();
     lcd->clear();
+    memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
+    memcpy(downArrow, DOWN_ARROW, sizeof(DOWN_ARROW));
     lcd->createChar(0, upArrow);
     lcd->createChar(1, downArrow);
     this->currentMenuTable = menu;
