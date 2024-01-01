@@ -13,29 +13,11 @@ class LiquidCrystalI2CMenu : public MenuController {
     /**
      * Down arrow (↓)
      */
-    byte downArrow[8] = {
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b10101,  // * * *
-        0b01110,  //  ***
-        0b00100   //   *
-    };
+    byte downArrow[8];
     /**
      * Up arrow (↑)
      */
-    byte upArrow[8] = {
-        0b00100,  //   *
-        0b01110,  //  ***
-        0b10101,  // * * *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100   //   *
-    };
+    byte upArrow[8];
     /**
      * Cursor icon. Defaults to right arrow (→).
      */
