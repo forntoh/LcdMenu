@@ -126,12 +126,12 @@ void LiquidCrystalI2CMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem** menu,
 
 void LiquidCrystalI2CMenu::update() {
     if (!enableUpdate) return;
-    lcd->display();
-    lcd->setBacklight(backlightState);
+    displayOn();
     drawMenu();
     drawCursor();
     startTime = millis();
 }
+
 #ifdef ItemInput_H
 
 void LiquidCrystalI2CMenu::resetBlinker() {
@@ -177,4 +177,14 @@ void LiquidCrystalI2CMenu::hide() {
 void LiquidCrystalI2CMenu::setBacklight(uint8_t state) {
     backlightState = state;
     update();
+}
+
+void LiquidCrystalI2CMenu::displayOff() {
+    lcd->noDisplay();
+    lcd->noBacklight();
+}
+
+void LiquidCrystalI2CMenu::displayOn() {
+    lcd->display();
+    lcd->setBacklight(backlightState);
 }

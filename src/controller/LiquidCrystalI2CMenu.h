@@ -58,6 +58,14 @@ class LiquidCrystalI2CMenu : public MenuController {
      */
     void resetBlinker() override;
 #endif
+    /**
+     * Turn on the display
+     */
+    void displayOn() override;
+    /**
+     * Turn off the display
+     */
+    void displayOff() override;
 
    public:
     /**

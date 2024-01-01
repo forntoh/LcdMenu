@@ -64,23 +64,6 @@ class MenuController {
      */
     virtual void drawMenu() = 0;
     /**
-     * Check if the cursor is at the start of the menu items
-     * @return true : `boolean` if it is at the start
-     */
-    boolean isAtTheStart() {
-        byte menuType = currentMenuTable[cursorPosition - 1]->getType();
-        return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
-               menuType == MENU_ITEM_SUB_MENU_HEADER;
-    }
-    /**
-     * Check if the cursor is at the end of the menu items
-     * @return true : `boolean` if it is at the end
-     */
-    boolean isAtTheEnd() {
-        return currentMenuTable[cursorPosition + 1]->getType() ==
-               MENU_ITEM_END_OF_MENU;
-    }
-    /**
      * Reset the display
      * @param isHistoryAvailable indicates if there is a previous position
      */
@@ -91,6 +74,14 @@ class MenuController {
      */
     virtual void resetBlinker() = 0;
 #endif
+    /**
+     * Turn on the display
+     */
+    virtual void displayOn() = 0;
+    /**
+     * Turn off the display
+     */
+    virtual void displayOff() = 0;
 
    public:
     /**
@@ -105,6 +96,16 @@ class MenuController {
      */
     explicit MenuController(uint8_t maxRows, uint8_t maxCols)
         : bottom(maxRows), maxRows(maxRows), maxCols(maxCols) {}
+    /**
+     * Check if the cursor is at the start of the menu items
+     * @return true : `boolean` if it is at the start
+     */
+    bool isAtTheStart();
+    /**
+     * Check if the cursor is at the end of the menu items
+     * @return true : `boolean` if it is at the end
+     */
+    bool isAtTheEnd();
     /*
      * Update the menu
      */
@@ -211,10 +212,7 @@ class MenuController {
     /**
      * Check if currently displayed menu is a sub menu.
      */
-    bool isSubMenu() {
-        byte menuItemType = currentMenuTable[0]->getType();
-        return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
-    }
+    bool isSubMenu();
     /**
      * Get a `MenuItem` at position
      * @return `MenuItem` - item at `position`
@@ -231,6 +229,10 @@ class MenuController {
     MenuItem* operator[](const uint8_t position) {
         return currentMenuTable[position];
     }
+    /**
+     * Update timer and turn off display on timeout
+     */
+    void updateTimer();
 };
 
 #endif
