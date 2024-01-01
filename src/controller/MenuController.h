@@ -30,7 +30,7 @@ class MenuController {
     uint8_t bottom = 0;
     uint8_t previousBottom = 0;
     /**
-     * Max rows for the meny
+     * Max rows for the menu
      */
     uint8_t maxRows;
     /**
