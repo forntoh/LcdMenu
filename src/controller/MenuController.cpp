@@ -2,6 +2,22 @@
 
 #include "../utils/utils.h"
 
+bool MenuController::isAtTheStart() {
+    byte menuType = currentMenuTable[cursorPosition - 1]->getType();
+    return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
+           menuType == MENU_ITEM_SUB_MENU_HEADER;
+}
+
+bool MenuController::isAtTheEnd() {
+    return currentMenuTable[cursorPosition + 1]->getType() ==
+           MENU_ITEM_END_OF_MENU;
+}
+
+bool MenuController::isSubMenu() {
+    byte menuItemType = currentMenuTable[0]->getType();
+    return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
+}
+
 void MenuController::reset(boolean isHistoryAvailable) {
     if (isHistoryAvailable) {
         cursorPosition = previousCursorPosition;
@@ -355,10 +371,14 @@ void MenuController::clear() {
     update();
 }
 #endif
-/**
- * Show the menu
- */
+
 void MenuController::show() {
     enableUpdate = true;
     update();
+}
+
+void MenuController::updateTimer() {
+    if (millis() == startTime + timeout) {
+        displayOff();
+    }
 }
