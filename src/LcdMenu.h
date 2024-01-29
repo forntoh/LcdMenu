@@ -607,11 +607,13 @@ class LcdMenu {
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                item->setItemIndex(item->getItemIndex() - 1);
-                if (previousIndex != item->getItemIndex()) update();
-                // Log
-                printCmd(F("LEFT"),
-                         item->getItems()[item->getItemIndex()].c_str());
+                if (isInEditMode()) {
+                    item->setItemIndex(item->getItemIndex() - 1);
+                    if (previousIndex != item->getItemIndex()) update();
+                    // Log
+                    printCmd(F("LEFT"),
+                             item->getItems()[item->getItemIndex()].c_str());
+                }
                 break;
             }
 #endif
@@ -662,13 +664,15 @@ class LcdMenu {
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                item->setItemIndex((item->getItemIndex() + 1) %
-                                   item->getItemCount());
-                // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
-                update();
-                // Log
-                printCmd(F("RIGHT"),
-                         item->getItems()[item->getItemIndex()].c_str());
+                if (isInEditMode()) {
+                    item->setItemIndex((item->getItemIndex() + 1) %
+                                       item->getItemCount());
+                    // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
+                    update();
+                    // Log
+                    printCmd(F("RIGHT"),
+                             item->getItems()[item->getItemIndex()].c_str());
+                }
                 break;
             }
 #endif
