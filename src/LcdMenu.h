@@ -630,12 +630,13 @@ class LcdMenu {
 #endif
 #ifdef ItemProgress_H
             case MENU_ITEM_PROGRESS: {
-                if (isInEditMode()) {
+                if (isInEditMode() && item->getItemIndex() > MIN_PROGRESS) {
                     item->decrement();
                     update();
                     // Log
                     printCmd(F("LEFT"), item->getValue());
                 }
+                break;
             }
 #endif
             default:
@@ -689,7 +690,7 @@ class LcdMenu {
 #endif
 #ifdef ItemProgress_H
             case MENU_ITEM_PROGRESS: {
-                if (isInEditMode()) {
+                if (isInEditMode() && item->getItemIndex() < MAX_PROGRESS) {
                     item->increment();
                     update();
                     // Log
