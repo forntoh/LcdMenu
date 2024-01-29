@@ -1,8 +1,10 @@
 #pragma once
 #include <Arduino.h>
 
+#ifdef MenuController_H
+
 #ifdef MenuItem_H
-bool processCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
+bool processCommand(MenuController& menu, byte cmd, byte upCmd, byte downCmd,
                     byte enterCmd, byte backCmd, byte leftCmd, byte rightCmd) {
     if (cmd == upCmd) {
         menu.up();
@@ -47,9 +49,9 @@ bool processCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
  *                  right in the menu.
  * @return          `true` if the command is consumed, `false` otherwise.
  */
-bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
-                        byte enterCmd, byte backCmd, byte leftCmd = 255,
-                        byte rightCmd = 255) {
+bool processMenuCommand(MenuController& menu, byte cmd, byte upCmd,
+                        byte downCmd, byte enterCmd, byte backCmd,
+                        byte leftCmd = 255, byte rightCmd = 255) {
     return processCommand(menu, cmd, upCmd, downCmd, enterCmd, backCmd, leftCmd,
                           rightCmd);
 }
@@ -88,7 +90,7 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
  *                     moving right in the menu.
  * @return             `true` if the command is consumed, `false` otherwise.
  */
-bool processMenuCommand(LcdMenu& menu, byte cmd, int8_t& pos,
+bool processMenuCommand(MenuController& menu, byte cmd, int8_t& pos,
                         const char* charset, uint8_t size, byte upCmd,
                         byte downCmd, byte enterCmd, byte backCmd,
                         byte clearCmd = 255, byte backspaceCmd = 255,
@@ -152,9 +154,9 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, int8_t& pos,
  *                     backspacing.
  * @return             `true` if the command is consumed, `false` otherwise.
  */
-bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
-                        byte leftCmd, byte rightCmd, byte enterCmd,
-                        byte backCmd, byte clearCmd = 255,
+bool processMenuCommand(MenuController& menu, byte cmd, byte upCmd,
+                        byte downCmd, byte leftCmd, byte rightCmd,
+                        byte enterCmd, byte backCmd, byte clearCmd = 255,
                         byte backspaceCmd = 255) {
     if (!processCommand(menu, cmd, upCmd, downCmd, enterCmd, backCmd, leftCmd,
                         rightCmd)) {
@@ -169,4 +171,5 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
     }
     return true;
 }
+#endif
 #endif

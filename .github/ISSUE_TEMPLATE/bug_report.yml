@@ -24,9 +24,6 @@ body:
       options:
         - 3.5.0
         - 3.4.0
-        - 3.3.4
-        - 3.3.3
-        - 3.3.2
     validations:
       required: true
   - type: dropdown
@@ -50,5 +47,5 @@ body:
     attributes:
       label: Relevant log output
       description: |
-       Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+        Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
