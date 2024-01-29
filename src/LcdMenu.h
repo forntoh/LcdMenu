@@ -410,7 +410,7 @@ class LcdMenu {
         if (isAtTheStart() || isEditModeEnabled) return;
         cursorPosition--;
         // Log
-        printCmd(F("UP"));
+        printCmd(F("UP"), cursorPosition);
         //
         // determine if cursor is at the top of the screen
         //
@@ -434,7 +434,7 @@ class LcdMenu {
         if (isAtTheEnd() || isEditModeEnabled) return;
         cursorPosition++;
         // Log
-        printCmd(F("DOWN"));
+        printCmd(F("DOWN"), cursorPosition);
         //
         // determine if cursor is at the bottom of the screen
         //
@@ -457,9 +457,9 @@ class LcdMenu {
      * - Toggle the state of an item.
      */
     void enter() {
-        // Log
-        printCmd(F("ENTER"));
         MenuItem* item = currentMenuTable[cursorPosition];
+        // Log
+        printCmd(F("ENTER"), item->getType());
         //
         // determine the type of menu entry, then execute it
         //
@@ -716,12 +716,12 @@ class LcdMenu {
         MenuItem* item = currentMenuTable[cursorPosition];
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
-        // Log
-        printCmd(F("BACKSPACE"));
         //
         uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
         remove(item->getValue(), p, 1);
-
+        // Log
+        printCmd(F("BACKSPACE"), item->getValue());
+        //
         blinkerPosition--;
         update();
     }
@@ -798,12 +798,12 @@ class LcdMenu {
         MenuItem* item = currentMenuTable[cursorPosition];
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
-        // Log
-        printCmd(F("CLEAR"));
         //
         // set the value
         //
         item->setValue((char*)"");
+        // Log
+        printCmd(F("CLEAR"), item->getValue());
         //
         // update blinker position
         //
