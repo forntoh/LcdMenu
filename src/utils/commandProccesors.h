@@ -1,6 +1,8 @@
 #pragma once
 #include <Arduino.h>
 
+#ifdef MenuController_H
+
 #ifdef MenuItem_H
 /**
  * Processes the given command on the LcdMenu object.
@@ -185,4 +187,5 @@ bool processMenuCommand(MenuController& menu, byte cmd, byte upCmd,
     }
     return true;
 }
+#endif
 #endif

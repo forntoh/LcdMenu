@@ -1,5 +1,56 @@
 #include "LiquidCrystalI2CMenu.h"
 
+#include "../utils/constants.h"
+
+void LiquidCrystalI2CMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem** menu,
+                                            uint16_t timeout) {
+    lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
+    lcd->init();
+    lcd->backlight();
+    lcd->clear();
+    memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
+    memcpy(downArrow, DOWN_ARROW, sizeof(DOWN_ARROW));
+    lcd->createChar(0, upArrow);
+    lcd->createChar(1, downArrow);
+    this->currentMenuTable = menu;
+    this->startTime = millis();
+    this->timeout = timeout;
+    update();
+}
+
+void LiquidCrystalI2CMenu::update() {
+    if (!enableUpdate) return;
+    displayOn();
+    drawMenu();
+    drawCursor();
+    startTime = millis();
+}
+
+void LiquidCrystalI2CMenu::setCursorIcon(uint8_t newIcon) {
+    cursorIcon = newIcon;
+    drawCursor();
+}
+
+void LiquidCrystalI2CMenu::hide() {
+    enableUpdate = false;
+    lcd->clear();
+}
+
+void LiquidCrystalI2CMenu::setBacklight(uint8_t state) {
+    backlightState = state;
+    update();
+}
+
+void LiquidCrystalI2CMenu::displayOff() {
+    lcd->noDisplay();
+    lcd->noBacklight();
+}
+
+void LiquidCrystalI2CMenu::displayOn() {
+    lcd->display();
+    lcd->setBacklight(backlightState);
+}
+
 void LiquidCrystalI2CMenu::drawCursor() {
     //
     // Erases current cursor
@@ -14,7 +65,6 @@ void LiquidCrystalI2CMenu::drawCursor() {
     uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
     lcd->setCursor(0, line);
     lcd->write(cursorIcon);
-#ifdef ItemInput_H
     //
     // If cursor is at MENU_ITEM_INPUT enable blinking
     //
@@ -26,7 +76,6 @@ void LiquidCrystalI2CMenu::drawCursor() {
             return;
         }
     }
-#endif
     lcd->noBlink();
 }
 
@@ -45,7 +94,6 @@ void LiquidCrystalI2CMenu::drawMenu() {
         // determine the type of item
         //
         switch (item->getType()) {
-#ifdef ItemToggle_H
             case MENU_ITEM_TOGGLE:
                 //
                 // append textOn or textOff depending on the state
@@ -54,18 +102,17 @@ void LiquidCrystalI2CMenu::drawMenu() {
                 lcd->print(item->isOn() ? item->getTextOn()
                                         : item->getTextOff());
                 break;
-#endif
-#ifdef ItemInput_H
             case MENU_ITEM_INPUT:
+            case MENU_ITEM_PROGRESS:
                 //
                 // append the value of the input
                 //
+                static char* buf = new char[maxCols];
+                substring(item->getValue(), 0,
+                          maxCols - strlen(item->getText()) - 2, buf);
                 lcd->print(":");
-                lcd->print(substring(item->getValue(), 0,
-                                     maxCols - strlen(item->getText()) - 2));
+                lcd->print(buf);
                 break;
-#endif
-#ifdef ItemList_H
             case MENU_ITEM_LIST:
                 //
                 // append the value of the item at current list position
@@ -74,7 +121,6 @@ void LiquidCrystalI2CMenu::drawMenu() {
                 lcd->print(item->getItems()[item->getItemIndex()].substring(
                     0, maxCols - strlen(item->getText()) - 2));
                 break;
-#endif
             default:
                 break;
         }
@@ -110,46 +156,6 @@ void LiquidCrystalI2CMenu::drawMenu() {
     }
 }
 
-void LiquidCrystalI2CMenu::setupLcdWithMenu(uint8_t lcd_Addr, MenuItem** menu,
-                                            uint16_t timeout) {
-    lcd = new LiquidCrystal_I2C(lcd_Addr, maxCols, maxRows);
-    lcd->init();
-    lcd->backlight();
-    lcd->clear();
-    memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
-    memcpy(downArrow, DOWN_ARROW, sizeof(DOWN_ARROW));
-    lcd->createChar(0, upArrow);
-    lcd->createChar(1, downArrow);
-    this->currentMenuTable = menu;
-    this->startTime = millis();
-    this->timeout = timeout;
-    update();
-}
-
-void LiquidCrystalI2CMenu::update() {
-    if (!enableUpdate) return;
-    displayOn();
-    drawMenu();
-    drawCursor();
-    startTime = millis();
-}
-
-#ifdef ItemInput_H
-
-void LiquidCrystalI2CMenu::resetBlinker() {
-    //
-    // calculate lower and upper bound
-    //
-    uint8_t lb = strlen(currentMenuTable[cursorPosition]->getText()) + 2;
-    uint8_t ub = lb + strlen(currentMenuTable[cursorPosition]->getValue());
-    ub = constrain(ub, lb, maxCols - 2);
-    //
-    // set cursor position
-    //
-    blinkerPosition = constrain(blinkerPosition, lb, ub);
-    lcd->setCursor(blinkerPosition, cursorPosition - top);
-}
-
 void LiquidCrystalI2CMenu::drawChar(char c) {
     MenuItem* item = currentMenuTable[cursorPosition];
     //
@@ -163,30 +169,20 @@ void LiquidCrystalI2CMenu::drawChar(char c) {
     resetBlinker();
     //
     isCharPickerActive = true;
-}
-#endif
-
-void LiquidCrystalI2CMenu::setCursorIcon(uint8_t newIcon) {
-    cursorIcon = newIcon;
-    drawCursor();
+    // Log
+    printCmd(F("DRAW-CHAR"), c);
 }
 
-void LiquidCrystalI2CMenu::hide() {
-    enableUpdate = false;
-    lcd->clear();
-}
-
-void LiquidCrystalI2CMenu::setBacklight(uint8_t state) {
-    backlightState = state;
-    update();
-}
-
-void LiquidCrystalI2CMenu::displayOff() {
-    lcd->noDisplay();
-    lcd->noBacklight();
-}
-
-void LiquidCrystalI2CMenu::displayOn() {
-    lcd->display();
-    lcd->setBacklight(backlightState);
+void LiquidCrystalI2CMenu::resetBlinker() {
+    //
+    // calculate lower and upper bound
+    //
+    uint8_t lb = strlen(currentMenuTable[cursorPosition]->getText()) + 2;
+    uint8_t ub = lb + strlen(currentMenuTable[cursorPosition]->getValue());
+    ub = constrain(ub, lb, maxCols - 2);
+    //
+    // set cursor position
+    //
+    blinkerPosition = constrain(blinkerPosition, lb, ub);
+    lcd->setCursor(blinkerPosition, cursorPosition - top);
 }

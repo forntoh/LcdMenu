@@ -1,5 +1,43 @@
 #include "LiquidCrystalMenu.h"
 
+void LiquidCrystalMenu::setupLcdWithMenu(uint8_t rs, uint8_t en, uint8_t d0,
+                                         uint8_t d1, uint8_t d2, uint8_t d3,
+                                         MenuItem** menu, uint16_t timeout) {
+    lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3);
+    lcd->begin(maxCols, maxRows);
+    lcd->clear();
+    memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
+    memcpy(downArrow, DOWN_ARROW, sizeof(DOWN_ARROW));
+    lcd->createChar(0, upArrow);
+    lcd->createChar(1, downArrow);
+    this->currentMenuTable = menu;
+    this->startTime = millis();
+    this->timeout = timeout;
+    update();
+}
+
+void LiquidCrystalMenu::update() {
+    if (!enableUpdate) return;
+    displayOn();
+    drawMenu();
+    drawCursor();
+    startTime = millis();
+}
+
+void LiquidCrystalMenu::setCursorIcon(uint8_t newIcon) {
+    cursorIcon = newIcon;
+    drawCursor();
+}
+
+void LiquidCrystalMenu::hide() {
+    enableUpdate = false;
+    lcd->clear();
+}
+
+void LiquidCrystalMenu::displayOff() { lcd->noDisplay(); }
+
+void LiquidCrystalMenu::displayOn() { lcd->display(); }
+
 void LiquidCrystalMenu::drawCursor() {
     //
     // Erases current cursor
@@ -14,7 +52,6 @@ void LiquidCrystalMenu::drawCursor() {
     uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
     lcd->setCursor(0, line);
     lcd->write(cursorIcon);
-#ifdef ItemInput_H
     //
     // If cursor is at MENU_ITEM_INPUT enable blinking
     //
@@ -26,7 +63,6 @@ void LiquidCrystalMenu::drawCursor() {
             return;
         }
     }
-#endif
     lcd->noBlink();
 }
 
@@ -45,7 +81,6 @@ void LiquidCrystalMenu::drawMenu() {
         // determine the type of item
         //
         switch (item->getType()) {
-#ifdef ItemToggle_H
             case MENU_ITEM_TOGGLE:
                 //
                 // append textOn or textOff depending on the state
@@ -54,18 +89,17 @@ void LiquidCrystalMenu::drawMenu() {
                 lcd->print(item->isOn() ? item->getTextOn()
                                         : item->getTextOff());
                 break;
-#endif
-#ifdef ItemInput_H
             case MENU_ITEM_INPUT:
+            case MENU_ITEM_PROGRESS:
                 //
                 // append the value of the input
                 //
+                static char* buf = new char[maxCols];
+                substring(item->getValue(), 0,
+                          maxCols - strlen(item->getText()) - 2, buf);
                 lcd->print(":");
-                lcd->print(substring(item->getValue(), 0,
-                                     maxCols - strlen(item->getText()) - 2));
+                lcd->print(buf);
                 break;
-#endif
-#ifdef ItemList_H
             case MENU_ITEM_LIST:
                 //
                 // append the value of the item at current list position
@@ -74,7 +108,6 @@ void LiquidCrystalMenu::drawMenu() {
                 lcd->print(item->getItems()[item->getItemIndex()].substring(
                     0, maxCols - strlen(item->getText()) - 2));
                 break;
-#endif
             default:
                 break;
         }
@@ -110,31 +143,22 @@ void LiquidCrystalMenu::drawMenu() {
     }
 }
 
-void LiquidCrystalMenu::setupLcdWithMenu(uint8_t rs, uint8_t en, uint8_t d0,
-                                         uint8_t d1, uint8_t d2, uint8_t d3,
-                                         MenuItem** menu, uint16_t timeout) {
-    lcd = new LiquidCrystal(rs, en, d0, d1, d2, d3);
-    lcd->begin(maxCols, maxRows);
-    lcd->clear();
-    memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
-    memcpy(downArrow, DOWN_ARROW, sizeof(DOWN_ARROW));
-    lcd->createChar(0, upArrow);
-    lcd->createChar(1, downArrow);
-    this->currentMenuTable = menu;
-    this->startTime = millis();
-    this->timeout = timeout;
-    update();
+void LiquidCrystalMenu::drawChar(char c) {
+    MenuItem* item = currentMenuTable[cursorPosition];
+    //
+    if (item->getType() != MENU_ITEM_INPUT || !isEditModeEnabled) return;
+    //
+    // draw the character without updating the menu item
+    //
+    uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
+    lcd->setCursor(blinkerPosition, line);
+    lcd->print(c);
+    resetBlinker();
+    //
+    isCharPickerActive = true;
+    // Log
+    printCmd(F("DRAW-CHAR"), c);
 }
-
-void LiquidCrystalMenu::update() {
-    if (!enableUpdate) return;
-    displayOn();
-    drawMenu();
-    drawCursor();
-    startTime = millis();
-}
-
-#ifdef ItemInput_H
 
 void LiquidCrystalMenu::resetBlinker() {
     //
@@ -149,33 +173,3 @@ void LiquidCrystalMenu::resetBlinker() {
     blinkerPosition = constrain(blinkerPosition, lb, ub);
     lcd->setCursor(blinkerPosition, cursorPosition - top);
 }
-
-void LiquidCrystalMenu::drawChar(char c) {
-    MenuItem* item = currentMenuTable[cursorPosition];
-    //
-    if (item->getType() != MENU_ITEM_INPUT || !isEditModeEnabled) return;
-    //
-    // draw the character without updating the menu item
-    //
-    uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
-    lcd->setCursor(blinkerPosition, line);
-    lcd->print(c);
-    resetBlinker();
-    //
-    isCharPickerActive = true;
-}
-#endif
-
-void LiquidCrystalMenu::setCursorIcon(uint8_t newIcon) {
-    cursorIcon = newIcon;
-    drawCursor();
-}
-
-void LiquidCrystalMenu::hide() {
-    enableUpdate = false;
-    lcd->clear();
-}
-
-void LiquidCrystalMenu::displayOff() { lcd->noDisplay(); }
-
-void LiquidCrystalMenu::displayOn() { lcd->display(); }
