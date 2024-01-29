@@ -13,11 +13,11 @@ class LiquidCrystalMenu : public MenuController {
     /**
      * Down arrow (↓)
      */
-    byte downArrow[8];
+    byte downArrow[8] = {};
     /**
      * Up arrow (↑)
      */
-    byte upArrow[8];
+    byte upArrow[8] = {};
     /**
      * Cursor icon. Defaults to right arrow (→).
      */
@@ -34,12 +34,10 @@ class LiquidCrystalMenu : public MenuController {
      * Draw the menu items with up and down indicators
      */
     void drawMenu() override;
-#ifdef ItemInput_H
     /**
      * Calculate and set the new blinker position
      */
     void resetBlinker() override;
-#endif
     /**
      * Turn on the display
      */
@@ -68,14 +66,12 @@ class LiquidCrystalMenu : public MenuController {
      * Draw the menu items and cursor
      */
     void update() override;
-#ifdef ItemInput_H
     /**
      * Draw a character on the display
      * used for `Input` type menu items.
      * @param c character to draw
      */
     void drawChar(char c) override;
-#endif
     /**
      * Set the character used to visualize the cursor.
      * @param newIcon character to display

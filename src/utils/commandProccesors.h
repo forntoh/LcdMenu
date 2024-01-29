@@ -1,6 +1,8 @@
 #pragma once
 #include <Arduino.h>
 
+#ifdef MenuController_H
+
 #ifdef MenuItem_H
 bool processCommand(MenuController& menu, byte cmd, byte upCmd, byte downCmd,
                     byte enterCmd, byte backCmd, byte leftCmd, byte rightCmd) {
@@ -169,4 +171,5 @@ bool processMenuCommand(MenuController& menu, byte cmd, byte upCmd,
     }
     return true;
 }
+#endif
 #endif

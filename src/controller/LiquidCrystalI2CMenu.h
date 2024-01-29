@@ -6,18 +6,18 @@
 #include "../utils/utils.h"
 #include "MenuController.h"
 
-class LiquidCrystalI2CMenu : public MenuController {
+class LiquidCrystalI2CMenu final : public MenuController {
     using MenuController::MenuController;
 
    private:
     /**
      * Down arrow (↓)
      */
-    byte downArrow[8];
+    byte downArrow[8] = {};
     /**
      * Up arrow (↑)
      */
-    byte upArrow[8];
+    byte upArrow[8] = {};
     /**
      * Cursor icon. Defaults to right arrow (→).
      */
@@ -34,12 +34,10 @@ class LiquidCrystalI2CMenu : public MenuController {
      * Draw the menu items with up and down indicators
      */
     void drawMenu() override;
-#ifdef ItemInput_H
     /**
      * Calculate and set the new blinker position
      */
     void resetBlinker() override;
-#endif
     /**
      * Turn on the display
      */
@@ -67,14 +65,12 @@ class LiquidCrystalI2CMenu : public MenuController {
      * Draw the menu items and cursor
      */
     void update() override;
-#ifdef ItemInput_H
     /**
      * Draw a character on the display
      * used for `Input` type menu items.
      * @param c character to draw
      */
     void drawChar(char c) override;
-#endif
     /**
      * Set the character used to visualize the cursor.
      * @param newIcon character to display
