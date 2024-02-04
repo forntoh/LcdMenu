@@ -746,15 +746,15 @@ class LcdMenu {
         // update text
         //
         if (blinkerPosition < ub) {
-            static char start[10];
-            static char end[10];
-            static char* joined = new char[maxCols - lb];
+            char start[10];
+            char end[10];
+            char* joined = new char[maxCols - lb];
             substring(item->getValue(), 0, blinkerPosition - lb, start);
             substring(item->getValue(), blinkerPosition + 1 - lb, length, end);
             concat(start, character, end, joined);
             item->setValue(joined);
         } else {
-            static char* buf = new char[length + 2];
+            char* buf = new char[length + 2];
             concat(item->getValue(), character, buf);
             item->setValue(buf);
         }
