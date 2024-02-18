@@ -129,7 +129,7 @@ class MenuItem {
      * Set the text of the item
      * @param text text to display for the item
      */
-    void setText(const char* text){};
+    void setText(const char* text) { this->text = text; };
     /**
      * Set the callback on the item
      * @param callback reference to callback function
@@ -153,7 +153,7 @@ class MenuItem {
      * Get item at index from the submenu
      * @param index for the item
      */
-    MenuItem& operator[](const uint8_t index);
+    virtual MenuItem* operator[](const uint8_t index) { return NULL; };
 };
 #define ITEM_BASIC(...) (new MenuItem(__VA_ARGS__))
 
@@ -192,6 +192,8 @@ class ItemHeader : public MenuItem {
         : ItemHeader("", parent, MENU_ITEM_SUB_MENU_HEADER) {}
 
     MenuItem** getSubMenu() override { return this->parent; };
+
+    MenuItem* operator[](const uint8_t index) override { return parent[index]; }
 };
 
 /**
