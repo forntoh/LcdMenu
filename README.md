@@ -2,6 +2,8 @@
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
 [![PlatformIO Registry](https://badges.registry.platformio.org/packages/forntoh/library/LcdMenu.svg)](https://registry.platformio.org/libraries/forntoh/LcdMenu)
+[![Badge Commits since latest](https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease)](https://github.com/forntoh/LcdMenu/commits/master)
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=forntoh.LcdMenu)
 
 LcdMenu is an Arduino library that enables you to create interactive menus and navigation systems for LCD displays. With LcdMenu, you can easily add menus to your projects and navigate through them using buttons or any input device you want. The library supports a wide range of LCD display modules, including character and alphanumeric displays.
 
