@@ -22,6 +22,7 @@ body:
       label: Version
       description: What version of our library are you running?
       options:
+        - 3.5.4
         - 3.5.3
         - 3.5.2
         - 3.5.1
