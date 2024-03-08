@@ -856,7 +856,20 @@ class LcdMenu {
      * @param position
      */
     void setCursorPosition(uint8_t position) {
-        this->cursorPosition = position;
+        uint8_t bottom = position;
+        bool isNotEnd = false;
+
+        do {
+            isNotEnd = currentMenuTable[++bottom]->getType() !=
+                           MENU_ITEM_END_OF_MENU &&
+                       bottom < maxRows + 20;
+        } while (isNotEnd);
+
+        uint8_t max = maxRows - 1;
+
+        this->cursorPosition = position + 1;
+        this->bottom = constrain(cursorPosition + max, max, bottom - 1);
+        this->top = this->bottom - max;
     }
     /**
      * Update timer and turn off display on timeout
