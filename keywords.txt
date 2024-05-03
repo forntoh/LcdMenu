@@ -44,6 +44,7 @@ drawCursor	KEYWORD2
 drawMenu	KEYWORD2
 isAtTheStart	KEYWORD2
 isAtTheEnd	KEYWORD2
+isAtTheEnd	KEYWORD2
 reset	KEYWORD2
 resetBlinker	KEYWORD2
 setupLcdWithMenu	KEYWORD2
