@@ -225,7 +225,7 @@ class LcdMenu {
         //
         // determine if cursor is at the top
         //
-        if (top == 1) {
+        if (top == 1 && !isAtTheEnd(bottom)) {
             //
             // Print the down arrow only
             //
@@ -242,7 +242,7 @@ class LcdMenu {
             //
             lcd->setCursor(maxCols - 1, 0);
             lcd->write(byte(0));
-        } else if (isAtTheEnd()) {
+        } else if (isAtTheEnd() && top != 1) {
             //
             // Print the up arrow only
             //
@@ -263,8 +263,13 @@ class LcdMenu {
      * Check if the cursor is at the end of the menu items
      * @return true : `boolean` if it is at the end
      */
-    boolean isAtTheEnd() {
-        return currentMenuTable[cursorPosition + 1]->getType() ==
+    boolean isAtTheEnd() { return isAtTheEnd(cursorPosition); }
+    /**
+     * Check if the item at [position] is at the end of the menu items
+     * @return true : `boolean` if it is at the end
+     */
+    boolean isAtTheEnd(uint8_t position) {
+        return currentMenuTable[position + 1]->getType() ==
                MENU_ITEM_END_OF_MENU;
     }
     /**

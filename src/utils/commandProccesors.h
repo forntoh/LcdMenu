@@ -2,6 +2,22 @@
 #include <Arduino.h>
 
 #ifdef MenuItem_H
+/**
+ * Processes the given command on the LcdMenu object.
+ *
+ * @param menu The LcdMenu object on which the command is to be processed.
+ * @param cmd The command to be processed.
+ * @param upCmd The command for moving up in the menu.
+ * @param downCmd The command for moving down in the menu.
+ * @param enterCmd The command for entering/editing a value.
+ * @param backCmd The command for going back in the menu.
+ * @param leftCmd The command for moving left in the menu.
+ * @param rightCmd The command for moving right in the menu.
+ *
+ * @return true if the command is consumed, false otherwise.
+ *
+ * @throws None
+ */
 bool processCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
                     byte enterCmd, byte backCmd, byte leftCmd, byte rightCmd) {
     if (cmd == upCmd) {
