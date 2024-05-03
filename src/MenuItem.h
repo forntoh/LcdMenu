@@ -193,7 +193,9 @@ class ItemHeader : public MenuItem {
 
     MenuItem** getSubMenu() override { return this->parent; };
 
-    MenuItem* operator[](const uint8_t index) override { return parent[index]; }
+    MenuItem* operator[](const uint8_t index) override {
+        return getSubMenu()[index];
+    }
 };
 
 /**
