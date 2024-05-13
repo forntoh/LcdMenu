@@ -251,28 +251,6 @@ class LcdMenu {
         }
     }
     /**
-     * Check if the cursor is at the start of the menu items
-     * @return true : `boolean` if it is at the start
-     */
-    boolean isAtTheStart() {
-        byte menuType = currentMenuTable[cursorPosition - 1]->getType();
-        return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
-               menuType == MENU_ITEM_SUB_MENU_HEADER;
-    }
-    /**
-     * Check if the cursor is at the end of the menu items
-     * @return true : `boolean` if it is at the end
-     */
-    boolean isAtTheEnd() { return isAtTheEnd(cursorPosition); }
-    /**
-     * Check if the item at [position] is at the end of the menu items
-     * @return true : `boolean` if it is at the end
-     */
-    boolean isAtTheEnd(uint8_t position) {
-        return currentMenuTable[position + 1]->getType() ==
-               MENU_ITEM_END_OF_MENU;
-    }
-    /**
      * Reset the display
      * @param isHistoryAvailable indicates if there is a previous position
      */
@@ -404,6 +382,28 @@ class LcdMenu {
      * Reset the display
      */
     void resetMenu() { this->reset(false); }
+    /**
+     * Check if the cursor is at the start of the menu items
+     * @return true : `boolean` if it is at the start
+     */
+    boolean isAtTheStart() {
+        byte menuType = currentMenuTable[cursorPosition - 1]->getType();
+        return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
+               menuType == MENU_ITEM_SUB_MENU_HEADER;
+    }
+    /**
+     * Check if the cursor is at the end of the menu items
+     * @return true : `boolean` if it is at the end
+     */
+    boolean isAtTheEnd() { return isAtTheEnd(cursorPosition); }
+    /**
+     * Check if the item at [position] is at the end of the menu items
+     * @return true : `boolean` if it is at the end
+     */
+    boolean isAtTheEnd(uint8_t position) {
+        return currentMenuTable[position + 1]->getType() ==
+               MENU_ITEM_END_OF_MENU;
+    }
     /**
      * Execute an "up press" on menu
      * When edit mode is enabled, this action is skipped
