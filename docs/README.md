@@ -28,7 +28,7 @@ Follow [this guide](https://www.ardu-badge.com/LcdMenu) to install the library w
 
     ```ini
     lib_deps =
-        forntoh/LcdMenu@^3.3.0
+        forntoh/LcdMenu@^3.5.5
     ```
 4. Save the changes to the `platformio.ini` file.
 5. Build and upload your project to your device.
