@@ -7,8 +7,6 @@
 
 class LiquidCrystalI2CAdapter : public DisplayInterface {
    private:
-    LiquidCrystal_I2C lcd;
-
     uint8_t downArrow[8];
     uint8_t upArrow[8];
 
@@ -16,6 +14,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
     uint8_t cursorIcon = 0x7E;      // →
     uint8_t editCursorIcon = 0x7F;  // ←
     uint16_t timeout = 10000;       // 10 seconds
+    LiquidCrystal_I2C lcd;
 
     unsigned long startTime = 0;
 

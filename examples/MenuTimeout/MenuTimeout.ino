@@ -5,7 +5,8 @@
 
 */
 
-#include <controller/LiquidCrystalI2CMenu.h>
+#include <LcdMenu.h>
+#include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
@@ -25,11 +26,12 @@ MAIN_MENU(
     ITEM_BASIC("Blink random")
 );
 
-LiquidCrystalI2CMenu menu(LCD_ROWS, LCD_COLS);
+LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LcdMenu menu(lcdAdapter);
 
 void setup() {
     Serial.begin(9600);
-    menu.setupLcdWithMenu(0x27, mainMenu, 20000);
+    menu.initialize(mainMenu);
 }
 
 void loop() {
@@ -37,7 +39,7 @@ void loop() {
      * IMPORTANT: You must call this function for the timeout to work
      * The default timeout is 10000ms
      */
-    menu.updateTimer();
+    lcdAdapter.updateTimer();
 
     // Listen to key
     if (!Serial.available()) return;
