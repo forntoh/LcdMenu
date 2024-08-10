@@ -104,7 +104,7 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
  *                     moving right in the menu.
  * @return             `true` if the command is consumed, `false` otherwise.
  */
-bool processMenuCommand(MenuController& menu, byte cmd, int8_t& pos,
+bool processMenuCommand(LcdMenu& menu, byte cmd, int8_t& pos,
                         const char* charset, uint8_t size, byte upCmd,
                         byte downCmd, byte enterCmd, byte backCmd,
                         byte clearCmd = 255, byte backspaceCmd = 255,
@@ -168,9 +168,9 @@ bool processMenuCommand(MenuController& menu, byte cmd, int8_t& pos,
  *                     backspacing.
  * @return             `true` if the command is consumed, `false` otherwise.
  */
-bool processMenuCommand(MenuController& menu, byte cmd, byte upCmd,
-                        byte downCmd, byte leftCmd, byte rightCmd,
-                        byte enterCmd, byte backCmd, byte clearCmd = 255,
+bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
+                        byte leftCmd, byte rightCmd, byte enterCmd,
+                        byte backCmd, byte clearCmd = 255,
                         byte backspaceCmd = 255) {
     if (!processCommand(menu, cmd, upCmd, downCmd, enterCmd, backCmd, leftCmd,
                         rightCmd)) {
