@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-void substring(char* str, uint8_t start, uint8_t size, char* substr);
+void substring(const char* str, uint8_t start, uint8_t size, char* substr);
 
 void concat(const char* first, char second, const char* third, char* result);
 

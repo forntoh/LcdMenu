@@ -2,7 +2,7 @@
 
 #include "constants.h"
 
-void substring(char* str, uint8_t start, uint8_t size, char* substr) {
+void substring(const char* str, uint8_t start, uint8_t size, char* substr) {
     strncpy(substr, str + start, size);
     substr[size] = '\0';
 }
