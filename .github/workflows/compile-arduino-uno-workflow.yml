@@ -37,7 +37,7 @@ jobs:
           key: ${{ runner.os }}-pio
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
@@ -59,6 +59,6 @@ jobs:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
 
       - name: Upload compile metrics
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: ${{ env.FILE_NAME }}
