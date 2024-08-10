@@ -1,11 +1,11 @@
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 #include <Wire.h>
 #include <utils/constants.h>
 
 #include "DisplayInterface.h"
 
-class LiquidCrystalI2CAdapter : public DisplayInterface {
+class LiquidCrystalAdapter : public DisplayInterface {
    private:
     uint8_t downArrow[8];
     uint8_t upArrow[8];
@@ -22,11 +22,12 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
     uint8_t cursorIcon = 0x7E;      // →
     uint8_t editCursorIcon = 0x7F;  // ←
     uint16_t timeout = 10000;       // 10 seconds
-    LiquidCrystal_I2C lcd;
+    LiquidCrystal lcd;
 
-    LiquidCrystalI2CAdapter(uint8_t lcd_Addr, uint8_t lcd_cols,
-                            uint8_t lcd_rows)
-        : lcd(lcd_Addr, lcd_cols, lcd_rows) {
+    LiquidCrystalAdapter(uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1,
+                         uint8_t d2, uint8_t d3, uint8_t lcd_cols,
+                         uint8_t lcd_rows)
+        : lcd(rs, en, d0, d1, d2, d3) {
         maxRows = lcd_rows;
         maxCols = lcd_cols;
         memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
@@ -34,15 +35,27 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
     }
 
     void begin() override {
-        lcd.init();
+        lcd.begin(maxCols, maxRows);
         lcd.clear();
-        lcd.backlight();
         lcd.createChar(0, upArrow);
         lcd.createChar(1, downArrow);
         startTime = millis();
     }
 
-    void clear() override { lcd.clear(); }
+    void update(MenuItem* menu[], uint8_t cursorPosition,
+                uint8_t blinkerPosition, uint8_t top, uint8_t bottom,
+                bool isInEditMode) override {
+        this->currentMenuTable = menu;
+        this->top = top;
+        this->bottom = bottom;
+        this->cursorPosition = cursorPosition;
+        this->blinkerPosition = blinkerPosition;
+        this->isEditModeEnabled = isInEditMode;
+        this->startTime = millis();
+        lcd.display();
+        drawMenu();
+        drawCursor();
+    }
 
     void drawCursor() override {
         //
@@ -72,21 +85,6 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         }
 #endif
         lcd.noBlink();
-    }
-
-    void update(MenuItem* menu[], uint8_t cursorPosition,
-                uint8_t blinkerPosition, uint8_t top, uint8_t bottom,
-                bool isInEditMode) override {
-        this->currentMenuTable = menu;
-        this->top = top;
-        this->bottom = bottom;
-        this->cursorPosition = cursorPosition;
-        this->blinkerPosition = blinkerPosition;
-        this->isEditModeEnabled = isInEditMode;
-        this->startTime = millis();
-        lcd.display();
-        drawMenu();
-        drawCursor();
     }
 
     void drawMenu() override {
@@ -174,6 +172,8 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         lcd.setCursor(blinkerPosition, cursorPosition - top);
     }
 #endif
+
+    void clear() override { lcd.clear(); }
 
     void updateTimer() {
         if (millis() == startTime + timeout) {
