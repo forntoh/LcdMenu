@@ -5,7 +5,8 @@
 
 */
 
-#include <controller/LiquidCrystalI2CMenu.h>
+#include <LcdMenu.h>
+#include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
@@ -18,20 +19,17 @@
 #define BACK 55   // NUMPAD 7
 
 // Initialize the main menu items
-MAIN_MENU(
-    ITEM_BASIC("Start service"),
-    ITEM_BASIC("Connect to WiFi"),
-    ITEM_BASIC("Settings"),
-    ITEM_BASIC("Blink SOS"),
-    ITEM_BASIC("Blink random")
-);
+MAIN_MENU(ITEM_BASIC("Start service"), ITEM_BASIC("Connect to WiFi"),
+          ITEM_BASIC("Settings"), ITEM_BASIC("Blink SOS"),
+          ITEM_BASIC("Blink random"));
 // Construct the LcdMenu
-LiquidCrystalI2CMenu menu(LCD_ROWS, LCD_COLS);
+LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LcdMenu menu(lcdAdapter);
 
 void setup() {
     Serial.begin(9600);
     // Initialize LcdMenu with the menu items
-    menu.setupLcdWithMenu(0x27, mainMenu);
+    menu.initialize(mainMenu);
 }
 
 void loop() {
