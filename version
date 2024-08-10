@@ -63,7 +63,7 @@ if [[ "$part_to_increment" =~ ^[1-3]$ ]]; then
     # Update version
     python3 .scripts/version.py library.* $incremented_version
     # Update keywords
-    .scripts/keywords.py src/*.h src/**/*.*
+    python3 .scripts/keywords.py src/*.h src/**/*.*
     # Update Bug Report Template
     python3 .scripts/bugreport.py $incremented_version
 else
