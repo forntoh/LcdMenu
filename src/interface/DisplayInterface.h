@@ -7,19 +7,35 @@ class DisplayInterface {
    protected:
     uint8_t maxRows;
     uint8_t maxCols;
+    uint8_t cursorPosition;
+    MenuItem** currentMenuTable = NULL;
+    bool isEditModeEnabled;
 
    public:
     virtual void begin() = 0;
+
+    virtual void update(MenuItem* menu[], uint8_t cursorPosition,
+                        uint8_t blinkerPosition, uint8_t top, uint8_t bottom,
+                        bool isInEditMode) = 0;
+    virtual void drawMenu() = 0;
+    virtual void drawCursor() = 0;
+#ifdef ItemInput_H
+    virtual void resetBlinker() = 0;
+    virtual bool drawChar(char c) = 0;
+#endif
     virtual void clear() = 0;
-    virtual void setCursor(uint8_t col, uint8_t row) = 0;
-    virtual void drawCursor(bool isInEditMode) = 0;
-    virtual void drawDownIndicator() = 0;
-    virtual void drawUpIndicator() = 0;
-    virtual void print(const char* str) = 0;
-    virtual void print(const char str) = 0;
-    virtual void display() = 0;
-    virtual void blink() = 0;
-    virtual void noBlink() = 0;
+    bool isAtTheStart() {
+        byte menuType = currentMenuTable[cursorPosition - 1]->getType();
+        return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
+               menuType == MENU_ITEM_SUB_MENU_HEADER;
+    }
+
+    bool isAtTheEnd() { return isAtTheEnd(cursorPosition); }
+
+    bool isAtTheEnd(uint8_t position) {
+        return currentMenuTable[position + 1]->getType() ==
+               MENU_ITEM_END_OF_MENU;
+    }
 
     virtual ~DisplayInterface() {}
 
