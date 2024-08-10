@@ -19,9 +19,9 @@ class LiquidCrystalAdapter : public DisplayInterface {
     void drawUpIndicator() { lcd.write(byte(0)); }
 
    public:
-    uint8_t cursorIcon = 0x7E;      // →
-    uint8_t editCursorIcon = 0x7F;  // ←
-    uint16_t timeout = 10000;       // 10 seconds
+    uint8_t cursorIcon = CURSOR_ICON;
+    uint8_t editCursorIcon = EDIT_CURSOR_ICON;
+    uint16_t timeout = DISPLAY_TIMEOUT;
     LiquidCrystal lcd;
 
     LiquidCrystalAdapter(uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1,

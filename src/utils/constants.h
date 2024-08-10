@@ -42,3 +42,7 @@ const byte UP_ARROW[8] = {
 //
 #define MIN_PROGRESS 0
 #define MAX_PROGRESS 1000
+//
+#define CURSOR_ICON 0x7E;       // →
+#define EDIT_CURSOR_ICON 0x7F;  // ←
+#define DISPLAY_TIMEOUT 10000;  // 10 seconds
