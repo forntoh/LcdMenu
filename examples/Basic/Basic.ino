@@ -19,9 +19,13 @@
 #define BACK 55   // NUMPAD 7
 
 // Initialize the main menu items
-MAIN_MENU(ITEM_BASIC("Start service"), ITEM_BASIC("Connect to WiFi"),
-          ITEM_BASIC("Settings"), ITEM_BASIC("Blink SOS"),
-          ITEM_BASIC("Blink random"));
+MAIN_MENU(
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_BASIC("Settings"),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random")
+);
 // Construct the LcdMenu
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
