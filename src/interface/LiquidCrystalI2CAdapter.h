@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
+#include <utils/constants.h>
 
 #include "DisplayInterface.h"
 
@@ -8,26 +9,8 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
    private:
     LiquidCrystal_I2C lcd;
 
-    uint8_t downArrow[8] = {
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b10101,  // * * *
-        0b01110,  //  ***
-        0b00100   //   *
-    };
-    uint8_t upArrow[8] = {
-        0b00100,  //   *
-        0b01110,  //  ***
-        0b10101,  // * * *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100,  //   *
-        0b00100   //   *
-    };
+    uint8_t downArrow[8];
+    uint8_t upArrow[8];
 
    public:
     uint8_t cursorIcon = 0x7E;      // →
@@ -41,6 +24,8 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         : lcd(lcd_Addr, lcd_cols, lcd_rows) {
         maxRows = lcd_rows;
         maxCols = lcd_cols;
+        memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
+        memcpy(downArrow, DOWN_ARROW, sizeof(DOWN_ARROW));
     }
 
     void begin() override {
