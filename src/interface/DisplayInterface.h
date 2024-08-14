@@ -12,11 +12,12 @@ class DisplayInterface {
     bool isEditModeEnabled;
 
    public:
+    uint8_t blinkerPosition;
+
     virtual void begin() = 0;
 
-    virtual void update(MenuItem* menu[], uint8_t cursorPosition,
-                        uint8_t blinkerPosition, uint8_t top, uint8_t bottom,
-                        bool isInEditMode) = 0;
+    virtual void update(MenuItem* menu[], uint8_t cursorPosition, uint8_t top,
+                        uint8_t bottom) = 0;
     virtual void drawMenu() = 0;
     virtual void drawCursor() = 0;
 #ifdef ItemInput_H
@@ -41,6 +42,9 @@ class DisplayInterface {
 
     uint8_t getMaxRows() const { return maxRows; }
     uint8_t getMaxCols() const { return maxCols; }
+
+    void setEditModeEnabled(bool isEnabled) { isEditModeEnabled = isEnabled; }
+    bool getEditModeEnabled() { return isEditModeEnabled; }
 };
 
 #endif  // DISPLAY_INTERFACE_H

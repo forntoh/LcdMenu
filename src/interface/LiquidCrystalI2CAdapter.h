@@ -11,7 +11,6 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
     uint8_t upArrow[8];
     uint8_t top;
     uint8_t bottom;
-    uint8_t blinkerPosition;
     unsigned long startTime = 0;
 
     void drawDownIndicator() { lcd.write(byte(1)); }
@@ -73,15 +72,12 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         lcd.noBlink();
     }
 
-    void update(MenuItem* menu[], uint8_t cursorPosition,
-                uint8_t blinkerPosition, uint8_t top, uint8_t bottom,
-                bool isInEditMode) override {
+    void update(MenuItem* menu[], uint8_t cursorPosition, uint8_t top,
+                uint8_t bottom) override {
         this->currentMenuTable = menu;
         this->top = top;
         this->bottom = bottom;
         this->cursorPosition = cursorPosition;
-        this->blinkerPosition = blinkerPosition;
-        this->isEditModeEnabled = isInEditMode;
         this->startTime = millis();
         lcd.display();
         drawMenu();

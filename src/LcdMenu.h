@@ -44,7 +44,6 @@ class LcdMenu {
     uint8_t top = 1;
     uint8_t previousTop = 1;
 
-    bool isEditModeEnabled = false;
     /**
      * Will prevent left and right movement when in edit mode and character
      * picker is active
@@ -57,10 +56,6 @@ class LcdMenu {
     uint8_t previousBottom = 0;
     uint8_t maxRows;
     uint8_t maxCols;
-    /**
-     * Column location of Blinker
-     */
-    uint8_t blinkerPosition = 0;
     /**
      * Array of menu items
      */
@@ -121,8 +116,7 @@ class LcdMenu {
      */
     void update() {
         if (!enableUpdate) return;
-        lcd.update(currentMenuTable, cursorPosition, blinkerPosition, top,
-                   bottom, isEditModeEnabled);
+        lcd.update(currentMenuTable, cursorPosition, top, bottom);
     }
     /**
      * Reset the display
@@ -136,7 +130,7 @@ class LcdMenu {
         //
         // determine if cursor ia at start of menu items
         //
-        if (lcd.isAtTheStart() || isEditModeEnabled) return;
+        if (lcd.isAtTheStart() || lcd.getEditModeEnabled()) return;
         cursorPosition--;
         // Log
         printCmd(F("UP"), cursorPosition);
@@ -160,7 +154,7 @@ class LcdMenu {
         //
         // determine if cursor has passed the end
         //
-        if (lcd.isAtTheEnd() || isEditModeEnabled) return;
+        if (lcd.isAtTheEnd() || lcd.getEditModeEnabled()) return;
         cursorPosition++;
         // Log
         printCmd(F("DOWN"), cursorPosition);
@@ -244,12 +238,8 @@ class LcdMenu {
 #endif
 #ifdef ItemInput_H
             case MENU_ITEM_INPUT: {
-                //
-                // enter editmode
-                //
-                if (!isInEditMode()) {
-                    isEditModeEnabled = true;
-                    // blinker will be drawn
+                if (!lcd.getEditModeEnabled()) {
+                    lcd.setEditModeEnabled(true);
                     lcd.drawCursor();
                 }
                 break;
@@ -257,11 +247,8 @@ class LcdMenu {
 #endif
             case MENU_ITEM_PROGRESS:
             case MENU_ITEM_LIST: {
-                //
-                // execute the menu item's function
-                //
-                if (!isInEditMode()) {
-                    isEditModeEnabled = true;
+                if (!lcd.getEditModeEnabled()) {
+                    lcd.setEditModeEnabled(true);
                     lcd.drawCursor();
                 }
                 break;
@@ -280,11 +267,11 @@ class LcdMenu {
         //
         // Back action different when on ItemInput
         //
-        if (isInEditMode()) switch (item->getType()) {
+        if (lcd.getEditModeEnabled()) switch (item->getType()) {
 #ifdef ItemInput_H
                 case MENU_ITEM_INPUT:
                     // Disable edit mode
-                    isEditModeEnabled = false;
+                    lcd.setEditModeEnabled(false);
                     update();
                     // Execute callback function
                     if (item->getCallbackStr() != NULL)
@@ -296,7 +283,7 @@ class LcdMenu {
                 case MENU_ITEM_LIST:
                 case MENU_ITEM_PROGRESS:
                     // Disable edit mode
-                    isEditModeEnabled = false;
+                    lcd.setEditModeEnabled(false);
                     update();
                     // Execute callback function
                     if (item->getCallbackInt() != NULL)
@@ -324,7 +311,7 @@ class LcdMenu {
      */
     void left() {
         //
-        if (isInEditMode() && isCharPickerActive) return;
+        if (lcd.getEditModeEnabled() && isCharPickerActive) return;
         //
         MenuItem* item = currentMenuTable[cursorPosition];
         //
@@ -336,7 +323,7 @@ class LcdMenu {
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                if (isInEditMode()) {
+                if (lcd.getEditModeEnabled()) {
                     item->setItemIndex(item->getItemIndex() - 1);
                     if (previousIndex != item->getItemIndex()) update();
                     // Log
@@ -348,18 +335,19 @@ class LcdMenu {
 #endif
 #ifdef ItemInput_H
             case MENU_ITEM_INPUT: {
-                blinkerPosition--;
+                lcd.blinkerPosition--;
                 lcd.resetBlinker();
                 // Log
                 printCmd(F("LEFT"),
-                         item->getValue()[blinkerPosition -
+                         item->getValue()[lcd.blinkerPosition -
                                           (strlen(item->getText()) + 2)]);
                 break;
             }
 #endif
 #ifdef ItemProgress_H
             case MENU_ITEM_PROGRESS: {
-                if (isInEditMode() && item->getItemIndex() > MIN_PROGRESS) {
+                if (lcd.getEditModeEnabled() &&
+                    item->getItemIndex() > MIN_PROGRESS) {
                     item->decrement();
                     update();
                     // Log
@@ -385,7 +373,7 @@ class LcdMenu {
         //
         // Is the menu in edit mode and is the character picker active?
         //
-        if (isInEditMode() && isCharPickerActive) return;
+        if (lcd.getEditModeEnabled() && isCharPickerActive) return;
         //
         MenuItem* item = currentMenuTable[cursorPosition];
         //
@@ -394,7 +382,7 @@ class LcdMenu {
         switch (item->getType()) {
 #ifdef ItemList_H
             case MENU_ITEM_LIST: {
-                if (isInEditMode()) {
+                if (lcd.getEditModeEnabled()) {
                     item->setItemIndex((item->getItemIndex() + 1) %
                                        item->getItemCount());
                     // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
@@ -408,18 +396,19 @@ class LcdMenu {
 #endif
 #ifdef ItemInput_H
             case MENU_ITEM_INPUT: {
-                blinkerPosition++;
+                lcd.blinkerPosition++;
                 lcd.resetBlinker();
                 // Log
                 printCmd(F("RIGHT"),
-                         item->getValue()[blinkerPosition -
+                         item->getValue()[lcd.blinkerPosition -
                                           (strlen(item->getText()) + 2)]);
                 break;
             }
 #endif
 #ifdef ItemProgress_H
             case MENU_ITEM_PROGRESS: {
-                if (isInEditMode() && item->getItemIndex() < MAX_PROGRESS) {
+                if (lcd.getEditModeEnabled() &&
+                    item->getItemIndex() < MAX_PROGRESS) {
                     item->increment();
                     update();
                     // Log
@@ -447,12 +436,12 @@ class LcdMenu {
         //
         if (item->getType() != MENU_ITEM_INPUT) return;
         //
-        uint8_t p = blinkerPosition - (strlen(item->getText()) + 2) - 1;
+        uint8_t p = lcd.blinkerPosition - (strlen(item->getText()) + 2) - 1;
         remove(item->getValue(), p, 1);
         // Log
         printCmd(F("BACKSPACE"), item->getValue());
         //
-        blinkerPosition--;
+        lcd.blinkerPosition--;
         update();
     }
     /**
@@ -463,7 +452,8 @@ class LcdMenu {
     void type(const char character) {
         MenuItem* item = currentMenuTable[cursorPosition];
         //
-        if (item->getType() != MENU_ITEM_INPUT || !isEditModeEnabled) return;
+        if (item->getType() != MENU_ITEM_INPUT || !lcd.getEditModeEnabled())
+            return;
         //
         // calculate lower and upper bound
         //
@@ -471,15 +461,20 @@ class LcdMenu {
         uint8_t lb = strlen(item->getText()) + 2;
         uint8_t ub = lb + length;
         ub = constrain(ub, lb, maxCols - 2);
+        printCmd(F("TYPE-CHAR-l"), length);
+        printCmd(F("TYPE-CHAR-lb"), lb);
+        printCmd(F("TYPE-CHAR-ub"), ub);
+        printCmd(F("TYPE-CHAR-bl"), lcd.blinkerPosition);
         //
         // update text
         //
-        if (blinkerPosition < ub) {
+        if (lcd.blinkerPosition < ub) {
             char start[10];
             char end[10];
             char* joined = new char[maxCols - lb];
-            substring(item->getValue(), 0, blinkerPosition - lb, start);
-            substring(item->getValue(), blinkerPosition + 1 - lb, length, end);
+            substring(item->getValue(), 0, lcd.blinkerPosition - lb, start);
+            substring(item->getValue(), lcd.blinkerPosition + 1 - lb, length,
+                      end);
             concat(start, character, end, joined);
             item->setValue(joined);
         } else {
@@ -492,7 +487,7 @@ class LcdMenu {
         //
         // update blinker position
         //
-        blinkerPosition++;
+        lcd.blinkerPosition++;
         //
         // repaint menu
         //
@@ -517,7 +512,7 @@ class LcdMenu {
         //
         // update blinker position
         //
-        blinkerPosition = 0;
+        lcd.blinkerPosition = 0;
         //
         // repaint menu
         //
@@ -540,11 +535,6 @@ class LcdMenu {
         enableUpdate = true;
         update();
     }
-    /**
-     * To know weather the menu is in edit mode or not
-     * @return `bool` - isEditModeEnabled
-     */
-    bool isInEditMode() { return isEditModeEnabled; }
     /**
      * Get the current cursor position
      * @return `cursorPosition` e.g. 1, 2, 3...
