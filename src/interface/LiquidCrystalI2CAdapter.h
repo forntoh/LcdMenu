@@ -17,9 +17,6 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
     void drawUpIndicator() { lcd.write(byte(0)); }
 
    public:
-    uint8_t cursorIcon = CURSOR_ICON;
-    uint8_t editCursorIcon = EDIT_CURSOR_ICON;
-    uint16_t timeout = DISPLAY_TIMEOUT;
     LiquidCrystal_I2C lcd;
 
     LiquidCrystalI2CAdapter(uint8_t lcd_Addr, uint8_t lcd_cols,
@@ -55,7 +52,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         //
         uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
         lcd.setCursor(0, line);
-        lcd.write(isEditModeEnabled ? editCursorIcon : cursorIcon);
+        lcd.write(isEditModeEnabled ? EDIT_CURSOR_ICON : CURSOR_ICON);
 #ifdef ItemInput_H
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
@@ -80,6 +77,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         this->cursorPosition = cursorPosition;
         this->startTime = millis();
         lcd.display();
+        lcd.backlight();
         drawMenu();
         drawCursor();
     }
@@ -171,8 +169,10 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
 #endif
 
     void updateTimer() {
-        if (millis() == startTime + timeout) {
+        if (millis() == startTime + DISPLAY_TIMEOUT) {
+            printCmd(F("TIMEOUT"));
             lcd.noDisplay();
+            lcd.noBacklight();
         }
     }
 };

@@ -19,9 +19,6 @@ class LiquidCrystalAdapter : public DisplayInterface {
     void drawUpIndicator() { lcd.write(byte(0)); }
 
    public:
-    uint8_t cursorIcon = CURSOR_ICON;
-    uint8_t editCursorIcon = EDIT_CURSOR_ICON;
-    uint16_t timeout = DISPLAY_TIMEOUT;
     LiquidCrystal lcd;
 
     LiquidCrystalAdapter(uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1,
@@ -42,20 +39,7 @@ class LiquidCrystalAdapter : public DisplayInterface {
         startTime = millis();
     }
 
-    void update(MenuItem* menu[], uint8_t cursorPosition,
-                uint8_t blinkerPosition, uint8_t top, uint8_t bottom,
-                bool isInEditMode) override {
-        this->currentMenuTable = menu;
-        this->top = top;
-        this->bottom = bottom;
-        this->cursorPosition = cursorPosition;
-        this->blinkerPosition = blinkerPosition;
-        this->isEditModeEnabled = isInEditMode;
-        this->startTime = millis();
-        lcd.display();
-        drawMenu();
-        drawCursor();
-    }
+    void clear() override { lcd.clear(); }
 
     void drawCursor() override {
         //
@@ -70,7 +54,7 @@ class LiquidCrystalAdapter : public DisplayInterface {
         //
         uint8_t line = constrain(cursorPosition - top, 0, maxRows - 1);
         lcd.setCursor(0, line);
-        lcd.write(isEditModeEnabled ? editCursorIcon : cursorIcon);
+        lcd.write(isEditModeEnabled ? EDIT_CURSOR_ICON : CURSOR_ICON);
 #ifdef ItemInput_H
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
@@ -85,6 +69,18 @@ class LiquidCrystalAdapter : public DisplayInterface {
         }
 #endif
         lcd.noBlink();
+    }
+
+    void update(MenuItem* menu[], uint8_t cursorPosition, uint8_t top,
+                uint8_t bottom) override {
+        this->currentMenuTable = menu;
+        this->top = top;
+        this->bottom = bottom;
+        this->cursorPosition = cursorPosition;
+        this->startTime = millis();
+        lcd.display();
+        drawMenu();
+        drawCursor();
     }
 
     void drawMenu() override {
@@ -173,10 +169,8 @@ class LiquidCrystalAdapter : public DisplayInterface {
     }
 #endif
 
-    void clear() override { lcd.clear(); }
-
     void updateTimer() {
-        if (millis() == startTime + timeout) {
+        if (millis() == startTime + DISPLAY_TIMEOUT) {
             lcd.noDisplay();
         }
     }
