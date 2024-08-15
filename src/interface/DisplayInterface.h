@@ -25,6 +25,9 @@ class DisplayInterface {
     virtual bool drawChar(char c) = 0;
 #endif
     virtual void clear() = 0;
+
+    virtual ~DisplayInterface() {}
+
     bool isAtTheStart() {
         byte menuType = currentMenuTable[cursorPosition - 1]->getType();
         return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
@@ -37,8 +40,6 @@ class DisplayInterface {
         return currentMenuTable[position + 1]->getType() ==
                MENU_ITEM_END_OF_MENU;
     }
-
-    virtual ~DisplayInterface() {}
 
     uint8_t getMaxRows() const { return maxRows; }
     uint8_t getMaxCols() const { return maxCols; }
