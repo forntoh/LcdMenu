@@ -34,8 +34,7 @@ Find all the avalaible adapters [here](/src/interface/)
 
 ### Improved Modularity and Flexibility
 
-- By decoupling the display management logic from the specific hardware, the system is now more modular and easier to extend with new display types.
-- The menu and cursor handling logic has been refactored to work seamlessly with the new interface, ensuring backward compatibility while providing enhanced flexibility.
+By decoupling the display management logic from the specific hardware, the system is now more modular and easier to extend with new display types.
 
 ## Installation
 
@@ -66,7 +65,7 @@ To use the LcdMenu library in your project, follow these steps:
 #include <interface/YourDesiredAdapter.h>
 ```
 
-Find all display interfaces [here](/src/interface/)
+Find currently available display interfaces [here](/src/interface/)
 
 Optionally add `#include <utils/commandProccesors.h>`, this is a helper for processing menu commands.
 
@@ -85,14 +84,15 @@ MAIN_MENU(
 
 Replace the sample menu items with your own menu items. Here are the different types of menu items available:
 
-| Type               | Description                                                                 | Import            |
-| ------------------ | --------------------------------------------------------------------------- | ----------------- |
-| `ITEM_BASIC`       | a basic menu item with **no functionality**                                 | N/A               |
-| `ITEM_COMMAND`     | a menu item that **executes** a function when selected                      | `<ItemCommand.h>` |
-| `ITEM_TOGGLE`      | a menu item that **toggles** a value when selected                          | `<ItemToggle.h>`  |
-| `ITEM_INPUT`       | a menu item that **prompts** the user to enter a value                      | `<ItemInput.h>`   |
-| `ITEM_SUBMENU`     | a menu item that leads to a **sub-menu** when selected                      | `<ItemSubMenu.h>` |
-| `ITEM_STRING_LIST` | a menu item that displays a value that is chosen form a **list of strings** | `<ItemList.h>`    |
+| Type               | Description                                                                 | Import             |
+| ------------------ | --------------------------------------------------------------------------- | ------------------ |
+| `ITEM_BASIC`       | a basic menu item with **no functionality**                                 | N/A                |
+| `ITEM_COMMAND`     | a menu item that **executes** a function when selected                      | `<ItemCommand.h>`  |
+| `ITEM_TOGGLE`      | a menu item that **toggles** a value when selected                          | `<ItemToggle.h>`   |
+| `ITEM_INPUT`       | a menu item that **prompts** the user to enter a value                      | `<ItemInput.h>`    |
+| `ITEM_SUBMENU`     | a menu item that leads to a **sub-menu** when selected                      | `<ItemSubMenu.h>`  |
+| `ITEM_STRING_LIST` | a menu item that displays a value that is chosen form a **list of strings** | `<ItemList.h>`     |
+| `ITEM_PROGRESS`    | a menu item that displays a value that is chosen form a given range         | `<ItemPregress.h>` |
 
 For each menu item, specify the menu item text, and any necessary parameters. For example, in `ITEM_COMMAND("Backlight", toggleBacklight)`, `"Backlight"` is the menu item text and `toggleBacklight` is the function to be executed when the item is selected.
 
@@ -112,15 +112,17 @@ The most essential actions are:
 - `menu.left()` and `menu.right()` - if the menu is in edit mode,
   - for `ITEM_INPUT` it moves along the characters of the value.
   - for `ITEM_STRING_LIST` it cycles through the items.
+  - for `ITEM_PROGRESS` goes up or down the range.
 - `menu.enter()` - if the active item is
-  - `ITEM_INPUT` or `ITEM_STRING_LIST` it goes into edit mode, if you call it again while in edit mode, it executes the callback bound to the item and exits edit mode.
+  - `ITEM_INPUT`, `ITEM_PROGRESS` or `ITEM_STRING_LIST` it goes into edit mode.
   - `ITEM_COMAND` or `ITEM_TOGGLE` it executes the bound callback
   - `ITEM_SUBMENU` it enters the sub-menu.
 - `menu.back()` - either exits edit mode or goes to back to a parent menu depending on the active item.
+  - `ITEM_INPUT`, `ITEM_PROGRESS` or `ITEM_STRING_LIST` exits edit mode and executes the callback bound to the item.
 
 The above actions are all encapsulated in this handy helper [utils/commandProccesors.h](/src/utils/commandProccesors.h) for processing menu commands.
 
-Full examples can be found [here](https://github.com/forntoh/LcdMenu/tree/master/examples) 👈
+Full examples can be found [here](/examples/) 👈
 
 ### And that's it! You should now have a fully functional LCD menu system for your Arduino project
 
