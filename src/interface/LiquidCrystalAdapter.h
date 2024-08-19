@@ -11,8 +11,6 @@ class LiquidCrystalAdapter : public DisplayInterface {
     uint8_t upArrow[8];
     uint8_t top;
     uint8_t bottom;
-    uint8_t cursorPosition;
-    uint8_t blinkerPosition;
     unsigned long startTime = 0;
 
     void drawDownIndicator() { lcd.write(byte(1)); }
