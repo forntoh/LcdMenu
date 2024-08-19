@@ -30,7 +30,7 @@ LcdMenu is an Arduino library that enables you to create interactive menus and n
 - Introduced a new `DisplayInterface` class, which abstracts the display management and makes it easier to integrate different display types without modifying the core logic.
 - This interface allows developers to implement custom display adapters, enabling support for a variety of display modules.
 
-Find all the avalaible adapters [here](/src/interface/)
+Find all the available adapters [here](/src/interface/)
 
 ### Improved Modularity and Flexibility
 

@@ -30,8 +30,11 @@ MAIN_MENU(
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random")
 );
-// Construct the LcdMenu
+
+// Construct the display adapter 
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+
+// Construct the LcdMenu
 LcdMenu menu(lcdAdapter);
 
 void setup() {
