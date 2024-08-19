@@ -19,5 +19,36 @@ const byte MENU_ITEM_END_OF_MENU = 8;
 const byte MENU_ITEM_LIST = 9;
 const byte MENU_ITEM_PROGRESS = 10;
 //
+const byte DOWN_ARROW[8] = {
+    0b00100,  //   *
+    0b00100,  //   *
+    0b00100,  //   *
+    0b00100,  //   *
+    0b00100,  //   *
+    0b10101,  // * * *
+    0b01110,  //  ***
+    0b00100   //   *
+};
+const byte UP_ARROW[8] = {
+    0b00100,  //   *
+    0b01110,  //  ***
+    0b10101,  // * * *
+    0b00100,  //   *
+    0b00100,  //   *
+    0b00100,  //   *
+    0b00100,  //   *
+    0b00100   //   *
+};
+//
 #define MIN_PROGRESS 0
 #define MAX_PROGRESS 1000
+//
+#ifndef CURSOR_ICON
+#define CURSOR_ICON 0x7E  // →
+#endif
+#ifndef EDIT_CURSOR_ICON
+#define EDIT_CURSOR_ICON 0x7F  // ←
+#endif
+#ifndef DISPLAY_TIMEOUT
+#define DISPLAY_TIMEOUT 10000  // 10 seconds
+#endif

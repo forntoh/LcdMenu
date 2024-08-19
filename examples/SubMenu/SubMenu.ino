@@ -6,6 +6,7 @@
 */
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
+#include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
@@ -35,16 +36,16 @@ SUB_MENU(settingsMenu, mainMenu,
     ITEM_BASIC("Contrast")
 );
 
-LcdMenu menu(LCD_ROWS, LCD_COLS);
+LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LcdMenu menu(lcdAdapter);
 
 void setup() {
     Serial.begin(9600);
-    menu.setupLcdWithMenu(0x27, mainMenu);
+    menu.initialize(mainMenu);
 }
 
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-
     processMenuCommand(menu, command, UP, DOWN, ENTER, BACK);
 }

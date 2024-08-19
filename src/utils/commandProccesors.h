@@ -110,14 +110,14 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, int8_t& pos,
                         byte clearCmd = 255, byte backspaceCmd = 255,
                         byte leftCmd = 255, byte rightCmd = 255) {
     if (cmd == upCmd) {
-        if (menu.isInEditMode()) pos = (pos + 1) % size;
+        if (menu.lcd.getEditModeEnabled()) pos = (pos + 1) % size;
         // Works only in edit mode
-        menu.drawChar(charset[pos]);
         menu.up();
-    } else if (cmd == downCmd) {
-        if (menu.isInEditMode()) pos = constrain(pos - 1, 0, size);
         menu.drawChar(charset[pos]);
+    } else if (cmd == downCmd) {
+        if (menu.lcd.getEditModeEnabled()) pos = constrain(pos - 1, 0, size);
         menu.down();
+        menu.drawChar(charset[pos]);
     } else if (cmd == leftCmd) {
         menu.left();
     } else if (cmd == rightCmd) {

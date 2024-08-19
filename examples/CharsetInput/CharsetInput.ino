@@ -7,20 +7,21 @@
 
 #include <ItemInput.h>
 #include <LcdMenu.h>
+#include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
 // Configure keyboard keys (ASCII)
-#define UP 56        // NUMPAD 8
-#define DOWN 50      // NUMPAD 2
-#define LEFT 52      // NUMPAD 4
-#define RIGHT 54     // NUMPAD 6
-#define ENTER 53     // NUMPAD 5
-#define BACK 55      // NUMPAD 7
-#define BACKSPACE 8  // BACKSPACE
-#define CLEAR 46     // NUMPAD .
+#define UP 'w'
+#define DOWN 's'
+#define LEFT 'a'
+#define RIGHT 'd'
+#define ENTER ' '
+#define BACK 'b'
+#define BACKSPACE 'v'
+#define CLEAR 'c'
 
 #define CHARSET_SIZE 10
 // Create your charset
@@ -38,17 +39,17 @@ MAIN_MENU(
     ITEM_BASIC("Blink random")
 );
 
-LcdMenu menu(LCD_ROWS, LCD_COLS);
+LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LcdMenu menu(lcdAdapter);
 
 void setup() {
     Serial.begin(9600);
-    menu.setupLcdWithMenu(0x27, mainMenu);
+    menu.initialize(mainMenu);
 }
 
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-
     processMenuCommand(menu, command, charsetPosition, charset, CHARSET_SIZE,
                        UP, DOWN, ENTER, BACK, CLEAR, BACKSPACE, LEFT, RIGHT);
 }
