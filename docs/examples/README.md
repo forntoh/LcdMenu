@@ -1,3 +1,7 @@
+---
+icon: person-chalkboard
+---
+
 # Examples
 
 Requirements for the examples.

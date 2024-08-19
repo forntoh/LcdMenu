@@ -1,5 +1,6 @@
 ---
 description: The following controls exist for the menu
+icon: gamepad-modern
 ---
 
 # Controls

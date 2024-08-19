@@ -1,3 +1,7 @@
+---
+icon: hammer
+---
+
 # Usage
 
 To use the LcdMenu library in your project, follow these steps:
@@ -6,7 +10,12 @@ To use the LcdMenu library in your project, follow these steps:
 
 ```arduino
 #include <LcdMenu.h>
+#include <interface/YourDesiredAdapter.h>
 ```
+
+Find currently available display interfaces [here](https://github.com/forntoh/LcdMenu/blob/decouple-menu-controller-and-display/src/interface)
+
+Optionally add `#include <utils/commandProccesors.h>`, this is a helper for processing menu commands.
 
 You will need to add other includes for the types of menu items you wish to use, the available types are described in the next step.
 
@@ -14,7 +23,9 @@ You will need to add other includes for the types of menu items you wish to use,
 ### <mark style="color:orange;">#include</mark> <mark style="color:blue;">LcdMenu.h</mark> should always be the <mark style="background-color:orange;">last</mark> include statement after all menu-item type imports
 {% endhint %}
 
-#### **2. Create the main menu, using the provided macro `MAIN_MENU()` e.g.**
+#### 2. Construct the display adapter
+
+#### **3. Create the main menu, using the provided macro `MAIN_MENU()` e.g.**
 
 ```arduino
 MAIN_MENU(
@@ -31,14 +42,12 @@ Replace the sample menu items with your own menu items. Here are the different t
 
 For each menu item, specify the menu item text, and any necessary parameters. For example, in `ITEM_COMMAND("Backlight", toggleBacklight)`, `"Backlight"` is the menu item text and `toggleBacklight` is the function to be executed when the item is selected.
 
-#### **3. Once you have created your menu, initialize LcdMenu with the menu items in the `setup()`**
+#### **4. Once you have created your menu, initialize LcdMenu with the menu items in the `setup()`**
 
 ```arduino
-menu.setupLcdWithMenu(0x27, mainMenu); //I2C
-// or
-menu.setupLcdWithMenu(rs, en, d0, d1, d2, d3, mainMenu); // Standard
+menu.initialize(mainMenu);
 ```
 
-#### **4. In the `loop()` function, define how you want to navigate the menu**
+#### **5. In the `loop()` function, define how you want to navigate the menu**
 
 You can use any input method of your choice to perform actions on the menu

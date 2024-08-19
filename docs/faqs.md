@@ -1,3 +1,7 @@
+---
+icon: circle-question
+---
+
 # FAQs
 
 <details>
@@ -35,5 +39,18 @@ There is a <mark style="color:purple;">**`hide()`**</mark> and a <mark style="co
 Getting the item at <mark style="color:orange;">**`index = 0`**</mark> from the menu will give you the **`ItemHeader`**, from there you can get the parent menu of the current menu.
 
 Calling <mark style="color:purple;">**`getSubMenu()`**</mark> on an **`ItemHeader`** returns the parent menu of the submenu where the **`ItemHeader`** is.
+
+</details>
+
+<details>
+
+<summary>How to see what's going on under the hood?</summary>
+
+If you desire to see what LcdMenu is doing you can just define the flag
+
+<pre class="language-cpp"><code class="lang-cpp"><strong>#define DEBUG
+</strong></code></pre>
+
+Stuff the library is doing will be printed to the serial bus.
 
 </details>

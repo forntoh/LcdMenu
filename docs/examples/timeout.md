@@ -10,20 +10,20 @@ The default timeout is 10 seconds.
 
 ### Configuration
 
-In the setup function, use the following function to configure the timeout duration.
+Define the timeout duration (optional)
 
-<pre class="language-arduino"><code class="lang-arduino">menu.setupLcdWithMenu(0x27, mainMenu, <a data-footnote-ref href="#user-content-fn-1">20000</a>)
-</code></pre>
+<pre class="language-arduino"><code class="lang-arduino"><strong>#define DISPLAY_TIMEOUT <a data-footnote-ref href="#user-content-fn-1">20000</a>
+</strong></code></pre>
 
 ### Usage
 
 {% hint style="warning" %}
 In the `loop` ensure that you have the following in the first line
-{% endhint %}
 
-```arduino
-menu.updateTimer();
+```cpp
+lcdAdapter.updateTimer();
 ```
+{% endhint %}
 
 ### Complete Code
 
