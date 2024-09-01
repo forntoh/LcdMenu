@@ -40,7 +40,14 @@ Cursor icon, edit cursor icon and display timeout are now updated using&#x20;
 #define DISPLAY_TIMEOUT 10000
 ```
 
+Lcd instantiation changes
+
 {% hint style="info" %}
 Note that the lcd instance now resides in the adapter so if you need to perform custom printing or any other function of `LiquidCrystal` like turning on/off backlight, you now need to reference it from the `lcdAdapter` not the menu.
 {% endhint %}
 
+Public functions moved from LcdMenu to the adapter (interface)
+
+* `menu.isInEditMode()` -> `lcdAdapter.getEditModeEnabled()`
+* `menu.isAtTheStart()` -> `lcdAdapter.isAtTheStart()`
+* `menu.isAtTheEnd([position])` -> `lcdAdapter.isAtTheEnd([position])`
