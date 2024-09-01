@@ -28,6 +28,8 @@ The menu is now initialised differently and is easier than before, replace `menu
 menu.initialize(mainMenu);
 ```
 
+***
+
 #### Other
 
 Cursor icon, edit cursor icon and display timeout are now updated using&#x20;
@@ -37,3 +39,8 @@ Cursor icon, edit cursor icon and display timeout are now updated using&#x20;
 #define EDIT_CURSOR_ICON 0x00
 #define DISPLAY_TIMEOUT 10000
 ```
+
+{% hint style="info" %}
+Note that the lcd instance now resides in the adapter so if you need to perform custom printing or any other function of `LiquidCrystal` like turning on/off backlight, you now need to reference it from the `lcdAdapter` not the menu.
+{% endhint %}
+
