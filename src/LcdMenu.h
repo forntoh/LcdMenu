@@ -186,74 +186,22 @@ class LcdMenu {
         //
         // determine the type of menu entry, then execute it
         //
-        switch (item->getType()) {
+        if (item->getType() == MENU_ITEM_SUB_MENU) {
             //
             // switch the menu to the selected sub menu
             //
-            case MENU_ITEM_SUB_MENU: {
-                //
-                // check if there is a sub menu
-                //
-                if (item->getSubMenu() == NULL) return;
-                currentMenuTable = item->getSubMenu();
-                //
-                // display the sub menu
-                //
-                reset(false);
-                break;
-            }
-#ifdef ItemCommand_H
             //
-            // execute the menu item's function
+            // check if there is a sub menu
             //
-            case MENU_ITEM_COMMAND: {
-                //
-                // execute the menu item's function
-                //
-                if (item->getCallback() != NULL) (item->getCallback())();
-                //
-                // display the menu again
-                //
-                update();
-                break;
-            }
-#endif
-#ifdef ItemToggle_H
-            case MENU_ITEM_TOGGLE: {
-                //
-                // toggle the value of isOn
-                //
-                item->setIsOn(!item->isOn());
-                //
-                // execute the menu item's function
-                //
-                if (item->getCallbackInt() != NULL)
-                    (item->getCallbackInt())(item->isOn());
-                //
-                // display the menu again
-                //
-                update();
-                break;
-            }
-#endif
-#ifdef ItemInput_H
-            case MENU_ITEM_INPUT: {
-                if (!lcd.getEditModeEnabled()) {
-                    lcd.setEditModeEnabled(true);
-                    lcd.drawCursor();
-                }
-                break;
-            }
-#endif
-            case MENU_ITEM_PROGRESS:
-            case MENU_ITEM_LIST: {
-                if (!lcd.getEditModeEnabled()) {
-                    lcd.setEditModeEnabled(true);
-                    lcd.drawCursor();
-                }
-                break;
-            }
+            if (item->getSubMenu() == NULL) return;
+            currentMenuTable = item->getSubMenu();
+            //
+            // display the sub menu
+            //
+            reset(false);
+            return;
         }
+        if (item->enter(&lcd)) update();
     }
     /**
      * Execute a "backpress" action on menu.
@@ -265,42 +213,20 @@ class LcdMenu {
         printCmd(F("BACK"));
         MenuItem* item = currentMenuTable[cursorPosition];
         //
-        // Back action different when on ItemInput
-        //
-        if (lcd.getEditModeEnabled()) switch (item->getType()) {
-#ifdef ItemInput_H
-                case MENU_ITEM_INPUT:
-                    // Disable edit mode
-                    lcd.setEditModeEnabled(false);
-                    update();
-                    // Execute callback function
-                    if (item->getCallbackStr() != NULL)
-                        (item->getCallbackStr())(item->getValue());
-                    // Interrupt going back to parent menu
-                    return;
-#endif
-#if defined(ItemProgress_H) || defined(ItemList_H)
-                case MENU_ITEM_LIST:
-                case MENU_ITEM_PROGRESS:
-                    // Disable edit mode
-                    lcd.setEditModeEnabled(false);
-                    update();
-                    // Execute callback function
-                    if (item->getCallbackInt() != NULL)
-                        (item->getCallbackInt())(item->getItemIndex());
-                    // Interrupt going back to parent menu
-                    return;
-#endif
-                default:
-                    break;
-            }
-        //
         // check if this is a sub menu, if so go back to its parent
         //
         if (isSubMenu()) {
             currentMenuTable = currentMenuTable[0]->getSubMenu();
             reset(true);
+            return;
         }
+        //
+        // Back action different when on ItemInput
+        //
+        if (!lcd.getEditModeEnabled()) {
+            return;
+        }
+        if (item->back(&lcd)) update();
     }
     /**
      * Execute a "left press" on menu
@@ -314,53 +240,7 @@ class LcdMenu {
         if (lcd.getEditModeEnabled() && isCharPickerActive) return;
         //
         MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        // get the type of the currently displayed menu
-        //
-#ifdef ItemList_H
-        uint8_t previousIndex = item->getItemIndex();
-#endif
-        switch (item->getType()) {
-#ifdef ItemList_H
-            case MENU_ITEM_LIST: {
-                if (lcd.getEditModeEnabled()) {
-                    item->setItemIndex(item->getItemIndex() - 1);
-                    if (previousIndex != item->getItemIndex()) update();
-                    // Log
-                    printCmd(F("LEFT"),
-                             item->getItems()[item->getItemIndex()].c_str());
-                }
-                break;
-            }
-#endif
-#ifdef ItemInput_H
-            case MENU_ITEM_INPUT: {
-                lcd.blinkerPosition--;
-                lcd.resetBlinker();
-                // Log
-                printCmd(F("LEFT"),
-                         item->getValue()[lcd.blinkerPosition -
-                                          (strlen(item->getText()) + 2)]);
-                break;
-            }
-#endif
-#ifdef ItemProgress_H
-            case MENU_ITEM_PROGRESS: {
-                if (lcd.getEditModeEnabled() &&
-                    item->getItemIndex() > MIN_PROGRESS) {
-                    item->decrement();
-                    update();
-                    // Log
-                    printCmd(F("LEFT"), item->getValue());
-                }
-                break;
-            }
-#endif
-            default:
-                // Log
-                printCmd(F("LEFT"));
-                break;
-        }
+        if (item->left(&lcd)) update();
     }
     /**
      * Execute a "right press" on menu
@@ -376,52 +256,7 @@ class LcdMenu {
         if (lcd.getEditModeEnabled() && isCharPickerActive) return;
         //
         MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        // get the type of the currently displayed menu
-        //
-        switch (item->getType()) {
-#ifdef ItemList_H
-            case MENU_ITEM_LIST: {
-                if (lcd.getEditModeEnabled()) {
-                    item->setItemIndex((item->getItemIndex() + 1) %
-                                       item->getItemCount());
-                    // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
-                    update();
-                    // Log
-                    printCmd(F("RIGHT"),
-                             item->getItems()[item->getItemIndex()].c_str());
-                }
-                break;
-            }
-#endif
-#ifdef ItemInput_H
-            case MENU_ITEM_INPUT: {
-                lcd.blinkerPosition++;
-                lcd.resetBlinker();
-                // Log
-                printCmd(F("RIGHT"),
-                         item->getValue()[lcd.blinkerPosition -
-                                          (strlen(item->getText()) + 2)]);
-                break;
-            }
-#endif
-#ifdef ItemProgress_H
-            case MENU_ITEM_PROGRESS: {
-                if (lcd.getEditModeEnabled() &&
-                    item->getItemIndex() < MAX_PROGRESS) {
-                    item->increment();
-                    update();
-                    // Log
-                    printCmd(F("RIGHT"), item->getValue());
-                }
-                break;
-            }
-#endif
-            default:
-                // Log
-                printCmd(F("RIGHT"));
-                break;
-        }
+        if (item->right(&lcd)) update();
     }
 #ifdef ItemInput_H
     /**

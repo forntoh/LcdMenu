@@ -26,6 +26,7 @@
 #ifndef ItemList_H
 #define ItemList_H
 #include "MenuItem.h"
+#include <utils/utils.h>
 
 class ItemList : public MenuItem {
    private:
@@ -87,6 +88,46 @@ class ItemList : public MenuItem {
      * @return A pointer to the array of items.
      */
     String* getItems() override { return items; }
+
+    bool enter(DisplayInterface* lcd) override {
+        if (!lcd->getEditModeEnabled()) {
+            lcd->setEditModeEnabled(true);
+            lcd->drawCursor();
+        }
+        return false;
+    };
+
+    bool back(DisplayInterface* lcd) override {
+        // Disable edit mode
+        lcd->setEditModeEnabled(false);
+        // Execute callback function
+        if (callback != NULL) {
+            callback(itemIndex);
+        }
+        return true;
+    };
+
+    bool left(DisplayInterface* lcd) override {
+        uint8_t previousIndex = itemIndex;
+        if (lcd->getEditModeEnabled()) {
+            this->setItemIndex(itemIndex - 1);
+            // Log
+            printCmd(F("LEFT"), items[itemIndex].c_str());
+            return previousIndex != itemIndex;
+        }
+        return false;
+    };
+
+    bool right(DisplayInterface* lcd) override {
+        if (lcd->getEditModeEnabled()) {
+            this->setItemIndex((itemIndex + 1) % itemCount);
+            // Log
+            printCmd(F("RIGHT"), items[itemIndex].c_str());
+            return true;
+        }
+        return false;
+    };
+
 };
 
 #define ITEM_STRING_LIST(...) (new ItemList(__VA_ARGS__))
