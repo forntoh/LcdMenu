@@ -27,6 +27,7 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
+#include "interface/DisplayInterface.h"
 #include "utils/constants.h"
 
 /**
@@ -144,6 +145,11 @@ class MenuItem {
      * @param uint16_t progress for the item
      */
     virtual void setProgress(uint16_t value){};
+
+    virtual bool enter(DisplayInterface* lcd) { return false; };
+    virtual bool back(DisplayInterface* lcd) { return false; };
+    virtual bool left(DisplayInterface* lcd) { return false; };
+    virtual bool right(DisplayInterface* lcd) { return false; };
 
     /**
      * Operators

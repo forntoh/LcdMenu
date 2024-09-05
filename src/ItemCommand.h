@@ -47,6 +47,14 @@ class ItemCommand : public MenuItem {
      * when the item is entered.
      */
     void setCallBack(fptr callback) override { this->callback = callback; };
+    
+    bool enter(DisplayInterface* lcd) override {
+        if (callback != NULL) {
+            callback();
+        }
+        return true;
+    };
+
 };
 
 #define ITEM_COMMAND(...) (new ItemCommand(__VA_ARGS__))

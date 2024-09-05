@@ -13,6 +13,7 @@
 
 // Include the header file for the base class.
 #include "MenuItem.h"
+#include <utils/utils.h>
 
 // Declare a class for menu items that allow the user to input information.
 class ItemInput : public MenuItem {
@@ -65,6 +66,41 @@ class ItemInput : public MenuItem {
      * @return The function pointer to the callback function.
      */
     fptrStr getCallbackStr() override { return callback; }
+
+    bool enter(DisplayInterface* lcd) override {
+        if (!lcd->getEditModeEnabled()) {
+            lcd->setEditModeEnabled(true);
+            lcd->drawCursor();
+        }
+        return false;
+    };
+
+    bool back(DisplayInterface* lcd) override {
+        // Disable edit mode
+        lcd->setEditModeEnabled(false);
+        // Execute callback function
+        if (callback != NULL) {
+            callback(value);
+        }
+        return true;
+    };
+
+    bool left(DisplayInterface* lcd) override {
+        lcd->blinkerPosition--;
+        lcd->resetBlinker();
+        // Log
+        printCmd(F("LEFT"), value[lcd->blinkerPosition - (strlen(this->getText()) + 2)]);
+        return false;
+    };
+
+    bool right(DisplayInterface* lcd) override {
+        lcd->blinkerPosition++;
+        lcd->resetBlinker();
+        // Log
+        printCmd(F("RIGHT"), value[lcd->blinkerPosition - (strlen(this->getText()) + 2)]);
+        return false;
+    };
+
 };
 
 #define ITEM_INPUT(...) (new ItemInput(__VA_ARGS__))

@@ -7,6 +7,7 @@
 #define ItemProgress_H
 
 #include "MenuItem.h"
+#include <utils/utils.h>
 
 /**
  * @class ItemProgress
@@ -98,6 +99,45 @@ class ItemProgress : public MenuItem {
             return mapping(progress);
         }
     }
+
+    bool enter(DisplayInterface* lcd) override {
+        if (!lcd->getEditModeEnabled()) {
+            lcd->setEditModeEnabled(true);
+            lcd->drawCursor();
+        }
+        return false;
+    };
+
+    bool back(DisplayInterface* lcd) override {
+        // Disable edit mode
+        lcd->setEditModeEnabled(false);
+        // Execute callback function
+        if (callback != NULL) {
+            callback(progress);
+        }
+        return true;
+    };
+
+    bool left(DisplayInterface* lcd) override {
+        if (lcd->getEditModeEnabled() && progress > MIN_PROGRESS) {
+            this->decrement();
+            // Log
+            printCmd(F("LEFT"), this->getValue());
+            return true;
+        }
+        return false;
+    };
+
+    bool right(DisplayInterface* lcd) override {
+        if (lcd->getEditModeEnabled() && progress < MAX_PROGRESS) {
+            this->increment();
+            // Log
+            printCmd(F("RIGHT"), this->getValue());
+            return true;
+        }
+        return false;
+    };
+
 };
 
 #define ITEM_PROGRESS(...) (new ItemProgress(__VA_ARGS__))

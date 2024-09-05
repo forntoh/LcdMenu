@@ -61,6 +61,14 @@ class ItemToggle : public MenuItem {
     const char* getTextOn() override { return this->textOn; }
 
     const char* getTextOff() override { return this->textOff; }
+    
+    bool enter(DisplayInterface* lcd) override {
+        enabled = !enabled;
+        if (callback != NULL) {
+            callback(enabled);
+        }
+        return true;
+    };
 };
 
 #define ITEM_TOGGLE(...) (new ItemToggle(__VA_ARGS__))
