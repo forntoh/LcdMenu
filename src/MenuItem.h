@@ -150,6 +150,7 @@ class MenuItem {
     virtual bool back(DisplayInterface* lcd) { return false; };
     virtual bool left(DisplayInterface* lcd) { return false; };
     virtual bool right(DisplayInterface* lcd) { return false; };
+    virtual void draw(DisplayInterface* lcd) { lcd->getPrint()->print(text); };
 
     /**
      * Operators

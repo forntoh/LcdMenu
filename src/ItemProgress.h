@@ -101,10 +101,7 @@ class ItemProgress : public MenuItem {
     }
 
     bool enter(DisplayInterface* lcd) override {
-        if (!lcd->getEditModeEnabled()) {
-            lcd->setEditModeEnabled(true);
-            lcd->drawCursor();
-        }
+        lcd->setEditModeEnabled(true);
         return false;
     };
 
@@ -120,9 +117,9 @@ class ItemProgress : public MenuItem {
 
     bool left(DisplayInterface* lcd) override {
         if (lcd->getEditModeEnabled() && progress > MIN_PROGRESS) {
-            this->decrement();
+            decrement();
             // Log
-            printCmd(F("LEFT"), this->getValue());
+            printCmd(F("LEFT"), getValue());
             return true;
         }
         return false;
@@ -130,13 +127,22 @@ class ItemProgress : public MenuItem {
 
     bool right(DisplayInterface* lcd) override {
         if (lcd->getEditModeEnabled() && progress < MAX_PROGRESS) {
-            this->increment();
+            increment();
             // Log
-            printCmd(F("RIGHT"), this->getValue());
+            printCmd(F("RIGHT"), getValue());
             return true;
         }
         return false;
     };
+
+    void draw(DisplayInterface* lcd) override {
+        uint8_t maxCols = lcd->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(getValue(), 0, maxCols - strlen(text) - 2, buf);
+        lcd->getPrint()->print(text);
+        lcd->getPrint()->print(":");
+        lcd->getPrint()->print(buf);
+    }
 
 };
 

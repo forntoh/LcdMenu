@@ -68,10 +68,7 @@ class ItemInput : public MenuItem {
     fptrStr getCallbackStr() override { return callback; }
 
     bool enter(DisplayInterface* lcd) override {
-        if (!lcd->getEditModeEnabled()) {
-            lcd->setEditModeEnabled(true);
-            lcd->drawCursor();
-        }
+        lcd->setEditModeEnabled(true);
         return false;
     };
 
@@ -100,6 +97,14 @@ class ItemInput : public MenuItem {
         printCmd(F("RIGHT"), value[lcd->blinkerPosition - (strlen(this->getText()) + 2)]);
         return false;
     };
+
+    void draw(DisplayInterface* lcd) override {
+        uint8_t maxCols = lcd->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(value, 0, maxCols - strlen(text) - 2, buf);
+        lcd->getPrint()->print(":");
+        lcd->getPrint()->print(buf);
+    }
 
 };
 
