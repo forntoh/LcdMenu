@@ -1,6 +1,7 @@
+#pragma once
+
 #include <Arduino.h>
 #include <LiquidCrystal.h>
-#include <Wire.h>
 #include <utils/constants.h>
 
 #include "DisplayInterface.h"
@@ -12,9 +13,6 @@ class LiquidCrystalAdapter : public DisplayInterface {
     uint8_t top;
     uint8_t bottom;
     unsigned long startTime = 0;
-
-    void drawDownIndicator() { lcd.write(byte(1)); }
-    void drawUpIndicator() { lcd.write(byte(0)); }
 
    public:
     LiquidCrystal lcd;
@@ -38,8 +36,17 @@ class LiquidCrystalAdapter : public DisplayInterface {
     }
 
     void clear() override { lcd.clear(); }
+    
+    void setEditModeEnabled(bool isEnabled) override { 
+        uint8_t previous = isEditModeEnabled;
+        isEditModeEnabled = isEnabled;
+        printCmd(F("setEditModeEnabled"));
+        if (!previous && isEditModeEnabled || previous && !isEditModeEnabled) { // From false to true or From true to false
+            drawCursor(false);
+        }
+    }
 
-    void drawCursor() override {
+    void drawCursor(bool blink) override {
         //
         // Erases current cursor
         //
@@ -57,8 +64,7 @@ class LiquidCrystalAdapter : public DisplayInterface {
         //
         // If cursor is at MENU_ITEM_INPUT enable blinking
         //
-        MenuItem* item = currentMenuTable[cursorPosition];
-        if (item->getType() == MENU_ITEM_INPUT) {
+        if (blink) {
             resetBlinker();
             if (isEditModeEnabled) {
                 lcd.blink();
@@ -69,78 +75,16 @@ class LiquidCrystalAdapter : public DisplayInterface {
         lcd.noBlink();
     }
 
-    void update(MenuItem* menu[], uint8_t cursorPosition, uint8_t top,
-                uint8_t bottom) override {
-        this->currentMenuTable = menu;
+    void update(uint8_t cursorPosition, uint8_t top, uint8_t bottom) override {
         this->top = top;
         this->bottom = bottom;
         this->cursorPosition = cursorPosition;
         this->startTime = millis();
         lcd.display();
-        drawMenu();
-        drawCursor();
-    }
-
-    void drawMenu() override {
-        lcd.clear();
-        for (uint8_t i = top; i <= bottom; i++) {
-            MenuItem* item = currentMenuTable[i];
-            lcd.setCursor(1, map(i, top, bottom, 0, maxRows - 1));
-            if (currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU) {
-                lcd.print(item->getText());
-            }
-            switch (item->getType()) {
-#ifdef ItemToggle_H
-                case MENU_ITEM_TOGGLE:
-                    lcd.print(":");
-                    lcd.print(item->isOn() ? item->getTextOn()
-                                           : item->getTextOff());
-                    break;
-#endif
-#if defined(ItemProgress_H) || defined(ItemInput_H)
-                case MENU_ITEM_INPUT:
-                case MENU_ITEM_PROGRESS:
-                    static char* buf = new char[maxCols];
-                    substring(item->getValue(), 0,
-                              maxCols - strlen(item->getText()) - 2, buf);
-                    lcd.print(":");
-                    lcd.print(buf);
-                    break;
-#endif
-#ifdef ItemList_H
-                case MENU_ITEM_LIST:
-                    static char* buff = new char[maxCols];
-                    substring(item->getItems()[item->getItemIndex()].c_str(), 0,
-                              maxCols - strlen(item->getText()) - 2, buff);
-                    lcd.print(":");
-                    lcd.print(buff);
-                    break;
-#endif
-                default:
-                    break;
-            }
-            if (currentMenuTable[i]->getType() == MENU_ITEM_END_OF_MENU) break;
-        }
-        if (top == 1 && !isAtTheEnd(bottom)) {
-            lcd.setCursor(maxCols - 1, maxRows - 1);
-            drawDownIndicator();
-        } else if (!isAtTheStart() && !isAtTheEnd()) {
-            lcd.setCursor(maxCols - 1, maxRows - 1);
-            drawDownIndicator();
-            lcd.setCursor(maxCols - 1, 0);
-            drawUpIndicator();
-        } else if (isAtTheEnd() && top != 1) {
-            lcd.setCursor(maxCols - 1, 0);
-            drawUpIndicator();
-        }
     }
 
 #ifdef ItemInput_H
     bool drawChar(char c) override {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        if (item->getType() != MENU_ITEM_INPUT || !isEditModeEnabled)
-            return false;
         //
         // draw the character without updating the menu item
         //
@@ -172,4 +116,23 @@ class LiquidCrystalAdapter : public DisplayInterface {
             lcd.noDisplay();
         }
     }
+    
+    Print* getPrint() override {
+        return &lcd;
+    }
+
+    void setCursor(uint8_t col, uint8_t row) override {
+        lcd.setCursor(col, row);
+    }
+
+    void drawDownIndicator(uint8_t col, uint8_t row) override { 
+        lcd.setCursor(col, row);
+        lcd.write(byte(1));
+    }
+
+    void drawUpIndicator(uint8_t col, uint8_t row) override { 
+        lcd.setCursor(col, row);
+        lcd.write(byte(0)); 
+    }
+
 };

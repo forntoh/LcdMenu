@@ -90,10 +90,7 @@ class ItemList : public MenuItem {
     String* getItems() override { return items; }
 
     bool enter(DisplayInterface* lcd) override {
-        if (!lcd->getEditModeEnabled()) {
-            lcd->setEditModeEnabled(true);
-            lcd->drawCursor();
-        }
+        lcd->setEditModeEnabled(true);
         return false;
     };
 
@@ -108,25 +105,34 @@ class ItemList : public MenuItem {
     };
 
     bool left(DisplayInterface* lcd) override {
-        uint8_t previousIndex = itemIndex;
-        if (lcd->getEditModeEnabled()) {
-            this->setItemIndex(itemIndex - 1);
-            // Log
-            printCmd(F("LEFT"), items[itemIndex].c_str());
-            return previousIndex != itemIndex;
+        if (!lcd->getEditModeEnabled()) {
+            return false;
         }
-        return false;
+        uint8_t previousIndex = itemIndex;
+        this->setItemIndex(itemIndex - 1);
+        // Log
+        printCmd(F("LEFT"), items[itemIndex].c_str());
+        return previousIndex != itemIndex;
     };
 
     bool right(DisplayInterface* lcd) override {
-        if (lcd->getEditModeEnabled()) {
-            this->setItemIndex((itemIndex + 1) % itemCount);
-            // Log
-            printCmd(F("RIGHT"), items[itemIndex].c_str());
-            return true;
+        if (!lcd->getEditModeEnabled()) {
+            return false;
         }
-        return false;
+        this->setItemIndex((itemIndex + 1) % itemCount);
+        // Log
+        printCmd(F("RIGHT"), items[itemIndex].c_str());
+        return true;
     };
+
+    void draw(DisplayInterface* lcd) override {
+        uint8_t maxCols = lcd->getMaxCols();
+        static char* buff = new char[maxCols];
+        substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buff);
+        lcd->getPrint()->print(text);
+        lcd->getPrint()->print(":");
+        lcd->getPrint()->print(buff);
+    }
 
 };
 

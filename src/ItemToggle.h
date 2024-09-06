@@ -69,6 +69,13 @@ class ItemToggle : public MenuItem {
         }
         return true;
     };
+
+    void draw(DisplayInterface* lcd) override {
+        lcd->getPrint()->print(text);
+        lcd->getPrint()->print(":");
+        lcd->getPrint()->print(enabled ? textOn : textOff);
+    };
+
 };
 
 #define ITEM_TOGGLE(...) (new ItemToggle(__VA_ARGS__))
