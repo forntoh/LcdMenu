@@ -41,38 +41,13 @@ class MenuItem {
    public:
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
-    /**
-     * ## Getters
-     */
 
-    /**
-     * `Boolean` state of the item *(either ON or OFF)*
-     */
-    virtual boolean isOn() { return false; }
-    /**
-     * String value of an `ItemInput`
-     */
-    virtual char* getValue() { return NULL; }
     /**
      * Get the text of the item
      * @return `String` - Item's text
      */
     virtual const char* getText() { return text; }
-    /**
-     * Get the callback of the item
-     * @return `ftpr` - Item's callback
-     */
-    virtual fptr getCallback() { return NULL; }
-    /**
-     * Get the callback of the item
-     * @return `fptrInt` - Item's callback
-     */
-    virtual fptrInt getCallbackInt() { return NULL; }
-    /**
-     * Get the callback of the item
-     * @return `fptrStr` - Item's callback
-     */
-    virtual fptrStr getCallbackStr() { return NULL; }
+
     /**
      * Get the sub menu at item
      * @return `MenuItem*` - Submenu at item
@@ -84,73 +59,22 @@ class MenuItem {
      */
     byte getType() { return type; }
     /**
-     * Get the text when toggle is ON
-     * @return `String` - ON text
-     */
-    virtual const char* getTextOn() { return NULL; }
-    /**
-     * Get the text when toggle is OFF
-     * @return `String` - OFF text
-     */
-    virtual const char* getTextOff() { return NULL; }
-    /**
-     * Current index of list for `ItemList`
-     */
-    virtual uint16_t getItemIndex() { return 0; }
-    /**
-     * Number of items in the list for `ItemList`
-     */
-    virtual uint8_t getItemCount() { return 0; };
-    /**
-     * Get the list of items
-     * @return `String*` - List of items
-     */
-    virtual String* getItems() { return NULL; }
-    /**
-     * @brief Increments the progress of the list.
-     */
-    virtual void increment(){};
-    /**
-     * @brief Decrements the progress of the list.
-     */
-    virtual void decrement(){};
-    /**
-     * ## Setters
-     */
-
-    /**
-     * `Boolean` state of the item *(either ON or OFF)*
-     */
-    virtual void setIsOn(boolean isOn){};
-    /**
-     * String value of an `ItemInput`
-     */
-    virtual void setValue(char* value){};
-    /**
      * Set the text of the item
      * @param text text to display for the item
      */
     void setText(const char* text) { this->text = text; };
-    /**
-     * Set the callback on the item
-     * @param callback reference to callback function
-     */
-    virtual void setCallBack(fptr callback){};
-    /**
-     * Current index of list for `ItemList`
-     */
-    virtual void setItemIndex(uint16_t itemIndex){};
-    /**
-     * Set the progress on the item
-     * @param uint16_t progress for the item
-     */
-    virtual void setProgress(uint16_t value){};
 
-    virtual bool enter(DisplayInterface* lcd) { return false; };
-    virtual bool back(DisplayInterface* lcd) { return false; };
-    virtual bool left(DisplayInterface* lcd) { return false; };
-    virtual bool right(DisplayInterface* lcd) { return false; };
-    virtual void draw(DisplayInterface* lcd) { lcd->getPrint()->print(text); };
+    virtual void enter(DisplayInterface* display) { };
+    virtual void back(DisplayInterface* display) { };
+    virtual void left(DisplayInterface* display) { };
+    virtual void right(DisplayInterface* display) { };
+    virtual void backspace(DisplayInterface* display) {};
+    virtual void type2(DisplayInterface* display, const char character) {};
+    virtual void drawChar(DisplayInterface* display, char c) {};
+    virtual void clear(DisplayInterface* display) {};
+    virtual void draw(DisplayInterface* display, uint8_t row) {
+        display->drawItem(row, text);
+    };
 
     /**
      * Operators

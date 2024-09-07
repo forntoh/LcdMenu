@@ -57,14 +57,14 @@ class ItemList : public MenuItem {
      *
      * @return The index of the currently selected item.
      */
-    uint16_t getItemIndex() override { return itemIndex; }
+    uint16_t getItemIndex() { return itemIndex; }
 
     /**
      * @brief Changes the index of the current item.
      *
      * @return The index of the item to be selected.
      */
-    void setItemIndex(uint16_t itemIndex) override {
+    void setItemIndex(uint16_t itemIndex) {
         this->itemIndex = constrain(itemIndex, 0, (uint16_t)(itemCount)-1);
     }
 
@@ -73,65 +73,69 @@ class ItemList : public MenuItem {
      *
      * @return The the callback bound to the current item.
      */
-    fptrInt getCallbackInt() override { return callback; }
+    fptrInt getCallbackInt() { return callback; }
 
     /**
      * @brief Returns the total number of items in the list.
      *
      * @return The total number of items in the list.
      */
-    uint8_t getItemCount() override { return itemCount; };
+    uint8_t getItemCount() { return itemCount; };
 
     /**
      * @brief Returns a pointer to the array of items.
      *
      * @return A pointer to the array of items.
      */
-    String* getItems() override { return items; }
+    String* getItems() { return items; }
 
-    bool enter(DisplayInterface* lcd) override {
-        lcd->setEditModeEnabled(true);
-        return false;
+    void enter(DisplayInterface* display) override {
+        if (display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(true);
     };
 
-    bool back(DisplayInterface* lcd) override {
-        // Disable edit mode
-        lcd->setEditModeEnabled(false);
-        // Execute callback function
+    void back(DisplayInterface* display) override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(false);
         if (callback != NULL) {
             callback(itemIndex);
         }
-        return true;
     };
 
-    bool left(DisplayInterface* lcd) override {
-        if (!lcd->getEditModeEnabled()) {
-            return false;
+    void left(DisplayInterface* display) override {
+        if (!display->getEditModeEnabled()) {
+            return;
         }
         uint8_t previousIndex = itemIndex;
-        this->setItemIndex(itemIndex - 1);
-        // Log
-        printCmd(F("LEFT"), items[itemIndex].c_str());
-        return previousIndex != itemIndex;
-    };
-
-    bool right(DisplayInterface* lcd) override {
-        if (!lcd->getEditModeEnabled()) {
-            return false;
+        itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
+        if (previousIndex != itemIndex) {
+            printCmd(F("LEFT"), items[itemIndex].c_str());
+            draw(display, display->getCursorRow());
         }
-        this->setItemIndex((itemIndex + 1) % itemCount);
-        // Log
-        printCmd(F("RIGHT"), items[itemIndex].c_str());
-        return true;
     };
 
-    void draw(DisplayInterface* lcd) override {
-        uint8_t maxCols = lcd->getMaxCols();
-        static char* buff = new char[maxCols];
-        substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buff);
-        lcd->getPrint()->print(text);
-        lcd->getPrint()->print(":");
-        lcd->getPrint()->print(buff);
+    void right(DisplayInterface* display) override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        uint8_t previousIndex = itemIndex;
+        itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
+        if (previousIndex != itemIndex) {
+            printCmd(F("RIGHT"), items[itemIndex].c_str());
+            draw(display, display->getCursorRow());
+        }
+    };
+
+    void draw(DisplayInterface* display, uint8_t row) override {
+        // MenuItem::draw(display);
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
+        display->drawItem(row, text, ':', buf);
     }
 
 };

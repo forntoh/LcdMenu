@@ -38,7 +38,7 @@ class ItemCommand : public MenuItem {
      *
      * @return The function pointer to the callback function.
      */
-    fptr getCallback() override { return callback; }
+    fptr getCallback() { return callback; }
 
     /**
      * Set the callback function for this item.
@@ -46,13 +46,12 @@ class ItemCommand : public MenuItem {
      * @param callback A reference to the new callback function to be invoked
      * when the item is entered.
      */
-    void setCallBack(fptr callback) override { this->callback = callback; };
+    void setCallBack(fptr callback) { this->callback = callback; };
     
-    bool enter(DisplayInterface* lcd) override {
+    void enter(DisplayInterface* display) override {
         if (callback != NULL) {
             callback();
         }
-        return true;
     };
 
 };

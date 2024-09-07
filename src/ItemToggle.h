@@ -10,6 +10,7 @@
 #ifndef ItemToggle_H
 #define ItemToggle_H
 #include "MenuItem.h"
+#include <utils/utils.h>
 
 class ItemToggle : public MenuItem {
    private:
@@ -26,6 +27,13 @@ class ItemToggle : public MenuItem {
     ItemToggle(const char* key, fptrInt callback)
         : ItemToggle(key, "ON", "OFF", callback) {}
 
+    ItemToggle(const char* text, boolean enabled, fptrInt callback)
+        : MenuItem(text, MENU_ITEM_TOGGLE),
+          enabled(enabled),
+          textOn("ON"),
+          textOff("OFF"),
+          callback(callback) {}
+
     /**
      * @brief Create an ItemToggle object.
      * @param key key of the item
@@ -33,8 +41,7 @@ class ItemToggle : public MenuItem {
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, const char* textOn, const char* textOff,
-               fptrInt callback)
+    ItemToggle(const char* key, const char* textOn, const char* textOff, fptrInt callback)
         : MenuItem(key, MENU_ITEM_TOGGLE),
           textOn(textOn),
           textOff(textOff),
@@ -44,36 +51,37 @@ class ItemToggle : public MenuItem {
      * @brief Get the integer callback function of this item.
      * @return the integer callback function
      */
-    fptrInt getCallbackInt() override { return callback; }
+    fptrInt getCallbackInt() { return callback; }
 
     /**
      * @brief Get the current state of this toggle item.
      * @return the current state
      */
-    boolean isOn() override { return enabled; }
+    boolean isOn() { return enabled; }
 
     /**
      * @brief Set the current state of this toggle item.
      * @param isOn the new state
      */
-    void setIsOn(boolean isOn) override { this->enabled = isOn; }
+    void setIsOn(boolean isOn) { this->enabled = isOn; }
 
-    const char* getTextOn() override { return this->textOn; }
+    const char* getTextOn() { return this->textOn; }
 
-    const char* getTextOff() override { return this->textOff; }
+    const char* getTextOff() { return this->textOff; }
     
-    bool enter(DisplayInterface* lcd) override {
+    void enter(DisplayInterface* display) override {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);
         }
-        return true;
+        draw(display, display->getCursorRow());
     };
 
-    void draw(DisplayInterface* lcd) override {
-        lcd->getPrint()->print(text);
-        lcd->getPrint()->print(":");
-        lcd->getPrint()->print(enabled ? textOn : textOff);
+    void draw(DisplayInterface* display, uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(enabled ? textOn : textOff, 0, maxCols - strlen(text) - 2, buf);
+        display->drawItem(row, text, ':', buf);
     };
 
 };

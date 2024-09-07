@@ -27,7 +27,6 @@
 
 #include <MenuItem.h>
 #include <utils/utils.h>
-
 #include "interface/DisplayInterface.h"
 
 /**
@@ -84,7 +83,10 @@ class LcdMenu {
             top = 1;
             bottom = maxRows;
         }
-        update();
+        display.clear();
+        drawMenu();
+        display.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
+        display.drawCursor(); // In case if currentPosition was not changed between screens
     }
 
    public:
@@ -94,62 +96,69 @@ class LcdMenu {
     /**
      * Display Interface
      */
-    DisplayInterface& lcd;
+    DisplayInterface& display;
 
     /**
      * # Constructor
      */
 
-    LcdMenu(DisplayInterface& display) : lcd(display) {
-        bottom = lcd.getMaxRows();
-        maxRows = lcd.getMaxRows();
-        maxCols = lcd.getMaxCols();
+    LcdMenu(DisplayInterface& display) : display(display) {
+        bottom = display.getMaxRows();
+        maxRows = display.getMaxRows();
+        maxCols = display.getMaxCols();
     }
 
     void initialize(MenuItem* menu[]) {
-        lcd.begin();
+        display.begin();
         currentMenuTable = menu;
-        update();
+        drawMenu();
+        display.drawCursor();
     }
     /*
      * Draw the menu items and cursor
      */
     void update() {
-        if (!enableUpdate) return;
-        lcd.update(cursorPosition, top, bottom);
+        if (!enableUpdate) {
+            return;
+        }
         drawMenu();
-        byte menuType = currentMenuTable[cursorPosition - 1]->getType();
-        lcd.drawCursor(menuType == MENU_ITEM_INPUT);
+        display.drawCursor();
+    }
+    /*
+     * Draw the menu items and cursor
+     */
+    void updateOnlyCursor() {
+        if (!enableUpdate) {
+            return;
+        }
+        display.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
     }
 
-    bool isAtTheStart() {
-        byte menuType = currentMenuTable[cursorPosition - 1]->getType();
-        return menuType == MENU_ITEM_MAIN_MENU_HEADER || menuType == MENU_ITEM_SUB_MENU_HEADER;
+    bool isAtTheStart(uint8_t position) {
+        return position == 1;
     }
-
-    bool isAtTheEnd() { return isAtTheEnd(cursorPosition); }
 
     bool isAtTheEnd(uint8_t position) {
-        return currentMenuTable[position + 1]->getType() == MENU_ITEM_END_OF_MENU;
+        return currentMenuTable[bottom + 1]->getType() == MENU_ITEM_END_OF_MENU;
     }
 
     void drawMenu() {
-        lcd.clear();
         for (uint8_t i = top; i <= bottom; i++) {
             MenuItem* item = currentMenuTable[i];
             if (currentMenuTable[i]->getType() == MENU_ITEM_END_OF_MENU) {
-                break;
+                return;
             }
-            lcd.setCursor(1, map(i, top, bottom, 0, maxRows - 1));
-            item->draw(&lcd);
+            item->draw(&display, i - top);
         }
-        if (top == 1 && !isAtTheEnd(bottom)) {
-            lcd.drawDownIndicator(maxCols - 1, maxRows - 1);
-        } else if (!isAtTheStart() && !isAtTheEnd()) {
-            lcd.drawDownIndicator(maxCols - 1, maxRows - 1);
-            lcd.drawUpIndicator(maxCols - 1, 0);
-        } else if (isAtTheEnd() && top != 1) {
-            lcd.drawUpIndicator(maxCols - 1, 0);
+        if (isAtTheStart(top)) {
+            display.clearUpIndicator();
+        } else {
+            display.drawUpIndicator();
+        }
+        if (isAtTheEnd(bottom)) {
+            display.clearDownIndicator();
+        } else {
+            display.drawDownIndicator();
         }
     }
 
@@ -165,7 +174,7 @@ class LcdMenu {
         //
         // determine if cursor ia at start of menu items
         //
-        if (isAtTheStart() || lcd.getEditModeEnabled()) return;
+        if (isAtTheStart(cursorPosition) || display.getEditModeEnabled()) return;
         cursorPosition--;
         // Log
         printCmd(F("UP"), cursorPosition);
@@ -178,8 +187,10 @@ class LcdMenu {
             //
             top--;
             bottom--;
+            update();
+        } else {
+            updateOnlyCursor();
         }
-        update();
     }
     /**
      * Execute a "down press" on menu
@@ -189,7 +200,7 @@ class LcdMenu {
         //
         // determine if cursor has passed the end
         //
-        if (isAtTheEnd() || lcd.getEditModeEnabled()) return;
+        if (isAtTheEnd(cursorPosition) || display.getEditModeEnabled()) return;
         cursorPosition++;
         // Log
         printCmd(F("DOWN"), cursorPosition);
@@ -202,8 +213,10 @@ class LcdMenu {
             //
             top++;
             bottom++;
+            update();
+        } else {
+            updateOnlyCursor();
         }
-        update();
     }
     /**
      * Execute an "enter" action on menu.
@@ -219,16 +232,12 @@ class LcdMenu {
         // Log
         printCmd(F("ENTER"), item->getType());
         //
-        // determine the type of menu entry, then execute it
+        // check if there is a sub menu
         //
-        if (item->getType() == MENU_ITEM_SUB_MENU) {
+        if (item->getSubMenu() != NULL) {
             //
             // switch the menu to the selected sub menu
             //
-            //
-            // check if there is a sub menu
-            //
-            if (item->getSubMenu() == NULL) return;
             currentMenuTable = item->getSubMenu();
             //
             // display the sub menu
@@ -236,7 +245,7 @@ class LcdMenu {
             reset(false);
             return;
         }
-        if (item->enter(&lcd)) update();
+        item->enter(&display);
     }
     /**
      * Execute a "backpress" action on menu.
@@ -246,14 +255,11 @@ class LcdMenu {
     void back() {
         // Log
         printCmd(F("BACK"));
-        MenuItem* item = currentMenuTable[cursorPosition];
         //
         // Back action different when on ItemInput
         //
-        if (lcd.getEditModeEnabled()) {
-            if (item->back(&lcd)) {
-                update();
-            }
+        if (display.getEditModeEnabled()) {
+            currentMenuTable[cursorPosition]->back(&display);
             return;
         }
         //
@@ -272,11 +278,10 @@ class LcdMenu {
      * Moves the cursor one step to the left.
      */
     void left() {
-        //
-        if (lcd.getEditModeEnabled() && isCharPickerActive) return;
-        //
-        MenuItem* item = currentMenuTable[cursorPosition];
-        if (item->left(&lcd)) update();
+        if (display.getEditModeEnabled() && isCharPickerActive) {
+            return;
+        }
+        currentMenuTable[cursorPosition]->left(&display);
     }
     /**
      * Execute a "right press" on menu
@@ -286,15 +291,11 @@ class LcdMenu {
      * Moves the cursor one step to the right.
      */
     void right() {
-        //
-        // Is the menu in edit mode and is the character picker active?
-        //
-        if (lcd.getEditModeEnabled() && isCharPickerActive) return;
-        //
-        MenuItem* item = currentMenuTable[cursorPosition];
-        if (item->right(&lcd)) update();
+        if (display.getEditModeEnabled() && isCharPickerActive) {
+            return;
+        }
+        currentMenuTable[cursorPosition]->right(&display);
     }
-#ifdef ItemInput_H
     /**
      * Execute a "backspace cmd" on menu
      *
@@ -303,17 +304,10 @@ class LcdMenu {
      * Removes the character at the current cursor position.
      */
     void backspace() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        if (item->getType() != MENU_ITEM_INPUT) return;
-        //
-        uint8_t p = lcd.blinkerPosition - (strlen(item->getText()) + 2) - 1;
-        remove(item->getValue(), p, 1);
-        // Log
-        printCmd(F("BACKSPACE"), item->getValue());
-        //
-        lcd.blinkerPosition--;
-        update();
+        if (!display.getEditModeEnabled()) {
+            return;
+        }
+        currentMenuTable[cursorPosition]->backspace(&display);
     }
     /**
      * Display text at the cursor position
@@ -321,71 +315,39 @@ class LcdMenu {
      * @param character character to append
      */
     void type(const char character) {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        if (item->getType() != MENU_ITEM_INPUT || !lcd.getEditModeEnabled())
+        if (!display.getEditModeEnabled()) {
             return;
-        //
-        // calculate lower and upper bound
-        //
-        uint8_t length = strlen(item->getValue());
-        uint8_t lb = strlen(item->getText()) + 2;
-        uint8_t ub = lb + length;
-        ub = constrain(ub, lb, maxCols - 2);
-        //
-        // update text
-        //
-        if (lcd.blinkerPosition < ub) {
-            char start[10];
-            char end[10];
-            char* joined = new char[maxCols - lb];
-            substring(item->getValue(), 0, lcd.blinkerPosition - lb, start);
-            substring(item->getValue(), lcd.blinkerPosition + 1 - lb, length,
-                      end);
-            concat(start, character, end, joined);
-            item->setValue(joined);
-        } else {
-            char* buf = new char[length + 2];
-            concat(item->getValue(), character, buf);
-            item->setValue(buf);
         }
+        Serial.println("Type called...");
+        currentMenuTable[cursorPosition]->type2(&display, character);
         //
         isCharPickerActive = false;
-        //
-        // update blinker position
-        //
-        lcd.blinkerPosition++;
         //
         // repaint menu
         //
         update();
-        // Log
-        printCmd(F("TYPE-CHAR"), character);
     }
-    void drawChar(char c) { isCharPickerActive = lcd.drawChar(c); }
+
+    void drawChar(char c) {
+        if (!display.getEditModeEnabled()) {
+            return;
+        }
+        isCharPickerActive = display.drawChar(c); 
+    }
+
     /**
      * Clear the value of the input field
      */
     void clear() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        if (item->getType() != MENU_ITEM_INPUT) return;
-        //
-        // set the value
-        //
-        item->setValue((char*)"");
-        // Log
-        printCmd(F("CLEAR"), item->getValue());
-        //
-        // update blinker position
-        //
-        lcd.blinkerPosition = 0;
+        if (!display.getEditModeEnabled()) {
+            return;
+        }
+        currentMenuTable[cursorPosition]->clear(&display);
         //
         // repaint menu
         //
         update();
     }
-#endif
     /**
      * When you want to display any other content on the screen then
      * call this function then display your content, later call
@@ -393,7 +355,7 @@ class LcdMenu {
      */
     void hide() {
         enableUpdate = false;
-        lcd.clear();
+        display.clear();
     }
     /**
      * Show the menu
@@ -416,9 +378,7 @@ class LcdMenu {
         bool isNotEnd = false;
 
         do {
-            isNotEnd = currentMenuTable[++bottom]->getType() !=
-                           MENU_ITEM_END_OF_MENU &&
-                       bottom < maxRows + 20;
+            isNotEnd = currentMenuTable[++bottom]->getType() != MENU_ITEM_END_OF_MENU && bottom < maxRows + 20;
         } while (isNotEnd);
 
         uint8_t max = maxRows - 1;

@@ -51,59 +51,144 @@ class ItemInput : public MenuItem {
      *
      * @return The current input value as a string.
      */
-    char* getValue() override { return value; }
+    char* getValue() { return value; }
 
     /**
      * Set the input value for this item.
      *
      * @param value The new input value.
      */
-    void setValue(char* value) override { this->value = value; }
+    void setValue(char* value) { this->value = value; }
 
     /**
      * Get the callback function for this item.
      *
      * @return The function pointer to the callback function.
      */
-    fptrStr getCallbackStr() override { return callback; }
+    fptrStr getCallbackStr() { return callback; }
 
-    bool enter(DisplayInterface* lcd) override {
-        lcd->setEditModeEnabled(true);
-        return false;
+    void enter(DisplayInterface* display) override {
+        if (display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(true);
+        display->resetBlinker(constrainBlinkerPosition(0, display->getMaxCols()));
     };
 
-    bool back(DisplayInterface* lcd) override {
+    void back(DisplayInterface* display) override {
         // Disable edit mode
-        lcd->setEditModeEnabled(false);
+        display->setEditModeEnabled(false);
         // Execute callback function
         if (callback != NULL) {
             callback(value);
         }
-        return true;
     };
 
-    bool left(DisplayInterface* lcd) override {
-        lcd->blinkerPosition--;
-        lcd->resetBlinker();
+    void left(DisplayInterface* display) override {
+        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerCol() - 1, display->getMaxCols()));
         // Log
-        printCmd(F("LEFT"), value[lcd->blinkerPosition - (strlen(this->getText()) + 2)]);
-        return false;
+        printCmd(F("LEFT"), value[display->getBlinkerCol() - (strlen(text) + 2)]);
     };
 
-    bool right(DisplayInterface* lcd) override {
-        lcd->blinkerPosition++;
-        lcd->resetBlinker();
+    void right(DisplayInterface* display) override {
+        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerCol() + 1, display->getMaxCols()));
         // Log
-        printCmd(F("RIGHT"), value[lcd->blinkerPosition - (strlen(this->getText()) + 2)]);
-        return false;
+        printCmd(F("RIGHT"), value[display->getBlinkerCol() - (strlen(text) + 2)]);
     };
 
-    void draw(DisplayInterface* lcd) override {
-        uint8_t maxCols = lcd->getMaxCols();
+    uint8_t constrainBlinkerPosition(uint8_t blinkerPosition, uint8_t maxCols) {
+        //
+        // calculate lower and upper bound
+        //
+        uint8_t lb = strlen(text) + 2;
+        uint8_t ub = lb + strlen(value);
+        ub = constrain(ub, lb, maxCols - 2);
+        //
+        // set cursor position
+        //
+        return constrain(blinkerPosition, lb, ub);
+    }
+
+    void draw(DisplayInterface* display, uint8_t row) override {
+        MenuItem::draw(display);
+        uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(value, 0, maxCols - strlen(text) - 2, buf);
-        lcd->getPrint()->print(":");
-        lcd->getPrint()->print(buf);
+        display->drawItem(row, text, ':', buf);
+    }
+
+    /**
+     * Execute a "backspace cmd" on menu
+     *
+     * *NB: Works only for `ItemInput` type*
+     *
+     * Removes the character at the current cursor position.
+     */
+    void backspace(DisplayInterface* display) override {
+        uint8_t p = display->getBlinkerCol() - (strlen(text) + 2) - 1;
+        remove(value, p, 1);
+        printCmd(F("BACKSPACE"), value);
+        display->getBlinkerCol()--;
+        update();
+    }
+
+    /**
+     * Display text at the cursor position
+     * used for `Input` type menu items
+     * @param character character to append
+     */
+    void type2(DisplayInterface* display, const char character) override {
+        //
+        // calculate lower and upper bound
+        //
+        uint8_t length = strlen(value);
+        uint8_t lb = strlen(text) + 2;
+        uint8_t ub = lb + length;
+        ub = constrain(ub, lb, maxCols - 2);
+        printCmd(F("TYPE-CHAR-l"), length);
+        printCmd(F("TYPE-CHAR-lb"), lb);
+        printCmd(F("TYPE-CHAR-ub"), ub);
+        printCmd(F("TYPE-CHAR-bl"), display->getBlinkerCol());
+        //
+        // update text
+        //
+        if (display->getBlinkerCol() < ub) {
+            char start[10];
+            char end[10];
+            char* joined = new char[maxCols - lb];
+            substring(value, 0, display->getBlinkerCol() - lb, start);
+            substring(value, display->getBlinkerCol() + 1 - lb, length, end);
+            concat(start, character, end, joined);
+            value = joined;
+        } else {
+            char* buf = new char[length + 2];
+            concat(value, character, buf);
+            value = buf;
+        }
+        //
+        // update blinker position
+        //
+        display->getBlinkerCol()++;
+        // Log
+        printCmd(F("TYPE-CHAR"), character);
+    }
+
+    void drawChar(DisplayInterface* display, char c) override { isCharPickerActive = display->drawChar(c); }
+
+    /**
+     * Clear the value of the input field
+     */
+    void clear(DisplayInterface* display) override {
+        //
+        // set the value
+        //
+        value = (char*)"";
+        // Log
+        printCmd(F("CLEAR"), value);
+        //
+        // update blinker position
+        //
+        display->getBlinkerCol() = 0;
     }
 
 };
