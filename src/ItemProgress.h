@@ -14,7 +14,7 @@
  * @brief ItemProgress indicates that the current item is a list.
  */
 class ItemProgress : public MenuItem {
-   private:
+   protected:
     fptrMapping mapping = NULL;  ///< Pointer to a mapping function
     fptrInt callback = NULL;     ///< Pointer to a callback function
     uint16_t progress = 0;       ///< The progress
@@ -51,7 +51,7 @@ class ItemProgress : public MenuItem {
     /**
      * @brief Increments the progress of the list.
      */
-    void increment() override {
+    void increment() {
         if (progress >= MAX_PROGRESS) return;
         progress += stepLength;
     }
@@ -59,7 +59,7 @@ class ItemProgress : public MenuItem {
     /**
      * @brief Decrements the progress of the list.
      */
-    void decrement() override {
+    void decrement() {
         if (progress <= MIN_PROGRESS) return;
         progress -= stepLength;
     }
@@ -68,7 +68,7 @@ class ItemProgress : public MenuItem {
      * Set the progress on the item
      * @param uint16_t progress for the item
      */
-    void setProgress(uint16_t value) override {
+    void setProgress(uint16_t value) {
         if (progress < MIN_PROGRESS || progress > MAX_PROGRESS) return;
         progress = value;
     }
@@ -76,12 +76,12 @@ class ItemProgress : public MenuItem {
     /**
      * Return the progress
      */
-    uint16_t getItemIndex() override { return progress; }
+    uint16_t getItemIndex() { return progress; }
 
     /**
      * Return the callback
      */
-    fptrInt getCallbackInt() override { return callback; }
+    fptrInt getCallbackInt() { return callback; }
 
     /**
      * @brief Returns the value to be displayed.
@@ -90,58 +90,53 @@ class ItemProgress : public MenuItem {
      *
      * @return A pointer to the value of the current list item.
      */
-    char* getValue() override {
+    char* getValue() {
         if (mapping == NULL) {
             static char buf[6];
             itoa(progress, buf, 10);
             return buf;
-        } else {
-            return mapping(progress);
         }
+        return mapping(progress);
     }
 
-    bool enter(DisplayInterface* lcd) override {
-        lcd->setEditModeEnabled(true);
-        return false;
+    void enter(DisplayInterface* display) override {
+        if (display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(true);
     };
 
-    bool back(DisplayInterface* lcd) override {
-        // Disable edit mode
-        lcd->setEditModeEnabled(false);
-        // Execute callback function
+    void back(DisplayInterface* display) override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(false);
         if (callback != NULL) {
             callback(progress);
         }
-        return true;
     };
 
-    bool left(DisplayInterface* lcd) override {
-        if (lcd->getEditModeEnabled() && progress > MIN_PROGRESS) {
-            decrement();
-            // Log
+    void left(DisplayInterface* display) override {
+        if (display->getEditModeEnabled() && progress > MIN_PROGRESS) {
+            progress -= stepLength;
             printCmd(F("LEFT"), getValue());
-            return true;
+            draw(display, display->getCursorRow());
         }
-        return false;
     };
 
-    bool right(DisplayInterface* lcd) override {
-        if (lcd->getEditModeEnabled() && progress < MAX_PROGRESS) {
-            increment();
-            // Log
+    void right(DisplayInterface* display) override {
+        if (display->getEditModeEnabled() && progress < MAX_PROGRESS) {
+            progress += stepLength;
             printCmd(F("RIGHT"), getValue());
-            return true;
+            draw(display, display->getCursorRow());
         }
-        return false;
     };
 
-    void draw(DisplayInterface* lcd) override {
-        uint8_t maxCols = lcd->getMaxCols();
+    void draw(DisplayInterface* display, uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(getValue(), 0, maxCols - strlen(text) - 2, buf);
-        lcd->getPrint()->print(text);
-        lcd->getPrint()->print(":");
-        lcd->getPrint()->print(buf);
+        display->drawItem(row, text, ':', buf);
     }
 
 };
