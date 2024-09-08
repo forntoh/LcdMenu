@@ -25,14 +25,12 @@ class ItemToggle : public MenuItem {
      * @param callback reference to callback function
      */
     ItemToggle(const char* key, fptrInt callback)
-        : ItemToggle(key, "ON", "OFF", callback) {}
+        : ItemToggle(key, false, callback) {}
 
     ItemToggle(const char* text, boolean enabled, fptrInt callback)
-        : MenuItem(text, MENU_ITEM_TOGGLE),
-          enabled(enabled),
-          textOn("ON"),
-          textOff("OFF"),
-          callback(callback) {}
+        : ItemToggle(text, "ON", "OFF", callback) {
+        this->enabled = enabled;
+    }
 
     /**
      * @brief Create an ItemToggle object.
@@ -74,7 +72,7 @@ class ItemToggle : public MenuItem {
         if (callback != NULL) {
             callback(enabled);
         }
-        draw(display, display->getCursorRow());
+        MenuItem::draw(display);
     };
 
     void draw(DisplayInterface* display, uint8_t row) override {

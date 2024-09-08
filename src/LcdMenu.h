@@ -134,12 +134,12 @@ class LcdMenu {
         display.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
     }
 
-    bool isAtTheStart(uint8_t position) {
+    inline bool isAtTheStart(uint8_t position) {
         return position == 1;
     }
 
-    bool isAtTheEnd(uint8_t position) {
-        return currentMenuTable[bottom + 1]->getType() == MENU_ITEM_END_OF_MENU;
+    inline bool isAtTheEnd(uint8_t position) {
+        return currentMenuTable[position + 1]->getType() == MENU_ITEM_END_OF_MENU;
     }
 
     void drawMenu() {
@@ -171,10 +171,15 @@ class LcdMenu {
      * When edit mode is enabled, this action is skipped
      */
     void up() {
+        if (display.getEditModeEnabled()) {
+            return;
+        }
         //
         // determine if cursor ia at start of menu items
         //
-        if (isAtTheStart(cursorPosition) || display.getEditModeEnabled()) return;
+        if (isAtTheStart(cursorPosition)) {
+            return;
+        }
         cursorPosition--;
         // Log
         printCmd(F("UP"), cursorPosition);
@@ -197,10 +202,15 @@ class LcdMenu {
      * When edit mode is enabled, this action is skipped
      */
     void down() {
+        if (display.getEditModeEnabled()) {
+            return;
+        }
         //
         // determine if cursor has passed the end
         //
-        if (isAtTheEnd(cursorPosition) || display.getEditModeEnabled()) return;
+        if (isAtTheEnd(cursorPosition)) {
+            return;
+        }
         cursorPosition++;
         // Log
         printCmd(F("DOWN"), cursorPosition);
@@ -278,9 +288,6 @@ class LcdMenu {
      * Moves the cursor one step to the left.
      */
     void left() {
-        if (display.getEditModeEnabled() && isCharPickerActive) {
-            return;
-        }
         currentMenuTable[cursorPosition]->left(&display);
     }
     /**
@@ -291,9 +298,6 @@ class LcdMenu {
      * Moves the cursor one step to the right.
      */
     void right() {
-        if (display.getEditModeEnabled() && isCharPickerActive) {
-            return;
-        }
         currentMenuTable[cursorPosition]->right(&display);
     }
     /**
@@ -304,9 +308,6 @@ class LcdMenu {
      * Removes the character at the current cursor position.
      */
     void backspace() {
-        if (!display.getEditModeEnabled()) {
-            return;
-        }
         currentMenuTable[cursorPosition]->backspace(&display);
     }
     /**
@@ -315,17 +316,9 @@ class LcdMenu {
      * @param character character to append
      */
     void type(const char character) {
-        if (!display.getEditModeEnabled()) {
-            return;
-        }
-        Serial.println("Type called...");
         currentMenuTable[cursorPosition]->type2(&display, character);
         //
         isCharPickerActive = false;
-        //
-        // repaint menu
-        //
-        update();
     }
 
     void drawChar(char c) {
@@ -339,14 +332,7 @@ class LcdMenu {
      * Clear the value of the input field
      */
     void clear() {
-        if (!display.getEditModeEnabled()) {
-            return;
-        }
         currentMenuTable[cursorPosition]->clear(&display);
-        //
-        // repaint menu
-        //
-        update();
     }
     /**
      * When you want to display any other content on the screen then
