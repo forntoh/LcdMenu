@@ -114,7 +114,7 @@ class ItemList : public MenuItem {
         itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             printCmd(F("LEFT"), items[itemIndex].c_str());
-            draw(display, display->getCursorRow());
+            MenuItem::draw(display);
         }
     };
 
@@ -126,7 +126,7 @@ class ItemList : public MenuItem {
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             printCmd(F("RIGHT"), items[itemIndex].c_str());
-            draw(display, display->getCursorRow());
+            MenuItem::draw(display);
         }
     };
 

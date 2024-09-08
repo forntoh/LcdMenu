@@ -76,6 +76,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
     }
 
     void resetBlinker(uint8_t blinkerPosition) {
+        restartTimer();
         this->blinkerPosition = blinkerPosition;
         lcd.setCursor(blinkerPosition, cursorRow);
     }

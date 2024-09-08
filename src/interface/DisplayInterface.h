@@ -11,9 +11,10 @@
  *   |  | S O M E  T E X T                     |^ |
  *   |->| S O M E  T E X T                     |  |
  *   |  | S O M E  T E X T                     |  |
- *   |  | S O M E  T E X T                     |v |
+ *   |  | S O M E  T E X T : V A L _           |v |
  *   +--+--------------------------------------+--+
- *                               Indicators ----^
+ *                       Blinker --^            ^
+ *                               Indicators ----+
  * 
  */
 class DisplayInterface {
@@ -55,7 +56,6 @@ class DisplayInterface {
     // Blinker
     virtual void clearBlinker();
     virtual void drawBlinker();
-    virtual void restartTimer();
     virtual void resetBlinker(uint8_t blinkerPosition);
     uint8_t getBlinkerCol() const { return blinkerPosition; }
     virtual bool drawChar(char c) = 0;
@@ -64,6 +64,8 @@ class DisplayInterface {
     virtual void drawUpIndicator();
     virtual void clearDownIndicator();
     virtual void drawDownIndicator();
+    // Timer
+    virtual void restartTimer();
     virtual ~DisplayInterface() {}
 };
 

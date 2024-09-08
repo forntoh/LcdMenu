@@ -52,7 +52,9 @@ class ItemProgress : public MenuItem {
      * @brief Increments the progress of the list.
      */
     void increment() {
-        if (progress >= MAX_PROGRESS) return;
+        if (progress >= MAX_PROGRESS) {
+            return;
+        }
         progress += stepLength;
     }
 
@@ -60,7 +62,9 @@ class ItemProgress : public MenuItem {
      * @brief Decrements the progress of the list.
      */
     void decrement() {
-        if (progress <= MIN_PROGRESS) return;
+        if (progress <= MIN_PROGRESS) {
+            return;
+        }
         progress -= stepLength;
     }
 
@@ -69,7 +73,9 @@ class ItemProgress : public MenuItem {
      * @param uint16_t progress for the item
      */
     void setProgress(uint16_t value) {
-        if (progress < MIN_PROGRESS || progress > MAX_PROGRESS) return;
+        if (progress < MIN_PROGRESS || progress > MAX_PROGRESS) {
+            return;
+        }
         progress = value;
     }
 
@@ -117,18 +123,26 @@ class ItemProgress : public MenuItem {
     };
 
     void left(DisplayInterface* display) override {
-        if (display->getEditModeEnabled() && progress > MIN_PROGRESS) {
-            progress -= stepLength;
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        uint16_t oldProgress = progress;
+        decrement();
+        if (progress != oldProgress) {
             printCmd(F("LEFT"), getValue());
-            draw(display, display->getCursorRow());
+            MenuItem::draw(display);
         }
     };
 
     void right(DisplayInterface* display) override {
-        if (display->getEditModeEnabled() && progress < MAX_PROGRESS) {
-            progress += stepLength;
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        uint16_t oldProgress = progress;
+        increment();
+        if (progress != oldProgress) {
             printCmd(F("RIGHT"), getValue());
-            draw(display, display->getCursorRow());
+            MenuItem::draw(display);
         }
     };
 

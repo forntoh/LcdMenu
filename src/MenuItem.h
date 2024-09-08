@@ -70,8 +70,10 @@ class MenuItem {
     virtual void right(DisplayInterface* display) { };
     virtual void backspace(DisplayInterface* display) {};
     virtual void type2(DisplayInterface* display, const char character) {};
-    virtual void drawChar(DisplayInterface* display, char c) {};
     virtual void clear(DisplayInterface* display) {};
+    virtual void draw(DisplayInterface* display) {
+        draw(display, display->getCursorRow());
+    };
     virtual void draw(DisplayInterface* display, uint8_t row) {
         display->drawItem(row, text);
     };
