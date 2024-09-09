@@ -67,15 +67,15 @@ class ItemToggle : public MenuItem {
 
     const char* getTextOff() { return this->textOff; }
     
-    void enter(DisplayInterface* display) override {
+    void enter() override {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);
         }
-        MenuItem::draw(display);
+        MenuItem::draw();
     };
 
-    void draw(DisplayInterface* display, uint8_t row) override {
+    void draw(uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(enabled ? textOn : textOff, 0, maxCols - strlen(text) - 2, buf);

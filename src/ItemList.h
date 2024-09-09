@@ -89,14 +89,14 @@ class ItemList : public MenuItem {
      */
     String* getItems() { return items; }
 
-    void enter(DisplayInterface* display) override {
+    void enter() override {
         if (display->getEditModeEnabled()) {
             return;
         }
         display->setEditModeEnabled(true);
     };
 
-    void back(DisplayInterface* display) override {
+    void back() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -106,7 +106,7 @@ class ItemList : public MenuItem {
         }
     };
 
-    void left(DisplayInterface* display) override {
+    void left() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -114,11 +114,11 @@ class ItemList : public MenuItem {
         itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             printCmd(F("LEFT"), items[itemIndex].c_str());
-            MenuItem::draw(display);
+            MenuItem::draw();
         }
     };
 
-    void right(DisplayInterface* display) override {
+    void right() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -126,12 +126,11 @@ class ItemList : public MenuItem {
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             printCmd(F("RIGHT"), items[itemIndex].c_str());
-            MenuItem::draw(display);
+            MenuItem::draw();
         }
     };
 
-    void draw(DisplayInterface* display, uint8_t row) override {
-        // MenuItem::draw(display);
+    void draw(uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
