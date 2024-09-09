@@ -105,14 +105,14 @@ class ItemProgress : public MenuItem {
         return mapping(progress);
     }
 
-    void enter(DisplayInterface* display) override {
+    void enter() override {
         if (display->getEditModeEnabled()) {
             return;
         }
         display->setEditModeEnabled(true);
     };
 
-    void back(DisplayInterface* display) override {
+    void back() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -122,7 +122,7 @@ class ItemProgress : public MenuItem {
         }
     };
 
-    void left(DisplayInterface* display) override {
+    void left() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -130,11 +130,11 @@ class ItemProgress : public MenuItem {
         decrement();
         if (progress != oldProgress) {
             printCmd(F("LEFT"), getValue());
-            MenuItem::draw(display);
+            MenuItem::draw();
         }
     };
 
-    void right(DisplayInterface* display) override {
+    void right() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -142,11 +142,11 @@ class ItemProgress : public MenuItem {
         increment();
         if (progress != oldProgress) {
             printCmd(F("RIGHT"), getValue());
-            MenuItem::draw(display);
+            MenuItem::draw();
         }
     };
 
-    void draw(DisplayInterface* display, uint8_t row) override {
+    void draw(uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(getValue(), 0, maxCols - strlen(text) - 2, buf);

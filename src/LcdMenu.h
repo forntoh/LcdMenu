@@ -111,6 +111,11 @@ class LcdMenu {
     void initialize(MenuItem* menu[]) {
         display.begin();
         currentMenuTable = menu;
+        uint8_t i = 1;
+        while (currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU) {
+            currentMenuTable[i]->initialize(&display);
+            i++;
+        }
         drawMenu();
         display.drawCursor();
     }
@@ -148,7 +153,7 @@ class LcdMenu {
             if (currentMenuTable[i]->getType() == MENU_ITEM_END_OF_MENU) {
                 return;
             }
-            item->draw(&display, i - top);
+            item->draw(i - top);
         }
         if (isAtTheStart(top)) {
             display.clearUpIndicator();
@@ -255,7 +260,7 @@ class LcdMenu {
             reset(false);
             return;
         }
-        item->enter(&display);
+        item->enter();
     }
     /**
      * Execute a "backpress" action on menu.
@@ -269,7 +274,7 @@ class LcdMenu {
         // Back action different when on ItemInput
         //
         if (display.getEditModeEnabled()) {
-            currentMenuTable[cursorPosition]->back(&display);
+            currentMenuTable[cursorPosition]->back();
             return;
         }
         //
@@ -288,7 +293,7 @@ class LcdMenu {
      * Moves the cursor one step to the left.
      */
     void left() {
-        currentMenuTable[cursorPosition]->left(&display);
+        currentMenuTable[cursorPosition]->left();
     }
     /**
      * Execute a "right press" on menu
@@ -298,7 +303,7 @@ class LcdMenu {
      * Moves the cursor one step to the right.
      */
     void right() {
-        currentMenuTable[cursorPosition]->right(&display);
+        currentMenuTable[cursorPosition]->right();
     }
     /**
      * Execute a "backspace cmd" on menu
@@ -308,7 +313,7 @@ class LcdMenu {
      * Removes the character at the current cursor position.
      */
     void backspace() {
-        currentMenuTable[cursorPosition]->backspace(&display);
+        currentMenuTable[cursorPosition]->backspace();
     }
     /**
      * Display text at the cursor position
@@ -316,7 +321,7 @@ class LcdMenu {
      * @param character character to append
      */
     void type(const char character) {
-        currentMenuTable[cursorPosition]->type2(&display, character);
+        currentMenuTable[cursorPosition]->type2(character);
         //
         isCharPickerActive = false;
     }
@@ -332,7 +337,7 @@ class LcdMenu {
      * Clear the value of the input field
      */
     void clear() {
-        currentMenuTable[cursorPosition]->clear(&display);
+        currentMenuTable[cursorPosition]->clear();
     }
     /**
      * When you want to display any other content on the screen then

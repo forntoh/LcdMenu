@@ -37,10 +37,23 @@ class MenuItem {
    protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;
+    DisplayInterface* display;
 
    public:
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
+    virtual void initialize(DisplayInterface* display) {
+        this->display = display;
+        MenuItem** subMenu = this->getSubMenu();
+        if (subMenu == NULL) {
+            return;
+        }
+        uint8_t i = 1;
+        while (subMenu[i]->getType() != MENU_ITEM_END_OF_MENU) {
+            subMenu[i]->initialize(display);
+            i++;
+        }
+    }
 
     /**
      * Get the text of the item
@@ -64,17 +77,17 @@ class MenuItem {
      */
     void setText(const char* text) { this->text = text; };
 
-    virtual void enter(DisplayInterface* display) { };
-    virtual void back(DisplayInterface* display) { };
-    virtual void left(DisplayInterface* display) { };
-    virtual void right(DisplayInterface* display) { };
-    virtual void backspace(DisplayInterface* display) {};
-    virtual void type2(DisplayInterface* display, const char character) {};
-    virtual void clear(DisplayInterface* display) {};
-    virtual void draw(DisplayInterface* display) {
-        draw(display, display->getCursorRow());
+    virtual void enter() { };
+    virtual void back() { };
+    virtual void left() { };
+    virtual void right() { };
+    virtual void backspace() {};
+    virtual void type2(const char character) {};
+    virtual void clear() {};
+    virtual void draw() {
+        draw(display->getCursorRow());
     };
-    virtual void draw(DisplayInterface* display, uint8_t row) {
+    virtual void draw(uint8_t row) {
         display->drawItem(row, text);
     };
 

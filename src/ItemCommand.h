@@ -48,7 +48,7 @@ class ItemCommand : public MenuItem {
      */
     void setCallBack(fptr callback) { this->callback = callback; };
     
-    void enter(DisplayInterface* display) override {
+    void enter() override {
         if (callback != NULL) {
             callback();
         }
