@@ -461,10 +461,6 @@ class LcdMenu {
         uint8_t lb = strlen(item->getText()) + 2;
         uint8_t ub = lb + length;
         ub = constrain(ub, lb, maxCols - 2);
-        printCmd(F("TYPE-CHAR-l"), length);
-        printCmd(F("TYPE-CHAR-lb"), lb);
-        printCmd(F("TYPE-CHAR-ub"), ub);
-        printCmd(F("TYPE-CHAR-bl"), lcd.blinkerPosition);
         //
         // update text
         //
