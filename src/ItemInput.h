@@ -20,13 +20,20 @@ class ItemInput : public MenuItem {
    private:
     // Declare a string to hold the input value.
     char* value;
-
     // Declare a function pointer for the input callback.
     fptrStr callback;
-    uint8_t windowMin = 0;
-    // uint8_t windowMax = 0;
-    uint8_t windowSize = 0;
-    uint8_t currentPosition;
+    /**
+     * Cursor position.
+     */
+    uint8_t cursor;
+    /**
+     * First visible char's position.
+     */
+    uint8_t view = 0;
+    /**
+     * Number of visible chars.
+     */
+    uint8_t viewSize = 0;
    public:
     /**
      * Construct a new ItemInput object with an initial value.
@@ -51,7 +58,7 @@ class ItemInput : public MenuItem {
 
     void initialize(LcdMenu* menu, MenuScreen* screen, DisplayInterface* display) override {
         MenuItem::initialize(menu, screen, display);
-        windowSize = display->getMaxCols() - (strlen(text) + 2) - 1;
+        viewSize = display->getMaxCols() - (strlen(text) + 2) - 1;
     }
 
     /**
@@ -87,8 +94,8 @@ class ItemInput : public MenuItem {
         if (display->getEditModeEnabled()) {
             return false;
         }
-        currentPosition = 0;
-        windowMin = 0;
+        cursor = 0;
+        view = 0;
         MenuItem::draw();
         display->setEditModeEnabled(true);
         display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2));
@@ -112,12 +119,12 @@ class ItemInput : public MenuItem {
         if (!display->getEditModeEnabled()) {
             return false;
         }
-        if (windowMin == 0 && currentPosition == 0) {
+        if (view == 0 && cursor == 0) {
             return false;
         }
-        currentPosition--;
-        if (currentPosition < windowMin) {
-            windowMin--;
+        cursor--;
+        if (cursor < view) {
+            view--;
             MenuItem::draw();
         }
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerCol() - 1));
@@ -131,12 +138,12 @@ class ItemInput : public MenuItem {
             return false;
         }
         uint8_t ub = strlen(value);
-        if ((windowMin + windowSize - 1) == ub && currentPosition == ub) {
+        if ((view + viewSize - 1) == ub && cursor == ub) {
             return false;
         }
-        currentPosition++;
-        if (currentPosition > (windowMin + windowSize - 1)) {
-            windowMin++;
+        cursor++;
+        if (cursor > (view + viewSize - 1)) {
+            view++;
             MenuItem::draw();
         }
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerCol() + 1));
@@ -162,7 +169,7 @@ class ItemInput : public MenuItem {
     void draw(uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
-        substring(value, windowMin, windowSize, buf);
+        substring(value, view, viewSize, buf);
         display->drawItem(row, text, ':', buf);
     }
 
@@ -177,15 +184,15 @@ class ItemInput : public MenuItem {
         if (!display->getEditModeEnabled()) {
             return false;
         }
-        if (strlen(value) == 0 || currentPosition == 0) {
+        if (strlen(value) == 0 || cursor == 0) {
             return false;
         }
         // uint8_t p = display->getBlinkerCol() - (strlen(text) + 2) - 1;
-        remove(value, currentPosition - 1, 1);
+        remove(value, cursor - 1, 1);
         printCmd(F("BACKSPACE"), value);
-        currentPosition--;
-        if (currentPosition < windowMin) {
-            windowMin--;
+        cursor--;
+        if (cursor < view) {
+            view--;
         }
         MenuItem::draw();
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerCol() - 1));
@@ -202,12 +209,12 @@ class ItemInput : public MenuItem {
             return false;
         }
         uint8_t length = strlen(value);
-        if (currentPosition < length) {
+        if (cursor < length) {
             char start[length];
             char end[length];
             char* joined = new char[length + 2];
-            substring(value, 0, currentPosition, start);
-            substring(value, currentPosition, length - currentPosition, end);
+            substring(value, 0, cursor, start);
+            substring(value, cursor, length - cursor, end);
             concat(start, character, end, joined);
             value = joined;
         } else {
@@ -215,9 +222,9 @@ class ItemInput : public MenuItem {
             concat(value, character, buf);
             value = buf;
         }
-        currentPosition++;
-        if (currentPosition > (windowMin + windowSize - 1)) {
-            windowMin++;
+        cursor++;
+        if (cursor > (view + viewSize - 1)) {
+            view++;
         }
         MenuItem::draw();
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerCol() + 1));

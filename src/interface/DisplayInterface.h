@@ -15,7 +15,6 @@
  *   +--+--------------------------------------+--+
  *                       Blinker --^            ^
  *                               Indicators ----+
- * 
  */
 class DisplayInterface {
    protected:
