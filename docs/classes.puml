@@ -1,0 +1,94 @@
+@startuml
+' https://www.plantuml.com/plantuml/uml/
+
+interface ActionHandler {
+    +virtual bool up()
+    +virtual bool down()
+    +virtual bool enter()
+    +virtual bool back()
+    +virtual bool left()
+    +virtual bool right()
+    +virtual bool backspace()
+    +virtual bool type(const char c)
+    +virtual bool clear()
+}
+
+class LcdMenu {
+    -bool enableUpdate
+    +void initialize(MenuScreen* screen)
+    +DisplayInterface* getDisplay()
+    +MenuScreen* getCurrentScreen()
+    +void setCurrentScreen(MenuScreen* screen)
+    +void resetMenu()
+    +void hide()
+    +void show()
+    +uint8_t getCursorPosition()
+    +void setCursorPosition(uint8_t position)
+    +MenuItem* getItemAt(uint8_t position)
+}
+
+class MenuScreen {
+    -uint8_t itemsCount
+    -uint8_t cursor
+    -uint8_t view
+    -uint8_t viewSize
+    +virtual void initialize(LcdMenu* menu, DisplayInterface* display)
+    +void setParent(MenuScreen* parent)
+}
+
+class MenuItem {
+    +const char* text
+    +virtual void initialize(LcdMenu* menu, MenuScreen* screen, DisplayInterface* display)
+    +virtual const char* getText()
+    +virtual MenuItem** getSubMenu()
+    +void setText(const char* text)
+}
+
+class DisplayInterface {
+    #uint8_t maxRows
+    #uint8_t maxCols
+    #uint8_t cursorRow
+    #uint8_t blinkerPosition
+    #bool isEditModeEnabled
+    +virtual void begin()
+    +uint8_t getMaxRows()
+    +uint8_t getMaxCols()
+    +virtual void clear()
+..
+    +virtual void drawItem(uint8_t row, const char* text)
+    +virtual void drawItem(uint8_t row, const char* text, char separator, char* value)
+..
+    +virtual void clearCursor()
+    +virtual void drawCursor()
+    +virtual void moveCursor(uint8_t newCursorRow)
+    +void setEditModeEnabled(bool enabled)
+    +bool getEditModeEnabled()
+    +uint8_t getCursorRow()
+..
+    +virtual void clearBlinker()
+    +virtual void drawBlinker()
+    +virtual void resetBlinker(uint8_t blinkerPosition)
+    +uint8_t getBlinkerCol()
+..
+    +virtual bool drawChar(char c)
+..
+    +virtual void clearUpIndicator()
+    +virtual void drawUpIndicator()
+..
+    +virtual void clearDownIndicator()
+    +virtual void drawDownIndicator()
+..
+    +virtual void restartTimer()
+}
+
+LcdMenu .l.|> ActionHandler 
+MenuScreen .l.|> ActionHandler 
+MenuItem .l.|> ActionHandler 
+LcdMenu -d-> "1" MenuScreen : currentScreen
+LcdMenu *-r-> "1" DisplayInterface : display
+MenuScreen -d-> "*" MenuItem : items
+MenuScreen -> "1" MenuScreen : parent
+MenuScreen -u--> "1" DisplayInterface : display
+MenuScreen -u--> "1" LcdMenu : menu
+MenuItem -u--> "1" DisplayInterface : display
+@enduml
