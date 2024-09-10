@@ -29,30 +29,25 @@
 
 #include "interface/DisplayInterface.h"
 #include "utils/constants.h"
+#include "ActionHandler.h"
+
+class LcdMenu;
+class MenuScreen;
 
 /**
  * The MenuItem class
  */
-class MenuItem {
+class MenuItem: public ActionHandler {
    protected:
     const char* text = NULL;
-    byte type = MENU_ITEM_NONE;
+    byte _type = MENU_ITEM_NONE;
     DisplayInterface* display;
 
    public:
     MenuItem(const char* text) : text(text) {}
-    MenuItem(const char* text, byte type) : text(text), type(type) {}
-    virtual void initialize(DisplayInterface* display) {
+    MenuItem(const char* text, byte type) : text(text), _type(type) {}
+    virtual void initialize(LcdMenu* menu, MenuScreen* screen, DisplayInterface* display) {
         this->display = display;
-        MenuItem** subMenu = this->getSubMenu();
-        if (subMenu == NULL) {
-            return;
-        }
-        uint8_t i = 1;
-        while (subMenu[i]->getType() != MENU_ITEM_END_OF_MENU) {
-            subMenu[i]->initialize(display);
-            i++;
-        }
     }
 
     /**
@@ -66,24 +61,27 @@ class MenuItem {
      * @return `MenuItem*` - Submenu at item
      */
     virtual MenuItem** getSubMenu() { return NULL; }
+
     /**
      * Get the type of the item
      * @return `byte` - type of menu item
      */
-    byte getType() { return type; }
+    byte getType() { return _type; }
     /**
      * Set the text of the item
      * @param text text to display for the item
      */
     void setText(const char* text) { this->text = text; };
 
-    virtual void enter() { };
-    virtual void back() { };
-    virtual void left() { };
-    virtual void right() { };
-    virtual void backspace() {};
-    virtual void type2(const char character) {};
-    virtual void clear() {};
+    virtual bool up() { return false; };
+    virtual bool down() { return false; };
+    virtual bool enter() { return false; };
+    virtual bool back() { return false; };
+    virtual bool left() { return false; };
+    virtual bool right() { return false; };
+    virtual bool backspace() { return false; };
+    virtual bool type(const char character) { return false; };
+    virtual bool clear() { return false; };
     virtual void draw() {
         draw(display->getCursorRow());
     };

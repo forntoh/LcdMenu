@@ -48,10 +48,11 @@ class ItemCommand : public MenuItem {
      */
     void setCallBack(fptr callback) { this->callback = callback; };
     
-    void enter() override {
+    bool enter() override {
         if (callback != NULL) {
             callback();
         }
+        return true;
     };
 
 };

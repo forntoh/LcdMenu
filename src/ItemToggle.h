@@ -67,12 +67,13 @@ class ItemToggle : public MenuItem {
 
     const char* getTextOff() { return this->textOff; }
     
-    void enter() override {
+    bool enter() override {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);
         }
         MenuItem::draw();
+        return true;
     };
 
     void draw(uint8_t row) override {

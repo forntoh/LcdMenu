@@ -105,26 +105,36 @@ class ItemProgress : public MenuItem {
         return mapping(progress);
     }
 
-    void enter() override {
+    bool up() override {
+        return display->getEditModeEnabled();
+    }
+
+    bool down() override {
+        return display->getEditModeEnabled();
+    }
+
+    bool enter() override {
         if (display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(true);
+        return true;
     };
 
-    void back() override {
+    bool back() override {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(false);
         if (callback != NULL) {
             callback(progress);
         }
+        return true;
     };
 
-    void left() override {
+    bool left() override {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint16_t oldProgress = progress;
         decrement();
@@ -132,11 +142,12 @@ class ItemProgress : public MenuItem {
             printCmd(F("LEFT"), getValue());
             MenuItem::draw();
         }
+        return true;
     };
 
-    void right() override {
+    bool right() override {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint16_t oldProgress = progress;
         increment();
@@ -144,6 +155,7 @@ class ItemProgress : public MenuItem {
             printCmd(F("RIGHT"), getValue());
             MenuItem::draw();
         }
+        return true;
     };
 
     void draw(uint8_t row) override {

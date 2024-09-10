@@ -89,26 +89,36 @@ class ItemList : public MenuItem {
      */
     String* getItems() { return items; }
 
-    void enter() override {
+    bool up() override {
+        return display->getEditModeEnabled();
+    }
+
+    bool down() override {
+        return display->getEditModeEnabled();
+    }
+
+    bool enter() override {
         if (display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(true);
+        return true;
     };
 
-    void back() override {
+    bool back() override {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(false);
         if (callback != NULL) {
             callback(itemIndex);
         }
+        return true;
     };
 
-    void left() override {
+    bool left() override {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
@@ -116,11 +126,12 @@ class ItemList : public MenuItem {
             printCmd(F("LEFT"), items[itemIndex].c_str());
             MenuItem::draw();
         }
+        return true;
     };
 
-    void right() override {
+    bool right() override {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
@@ -128,6 +139,7 @@ class ItemList : public MenuItem {
             printCmd(F("RIGHT"), items[itemIndex].c_str());
             MenuItem::draw();
         }
+        return true;
     };
 
     void draw(uint8_t row) override {
