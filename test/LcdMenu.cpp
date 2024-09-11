@@ -26,13 +26,13 @@ unittest(text_set_correctly) {
 }
 
 unittest(no_text_off_on_for_item_input) {
-    assertNull(mainMenu[ITEM_INPUT_INDEX]->getTextOn());
-    assertNull(mainMenu[ITEM_INPUT_INDEX]->getTextOff());
+    assertNull((static_cast<ItemToggle*>(mainMenu[ITEM_INPUT_INDEX]))->getTextOn());
+    assertNull((static_cast<ItemToggle*>(mainMenu[ITEM_INPUT_INDEX]))->getTextOff());
 }
 
 unittest(text_off_on_for_item_toggle) {
-    assertEqual("ON", mainMenu[ITEM_TOGGLE_INDEX]->getTextOn());
-    assertEqual("OFF", mainMenu[ITEM_TOGGLE_INDEX]->getTextOff());
+    assertEqual("ON", (static_cast<ItemToggle*>(mainMenu[ITEM_TOGGLE_INDEX]))->getTextOn());
+    assertEqual("OFF", (static_cast<ItemToggle*>(mainMenu[ITEM_TOGGLE_INDEX]))->getTextOff());
 }
 
 unittest(check_types) {
@@ -46,9 +46,9 @@ unittest(check_types) {
 
 unittest(can_set_input_value) {
     char* expected = "TEST";
-    assertEqual("", mainMenu[ITEM_INPUT_INDEX]->getValue());
-    mainMenu[ITEM_INPUT_INDEX]->setValue(expected);
-    assertEqual(expected, mainMenu[ITEM_INPUT_INDEX]->getValue());
+    assertEqual("", (static_cast<ItemInput*>(mainMenu[ITEM_INPUT_INDEX]))->getValue());
+    (static_cast<ItemInput*>(mainMenu[ITEM_INPUT_INDEX]))->setValue(expected);
+    assertEqual(expected, (static_cast<ItemInput*>(mainMenu[ITEM_INPUT_INDEX]))->getValue());
 }
 
 unittest_main()

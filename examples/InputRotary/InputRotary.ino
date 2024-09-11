@@ -65,5 +65,5 @@ void inputCallback(char *value) {
 }
 
 void clearInput() {
-    menu[1]->setValue((char *)"");
+    (static_cast<ItemInput*>(menu[1]))->setValue((char *)"");
 }
