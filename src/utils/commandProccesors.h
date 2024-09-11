@@ -178,7 +178,7 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
             menu.clear();
         else if (cmd == backspaceCmd)  // Remove one character from the tail
             menu.backspace();
-        else if (cmd != '\n') // Type the character you want
+        else if (cmd != '\n')  // Type the character you want
             menu.type(cmd);
         else
             return false;
