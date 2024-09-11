@@ -55,7 +55,7 @@ void loop() {
 
 // Define the callbacks
 void toggleBacklight(uint16_t isOn) {
-    lcdAdapter.lcd.setBacklight(isOn);
+    lcdAdapter.setBacklight(isOn);
 }
 
 void callback(uint16_t pos) {
