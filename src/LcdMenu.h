@@ -102,7 +102,7 @@ class LcdMenu {
      * # Constructor
      */
 
-    LcdMenu(DisplayInterface& lcd) : lcd(lcd) {
+    LcdMenu(DisplayInterface& display) : lcd(display) {
         bottom = lcd.getMaxRows();
         maxRows = lcd.getMaxRows();
         maxCols = lcd.getMaxCols();

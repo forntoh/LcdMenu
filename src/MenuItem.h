@@ -29,6 +29,7 @@
 
 #include "interface/DisplayInterface.h"
 #include "utils/constants.h"
+#include <utils/utils.h>
 
 /**
  * The MenuItem class
@@ -88,7 +89,10 @@ class MenuItem {
         draw(display->getCursorRow());
     };
     virtual void draw(uint8_t row) {
-        display->drawItem(row, text);
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(text, 0, maxCols - 2, buf);
+        display->drawItem(row, buf);
     };
 
     /**

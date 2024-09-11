@@ -33,6 +33,10 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
 
     void clear() override { lcd.clear(); }
 
+    void setBacklight(bool enabled) override {
+        lcd.setBacklight(enabled);
+    }
+
     void clearCursor() override {
         lcd.setCursor(0, cursorRow);
         lcd.print(" ");

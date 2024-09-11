@@ -32,6 +32,10 @@ class LiquidCrystalAdapter : public DisplayInterface {
 
     void clear() override { lcd.clear(); }
 
+    void setBacklight(bool enabled) override {
+        // Unsupported
+    }
+
     void clearCursor() override {
         lcd.setCursor(0, cursorRow);
         lcd.print(" ");

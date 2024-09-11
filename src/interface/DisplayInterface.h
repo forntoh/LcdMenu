@@ -30,6 +30,7 @@ class DisplayInterface {
     uint8_t getMaxRows() const { return maxRows; }
     uint8_t getMaxCols() const { return maxCols; }
     virtual void clear() = 0;
+    virtual void setBacklight(bool enabled) = 0;
     // Items
     virtual void drawItem(uint8_t row, const char* text);
     virtual void drawItem(uint8_t row, const char* text, char separator, char* value);
