@@ -83,10 +83,10 @@ class LcdMenu {
             top = 1;
             bottom = maxRows;
         }
-        display.clear();
+        lcd.clear();
         drawMenu();
-        display.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
-        display.drawCursor(); // In case if currentPosition was not changed between screens
+        lcd.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
+        lcd.drawCursor(); // In case if currentPosition was not changed between screens
     }
 
    public:
@@ -96,28 +96,28 @@ class LcdMenu {
     /**
      * Display Interface
      */
-    DisplayInterface& display;
+    DisplayInterface& lcd;
 
     /**
      * # Constructor
      */
 
-    LcdMenu(DisplayInterface& display) : display(display) {
-        bottom = display.getMaxRows();
-        maxRows = display.getMaxRows();
-        maxCols = display.getMaxCols();
+    LcdMenu(DisplayInterface& lcd) : lcd(lcd) {
+        bottom = lcd.getMaxRows();
+        maxRows = lcd.getMaxRows();
+        maxCols = lcd.getMaxCols();
     }
 
     void initialize(MenuItem* menu[]) {
-        display.begin();
+        lcd.begin();
         currentMenuTable = menu;
         uint8_t i = 1;
         while (currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU) {
-            currentMenuTable[i]->initialize(&display);
+            currentMenuTable[i]->initialize(&lcd);
             i++;
         }
         drawMenu();
-        display.drawCursor();
+        lcd.drawCursor();
     }
     /*
      * Draw the menu items and cursor
@@ -127,7 +127,7 @@ class LcdMenu {
             return;
         }
         drawMenu();
-        display.drawCursor();
+        lcd.drawCursor();
     }
     /*
      * Draw the menu items and cursor
@@ -136,7 +136,7 @@ class LcdMenu {
         if (!enableUpdate) {
             return;
         }
-        display.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
+        lcd.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
     }
 
     inline bool isAtTheStart(uint8_t position) {
@@ -156,14 +156,14 @@ class LcdMenu {
             item->draw(i - top);
         }
         if (isAtTheStart(top)) {
-            display.clearUpIndicator();
+            lcd.clearUpIndicator();
         } else {
-            display.drawUpIndicator();
+            lcd.drawUpIndicator();
         }
         if (isAtTheEnd(bottom)) {
-            display.clearDownIndicator();
+            lcd.clearDownIndicator();
         } else {
-            display.drawDownIndicator();
+            lcd.drawDownIndicator();
         }
     }
 
@@ -176,7 +176,7 @@ class LcdMenu {
      * When edit mode is enabled, this action is skipped
      */
     void up() {
-        if (display.getEditModeEnabled()) {
+        if (lcd.getEditModeEnabled()) {
             return;
         }
         //
@@ -207,7 +207,7 @@ class LcdMenu {
      * When edit mode is enabled, this action is skipped
      */
     void down() {
-        if (display.getEditModeEnabled()) {
+        if (lcd.getEditModeEnabled()) {
             return;
         }
         //
@@ -273,7 +273,7 @@ class LcdMenu {
         //
         // Back action different when on ItemInput
         //
-        if (display.getEditModeEnabled()) {
+        if (lcd.getEditModeEnabled()) {
             currentMenuTable[cursorPosition]->back();
             return;
         }
@@ -327,10 +327,10 @@ class LcdMenu {
     }
 
     void drawChar(char c) {
-        if (!display.getEditModeEnabled()) {
+        if (!lcd.getEditModeEnabled()) {
             return;
         }
-        isCharPickerActive = display.drawChar(c); 
+        isCharPickerActive = lcd.drawChar(c); 
     }
 
     /**
@@ -346,7 +346,7 @@ class LcdMenu {
      */
     void hide() {
         enableUpdate = false;
-        display.clear();
+        lcd.clear();
     }
     /**
      * Show the menu

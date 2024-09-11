@@ -110,12 +110,12 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, int8_t& pos,
                         byte clearCmd = 255, byte backspaceCmd = 255,
                         byte leftCmd = 255, byte rightCmd = 255) {
     if (cmd == upCmd) {
-        if (menu.display.getEditModeEnabled()) pos = (pos + 1) % size;
+        if (menu.lcd.getEditModeEnabled()) pos = (pos + 1) % size;
         // Works only in edit mode
         menu.up();
         menu.drawChar(charset[pos]);
     } else if (cmd == downCmd) {
-        if (menu.display.getEditModeEnabled()) pos = constrain(pos - 1, 0, size);
+        if (menu.lcd.getEditModeEnabled()) pos = constrain(pos - 1, 0, size);
         menu.down();
         menu.drawChar(charset[pos]);
     } else if (cmd == leftCmd) {
@@ -178,10 +178,8 @@ bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd,
             menu.clear();
         else if (cmd == backspaceCmd)  // Remove one character from the tail
             menu.backspace();
-        else if (cmd != '\n' && cmd != 255) {  // Type the character you want
-            printCmd(F("CMD"), cmd);
+        else if (cmd != '\n') // Type the character you want
             menu.type(cmd);
-        }
         else
             return false;
     }
