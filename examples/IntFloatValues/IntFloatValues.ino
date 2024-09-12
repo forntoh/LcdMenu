@@ -8,25 +8,15 @@
 #include <ItemProgress.h>
 #include <LcdMenu.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
-#include <utils/commandProccesors.h>
+#include <utils/SimpleNavConfig.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-// Configure keyboard keys (ASCII)
-#define UP 'w'
-#define DOWN 's'
-#define LEFT 'a'
-#define RIGHT 'd'
-#define ENTER ' '
-#define BACK 'b'
-#define BACKSPACE 'v'
-#define CLEAR 'c'
-
 // Declare the callbacks
 void callback(uint16_t pos);
 
-char* intMapping(uint16_t progress) {
+char *intMapping(uint16_t progress) {
     // Map the progress value to a new range (100 to 200)
     long mapped = mapProgress(progress, 100L, 200L);
 
@@ -43,7 +33,7 @@ char* intMapping(uint16_t progress) {
     return buffer;
 }
 
-char* floatMapping(uint16_t progress) {
+char *floatMapping(uint16_t progress) {
     // Normalize the progress value and map it to the specified floating-point
     // range
     float floatValue = mapProgress(progress, -1.0f, 1.0f);
@@ -68,12 +58,21 @@ MAIN_MENU(
     ITEM_PROGRESS("Dist", 10, intMapping, callback),
     ITEM_PROGRESS("Curr", 5, floatMapping, callback),
     ITEM_BASIC("Blink SOS"),
-    ITEM_BASIC("Blink random")
-);
+    ITEM_BASIC("Blink random"));
 
 // Construct the LcdMenu
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
+
+SimpleNavConfig navConfig = {
+    .menu = &menu,
+    .up = 'w',
+    .down = 's',
+    .enter = ' ',
+    .back = 'b',
+    .left = 'a',
+    .right = 'd',
+};
 
 void setup() {
     Serial.begin(9600);
@@ -84,7 +83,7 @@ void setup() {
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-    processMenuCommand(menu, command, UP, DOWN, ENTER, BACK, LEFT, RIGHT);
+    processWithSimpleCommand(&navConfig, command);
 }
 
 void callback(uint16_t pos) {

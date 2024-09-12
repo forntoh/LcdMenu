@@ -7,20 +7,10 @@
 
 #include <LcdMenu.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
-#include <utils/commandProccesors.h>
+#include <utils/SimpleNavConfig.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
-
-// Configure keyboard keys (ASCII)
-#define UP 'w'
-#define DOWN 's'
-#define LEFT 'a'
-#define RIGHT 'd'
-#define ENTER ' '
-#define BACK 'b'
-#define BACKSPACE 'v'
-#define CLEAR 'c'
 
 // Initialize the main menu items
 MAIN_MENU(
@@ -28,14 +18,23 @@ MAIN_MENU(
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Settings"),
     ITEM_BASIC("Blink SOS"),
-    ITEM_BASIC("Blink random")
-);
+    ITEM_BASIC("Blink random"));
 
-// Construct the display adapter 
+// Construct the display adapter
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
 
 // Construct the LcdMenu
 LcdMenu menu(lcdAdapter);
+
+SimpleNavConfig navConfig = {
+    .menu = &menu,
+    .up = 'w',
+    .down = 's',
+    .enter = ' ',
+    .back = 'b',
+    .left = 'a',
+    .right = 'd',
+};
 
 void setup() {
     Serial.begin(9600);
@@ -46,5 +45,5 @@ void setup() {
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-    processMenuCommand(menu, command, UP, DOWN, ENTER, BACK);
+    processWithSimpleCommand(&navConfig, command);
 }
