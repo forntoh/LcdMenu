@@ -14,7 +14,7 @@ class ItemInputCharset : public ItemInput {
     bool charEditMode = false;
 
     /**
-     * Initialize `charset edit mode`.
+     * @brief Initialize `char edit mode`.
      * Set `charEditMode` flag and search for currently selected char in charset.
      */
     void initCharsetEditMode() {
@@ -30,7 +30,7 @@ class ItemInputCharset : public ItemInput {
     }
 
     /**
-     * Stop `charset edit mode`.
+     * @brief Stop `char edit mode`.
      * Unset `charEditMode` flag and draw actual char from `value`.
      */
     void stopCharsetEditMode() {
