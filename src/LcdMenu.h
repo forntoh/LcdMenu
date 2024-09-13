@@ -111,10 +111,8 @@ class LcdMenu {
     void initialize(MenuItem* menu[]) {
         lcd.begin();
         currentMenuTable = menu;
-        uint8_t i = 1;
-        while (currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU) {
+        for (uint8_t i = 1; currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
             currentMenuTable[i]->initialize(&lcd);
-            i++;
         }
         drawMenu();
         lcd.drawCursor();
@@ -321,7 +319,7 @@ class LcdMenu {
      * @param character character to append
      */
     void type(const char character) {
-        currentMenuTable[cursorPosition]->type2(character);
+        currentMenuTable[cursorPosition]->typeChar(character);
         //
         isCharPickerActive = false;
     }

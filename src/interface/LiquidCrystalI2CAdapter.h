@@ -12,9 +12,9 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
     uint8_t downArrow[8];
     uint8_t upArrow[8];
     unsigned long startTime = 0;
-    LiquidCrystal_I2C lcd;
 
    public:
+    LiquidCrystal_I2C lcd;
     LiquidCrystalI2CAdapter(uint8_t lcd_Addr, uint8_t lcd_cols, uint8_t lcd_rows): lcd(lcd_Addr, lcd_cols, lcd_rows) {
         maxRows = lcd_rows;
         maxCols = lcd_cols;
@@ -97,7 +97,6 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         //
         lcd.setCursor(blinkerPosition, cursorRow);
         lcd.print(c);
-        // resetBlinker(blinkerPosition);
         // Log
         printCmd(F("DRAW-CHAR"), c);
         return true;

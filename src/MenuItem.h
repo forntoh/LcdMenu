@@ -49,10 +49,8 @@ class MenuItem {
         if (subMenu == NULL) {
             return;
         }
-        uint8_t i = 1;
-        while (subMenu[i]->getType() != MENU_ITEM_END_OF_MENU) {
+        for (uint8_t i = 1; subMenu[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
             subMenu[i]->initialize(display);
-            i++;
         }
     }
 
@@ -78,12 +76,12 @@ class MenuItem {
      */
     void setText(const char* text) { this->text = text; };
 
-    virtual void enter() { };
-    virtual void back() { };
-    virtual void left() { };
-    virtual void right() { };
+    virtual void enter() {};
+    virtual void back() {};
+    virtual void left() {};
+    virtual void right() {};
     virtual void backspace() {};
-    virtual void type2(const char character) {};
+    virtual void typeChar(const char character) {};
     virtual void clear() {};
     virtual void draw() {
         draw(display->getCursorRow());

@@ -12,9 +12,9 @@ class LiquidCrystalAdapter : public DisplayInterface {
     uint8_t downArrow[8];
     uint8_t upArrow[8];
     unsigned long startTime = 0;
-    LiquidCrystal lcd;
 
    public:
+    LiquidCrystal lcd;
     LiquidCrystalAdapter(uint8_t rs, uint8_t en, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, uint8_t lcd_cols, uint8_t lcd_rows): lcd(rs, en, d0, d1, d2, d3) {
         maxRows = lcd_rows;
         maxCols = lcd_cols;
@@ -95,7 +95,6 @@ class LiquidCrystalAdapter : public DisplayInterface {
         //
         lcd.setCursor(blinkerPosition, cursorRow);
         lcd.print(c);
-        // resetBlinker(blinkerPosition);
         // Log
         printCmd(F("DRAW-CHAR"), c);
         return true;

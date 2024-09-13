@@ -12,6 +12,17 @@
 #include "MenuItem.h"
 #include <utils/utils.h>
 
+/**
+ * @brief Item that allows user to toggle between ON/OFF states.
+ * 
+ * ┌────────────────────────────┐
+ * │   . . .                    │
+ * │ > T E X T : O F F          │
+ * │   . . .                    │
+ * └────────────────────────────┘
+ * 
+ * Additionally to `text` this item has ON/OFF `enabled` state.
+ */
 class ItemToggle : public MenuItem {
    private:
     bool enabled = false;

@@ -7,12 +7,12 @@
 /**
  *    +-- Cursor
  *    v            v---- Items
- *   +--+--------------------------------------+--+
- *   |  | S O M E  T E X T                     |^ |
- *   |->| S O M E  T E X T                     |  |
- *   |  | S O M E  T E X T                     |  |
- *   |  | S O M E  T E X T : V A L _           |v |
- *   +--+--------------------------------------+--+
+ *   ┌──┬──────────────────────────────────────┬──┐
+ *   │  │ S O M E  T E X T                     │^ │
+ *   │ >│ S O M E  T E X T                     │  │
+ *   │  │ S O M E  T E X T                     │  │
+ *   │  │ S O M E  T E X T : V A L █           │v │
+ *   └──┴──────────────────────────────────────┴──┘
  *                       Blinker --^            ^
  *                               Indicators ----+
  * 
@@ -58,7 +58,7 @@ class DisplayInterface {
     virtual void clearBlinker();
     virtual void drawBlinker();
     virtual void resetBlinker(uint8_t blinkerPosition);
-    uint8_t getBlinkerCol() const { return blinkerPosition; }
+    uint8_t getBlinkerPosition() const { return blinkerPosition; }
     virtual bool drawChar(char c) = 0;
     // Indicators
     virtual void clearUpIndicator();
