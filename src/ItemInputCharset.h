@@ -77,10 +77,7 @@ class ItemInputCharset : public ItemInput {
             ItemInput::back();
             return;
         }
-        charEditMode = false;
-        charsetPosition = -1;
-        MenuItem::draw();
-        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition()));
+        stopCharsetEditMode();
     };
 
     void left() override {
@@ -121,7 +118,6 @@ class ItemInputCharset : public ItemInput {
         if (!charEditMode) {
             initCharsetEditMode();
         }
-        charEditMode = true;
         charsetPosition = constrain(charsetPosition - 1, 0, charsetSize);
         display->drawChar(charset[charsetPosition]);
     }
