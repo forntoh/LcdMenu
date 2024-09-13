@@ -1,6 +1,7 @@
 #include <ItemList.h>
 #include <ItemProgress.h>
 #include <ItemToggle.h>
+#include <ItemInputCharsetSimple.h>
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
@@ -26,6 +27,7 @@ String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple",
 
 MAIN_MENU(
     ITEM_BASIC("Connect to WiFi"),
+    ITEM_INPUT_CHARSET_SIMPLE("Con", "6525637", "0123456789", 10, [](char *value) { Serial.println(value); }),
     ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
     ITEM_BASIC("Blink SOS"),
     ITEM_PROGRESS("Dist", 10, intMapping, callback),

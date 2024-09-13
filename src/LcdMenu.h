@@ -42,12 +42,6 @@ class LcdMenu {
      */
     uint8_t top = 1;
     uint8_t previousTop = 1;
-
-    /**
-     * Will prevent left and right movement when in edit mode and character
-     * picker is active
-     */
-    bool isCharPickerActive = false;
     /**
      * Last visible item's position in the menu array
      */
@@ -322,17 +316,7 @@ class LcdMenu {
      */
     void type(const char character) {
         currentMenuTable[cursorPosition]->typeChar(character);
-        //
-        isCharPickerActive = false;
     }
-
-    void drawChar(char c) {
-        if (!lcd.getEditModeEnabled()) {
-            return;
-        }
-        isCharPickerActive = lcd.drawChar(c); 
-    }
-
     /**
      * Clear the value of the input field
      */

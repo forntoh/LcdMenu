@@ -1,11 +1,11 @@
-#ifndef ItemInputCharset_H
+#ifndef ItemInputCharsetSimple_H
 #define ItemInputCharset_H
 
 #include <utils/utils.h>
 
 #include "ItemInput.h"
 
-class ItemInputCharset : public ItemInput {
+class ItemInputCharsetSimple : public ItemInput {
    private:
     const char* charset;
     const uint8_t charsetSize;
@@ -43,7 +43,7 @@ class ItemInputCharset : public ItemInput {
     }
 
    public:
-    ItemInputCharset(const char* text, char* value, const char* charset,
+    ItemInputCharsetSimple(const char* text, char* value, const char* charset,
                      const uint8_t charsetSize, fptrStr callback)
         : ItemInput(text, value, callback),
           charset(charset),
@@ -55,6 +55,7 @@ class ItemInputCharset : public ItemInput {
             return;
         }
         if (!charEditMode) {
+            initCharsetEditMode();
             return;
         }
         uint8_t length = strlen(value);
@@ -85,42 +86,32 @@ class ItemInputCharset : public ItemInput {
         if (!display->getEditModeEnabled()) {
             return;
         }
-        if (charEditMode) {
-            stopCharsetEditMode();
+        if (!charEditMode) {
+            ItemInput::left();
+            return;
         }
-        ItemInput::left();
+        charsetPosition = constrain(charsetPosition - 1, 0, charsetSize);
+        display->drawChar(charset[charsetPosition]);
     }
 
     void right() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
-        if (charEditMode) {
-            stopCharsetEditMode();
-        }
-        ItemInput::right();
-    }
-
-    void up() override {
-        if (!display->getEditModeEnabled()) {
-            return;
-        }
         if (!charEditMode) {
-            initCharsetEditMode();
+            ItemInput::right();
+            return;
         }
         charsetPosition = (charsetPosition + 1) % charsetSize;
         display->drawChar(charset[charsetPosition]);
     }
 
+    void up() override {
+        // Do nothing
+    }
+
     void down() override {
-        if (!display->getEditModeEnabled()) {
-            return;
-        }
-        if (!charEditMode) {
-            initCharsetEditMode();
-        }
-        charsetPosition = constrain(charsetPosition - 1, 0, charsetSize);
-        display->drawChar(charset[charsetPosition]);
+        // Do nothing
     }
 
     void clear() override {
@@ -136,6 +127,6 @@ class ItemInputCharset : public ItemInput {
 
 };
 
-#define ITEM_INPUT_CHARSET(...) (new ItemInputCharset(__VA_ARGS__))
+#define ITEM_INPUT_CHARSET_SIMPLE(...) (new ItemInputCharsetSimple(__VA_ARGS__))
 
 #endif
