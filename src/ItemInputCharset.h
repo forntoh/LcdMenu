@@ -55,6 +55,10 @@ class ItemInputCharset : public ItemInput {
         charsetPosition = -1;
     }
 
+    void typeChar(const char character) override {
+        // Do nothing
+    }
+
 };
 
 #endif
