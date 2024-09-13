@@ -45,7 +45,7 @@ class ItemInputCharset : public ItemInput {
         if (!display->getEditModeEnabled()) {
             return;
         }
-        charsetPosition = (charsetPosition - 1) % charsetSize;
+        charsetPosition = constrain(charsetPosition - 1, 0, charsetSize);
         changeChar(charset[charsetPosition]);
     }
 
