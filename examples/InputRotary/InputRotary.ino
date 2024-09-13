@@ -1,5 +1,6 @@
 #include <ItemCommand.h>
 #include <ItemInput.h>
+#include <ItemInputCharsetSimple.h>
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
@@ -30,7 +31,7 @@ MAIN_MENU(
 SUB_MENU(
     usernameMenu,
     mainMenu,
-    ITEM_INPUT("User", inputCallback),
+    ITEM_INPUT_CHARSET_SIMPLE("User", "", charset, CHARSET_SIZE, inputCallback),
     ITEM_COMMAND("Clear", clearInput));
 
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
@@ -42,9 +43,6 @@ RotaryNavConfig menuConfig = {
     .encoder = &encoder,
     .menu = &menu,
     .longPressDuration = 1000,
-    .charset = charset,
-    .charsetSize = CHARSET_SIZE,
-    .charsetPosition = charsetPosition,
 };
 
 void setup() {
