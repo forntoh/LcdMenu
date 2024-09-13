@@ -55,7 +55,7 @@ class ItemInput : public MenuItem {
      *        ├───────────────┤
      *        │<── viewSize ─>│
      * 
-     * Effectivelly const, but initialized lately when display is injected.
+     * Effectively const, but initialized lately when display is injected.
      */
     uint8_t viewSize;
     /**
