@@ -33,6 +33,7 @@ class ItemInputCharset : public ItemInput {
         : ItemInput(text, value, callback),
           charset(charset),
           charsetSize(charsetSize) {}
+
     void up() override {
         if (!display->getEditModeEnabled()) {
             return;
@@ -53,6 +54,7 @@ class ItemInputCharset : public ItemInput {
         MenuItem::clear();
         charsetPosition = -1;
     }
+
 };
 
 #endif
