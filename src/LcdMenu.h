@@ -175,6 +175,7 @@ class LcdMenu {
      */
     void up() {
         if (lcd.getEditModeEnabled()) {
+            currentMenuTable[cursorPosition]->up();
             return;
         }
         //
@@ -206,6 +207,7 @@ class LcdMenu {
      */
     void down() {
         if (lcd.getEditModeEnabled()) {
+            currentMenuTable[cursorPosition]->down();
             return;
         }
         //

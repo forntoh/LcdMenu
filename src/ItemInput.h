@@ -28,7 +28,7 @@
  * Value area is scrollable, see `view`.
  */
 class ItemInput : public MenuItem {
-   private:
+   protected:
     /**
      * @brief String value of item.
      */
@@ -92,6 +92,7 @@ class ItemInput : public MenuItem {
         //
         return constrain(blinkerPosition, lb, ub);
     }
+
    public:
     /**
      * Construct a new ItemInput object with an initial value.
@@ -139,6 +140,10 @@ class ItemInput : public MenuItem {
      * @return The function pointer to the callback function.
      */
     fptrStr getCallbackStr() { return callback; }
+
+    void up() override {}
+
+    void down() override {}
 
     void enter() override {
         if (display->getEditModeEnabled()) {
