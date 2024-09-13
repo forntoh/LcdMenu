@@ -149,11 +149,17 @@ class ItemInput : public MenuItem {
         if (display->getEditModeEnabled()) {
             return;
         }
-        cursor = 0;
-        view = 0;
+        // Move cursor to the latest index
+        uint8_t length = strlen(value);
+        cursor = length;
+        // Move view if needed
+        if (cursor > viewSize) {
+            view = length - (viewSize - 1);
+        }
+        // Redraw
         MenuItem::draw();
         display->setEditModeEnabled(true);
-        display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2));
+        display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2 + cursor - view));
         display->drawBlinker();
     };
 
@@ -161,8 +167,12 @@ class ItemInput : public MenuItem {
         if (!display->getEditModeEnabled()) {
             return;
         }
-        display->setEditModeEnabled(false);
         display->clearBlinker();
+        display->setEditModeEnabled(false);
+        // Move view to 0 and redraw before exit
+        cursor = 0;
+        view = 0;
+        MenuItem::draw();
         if (callback != NULL) {
             callback(value);
         }

@@ -13,27 +13,33 @@ class ItemInputCharset : public ItemInput {
     int8_t charsetPosition = -1;
     bool charEditMode = false;
 
-    int8_t charsetIndexOf(const char character) {
-        char *e = strchr(charset, character);
-        if (e == NULL) {
-            return -1;
-        }
-        return (int)(e - charset);
-    }
-
+    /**
+     * Initialize `charset edit mode`.
+     * Set `charEditMode` flag and search for currently selected char in charset.
+     */
     void initCharsetEditMode() {
         charEditMode = true;
         if (cursor < strlen(value)) {
-            charsetPosition = charsetIndexOf(value[cursor]);
-        } else {
-            charsetPosition = -1;
+            char *e = strchr(charset, value[cursor]);
+            if (e != NULL) {
+                charsetPosition = (int)(e - charset);
+                return;
+            }
         }
+        charsetPosition = -1;
     }
 
+    /**
+     * Stop `charset edit mode`.
+     * Unset `charEditMode` flag and draw actual char from `value`.
+     */
     void stopCharsetEditMode() {
-        // Revert char
-        display->drawChar(value[cursor]);
         charEditMode = false;
+        if (cursor < strlen(value)) {
+            display->drawChar(value[cursor]);
+        } else {
+            display->drawChar(' ');
+        }
     }
 
    public:
