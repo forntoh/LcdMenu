@@ -3,61 +3,27 @@
   "author": "Uri Shaked",
   "editor": "wokwi",
   "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 200, "left": 20, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd1", "top": 16, "left": 15.2, "attrs": { "pins": "i2c" } },
     {
-      "type": "wokwi-arduino-uno",
-      "id": "uno",
-      "top": 200,
-      "left": 20,
+      "type": "wokwi-ky-040",
+      "id": "encoder1",
+      "top": 41.4,
+      "left": 318.1,
+      "rotate": 90,
       "attrs": {}
-    },
-    {
-      "type": "wokwi-membrane-keypad",
-      "id": "keypad",
-      "top": 19.86,
-      "left": 334.39,
-      "attrs": {
-        "columns": "3",
-        "keys": [
-          "",
-          "↑",
-          "",
-          "+",
-          "←",
-          "•",
-          "→",
-          "-",
-          "",
-          "↓",
-          "",
-          "*",
-          "↩",
-          "0",
-          "✕",
-          "/"
-        ]
-      }
-    },
-    {
-      "type": "wokwi-lcd1602",
-      "id": "lcd1",
-      "top": 20.06,
-      "left": 19.11,
-      "attrs": { "pins": "i2c" }
     }
   ],
   "connections": [
-    ["uno:A3", "keypad:C1", "brown", ["v36.94", "h192.89"]],
-    ["uno:A2", "keypad:C2", "gray", ["v47.76", "h211.89"]],
-    ["uno:A1", "keypad:C3", "orange", ["v59.27", "h230.89"]],
-    ["uno:A0", "keypad:C4", "pink", ["v88", "*", "h0", "v0"]],
-    ["uno:5", "keypad:R1", "blue", ["v-34", "h96", "*", "v12"]],
-    ["uno:4", "keypad:R2", "green", ["v-30", "h80", "*", "v16"]],
-    ["uno:3", "keypad:R3", "purple", ["v-26", "h64", "*", "v20"]],
-    ["uno:2", "keypad:R4", "gold", ["v-22", "h48", "v229.85", "h135.14"]],
-    ["lcd1:SDA", "uno:A4", "blue", ["h-30.42", "v369.27", "h273.31"]],
-    ["lcd1:SCL", "uno:A5", "limegreen", ["h-16.48", "v370.62", "h268.87"]],
-    ["lcd1:VCC", "uno:5V", "red", ["h-42.82", "v366.38", "h199.71"]],
-    ["lcd1:GND", "uno:GND.1", "black", ["h-24.23", "v175.22"]]
+    [ "lcd1:SDA", "uno:A4", "blue", [ "h-30.42", "v369.27", "h273.31" ] ],
+    [ "lcd1:SCL", "uno:A5", "limegreen", [ "h-16.48", "v370.62", "h268.87" ] ],
+    [ "lcd1:VCC", "uno:5V", "red", [ "h-42.82", "v366.38", "h199.71" ] ],
+    [ "lcd1:GND", "uno:GND.1", "black", [ "h-24.23", "v175.22" ] ],
+    [ "encoder1:CLK", "uno:2", "green", [ "v2.1", "h-90.4" ] ],
+    [ "encoder1:DT", "uno:3", "green", [ "h-0.1", "v74.6" ] ],
+    [ "encoder1:SW", "uno:4", "green", [ "h-0.1", "v74.6" ] ],
+    [ "encoder1:GND", "uno:GND.1", "black", [ "h-0.8", "v74.6" ] ],
+    [ "encoder1:VCC", "uno:5V", "red", [ "h-0.4", "v288", "h-194.4" ] ]
   ],
   "dependencies": {}
 }

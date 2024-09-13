@@ -1,0 +1,24 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 0
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true
+IndentCaseLabels: true
+IndentCaseBlocks: true
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: false
+  AfterControlStatement: false
+  AfterEnum: true
+  AfterFunction: false
+  AfterObjCDeclaration: true
+  AfterStruct: false
+  AfterUnion: true
+  AfterExternBlock: true
+  BeforeElse: false
+  SplitEmptyFunction: true
+BinPackArguments: false
+BinPackParameters: false
+AlignAfterOpenBracket: Align
+AllowAllParametersOfDeclarationOnNextLine: false
