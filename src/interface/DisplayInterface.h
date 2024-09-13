@@ -5,16 +5,16 @@
 #include <utils/constants.h>
 
 /**
- *    +-- Cursor
- *    v            v---- Items
+ *    ┌── Cursor
+ *    v            v──── Items
  *   ┌──┬──────────────────────────────────────┬──┐
  *   │  │ S O M E  T E X T                     │^ │
  *   │ >│ S O M E  T E X T                     │  │
  *   │  │ S O M E  T E X T                     │  │
  *   │  │ S O M E  T E X T : V A L █           │v │
  *   └──┴──────────────────────────────────────┴──┘
- *                       Blinker --^            ^
- *                               Indicators ----+
+ *                       Blinker ──^            ^
+ *                               Indicators ────┘
  * 
  */
 class DisplayInterface {
