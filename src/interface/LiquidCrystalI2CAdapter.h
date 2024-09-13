@@ -97,6 +97,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         //
         lcd.setCursor(blinkerPosition, cursorRow);
         lcd.print(c);
+        lcd.setCursor(blinkerPosition, cursorRow); // Move back
         // Log
         printCmd(F("DRAW-CHAR"), c);
         return true;

@@ -11,20 +11,29 @@ class ItemInputCharset : public ItemInput {
     const uint8_t charsetSize;
     // Active index of the charset
     int8_t charsetPosition = -1;
+    bool charEditMode = false;
 
-    void changeChar(const char character) {
-        uint8_t length = strlen(value);
-        if (cursor < length) {
-            value[cursor] = character;
-        } else {
-            char* buf = new char[length + 2];
-            concat(value, character, buf);
-            value = buf;
+    int8_t charsetIndexOf(const char character) {
+        char *e = strchr(charset, character);
+        if (e == NULL) {
+            return -1;
         }
-        MenuItem::draw();
-        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition()));
-        // Log
-        printCmd(F("TYPE-CHARSET"), character);
+        return (int)(e - charset);
+    }
+
+    void initCharsetEditMode() {
+        charEditMode = true;
+        if (cursor < strlen(value)) {
+            charsetPosition = charsetIndexOf(value[cursor]);
+        } else {
+            charsetPosition = -1;
+        }
+    }
+
+    void stopCharsetEditMode() {
+        // Revert char
+        display->drawChar(value[cursor]);
+        charEditMode = false;
     }
 
    public:
@@ -34,25 +43,90 @@ class ItemInputCharset : public ItemInput {
           charset(charset),
           charsetSize(charsetSize) {}
 
+    void enter() override {
+        if (!display->getEditModeEnabled()) {
+            ItemInput::enter();
+            return;
+        }
+        if (!charEditMode) {
+            return;
+        }
+        uint8_t length = strlen(value);
+        if (cursor < length) {
+            value[cursor] = charset[charsetPosition];
+        } else {
+            char* buf = new char[length + 2];
+            concat(value, charset[charsetPosition], buf);
+            value = buf;
+        }
+        printCmd(F("CHARSET"), value);
+        right();
+        charEditMode = false;
+        charsetPosition = -1;
+    }
+
+    void back() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        if (!charEditMode) {
+            ItemInput::back();
+            return;
+        }
+        charEditMode = false;
+        charsetPosition = -1;
+        MenuItem::draw();
+        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition()));
+    };
+
+    void left() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        if (charEditMode) {
+            stopCharsetEditMode();
+        }
+        ItemInput::left();
+    }
+
+    void right() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        if (charEditMode) {
+            stopCharsetEditMode();
+        }
+        ItemInput::right();
+    }
+
     void up() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
+        if (!charEditMode) {
+            initCharsetEditMode();
+        }
         charsetPosition = (charsetPosition + 1) % charsetSize;
-        changeChar(charset[charsetPosition]);
+        display->drawChar(charset[charsetPosition]);
     }
 
     void down() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
+        if (!charEditMode) {
+            initCharsetEditMode();
+        }
+        charEditMode = true;
         charsetPosition = constrain(charsetPosition - 1, 0, charsetSize);
-        changeChar(charset[charsetPosition]);
+        display->drawChar(charset[charsetPosition]);
     }
 
     void clear() override {
-        MenuItem::clear();
-        charsetPosition = -1;
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        ItemInput::clear();
     }
 
     void typeChar(const char character) override {
@@ -60,5 +134,7 @@ class ItemInputCharset : public ItemInput {
     }
 
 };
+
+#define ITEM_INPUT_CHARSET(...) (new ItemInputCharset(__VA_ARGS__))
 
 #endif

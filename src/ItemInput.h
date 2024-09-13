@@ -158,6 +158,9 @@ class ItemInput : public MenuItem {
     };
 
     void back() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
         display->setEditModeEnabled(false);
         display->clearBlinker();
         if (callback != NULL) {
@@ -166,6 +169,9 @@ class ItemInput : public MenuItem {
     };
 
     void left() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
         if (cursor == 0) {
             return;
         }
@@ -180,6 +186,9 @@ class ItemInput : public MenuItem {
     };
 
     void right() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
         if (cursor == strlen(value)) {
             return;
         }
@@ -208,6 +217,9 @@ class ItemInput : public MenuItem {
      * Removes the character at the current cursor position.
      */
     void backspace() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
         if (strlen(value) == 0 || cursor == 0) {
             return;
         }
@@ -227,6 +239,9 @@ class ItemInput : public MenuItem {
      * @param character character to append
      */
     void typeChar(const char character) override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
         uint8_t length = strlen(value);
         if (cursor < length) {
             char start[length];
@@ -255,6 +270,9 @@ class ItemInput : public MenuItem {
      * Clear the value of the input field
      */
     void clear() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
         //
         // set the value
         //
