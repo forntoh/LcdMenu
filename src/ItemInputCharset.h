@@ -67,8 +67,6 @@ class ItemInputCharset : public ItemInput {
         }
         printCmd(F("CHARSET"), value);
         right();
-        charEditMode = false;
-        charsetPosition = -1;
     }
 
     void back() override {
