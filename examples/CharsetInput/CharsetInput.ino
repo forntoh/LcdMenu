@@ -22,7 +22,7 @@ void inputCallback(char *value);
 
 MAIN_MENU(
     new ItemInput("Con", "", inputCallback),
-    new ItemInputCharset("Con2", "", charset, CHARSET_SIZE, inputCallback),
+    new ItemInputCharset("Con2", "", charset, 10, inputCallback),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
@@ -40,9 +40,6 @@ SimpleNavConfig navConfig = {
     .right = 'd',
     .clear = 'c',
     .backspace = 'v',
-    .charset = charset,
-    .charsetSize = 10,
-    .charsetPosition = -1,
 };
 
 void setup() {
