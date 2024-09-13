@@ -6,6 +6,7 @@
 */
 
 #include <ItemInput.h>
+#include <ItemInputCharset.h>
 #include <LcdMenu.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/commandProccesors.h>
@@ -26,14 +27,13 @@
 #define CHARSET_SIZE 10
 // Create your charset
 char charset[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-// Active index of the charset
-int8_t charsetPosition = -1;
 
 // Declare the call back function
 void inputCallback(char* value);
 
 MAIN_MENU(
-    ITEM_INPUT("Con", inputCallback),
+    new ItemInput("Con", "", inputCallback),
+    new ItemInputCharset("Con2", "", charset, CHARSET_SIZE, inputCallback),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random")
@@ -50,8 +50,8 @@ void setup() {
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-    processMenuCommand(menu, command, charsetPosition, charset, CHARSET_SIZE,
-                       UP, DOWN, ENTER, BACK, CLEAR, BACKSPACE, LEFT, RIGHT);
+    processMenuCommand(menu, command, UP, DOWN, LEFT, RIGHT, ENTER, BACK, CLEAR,
+                       BACKSPACE);
 }
 /**
  * Define callback
