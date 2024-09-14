@@ -38,7 +38,7 @@ class ItemCommand : public MenuItem {
      *
      * @return The function pointer to the callback function.
      */
-    fptr getCallback() override { return callback; }
+    fptr getCallback() { return callback; }
 
     /**
      * Set the callback function for this item.
@@ -46,7 +46,14 @@ class ItemCommand : public MenuItem {
      * @param callback A reference to the new callback function to be invoked
      * when the item is entered.
      */
-    void setCallBack(fptr callback) override { this->callback = callback; };
+    void setCallBack(fptr callback) { this->callback = callback; };
+    
+    void enter() override {
+        if (callback != NULL) {
+            callback();
+        }
+    };
+
 };
 
 #define ITEM_COMMAND(...) (new ItemCommand(__VA_ARGS__))

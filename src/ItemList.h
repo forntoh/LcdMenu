@@ -26,15 +26,16 @@
 #ifndef ItemList_H
 #define ItemList_H
 #include "MenuItem.h"
+#include <utils/utils.h>
 
 class ItemList : public MenuItem {
-   private:
+  private:
     fptrInt callback = NULL;  ///< Pointer to a callback function
     String* items = NULL;     ///< Pointer to an array of items
     const uint8_t itemCount;  ///< The total number of items in the list
     uint16_t itemIndex = 0;   ///< The current selected item index
 
-   public:
+  public:
     /**
      * @brief Constructs a new ItemList object.
      *
@@ -44,26 +45,22 @@ class ItemList : public MenuItem {
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
      */
-    ItemList(const char* key, String* items, const uint8_t itemCount,
-             fptrInt callback)
-        : MenuItem(key, MENU_ITEM_LIST), itemCount(itemCount) {
-        this->callback = callback;
-        this->items = items;
-    }
+    ItemList(const char* key, String* items, const uint8_t itemCount, fptrInt callback)
+        : MenuItem(key, MENU_ITEM_LIST), callback(callback), items(items), itemCount(itemCount) {}
 
     /**
      * @brief Returns the index of the currently selected item.
      *
      * @return The index of the currently selected item.
      */
-    uint16_t getItemIndex() override { return itemIndex; }
+    uint16_t getItemIndex() { return itemIndex; }
 
     /**
      * @brief Changes the index of the current item.
      *
      * @return The index of the item to be selected.
      */
-    void setItemIndex(uint16_t itemIndex) override {
+    void setItemIndex(uint16_t itemIndex) {
         this->itemIndex = constrain(itemIndex, 0, (uint16_t)(itemCount)-1);
     }
 
@@ -72,21 +69,69 @@ class ItemList : public MenuItem {
      *
      * @return The the callback bound to the current item.
      */
-    fptrInt getCallbackInt() override { return callback; }
+    fptrInt getCallbackInt() { return callback; }
 
     /**
      * @brief Returns the total number of items in the list.
      *
      * @return The total number of items in the list.
      */
-    uint8_t getItemCount() override { return itemCount; };
+    uint8_t getItemCount() { return itemCount; };
 
     /**
      * @brief Returns a pointer to the array of items.
      *
      * @return A pointer to the array of items.
      */
-    String* getItems() override { return items; }
+    String* getItems() { return items; }
+
+    void enter() override {
+        if (display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(true);
+    };
+
+    void back() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(false);
+        if (callback != NULL) {
+            callback(itemIndex);
+        }
+    };
+
+    void down() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        uint8_t previousIndex = itemIndex;
+        itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
+        if (previousIndex != itemIndex) {
+            printCmd(F("LEFT"), items[itemIndex].c_str());
+            MenuItem::draw();
+        }
+    };
+
+    void up() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        uint8_t previousIndex = itemIndex;
+        itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
+        if (previousIndex != itemIndex) {
+            printCmd(F("RIGHT"), items[itemIndex].c_str());
+            MenuItem::draw();
+        }
+    };
+
+    void draw(uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
+        display->drawItem(row, text, ':', buf);
+    }
 };
 
 #define ITEM_STRING_LIST(...) (new ItemList(__VA_ARGS__))

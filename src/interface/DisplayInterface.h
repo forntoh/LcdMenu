@@ -2,50 +2,72 @@
 #define DISPLAY_INTERFACE_H
 
 #include <stdint.h>
+#include <utils/constants.h>
 
+/**
+ *    ┌── Cursor
+ *    v            v──── Items
+ *   ┌──┬──────────────────────────────────────┬──┐
+ *   │  │ S O M E  T E X T                     │^ │
+ *   │ >│ S O M E  T E X T                     │  │
+ *   │  │ S O M E  T E X T                     │  │
+ *   │  │ S O M E  T E X T : V A L █           │v │
+ *   └──┴──────────────────────────────────────┴──┘
+ *                       Blinker ──^            ^
+ *                               Indicators ────┘
+ * 
+ */
 class DisplayInterface {
    protected:
     uint8_t maxRows;
     uint8_t maxCols;
-    uint8_t cursorPosition;
-    MenuItem** currentMenuTable = NULL;
-    bool isEditModeEnabled;
+    uint8_t cursorRow = 0;
+    uint8_t blinkerPosition;
+    bool isEditModeEnabled = false;
 
    public:
-    uint8_t blinkerPosition;
-
     virtual void begin() = 0;
-
-    virtual void update(MenuItem* menu[], uint8_t cursorPosition, uint8_t top,
-                        uint8_t bottom) = 0;
-    virtual void drawMenu() = 0;
-    virtual void drawCursor() = 0;
-#ifdef ItemInput_H
-    virtual void resetBlinker() = 0;
-    virtual bool drawChar(char c) = 0;
-#endif
-    virtual void clear() = 0;
-
-    virtual ~DisplayInterface() {}
-
-    bool isAtTheStart() {
-        byte menuType = currentMenuTable[cursorPosition - 1]->getType();
-        return menuType == MENU_ITEM_MAIN_MENU_HEADER ||
-               menuType == MENU_ITEM_SUB_MENU_HEADER;
-    }
-
-    bool isAtTheEnd() { return isAtTheEnd(cursorPosition); }
-
-    bool isAtTheEnd(uint8_t position) {
-        return currentMenuTable[position + 1]->getType() ==
-               MENU_ITEM_END_OF_MENU;
-    }
-
     uint8_t getMaxRows() const { return maxRows; }
     uint8_t getMaxCols() const { return maxCols; }
-
-    void setEditModeEnabled(bool isEnabled) { isEditModeEnabled = isEnabled; }
+    virtual void clear() = 0;
+    virtual void setBacklight(bool enabled) = 0;
+    // Items
+    virtual void drawItem(uint8_t row, const char* text);
+    virtual void drawItem(uint8_t row, const char* text, char separator, char* value);
+    // Cursor
+    virtual void clearCursor();
+    virtual void drawCursor();
+    virtual void moveCursor(uint8_t newCursorRow) {
+        if (cursorRow == newCursorRow) {
+            return;
+        }
+        clearCursor();
+        cursorRow = newCursorRow;
+        drawCursor();
+    }
+    void setEditModeEnabled(bool enabled) {
+        if (isEditModeEnabled == enabled) {
+            return;
+        }
+        isEditModeEnabled = enabled;
+        drawCursor();
+    }
     bool getEditModeEnabled() { return isEditModeEnabled; }
+    uint8_t getCursorRow() const { return cursorRow; }
+    // Blinker
+    virtual void clearBlinker();
+    virtual void drawBlinker();
+    virtual void resetBlinker(uint8_t blinkerPosition);
+    uint8_t getBlinkerPosition() const { return blinkerPosition; }
+    virtual bool drawChar(char c) = 0;
+    // Indicators
+    virtual void clearUpIndicator();
+    virtual void drawUpIndicator();
+    virtual void clearDownIndicator();
+    virtual void drawDownIndicator();
+    // Timer
+    virtual void restartTimer();
+    virtual ~DisplayInterface() {}
 };
 
 #endif  // DISPLAY_INTERFACE_H

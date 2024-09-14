@@ -7,19 +7,20 @@
 #define ItemProgress_H
 
 #include "MenuItem.h"
+#include <utils/utils.h>
 
 /**
  * @class ItemProgress
  * @brief ItemProgress indicates that the current item is a list.
  */
 class ItemProgress : public MenuItem {
-   private:
+  protected:
     fptrMapping mapping = NULL;  ///< Pointer to a mapping function
     fptrInt callback = NULL;     ///< Pointer to a callback function
     uint16_t progress = 0;       ///< The progress
     uint8_t stepLength = 1;
 
-   public:
+  public:
     /**
      * @brief Constructs a new ItemProgress object.
      *
@@ -29,8 +30,7 @@ class ItemProgress : public MenuItem {
      * @param callback A pointer to the callback function to execute when this
      * menu item is selected.
      */
-    ItemProgress(const char* key, uint16_t start, uint8_t stepLength,
-                 fptrMapping mapping, fptrInt callback)
+    ItemProgress(const char* key, uint16_t start, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
         : MenuItem(key, MENU_ITEM_PROGRESS),
           mapping(mapping),
           callback(callback),
@@ -43,23 +43,26 @@ class ItemProgress : public MenuItem {
     ItemProgress(const char* key, fptrInt callback)
         : ItemProgress(key, 0, 1, NULL, callback) {}
 
-    ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping,
-                 fptrInt callback)
+    ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
         : ItemProgress(key, 0, stepLength, mapping, callback) {}
 
     /**
      * @brief Increments the progress of the list.
      */
-    void increment() override {
-        if (progress >= MAX_PROGRESS) return;
+    void increment() {
+        if (progress >= MAX_PROGRESS) {
+            return;
+        }
         progress += stepLength;
     }
 
     /**
      * @brief Decrements the progress of the list.
      */
-    void decrement() override {
-        if (progress <= MIN_PROGRESS) return;
+    void decrement() {
+        if (progress <= MIN_PROGRESS) {
+            return;
+        }
         progress -= stepLength;
     }
 
@@ -67,20 +70,22 @@ class ItemProgress : public MenuItem {
      * Set the progress on the item
      * @param uint16_t progress for the item
      */
-    void setProgress(uint16_t value) override {
-        if (progress < MIN_PROGRESS || progress > MAX_PROGRESS) return;
+    void setProgress(uint16_t value) {
+        if (progress < MIN_PROGRESS || progress > MAX_PROGRESS) {
+            return;
+        }
         progress = value;
     }
 
     /**
      * Return the progress
      */
-    uint16_t getItemIndex() override { return progress; }
+    uint16_t getItemIndex() { return progress; }
 
     /**
      * Return the callback
      */
-    fptrInt getCallbackInt() override { return callback; }
+    fptrInt getCallbackInt() { return callback; }
 
     /**
      * @brief Returns the value to be displayed.
@@ -89,14 +94,61 @@ class ItemProgress : public MenuItem {
      *
      * @return A pointer to the value of the current list item.
      */
-    char* getValue() override {
+    char* getValue() {
         if (mapping == NULL) {
             static char buf[6];
             itoa(progress, buf, 10);
             return buf;
-        } else {
-            return mapping(progress);
         }
+        return mapping(progress);
+    }
+
+    void enter() override {
+        if (display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(true);
+    };
+
+    void back() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        display->setEditModeEnabled(false);
+        if (callback != NULL) {
+            callback(progress);
+        }
+    };
+
+    void down() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        uint16_t oldProgress = progress;
+        decrement();
+        if (progress != oldProgress) {
+            printCmd(F("LEFT"), getValue());
+            MenuItem::draw();
+        }
+    };
+
+    void up() override {
+        if (!display->getEditModeEnabled()) {
+            return;
+        }
+        uint16_t oldProgress = progress;
+        increment();
+        if (progress != oldProgress) {
+            printCmd(F("RIGHT"), getValue());
+            MenuItem::draw();
+        }
+    };
+
+    void draw(uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(getValue(), 0, maxCols - strlen(text) - 2, buf);
+        display->drawItem(row, text, ':', buf);
     }
 };
 

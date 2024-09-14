@@ -27,7 +27,9 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
+#include "interface/DisplayInterface.h"
 #include "utils/constants.h"
+#include <utils/utils.h>
 
 /**
  * The MenuItem class
@@ -36,42 +38,28 @@ class MenuItem {
    protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;
+    DisplayInterface* display;
 
    public:
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
-    /**
-     * ## Getters
-     */
+    virtual void initialize(DisplayInterface* display) {
+        this->display = display;
+        MenuItem** subMenu = this->getSubMenu();
+        if (subMenu == NULL) {
+            return;
+        }
+        for (uint8_t i = 1; subMenu[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
+            subMenu[i]->initialize(display);
+        }
+    }
 
-    /**
-     * `Boolean` state of the item *(either ON or OFF)*
-     */
-    virtual boolean isOn() { return false; }
-    /**
-     * String value of an `ItemInput`
-     */
-    virtual char* getValue() { return NULL; }
     /**
      * Get the text of the item
      * @return `String` - Item's text
      */
     virtual const char* getText() { return text; }
-    /**
-     * Get the callback of the item
-     * @return `ftpr` - Item's callback
-     */
-    virtual fptr getCallback() { return NULL; }
-    /**
-     * Get the callback of the item
-     * @return `fptrInt` - Item's callback
-     */
-    virtual fptrInt getCallbackInt() { return NULL; }
-    /**
-     * Get the callback of the item
-     * @return `fptrStr` - Item's callback
-     */
-    virtual fptrStr getCallbackStr() { return NULL; }
+
     /**
      * Get the sub menu at item
      * @return `MenuItem*` - Submenu at item
@@ -83,67 +71,29 @@ class MenuItem {
      */
     byte getType() { return type; }
     /**
-     * Get the text when toggle is ON
-     * @return `String` - ON text
-     */
-    virtual const char* getTextOn() { return NULL; }
-    /**
-     * Get the text when toggle is OFF
-     * @return `String` - OFF text
-     */
-    virtual const char* getTextOff() { return NULL; }
-    /**
-     * Current index of list for `ItemList`
-     */
-    virtual uint16_t getItemIndex() { return 0; }
-    /**
-     * Number of items in the list for `ItemList`
-     */
-    virtual uint8_t getItemCount() { return 0; };
-    /**
-     * Get the list of items
-     * @return `String*` - List of items
-     */
-    virtual String* getItems() { return NULL; }
-    /**
-     * @brief Increments the progress of the list.
-     */
-    virtual void increment(){};
-    /**
-     * @brief Decrements the progress of the list.
-     */
-    virtual void decrement(){};
-    /**
-     * ## Setters
-     */
-
-    /**
-     * `Boolean` state of the item *(either ON or OFF)*
-     */
-    virtual void setIsOn(boolean isOn){};
-    /**
-     * String value of an `ItemInput`
-     */
-    virtual void setValue(char* value){};
-    /**
      * Set the text of the item
      * @param text text to display for the item
      */
     void setText(const char* text) { this->text = text; };
-    /**
-     * Set the callback on the item
-     * @param callback reference to callback function
-     */
-    virtual void setCallBack(fptr callback){};
-    /**
-     * Current index of list for `ItemList`
-     */
-    virtual void setItemIndex(uint16_t itemIndex){};
-    /**
-     * Set the progress on the item
-     * @param uint16_t progress for the item
-     */
-    virtual void setProgress(uint16_t value){};
+
+    virtual void up() {};
+    virtual void down() {};
+    virtual void enter() {};
+    virtual void back() {};
+    virtual void left() {};
+    virtual void right() {};
+    virtual void backspace() {};
+    virtual void typeChar(const char character) {};
+    virtual void clear() {};
+    virtual void draw() {
+        draw(display->getCursorRow());
+    };
+    virtual void draw(uint8_t row) {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(text, 0, maxCols - 2, buf);
+        display->drawItem(row, buf);
+    };
 
     /**
      * Operators

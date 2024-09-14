@@ -6,6 +6,7 @@
 */
 
 #include <ItemInput.h>
+#include <ItemInputCharset.h>
 #include <LcdMenu.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
@@ -14,13 +15,13 @@
 #define LCD_COLS 16
 
 // Create your charset
-char charset[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+const char* charset = "0123456789";
 
 // Declare the call back function
-void inputCallback(char *value);
+void inputCallback(char* value);
 
 MAIN_MENU(
-    ITEM_INPUT("Con", inputCallback),
+    ITEM_INPUT_CHARSET("Con", "0123456", charset, inputCallback),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
@@ -38,9 +39,6 @@ SimpleNavConfig navConfig = {
     .right = 'd',
     .clear = 'c',
     .backspace = 'v',
-    .charset = charset,
-    .charsetSize = 10,
-    .charsetPosition = -1,
 };
 
 void setup() {
@@ -56,7 +54,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(char *value) {
+void inputCallback(char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);
