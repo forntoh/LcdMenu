@@ -45,12 +45,8 @@ class ItemList : public MenuItem {
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
      */
-    ItemList(const char* key, String* items, const uint8_t itemCount,
-             fptrInt callback)
-        : MenuItem(key, MENU_ITEM_LIST), itemCount(itemCount) {
-        this->callback = callback;
-        this->items = items;
-    }
+    ItemList(const char* key, String* items, const uint8_t itemCount, fptrInt callback)
+        : MenuItem(key, MENU_ITEM_LIST), callback(callback), items(items), itemCount(itemCount) {}
 
     /**
      * @brief Returns the index of the currently selected item.
