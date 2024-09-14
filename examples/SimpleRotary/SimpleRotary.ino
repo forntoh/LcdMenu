@@ -41,6 +41,7 @@ RotaryNavConfig menuConfig = {
     .encoder = &encoder,
     .menu = &menu,
     .longPressDuration = 1000,
+    .doublePressThreshold = 500,
 };
 
 void setup() {

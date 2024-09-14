@@ -8,12 +8,18 @@
  *
  * @param encoder Pointer to the rotary encoder instance
  * @param menu Pointer to the LCD menu instance
+ * @param doublePressThreshold Duration (ms) to consider a double press
  * @param longPressDuration Duration (ms) to consider a long press
+ * @param lastPressTime The last time the button was pressed
+ * @param pendingEnter Flag to indicate if an enter action is pending
  */
 struct RotaryNavConfig {
     SimpleRotary *encoder;
     LcdMenu *menu;
     uint16_t longPressDuration;
+    uint16_t doublePressThreshold;
+    unsigned long lastPressTime;
+    bool pendingEnter;
 };
 
 /**
@@ -29,11 +35,31 @@ void processWithRotaryEncoder(RotaryNavConfig *config) {
     } else if (rotation == 2) {
         config->menu->up(); // Call UP action
     }
-    // Handle button press (short and long press)
+
+    // Handle button press (short, long, and double press)
     uint8_t pressType = config->encoder->pushType(config->longPressDuration);
+    unsigned long currentTime = millis();
+
     if (pressType == 1) {
-        config->menu->enter(); // Call ENTER action (short press)
+        if (config->pendingEnter) {
+            if (config->doublePressThreshold > 0 &&
+                currentTime - config->lastPressTime < config->doublePressThreshold) {
+                config->menu->backspace(); // Call BACKSPACE action (double press)
+                config->pendingEnter = false;
+            }
+        } else {
+            config->pendingEnter = true;
+            config->lastPressTime = currentTime;
+        }
     } else if (pressType == 2) {
         config->menu->back(); // Call BACK action (long press)
+        config->pendingEnter = false;
+    }
+
+    // Check if the doublePressThreshold has elapsed for pending enter action
+    if ((!config->menu->lcd.getEditModeEnabled() && config->pendingEnter) ||
+        (config->pendingEnter && (currentTime - config->lastPressTime >= config->doublePressThreshold))) {
+        config->menu->enter(); // Call ENTER action (short press)
+        config->pendingEnter = false;
     }
 }
