@@ -6,7 +6,7 @@
 #include "ItemInput.h"
 
 class ItemInputCharset : public ItemInput {
-   private:
+  private:
     const char* charset;
     const uint8_t charsetSize;
     // Active index of the charset
@@ -20,7 +20,7 @@ class ItemInputCharset : public ItemInput {
     void initCharsetEditMode() {
         charEditMode = true;
         if (cursor < strlen(value)) {
-            char *e = strchr(charset, value[cursor]);
+            char* e = strchr(charset, value[cursor]);
             if (e != NULL) {
                 charsetPosition = (int)(e - charset);
                 return;
@@ -42,12 +42,11 @@ class ItemInputCharset : public ItemInput {
         }
     }
 
-   public:
-    ItemInputCharset(const char* text, char* value, const char* charset,
-                     const uint8_t charsetSize, fptrStr callback)
-        : ItemInput(text, value, callback),
-          charset(charset),
-          charsetSize(charsetSize) {}
+  public:
+    ItemInputCharset(const char* text, char* value, const char* charset, fptrStr callback)
+        : ItemInput(text, value, callback), charset(charset), charsetSize(strlen(charset)) {}
+    ItemInputCharset(const char* text, const char* charset, fptrStr callback)
+        : ItemInputCharset(text, (char*)"", charset, callback) {}
 
     void enter() override {
         if (!display->getEditModeEnabled()) {
@@ -101,7 +100,7 @@ class ItemInputCharset : public ItemInput {
         ItemInput::right();
     }
 
-    void up() override {
+    void down() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -112,7 +111,7 @@ class ItemInputCharset : public ItemInput {
         display->drawChar(charset[charsetPosition]);
     }
 
-    void down() override {
+    void up() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -133,7 +132,6 @@ class ItemInputCharset : public ItemInput {
     void typeChar(const char character) override {
         // Do nothing
     }
-
 };
 
 #define ITEM_INPUT_CHARSET(...) (new ItemInputCharset(__VA_ARGS__))

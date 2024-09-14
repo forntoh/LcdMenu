@@ -29,13 +29,13 @@
 #include <utils/utils.h>
 
 class ItemList : public MenuItem {
-   private:
+  private:
     fptrInt callback = NULL;  ///< Pointer to a callback function
     String* items = NULL;     ///< Pointer to an array of items
     const uint8_t itemCount;  ///< The total number of items in the list
     uint16_t itemIndex = 0;   ///< The current selected item index
 
-   public:
+  public:
     /**
      * @brief Constructs a new ItemList object.
      *
@@ -45,12 +45,8 @@ class ItemList : public MenuItem {
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
      */
-    ItemList(const char* key, String* items, const uint8_t itemCount,
-             fptrInt callback)
-        : MenuItem(key, MENU_ITEM_LIST), itemCount(itemCount) {
-        this->callback = callback;
-        this->items = items;
-    }
+    ItemList(const char* key, String* items, const uint8_t itemCount, fptrInt callback)
+        : MenuItem(key, MENU_ITEM_LIST), callback(callback), items(items), itemCount(itemCount) {}
 
     /**
      * @brief Returns the index of the currently selected item.
@@ -136,7 +132,6 @@ class ItemList : public MenuItem {
         substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
         display->drawItem(row, text, ':', buf);
     }
-
 };
 
 #define ITEM_STRING_LIST(...) (new ItemList(__VA_ARGS__))
