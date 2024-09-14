@@ -25,17 +25,9 @@ void processWithRotaryEncoder(RotaryNavConfig *config) {
     // Handle rotary encoder rotation
     uint8_t rotation = config->encoder->rotate();
     if (rotation == 1) {
-        if (config->menu->lcd.getEditModeEnabled()) {
-            config->menu->right(); // Call RIGHT action in edit mode
-        } else {
-            config->menu->down(); // Call DOWN action in normal mode
-        }
+        config->menu->down(); // Call DOWN action
     } else if (rotation == 2) {
-        if (config->menu->lcd.getEditModeEnabled()) {
-            config->menu->left(); // Call LEFT action in edit mode
-        } else {
-            config->menu->up(); // Call UP action in normal mode
-        }
+        config->menu->up(); // Call UP action
     }
     // Handle button press (short and long press)
     uint8_t pressType = config->encoder->pushType(config->longPressDuration);
