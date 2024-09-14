@@ -15,7 +15,7 @@
 #define LCD_COLS 16
 
 // Create your charset
-char charset[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+const char* charset = "0123456789";
 
 // Declare the call back function
 void inputCallback(char *value);

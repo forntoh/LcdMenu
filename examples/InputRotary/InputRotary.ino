@@ -12,7 +12,7 @@
 
 #define CHARSET_SIZE 26
 // Create your charset
-char charset[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 // Active index of the charset
 int8_t charsetPosition = -1;
 
