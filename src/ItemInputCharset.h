@@ -100,7 +100,7 @@ class ItemInputCharset : public ItemInput {
         ItemInput::right();
     }
 
-    void up() override {
+    void down() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -111,7 +111,7 @@ class ItemInputCharset : public ItemInput {
         display->drawChar(charset[charsetPosition]);
     }
 
-    void down() override {
+    void up() override {
         if (!display->getEditModeEnabled()) {
             return;
         }

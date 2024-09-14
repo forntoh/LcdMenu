@@ -122,7 +122,7 @@ class ItemProgress : public MenuItem {
         }
     };
 
-    void left() override {
+    void down() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
@@ -134,7 +134,7 @@ class ItemProgress : public MenuItem {
         }
     };
 
-    void right() override {
+    void up() override {
         if (!display->getEditModeEnabled()) {
             return;
         }
