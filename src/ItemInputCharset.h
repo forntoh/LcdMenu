@@ -6,7 +6,7 @@
 #include "ItemInput.h"
 
 class ItemInputCharset : public ItemInput {
-   private:
+  private:
     const char* charset;
     const uint8_t charsetSize;
     // Active index of the charset
@@ -20,7 +20,7 @@ class ItemInputCharset : public ItemInput {
     void initCharsetEditMode() {
         charEditMode = true;
         if (cursor < strlen(value)) {
-            char *e = strchr(charset, value[cursor]);
+            char* e = strchr(charset, value[cursor]);
             if (e != NULL) {
                 charsetPosition = (int)(e - charset);
                 return;
@@ -132,7 +132,6 @@ class ItemInputCharset : public ItemInput {
     void typeChar(const char character) override {
         // Do nothing
     }
-
 };
 
 #define ITEM_INPUT_CHARSET(...) (new ItemInputCharset(__VA_ARGS__))

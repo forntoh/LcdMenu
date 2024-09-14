@@ -18,7 +18,7 @@
 const char* charset = "0123456789";
 
 // Declare the call back function
-void inputCallback(char *value);
+void inputCallback(char* value);
 
 MAIN_MENU(
     ITEM_INPUT_CHARSET("Con", "0123456", charset, inputCallback),
@@ -54,7 +54,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(char *value) {
+void inputCallback(char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);

@@ -14,13 +14,13 @@
  * @brief ItemProgress indicates that the current item is a list.
  */
 class ItemProgress : public MenuItem {
-   protected:
+  protected:
     fptrMapping mapping = NULL;  ///< Pointer to a mapping function
     fptrInt callback = NULL;     ///< Pointer to a callback function
     uint16_t progress = 0;       ///< The progress
     uint8_t stepLength = 1;
 
-   public:
+  public:
     /**
      * @brief Constructs a new ItemProgress object.
      *
@@ -30,8 +30,7 @@ class ItemProgress : public MenuItem {
      * @param callback A pointer to the callback function to execute when this
      * menu item is selected.
      */
-    ItemProgress(const char* key, uint16_t start, uint8_t stepLength,
-                 fptrMapping mapping, fptrInt callback)
+    ItemProgress(const char* key, uint16_t start, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
         : MenuItem(key, MENU_ITEM_PROGRESS),
           mapping(mapping),
           callback(callback),
@@ -44,8 +43,7 @@ class ItemProgress : public MenuItem {
     ItemProgress(const char* key, fptrInt callback)
         : ItemProgress(key, 0, 1, NULL, callback) {}
 
-    ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping,
-                 fptrInt callback)
+    ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
         : ItemProgress(key, 0, stepLength, mapping, callback) {}
 
     /**
@@ -152,7 +150,6 @@ class ItemProgress : public MenuItem {
         substring(getValue(), 0, maxCols - strlen(text) - 2, buf);
         display->drawItem(row, text, ':', buf);
     }
-
 };
 
 #define ITEM_PROGRESS(...) (new ItemProgress(__VA_ARGS__))

@@ -14,10 +14,10 @@
 const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // Declare the call back functions
-void inputCallback(char *value);
+void inputCallback(char* value);
 void clearInput();
 
-extern MenuItem *usernameMenu[];
+extern MenuItem* usernameMenu[];
 
 MAIN_MENU(
     ITEM_SUBMENU("Set user", usernameMenu),
@@ -53,12 +53,12 @@ void loop() {
 }
 
 // Define the callbacks
-void inputCallback(char *value) {
+void inputCallback(char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);
 }
 
 void clearInput() {
-    (static_cast<ItemInput*>(menu[1]))->setValue((char *)"");
+    (static_cast<ItemInput*>(menu[1]))->setValue((char*)"");
 }
