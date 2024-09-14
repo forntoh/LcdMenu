@@ -42,12 +42,11 @@ class ItemInputCharset : public ItemInput {
         }
     }
 
-   public:
-    ItemInputCharset(const char* text, char* value, const char* charset,
-                     const uint8_t charsetSize, fptrStr callback)
-        : ItemInput(text, value, callback),
-          charset(charset),
-          charsetSize(charsetSize) {}
+  public:
+    ItemInputCharset(const char* text, char* value, const char* charset, fptrStr callback)
+        : ItemInput(text, value, callback), charset(charset), charsetSize(strlen(charset)) {}
+    ItemInputCharset(const char* text, const char* charset, fptrStr callback)
+        : ItemInputCharset(text, (char*)"", charset, callback) {}
 
     void enter() override {
         if (!display->getEditModeEnabled()) {

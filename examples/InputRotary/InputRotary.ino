@@ -1,6 +1,6 @@
 #include <ItemCommand.h>
 #include <ItemInput.h>
-#include <ItemInputCharsetSimple.h>
+#include <ItemInputCharset.h>
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
@@ -10,11 +10,8 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-#define CHARSET_SIZE 26
 // Create your charset
 const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-// Active index of the charset
-int8_t charsetPosition = -1;
 
 // Declare the call back functions
 void inputCallback(char *value);
@@ -31,7 +28,7 @@ MAIN_MENU(
 SUB_MENU(
     usernameMenu,
     mainMenu,
-    ITEM_INPUT_CHARSET_SIMPLE("User", "", charset, CHARSET_SIZE, inputCallback),
+    ITEM_INPUT_CHARSET("User", charset, inputCallback),
     ITEM_COMMAND("Clear", clearInput));
 
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
