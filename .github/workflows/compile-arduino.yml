@@ -1,0 +1,37 @@
+name: Compile Examples
+on:
+  - push
+  - pull_request
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        board:
+          - fqbn: arduino:avr:uno
+            artifact-name-suffix: arduino-avr-uno
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile sketches
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn: ${{ matrix.board.fqbn }}
+          enable-deltas-report: true
+          enable-warnings-report: true
+          sketches-report-path: ${{ vars.SKETCHES_REPORTS_PATH }}
+          libraries: |
+            - source-path: ./
+            - source-url: https://github.com/johnrickman/LiquidCrystal_I2C.git
+            - source-url: https://github.com/feilipu/Arduino_FreeRTOS_Library.git
+            - source-url: https://github.com/mprograms/SimpleRotary.git
+
+      - name: Upload sketches reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: sketches-report-${{ matrix.board.artifact-name-suffix }}
+          path: ${{ vars.SKETCHES_REPORTS_PATH }}
