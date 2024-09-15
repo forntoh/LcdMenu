@@ -1,0 +1,12 @@
+name: PR Size Checker
+on: [pull_request]
+jobs:
+  check_pr_size:
+    name: runner / check-pr-size
+    runs-on: ubuntu-latest
+    steps:
+      - uses: budougumi0617/action-pr-size-checker@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          max_added_count: ${{ vars.PR_SIZE_LIMIT }}
+          filter_pattern: ".*.yml|.*.json|.*.md|Gemfile|platformio.ini|wokwi.toml|keywords.txt|test/.*.cpp"
