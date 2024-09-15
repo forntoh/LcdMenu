@@ -1,14 +1,11 @@
+name: Compile Sketches
 on:
   - push
   - pull_request
-  - workflow_dispatch
 
 jobs:
   compile:
     runs-on: ubuntu-latest
-
-    env:
-      SKETCHES_REPORTS_PATH: sketches-reports
 
     strategy:
       matrix:
@@ -20,19 +17,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: arduino/compile-sketches@v1
+      - name: Compile sketches
+        uses: arduino/compile-sketches@v1
         with:
+          fqbn: ${{ matrix.board.fqbn }}
           enable-deltas-report: true
           enable-warnings-report: true
-          fqbn: ${{ matrix.board.fqbn }}
-          sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          sketches-report-path: ${{ vars.SKETCHES_REPORTS_PATH }}
           libraries: |
             - source-path: ./
             - source-url: https://github.com/johnrickman/LiquidCrystal_I2C.git
             - source-url: https://github.com/feilipu/Arduino_FreeRTOS_Library.git
             - source-url: https://github.com/mprograms/SimpleRotary.git
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload sketches reports
+        uses: actions/upload-artifact@v4
         with:
           name: sketches-report-${{ matrix.board.artifact-name-suffix }}
-          path: ${{ env.SKETCHES_REPORTS_PATH }}
+          path: ${{ vars.SKETCHES_REPORTS_PATH }}
