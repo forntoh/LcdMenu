@@ -1,0 +1,33 @@
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    env:
+      SKETCHES_REPORTS_PATH: sketches-reports
+
+    strategy:
+      matrix:
+        board:
+          - fqbn: arduino:avr:uno
+            artifact-name-suffix: arduino-avr-uno
+          - fqbn: arduino:samd:mkrzero
+            artifact-name-suffix: arduino-samd-mkrzero
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: arduino/compile-sketches@v1
+        with:
+          enable-deltas-report: true
+          fqbn: ${{ matrix.board.fqbn }}
+          sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sketches-report-${{ matrix.board.artifact-name-suffix }}
+          path: ${{ env.SKETCHES_REPORTS_PATH }}
