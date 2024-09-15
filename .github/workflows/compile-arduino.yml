@@ -15,15 +15,15 @@ jobs:
         board:
           - fqbn: arduino:avr:uno
             artifact-name-suffix: arduino-avr-uno
-          - fqbn: arduino:samd:mkrzero
-            artifact-name-suffix: arduino-samd-mkrzero
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - uses: arduino/compile-sketches@v1
         with:
           enable-deltas-report: true
+          enable-warnings-report: true
           fqbn: ${{ matrix.board.fqbn }}
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
           libraries: |
