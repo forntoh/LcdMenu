@@ -26,6 +26,10 @@ jobs:
           enable-deltas-report: true
           fqbn: ${{ matrix.board.fqbn }}
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          libraries: |
+            - source-url: https://github.com/johnrickman/LiquidCrystal_I2C.git
+            - source-url: https://github.com/feilipu/Arduino_FreeRTOS_Library.git
+            - source-url: https://github.com/mprograms/SimpleRotary.git
 
       - uses: actions/upload-artifact@v4
         with:
