@@ -35,19 +35,3 @@ jobs:
         with:
           name: sketches-report-${{ matrix.board.artifact-name-suffix }}
           path: ${{ vars.SKETCHES_REPORTS_PATH }}
-
-  report:
-    needs: compile
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download sketches reports artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ vars.SKETCHES_REPORTS_PATH }}
-
-      - name: Report size deltas
-        uses: arduino/report-size-deltas@v1
-        with:
-          sketches-reports-source: ${{ vars.SKETCHES_REPORTS_PATH }}
