@@ -26,10 +26,9 @@
 #pragma once
 
 #include "interface/DisplayInterface.h"
-#include <MenuItem.h>
-#include "interface/DisplayInterface.h"
-#include <utils/utils.h>
 #include "utils/constants.h"
+#include <MenuItem.h>
+#include <utils/utils.h>
 
 /**
  * The LcdMenu class contains all fields and methods to manipulate the menu
@@ -170,16 +169,16 @@ class LcdMenu {
         if (currentMenuTable[cursorPosition]->process(c)) {
             return true;
         }
-        switch(c) {
+        switch (c) {
             case UP: return up();
             case DOWN: return down();
             case ENTER: return enter();
             case BACK: return back();
             default: return false;
         }
-     };
+    };
 
-   protected:
+  protected:
     /**
      * Execute an "up press" on menu
      * When edit mode is enabled, this action is skipped
@@ -284,7 +283,7 @@ class LcdMenu {
         return true;
     }
 
-   public:
+  public:
     /**
      * When you want to display any other content on the screen then
      * call this function then display your content, later call
@@ -347,5 +346,4 @@ class LcdMenu {
     MenuItem* operator[](const uint8_t position) {
         return currentMenuTable[position];
     }
-
 };

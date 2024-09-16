@@ -33,11 +33,11 @@
 
 /**
  * @brief The MenuItem class.
- * 
+ *
  * ┌────────────────────────────┐
  * │ > T E X T                  │
  * └────────────────────────────┘
- * 
+ *
  */
 class MenuItem {
   protected:
