@@ -47,11 +47,20 @@ class ItemCommand : public MenuItem {
      * when the item is entered.
      */
     void setCallBack(fptr callback) { this->callback = callback; };
-    
-    void enter() override {
+
+    bool handle(const char c) override {
+        switch (c) {
+            case ENTER: return enter();
+            default: return false;
+        }
+    }
+
+   protected:
+    bool enter() {
         if (callback != NULL) {
             callback();
         }
+        return true;
     };
 
 };

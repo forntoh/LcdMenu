@@ -18,9 +18,7 @@
  * @brief Item that allows user to input string information.
  * 
  * ┌────────────────────────────┐
- * │   . . .                    │
  * │ > T E X T : V A L U E      │
- * │   . . .                    │
  * └────────────────────────────┘
  * 
  * Additionally to `text` this item has string `value`.
@@ -141,13 +139,34 @@ class ItemInput : public MenuItem {
      */
     fptrStr getCallbackStr() { return callback; }
 
-    void up() override {}
+    bool handle(const char c) override {
+        if (isprint(c)) {
+            return typeChar(c);
+        }
+        switch (c) {
+            case ENTER: return enter();
+            case BACK: return back();
+            case UP: return display->getEditModeEnabled();
+            case DOWN: return display->getEditModeEnabled();
+            case LEFT: return left();
+            case RIGHT: return right();
+            case BACKSPACE: return backspace();
+            case CLEAR: return clear();
+            default: return false;
+        }
+    }
 
-    void down() override {}
+    void draw(uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(value, view, viewSize, buf);
+        display->drawItem(row, text, ':', buf);
+    }
 
-    void enter() override {
+   protected:
+    bool enter() {
         if (display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         // Move cursor to the latest index
         uint8_t length = strlen(value);
@@ -161,11 +180,11 @@ class ItemInput : public MenuItem {
         display->setEditModeEnabled(true);
         display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2 + cursor - view));
         display->drawBlinker();
+        return true;
     };
-
-    void back() override {
+    bool back() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->clearBlinker();
         display->setEditModeEnabled(false);
@@ -176,14 +195,14 @@ class ItemInput : public MenuItem {
         if (callback != NULL) {
             callback(value);
         }
+        return true;
     };
-
-    void left() override {
+    bool left() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         if (cursor == 0) {
-            return;
+            return true;
         }
         cursor--;
         if (cursor < view) {
@@ -193,14 +212,14 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() - 1));
         // Log
         printCmd(F("LEFT"), value[display->getBlinkerPosition() - (strlen(text) + 2)]);
+        return true;
     };
-
-    void right() override {
+    bool right() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         if (cursor == strlen(value)) {
-            return;
+            return true;
         }
         cursor++;
         if (cursor > (view + viewSize - 1)) {
@@ -210,15 +229,8 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() + 1));
         // Log
         printCmd(F("RIGHT"), value[display->getBlinkerPosition() - (strlen(text) + 2)]);
+        return true;
     };
-
-    void draw(uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(value, view, viewSize, buf);
-        display->drawItem(row, text, ':', buf);
-    }
-
     /**
      * Execute a "backspace cmd" on menu
      *
@@ -226,12 +238,12 @@ class ItemInput : public MenuItem {
      *
      * Removes the character at the current cursor position.
      */
-    void backspace() override {
+    bool backspace() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         if (strlen(value) == 0 || cursor == 0) {
-            return;
+            return true;
         }
         remove(value, cursor - 1, 1);
         printCmd(F("BACKSPACE"), value);
@@ -241,16 +253,16 @@ class ItemInput : public MenuItem {
         }
         MenuItem::draw();
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() - 1));
+        return true;
     }
-
     /**
      * Display text at the cursor position
      * used for `Input` type menu items
      * @param character character to append
      */
-    void typeChar(const char character) override {
+    bool typeChar(const char character) {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint8_t length = strlen(value);
         if (cursor < length) {
@@ -274,14 +286,14 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() + 1));
         // Log
         printCmd(F("TYPE-CHAR"), character);
+        return true;
     }
-
     /**
      * Clear the value of the input field
      */
-    void clear() override {
+    bool clear() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         //
         // set the value
@@ -294,6 +306,7 @@ class ItemInput : public MenuItem {
         //
         MenuItem::draw();
         display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2));
+        return true;
     }
 
 };

@@ -103,26 +103,46 @@ class ItemProgress : public MenuItem {
         return mapping(progress);
     }
 
-    void enter() override {
+    void draw(uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(getValue(), 0, maxCols - strlen(text) - 2, buf);
+        display->drawItem(row, text, ':', buf);
+    }
+
+    bool handle(const char c) override {
+        switch (c) {
+            case ENTER: return enter();
+            case BACK: return back();
+            case UP: return up();
+            case DOWN: return down();
+            default: return false;
+        }
+    }
+
+  protected:
+    bool enter() {
         if (display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(true);
+        return true;
     };
 
-    void back() override {
+    bool back() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(false);
         if (callback != NULL) {
             callback(progress);
         }
+        return true;
     };
 
-    void down() override {
+    bool down() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint16_t oldProgress = progress;
         decrement();
@@ -130,11 +150,12 @@ class ItemProgress : public MenuItem {
             printCmd(F("LEFT"), getValue());
             MenuItem::draw();
         }
+        return true;
     };
 
-    void up() override {
+    bool up() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint16_t oldProgress = progress;
         increment();
@@ -142,14 +163,8 @@ class ItemProgress : public MenuItem {
             printCmd(F("RIGHT"), getValue());
             MenuItem::draw();
         }
+        return true;
     };
-
-    void draw(uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(getValue(), 0, maxCols - strlen(text) - 2, buf);
-        display->drawItem(row, text, ':', buf);
-    }
 };
 
 #define ITEM_PROGRESS(...) (new ItemProgress(__VA_ARGS__))

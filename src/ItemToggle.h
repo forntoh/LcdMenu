@@ -16,9 +16,7 @@
  * @brief Item that allows user to toggle between ON/OFF states.
  * 
  * ┌────────────────────────────┐
- * │   . . .                    │
  * │ > T E X T : O F F          │
- * │   . . .                    │
  * └────────────────────────────┘
  * 
  * Additionally to `text` this item has ON/OFF `enabled` state.
@@ -77,20 +75,29 @@ class ItemToggle : public MenuItem {
     const char* getTextOn() { return this->textOn; }
 
     const char* getTextOff() { return this->textOff; }
-    
-    void enter() override {
-        enabled = !enabled;
-        if (callback != NULL) {
-            callback(enabled);
-        }
-        MenuItem::draw();
-    };
 
     void draw(uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(enabled ? textOn : textOff, 0, maxCols - strlen(text) - 2, buf);
         display->drawItem(row, text, ':', buf);
+    };
+
+    bool handle(const char c) override { 
+        switch(c) {
+            case ENTER: return enter();
+            default: return false;
+        }
+    };
+    
+  protected:
+    bool enter() {
+        enabled = !enabled;
+        if (callback != NULL) {
+            callback(enabled);
+        }
+        MenuItem::draw();
+        return true;
     };
 
 };

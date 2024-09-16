@@ -32,7 +32,12 @@
 #include <utils/utils.h>
 
 /**
- * The MenuItem class
+ * @brief The MenuItem class.
+ * 
+ * ┌────────────────────────────┐
+ * │ > T E X T                  │
+ * └────────────────────────────┘
+ * 
  */
 class MenuItem {
    protected:
@@ -76,15 +81,8 @@ class MenuItem {
      */
     void setText(const char* text) { this->text = text; };
 
-    virtual void up() {};
-    virtual void down() {};
-    virtual void enter() {};
-    virtual void back() {};
-    virtual void left() {};
-    virtual void right() {};
-    virtual void backspace() {};
-    virtual void typeChar(const char character) {};
-    virtual void clear() {};
+    virtual bool handle(const char c) { return false; };
+
     virtual void draw() {
         draw(display->getCursorRow());
     };

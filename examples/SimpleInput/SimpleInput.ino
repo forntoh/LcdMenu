@@ -47,7 +47,7 @@ void loop() {
     char command = Serial.read();
 
     if (!processWithSimpleCommand(&navConfig, command) && command != '\n') {
-        menu.type(command);
+        menu.handle(command);
     }
 }
 /**

@@ -26,8 +26,9 @@
 #pragma once
 
 #include <MenuItem.h>
-#include <utils/utils.h>
 #include "interface/DisplayInterface.h"
+#include <utils/utils.h>
+#include "utils/constants.h"
 
 /**
  * The LcdMenu class contains all fields and methods to manipulate the menu
@@ -163,20 +164,31 @@ class LcdMenu {
      * Reset the display
      */
     void resetMenu() { this->reset(false); }
+
+    bool handle(char c) {
+        if (currentMenuTable[cursorPosition]->handle(c)) {
+            return true;
+        }
+        switch(c) {
+            case UP: return up();
+            case DOWN: return down();
+            case ENTER: return enter();
+            case BACK: return back();
+            default: return false;
+        }
+     };
+
+   protected:
     /**
      * Execute an "up press" on menu
      * When edit mode is enabled, this action is skipped
      */
-    void up() {
-        if (lcd.getEditModeEnabled()) {
-            currentMenuTable[cursorPosition]->up();
-            return;
-        }
+    bool up() {
         //
         // determine if cursor ia at start of menu items
         //
         if (isAtTheStart(cursorPosition)) {
-            return;
+            return false;
         }
         cursorPosition--;
         // Log
@@ -194,21 +206,18 @@ class LcdMenu {
         } else {
             updateOnlyCursor();
         }
+        return true;
     }
     /**
      * Execute a "down press" on menu
      * When edit mode is enabled, this action is skipped
      */
-    void down() {
-        if (lcd.getEditModeEnabled()) {
-            currentMenuTable[cursorPosition]->down();
-            return;
-        }
+    bool down() {
         //
         // determine if cursor has passed the end
         //
         if (isAtTheEnd(cursorPosition)) {
-            return;
+            return false;
         }
         cursorPosition++;
         // Log
@@ -226,6 +235,7 @@ class LcdMenu {
         } else {
             updateOnlyCursor();
         }
+        return true;
     }
     /**
      * Execute an "enter" action on menu.
@@ -236,7 +246,7 @@ class LcdMenu {
      * - Execute a callback action.
      * - Toggle the state of an item.
      */
-    void enter() {
+    bool enter() {
         MenuItem* item = currentMenuTable[cursorPosition];
         // Log
         printCmd(F("ENTER"), item->getType());
@@ -252,25 +262,17 @@ class LcdMenu {
             // display the sub menu
             //
             reset(false);
-            return;
         }
-        item->enter();
+        return true;
     }
     /**
      * Execute a "backpress" action on menu.
      *
      * Navigates up once.
      */
-    void back() {
+    bool back() {
         // Log
         printCmd(F("BACK"));
-        //
-        // Back action different when on ItemInput
-        //
-        if (lcd.getEditModeEnabled()) {
-            currentMenuTable[cursorPosition]->back();
-            return;
-        }
         //
         // check if this is a sub menu, if so go back to its parent
         //
@@ -278,51 +280,10 @@ class LcdMenu {
             currentMenuTable = currentMenuTable[0]->getSubMenu();
             reset(true);
         }
+        return true;
     }
-    /**
-     * Execute a "left press" on menu
-     *
-     * *NB: Works only for `ItemInput` and `ItemList` types*
-     *
-     * Moves the cursor one step to the left.
-     */
-    void left() {
-        currentMenuTable[cursorPosition]->left();
-    }
-    /**
-     * Execute a "right press" on menu
-     *
-     * *NB: Works only for `ItemInput` and `ItemList` types*
-     *
-     * Moves the cursor one step to the right.
-     */
-    void right() {
-        currentMenuTable[cursorPosition]->right();
-    }
-    /**
-     * Execute a "backspace cmd" on menu
-     *
-     * *NB: Works only for `ItemInput` type*
-     *
-     * Removes the character at the current cursor position.
-     */
-    void backspace() {
-        currentMenuTable[cursorPosition]->backspace();
-    }
-    /**
-     * Display text at the cursor position
-     * used for `Input` type menu items
-     * @param character character to append
-     */
-    void type(const char character) {
-        currentMenuTable[cursorPosition]->typeChar(character);
-    }
-    /**
-     * Clear the value of the input field
-     */
-    void clear() {
-        currentMenuTable[cursorPosition]->clear();
-    }
+
+   public:
     /**
      * When you want to display any other content on the screen then
      * call this function then display your content, later call
@@ -385,4 +346,5 @@ class LcdMenu {
     MenuItem* operator[](const uint8_t position) {
         return currentMenuTable[position];
     }
+
 };
