@@ -1,9 +1,10 @@
 BasedOnStyle: LLVM
 IndentWidth: 4
 ColumnLimit: 0
-AllowShortBlocksOnASingleLine: false
+AllowShortBlocksOnASingleLine: true
 AllowShortFunctionsOnASingleLine: true
 AllowShortIfStatementsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
 IndentCaseLabels: true
 IndentCaseBlocks: true
 BreakBeforeBraces: Custom
