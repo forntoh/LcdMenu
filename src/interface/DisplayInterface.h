@@ -15,17 +15,17 @@
  *   └──┴──────────────────────────────────────┴──┘
  *                       Blinker ──^            ^
  *                               Indicators ────┘
- * 
+ *
  */
 class DisplayInterface {
-   protected:
+  protected:
     uint8_t maxRows;
     uint8_t maxCols;
     uint8_t cursorRow = 0;
     uint8_t blinkerPosition;
     bool isEditModeEnabled = false;
 
-   public:
+  public:
     virtual void begin() = 0;
     uint8_t getMaxRows() const { return maxRows; }
     uint8_t getMaxCols() const { return maxCols; }
