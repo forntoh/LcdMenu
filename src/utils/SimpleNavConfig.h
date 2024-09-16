@@ -3,7 +3,7 @@
 #include <LcdMenu.h>
 
 struct SimpleNavConfig {
-    LcdMenu *menu;
+    LcdMenu* menu;
     byte up;
     byte down;
     byte enter;
@@ -16,7 +16,7 @@ struct SimpleNavConfig {
 #endif
 };
 
-bool processWithSimpleCommand(SimpleNavConfig *config, byte cmd) {
+bool processWithSimpleCommand(SimpleNavConfig* config, byte cmd) {
     if (config->up && cmd == config->up) {
         config->menu->handle(UP);
     } else if (config->down && cmd == config->down) {

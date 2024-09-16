@@ -16,55 +16,55 @@
 
 /**
  * @brief Item that allows user to input string information.
- * 
+ *
  * ┌────────────────────────────┐
  * │ > T E X T : V A L U E      │
  * └────────────────────────────┘
- * 
+ *
  * Additionally to `text` this item has string `value`.
  * Has internal `edit` state.
  * Value area is scrollable, see `view`.
  */
 class ItemInput : public MenuItem {
-   protected:
+  protected:
     /**
      * @brief String value of item.
      */
     char* value;
     /**
      * @brief The index of first visible character.
-     * 
+     *
      *          visible area
      *        ┌───────────────┐
      * X X X X│X X X X █ X X X│X X
      *        └───────────────┘
      *   view--^
-     * 
+     *
      * Is moved when `cursor` crosses the borders of visible area.
      * When length of `value` < `viewSize` this index should be 0.
      */
     uint8_t view = 0;
     /**
      * @brief The number of visible characters.
-     * 
+     *
      *          visible area
      *        ┌───────────────┐
      * X X X X│X X X X █ X X X│X X
      *        ├───────────────┤
      *        │<── viewSize ─>│
-     * 
+     *
      * Effectively const, but initialized lately when display is injected.
      */
     uint8_t viewSize;
     /**
      * @brief Current index of the char to be edited.
-     * 
+     *
      *          visible area
      *        ┌───────────────┐
      * X X X X│X X X X █ X X X│X X
      *        └───────────────┘
      *         cursor--^
-     * 
+     *
      * When `left` or `right` then this position will be moved over the string accordingly.
      * When `type` then new character will be appended on this position.
      * When `backspace` then one character before will be removed.
@@ -91,7 +91,7 @@ class ItemInput : public MenuItem {
         return constrain(blinkerPosition, lb, ub);
     }
 
-   public:
+  public:
     /**
      * Construct a new ItemInput object with an initial value.
      *
@@ -308,7 +308,6 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2));
         return true;
     }
-
 };
 
 #define ITEM_INPUT(...) (new ItemInput(__VA_ARGS__))

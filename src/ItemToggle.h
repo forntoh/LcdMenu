@@ -14,21 +14,21 @@
 
 /**
  * @brief Item that allows user to toggle between ON/OFF states.
- * 
+ *
  * ┌────────────────────────────┐
  * │ > T E X T : O F F          │
  * └────────────────────────────┘
- * 
+ *
  * Additionally to `text` this item has ON/OFF `enabled` state.
  */
 class ItemToggle : public MenuItem {
-   private:
+  private:
     bool enabled = false;
     const char* textOn = NULL;
     const char* textOff = NULL;
     fptrInt callback = NULL;
 
-   public:
+  public:
     /**
      * @param key key of the item
      * @param callback reference to callback function

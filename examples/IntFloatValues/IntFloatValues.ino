@@ -16,7 +16,7 @@
 // Declare the callbacks
 void callback(uint16_t pos);
 
-char *intMapping(uint16_t progress) {
+char* intMapping(uint16_t progress) {
     // Map the progress value to a new range (100 to 200)
     long mapped = mapProgress(progress, 100L, 200L);
 
@@ -33,7 +33,7 @@ char *intMapping(uint16_t progress) {
     return buffer;
 }
 
-char *floatMapping(uint16_t progress) {
+char* floatMapping(uint16_t progress) {
     // Normalize the progress value and map it to the specified floating-point
     // range
     float floatValue = mapProgress(progress, -1.0f, 1.0f);
