@@ -12,7 +12,7 @@
 #include "MenuItem.h"
 
 class ItemSubMenu : public ItemHeader {
-   public:
+  public:
     /**
      * @param text text to display for the item
      * @param parent the parent of the sub menu item

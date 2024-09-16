@@ -19,7 +19,7 @@
  * @throws None
  */
 [[deprecated("Replaced by NavConfig will be removed in the next release, please see examples for more info.")]]
-bool processCommand(LcdMenu &menu, byte cmd, byte upCmd, byte downCmd, byte enterCmd, byte backCmd, byte leftCmd, byte rightCmd) {
+bool processCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd, byte enterCmd, byte backCmd, byte leftCmd, byte rightCmd) {
     if (cmd == upCmd) {
         menu.up();
     } else if (cmd == downCmd) {
@@ -64,7 +64,7 @@ bool processCommand(LcdMenu &menu, byte cmd, byte upCmd, byte downCmd, byte ente
  * @return          `true` if the command is consumed, `false` otherwise.
  */
 [[deprecated("Replaced by NavConfig will be removed in the next release, please see examples for more info.")]]
-bool processMenuCommand(LcdMenu &menu, byte cmd, byte upCmd, byte downCmd, byte enterCmd, byte backCmd, byte leftCmd = 255, byte rightCmd = 255) {
+bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd, byte enterCmd, byte backCmd, byte leftCmd = 255, byte rightCmd = 255) {
     return processCommand(menu, cmd, upCmd, downCmd, enterCmd, backCmd, leftCmd, rightCmd);
 }
 #endif
@@ -103,7 +103,7 @@ bool processMenuCommand(LcdMenu &menu, byte cmd, byte upCmd, byte downCmd, byte 
  * @return             `true` if the command is consumed, `false` otherwise.
  */
 [[deprecated("Replaced by NavConfig will be removed in the next release, please see examples for more info.")]]
-bool processMenuCommand(LcdMenu &menu, byte cmd, int8_t &pos, const char *charset, uint8_t size, byte upCmd, byte downCmd, byte enterCmd, byte backCmd, byte clearCmd = 255, byte backspaceCmd = 255, byte leftCmd = 255, byte rightCmd = 255) {
+bool processMenuCommand(LcdMenu& menu, byte cmd, int8_t& pos, const char* charset, uint8_t size, byte upCmd, byte downCmd, byte enterCmd, byte backCmd, byte clearCmd = 255, byte backspaceCmd = 255, byte leftCmd = 255, byte rightCmd = 255) {
     if (cmd == upCmd) {
         if (menu.lcd.getEditModeEnabled()) pos = (pos + 1) % size;
         // Works only in edit mode
@@ -164,13 +164,13 @@ bool processMenuCommand(LcdMenu &menu, byte cmd, int8_t &pos, const char *charse
  * @return             `true` if the command is consumed, `false` otherwise.
  */
 [[deprecated("Replaced by NavConfig will be removed in the next release, please see examples for more info.")]]
-bool processMenuCommand(LcdMenu &menu, byte cmd, byte upCmd, byte downCmd, byte leftCmd, byte rightCmd, byte enterCmd, byte backCmd, byte clearCmd = 255, byte backspaceCmd = 255) {
+bool processMenuCommand(LcdMenu& menu, byte cmd, byte upCmd, byte downCmd, byte leftCmd, byte rightCmd, byte enterCmd, byte backCmd, byte clearCmd = 255, byte backspaceCmd = 255) {
     if (!processCommand(menu, cmd, upCmd, downCmd, enterCmd, backCmd, leftCmd, rightCmd)) {
         if (cmd == clearCmd)
             menu.clear();
-        else if (cmd == backspaceCmd) // Remove one character from the tail
+        else if (cmd == backspaceCmd)  // Remove one character from the tail
             menu.backspace();
-        else if (cmd != '\n') // Type the character you want
+        else if (cmd != '\n')  // Type the character you want
             menu.type(cmd);
         else
             return false;

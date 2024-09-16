@@ -14,23 +14,23 @@
 
 /**
  * @brief Item that allows user to toggle between ON/OFF states.
- * 
+ *
  * ┌────────────────────────────┐
  * │   . . .                    │
  * │ > T E X T : O F F          │
  * │   . . .                    │
  * └────────────────────────────┘
- * 
+ *
  * Additionally to `text` this item has ON/OFF `enabled` state.
  */
 class ItemToggle : public MenuItem {
-   private:
+  private:
     bool enabled = false;
     const char* textOn = NULL;
     const char* textOff = NULL;
     fptrInt callback = NULL;
 
-   public:
+  public:
     /**
      * @param key key of the item
      * @param callback reference to callback function
@@ -77,7 +77,7 @@ class ItemToggle : public MenuItem {
     const char* getTextOn() { return this->textOn; }
 
     const char* getTextOff() { return this->textOff; }
-    
+
     void enter() override {
         enabled = !enabled;
         if (callback != NULL) {
@@ -92,7 +92,6 @@ class ItemToggle : public MenuItem {
         substring(enabled ? textOn : textOff, 0, maxCols - strlen(text) - 2, buf);
         display->drawItem(row, text, ':', buf);
     };
-
 };
 
 #define ITEM_TOGGLE(...) (new ItemToggle(__VA_ARGS__))

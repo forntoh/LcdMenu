@@ -35,12 +35,12 @@
  * The MenuItem class
  */
 class MenuItem {
-   protected:
+  protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;
     DisplayInterface* display;
 
-   public:
+  public:
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
     virtual void initialize(DisplayInterface* display) {
@@ -125,13 +125,13 @@ class MenuItem {
  */
 
 class ItemHeader : public MenuItem {
-   protected:
+  protected:
     MenuItem** parent = NULL;
 
     ItemHeader(const char* text, MenuItem** parent, byte type)
         : MenuItem(text, type), parent(parent) {}
 
-   public:
+  public:
     /**
      */
     ItemHeader() : ItemHeader("", NULL, MENU_ITEM_MAIN_MENU_HEADER) {}
@@ -167,7 +167,7 @@ class ItemHeader : public MenuItem {
  */
 
 class ItemFooter : public MenuItem {
-   public:
+  public:
     /**
      */
     ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
@@ -177,8 +177,7 @@ class ItemFooter : public MenuItem {
     extern MenuItem* mainMenu[]; \
     MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, new ItemFooter()}
 
-#define SUB_MENU(subMenu, parent, ...)                          \
-    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, \
-                           new ItemFooter()}
+#define SUB_MENU(subMenu, parent, ...) \
+    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, new ItemFooter()}
 
 #endif
