@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2023 Forntoh Thomas
+  Copyright (c) 2020-2024 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -107,23 +107,6 @@ class MenuItem {
 };
 #define ITEM_BASIC(...) (new MenuItem(__VA_ARGS__))
 
-/**
- *
- * # ItemHeader
- *
- * This item must be present at the all menus collections *(the first item in
- * the array)*.
- *
- * **Example**
- *
- * ```cpp
- * MenuItem mainMenu[] = {ItemHeader(),
- *                        MenuItem("Item 1"),
- *                        MenuItem("Item 2"),
- *                        ...
- * ```
- */
-
 class ItemHeader : public MenuItem {
   protected:
     MenuItem** parent = NULL;
@@ -147,24 +130,6 @@ class ItemHeader : public MenuItem {
         return getSubMenu()[index];
     }
 };
-
-/**
- * ---
- *
- * # ItemFooter
- *
- * This item must be present at the all menus *(the last item in the array)*
- *
- * **Example**
- *
- * ```cpp
- * MenuItem mainMenu[] = {ItemHeader(),
- *                        MenuItem("Item 1"),
- *                        MenuItem("Item 2"),
- *                        ...
- *                        ItemFooter()};
- * ```
- */
 
 class ItemFooter : public MenuItem {
   public:
