@@ -1,5 +1,5 @@
 name: PR Size Checker
-on: [pull_request]
+on: [pull_request_target]
 jobs:
   check_pr_size:
     name: runner / check-pr-size
