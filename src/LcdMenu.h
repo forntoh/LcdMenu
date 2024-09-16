@@ -25,6 +25,7 @@
 */
 #pragma once
 
+#include "interface/DisplayInterface.h"
 #include <MenuItem.h>
 #include "interface/DisplayInterface.h"
 #include <utils/utils.h>
@@ -35,7 +36,7 @@
  * items.
  */
 class LcdMenu {
-   private:
+  private:
     uint8_t cursorPosition = 1;
     uint8_t previousCursorPosition = 1;
     /**
@@ -81,10 +82,10 @@ class LcdMenu {
         lcd.clear();
         drawMenu();
         lcd.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
-        lcd.drawCursor(); // In case if currentPosition was not changed between screens
+        lcd.drawCursor();  // In case if currentPosition was not changed between screens
     }
 
-   public:
+  public:
     /**
      * ## Public Fields
      */

@@ -16,11 +16,11 @@
 
 // Declare a class for menu items that represent commands.
 class ItemCommand : public MenuItem {
-   private:
+  private:
     // Declare a function pointer for the command callback.
     fptr callback;
 
-   public:
+  public:
     /**
      * Construct a new ItemCommand object.
      *
@@ -62,7 +62,6 @@ class ItemCommand : public MenuItem {
         }
         return true;
     };
-
 };
 
 #define ITEM_COMMAND(...) (new ItemCommand(__VA_ARGS__))

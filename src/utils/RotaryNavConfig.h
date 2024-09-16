@@ -14,8 +14,8 @@
  * @param pendingEnter Flag to indicate if an enter action is pending
  */
 struct RotaryNavConfig {
-    SimpleRotary *encoder;
-    LcdMenu *menu;
+    SimpleRotary* encoder;
+    LcdMenu* menu;
     uint16_t longPressDuration;
     uint16_t doublePressThreshold;
     unsigned long lastPressTime;
@@ -27,7 +27,7 @@ struct RotaryNavConfig {
  *
  * @param config Pointer to the RotaryNavConfig struct
  */
-void processWithRotaryEncoder(RotaryNavConfig *config) {
+void processWithRotaryEncoder(RotaryNavConfig* config) {
     // Handle rotary encoder rotation
     uint8_t rotation = config->encoder->rotate();
     if (rotation == 1) {

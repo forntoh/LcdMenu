@@ -8,14 +8,14 @@
 #include "DisplayInterface.h"
 
 class LiquidCrystalI2CAdapter : public DisplayInterface {
-   private:
+  private:
     uint8_t downArrow[8];
     uint8_t upArrow[8];
     unsigned long startTime = 0;
 
-   public:
+  public:
     LiquidCrystal_I2C lcd;
-    LiquidCrystalI2CAdapter(uint8_t lcd_Addr, uint8_t lcd_cols, uint8_t lcd_rows): lcd(lcd_Addr, lcd_cols, lcd_rows) {
+    LiquidCrystalI2CAdapter(uint8_t lcd_Addr, uint8_t lcd_cols, uint8_t lcd_rows) : lcd(lcd_Addr, lcd_cols, lcd_rows) {
         maxRows = lcd_rows;
         maxCols = lcd_cols;
         memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
@@ -70,11 +70,11 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
             lcd.print(" ");
         }
     }
-    
+
     void clearBlinker() override {
         lcd.noBlink();
     }
-    
+
     void drawBlinker() override {
         lcd.blink();
     }
@@ -84,7 +84,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         this->blinkerPosition = blinkerPosition;
         lcd.setCursor(blinkerPosition, cursorRow);
     }
-    
+
     void restartTimer() override {
         this->startTime = millis();
         lcd.display();
@@ -97,7 +97,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         //
         lcd.setCursor(blinkerPosition, cursorRow);
         lcd.print(c);
-        lcd.setCursor(blinkerPosition, cursorRow); // Move back
+        lcd.setCursor(blinkerPosition, cursorRow);  // Move back
         // Log
         printCmd(F("DRAW-CHAR"), c);
         return true;
@@ -117,7 +117,7 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         lcd.print(" ");
     }
 
-    void drawDownIndicator() override { 
+    void drawDownIndicator() override {
         lcd.setCursor(maxCols - 1, maxRows - 1);
         lcd.write(byte(1));
     }
@@ -127,9 +127,8 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
         lcd.print(" ");
     }
 
-    void drawUpIndicator() override { 
+    void drawUpIndicator() override {
         lcd.setCursor(maxCols - 1, 0);
-        lcd.write(byte(0)); 
+        lcd.write(byte(0));
     }
-
 };

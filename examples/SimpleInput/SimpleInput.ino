@@ -14,7 +14,7 @@
 #define LCD_COLS 16
 
 // Declare the call back function
-void inputCallback(char *value);
+void inputCallback(char* value);
 
 MAIN_MENU(
     ITEM_INPUT("Con", inputCallback),
@@ -53,7 +53,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(char *value) {
+void inputCallback(char* value) {
     Serial.print(F("# "));
     Serial.println(value);
 }
