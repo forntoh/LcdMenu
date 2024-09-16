@@ -110,7 +110,7 @@ class ItemProgress : public MenuItem {
         display->drawItem(row, text, ':', buf);
     }
 
-    bool handle(const char c) override {
+    bool process(const unsigned char c) override {
         switch (c) {
             case ENTER: return enter();
             case BACK: return back();

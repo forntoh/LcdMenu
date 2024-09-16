@@ -83,7 +83,7 @@ class ItemToggle : public MenuItem {
         display->drawItem(row, text, ':', buf);
     };
 
-    bool handle(const char c) override { 
+    bool process(const unsigned char c) override { 
         switch(c) {
             case ENTER: return enter();
             default: return false;

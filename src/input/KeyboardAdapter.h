@@ -17,6 +17,9 @@
  * - `Escape` for `BACK`;
  * - `Delete` for `CLEAR`;
  * - `Backspace` for `BACKSPACE`;
+ * 
+ * Keyboard can send multiple-bytes commands.
+ * Implementation should convert it to one byte command.
  *
  * Implementation details. Mapping:
  * `First 128 of ASCII`        -> as is

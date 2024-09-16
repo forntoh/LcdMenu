@@ -139,7 +139,7 @@ class ItemInput : public MenuItem {
      */
     fptrStr getCallbackStr() { return callback; }
 
-    bool handle(const char c) override {
+    bool process(const unsigned char c) override {
         if (isprint(c)) {
             return typeChar(c);
         }

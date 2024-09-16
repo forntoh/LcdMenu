@@ -47,7 +47,7 @@ class ItemInputCharset : public ItemInput {
     ItemInputCharset(const char* text, const char* charset, fptrStr callback)
         : ItemInputCharset(text, (char*)"", charset, callback) {}
 
-    bool handle(const char c) override {
+    bool process(const unsigned char c) override {
         switch (c) {
             case ENTER: return enter();
             case BACK: return back();

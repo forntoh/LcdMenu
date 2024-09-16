@@ -165,8 +165,8 @@ class LcdMenu {
      */
     void resetMenu() { this->reset(false); }
 
-    bool handle(char c) {
-        if (currentMenuTable[cursorPosition]->handle(c)) {
+    bool process(const unsigned char c) {
+        if (currentMenuTable[cursorPosition]->process(c)) {
             return true;
         }
         switch(c) {
