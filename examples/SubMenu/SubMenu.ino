@@ -8,7 +8,6 @@
 #include <LcdMenu.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
-#include <utils/commandProccesors.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
