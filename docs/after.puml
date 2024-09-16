@@ -1,0 +1,49 @@
+@startuml
+' https://www.plantuml.com/plantuml/uml/
+
+hide empty members
+
+class LcdMenu {
+    +virtual bool handle(char c)
+    #virtual bool up()
+    #virtual bool down()
+    #virtual bool enter()
+    #virtual bool back()
+}
+
+class MenuItem {
+    +virtual bool handle(char c)
+}
+
+class ItemCommand {
+    +bool handle(char c) override
+    #bool enter() override
+}
+
+class ItemList {
+    +bool handle(char c) override
+    #bool up() override
+    #bool down() override
+    #bool enter() override
+    #bool back() override
+}
+
+class ItemInput {
+    +bool handle(char c) override
+    #bool up() override
+    #bool down() override
+    #bool enter() override
+    #bool back() override
+    #bool left() override
+    #bool right() override
+    #bool backspace() override
+    #bool typeChar(char c) override
+    #bool clear() override
+}
+
+LcdMenu::handle -r-> MenuItem::handle
+ItemCommand -u-|> MenuItem
+ItemList -u-|> MenuItem
+ItemInput -u-|> MenuItem
+
+@enduml
