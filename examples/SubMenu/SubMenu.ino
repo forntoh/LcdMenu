@@ -13,7 +13,7 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-extern MenuItem *settingsMenu[];
+extern MenuItem* settingsMenu[];
 
 // Define the main menu
 MAIN_MENU(

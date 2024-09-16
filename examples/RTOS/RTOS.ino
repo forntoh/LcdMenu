@@ -16,8 +16,8 @@ float temperature3;
 
 bool relay1State, relay2State, relay3State;
 // Main Menu Definings
-extern MenuItem *relayTest[];
-extern MenuItem *tempObs[];
+extern MenuItem* relayTest[];
+extern MenuItem* tempObs[];
 
 // Relay 1 Toggle
 void toggleRelay1(uint16_t isOn) {
@@ -60,13 +60,13 @@ SUB_MENU(relayTest, mainMenu, ITEM_TOGGLE("Relay 1", toggleRelay1), ITEM_TOGGLE(
 SUB_MENU(tempObs, mainMenu, ITEM_BASIC(""), ITEM_BASIC(""), ITEM_BASIC(""));
 
 // RTOS func. to measure temperature value
-static void tempMeas(void *pvParameters) {
+static void tempMeas(void* pvParameters) {
     (void)pvParameters;
     for (;;) {
         //-------------------BEGIN: TEST WITH RANDOM------------------//
-        temperature1 = random(1, 1000) / 100.0; // Generate random float
-        temperature2 = random(1, 2000) / 100.0; // Generate random float
-        temperature3 = random(1, 3000) / 100.0; // Generate random float
+        temperature1 = random(1, 1000) / 100.0;  // Generate random float
+        temperature2 = random(1, 2000) / 100.0;  // Generate random float
+        temperature3 = random(1, 3000) / 100.0;  // Generate random float
         //-------------------END: TEST WITH RANDOM--------------------//
 
         char buffer1[8];
@@ -79,13 +79,13 @@ static void tempMeas(void *pvParameters) {
         tempObs[3]->setText(dtostrf(temperature3, 5, 2, buffer3));
 
         menu.update();
-        vTaskDelay(5000 / portTICK_PERIOD_MS); // wait for five seconds
+        vTaskDelay(5000 / portTICK_PERIOD_MS);  // wait for five seconds
     }
 }
 
 // RTOS func to read serial input from keyboard
-static void keyPad(void *pvParameters) {
-    (void)pvParameters; // Unused parameter
+static void keyPad(void* pvParameters) {
+    (void)pvParameters;  // Unused parameter
 
     for (;;) {
         char command = Serial.read();
