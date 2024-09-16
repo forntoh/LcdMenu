@@ -79,7 +79,7 @@ class KeyboardAdapter : public InputInterface {
     Stream* stream = NULL;
     /**
      * Internal state of current code set.
-     * As stream receives bytes asyncronously, multiple bytes command can arrive
+     * As stream receives bytes asynchronously, multiple bytes command can arrive
      * in several calls. Need to store current state between calls.
      */
     CodeSet codeSet = CodeSet::C0;
