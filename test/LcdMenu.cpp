@@ -16,10 +16,13 @@
 void commandCallback() {}
 void toggleCallback(uint16_t) {}
 
-MAIN_MENU(ITEM_INPUT("Random", NULL), ITEM_INPUT("Connect", NULL),
-          ITEM_BASIC("Settings"), ITEM_COMMAND("Backlight", commandCallback),
-          ITEM_TOGGLE("Toggle", "ON", "OFF", toggleCallback),
-          ITEM_BASIC("Blink random"));
+MAIN_MENU(
+    ITEM_INPUT("Random", NULL),
+    ITEM_INPUT("Connect", NULL),
+    ITEM_BASIC("Settings"),
+    ITEM_COMMAND("Backlight", commandCallback),
+    ITEM_TOGGLE("Toggle", "ON", "OFF", toggleCallback),
+    ITEM_BASIC("Blink random"));
 
 unittest(text_set_correctly) {
     assertEqual("Random", mainMenu[ITEM_INPUT_INDEX]->getText());

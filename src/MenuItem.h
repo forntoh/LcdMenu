@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2023 Forntoh Thomas
+  Copyright (c) 2020-2024 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -35,12 +35,12 @@
  * The MenuItem class
  */
 class MenuItem {
-   protected:
+  protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;
     DisplayInterface* display;
 
-   public:
+  public:
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
     virtual void initialize(DisplayInterface* display) {
@@ -76,18 +76,20 @@ class MenuItem {
      */
     void setText(const char* text) { this->text = text; };
 
-    virtual void up() {};
-    virtual void down() {};
-    virtual void enter() {};
-    virtual void back() {};
-    virtual void left() {};
-    virtual void right() {};
-    virtual void backspace() {};
-    virtual void typeChar(const char character) {};
-    virtual void clear() {};
+    virtual void up() {}
+    virtual void down() {}
+    virtual void enter() {}
+    virtual void back() {}
+    virtual void left() {}
+    virtual void right() {}
+    virtual void backspace() {}
+    virtual void typeChar(const char character) {}
+    virtual void clear() {}
+
     virtual void draw() {
         draw(display->getCursorRow());
     };
+
     virtual void draw(uint8_t row) {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
@@ -107,31 +109,14 @@ class MenuItem {
 };
 #define ITEM_BASIC(...) (new MenuItem(__VA_ARGS__))
 
-/**
- *
- * # ItemHeader
- *
- * This item must be present at the all menus collections *(the first item in
- * the array)*.
- *
- * **Example**
- *
- * ```cpp
- * MenuItem mainMenu[] = {ItemHeader(),
- *                        MenuItem("Item 1"),
- *                        MenuItem("Item 2"),
- *                        ...
- * ```
- */
-
 class ItemHeader : public MenuItem {
-   protected:
+  protected:
     MenuItem** parent = NULL;
 
     ItemHeader(const char* text, MenuItem** parent, byte type)
         : MenuItem(text, type), parent(parent) {}
 
-   public:
+  public:
     /**
      */
     ItemHeader() : ItemHeader("", NULL, MENU_ITEM_MAIN_MENU_HEADER) {}
@@ -148,26 +133,8 @@ class ItemHeader : public MenuItem {
     }
 };
 
-/**
- * ---
- *
- * # ItemFooter
- *
- * This item must be present at the all menus *(the last item in the array)*
- *
- * **Example**
- *
- * ```cpp
- * MenuItem mainMenu[] = {ItemHeader(),
- *                        MenuItem("Item 1"),
- *                        MenuItem("Item 2"),
- *                        ...
- *                        ItemFooter()};
- * ```
- */
-
 class ItemFooter : public MenuItem {
-   public:
+  public:
     /**
      */
     ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
@@ -177,8 +144,7 @@ class ItemFooter : public MenuItem {
     extern MenuItem* mainMenu[]; \
     MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, new ItemFooter()}
 
-#define SUB_MENU(subMenu, parent, ...)                          \
-    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, \
-                           new ItemFooter()}
+#define SUB_MENU(subMenu, parent, ...) \
+    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, new ItemFooter()}
 
 #endif
