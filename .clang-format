@@ -18,7 +18,7 @@ BraceWrapping:
   AfterUnion: true
   AfterExternBlock: true
   BeforeElse: false
-  SplitEmptyFunction: true
+  SplitEmptyFunction: false
 BinPackArguments: false
 BinPackParameters: false
 AlignAfterOpenBracket: Align
