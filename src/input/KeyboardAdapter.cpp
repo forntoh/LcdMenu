@@ -10,8 +10,8 @@ void KeyboardAdapter::loop() {
         if (millis() > lastCharTimestamp + THRESHOLD) {
             if (codeSet == CodeSet::C1) {
                 // When ESC but no further chars
-                printCmd(F("Call BACK")); 
-                menu->process(BACK); 
+                printCmd(F("Call BACK"));
+                menu->process(BACK);
             }
             if (codeSet != CodeSet::C0) {
                 reset();
@@ -25,38 +25,82 @@ void KeyboardAdapter::loop() {
     switch (codeSet) {
         case CodeSet::C0:
             switch (command) {
-                case ESC: codeSet = CodeSet::C1; return;
-                default: printCmd(F("Call"), command); menu->process(command); return;
+                case ESC:
+                    codeSet = CodeSet::C1;
+                    return;
+                default:
+                    printCmd(F("Call"), command);
+                    menu->process(command);
+                    return;
             }
         case CodeSet::C1:
             switch (command) {
-                case '[': codeSet = CodeSet::C2_CSI; return;
-                default: reset(); return;
+                case '[':
+                    codeSet = CodeSet::C2_CSI;
+                    return;
+                default:
+                    reset();
+                    return;
             }
         case CodeSet::C2_CSI:
             if (command >= C2_CSI_TERMINAL_MIN && command <= C2_CSI_TERMINAL_MAX) {
                 switch (command) {
-                    case 'A': printCmd(F("Call UP")); menu->process(UP); reset(); return;
-                    case 'B': printCmd(F("Call DOWN")); menu->process(DOWN); reset(); return;
-                    case 'C': printCmd(F("Call RIGHT")); menu->process(RIGHT); reset(); return;
-                    case 'D': printCmd(F("Call LEFT")); menu->process(LEFT); reset(); return;
+                    case 'A':
+                        printCmd(F("Call UP"));
+                        menu->process(UP);
+                        reset();
+                        return;
+                    case 'B':
+                        printCmd(F("Call DOWN"));
+                        menu->process(DOWN);
+                        reset();
+                        return;
+                    case 'C':
+                        printCmd(F("Call RIGHT"));
+                        menu->process(RIGHT);
+                        reset();
+                        return;
+                    case 'D':
+                        printCmd(F("Call LEFT"));
+                        menu->process(LEFT);
+                        reset();
+                        return;
                     case '~':
                         if (csiBufferCursor > 0) {
                             switch (csiBuffer[0] - '0') {
-                                case 2: printCmd(F("Insert")); reset(); return; // Insert
-                                case 3: printCmd(F("Call CLEAR")); menu->process(CLEAR); reset(); return;
-                                case 5: printCmd(F("PgUp")); reset(); return; // PgUp
-                                case 6: printCmd(F("PgDn")); reset(); return; // PgDn
-                                default: reset(); return;
+                                case 2:
+                                    printCmd(F("Insert"));
+                                    reset();
+                                    return;  // Insert
+                                case 3:
+                                    printCmd(F("Call CLEAR"));
+                                    menu->process(CLEAR);
+                                    reset();
+                                    return;
+                                case 5:
+                                    printCmd(F("PgUp"));
+                                    reset();
+                                    return;  // PgUp
+                                case 6:
+                                    printCmd(F("PgDn"));
+                                    reset();
+                                    return;  // PgDn
+                                default:
+                                    reset();
+                                    return;
                             }
                         }
-                    default: reset(); return;
+                    default:
+                        reset();
+                        return;
                 }
             } else {
                 csiBuffer[csiBufferCursor] = command;
                 csiBufferCursor++;
                 return;
             }
-        default: reset(); return;
+        default:
+            reset();
+            return;
     }
 }

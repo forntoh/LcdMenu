@@ -9,10 +9,10 @@
  */
 class InputInterface {
   protected:
-    LcdMenu *menu = NULL;
+    LcdMenu* menu = NULL;
 
   public:
-    InputInterface(LcdMenu *menu)
+    InputInterface(LcdMenu* menu)
         : menu(menu) {
     }
     virtual void loop() = 0;

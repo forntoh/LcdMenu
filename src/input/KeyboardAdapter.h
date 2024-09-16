@@ -3,7 +3,7 @@
 #include "InputInterface.h"
 #include "Stream.h"
 
-#define ESC 27 // Escape
+#define ESC 27  // Escape
 #define C2_CSI_TERMINAL_MIN 0x40
 #define C2_CSI_TERMINAL_MAX 0x7E
 #define THRESHOLD 100
@@ -17,7 +17,7 @@
  * - `Escape` for `BACK`;
  * - `Delete` for `CLEAR`;
  * - `Backspace` for `BACKSPACE`;
- * 
+ *
  * Keyboard can send multiple-bytes commands.
  * Implementation should convert it to one byte command.
  *
@@ -56,7 +56,7 @@ class KeyboardAdapter : public InputInterface {
         C2_CSI,
         /**
          * @brief Device Control String.
-         * Starts with ESC P. 
+         * Starts with ESC P.
          * Terminates with ESC \.
          */
         C2_DCS,
@@ -103,7 +103,7 @@ class KeyboardAdapter : public InputInterface {
     void reset();
 
   public:
-    KeyboardAdapter(LcdMenu *menu, Stream *stream)
+    KeyboardAdapter(LcdMenu* menu, Stream* stream)
         : InputInterface(menu), stream(stream) {
     }
     void loop() override;
