@@ -76,41 +76,15 @@ class MenuItem {
      */
     void setText(const char* text) { this->text = text; };
 
-    virtual void up() {
-        // NO IMPL
-    };
-
-    virtual void down() {
-        // NO IMPL
-    };
-
-    virtual void enter() {
-        // NO IMPL
-    };
-
-    virtual void back() {
-        // NO IMPL
-    };
-
-    virtual void left() {
-        // NO IMPL
-    };
-
-    virtual void right() {
-        // NO IMPL
-    };
-
-    virtual void backspace() {
-        // NO IMPL
-    };
-
-    virtual void typeChar(const char character) {
-        // NO IMPL
-    };
-
-    virtual void clear() {
-        // NO IMPL
-    };
+    virtual void up() {}
+    virtual void down() {}
+    virtual void enter() {}
+    virtual void back() {}
+    virtual void left() {}
+    virtual void right() {}
+    virtual void backspace() {}
+    virtual void typeChar(const char character) {}
+    virtual void clear() {}
 
     virtual void draw() {
         draw(display->getCursorRow());
