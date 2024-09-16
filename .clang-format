@@ -2,15 +2,16 @@ BasedOnStyle: LLVM
 IndentWidth: 4
 ColumnLimit: 0
 AllowShortBlocksOnASingleLine: false
-AllowShortFunctionsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: true
 AllowShortIfStatementsOnASingleLine: true
 IndentCaseLabels: true
 IndentCaseBlocks: true
 BreakBeforeBraces: Custom
 BraceWrapping:
+  AfterCaseLabel: false
   AfterClass: false
   AfterControlStatement: false
-  AfterEnum: true
+  AfterEnum: false
   AfterFunction: false
   AfterObjCDeclaration: true
   AfterStruct: false
@@ -22,3 +23,5 @@ BinPackArguments: false
 BinPackParameters: false
 AlignAfterOpenBracket: Align
 AllowAllParametersOfDeclarationOnNextLine: false
+PointerAlignment: Left
+SpacesBeforeTrailingComments: 2
