@@ -15,5 +15,5 @@ class InputInterface {
     InputInterface(LcdMenu* menu)
         : menu(menu) {
     }
-    virtual void loop() = 0;
+    virtual void observe() = 0;
 };

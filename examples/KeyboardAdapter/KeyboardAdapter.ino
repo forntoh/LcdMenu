@@ -33,7 +33,7 @@ void setup() {
 }
 
 void loop() {
-    keyboard.loop();
+    keyboard.observe();
 }
 /**
  * Define callback

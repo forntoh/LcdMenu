@@ -5,7 +5,7 @@ void KeyboardAdapter::reset() {
     csiBufferCursor = 0;
 }
 
-void KeyboardAdapter::loop() {
+void KeyboardAdapter::observe() {
     if (!stream->available()) {
         if (millis() > lastCharTimestamp + THRESHOLD) {
             if (codeSet == CodeSet::C1) {

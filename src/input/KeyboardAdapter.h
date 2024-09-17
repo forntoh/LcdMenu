@@ -106,5 +106,5 @@ class KeyboardAdapter : public InputInterface {
     KeyboardAdapter(LcdMenu* menu, Stream* stream)
         : InputInterface(menu), stream(stream) {
     }
-    void loop() override;
+    void observe() override;
 };
