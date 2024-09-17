@@ -3,7 +3,6 @@
 #include <ItemToggle.h>
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
-#include <input/RotaryInputAdapter.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
 #include <utils/RotaryNavConfig.h>
 
@@ -33,18 +32,27 @@ MAIN_MENU(
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Blink random"));
 
-SimpleRotary encoder(2, 3, 4);
-
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-RotaryInputAdapter rotaryInput(&menu, &encoder);
+
+SimpleRotary encoder(2, 3, 4);
+
+RotaryNavConfig menuConfig = {
+    .encoder = &encoder,
+    .menu = &menu,
+    .longPressDuration = 1000,
+    .doublePressThreshold = 500,
+};
 
 void setup() {
     Serial.begin(9600);
     menu.initialize(mainMenu);
 }
 
-void loop() { rotaryInput.observe(); }
+void loop() {
+    // Call the handleRotaryMenu function, passing the menuConfig instance
+    processWithRotaryEncoder(&menuConfig);
+}
 
 // Define the callbacks
 void toggleBacklight(uint16_t isOn) {
