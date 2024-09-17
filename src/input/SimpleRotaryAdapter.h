@@ -31,7 +31,8 @@ class SimpleRotaryAdapter : public InputInterface {
   public:
     SimpleRotary* encoder;
 
-    SimpleRotaryAdapter(LcdMenu* menu, SimpleRotary* encoder) : InputInterface(menu), encoder(encoder) {};
+    SimpleRotaryAdapter(LcdMenu* menu, SimpleRotary* encoder)
+        : InputInterface(menu), encoder(encoder) {};
 
     void observe() override {
         // Handle rotary encoder rotation
@@ -48,8 +49,7 @@ class SimpleRotaryAdapter : public InputInterface {
 
         if (pressType == 1) {
             if (pendingEnter) {
-                if (DOUBLE_PRESS_THRESHOLD > 0 &&
-                    currentTime - lastPressTime < DOUBLE_PRESS_THRESHOLD) {
+                if (DOUBLE_PRESS_THRESHOLD > 0 && currentTime - lastPressTime < DOUBLE_PRESS_THRESHOLD) {
                     menu->process(BACKSPACE);  // Call BACKSPACE action (double press)
                     pendingEnter = false;
                 }
@@ -63,8 +63,7 @@ class SimpleRotaryAdapter : public InputInterface {
         }
 
         // Check if the doublePressThreshold has elapsed for pending enter action
-        if ((!menu->lcd.getEditModeEnabled() && pendingEnter) ||
-            (pendingEnter && (currentTime - lastPressTime >= DOUBLE_PRESS_THRESHOLD))) {
+        if ((!menu->lcd.getEditModeEnabled() && pendingEnter) || (pendingEnter && (currentTime - lastPressTime >= DOUBLE_PRESS_THRESHOLD))) {
             menu->process(ENTER);  // Call ENTER action (short press)
             pendingEnter = false;
         }
