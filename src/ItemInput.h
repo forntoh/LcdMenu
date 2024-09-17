@@ -163,7 +163,7 @@ class ItemInput : public MenuItem {
         display->drawItem(row, text, ':', buf);
     }
 
-   protected:
+  protected:
     bool enter() {
         if (display->getEditModeEnabled()) {
             return false;

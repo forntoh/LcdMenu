@@ -147,7 +147,6 @@ class ItemList : public MenuItem {
         }
         return true;
     };
-
 };
 
 #define ITEM_STRING_LIST(...) (new ItemList(__VA_ARGS__))

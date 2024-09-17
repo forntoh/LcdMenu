@@ -61,7 +61,7 @@ class ItemInputCharset : public ItemInput {
         }
     }
 
-   protected:
+  protected:
     bool enter() {
         if (!display->getEditModeEnabled()) {
             return ItemInput::enter();
@@ -137,7 +137,6 @@ class ItemInputCharset : public ItemInput {
         display->drawChar(charset[charsetPosition]);
         return true;
     }
-
 };
 
 #define ITEM_INPUT_CHARSET(...) (new ItemInputCharset(__VA_ARGS__))

@@ -55,7 +55,7 @@ class ItemCommand : public MenuItem {
         }
     }
 
-   protected:
+  protected:
     bool enter() {
         if (callback != NULL) {
             callback();

@@ -5,8 +5,8 @@
 
 #include <ItemInputCharset.h>
 #include <LcdMenu.h>
-#include <interface/LiquidCrystalI2CAdapter.h>
 #include <input/KeyboardAdapter.h>
+#include <interface/LiquidCrystalI2CAdapter.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
