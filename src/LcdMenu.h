@@ -84,34 +84,6 @@ class LcdMenu {
         lcd.drawCursor();  // In case if currentPosition was not changed between screens
     }
 
-  public:
-    /**
-     * ## Public Fields
-     */
-    /**
-     * Display Interface
-     */
-    DisplayInterface& lcd;
-
-    /**
-     * # Constructor
-     */
-
-    LcdMenu(DisplayInterface& display) : lcd(display) {
-        bottom = lcd.getMaxRows();
-        maxRows = lcd.getMaxRows();
-        maxCols = lcd.getMaxCols();
-    }
-
-    void initialize(MenuItem* menu[]) {
-        lcd.begin();
-        currentMenuTable = menu;
-        for (uint8_t i = 1; currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
-            currentMenuTable[i]->initialize(&lcd);
-        }
-        drawMenu();
-        lcd.drawCursor();
-    }
     /*
      * Draw the menu items and cursor
      */
@@ -122,22 +94,15 @@ class LcdMenu {
         drawMenu();
         lcd.drawCursor();
     }
+
     /*
-     * Draw the menu items and cursor
+     * Draw the cursor
      */
     void updateOnlyCursor() {
         if (!enableUpdate) {
             return;
         }
         lcd.moveCursor(constrain(cursorPosition - top, 0, maxRows - 1));
-    }
-
-    inline bool isAtTheStart(uint8_t position) {
-        return position == 1;
-    }
-
-    inline bool isAtTheEnd(uint8_t position) {
-        return currentMenuTable[position + 1]->getType() == MENU_ITEM_END_OF_MENU;
     }
 
     void drawMenu() {
@@ -160,10 +125,33 @@ class LcdMenu {
         }
     }
 
+  public:
     /**
-     * Reset the display
+     * ## Public Fields
      */
-    void resetMenu() { this->reset(false); }
+    /**
+     * Display Interface
+     */
+    DisplayInterface& lcd;
+
+    /**
+     * # Constructor
+     */
+    LcdMenu(DisplayInterface& display) : lcd(display) {
+        bottom = lcd.getMaxRows();
+        maxRows = lcd.getMaxRows();
+        maxCols = lcd.getMaxCols();
+    }
+
+    void initialize(MenuItem* menu[]) {
+        lcd.begin();
+        currentMenuTable = menu;
+        for (uint8_t i = 1; currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
+            currentMenuTable[i]->initialize(&lcd);
+        }
+        drawMenu();
+        lcd.drawCursor();
+    }
 
     bool process(const unsigned char c) {
         if (currentMenuTable[cursorPosition]->process(c)) {
@@ -177,6 +165,86 @@ class LcdMenu {
             default: return false;
         }
     };
+
+    /**
+     * When you want to display any other content on the screen then
+     * call this function then display your content, later call
+     * `show()` to show the menu
+     */
+    void hide() {
+        enableUpdate = false;
+        lcd.clear();
+    }
+    /**
+     * Show the menu
+     */
+    void show() {
+        enableUpdate = true;
+        update();
+    }
+    /**
+     * @brief Checks if the given position is at the start.
+     * @param position The position to check.
+     * @return true if the position is at the start (i.e., equal to 1),
+     *         false otherwise.
+     */
+    inline bool isAtTheStart(uint8_t position) {
+        return position == 1;
+    }
+    /**
+     * @brief Checks if the specified position is at the end of the menu.
+     * @param position The index of the item to check.
+     * @return true if the next item is the end of the menu; false otherwise.
+     */
+    inline bool isAtTheEnd(uint8_t position) {
+        return currentMenuTable[position + 1]->getType() == MENU_ITEM_END_OF_MENU;
+    }
+    /**
+     * Get the current cursor position
+     * @return `cursorPosition` e.g. 1, 2, 3...
+     */
+    uint8_t getCursorPosition() { return this->cursorPosition; }
+    /**
+     * Set the current cursor position
+     * @param position
+     */
+    void setCursorPosition(uint8_t position) {
+        uint8_t bottom = position;
+        bool isNotEnd = false;
+
+        do {
+            isNotEnd = currentMenuTable[++bottom]->getType() != MENU_ITEM_END_OF_MENU && bottom < maxRows + 20;
+        } while (isNotEnd);
+
+        uint8_t max = maxRows - 1;
+
+        this->cursorPosition = position + 1;
+        this->bottom = constrain(cursorPosition + max, max, bottom - 1);
+        this->top = this->bottom - max;
+    }
+    /**
+     * Check if currently displayed menu is a sub menu.
+     */
+    bool isSubMenu() {
+        byte menuItemType = currentMenuTable[0]->getType();
+        return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
+    }
+    /**
+     * Get a `MenuItem` at position
+     * @return `MenuItem` - item at `position`
+     */
+    MenuItem* getItemAt(uint8_t position) { return currentMenuTable[position]; }
+    /**
+     * Get a `MenuItem` at position using operator function
+     * e.g `menu[menu.getCursorPosition()]` will return the item at the
+     * current cursor position NB: This is relative positioning (i.e. if a
+     * submenu is currently being displayed, menu[1] will return item 1 in
+     * the current menu)
+     * @return `MenuItem` - item at `position`
+     */
+    MenuItem* operator[](const uint8_t position) {
+        return currentMenuTable[position];
+    }
 
   protected:
     /**
@@ -281,69 +349,5 @@ class LcdMenu {
             reset(true);
         }
         return true;
-    }
-
-  public:
-    /**
-     * When you want to display any other content on the screen then
-     * call this function then display your content, later call
-     * `show()` to show the menu
-     */
-    void hide() {
-        enableUpdate = false;
-        lcd.clear();
-    }
-    /**
-     * Show the menu
-     */
-    void show() {
-        enableUpdate = true;
-        update();
-    }
-    /**
-     * Get the current cursor position
-     * @return `cursorPosition` e.g. 1, 2, 3...
-     */
-    uint8_t getCursorPosition() { return this->cursorPosition; }
-    /**
-     * Set the current cursor position
-     * @param position
-     */
-    void setCursorPosition(uint8_t position) {
-        uint8_t bottom = position;
-        bool isNotEnd = false;
-
-        do {
-            isNotEnd = currentMenuTable[++bottom]->getType() != MENU_ITEM_END_OF_MENU && bottom < maxRows + 20;
-        } while (isNotEnd);
-
-        uint8_t max = maxRows - 1;
-
-        this->cursorPosition = position + 1;
-        this->bottom = constrain(cursorPosition + max, max, bottom - 1);
-        this->top = this->bottom - max;
-    }
-    /**
-     * Check if currently displayed menu is a sub menu.
-     */
-    bool isSubMenu() {
-        byte menuItemType = currentMenuTable[0]->getType();
-        return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
-    }
-    /**
-     * Get a `MenuItem` at position
-     * @return `MenuItem` - item at `position`
-     */
-    MenuItem* getItemAt(uint8_t position) { return currentMenuTable[position]; }
-    /**
-     * Get a `MenuItem` at position using operator function
-     * e.g `menu[menu.getCursorPosition()]` will return the item at the
-     * current cursor position NB: This is relative positioning (i.e. if a
-     * submenu is currently being displayed, menu[1] will return item 1 in
-     * the current menu)
-     * @return `MenuItem` - item at `position`
-     */
-    MenuItem* operator[](const uint8_t position) {
-        return currentMenuTable[position];
     }
 };
