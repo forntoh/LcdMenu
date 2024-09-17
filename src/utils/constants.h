@@ -30,6 +30,15 @@ const byte MENU_ITEM_PROGRESS = 10;
 #define LEFT 131     // >127
 #define CLEAR 132    // >127
 //
+// Rotary encoder configuration
+//
+#ifndef LONG_PRESS_DURATION
+#define LONG_PRESS_DURATION 1000
+#endif
+#ifndef DOUBLE_PRESS_THRESHOLD
+#define DOUBLE_PRESS_THRESHOLD 300
+#endif
+//
 const byte DOWN_ARROW[8] = {
     0b00100,  //   *
     0b00100,  //   *

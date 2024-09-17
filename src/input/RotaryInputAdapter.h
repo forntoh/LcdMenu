@@ -3,37 +3,35 @@
 #include "InputInterface.h"
 #include <SimpleRotary.h>
 
+/**
+ * @class RotaryInputAdapter
+ * @brief Adapter for handling rotary input for an LCD menu.
+ *
+ * This class interfaces with a rotary encoder to manage user input
+ * for navigating and selecting options in an LCD menu.
+ *
+ * It processes rotary encoder rotations to navigate through menu options
+ * and handles button presses for various actions, including:
+ * - Short press for selecting an option
+ * - Long press for going back
+ * - Double press for backspacing
+ *
+ * The values for long press duration (defined as LONG_PRESS_DURATION) and
+ * double press threshold (defined as DOUBLE_PRESS_THRESHOLD) can be
+ * overwritten by defining new ones with #define.
+ *
+ * @param menu Pointer to the LcdMenu instance that this adapter will control.
+ * @param encoder Pointer to the SimpleRotary instance representing the rotary encoder.
+ */
 class RotaryInputAdapter : public InputInterface {
   private:
-    uint16_t longPressDuration;       // Duration to consider a long press
-    uint16_t doublePressThreshold;    // Duration to consider a double press
     unsigned long lastPressTime = 0;  // Last time the button was pressed
     bool pendingEnter = false;        // Flag to indicate if an enter action is pending
 
   public:
     SimpleRotary* encoder;
 
-    /**
-     * @brief Adapter for handling rotary input for an LCD menu.
-     *
-     * This class interfaces with a rotary encoder to manage user input
-     * for navigating and selecting options in an LCD menu.
-     *
-     * @param menu Pointer to the LcdMenu instance that this adapter will control.
-     * @param encoder Pointer to the SimpleRotary instance representing the rotary encoder.
-     * @param longPressDuration Duration in milliseconds to recognize a long press (default is 1000 ms).
-     * @param doublePressThreshold Duration in milliseconds to recognize a double press (default is 300 ms).
-     */
-    RotaryInputAdapter(
-        LcdMenu* menu,
-        SimpleRotary* encoder,
-        uint16_t longPressDuration = 1000,
-        uint16_t doublePressThreshold = 300)
-
-        : InputInterface(menu),
-          encoder(encoder),
-          longPressDuration(longPressDuration),
-          doublePressThreshold(doublePressThreshold) {};
+    RotaryInputAdapter(LcdMenu* menu, SimpleRotary* encoder) : InputInterface(menu), encoder(encoder) {};
 
     void observe() override {
         // Handle rotary encoder rotation
@@ -45,13 +43,13 @@ class RotaryInputAdapter : public InputInterface {
         }
 
         // Handle button press (short, long, and double press)
-        uint8_t pressType = encoder->pushType(longPressDuration);
+        uint8_t pressType = encoder->pushType(LONG_PRESS_DURATION);
         unsigned long currentTime = millis();
 
         if (pressType == 1) {
             if (pendingEnter) {
-                if (doublePressThreshold > 0 &&
-                    currentTime - lastPressTime < doublePressThreshold) {
+                if (DOUBLE_PRESS_THRESHOLD > 0 &&
+                    currentTime - lastPressTime < DOUBLE_PRESS_THRESHOLD) {
                     menu->process(BACKSPACE);  // Call BACKSPACE action (double press)
                     pendingEnter = false;
                 }
@@ -66,7 +64,7 @@ class RotaryInputAdapter : public InputInterface {
 
         // Check if the doublePressThreshold has elapsed for pending enter action
         if ((!menu->lcd.getEditModeEnabled() && pendingEnter) ||
-            (pendingEnter && (currentTime - lastPressTime >= doublePressThreshold))) {
+            (pendingEnter && (currentTime - lastPressTime >= DOUBLE_PRESS_THRESHOLD))) {
             menu->process(ENTER);  // Call ENTER action (short press)
             pendingEnter = false;
         }
