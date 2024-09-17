@@ -34,8 +34,8 @@ SUB_MENU(
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-SimpleRotary encoder(2, 3, 4);
-SimpleRotaryAdapter rotary(&menu, &encoder);
+SimpleRotary rotary(2, 3, 4);
+SimpleRotaryAdapter rotaryAdapter(&menu, &rotary);
 
 void setup() {
     Serial.begin(9600);
@@ -43,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-    rotary.observe();
+    rotaryAdapter.observe();
 }
 
 // Define the callbacks
