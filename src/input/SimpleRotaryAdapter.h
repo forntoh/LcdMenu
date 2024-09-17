@@ -4,7 +4,7 @@
 #include <SimpleRotary.h>
 
 /**
- * @class RotaryInputAdapter
+ * @class SimpleRotaryAdapter
  * @brief Adapter for handling rotary input for an LCD menu.
  *
  * This class interfaces with a rotary encoder to manage user input
@@ -23,7 +23,7 @@
  * @param menu Pointer to the LcdMenu instance that this adapter will control.
  * @param encoder Pointer to the SimpleRotary instance representing the rotary encoder.
  */
-class RotaryInputAdapter : public InputInterface {
+class SimpleRotaryAdapter : public InputInterface {
   private:
     unsigned long lastPressTime = 0;  // Last time the button was pressed
     bool pendingEnter = false;        // Flag to indicate if an enter action is pending
@@ -31,7 +31,7 @@ class RotaryInputAdapter : public InputInterface {
   public:
     SimpleRotary* encoder;
 
-    RotaryInputAdapter(LcdMenu* menu, SimpleRotary* encoder) : InputInterface(menu), encoder(encoder) {};
+    SimpleRotaryAdapter(LcdMenu* menu, SimpleRotary* encoder) : InputInterface(menu), encoder(encoder) {};
 
     void observe() override {
         // Handle rotary encoder rotation

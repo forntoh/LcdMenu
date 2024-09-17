@@ -36,7 +36,7 @@ SimpleRotary encoder(2, 3, 4);
 
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-RotaryInputAdapter rotaryInput(&menu, &encoder);
+SimpleRotaryAdapter rotaryInput(&menu, &encoder);
 
 void setup() {
     Serial.begin(9600);
