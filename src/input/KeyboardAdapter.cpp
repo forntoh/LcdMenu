@@ -1,111 +1,108 @@
+#define DEBUG
+
 #include "KeyboardAdapter.h"
+#include "utils/utils.h"
 
-void KeyboardAdapter::reset() {
-    codeSet = CodeSet::C0;
-    csiBufferCursor = 0;
-}
-
-void KeyboardAdapter::observe() {
-    if (!stream->available()) {
-        if (millis() > lastCharTimestamp + THRESHOLD) {
-            if (codeSet == CodeSet::C1) {
-                // When ESC but no further chars
-                printCmd(F("Call BACK"));
-                menu->process(BACK);
-            }
-            if (codeSet != CodeSet::C0) {
-                reset();
-            }
-        }
-        return;
+void KeyboardAdapter::handleIdle() {
+    switch (lastChar) {
+        case CR:  // Received single `\r`
+            printCmd(F("Call ENTER from idle"));
+            menu->process(ENTER);
+            break;
+        case ESC:  // Received single `ESC`
+            printCmd(F("Call BACK from idle"));
+            menu->process(BACK);
+            break;
     }
-    unsigned char command = stream->read();
-    lastCharTimestamp = millis();
-    printCmd(F("INPUT"), (uint8_t)command);
+}
+void KeyboardAdapter::handleReceived(unsigned char command) {
     switch (codeSet) {
         case CodeSet::C0:
             switch (command) {
-                case ESC:
-                    codeSet = CodeSet::C1;
-                    return;
-                case BS:  // On Win
-                case DEL: // On Mac
+                case BS:   // 8. On Win
+                case DEL:  // 127. On Mac
                     printCmd(F("Call BACKSPACE"));
                     menu->process(BACKSPACE);
-                    return;
+                    break;
+                case LF:  // 10, \n
+                    printCmd(F("Call ENTER"));
+                    menu->process(ENTER);
+                    break;
+                case CR:  // 13, \r
+                    // Can be \r\n sequence, do nothing
+                    break;
+                case ESC:  // 27
+                    codeSet = CodeSet::C1;
+                    break;
                 default:
-                    printCmd(F("Call"), command);
+                    printCmd(F("Call default"), (uint8_t)command);
                     menu->process(command);
-                    return;
+                    break;
             }
+            saveLastChar(command);
+            break;
         case CodeSet::C1:
             switch (command) {
                 case '[':
                     codeSet = CodeSet::C2_CSI;
-                    return;
+                    break;
                 default:
-                    reset();
-                    return;
+                    reset(); // Reset after unsupported C1 commmand
+                    break;
             }
+            break;
         case CodeSet::C2_CSI:
             if (command >= C2_CSI_TERMINAL_MIN && command <= C2_CSI_TERMINAL_MAX) {
                 switch (command) {
                     case 'A':
                         printCmd(F("Call UP"));
                         menu->process(UP);
-                        reset();
-                        return;
+                        break;
                     case 'B':
                         printCmd(F("Call DOWN"));
                         menu->process(DOWN);
-                        reset();
-                        return;
+                        break;
                     case 'C':
                         printCmd(F("Call RIGHT"));
                         menu->process(RIGHT);
-                        reset();
-                        return;
+                        break;
                     case 'D':
                         printCmd(F("Call LEFT"));
                         menu->process(LEFT);
-                        reset();
-                        return;
+                        break;
+                    case 'F':
+                        printCmd(F("End"));
+                        break;
+                    case 'H':
+                        printCmd(F("Home"));
+                        break;
                     case '~':
                         if (csiBufferCursor > 0) {
                             switch (csiBuffer[0] - '0') {
-                                case 2:
+                                case 2:  // Insert
                                     printCmd(F("Insert"));
-                                    reset();
-                                    return;  // Insert
-                                case 3:
+                                    break;
+                                case 3:  // Delete
                                     printCmd(F("Call CLEAR"));
                                     menu->process(CLEAR);
-                                    reset();
-                                    return;
-                                case 5:
+                                    break;
+                                case 5:  // PgUp
                                     printCmd(F("PgUp"));
-                                    reset();
-                                    return;  // PgUp
-                                case 6:
+                                    break;
+                                case 6:  // PgDn
                                     printCmd(F("PgDn"));
-                                    reset();
-                                    return;  // PgDn
-                                default:
-                                    reset();
-                                    return;
+                                    break;
                             }
                         }
-                    default:
-                        reset();
-                        return;
                 }
+                reset(); // Reset after C2 terminal symbol
             } else {
                 csiBuffer[csiBufferCursor] = command;
                 csiBufferCursor++;
-                return;
             }
+            break;
         default:
-            reset();
-            return;
+            reset(); // Reset after unknown code set
+            break;
     }
 }

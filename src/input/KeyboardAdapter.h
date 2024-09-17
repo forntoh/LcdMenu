@@ -3,7 +3,9 @@
 #include "InputInterface.h"
 #include "Stream.h"
 
-#define BS  8    // Backspace
+#define BS 8     // Backspace, \b
+#define LF 10    // Line feed, \n
+#define CR 13    // Carriage Return, \r
 #define ESC 27   // Escape
 #define DEL 127  // Del, Backspace on Mac
 #define C2_CSI_TERMINAL_MIN 0x40
@@ -25,6 +27,9 @@
  *
  * Implementation details. Mapping:
  * `First 128 of ASCII`        -> as is
+ * `\r`                        -> `ENTER`
+ * `\n`                        -> `ENTER`
+ * `\r\n`                      -> `ENTER`
  * `ESC`                       -> `BACK`
  * `ESC [ A` (up arrow)        -> `UP`
  * `ESC [ B` (down arrow)      -> `DOWN`
@@ -76,18 +81,23 @@ class KeyboardAdapter : public InputInterface {
         C3,
     };
     /**
-     * Input stream.
+     * @brief Input stream.
      */
     Stream* stream = NULL;
     /**
-     * Internal state of current code set.
+     * @brief Internal state of current code set.
      * As stream receives bytes asynchronously, multiple bytes command can arrive
      * in several calls. Need to store current state between calls.
      */
     CodeSet codeSet = CodeSet::C0;
     /**
-     * Milliseconds timestamp of last received character.
-     * Used for detecting ESC with no chars next.
+     * @brief Last received character.
+     * Used to detect 2 chars sequences, e.g. `\r\n`.
+     */
+    unsigned char lastChar;
+    /**
+     * @brief Milliseconds timestamp of last received character.
+     * Used for detecting ESC with no chars next or single `\r` without `\n`.
      */
     unsigned long lastCharTimestamp;
     /**
@@ -96,17 +106,51 @@ class KeyboardAdapter : public InputInterface {
      */
     char csiBuffer[CSI_BUFFER_SIZE];
     /**
-     * Points to available byte in `buffer`.
+     * @brief Points to next available byte in `csiBuffer`.
      */
     uint8_t csiBufferCursor = 0;
     /**
-     * Reset to initial state.
+     * @brief Reset to initial state.
      */
-    void reset();
+    inline void reset() {
+        codeSet = CodeSet::C0;
+        csiBufferCursor = 0;
+        lastChar = 0;
+        lastCharTimestamp = 0;
+    }
+    inline bool hasLastChar() {
+        // TODO: Check millis() overflow situation
+        return lastChar != 0 && millis() > lastCharTimestamp + THRESHOLD;
+    }
+    inline void saveLastChar(unsigned char command) {
+        lastChar = command;
+        lastCharTimestamp = millis();
+    }
+    /**
+     * @brief Handle idle state when there are no input for some time.
+     * @see THRESHOLD - timeout in ms.
+     */
+    void handleIdle();
+    /**
+     * @brief Handle received command.
+     * @param command the received command
+     */
+    void handleReceived(unsigned char command);
 
   public:
     KeyboardAdapter(LcdMenu* menu, Stream* stream)
         : InputInterface(menu), stream(stream) {
     }
-    void observe() override;
+    void observe() override {
+        if (!stream->available()) {
+            if (hasLastChar()) {
+                handleIdle();
+                reset();
+            }
+            return;
+        }
+        unsigned char command = stream->read();
+        printCmd(F("INPUT"), (uint8_t)command);
+        handleReceived(command);
+    }
 };
