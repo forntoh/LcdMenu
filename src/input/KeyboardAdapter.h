@@ -178,7 +178,7 @@ class KeyboardAdapter : public InputInterface {
                         codeSet = CodeSet::C2_CSI;
                         break;
                     default:
-                        reset();  // Reset after unsupported C1 commmand
+                        reset();  // Reset after unsupported C1 command
                         break;
                 }
                 break;
