@@ -31,7 +31,8 @@ class SimpleRotaryAdapter : public InputInterface {
 
   public:
     SimpleRotaryAdapter(LcdMenu* menu, SimpleRotary* encoder)
-        : InputInterface(menu), encoder(encoder) {};
+        : InputInterface(menu), encoder(encoder) {
+    }
 
     void observe() override {
         // Handle rotary encoder rotation
