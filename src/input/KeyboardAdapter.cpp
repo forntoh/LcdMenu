@@ -28,6 +28,11 @@ void KeyboardAdapter::observe() {
                 case ESC:
                     codeSet = CodeSet::C1;
                     return;
+                case BS:  // On Win
+                case DEL: // On Mac
+                    printCmd(F("Call BACKSPACE"));
+                    menu->process(BACKSPACE);
+                    return;
                 default:
                     printCmd(F("Call"), command);
                     menu->process(command);

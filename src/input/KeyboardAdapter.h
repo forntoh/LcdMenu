@@ -3,7 +3,9 @@
 #include "InputInterface.h"
 #include "Stream.h"
 
-#define ESC 27  // Escape
+#define BS  8    // Backspace
+#define ESC 27   // Escape
+#define DEL 127  // Del, Backspace on Mac
 #define C2_CSI_TERMINAL_MIN 0x40
 #define C2_CSI_TERMINAL_MAX 0x7E
 #define THRESHOLD 100
