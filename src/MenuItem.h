@@ -32,7 +32,12 @@
 #include <utils/utils.h>
 
 /**
- * The MenuItem class
+ * @brief The MenuItem class.
+ *
+ * ┌────────────────────────────┐
+ * │ > T E X T                  │
+ * └────────────────────────────┘
+ *
  */
 class MenuItem {
   protected:
@@ -75,16 +80,17 @@ class MenuItem {
      * @param text text to display for the item
      */
     void setText(const char* text) { this->text = text; };
-
-    virtual void up() {}
-    virtual void down() {}
-    virtual void enter() {}
-    virtual void back() {}
-    virtual void left() {}
-    virtual void right() {}
-    virtual void backspace() {}
-    virtual void typeChar(const char character) {}
-    virtual void clear() {}
+    /**
+     * @brief Process a command decoded in 1 byte.
+     * It can be a printable character or a control command like `ENTER` or `LEFT`.
+     * Return value is used to determine operation was successful or ignored.
+     * If the parent of item received that handle was ignored it can execute it's own action on this command.
+     * Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element.
+     * Behaviour is very similar to Even Bubbling in JavaScript.
+     * @param c the character, can be a printable character or a control command
+     * @return true if command was successfully handled by item.
+     */
+    virtual bool process(const unsigned char c) { return false; };
 
     virtual void draw() {
         draw(display->getCursorRow());

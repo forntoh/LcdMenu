@@ -19,6 +19,17 @@ const byte MENU_ITEM_END_OF_MENU = 8;
 const byte MENU_ITEM_LIST = 9;
 const byte MENU_ITEM_PROGRESS = 10;
 //
+// Control codes
+//
+#define BACKSPACE 8  // Backspace
+#define ENTER 10     // Enter
+#define BACK 27      // Escape
+#define UP 128       // >127
+#define DOWN 129     // >127
+#define RIGHT 130    // >127
+#define LEFT 131     // >127
+#define CLEAR 132    // >127
+//
 const byte DOWN_ARROW[8] = {
     0b00100,  //   *
     0b00100,  //   *

@@ -85,26 +85,46 @@ class ItemList : public MenuItem {
      */
     String* getItems() { return items; }
 
-    void enter() override {
+    void draw(uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
+        display->drawItem(row, text, ':', buf);
+    }
+
+    bool process(const unsigned char c) override {
+        switch (c) {
+            case ENTER: return enter();
+            case BACK: return back();
+            case UP: return up();
+            case DOWN: return down();
+            default: return false;
+        }
+    }
+
+  protected:
+    bool enter() {
         if (display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(true);
+        return true;
     };
 
-    void back() override {
+    bool back() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         display->setEditModeEnabled(false);
         if (callback != NULL) {
             callback(itemIndex);
         }
+        return true;
     };
 
-    void down() override {
+    bool down() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
@@ -112,11 +132,12 @@ class ItemList : public MenuItem {
             printCmd(F("LEFT"), items[itemIndex].c_str());
             MenuItem::draw();
         }
+        return true;
     };
 
-    void up() override {
+    bool up() {
         if (!display->getEditModeEnabled()) {
-            return;
+            return false;
         }
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
@@ -124,14 +145,8 @@ class ItemList : public MenuItem {
             printCmd(F("RIGHT"), items[itemIndex].c_str());
             MenuItem::draw();
         }
+        return true;
     };
-
-    void draw(uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
-        display->drawItem(row, text, ':', buf);
-    }
 };
 
 #define ITEM_STRING_LIST(...) (new ItemList(__VA_ARGS__))

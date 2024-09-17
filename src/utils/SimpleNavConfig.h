@@ -18,24 +18,25 @@ struct SimpleNavConfig {
 
 bool processWithSimpleCommand(SimpleNavConfig* config, byte cmd) {
     if (config->up && cmd == config->up) {
-        config->menu->up();
+        config->menu->process(UP);
     } else if (config->down && cmd == config->down) {
-        config->menu->down();
+        config->menu->process(DOWN);
     } else if (config->left && cmd == config->left) {
-        config->menu->left();
+        config->menu->process(LEFT);
     } else if (config->right && cmd == config->right) {
-        config->menu->right();
+        config->menu->process(RIGHT);
     } else if (config->enter && cmd == config->enter) {
-        config->menu->enter();
+        config->menu->process(ENTER);
     } else if (config->back && cmd == config->back) {
-        config->menu->back();
+        config->menu->process(BACK);
 #ifdef ItemInput_H
     } else if (config->clear && cmd == config->clear) {
-        config->menu->clear();
+        config->menu->process(CLEAR);
     } else if (config->backspace && cmd == config->backspace) {
-        config->menu->backspace();
+        config->menu->process(BACKSPACE);
 #endif
     } else {
+        config->menu->process(cmd);
         return false;
     }
     return true;

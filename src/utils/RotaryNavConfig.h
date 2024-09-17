@@ -31,9 +31,9 @@ void processWithRotaryEncoder(RotaryNavConfig* config) {
     // Handle rotary encoder rotation
     uint8_t rotation = config->encoder->rotate();
     if (rotation == 1) {
-        config->menu->down();  // Call DOWN action
+        config->menu->process(DOWN);  // Call DOWN action
     } else if (rotation == 2) {
-        config->menu->up();  // Call UP action
+        config->menu->process(UP);  // Call UP action
     }
 
     // Handle button press (short, long, and double press)
@@ -44,7 +44,7 @@ void processWithRotaryEncoder(RotaryNavConfig* config) {
         if (config->pendingEnter) {
             if (config->doublePressThreshold > 0 &&
                 currentTime - config->lastPressTime < config->doublePressThreshold) {
-                config->menu->backspace();  // Call BACKSPACE action (double press)
+                config->menu->process(BACKSPACE);  // Call BACKSPACE action (double press)
                 config->pendingEnter = false;
             }
         } else {
@@ -52,14 +52,14 @@ void processWithRotaryEncoder(RotaryNavConfig* config) {
             config->lastPressTime = currentTime;
         }
     } else if (pressType == 2) {
-        config->menu->back();  // Call BACK action (long press)
+        config->menu->process(BACK);  // Call BACK action (long press)
         config->pendingEnter = false;
     }
 
     // Check if the doublePressThreshold has elapsed for pending enter action
     if ((!config->menu->lcd.getEditModeEnabled() && config->pendingEnter) ||
         (config->pendingEnter && (currentTime - config->lastPressTime >= config->doublePressThreshold))) {
-        config->menu->enter();  // Call ENTER action (short press)
+        config->menu->process(ENTER);  // Call ENTER action (short press)
         config->pendingEnter = false;
     }
 }
