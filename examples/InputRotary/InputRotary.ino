@@ -4,7 +4,7 @@
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
-#include <input/RotaryInputAdapter.h>
+#include <input/SimpleRotaryAdapter.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
 
 #define LCD_ROWS 2
