@@ -27,10 +27,9 @@ class SimpleRotaryAdapter : public InputInterface {
   private:
     unsigned long lastPressTime = 0;  // Last time the button was pressed
     bool pendingEnter = false;        // Flag to indicate if an enter action is pending
+    SimpleRotary* encoder;            // Pointer to the SimpleRotary instance
 
   public:
-    SimpleRotary* encoder;
-
     SimpleRotaryAdapter(LcdMenu* menu, SimpleRotary* encoder)
         : InputInterface(menu), encoder(encoder) {};
 
