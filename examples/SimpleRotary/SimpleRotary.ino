@@ -3,8 +3,8 @@
 #include <ItemToggle.h>
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
+#include <input/SimpleRotaryAdapter.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
-#include <utils/RotaryNavConfig.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -34,15 +34,8 @@ MAIN_MENU(
 
 LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-
 SimpleRotary encoder(2, 3, 4);
-
-RotaryNavConfig menuConfig = {
-    .encoder = &encoder,
-    .menu = &menu,
-    .longPressDuration = 1000,
-    .doublePressThreshold = 500,
-};
+SimpleRotaryAdapter rotary(&menu, &encoder);
 
 void setup() {
     Serial.begin(9600);
@@ -50,8 +43,7 @@ void setup() {
 }
 
 void loop() {
-    // Call the handleRotaryMenu function, passing the menuConfig instance
-    processWithRotaryEncoder(&menuConfig);
+    rotary.observe();
 }
 
 // Define the callbacks
