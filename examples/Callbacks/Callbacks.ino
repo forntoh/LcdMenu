@@ -7,7 +7,7 @@
 
 #include <ItemToggle.h>
 #include <LcdMenu.h>
-#include <interface/LiquidCrystalI2CAdapter.h>
+#include <interface/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
 #define LCD_ROWS 2
@@ -24,7 +24,8 @@ MAIN_MENU(
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
 
-LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
 
 SimpleNavConfig navConfig = {

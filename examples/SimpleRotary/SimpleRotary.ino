@@ -4,7 +4,7 @@
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
 #include <input/SimpleRotaryAdapter.h>
-#include <interface/LiquidCrystalI2CAdapter.h>
+#include <interface/LiquidCrystal_I2CAdapter.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -32,11 +32,11 @@ MAIN_MENU(
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Blink random"));
 
-SimpleRotary encoder(2, 3, 4);
-
-LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-SimpleRotaryAdapter rotaryInput(&menu, &encoder);
+SimpleRotary encoder(2, 3, 4);
+SimpleRotaryAdapter rotary(&menu, &encoder);
 
 void setup() {
     Serial.begin(9600);

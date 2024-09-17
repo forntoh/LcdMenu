@@ -3,7 +3,7 @@
 #include <ItemSubMenu.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>
-#include <interface/LiquidCrystalI2CAdapter.h>
+#include <interface/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
 // 2x20 LCD Display
@@ -34,7 +34,8 @@ void toggleRelay3(uint16_t isOn) {
     printCmd(F("relay3State"));
 }
 
-LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
 
 SimpleNavConfig navConfig = {
