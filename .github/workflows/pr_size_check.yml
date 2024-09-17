@@ -13,4 +13,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           max_added_count: ${{ vars.PR_SIZE_LIMIT }}
-          filter_pattern: ".*.yml|.*.json|.*.md|Gemfile|platformio.ini|wokwi.toml|keywords.txt|test/.*.cpp"
+          filter_pattern: ${{ vars.PR_SIZE_IGNORE_PATTERN }}
