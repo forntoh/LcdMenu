@@ -28,10 +28,12 @@ class RotaryInputAdapter : public InputInterface {
         LcdMenu* menu,
         SimpleRotary* encoder,
         uint16_t longPressDuration = 1000,
-        uint16_t doublePressThreshold = 300) : InputInterface(menu),
-                                               encoder(encoder),
-                                               longPressDuration(longPressDuration),
-                                               doublePressThreshold(doublePressThreshold) {};
+        uint16_t doublePressThreshold = 300)
+
+        : InputInterface(menu),
+          encoder(encoder),
+          longPressDuration(longPressDuration),
+          doublePressThreshold(doublePressThreshold) {};
 
     void observe() override {
         // Handle rotary encoder rotation

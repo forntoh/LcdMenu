@@ -5,7 +5,6 @@
 #include <SimpleRotary.h>
 #include <input/RotaryInputAdapter.h>
 #include <interface/LiquidCrystalI2CAdapter.h>
-#include <utils/RotaryNavConfig.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
