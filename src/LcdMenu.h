@@ -85,17 +85,6 @@ class LcdMenu {
     }
 
     /*
-     * Draw the menu items and cursor
-     */
-    void update() {
-        if (!enableUpdate) {
-            return;
-        }
-        drawMenu();
-        lcd.drawCursor();
-    }
-
-    /*
      * Draw the cursor
      */
     void updateOnlyCursor() {
@@ -148,6 +137,17 @@ class LcdMenu {
         currentMenuTable = menu;
         for (uint8_t i = 1; currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
             currentMenuTable[i]->initialize(&lcd);
+        }
+        drawMenu();
+        lcd.drawCursor();
+    }
+
+    /*
+     * Draw the menu items and cursor
+     */
+    void update() {
+        if (!enableUpdate) {
+            return;
         }
         drawMenu();
         lcd.drawCursor();
