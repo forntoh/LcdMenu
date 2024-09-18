@@ -11,4 +11,4 @@ jobs:
       - name: Report size deltas
         uses: arduino/report-size-deltas@v1
         with:
-          sketches-reports-source: ${{ vars.SKETCHES_REPORTS_PATH }}
+          sketches-reports-source: ^sketches-report-.+
