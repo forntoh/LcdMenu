@@ -49,11 +49,6 @@ class MenuItem {
     byte type = MENU_ITEM_NONE;
 
   public:
-    struct Context {
-        LcdMenu* menu;
-        DisplayInterface* display;
-        const unsigned char command;
-    };
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
     /**
@@ -78,6 +73,11 @@ class MenuItem {
     void setText(const char* text) { this->text = text; };
 
   protected:
+    struct Context {
+        LcdMenu* menu;
+        DisplayInterface* display;
+        const unsigned char command;
+    };
     /**
      * @brief Process a command decoded in 1 byte.
      * It can be a printable character or a control command like `ENTER` or `LEFT`.
