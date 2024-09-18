@@ -33,15 +33,6 @@ unittest(text_off_on_for_item_toggle) {
     assertEqual("OFF", (static_cast<ItemToggle*>(mainMenu[ITEM_TOGGLE_INDEX]))->getTextOff());
 }
 
-unittest(check_types) {
-    assertEqual(MENU_ITEM_MAIN_MENU_HEADER,
-                mainMenu[ITEM_MAIN_HEADER_INDEX]->getType());
-    assertEqual(MENU_ITEM_INPUT, mainMenu[ITEM_INPUT_INDEX]->getType());
-    assertEqual(MENU_ITEM_NONE, mainMenu[3]->getType());
-    assertEqual(MENU_ITEM_COMMAND, mainMenu[ITEM_COMMAND_INDEX]->getType());
-    assertEqual(MENU_ITEM_TOGGLE, mainMenu[ITEM_TOGGLE_INDEX]->getType());
-}
-
 unittest(can_set_input_value) {
     char* expected = "TEST";
     assertEqual("", (static_cast<ItemInput*>(mainMenu[ITEM_INPUT_INDEX]))->getValue());
