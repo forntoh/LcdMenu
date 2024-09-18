@@ -42,7 +42,8 @@ class LcdMenu;
  *
  */
 class MenuItem {
-  friend LcdMenu;
+    friend LcdMenu;
+
   protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;

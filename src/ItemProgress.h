@@ -111,7 +111,7 @@ class ItemProgress : public MenuItem {
         display->drawItem(row, text, ':', buf);
     }
 
-    bool process(Context context)  {
+    bool process(Context context) {
         switch (context.command) {
             case ENTER: return enter(context);
             case BACK: return back(context);

@@ -12,8 +12,8 @@
 #define ItemBack_H
 
 // Include the header file for the base class.
-#include "MenuItem.h"
 #include "LcdMenu.h"
+#include "MenuItem.h"
 
 // Declare a class for menu items that represent commands.
 class ItemBack : public MenuItem {
@@ -22,7 +22,7 @@ class ItemBack : public MenuItem {
      * Construct a new ItemBack object.
      * @param text The text of the item.
      */
-    ItemBack(const char* text = ".."): MenuItem(text, MENU_ITEM_COMMAND) {}
+    ItemBack(const char* text = "..") : MenuItem(text, MENU_ITEM_COMMAND) {}
 
   protected:
     bool process(Context context) override {
@@ -31,7 +31,6 @@ class ItemBack : public MenuItem {
             default: return false;
         }
     }
-
 };
 
 #define ITEM_BACK(...) (new ItemBack(__VA_ARGS__))
