@@ -3,8 +3,8 @@
 #include <ItemToggle.h>
 #include <LcdMenu.h>
 #include <SimpleRotary.h>
-#include <input/SimpleRotaryAdapter.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
+#include <input/SimpleRotaryAdapter.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16

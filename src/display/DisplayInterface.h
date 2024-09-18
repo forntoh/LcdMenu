@@ -26,7 +26,7 @@ class DisplayInterface {
     bool isEditModeEnabled = false;
 
   public:
-    DisplayInterface(uint8_t maxCols, uint8_t maxRows) : maxCols(maxCols), maxRows(maxRows) {};
+    DisplayInterface(uint8_t maxCols, uint8_t maxRows) : maxCols(maxCols), maxRows(maxRows) {}
     virtual void begin() = 0;
     uint8_t getMaxRows() const { return maxRows; }
     uint8_t getMaxCols() const { return maxCols; }
