@@ -48,15 +48,14 @@ class ItemCommand : public MenuItem {
      */
     void setCallBack(fptr callback) { this->callback = callback; };
 
-    bool process(const unsigned char c) override {
-        switch (c) {
-            case ENTER: return enter();
+  protected:
+    bool process(Context context) override {
+        switch (context.command) {
+            case ENTER: return enter(context);
             default: return false;
         }
     }
-
-  protected:
-    bool enter() {
+    bool enter(Context context) {
         if (callback != NULL) {
             callback();
         }

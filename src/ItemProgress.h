@@ -103,25 +103,26 @@ class ItemProgress : public MenuItem {
         return mapping(progress);
     }
 
-    void draw(uint8_t row) override {
+  protected:
+    void draw(DisplayInterface* display, uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(getValue(), 0, maxCols - strlen(text) - 2, buf);
         display->drawItem(row, text, ':', buf);
     }
 
-    bool process(const unsigned char c) override {
-        switch (c) {
-            case ENTER: return enter();
-            case BACK: return back();
-            case UP: return up();
-            case DOWN: return down();
+    bool process(Context context) {
+        switch (context.command) {
+            case ENTER: return enter(context);
+            case BACK: return back(context);
+            case UP: return up(context);
+            case DOWN: return down(context);
             default: return false;
         }
     }
 
-  protected:
-    bool enter() {
+    bool enter(Context context) {
+        DisplayInterface* display = context.display;
         if (display->getEditModeEnabled()) {
             return false;
         }
@@ -129,7 +130,8 @@ class ItemProgress : public MenuItem {
         return true;
     };
 
-    bool back() {
+    bool back(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -140,7 +142,8 @@ class ItemProgress : public MenuItem {
         return true;
     };
 
-    bool down() {
+    bool down(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -148,12 +151,13 @@ class ItemProgress : public MenuItem {
         decrement();
         if (progress != oldProgress) {
             printCmd(F("LEFT"), getValue());
-            MenuItem::draw();
+            MenuItem::draw(display);
         }
         return true;
     };
 
-    bool up() {
+    bool up(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -161,7 +165,7 @@ class ItemProgress : public MenuItem {
         increment();
         if (progress != oldProgress) {
             printCmd(F("RIGHT"), getValue());
-            MenuItem::draw();
+            MenuItem::draw(display);
         }
         return true;
     };

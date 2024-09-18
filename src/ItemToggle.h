@@ -76,27 +76,26 @@ class ItemToggle : public MenuItem {
 
     const char* getTextOff() { return this->textOff; }
 
-    void draw(uint8_t row) override {
+    void draw(DisplayInterface* display, uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(enabled ? textOn : textOff, 0, maxCols - strlen(text) - 2, buf);
         display->drawItem(row, text, ':', buf);
     };
 
-    bool process(const unsigned char c) override {
-        switch (c) {
-            case ENTER: return enter();
+  protected:
+    bool process(Context context) override {
+        switch (context.command) {
+            case ENTER: return enter(context);
             default: return false;
         }
     };
-
-  protected:
-    bool enter() {
+    bool enter(Context context) {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);
         }
-        MenuItem::draw();
+        MenuItem::draw(context.display);
         return true;
     };
 };

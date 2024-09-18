@@ -32,7 +32,7 @@ class ItemInputCharset : public ItemInput {
      * @brief Stop `char edit mode`.
      * Unset `charEditMode` flag and draw actual char from `value`.
      */
-    void stopCharsetEditMode() {
+    void stopCharsetEditMode(DisplayInterface* display) {
         charEditMode = false;
         if (cursor < strlen(value)) {
             display->drawChar(value[cursor]);
@@ -47,24 +47,26 @@ class ItemInputCharset : public ItemInput {
     ItemInputCharset(const char* text, const char* charset, fptrStr callback)
         : ItemInputCharset(text, (char*)"", charset, callback) {}
 
-    bool process(const unsigned char c) override {
+  protected:
+    bool process(Context context) override {
+        const unsigned char c = context.command;
         switch (c) {
-            case ENTER: return enter();
-            case BACK: return back();
-            case UP: return up();
-            case DOWN: return down();
-            case LEFT: return left();
-            case RIGHT: return right();
-            case BACKSPACE: return ItemInput::backspace();
-            case CLEAR: return ItemInput::clear();
+            case ENTER: return enter(context);
+            case BACK: return back(context);
+            case UP: return up(context);
+            case DOWN: return down(context);
+            case LEFT: return left(context);
+            case RIGHT: return right(context);
+            case BACKSPACE: return ItemInput::backspace(context);
+            case CLEAR: return ItemInput::clear(context);
             default: return false;
         }
     }
 
-  protected:
-    bool enter() {
+    bool enter(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
-            return ItemInput::enter();
+            return ItemInput::enter(context);
         }
         if (!charEditMode) {
             return true;
@@ -78,43 +80,47 @@ class ItemInputCharset : public ItemInput {
             value = buf;
         }
         printCmd(F("CHARSET"), value);
-        stopCharsetEditMode();
-        ItemInput::right();
+        stopCharsetEditMode(display);
+        ItemInput::right(context);
         return true;
     }
 
-    bool back() {
+    bool back(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
         if (!charEditMode) {
-            return ItemInput::back();
+            return ItemInput::back(context);
         }
-        stopCharsetEditMode();
+        stopCharsetEditMode(display);
         return true;
     };
 
-    bool left() {
+    bool left(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
         if (charEditMode) {
-            stopCharsetEditMode();
+            stopCharsetEditMode(display);
         }
-        return ItemInput::left();
+        return ItemInput::left(context);
     }
 
-    bool right() {
+    bool right(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
         if (charEditMode) {
-            stopCharsetEditMode();
+            stopCharsetEditMode(display);
         }
-        return ItemInput::right();
+        return ItemInput::right(context);
     }
 
-    bool down() {
+    bool down(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -126,7 +132,8 @@ class ItemInputCharset : public ItemInput {
         return true;
     }
 
-    bool up() {
+    bool up(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
