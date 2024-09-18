@@ -18,7 +18,7 @@ class ItemSubMenu : public ItemHeader {
      * @param parent the parent of the sub menu item
      */
     ItemSubMenu(const char* text, MenuItem** parent)
-        : ItemHeader(text, parent, MENU_ITEM_SUB_MENU) {}
+        : ItemHeader(text, parent) {}
 };
 
 #define ITEM_SUBMENU(...) (new ItemSubMenu(__VA_ARGS__))

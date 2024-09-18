@@ -103,7 +103,7 @@ class ItemInput : public MenuItem {
      * the input is submitted.
      */
     ItemInput(const char* text, char* value, fptrStr callback)
-        : MenuItem(text, MENU_ITEM_INPUT), value(value), callback(callback) {}
+        : MenuItem(text), value(value), callback(callback) {}
     /**
      * Construct a new ItemInput object with no initial value.
      *

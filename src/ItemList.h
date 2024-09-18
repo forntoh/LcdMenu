@@ -46,7 +46,7 @@ class ItemList : public MenuItem {
      * this menu item is selected.
      */
     ItemList(const char* key, String* items, const uint8_t itemCount, fptrInt callback)
-        : MenuItem(key, MENU_ITEM_LIST), callback(callback), items(items), itemCount(itemCount) {}
+        : MenuItem(key), callback(callback), items(items), itemCount(itemCount) {}
 
     /**
      * @brief Returns the index of the currently selected item.

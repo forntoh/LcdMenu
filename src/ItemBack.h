@@ -22,7 +22,7 @@ class ItemBack : public MenuItem {
      * Construct a new ItemBack object.
      * @param text The text of the item.
      */
-    ItemBack(const char* text = "..") : MenuItem(text, MENU_ITEM_COMMAND) {}
+    ItemBack(const char* text = "..") : MenuItem(text) {}
 
   protected:
     bool process(Context context) override {

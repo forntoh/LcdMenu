@@ -43,13 +43,13 @@ class ItemToggle : public MenuItem {
 
     /**
      * @brief Create an ItemToggle object.
-     * @param key key of the item
+     * @param text the text of the item
      * @param textOn display text when ON
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, const char* textOn, const char* textOff, fptrInt callback)
-        : MenuItem(key, MENU_ITEM_TOGGLE),
+    ItemToggle(const char* text, const char* textOn, const char* textOff, fptrInt callback)
+        : MenuItem(text),
           textOn(textOn),
           textOff(textOff),
           callback(callback) {}

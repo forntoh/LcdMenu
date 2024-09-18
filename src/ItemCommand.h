@@ -24,14 +24,11 @@ class ItemCommand : public MenuItem {
     /**
      * Construct a new ItemCommand object.
      *
-     * @param key The key of the item.
+     * @param text The text of the item.
      * @param callback A reference to the callback function to be invoked when
      * the item is entered.
      */
-    ItemCommand(const char* key, fptr callback)
-        : MenuItem(key, MENU_ITEM_COMMAND) {
-        this->callback = callback;
-    }
+    ItemCommand(const char* text, fptr callback) : MenuItem(text), callback(callback) {}
 
     /**
      * Get the callback function for this item.
