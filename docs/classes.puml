@@ -23,28 +23,28 @@ class MenuItem {
 
 class ItemCommand {
     #bool process(Context context) override
-    #bool enter(Context context) override
+    #bool enter(Context context)
 }
 
 class ItemList {
     #bool process(Context context) override
-    #bool up(Context context) override
-    #bool down(Context context) override
-    #bool enter(Context context) override
-    #bool back(Context context) override
+    #bool up(Context context)
+    #bool down(Context context)
+    #bool enter(Context context)
+    #bool back(Context context)
 }
 
 class ItemInput {
     #bool process(Context context) override
-    #bool up(Context context) override
-    #bool down(Context context) override
-    #bool enter(Context context) override
-    #bool back(Context context) override
-    #bool left(Context context) override
-    #bool right(Context context) override
-    #bool backspace(Context context) override
-    #bool typeChar(Context context) override
-    #bool clear(Context context) override
+    #bool up(Context context)
+    #bool down(Context context)
+    #bool enter(Context context)
+    #bool back(Context context)
+    #bool left(Context context)
+    #bool right(Context context)
+    #bool backspace(Context context)
+    #bool typeChar(Context context)
+    #bool clear(Context context)
 }
 
 LcdMenu::process -r-> MenuItem::process
