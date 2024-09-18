@@ -83,14 +83,13 @@ class ItemToggle : public MenuItem {
         display->drawItem(row, text, ':', buf);
     };
 
+  protected:
     bool process(Context context) override {
         switch (context.command) {
             case ENTER: return enter(context);
             default: return false;
         }
     };
-
-  protected:
     bool enter(Context context) {
         enabled = !enabled;
         if (callback != NULL) {

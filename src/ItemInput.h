@@ -45,18 +45,6 @@ class ItemInput : public MenuItem {
      */
     uint8_t view = 0;
     /**
-     * @brief The number of visible characters.
-     *
-     *          visible area
-     *        ┌───────────────┐
-     * X X X X│X X X X █ X X X│X X
-     *        ├───────────────┤
-     *        │<── viewSize ─>│
-     *
-     * Effectively const, but initialized lately when display is injected.
-     */
-    uint8_t viewSize;
-    /**
      * @brief Current index of the char to be edited.
      *
      *          visible area
@@ -76,8 +64,22 @@ class ItemInput : public MenuItem {
      * First parameter will be a `value` string.
      */
     fptrStr callback;
+    /**
+     * @brief The number of visible characters.
+     *
+     *          visible area
+     *        ┌───────────────┐
+     * X X X X│X X X X █ X X X│X X
+     *        ├───────────────┤
+     *        │<── viewSize ─>│
+     *
+     * Effectively const, but initialized lately when display is injected.
+     */
+    inline uint8_t getViewSize(DisplayInterface* display) {
+        return display->getMaxCols() - (strlen(text) + 2) - 1;
+    };
 
-    uint8_t constrainBlinkerPosition(uint8_t blinkerPosition) {
+    uint8_t constrainBlinkerPosition(DisplayInterface* display, uint8_t blinkerPosition) {
         uint8_t maxCols = display->getMaxCols();
         //
         // calculate lower and upper bound
@@ -102,7 +104,6 @@ class ItemInput : public MenuItem {
      */
     ItemInput(const char* text, char* value, fptrStr callback)
         : MenuItem(text, MENU_ITEM_INPUT), value(value), callback(callback) {}
-
     /**
      * Construct a new ItemInput object with no initial value.
      *
@@ -112,26 +113,18 @@ class ItemInput : public MenuItem {
      */
     ItemInput(const char* text, fptrStr callback)
         : ItemInput(text, (char*)"", callback) {}
-
-    void initialize(DisplayInterface* display) override {
-        MenuItem::initialize(display);
-        viewSize = display->getMaxCols() - (strlen(text) + 2) - 1;
-    }
-
     /**
      * Get the current input value for this item.
      *
      * @return The current input value as a string.
      */
     char* getValue() { return value; }
-
     /**
      * Set the input value for this item.
      *
      * @param value The new input value.
      */
     void setValue(char* value) { this->value = value; }
-
     /**
      * Get the callback function for this item.
      *
@@ -139,10 +132,12 @@ class ItemInput : public MenuItem {
      */
     fptrStr getCallbackStr() { return callback; }
 
+  protected:
     bool process(Context context) override {
         unsigned char c = context.command;
+        DisplayInterface* display = context.display;
         if (isprint(c)) {
-            return typeChar(c);
+            return typeChar(context);
         }
         switch (c) {
             case ENTER: return enter(context);
@@ -160,11 +155,10 @@ class ItemInput : public MenuItem {
     void draw(DisplayInterface* display, uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
-        substring(value, view, viewSize, buf);
+        substring(value, view, getViewSize(display), buf);
         display->drawItem(row, text, ':', buf);
     }
 
-  protected:
     bool enter(Context context) {
         DisplayInterface* display = context.display;
         if (display->getEditModeEnabled()) {
@@ -174,13 +168,14 @@ class ItemInput : public MenuItem {
         uint8_t length = strlen(value);
         cursor = length;
         // Move view if needed
+        uint8_t viewSize = getViewSize(display);
         if (cursor > viewSize) {
             view = length - (viewSize - 1);
         }
         // Redraw
         MenuItem::draw(display);
         display->setEditModeEnabled(true);
-        display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2 + cursor - view));
+        display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2 + cursor - view));
         display->drawBlinker();
         return true;
     };
@@ -194,7 +189,7 @@ class ItemInput : public MenuItem {
         // Move view to 0 and redraw before exit
         cursor = 0;
         view = 0;
-        MenuItem::draw();
+        MenuItem::draw(display);
         if (callback != NULL) {
             callback(value);
         }
@@ -211,9 +206,9 @@ class ItemInput : public MenuItem {
         cursor--;
         if (cursor < view) {
             view--;
-            MenuItem::draw();
+            MenuItem::draw(display);
         }
-        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() - 1));
+        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
         // Log
         printCmd(F("LEFT"), value[display->getBlinkerPosition() - (strlen(text) + 2)]);
         return true;
@@ -227,11 +222,12 @@ class ItemInput : public MenuItem {
             return true;
         }
         cursor++;
+        uint8_t viewSize = getViewSize(display);
         if (cursor > (view + viewSize - 1)) {
             view++;
-            MenuItem::draw();
+            MenuItem::draw(display);
         }
-        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() + 1));
+        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
         // Log
         printCmd(F("RIGHT"), value[display->getBlinkerPosition() - (strlen(text) + 2)]);
         return true;
@@ -257,8 +253,8 @@ class ItemInput : public MenuItem {
         if (cursor < view) {
             view--;
         }
-        MenuItem::draw();
-        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() - 1));
+        MenuItem::draw(display);
+        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
         return true;
     }
     /**
@@ -268,7 +264,7 @@ class ItemInput : public MenuItem {
      */
     bool typeChar(Context context) {
         DisplayInterface* display = context.display;
-        const char character = context.command
+        const char character = context.command;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -287,11 +283,12 @@ class ItemInput : public MenuItem {
             value = buf;
         }
         cursor++;
+        uint8_t viewSize = getViewSize(display);
         if (cursor > (view + viewSize - 1)) {
             view++;
         }
         MenuItem::draw(display);
-        display->resetBlinker(constrainBlinkerPosition(display->getBlinkerPosition() + 1));
+        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
         // Log
         printCmd(F("TYPE-CHAR"), character);
         return true;
@@ -314,7 +311,7 @@ class ItemInput : public MenuItem {
         // update blinker position
         //
         MenuItem::draw(display);
-        display->resetBlinker(constrainBlinkerPosition(strlen(text) + 2));
+        display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2));
         return true;
     }
 };

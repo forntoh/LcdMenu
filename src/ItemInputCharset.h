@@ -47,6 +47,7 @@ class ItemInputCharset : public ItemInput {
     ItemInputCharset(const char* text, const char* charset, fptrStr callback)
         : ItemInputCharset(text, (char*)"", charset, callback) {}
 
+  protected:
     bool process(Context context) override {
         const unsigned char c = context.command;
         switch (c) {
@@ -62,7 +63,6 @@ class ItemInputCharset : public ItemInput {
         }
     }
 
-  protected:
     bool enter(Context context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {

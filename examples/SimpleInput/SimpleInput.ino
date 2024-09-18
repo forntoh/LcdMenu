@@ -46,10 +46,7 @@ void setup() {
 void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
-
-    if (!processWithSimpleCommand(&navConfig, command) && command != '\n') {
-        menu.process(command);
-    }
+    processWithSimpleCommand(&navConfig, command);
 }
 /**
  * Define callback

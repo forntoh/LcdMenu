@@ -42,6 +42,7 @@ class LcdMenu;
  *
  */
 class MenuItem {
+  friend LcdMenu;
   protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;
@@ -74,6 +75,8 @@ class MenuItem {
      * @param text text to display for the item
      */
     void setText(const char* text) { this->text = text; };
+
+  protected:
     /**
      * @brief Process a command decoded in 1 byte.
      * It can be a printable character or a control command like `ENTER` or `LEFT`.
@@ -85,11 +88,18 @@ class MenuItem {
      * @return true if command was successfully handled by item.
      */
     virtual bool process(Context context) { return false; };
-
+    /**
+     * @brief Draw this menu item on specified display on current line.
+     * @param display the display that should be used for draw
+     */
     virtual void draw(DisplayInterface* display) {
         draw(display, display->getCursorRow());
     };
-
+    /**
+     * @brief Draw this menu item on specified display on specified line.
+     * @param display the display that should be used for draw
+     * @param row the number of row to draw on
+     */
     virtual void draw(DisplayInterface* display, uint8_t row) {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
@@ -97,10 +107,7 @@ class MenuItem {
         display->drawItem(row, buf);
     };
 
-    /**
-     * Operators
-     */
-
+  public:
     /**
      * Get item at index from the submenu
      * @param index for the item

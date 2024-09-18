@@ -11,17 +11,23 @@ class LcdMenu {
     #virtual bool back()
 }
 
+struct MenuItem::Context {
+    LcdMenu* menu;
+    DisplayInterface* display;
+    const unsigned char command;
+}
+
 class MenuItem {
-    +virtual bool handle(char c)
+    #virtual bool handle(Context context)
 }
 
 class ItemCommand {
-    +bool handle(char c) override
+    #bool handle(Context context) override
     #bool enter() override
 }
 
 class ItemList {
-    +bool handle(char c) override
+    #bool handle(Context context) override
     #bool up() override
     #bool down() override
     #bool enter() override
@@ -29,7 +35,7 @@ class ItemList {
 }
 
 class ItemInput {
-    +bool handle(char c) override
+    #bool handle(Context context) override
     #bool up() override
     #bool down() override
     #bool enter() override
@@ -45,5 +51,4 @@ LcdMenu::handle -r-> MenuItem::handle
 ItemCommand -u-|> MenuItem
 ItemList -u-|> MenuItem
 ItemInput -u-|> MenuItem
-
 @enduml

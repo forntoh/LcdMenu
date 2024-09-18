@@ -85,6 +85,7 @@ class ItemList : public MenuItem {
      */
     String* getItems() { return items; }
 
+  protected:
     void draw(DisplayInterface* display, uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
@@ -103,7 +104,6 @@ class ItemList : public MenuItem {
         }
     }
 
-  protected:
     bool enter(Context context) {
         DisplayInterface* display = context.display;
         if (display->getEditModeEnabled()) {

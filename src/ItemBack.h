@@ -24,6 +24,7 @@ class ItemBack : public MenuItem {
      */
     ItemBack(const char* text = ".."): MenuItem(text, MENU_ITEM_COMMAND) {}
 
+  protected:
     bool process(Context context) override {
         switch (context.command) {
             case ENTER: context.menu->process(BACK); return true;
