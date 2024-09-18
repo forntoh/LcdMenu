@@ -21,7 +21,7 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           enable-deltas-report: true
           enable-warnings-report: true
-          sketches-report-path: ${{ vars.SKETCHES_REPORTS_PATH || 'sketches-reports' }}
+          sketches-report-path: sketches-reports
           libraries: |
             - source-path: ./
             - source-url: https://github.com/johnrickman/LiquidCrystal_I2C.git
@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sketches-report-${{ matrix.board.artifact-name-suffix }}
-          path: ${{ vars.SKETCHES_REPORTS_PATH || 'sketches-reports' }}
+          path: sketches-reports
