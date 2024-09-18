@@ -85,25 +85,27 @@ class ItemList : public MenuItem {
      */
     String* getItems() { return items; }
 
-    void draw(uint8_t row) override {
+  protected:
+    void draw(DisplayInterface* display, uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
         display->drawItem(row, text, ':', buf);
     }
 
-    bool process(const unsigned char c) override {
+    bool process(Context context) override {
+        const unsigned char c = context.command;
         switch (c) {
-            case ENTER: return enter();
-            case BACK: return back();
-            case UP: return up();
-            case DOWN: return down();
+            case ENTER: return enter(context);
+            case BACK: return back(context);
+            case UP: return up(context);
+            case DOWN: return down(context);
             default: return false;
         }
     }
 
-  protected:
-    bool enter() {
+    bool enter(Context context) {
+        DisplayInterface* display = context.display;
         if (display->getEditModeEnabled()) {
             return false;
         }
@@ -111,7 +113,8 @@ class ItemList : public MenuItem {
         return true;
     };
 
-    bool back() {
+    bool back(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -122,7 +125,8 @@ class ItemList : public MenuItem {
         return true;
     };
 
-    bool down() {
+    bool down(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -130,12 +134,13 @@ class ItemList : public MenuItem {
         itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             printCmd(F("LEFT"), items[itemIndex].c_str());
-            MenuItem::draw();
+            MenuItem::draw(display);
         }
         return true;
     };
 
-    bool up() {
+    bool up(Context context) {
+        DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
         }
@@ -143,7 +148,7 @@ class ItemList : public MenuItem {
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             printCmd(F("RIGHT"), items[itemIndex].c_str());
-            MenuItem::draw();
+            MenuItem::draw(display);
         }
         return true;
     };

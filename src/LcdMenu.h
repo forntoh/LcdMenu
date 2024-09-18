@@ -100,7 +100,7 @@ class LcdMenu {
             if (currentMenuTable[i]->getType() == MENU_ITEM_END_OF_MENU) {
                 return;
             }
-            item->draw(i - top);
+            item->draw(&lcd, i - top);
         }
         if (isAtTheStart(top)) {
             lcd.clearUpIndicator();
@@ -135,9 +135,6 @@ class LcdMenu {
     void initialize(MenuItem* menu[]) {
         lcd.begin();
         currentMenuTable = menu;
-        for (uint8_t i = 1; currentMenuTable[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
-            currentMenuTable[i]->initialize(&lcd);
-        }
         drawMenu();
         lcd.drawCursor();
     }
@@ -154,7 +151,8 @@ class LcdMenu {
     }
 
     bool process(const unsigned char c) {
-        if (currentMenuTable[cursorPosition]->process(c)) {
+        MenuItem::Context context{this, &lcd, c};
+        if (currentMenuTable[cursorPosition]->process(context)) {
             return true;
         }
         switch (c) {

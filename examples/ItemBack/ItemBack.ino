@@ -1,11 +1,5 @@
-/*
- Simple Input
-
- https://lcdmenu.forntoh.dev/examples/simple-input
-
-*/
-
-#include <ItemInput.h>
+#include <ItemBack.h>
+#include <ItemSubMenu.h>
 #include <LcdMenu.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
@@ -13,14 +7,24 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-// Declare the call back function
-void inputCallback(char* value);
+extern MenuItem* settingsMenu[];
 
+// Define the main menu
 MAIN_MENU(
-    ITEM_INPUT("Con", inputCallback),
+    ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
+    ITEM_SUBMENU("Settings", settingsMenu),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
+/**
+ * Create submenu and precise its parent
+ */
+SUB_MENU(
+    settingsMenu,
+    mainMenu,
+    ITEM_BASIC("Backlight"),
+    ITEM_BASIC("Contrast"),
+    ITEM_BACK());
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
@@ -32,10 +36,8 @@ SimpleNavConfig navConfig = {
     .down = 's',
     .enter = ' ',
     .back = 'b',
-    .left = 'a',
-    .right = 'd',
-    .clear = 'c',
-    .backspace = 'v',
+    .left = NULL,
+    .right = NULL,
 };
 
 void setup() {
@@ -47,11 +49,4 @@ void loop() {
     if (!Serial.available()) return;
     char command = Serial.read();
     processWithSimpleCommand(&navConfig, command);
-}
-/**
- * Define callback
- */
-void inputCallback(char* value) {
-    Serial.print(F("# "));
-    Serial.println(value);
 }
