@@ -31,6 +31,8 @@
 #include "utils/constants.h"
 #include <utils/utils.h>
 
+class LcdMenu;
+
 /**
  * @brief The MenuItem class.
  *
@@ -43,28 +45,20 @@ class MenuItem {
   protected:
     const char* text = NULL;
     byte type = MENU_ITEM_NONE;
-    DisplayInterface* display;
 
   public:
+    struct Context {
+        LcdMenu* menu;
+        DisplayInterface* display;
+        const unsigned char command;
+    };
     MenuItem(const char* text) : text(text) {}
     MenuItem(const char* text, byte type) : text(text), type(type) {}
-    virtual void initialize(DisplayInterface* display) {
-        this->display = display;
-        MenuItem** subMenu = this->getSubMenu();
-        if (subMenu == NULL) {
-            return;
-        }
-        for (uint8_t i = 1; subMenu[i]->getType() != MENU_ITEM_END_OF_MENU; ++i) {
-            subMenu[i]->initialize(display);
-        }
-    }
-
     /**
      * Get the text of the item
      * @return `String` - Item's text
      */
     virtual const char* getText() { return text; }
-
     /**
      * Get the sub menu at item
      * @return `MenuItem*` - Submenu at item
@@ -87,16 +81,16 @@ class MenuItem {
      * If the parent of item received that handle was ignored it can execute it's own action on this command.
      * Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element.
      * Behaviour is very similar to Even Bubbling in JavaScript.
-     * @param c the character, can be a printable character or a control command
+     * @param context the context of call, contains at least character command (can be a printable character or a control command) and backreference to menu
      * @return true if command was successfully handled by item.
      */
-    virtual bool process(const unsigned char c) { return false; };
+    virtual bool process(Context context) { return false; };
 
-    virtual void draw() {
-        draw(display->getCursorRow());
+    virtual void draw(DisplayInterface* display) {
+        draw(display, display->getCursorRow());
     };
 
-    virtual void draw(uint8_t row) {
+    virtual void draw(DisplayInterface* display, uint8_t row) {
         uint8_t maxCols = display->getMaxCols();
         static char* buf = new char[maxCols];
         substring(text, 0, maxCols - 2, buf);
