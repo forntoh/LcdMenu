@@ -25,7 +25,7 @@
 */
 #pragma once
 
-#include "interface/DisplayInterface.h"
+#include "display/DisplayInterface.h"
 #include "utils/constants.h"
 #include <MenuItem.h>
 #include <utils/utils.h>
