@@ -19,13 +19,14 @@
  */
 class DisplayInterface {
   protected:
-    uint8_t maxRows;
     uint8_t maxCols;
+    uint8_t maxRows;
     uint8_t cursorRow = 0;
-    uint8_t blinkerPosition;
+    uint8_t blinkerPosition = 0;
     bool isEditModeEnabled = false;
 
   public:
+    DisplayInterface(uint8_t maxCols, uint8_t maxRows) : maxCols(maxCols), maxRows(maxRows) {}
     virtual void begin() = 0;
     uint8_t getMaxRows() const { return maxRows; }
     uint8_t getMaxCols() const { return maxCols; }

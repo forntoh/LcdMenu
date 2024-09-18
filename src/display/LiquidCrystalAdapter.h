@@ -1,103 +1,99 @@
 #pragma once
 
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 #include <utils/constants.h>
 #include <utils/utils.h>
 
 #include "DisplayInterface.h"
 
-class LiquidCrystalI2CAdapter : public DisplayInterface {
+class LiquidCrystalAdapter : public DisplayInterface {
   private:
+    LiquidCrystal* lcd;
     uint8_t downArrow[8];
     uint8_t upArrow[8];
     unsigned long startTime = 0;
 
   public:
-    LiquidCrystal_I2C lcd;
-    LiquidCrystalI2CAdapter(uint8_t lcd_Addr, uint8_t lcd_cols, uint8_t lcd_rows) : lcd(lcd_Addr, lcd_cols, lcd_rows) {
-        maxRows = lcd_rows;
-        maxCols = lcd_cols;
+    LiquidCrystalAdapter(LiquidCrystal* lcd, uint8_t maxCols, uint8_t maxRows) : DisplayInterface(maxCols, maxRows), lcd(lcd) {
         memcpy(upArrow, UP_ARROW, sizeof(UP_ARROW));
         memcpy(downArrow, DOWN_ARROW, sizeof(DOWN_ARROW));
     }
 
     void begin() override {
-        lcd.init();
-        lcd.clear();
-        lcd.backlight();
-        lcd.createChar(0, upArrow);
-        lcd.createChar(1, downArrow);
+        lcd->begin(maxCols, maxRows);
+        lcd->clear();
+        lcd->createChar(0, upArrow);
+        lcd->createChar(1, downArrow);
         startTime = millis();
     }
 
-    void clear() override { lcd.clear(); }
+    void clear() override { lcd->clear(); }
 
     void setBacklight(bool enabled) override {
-        lcd.setBacklight(enabled);
+        // Unsupported
     }
 
     void clearCursor() override {
-        lcd.setCursor(0, cursorRow);
-        lcd.print(" ");
+        lcd->setCursor(0, cursorRow);
+        lcd->print(" ");
     }
 
     void drawCursor() override {
         restartTimer();
-        lcd.setCursor(0, cursorRow);
-        lcd.write(isEditModeEnabled ? EDIT_CURSOR_ICON : CURSOR_ICON);
+        lcd->setCursor(0, cursorRow);
+        lcd->write(isEditModeEnabled ? EDIT_CURSOR_ICON : CURSOR_ICON);
     }
 
     void drawItem(uint8_t row, const char* text) override {
         restartTimer();
-        lcd.setCursor(1, row);
-        lcd.print(text);
+        lcd->setCursor(1, row);
+        lcd->print(text);
         uint8_t spaces = maxCols - 2 - strlen(text);
         for (uint8_t i = 0; i < spaces; i++) {
-            lcd.print(" ");
+            lcd->print(" ");
         }
     }
 
     void drawItem(uint8_t row, const char* text, char separator, char* value) override {
         restartTimer();
-        lcd.setCursor(1, row);
+        lcd->setCursor(1, row);
         uint8_t size = strlen(text) + 1 + strlen(value);
-        lcd.print(text);
-        lcd.print(separator);
-        lcd.print(value);
+        lcd->print(text);
+        lcd->print(separator);
+        lcd->print(value);
         uint8_t spaces = maxCols - 2 - size;
         for (uint8_t i = 0; i < spaces; i++) {
-            lcd.print(" ");
+            lcd->print(" ");
         }
     }
 
     void clearBlinker() override {
-        lcd.noBlink();
+        lcd->noBlink();
     }
 
     void drawBlinker() override {
-        lcd.blink();
+        lcd->blink();
     }
 
     void resetBlinker(uint8_t blinkerPosition) {
         restartTimer();
         this->blinkerPosition = blinkerPosition;
-        lcd.setCursor(blinkerPosition, cursorRow);
+        lcd->setCursor(blinkerPosition, cursorRow);
     }
 
     void restartTimer() override {
         this->startTime = millis();
-        lcd.display();
-        lcd.backlight();
+        lcd->display();
     }
 
     bool drawChar(char c) override {
         //
         // draw the character without updating the menu item
         //
-        lcd.setCursor(blinkerPosition, cursorRow);
-        lcd.print(c);
-        lcd.setCursor(blinkerPosition, cursorRow);  // Move back
+        lcd->setCursor(blinkerPosition, cursorRow);
+        lcd->print(c);
+        lcd->setCursor(blinkerPosition, cursorRow);  // Move back
         // Log
         printCmd(F("DRAW-CHAR"), c);
         return true;
@@ -108,27 +104,26 @@ class LiquidCrystalI2CAdapter : public DisplayInterface {
             return;
         }
         printCmd(F("TIMEOUT"));
-        lcd.noDisplay();
-        lcd.noBacklight();
+        lcd->noDisplay();
     }
 
     void clearDownIndicator() {
-        lcd.setCursor(maxCols - 1, maxRows - 1);
-        lcd.print(" ");
+        lcd->setCursor(maxCols - 1, maxRows - 1);
+        lcd->print(" ");
     }
 
     void drawDownIndicator() override {
-        lcd.setCursor(maxCols - 1, maxRows - 1);
-        lcd.write(byte(1));
+        lcd->setCursor(maxCols - 1, maxRows - 1);
+        lcd->write(byte(1));
     }
 
     void clearUpIndicator() {
-        lcd.setCursor(maxCols - 1, 0);
-        lcd.print(" ");
+        lcd->setCursor(maxCols - 1, 0);
+        lcd->print(" ");
     }
 
     void drawUpIndicator() override {
-        lcd.setCursor(maxCols - 1, 0);
-        lcd.write(byte(0));
+        lcd->setCursor(maxCols - 1, 0);
+        lcd->write(byte(0));
     }
 };

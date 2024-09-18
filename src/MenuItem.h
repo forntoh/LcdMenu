@@ -27,7 +27,7 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
-#include "interface/DisplayInterface.h"
+#include "display/DisplayInterface.h"
 #include "utils/constants.h"
 #include <utils/utils.h>
 
