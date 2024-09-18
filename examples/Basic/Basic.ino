@@ -6,7 +6,7 @@
 */
 
 #include <LcdMenu.h>
-#include <interface/LiquidCrystal_I2CAdapter.h>
+#include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
 #define LCD_ROWS 2

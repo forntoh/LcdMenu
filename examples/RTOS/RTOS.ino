@@ -3,7 +3,7 @@
 #include <ItemSubMenu.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>
-#include <interface/LiquidCrystal_I2CAdapter.h>
+#include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
 // 2x20 LCD Display
