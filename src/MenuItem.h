@@ -134,13 +134,6 @@ class ItemHeader : public MenuItem {
     }
 };
 
-class ItemFooter : public MenuItem {
-  public:
-    /**
-     */
-    ItemFooter() : MenuItem(NULL) {}
-};
-
 #define MAIN_MENU(...)           \
     extern MenuItem* mainMenu[]; \
     MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, nullptr}
