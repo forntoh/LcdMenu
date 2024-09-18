@@ -4,7 +4,7 @@
 hide empty members
 
 class LcdMenu {
-    +virtual bool handle(char c)
+    +virtual bool process(char c)
     #virtual bool up()
     #virtual bool down()
     #virtual bool enter()
@@ -18,36 +18,36 @@ struct MenuItem::Context {
 }
 
 class MenuItem {
-    #virtual bool handle(Context context)
+    #virtual bool process(Context context)
 }
 
 class ItemCommand {
-    #bool handle(Context context) override
-    #bool enter() override
+    #bool process(Context context) override
+    #bool enter(Context context) override
 }
 
 class ItemList {
-    #bool handle(Context context) override
-    #bool up() override
-    #bool down() override
-    #bool enter() override
-    #bool back() override
+    #bool process(Context context) override
+    #bool up(Context context) override
+    #bool down(Context context) override
+    #bool enter(Context context) override
+    #bool back(Context context) override
 }
 
 class ItemInput {
-    #bool handle(Context context) override
-    #bool up() override
-    #bool down() override
-    #bool enter() override
-    #bool back() override
-    #bool left() override
-    #bool right() override
-    #bool backspace() override
-    #bool typeChar(char c) override
-    #bool clear() override
+    #bool process(Context context) override
+    #bool up(Context context) override
+    #bool down(Context context) override
+    #bool enter(Context context) override
+    #bool back(Context context) override
+    #bool left(Context context) override
+    #bool right(Context context) override
+    #bool backspace(Context context) override
+    #bool typeChar(Context context) override
+    #bool clear(Context context) override
 }
 
-LcdMenu::handle -r-> MenuItem::handle
+LcdMenu::process -r-> MenuItem::process
 ItemCommand -u-|> MenuItem
 ItemList -u-|> MenuItem
 ItemInput -u-|> MenuItem
