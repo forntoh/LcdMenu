@@ -97,7 +97,7 @@ class LcdMenu {
     void drawMenu() {
         for (uint8_t i = top; i <= bottom; i++) {
             MenuItem* item = currentMenuTable[i];
-            if (currentMenuTable[i]->getType() == MENU_ITEM_END_OF_MENU) {
+            if (currentMenuTable[i] == nullptr) {
                 return;
             }
             item->draw(&lcd, i - top);
@@ -195,7 +195,7 @@ class LcdMenu {
      * @return true if the next item is the end of the menu; false otherwise.
      */
     inline bool isAtTheEnd(uint8_t position) {
-        return currentMenuTable[position + 1]->getType() == MENU_ITEM_END_OF_MENU;
+        return currentMenuTable[position + 1] == nullptr;
     }
     /**
      * Get the current cursor position
@@ -211,7 +211,7 @@ class LcdMenu {
         bool isNotEnd = false;
 
         do {
-            isNotEnd = currentMenuTable[++bottom]->getType() != MENU_ITEM_END_OF_MENU && bottom < maxRows + 20;
+            isNotEnd = currentMenuTable[++bottom] == nullptr && bottom < maxRows + 20;
         } while (isNotEnd);
 
         uint8_t max = maxRows - 1;
@@ -224,8 +224,7 @@ class LcdMenu {
      * Check if currently displayed menu is a sub menu.
      */
     bool isSubMenu() {
-        byte menuItemType = currentMenuTable[0]->getType();
-        return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
+        return currentMenuTable[0]->getSubMenu() != NULL;
     }
     /**
      * Get a `MenuItem` at position
@@ -315,7 +314,7 @@ class LcdMenu {
     bool enter() {
         MenuItem* item = currentMenuTable[cursorPosition];
         // Log
-        printCmd(F("ENTER"), item->getType());
+        printCmd(F("ENTER"), item->getText());
         //
         // check if there is a sub menu
         //

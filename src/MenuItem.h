@@ -46,11 +46,9 @@ class MenuItem {
 
   protected:
     const char* text = NULL;
-    byte type = MENU_ITEM_NONE;
 
   public:
     MenuItem(const char* text) : text(text) {}
-    MenuItem(const char* text, byte type) : text(text), type(type) {}
     /**
      * Get the text of the item
      * @return `String` - Item's text
@@ -61,11 +59,6 @@ class MenuItem {
      * @return `MenuItem*` - Submenu at item
      */
     virtual MenuItem** getSubMenu() { return NULL; }
-    /**
-     * Get the type of the item
-     * @return `byte` - type of menu item
-     */
-    byte getType() { return type; }
     /**
      * Set the text of the item
      * @param text text to display for the item
@@ -121,18 +114,18 @@ class ItemHeader : public MenuItem {
   protected:
     MenuItem** parent = NULL;
 
-    ItemHeader(const char* text, MenuItem** parent, byte type)
-        : MenuItem(text, type), parent(parent) {}
+    ItemHeader(const char* text, MenuItem** parent)
+        : MenuItem(text), parent(parent) {}
 
   public:
     /**
      */
-    ItemHeader() : ItemHeader("", NULL, MENU_ITEM_MAIN_MENU_HEADER) {}
+    ItemHeader() : ItemHeader("", NULL) {}
     /**
      * @param parent the parent menu item
      */
     ItemHeader(MenuItem** parent)
-        : ItemHeader("", parent, MENU_ITEM_SUB_MENU_HEADER) {}
+        : ItemHeader("", parent) {}
 
     MenuItem** getSubMenu() override { return this->parent; };
 
@@ -141,18 +134,11 @@ class ItemHeader : public MenuItem {
     }
 };
 
-class ItemFooter : public MenuItem {
-  public:
-    /**
-     */
-    ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
-};
-
 #define MAIN_MENU(...)           \
     extern MenuItem* mainMenu[]; \
-    MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, new ItemFooter()}
+    MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, nullptr}
 
 #define SUB_MENU(subMenu, parent, ...) \
-    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, new ItemFooter()}
+    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, nullptr}
 
 #endif

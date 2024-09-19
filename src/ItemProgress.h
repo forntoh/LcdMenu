@@ -24,27 +24,27 @@ class ItemProgress : public MenuItem {
     /**
      * @brief Constructs a new ItemProgress object.
      *
-     * @param key The key of the menu item.
+     * @param text The text of the menu item.
      * @param start The starting position of the list.
      * @param mapping A pointer to the mapping function.
      * @param callback A pointer to the callback function to execute when this
      * menu item is selected.
      */
-    ItemProgress(const char* key, uint16_t start, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
-        : MenuItem(key, MENU_ITEM_PROGRESS),
+    ItemProgress(const char* text, uint16_t start, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
+        : MenuItem(text),
           mapping(mapping),
           callback(callback),
           progress(start),
           stepLength(stepLength) {}
 
-    ItemProgress(const char* key, uint16_t start, fptrInt callback)
-        : ItemProgress(key, start, 1, NULL, callback) {}
+    ItemProgress(const char* text, uint16_t start, fptrInt callback)
+        : ItemProgress(text, start, 1, NULL, callback) {}
 
-    ItemProgress(const char* key, fptrInt callback)
-        : ItemProgress(key, 0, 1, NULL, callback) {}
+    ItemProgress(const char* text, fptrInt callback)
+        : ItemProgress(text, 0, 1, NULL, callback) {}
 
-    ItemProgress(const char* key, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
-        : ItemProgress(key, 0, stepLength, mapping, callback) {}
+    ItemProgress(const char* text, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
+        : ItemProgress(text, 0, stepLength, mapping, callback) {}
 
     /**
      * @brief Increments the progress of the list.
