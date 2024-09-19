@@ -1,3 +1,6 @@
+// Disable double press detection
+#define DOUBLE_PRESS_THRESHOLD 0
+
 #include <ItemInputCharset.h>
 #include <ItemList.h>
 #include <ItemToggle.h>
@@ -6,9 +9,6 @@
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/DigitalInputAdapter.h>
 #include <input/SimpleRotaryAdapter.h>
-
-// Disable double press detection
-#define DOUBLE_PRESS_THRESHOLD 0
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
