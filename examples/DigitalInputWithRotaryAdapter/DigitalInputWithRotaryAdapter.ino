@@ -52,3 +52,7 @@ void toggleBacklight(uint16_t isOn) {
 void colorsCallback(uint16_t pos) {
     Serial.println(colors[pos]);
 }
+
+void inputCallback(char* value) {
+    Serial.println(value);
+}
