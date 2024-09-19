@@ -1,3 +1,4 @@
+#include <ItemInputCharset.h>
 #include <ItemList.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>
@@ -15,15 +16,16 @@
 // Declare the callbacks
 void colorsCallback(uint16_t pos);
 void toggleBacklight(uint16_t isOn);
+void inputCallback(char* value);
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
 MAIN_MENU(
-    ITEM_BASIC("Connect to WiFi"),
+    ITEM_INPUT_CHARSET("User", (const char*)"ABCDEFGHIJKLMNOPQRSTUVWXYZ", inputCallback),
     ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
-    ITEM_BASIC("Blink SOS"),
     ITEM_TOGGLE("Backlight", toggleBacklight),
-    ITEM_BASIC("Blink random"));
+    ITEM_BASIC("Placeholder 1"),
+    ITEM_BASIC("Placeholder 2"));
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
