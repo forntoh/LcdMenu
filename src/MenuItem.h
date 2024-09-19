@@ -79,7 +79,7 @@ class MenuItem {
      * @param context the context of call, contains at least character command (can be a printable character or a control command) and backreference to menu
      * @return true if command was successfully handled by item.
      */
-    virtual bool process(Context context) { return false; };
+    virtual bool process(Context& context) { return false; };
     /**
      * @brief Draw this menu item on specified display on current line.
      * @param display the display that should be used for draw

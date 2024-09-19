@@ -133,7 +133,13 @@ class ItemInput : public MenuItem {
     fptrStr getCallbackStr() { return callback; }
 
   protected:
-    bool process(Context context) override {
+    void draw(DisplayInterface* display, uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(value, view, getViewSize(display), buf);
+        display->drawItem(row, text, ':', buf);
+    }
+    bool process(Context& context) override {
         unsigned char c = context.command;
         DisplayInterface* display = context.display;
         if (isprint(c)) {
@@ -151,15 +157,7 @@ class ItemInput : public MenuItem {
             default: return false;
         }
     }
-
-    void draw(DisplayInterface* display, uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(value, view, getViewSize(display), buf);
-        display->drawItem(row, text, ':', buf);
-    }
-
-    bool enter(Context context) {
+    bool enter(Context& context) {
         DisplayInterface* display = context.display;
         if (display->getEditModeEnabled()) {
             return false;
@@ -179,7 +177,7 @@ class ItemInput : public MenuItem {
         display->drawBlinker();
         return true;
     };
-    bool back(Context context) {
+    bool back(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -195,7 +193,7 @@ class ItemInput : public MenuItem {
         }
         return true;
     };
-    bool left(Context context) {
+    bool left(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -213,7 +211,7 @@ class ItemInput : public MenuItem {
         printCmd(F("LEFT"), value[display->getBlinkerPosition() - (strlen(text) + 2)]);
         return true;
     };
-    bool right(Context context) {
+    bool right(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -239,7 +237,7 @@ class ItemInput : public MenuItem {
      *
      * Removes the character at the current cursor position.
      */
-    bool backspace(Context context) {
+    bool backspace(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -262,7 +260,7 @@ class ItemInput : public MenuItem {
      * used for `Input` type menu items
      * @param character character to append
      */
-    bool typeChar(Context context) {
+    bool typeChar(Context& context) {
         DisplayInterface* display = context.display;
         const char character = context.command;
         if (!display->getEditModeEnabled()) {
@@ -296,7 +294,7 @@ class ItemInput : public MenuItem {
     /**
      * Clear the value of the input field
      */
-    bool clear(Context context) {
+    bool clear(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;

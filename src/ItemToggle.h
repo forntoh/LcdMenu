@@ -84,13 +84,13 @@ class ItemToggle : public MenuItem {
     };
 
   protected:
-    bool process(Context context) override {
+    bool process(Context& context) override {
         switch (context.command) {
             case ENTER: return enter(context);
             default: return false;
         }
     };
-    bool enter(Context context) {
+    bool enter(Context& context) {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);

@@ -111,7 +111,7 @@ class ItemProgress : public MenuItem {
         display->drawItem(row, text, ':', buf);
     }
 
-    bool process(Context context) {
+    bool process(Context& context) {
         switch (context.command) {
             case ENTER: return enter(context);
             case BACK: return back(context);
@@ -121,7 +121,7 @@ class ItemProgress : public MenuItem {
         }
     }
 
-    bool enter(Context context) {
+    bool enter(Context& context) {
         DisplayInterface* display = context.display;
         if (display->getEditModeEnabled()) {
             return false;
@@ -130,7 +130,7 @@ class ItemProgress : public MenuItem {
         return true;
     };
 
-    bool back(Context context) {
+    bool back(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -142,7 +142,7 @@ class ItemProgress : public MenuItem {
         return true;
     };
 
-    bool down(Context context) {
+    bool down(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -156,7 +156,7 @@ class ItemProgress : public MenuItem {
         return true;
     };
 
-    bool up(Context context) {
+    bool up(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;

@@ -48,7 +48,7 @@ class ItemInputCharset : public ItemInput {
         : ItemInputCharset(text, (char*)"", charset, callback) {}
 
   protected:
-    bool process(Context context) override {
+    bool process(Context& context) override {
         const unsigned char c = context.command;
         switch (c) {
             case ENTER: return enter(context);
@@ -63,7 +63,7 @@ class ItemInputCharset : public ItemInput {
         }
     }
 
-    bool enter(Context context) {
+    bool enter(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return ItemInput::enter(context);
@@ -85,7 +85,7 @@ class ItemInputCharset : public ItemInput {
         return true;
     }
 
-    bool back(Context context) {
+    bool back(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -97,7 +97,7 @@ class ItemInputCharset : public ItemInput {
         return true;
     };
 
-    bool left(Context context) {
+    bool left(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -108,7 +108,7 @@ class ItemInputCharset : public ItemInput {
         return ItemInput::left(context);
     }
 
-    bool right(Context context) {
+    bool right(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -119,7 +119,7 @@ class ItemInputCharset : public ItemInput {
         return ItemInput::right(context);
     }
 
-    bool down(Context context) {
+    bool down(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -132,7 +132,7 @@ class ItemInputCharset : public ItemInput {
         return true;
     }
 
-    bool up(Context context) {
+    bool up(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;

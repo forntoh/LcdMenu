@@ -32,7 +32,7 @@ class ItemSubMenu : public MenuItem {
         concat(text, '*', buf);
         display->drawItem(row, buf);
     }
-    bool process(Context context) {
+    bool process(Context& context) {
         switch (context.command) {
             case ENTER: return enter(context);
             default: return false;
@@ -41,7 +41,7 @@ class ItemSubMenu : public MenuItem {
     /**
      * Open next screen.
      */
-    bool enter(Context context) {
+    bool enter(Context& context) {
         printCmd(F("Opening screen..."));
         screen->setParent(context.menu->getCurrentScreen());
         context.menu->setCurrentScreen(screen);
