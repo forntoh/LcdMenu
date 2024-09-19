@@ -2,7 +2,9 @@
 
 * [Home](README.md)
 * [Usage](usage.md)
-* [Controls](controls.md)
+* [Controls](controls/README.md)
+  * [Simple Nav Config](controls/simple-nav-config.md)
+  * [Rotary Nav Config](controls/rotary-nav-config.md)
 * [Examples](examples/README.md)
   * [Basic](examples/basic.md)
   * [Submenu](examples/submenu.md)

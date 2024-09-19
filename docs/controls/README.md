@@ -1,33 +1,24 @@
 ---
-description: The following controls exist for the menu
 icon: gamepad-modern
+description: The following controls exist for the menu
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # Controls
 
-This library already contains pre-made menu control helpers that you can use and extend.
+This library already contains pre-made menu control helpers that you can use and extend, check them out in the next page.
 
-To use the existing helpers, add the following import (preferably after all imports)
-
-```arduino
-//...
-#include <utils/commandProccesors.h>
-```
-
-Then do the following in the loop function
-
-```arduino
-void loop() {
-    byte command = // read my command from an input device (serial, keypad, etc);
-    // Process the command
-    processMenuCommand(menu, command, UP, DOWN, ENTER, BACK);
-    // UP, DOWN, ENTER, BACK are the values used to match the value of command
-}
-```
-
-`processMenuCommand` has multiple definitions depending on the type of menu items you have in your menu. See [commandProcessors.h](https://github.com/forntoh/LcdMenu/blob/master/src/utils/commandProccesors.h) and the example code.
-
-Under the hood, commandProcessors use the following functions, you can use them directly if you don't want to use the helpers provided.
+Under the hood, these helpers use the following functions, you can use them directly if you don't want to use the provided helpers.
 
 ### <mark style="color:blue;">`menu.up()`</mark> and <mark style="color:blue;">`menu.down()`</mark>&#x20;
 
@@ -67,4 +58,3 @@ If the current item is <mark style="color:orange;">**`ITEM_INPUT`**</mark>, it a
 ### <mark style="color:blue;">`menu.drawChar(`</mark><mark style="color:purple;">`character`</mark><mark style="color:blue;">`)`</mark>
 
 It does the same as type but doesn't set the value, it just draws it to the display.
-
