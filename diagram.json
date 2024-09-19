@@ -12,6 +12,13 @@
       "left": 318.1,
       "rotate": 90,
       "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 207.8,
+      "left": 393.6,
+      "attrs": { "color": "green" }
     }
   ],
   "connections": [
@@ -19,11 +26,13 @@
     [ "lcd1:SCL", "uno:A5", "limegreen", [ "h-16.48", "v370.62", "h268.87" ] ],
     [ "lcd1:VCC", "uno:5V", "red", [ "h-42.82", "v366.38", "h199.71" ] ],
     [ "lcd1:GND", "uno:GND.1", "black", [ "h-24.23", "v175.22" ] ],
-    [ "encoder1:CLK", "uno:2", "green", [ "v2.1", "h-90.4" ] ],
-    [ "encoder1:DT", "uno:3", "green", [ "h-0.1", "v74.6" ] ],
-    [ "encoder1:SW", "uno:4", "green", [ "h-0.1", "v74.6" ] ],
-    [ "encoder1:GND", "uno:GND.1", "black", [ "h-0.8", "v74.6" ] ],
-    [ "encoder1:VCC", "uno:5V", "red", [ "h-0.4", "v288", "h-194.4" ] ]
+    [ "encoder1:CLK", "uno:2", "blue", [ "v28.8", "h-146.7" ] ],
+    [ "encoder1:DT", "uno:3", "orange", [ "h-0.1", "v57.6", "h-146.6" ] ],
+    [ "encoder1:SW", "uno:4", "green", [ "h-0.1", "v48", "h-146.5" ] ],
+    [ "encoder1:GND", "uno:GND.1", "black", [ "h-0.8", "v38.4", "h-229.3" ] ],
+    [ "encoder1:VCC", "uno:5V", "red", [ "h-0.4", "v288", "h-194.4" ] ],
+    [ "btn1:1.l", "uno:5", "green", [ "h-163.2", "v-11.8" ] ],
+    [ "btn1:2.l", "uno:GND.1", "black", [ "h0" ] ]
   ],
   "dependencies": {}
 }
