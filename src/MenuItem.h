@@ -32,6 +32,7 @@
 #include <utils/utils.h>
 
 class LcdMenu;
+class MenuScreen;
 
 /**
  * @brief The MenuItem class.
@@ -43,6 +44,7 @@ class LcdMenu;
  */
 class MenuItem {
     friend LcdMenu;
+    friend MenuScreen;
 
   protected:
     const char* text = NULL;
