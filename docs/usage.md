@@ -15,8 +15,6 @@ To use the LcdMenu library in your project, follow these steps:
 
 Find currently available display interfaces [here](https://github.com/forntoh/LcdMenu/blob/decouple-menu-controller-and-display/src/interface)
 
-Optionally add `#include <utils/commandProccesors.h>`, this is a helper for processing menu commands.
-
 You will need to add other includes for the types of menu items you wish to use, the available types are described in the next step.
 
 {% hint style="warning" %}
