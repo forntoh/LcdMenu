@@ -24,14 +24,6 @@ class ItemSubMenu : public MenuItem {
     ItemSubMenu(const char* text, MenuScreen* screen) : MenuItem(text), screen(screen) {}
 
   protected:
-    /**
-     * Draw text of the item with asterisk (`*`) sign on the end.
-     */
-    void draw(DisplayInterface* display, uint8_t row) override {
-        char* buf = new char[strlen(text) + 2];
-        concat(text, '*', buf);
-        display->drawItem(row, buf);
-    }
     bool process(Context& context) {
         switch (context.command) {
             case ENTER: return enter(context);
