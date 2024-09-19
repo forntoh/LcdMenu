@@ -18,8 +18,6 @@ const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 void inputCallback(char* value);
 void clearInput();
 
-extern MenuItem* usernameMenu[];
-
 // clang-format off
 MENU_SCREEN(userScreen, userItems,
     ITEM_INPUT_CHARSET("User", charset, inputCallback),
