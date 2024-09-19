@@ -68,10 +68,9 @@ class MenuScreen {
     }
 
   protected:
-
     uint8_t itemsCount() {
         uint8_t i = 0;
-        while(items[i] != nullptr) {
+        while (items[i] != nullptr) {
             i++;
         }
         return i;
@@ -97,6 +96,8 @@ class MenuScreen {
         for (uint8_t i = 0; i < display->getMaxRows(); i++) {
             MenuItem* item = this->items[view + i];
             if (item == nullptr) {
+                display->moveCursor(cursor - view);
+                display->drawCursor();  // In case if currentPosition was not changed between screens
                 return;
             }
             item->draw(display, i);
@@ -148,7 +149,7 @@ class MenuScreen {
      * When edit mode is enabled, this action is skipped
      */
     bool down(MenuItem::Context context) {
-        if (cursor == itemsCount - 1) {
+        if (cursor == itemsCount() - 1) {
             return false;
         }
         DisplayInterface* display = context.display;
@@ -166,12 +167,7 @@ class MenuScreen {
      *
      * Navigates up once.
      */
-    bool back(MenuItem::Context context) {
-        if (parent != NULL) {
-            context.menu->setCurrentScreen(parent);
-        }
-        return true;
-    }
+    bool back(MenuItem::Context context);
 
     void reset(DisplayInterface* display) {
         cursor = 0;
@@ -179,3 +175,9 @@ class MenuScreen {
         draw(display);
     }
 };
+
+#define MENU_SCREEN(screen, items, ...)         \
+    extern MenuItem* items[];                   \
+    extern MenuScreen* screen;                  \
+    MenuItem* items[] = {__VA_ARGS__, nullptr}; \
+    MenuScreen* screen = new MenuScreen(items)

@@ -25,11 +25,11 @@
 */
 #pragma once
 
+#include "MenuScreen.h"
 #include "display/DisplayInterface.h"
 #include "utils/constants.h"
 #include <MenuItem.h>
 #include <utils/utils.h>
-#include "MenuScreen.h"
 
 /**
  * The LcdMenu class contains all fields and methods to manipulate the menu
@@ -57,67 +57,44 @@ class LcdMenu {
      * # Constructor
      */
     LcdMenu(DisplayInterface& display) : display(display) {}
-    DisplayInterface* getDisplay(){
+    DisplayInterface* getDisplay() {
         return &display;
     }
     MenuScreen* getCurrentScreen() {
         return currentScreen;
     }
-    void setCurrentScreen(MenuScreen* screen) {
-        currentScreen = screen;
-        display.clear();
-        currentScreen->draw(&display);
-    }
-    void initialize(MenuScreen* screen) {
-        display.begin();
-        currentScreen = screen;
-        currentScreen->draw(&display);
-    }
-
-    bool process(const unsigned char c) {
-        MenuItem::Context context{this, &display, c};
-        return currentScreen->process(context);
-    };
-
+    void setCurrentScreen(MenuScreen* screen);
+    void initialize(MenuScreen* screen);
+    bool process(const unsigned char c);
     /**
      * Reset the display
      */
-    void resetMenu() { this->currentScreen->reset(&display); }
-
+    void resetMenu();
     /**
      * When you want to display any other content on the screen then
      * call this function then display your content, later call
      * `show()` to show the menu
      */
-    void hide() {
-        enableUpdate = false;
-        display.clear();
-    }
+    void hide();
     /**
      * Show the menu
      */
-    void show() {
-        enableUpdate = true;
-        display.clear();
-        currentScreen->draw(&display);
-    }
+    void show();
     /**
      * Get the current cursor position
      * @return `cursorPosition` e.g. 1, 2, 3...
      */
-    uint8_t getCursorPosition() { return this->currentScreen->getCursor(); }
+    uint8_t getCursorPosition();
     /**
      * Set the current cursor position
      * @param position
      */
-    void setCursorPosition(uint8_t position) {
-        this->currentScreen->setCursor(&display, position);
-    }
+    void setCursorPosition(uint8_t position);
     /**
      * Get a `MenuItem` at position
      * @return `MenuItem` - item at `position`
      */
-    MenuItem* getItemAt(uint8_t position) { return currentScreen->getItemAt(position); }
+    MenuItem* getItemAt(uint8_t position);
     /**
      * Get a `MenuItem` at position using operator function
      * e.g `menu[menu.getCursorPosition()]` will return the item at the
@@ -126,7 +103,5 @@ class LcdMenu {
      * the current menu)
      * @return `MenuItem` - item at `position`
      */
-    MenuItem* operator[](const uint8_t position) {
-        return currentScreen->getItemAt(position);
-    }
+    MenuItem* operator[](const uint8_t position);
 };
