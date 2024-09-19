@@ -7,6 +7,7 @@
 
 #include <ItemInput.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
@@ -16,7 +17,7 @@
 // Declare the call back function
 void inputCallback(char* value);
 
-MAIN_MENU(
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_INPUT("Con", inputCallback),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Blink SOS"),
@@ -40,7 +41,7 @@ SimpleNavConfig navConfig = {
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() {

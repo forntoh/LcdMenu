@@ -95,6 +95,7 @@ class LcdMenu {
      * @return `MenuItem` - item at `position`
      */
     MenuItem* getItemAt(uint8_t position);
+    void update();
     /**
      * Get a `MenuItem` at position using operator function
      * e.g `menu[menu.getCursorPosition()]` will return the item at the

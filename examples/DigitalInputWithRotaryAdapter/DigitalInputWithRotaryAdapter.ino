@@ -5,6 +5,7 @@
 #include <ItemList.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <SimpleRotary.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/DigitalInputAdapter.h>
@@ -20,7 +21,7 @@ void inputCallback(char* value);
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
-MAIN_MENU(
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_INPUT_CHARSET("User", (const char*)"ABCDEFGHIJKLMNOPQRSTUVWXYZ", inputCallback),
     ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
     ITEM_TOGGLE("Backlight", toggleBacklight),
@@ -36,7 +37,7 @@ DigitalInputAdapter backspaceBtn(&menu, 5, BACKSPACE);  // Push button for backs
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() {

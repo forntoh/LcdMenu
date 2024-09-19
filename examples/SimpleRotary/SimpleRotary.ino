@@ -2,6 +2,7 @@
 #include <ItemProgress.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <SimpleRotary.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/SimpleRotaryAdapter.h>
@@ -24,7 +25,7 @@ char* intMapping(uint16_t progress) {
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
-MAIN_MENU(
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Connect to WiFi"),
     ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
     ITEM_BASIC("Blink SOS"),
@@ -40,7 +41,7 @@ SimpleRotaryAdapter rotaryInput(&menu, &encoder);
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() { rotaryInput.observe(); }

@@ -3,6 +3,7 @@
 #include <ItemInputCharset.h>
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <SimpleRotary.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/SimpleRotaryAdapter.h>
@@ -19,17 +20,15 @@ void clearInput();
 
 extern MenuItem* usernameMenu[];
 
-MAIN_MENU(
-    ITEM_SUBMENU("Set user", usernameMenu),
+MENU_SCREEN(userScreen, userItems,
+    ITEM_INPUT_CHARSET("User", charset, inputCallback),
+    ITEM_COMMAND("Clear", clearInput));
+
+MENU_SCREEN(mainScreen, mainItems,
+    ITEM_SUBMENU("Set user", userScreen),
     ITEM_BASIC("Settings"),
     ITEM_BASIC("More Settings"),
     ITEM_BASIC("And more Settings"));
-
-SUB_MENU(
-    usernameMenu,
-    mainMenu,
-    ITEM_INPUT_CHARSET("User", charset, inputCallback),
-    ITEM_COMMAND("Clear", clearInput));
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
@@ -39,7 +38,7 @@ SimpleRotaryAdapter rotaryInput(&menu, &encoder);
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() { rotaryInput.observe(); }

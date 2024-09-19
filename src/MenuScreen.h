@@ -174,6 +174,11 @@ class MenuScreen {
         view = 0;
         draw(display);
     }
+
+    void update(DisplayInterface* display) {
+        draw(display);
+        display->drawCursor();
+    }
 };
 
 #define MENU_SCREEN(screen, items, ...)         \

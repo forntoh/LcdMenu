@@ -6,29 +6,25 @@
 */
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-extern MenuItem* settingsMenu[];
-
-// Define the main menu
-MAIN_MENU(
-    ITEM_BASIC("Start service"),
-    ITEM_BASIC("Connect to WiFi"),
-    ITEM_SUBMENU("Settings", settingsMenu),
-    ITEM_BASIC("Blink SOS"),
-    ITEM_BASIC("Blink random"));
-/**
- * Create submenu and precise its parent
- */
-SUB_MENU(
-    settingsMenu,
-    mainMenu,
+// Create submenu and precise its parent
+MENU_SCREEN(settingsScreen, settingsItems,
     ITEM_BASIC("Backlight"),
     ITEM_BASIC("Contrast"));
+
+// Define the main menu
+MENU_SCREEN(mainScreen, mainItems,
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_SUBMENU("Settings", settingsScreen),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random"));
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
@@ -46,7 +42,7 @@ SimpleNavConfig navConfig = {
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() {

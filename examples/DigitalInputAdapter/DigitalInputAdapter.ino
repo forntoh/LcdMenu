@@ -1,5 +1,6 @@
 #include <ItemToggle.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/DigitalInputAdapter.h>
 
@@ -9,7 +10,7 @@
 // Declare the call back function
 void toggleBacklight(uint16_t isOn);
 
-MAIN_MENU(
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_TOGGLE("Backlight", toggleBacklight),
@@ -25,7 +26,7 @@ DigitalInputAdapter enterBtn(&menu, 4, ENTER);
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() {

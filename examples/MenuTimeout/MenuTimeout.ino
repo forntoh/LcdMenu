@@ -6,13 +6,14 @@
 */
 
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-MAIN_MENU(
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Settings"),
@@ -35,7 +36,7 @@ SimpleNavConfig navConfig = {
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() {

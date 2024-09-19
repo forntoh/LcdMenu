@@ -5,9 +5,12 @@ hide empty members
 
 class LcdMenu {
     +virtual bool process(char c)
+}
+
+class MenuScreen {
+    #virtual bool process(Context context)
     #virtual bool up()
     #virtual bool down()
-    #virtual bool enter()
     #virtual bool back()
 }
 
@@ -47,7 +50,8 @@ class ItemInput {
     #bool clear(Context context)
 }
 
-LcdMenu::process -r-> MenuItem::process
+LcdMenu -r-> MenuScreen
+MenuScreen -r-> MenuItem
 ItemCommand -u-|> MenuItem
 ItemList -u-|> MenuItem
 ItemInput -u-|> MenuItem

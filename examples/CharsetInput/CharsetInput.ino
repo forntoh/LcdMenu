@@ -8,6 +8,7 @@
 #include <ItemInput.h>
 #include <ItemInputCharset.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
@@ -20,7 +21,7 @@ const char* charset = "0123456789";
 // Declare the call back function
 void inputCallback(char* value);
 
-MAIN_MENU(
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_INPUT_CHARSET("Con", "0123456", charset, inputCallback),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Blink SOS"),
@@ -44,7 +45,7 @@ SimpleNavConfig navConfig = {
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() {

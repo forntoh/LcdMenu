@@ -7,6 +7,7 @@
 
 #include <ItemToggle.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
@@ -17,7 +18,7 @@
 void toggleBacklight(uint16_t isOn);
 
 // prettier-ignore
-MAIN_MENU(
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_TOGGLE("Backlight", toggleBacklight),
@@ -40,7 +41,7 @@ SimpleNavConfig navConfig = {
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    menu.initialize(mainScreen);
 }
 
 void loop() {
