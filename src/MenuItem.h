@@ -35,7 +35,8 @@ class LcdMenu;
 class MenuScreen;
 
 /**
- * @brief The MenuItem class.
+ * @class MenuItem
+ * @brief Represent sinle item in menu.
  *
  * ┌────────────────────────────┐
  * │ > T E X T                  │
@@ -56,11 +57,6 @@ class MenuItem {
      * @return `String` - Item's text
      */
     virtual const char* getText() { return text; }
-    /**
-     * Get the sub menu at item
-     * @return `MenuItem*` - Submenu at item
-     */
-    virtual MenuItem** getSubMenu() { return NULL; }
     /**
      * Set the text of the item
      * @param text text to display for the item
@@ -102,45 +98,8 @@ class MenuItem {
         substring(text, 0, maxCols - 2, buf);
         display->drawItem(row, buf);
     };
-
-  public:
-    /**
-     * Get item at index from the submenu
-     * @param index for the item
-     */
-    virtual MenuItem* operator[](const uint8_t index) { return NULL; };
 };
+
 #define ITEM_BASIC(...) (new MenuItem(__VA_ARGS__))
-
-class ItemHeader : public MenuItem {
-  protected:
-    MenuItem** parent = NULL;
-
-    ItemHeader(const char* text, MenuItem** parent)
-        : MenuItem(text), parent(parent) {}
-
-  public:
-    /**
-     */
-    ItemHeader() : ItemHeader("", NULL) {}
-    /**
-     * @param parent the parent menu item
-     */
-    ItemHeader(MenuItem** parent)
-        : ItemHeader("", parent) {}
-
-    MenuItem** getSubMenu() override { return this->parent; };
-
-    MenuItem* operator[](const uint8_t index) override {
-        return getSubMenu()[index];
-    }
-};
-
-#define MAIN_MENU(...)           \
-    extern MenuItem* mainMenu[]; \
-    MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, nullptr}
-
-#define SUB_MENU(subMenu, parent, ...) \
-    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, nullptr}
 
 #endif

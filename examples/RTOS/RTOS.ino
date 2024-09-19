@@ -93,7 +93,7 @@ static void tempMeas(void* pvParameters) {
         tempItems[2]->setText(dtostrf(temperature3, 5, 2, buffer3));
 
         if (menu.getCurrentScreen() == tempScreen) {
-            menu.update();
+            menu.refresh();
         }
         vTaskDelay(5000 / portTICK_PERIOD_MS);  // wait for five seconds
     }

@@ -44,13 +44,10 @@ MenuItem* LcdMenu::getItemAt(uint8_t position) {
     return currentScreen->getItemAt(position);
 }
 
-void LcdMenu::update() {
+void LcdMenu::refresh() {
     if (!enableUpdate) {
         return;
     }
-    currentScreen->update(&display);
-}
-
-MenuItem* LcdMenu::operator[](const uint8_t position) {
-    return currentScreen->getItemAt(position);
+    currentScreen->draw(&display);
+    display.drawCursor();
 }
