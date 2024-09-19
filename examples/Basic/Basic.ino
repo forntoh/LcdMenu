@@ -14,12 +14,14 @@
 #define LCD_COLS 16
 
 // Initialize the main menu items
+// clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Settings"),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
+// clang-format on
 
 // Construct the display adapter
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);

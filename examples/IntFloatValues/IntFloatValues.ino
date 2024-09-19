@@ -54,12 +54,14 @@ char* floatMapping(uint16_t progress) {
 }
 
 // Initialize the main menu items
+// clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Con"),
     ITEM_PROGRESS("Dist", 10, intMapping, callback),
     ITEM_PROGRESS("Curr", 5, floatMapping, callback),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
+// clang-format on
 
 // Construct the LcdMenu
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);

@@ -29,11 +29,13 @@ extern String nums[];
 String nums[] = {"5", "7", "9", "12", "32"};
 
 // Initialize the main menu items
+// clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("List demo"),
     ITEM_STRING_LIST("Col", colors, 8, colorsCallback),
     ITEM_STRING_LIST("Num", nums, 5, numsCallback),
     ITEM_BASIC("Example"));
+// clang-format on
 
 // Construct the LcdMenu
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);

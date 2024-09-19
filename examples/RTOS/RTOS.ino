@@ -50,22 +50,28 @@ SimpleNavConfig navConfig = {
 };
 
 // Sub Menu 1: Relays
+// clang-format off
 MENU_SCREEN(relayScreen, relayItems, 
     ITEM_TOGGLE("Relay 1", toggleRelay1), 
     ITEM_TOGGLE("Relay 2", toggleRelay2), 
     ITEM_TOGGLE("Relay 3", toggleRelay3));
+// clang-format on
 
 // Sub Menu 2: Temperature Values
+// clang-format off
 MENU_SCREEN(tempScreen, tempItems, 
     ITEM_BASIC(""), 
     ITEM_BASIC(""), 
     ITEM_BASIC(""));
+// clang-format on
 
+// clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Relay Test"),
     ITEM_SUBMENU("Temp. Observing", tempScreen),
     ITEM_BASIC("Hello World"),
     ITEM_BASIC("I'm World"));
+// clang-format on
 
 // RTOS func. to measure temperature value
 static void tempMeas(void* pvParameters) {

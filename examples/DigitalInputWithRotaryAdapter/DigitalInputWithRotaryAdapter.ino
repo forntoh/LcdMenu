@@ -21,12 +21,14 @@ void inputCallback(char* value);
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
+// clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_INPUT_CHARSET("User", (const char*)"ABCDEFGHIJKLMNOPQRSTUVWXYZ", inputCallback),
     ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Placeholder 1"),
     ITEM_BASIC("Placeholder 2"));
+// clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);

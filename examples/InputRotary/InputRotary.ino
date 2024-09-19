@@ -20,15 +20,19 @@ void clearInput();
 
 extern MenuItem* usernameMenu[];
 
+// clang-format off
 MENU_SCREEN(userScreen, userItems,
     ITEM_INPUT_CHARSET("User", charset, inputCallback),
     ITEM_COMMAND("Clear", clearInput));
+// clang-format on
 
+// clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_SUBMENU("Set user", userScreen),
     ITEM_BASIC("Settings"),
     ITEM_BASIC("More Settings"),
     ITEM_BASIC("And more Settings"));
+// clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
