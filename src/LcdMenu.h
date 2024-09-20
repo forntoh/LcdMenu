@@ -38,61 +38,73 @@
 class LcdMenu {
   private:
     /**
-     * Display Interface
+     * @brief Display Interface.
      */
     DisplayInterface& display;
     /**
-     * Currently visible menu screen.
+     * @brief Currently visible menu screen.
      */
-    MenuScreen* currentScreen = NULL;
+    MenuScreen* screen = NULL;
     /**
+     * @brief Enabled flag of menu.
      * Determines whether the screen should be updated after an action. Set it
      * to `false` when you want to display any other content on the screen then
      * set it back to `true` to show the menu.
      */
-    bool enableUpdate = true;
+    bool enabled = true;
 
   public:
     /**
-     * # Constructor
+     * Construct new instance of `LcdMenu`.
      */
     LcdMenu(DisplayInterface& display) : display(display) {}
-    DisplayInterface* getDisplay() {
-        return &display;
-    }
-    MenuScreen* getCurrentScreen() {
-        return currentScreen;
-    }
-    void setCurrentScreen(MenuScreen* screen);
-    void initialize(MenuScreen* screen);
+    /**
+     * @brief Get the display.
+     * @return the display
+     */
+    DisplayInterface* getDisplay();
+    /**
+     * @brief Get the screen that currently on display.
+     * @return currently active screen
+     */
+    MenuScreen* getScreen();
+    /**
+     * @brief Set new screen to display.
+     * The only place that clears whole screen.
+     * Then it Will `draw` of new screen screen on display.
+     * @param screen the new screen to display
+     */
+    void setScreen(MenuScreen* screen);
     bool process(const unsigned char c);
     /**
-     * Reset the display
+     * @brief Reset current screen to initial state.
+     * Moves cursor and view positions to zero.
      */
-    void resetMenu();
+    void reset();
     /**
+     * @brief Hide the menu.
      * When you want to display any other content on the screen then
      * call this function then display your content, later call
      * `show()` to show the menu
      */
     void hide();
     /**
-     * Show the menu
+     * @brief Show the menu.
      */
     void show();
     /**
-     * Get the current cursor position
-     * @return `cursorPosition` e.g. 1, 2, 3...
+     * @brief Get the current cursor position of current screen.
+     * @return the 0-based `cursor` position
      */
-    uint8_t getCursorPosition();
+    uint8_t getCursor();
     /**
-     * Set the current cursor position
-     * @param position
+     * @brief Set the current cursor position
+     * @param cursor the 0-based `cursor` position
      */
-    void setCursorPosition(uint8_t position);
+    void setCursor(uint8_t cursor);
     /**
-     * Get a `MenuItem` at position
-     * @return `MenuItem` - item at `position`
+     * @brief Get `MenuItem` at position on current screen.
+     * @return `MenuItem` item at `position`
      */
     MenuItem* getItemAt(uint8_t position);
     void refresh();

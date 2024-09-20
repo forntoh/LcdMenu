@@ -92,7 +92,7 @@ static void tempMeas(void* pvParameters) {
         char buffer3[8];
         tempItems[2]->setText(dtostrf(temperature3, 5, 2, buffer3));
 
-        if (menu.getCurrentScreen() == tempScreen) {
+        if (menu.getScreen() == tempScreen) {
             menu.refresh();
         }
         vTaskDelay(5000 / portTICK_PERIOD_MS);  // wait for five seconds
@@ -113,7 +113,8 @@ static void keyPad(void* pvParameters) {
 void setup() {
     Serial.begin(9600);
     // LCD activation
-    menu.initialize(mainScreen);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
     // Run RTOS func.
     xTaskCreate(keyPad, "keyPad", 128, NULL, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate(tempMeas, "tempMeas", 128, NULL, tskIDLE_PRIORITY + 1, NULL);

@@ -59,7 +59,7 @@ DisplayInterface	KEYWORD2
 reset	KEYWORD2
 drawDownIndicator	KEYWORD2
 getCallbackInt	KEYWORD2
-resetMenu	KEYWORD2
+reset	KEYWORD2
 drawMenu	KEYWORD2
 getTextOn	KEYWORD2
 isSubMenu	KEYWORD2

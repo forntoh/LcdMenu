@@ -1,53 +1,66 @@
 #include "LcdMenu.h"
 
-void LcdMenu::setCurrentScreen(MenuScreen* screen) {
-    currentScreen = screen;
-    display.clear();
-    currentScreen->draw(&display);
+DisplayInterface* LcdMenu::getDisplay() {
+    return &display;
 }
 
-void LcdMenu::initialize(MenuScreen* screen) {
-    display.begin();
-    currentScreen = screen;
-    currentScreen->draw(&display);
+MenuScreen* LcdMenu::getScreen() {
+    return screen;
+}
+
+void LcdMenu::setScreen(MenuScreen* screen) {
+    this->screen = screen;
+    display.clear();
+    this->screen->draw(&display);
 }
 
 bool LcdMenu::process(const unsigned char c) {
+    if (!enabled) {
+        return false;
+    }
     MenuItem::Context context{this, &display, c};
-    return currentScreen->process(context);
+    return screen->process(context);
 };
 
-void LcdMenu::resetMenu() {
-    this->currentScreen->reset(&display);
+void LcdMenu::reset() {
+    this->screen->reset(&display);
 }
 
 void LcdMenu::hide() {
-    enableUpdate = false;
+    if (!enabled) {
+        return;
+    }
+    enabled = false;
     display.clear();
 }
 
 void LcdMenu::show() {
-    enableUpdate = true;
+    if (enabled) {
+        return;
+    }
+    enabled = true;
     display.clear();
-    currentScreen->draw(&display);
+    screen->draw(&display);
 }
 
-uint8_t LcdMenu::getCursorPosition() {
-    return this->currentScreen->getCursor();
+uint8_t LcdMenu::getCursor() {
+    return screen->getCursor();
 }
 
-void LcdMenu::setCursorPosition(uint8_t position) {
-    this->currentScreen->setCursor(&display, position);
+void LcdMenu::setCursor(uint8_t cursor) {
+    if (!enabled) {
+        return;
+    }
+    screen->setCursor(&display, cursor);
 }
 
 MenuItem* LcdMenu::getItemAt(uint8_t position) {
-    return currentScreen->getItemAt(position);
+    return screen->getItemAt(position);
 }
 
 void LcdMenu::refresh() {
-    if (!enableUpdate) {
+    if (!enabled) {
         return;
     }
-    currentScreen->draw(&display);
-    display.drawCursor();
+    screen->draw(&display);
 }

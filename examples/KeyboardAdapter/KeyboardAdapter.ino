@@ -33,7 +33,8 @@ KeyboardAdapter keyboard(&menu, &Serial);
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainScreen);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
 }
 
 void loop() {

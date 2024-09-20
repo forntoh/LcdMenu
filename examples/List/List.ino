@@ -55,7 +55,8 @@ SimpleNavConfig navConfig = {
 void setup() {
     Serial.begin(9600);
     // Initialize LcdMenu with the menu items
-    menu.initialize(mainScreen);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
 }
 
 void loop() {
