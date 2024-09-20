@@ -9,16 +9,36 @@
 
 #ifndef ItemSubMenu_H
 #define ItemSubMenu_H
+#include "LcdMenu.h"
 #include "MenuItem.h"
 
-class ItemSubMenu : public ItemHeader {
+class ItemSubMenu : public MenuItem {
+  private:
+    MenuScreen* screen;
+
   public:
     /**
      * @param text text to display for the item
-     * @param parent the parent of the sub menu item
+     * @param screen the next screen to show
      */
-    ItemSubMenu(const char* text, MenuItem** parent)
-        : ItemHeader(text, parent) {}
+    ItemSubMenu(const char* text, MenuScreen* screen) : MenuItem(text), screen(screen) {}
+
+  protected:
+    bool process(Context& context) {
+        switch (context.command) {
+            case ENTER: return enter(context);
+            default: return false;
+        }
+    }
+    /**
+     * Open next screen.
+     */
+    bool enter(Context& context) {
+        printCmd(F("Opening screen..."));
+        screen->setParent(context.menu->getScreen());
+        context.menu->setScreen(screen);
+        return true;
+    }
 };
 
 #define ITEM_SUBMENU(...) (new ItemSubMenu(__VA_ARGS__))

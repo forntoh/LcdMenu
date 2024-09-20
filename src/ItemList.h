@@ -93,7 +93,7 @@ class ItemList : public MenuItem {
         display->drawItem(row, text, ':', buf);
     }
 
-    bool process(Context context) override {
+    bool process(Context& context) override {
         const unsigned char c = context.command;
         switch (c) {
             case ENTER: return enter(context);
@@ -104,7 +104,7 @@ class ItemList : public MenuItem {
         }
     }
 
-    bool enter(Context context) {
+    bool enter(Context& context) {
         DisplayInterface* display = context.display;
         if (display->getEditModeEnabled()) {
             return false;
@@ -113,7 +113,7 @@ class ItemList : public MenuItem {
         return true;
     };
 
-    bool back(Context context) {
+    bool back(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -125,7 +125,7 @@ class ItemList : public MenuItem {
         return true;
     };
 
-    bool down(Context context) {
+    bool down(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;
@@ -139,7 +139,7 @@ class ItemList : public MenuItem {
         return true;
     };
 
-    bool up(Context context) {
+    bool up(Context& context) {
         DisplayInterface* display = context.display;
         if (!display->getEditModeEnabled()) {
             return false;

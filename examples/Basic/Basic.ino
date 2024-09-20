@@ -6,6 +6,7 @@
 */
 
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
@@ -13,12 +14,14 @@
 #define LCD_COLS 16
 
 // Initialize the main menu items
-MAIN_MENU(
+// clang-format off
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Settings"),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
+// clang-format on
 
 // Construct the display adapter
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
@@ -40,7 +43,8 @@ SimpleNavConfig navConfig = {
 void setup() {
     Serial.begin(9600);
     // Initialize LcdMenu with the menu items
-    menu.initialize(mainMenu);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
 }
 
 void loop() {

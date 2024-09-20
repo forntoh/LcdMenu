@@ -7,6 +7,7 @@
 
 #include <ItemProgress.h>
 #include <LcdMenu.h>
+#include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <utils/SimpleNavConfig.h>
 
@@ -53,12 +54,14 @@ char* floatMapping(uint16_t progress) {
 }
 
 // Initialize the main menu items
-MAIN_MENU(
+// clang-format off
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Con"),
     ITEM_PROGRESS("Dist", 10, intMapping, callback),
     ITEM_PROGRESS("Curr", 5, floatMapping, callback),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
+// clang-format on
 
 // Construct the LcdMenu
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
@@ -78,7 +81,8 @@ SimpleNavConfig navConfig = {
 void setup() {
     Serial.begin(9600);
     // Initialize LcdMenu with the menu items
-    menu.initialize(mainMenu);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
 }
 
 void loop() {
