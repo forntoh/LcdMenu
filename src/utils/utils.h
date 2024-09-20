@@ -51,34 +51,34 @@ inline float mapProgress(uint16_t progress, float minValue, float maxValue) {
            minValue;
 }
 
-inline void printCmd(const __FlashStringHelper* command) {
+inline void printLog(const __FlashStringHelper* command) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
     Serial.println(command);
 #endif
 }
 
-inline void printCmd(const __FlashStringHelper* command, const char value) {
+inline void printLog(const __FlashStringHelper* command, const char value) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
     Serial.print(command);
     Serial.print(F("="));
     Serial.println(value);
 #endif
 }
 
-inline void printCmd(const __FlashStringHelper* command, const uint8_t value) {
+inline void printLog(const __FlashStringHelper* command, const uint8_t value) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
     Serial.print(command);
     Serial.print(F("="));
     Serial.println(value, DEC);
 #endif
 }
 
-inline void printCmd(const __FlashStringHelper* command, const char* value) {
+inline void printLog(const __FlashStringHelper* command, const char* value) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
     Serial.print(command);
     Serial.print(F("="));
     Serial.println(value);

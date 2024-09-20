@@ -79,7 +79,6 @@ class ItemInputCharset : public ItemInput {
             concat(value, charset[charsetPosition], buf);
             value = buf;
         }
-        printCmd(F("CHARSET"), value);
         stopCharsetEditMode(display);
         ItemInput::right(context);
         return true;
@@ -129,6 +128,7 @@ class ItemInputCharset : public ItemInput {
         }
         charsetPosition = (charsetPosition + 1) % charsetSize;
         display->drawChar(charset[charsetPosition]);
+        printLog(F("ItemInputCharset::down"), charset[charsetPosition]);
         return true;
     }
 
@@ -142,6 +142,7 @@ class ItemInputCharset : public ItemInput {
         }
         charsetPosition = constrain(charsetPosition - 1, 0, charsetSize);
         display->drawChar(charset[charsetPosition]);
+        printLog(F("ItemInputCharset::up"), charset[charsetPosition]);
         return true;
     }
 };

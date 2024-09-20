@@ -19,17 +19,17 @@ bool relay1State, relay2State, relay3State;
 
 // Relay 1 Toggle
 void toggleRelay1(uint16_t isOn) {
-    printCmd(F("relay1State"));
+    printLog(F("relay1State"));
 }
 
 // Relay 2 Toggle
 void toggleRelay2(uint16_t isOn) {
-    printCmd(F("relay2State"));
+    printLog(F("relay2State"));
 }
 
 // Relay 3 Toggle
 void toggleRelay3(uint16_t isOn) {
-    printCmd(F("relay3State"));
+    printLog(F("relay3State"));
 }
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);

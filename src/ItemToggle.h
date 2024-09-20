@@ -94,6 +94,7 @@ class ItemToggle : public MenuItem {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);
+            printLog(F("ItemToggle::toggle"), enabled ? textOn : textOff);
         }
         MenuItem::draw(context.display);
         return true;

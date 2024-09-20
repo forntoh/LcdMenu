@@ -3,23 +3,23 @@
  *
  * # ItemList
  *
- * This item type indicates that the current item is a **list**.
+ * This item type represents a **list**.
  *
  * ### Functionality
- * - `left()`: cycles down the list
- * - `right()`: cycles up the list. This function can be used alone with a
- * single button. Once the menu reaches the end of the list, it automatically
- * starts back from the beginning.
- * - `enter()`: invokes the command *(callback)* bound to this item.
+ * - `down()`: cycles down the list.
+ * - `up()`: cycles up the list. This function can be used with a single button.
+ *           Once the menu reaches the end of the list, it automatically
+ *           starts back from the beginning.
+ * - `enter()`: invokes the command (callback) bound to this item.
  *
  * ### Usage
  * This item can be used for other primitive data types; you just need to pass
- * it as a string, then parse the result to the desired datatype.
+ * them as strings, then parse the result to the desired datatype.
  *
  * ### Parameters
- * @param key: key of the items
- * @param items: array of items to display
- * @param itemCount: number of items in `items`
+ * @param key: key of the item.
+ * @param items: array of items to display.
+ * @param itemCount: number of items in `items`.
  * @param callback: reference to a callback function that will be invoked
  * when the user selects an item from the list.
  */
@@ -85,6 +85,15 @@ class ItemList : public MenuItem {
      */
     String* getItems() { return items; }
 
+    /**
+     * @brief Returns the value of the currently selected item.
+     *
+     * @return The value of the currently selected item.
+     */
+    char* getValue() {
+        return (char*)items[itemIndex].c_str();
+    }
+
   protected:
     void draw(DisplayInterface* display, uint8_t row) override {
         uint8_t maxCols = display->getMaxCols();
@@ -110,6 +119,7 @@ class ItemList : public MenuItem {
             return false;
         }
         display->setEditModeEnabled(true);
+        printLog(F("ItemList::enterEditMode"), getValue());
         return true;
     };
 
@@ -122,6 +132,7 @@ class ItemList : public MenuItem {
         if (callback != NULL) {
             callback(itemIndex);
         }
+        printLog(F("ItemList::exitEditMode"), getValue());
         return true;
     };
 
@@ -133,9 +144,9 @@ class ItemList : public MenuItem {
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
-            printCmd(F("LEFT"), items[itemIndex].c_str());
             MenuItem::draw(display);
         }
+        printLog(F("ItemList::down"), getValue());
         return true;
     };
 
@@ -147,9 +158,9 @@ class ItemList : public MenuItem {
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
-            printCmd(F("RIGHT"), items[itemIndex].c_str());
             MenuItem::draw(display);
         }
+        printLog(F("ItemList::up"), getValue());
         return true;
     };
 };

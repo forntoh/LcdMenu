@@ -96,8 +96,6 @@ class LiquidCrystal_I2CAdapter : public DisplayInterface {
         lcd->setCursor(blinkerPosition, cursorRow);
         lcd->print(c);
         lcd->setCursor(blinkerPosition, cursorRow);  // Move back
-        // Log
-        printCmd(F("DRAW-CHAR"), c);
         return true;
     }
 
@@ -105,7 +103,7 @@ class LiquidCrystal_I2CAdapter : public DisplayInterface {
         if (millis() != startTime + DISPLAY_TIMEOUT) {
             return;
         }
-        printCmd(F("TIMEOUT"));
+        printLog(F("LiquidCrystal_I2CAdapter::timeout"));
         lcd->noDisplay();
         lcd->noBacklight();
     }
