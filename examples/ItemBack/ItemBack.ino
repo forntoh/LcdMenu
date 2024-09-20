@@ -8,7 +8,7 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-extern MenuScreen* userScreen;
+extern MenuScreen* settingsScreen;
 
 // Define the main menu
 // clang-format off
