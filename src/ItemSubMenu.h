@@ -34,7 +34,7 @@ class ItemSubMenu : public MenuItem {
      * Open next screen.
      */
     bool enter(Context& context) {
-        printCmd(F("Opening screen..."));
+        printLog(F("ItemSubMenu::enter"), text);
         screen->setParent(context.menu->getScreen());
         context.menu->setScreen(screen);
         return true;

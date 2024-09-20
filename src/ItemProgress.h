@@ -54,6 +54,7 @@ class ItemProgress : public MenuItem {
             return;
         }
         progress += stepLength;
+        printLog(F("ItemProgress::increment"), getValue());
     }
 
     /**
@@ -64,6 +65,7 @@ class ItemProgress : public MenuItem {
             return;
         }
         progress -= stepLength;
+        printLog(F("ItemProgress::decrement"), getValue());
     }
 
     /**
@@ -127,6 +129,7 @@ class ItemProgress : public MenuItem {
             return false;
         }
         display->setEditModeEnabled(true);
+        printLog(F("ItemProgress::enterEditMode"), getValue());
         return true;
     };
 
@@ -139,6 +142,7 @@ class ItemProgress : public MenuItem {
         if (callback != NULL) {
             callback(progress);
         }
+        printLog(F("ItemProgress::exitEditMode"), getValue());
         return true;
     };
 
@@ -150,7 +154,6 @@ class ItemProgress : public MenuItem {
         uint16_t oldProgress = progress;
         decrement();
         if (progress != oldProgress) {
-            printCmd(F("LEFT"), getValue());
             MenuItem::draw(display);
         }
         return true;
@@ -164,7 +167,6 @@ class ItemProgress : public MenuItem {
         uint16_t oldProgress = progress;
         increment();
         if (progress != oldProgress) {
-            printCmd(F("RIGHT"), getValue());
             MenuItem::draw(display);
         }
         return true;

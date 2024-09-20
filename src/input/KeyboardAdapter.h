@@ -133,11 +133,11 @@ class KeyboardAdapter : public InputInterface {
     void handleIdle() {
         switch (lastChar) {
             case CR:  // Received single `\r`
-                printCmd(F("Call ENTER from idle"));
+                printLog(F("Call ENTER from idle"));
                 menu->process(ENTER);
                 break;
             case ESC:  // Received single `ESC`
-                printCmd(F("Call BACK from idle"));
+                printLog(F("Call BACK from idle"));
                 menu->process(BACK);
                 break;
         }
@@ -152,11 +152,11 @@ class KeyboardAdapter : public InputInterface {
                 switch (command) {
                     case BS:   // 8. On Win
                     case DEL:  // 127. On Mac
-                        printCmd(F("Call BACKSPACE"));
+                        printLog(F("Call BACKSPACE"));
                         menu->process(BACKSPACE);
                         break;
                     case LF:  // 10, \n
-                        printCmd(F("Call ENTER"));
+                        printLog(F("Call ENTER"));
                         menu->process(ENTER);
                         break;
                     case CR:  // 13, \r
@@ -166,7 +166,7 @@ class KeyboardAdapter : public InputInterface {
                         codeSet = CodeSet::C1;
                         break;
                     default:
-                        printCmd(F("Call default"), (uint8_t)command);
+                        printLog(F("Call default"), (uint8_t)command);
                         menu->process(command);
                         break;
                 }
@@ -186,42 +186,42 @@ class KeyboardAdapter : public InputInterface {
                 if (command >= C2_CSI_TERMINAL_MIN && command <= C2_CSI_TERMINAL_MAX) {
                     switch (command) {
                         case 'A':
-                            printCmd(F("Call UP"));
+                            printLog(F("Call UP"));
                             menu->process(UP);
                             break;
                         case 'B':
-                            printCmd(F("Call DOWN"));
+                            printLog(F("Call DOWN"));
                             menu->process(DOWN);
                             break;
                         case 'C':
-                            printCmd(F("Call RIGHT"));
+                            printLog(F("Call RIGHT"));
                             menu->process(RIGHT);
                             break;
                         case 'D':
-                            printCmd(F("Call LEFT"));
+                            printLog(F("Call LEFT"));
                             menu->process(LEFT);
                             break;
                         case 'F':
-                            printCmd(F("End"));
+                            printLog(F("End"));
                             break;
                         case 'H':
-                            printCmd(F("Home"));
+                            printLog(F("Home"));
                             break;
                         case '~':
                             if (csiBufferCursor > 0) {
                                 switch (csiBuffer[0] - '0') {
                                     case 2:  // Insert
-                                        printCmd(F("Insert"));
+                                        printLog(F("Insert"));
                                         break;
                                     case 3:  // Delete
-                                        printCmd(F("Call CLEAR"));
+                                        printLog(F("Call CLEAR"));
                                         menu->process(CLEAR);
                                         break;
                                     case 5:  // PgUp
-                                        printCmd(F("PgUp"));
+                                        printLog(F("PgUp"));
                                         break;
                                     case 6:  // PgDn
-                                        printCmd(F("PgDn"));
+                                        printLog(F("PgDn"));
                                         break;
                                 }
                             }
@@ -251,7 +251,7 @@ class KeyboardAdapter : public InputInterface {
             return;
         }
         unsigned char command = stream->read();
-        printCmd(F("INPUT"), (uint8_t)command);
+        printLog(F("KEY"), command);
         handleReceived(command);
     }
 };

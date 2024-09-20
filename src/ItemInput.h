@@ -175,6 +175,7 @@ class ItemInput : public MenuItem {
         display->setEditModeEnabled(true);
         display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2 + cursor - view));
         display->drawBlinker();
+        printLog(F("ItemInput::enterEditMode"), value);
         return true;
     };
     bool back(Context& context) {
@@ -191,6 +192,7 @@ class ItemInput : public MenuItem {
         if (callback != NULL) {
             callback(value);
         }
+        printLog(F("ItemInput::exitEditMode"), value);
         return true;
     };
     bool left(Context& context) {
@@ -208,7 +210,7 @@ class ItemInput : public MenuItem {
         }
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
         // Log
-        printCmd(F("LEFT"), value[display->getBlinkerPosition() - (strlen(text) + 2)]);
+        printLog(F("ItemInput::left"), value);
         return true;
     };
     bool right(Context& context) {
@@ -227,7 +229,7 @@ class ItemInput : public MenuItem {
         }
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
         // Log
-        printCmd(F("RIGHT"), value[display->getBlinkerPosition() - (strlen(text) + 2)]);
+        printLog(F("ItemInput::right"), value);
         return true;
     };
     /**
@@ -246,7 +248,7 @@ class ItemInput : public MenuItem {
             return true;
         }
         remove(value, cursor - 1, 1);
-        printCmd(F("BACKSPACE"), value);
+        printLog(F("ItemInput::backspace"), value);
         cursor--;
         if (cursor < view) {
             view--;
@@ -288,7 +290,7 @@ class ItemInput : public MenuItem {
         MenuItem::draw(display);
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
         // Log
-        printCmd(F("TYPE-CHAR"), character);
+        printLog(F("ItemInput::typeChar"), character);
         return true;
     }
     /**
@@ -304,7 +306,7 @@ class ItemInput : public MenuItem {
         //
         value = (char*)"";
         // Log
-        printCmd(F("CLEAR"), value);
+        printLog(F("ItemInput::clear"), value);
         //
         // update blinker position
         //

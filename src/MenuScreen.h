@@ -162,6 +162,7 @@ class MenuScreen {
      */
     bool up(MenuItem::Context context) {
         if (cursor == 0) {
+            printLog(F("MenuScreen:up"), cursor);
             return false;
         }
         DisplayInterface* display = context.display;
@@ -172,6 +173,7 @@ class MenuScreen {
         } else {
             display->moveCursor(cursor - view);
         }
+        printLog(F("MenuScreen:up"), cursor);
         return true;
     }
     /**
@@ -180,6 +182,7 @@ class MenuScreen {
      */
     bool down(MenuItem::Context context) {
         if (cursor == itemsCount() - 1) {
+            printLog(F("MenuScreen:down"), cursor);
             return false;
         }
         DisplayInterface* display = context.display;
@@ -190,6 +193,7 @@ class MenuScreen {
         } else {
             display->moveCursor(cursor - view);
         }
+        printLog(F("MenuScreen:down"), cursor);
         return true;
     }
     /**
@@ -198,7 +202,9 @@ class MenuScreen {
      * Navigates up once.
      */
     bool back(MenuItem::Context context);
-
+    /**
+     * @brief Reset the screen to initial state.
+     */
     void reset(DisplayInterface* display) {
         cursor = 0;
         view = 0;

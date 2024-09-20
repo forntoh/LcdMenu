@@ -75,6 +75,11 @@ class LcdMenu {
      * @param screen the new screen to display
      */
     void setScreen(MenuScreen* screen);
+    /**
+     * @brief Process the input character.
+     * @param c the input character
+     * @return `true` if the input was processed successfully
+     */
     bool process(const unsigned char c);
     /**
      * @brief Reset current screen to initial state.
@@ -107,5 +112,8 @@ class LcdMenu {
      * @return `MenuItem` item at `position`
      */
     MenuItem* getItemAt(uint8_t position);
+    /**
+     * @brief Refresh the current screen.
+     */
     void refresh();
 };
