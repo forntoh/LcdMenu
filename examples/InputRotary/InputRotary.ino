@@ -26,9 +26,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Settings"),
     ITEM_BASIC("More Settings"),
     ITEM_BASIC("And more Settings"));
-// clang-format on
 
-// clang-format off
 MENU_SCREEN(userScreen, userItems,
     ITEM_INPUT_CHARSET("User", charset, inputCallback),
     ITEM_COMMAND("Clear", clearInput));

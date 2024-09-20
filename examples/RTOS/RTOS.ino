@@ -5,7 +5,7 @@
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
-#include <utils/SimpleNavConfig.h>
+#include <input/KeyboardAdapter.h>
 
 // 2x20 LCD Display
 #define LCD_ROWS 4
@@ -35,16 +35,7 @@ void toggleRelay3(uint16_t isOn) {
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-
-SimpleNavConfig navConfig = {
-    .menu = &menu,
-    .up = 'w',
-    .down = 's',
-    .enter = ' ',
-    .back = 'b',
-    .left = 'a',
-    .right = 'd',
-};
+KeyboardAdapter keyboard(&menu, &Serial);
 
 extern MenuScreen* relayScreen;
 extern MenuScreen* tempScreen;
@@ -104,8 +95,7 @@ static void keyPad(void* pvParameters) {
     (void)pvParameters;  // Unused parameter
 
     for (;;) {
-        char command = Serial.read();
-        processWithSimpleCommand(&navConfig, command);
+        keyboard.observe();
         vTaskDelay(1);
     }
 }
