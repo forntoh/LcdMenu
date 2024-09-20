@@ -84,7 +84,7 @@ class MenuItem {
      * @brief Draw this menu item on specified display on current line.
      * @param display the display that should be used for draw
      */
-    virtual void draw(DisplayInterface* display) {
+    const void draw(DisplayInterface* display) {
         draw(display, display->getCursorRow());
     };
     /**
