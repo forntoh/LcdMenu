@@ -16,9 +16,6 @@ float temperature2;
 float temperature3;
 
 bool relay1State, relay2State, relay3State;
-// Main Menu Definings
-// extern MenuItem* relayTest[];
-// extern MenuItem* tempObs[];
 
 // Relay 1 Toggle
 void toggleRelay1(uint16_t isOn) {
@@ -49,6 +46,17 @@ SimpleNavConfig navConfig = {
     .right = 'd',
 };
 
+extern MenuScreen* relayScreen;
+extern MenuScreen* tempScreen;
+
+// clang-format off
+MENU_SCREEN(mainScreen, mainItems,
+    ITEM_BASIC("Relay Test"),
+    ITEM_SUBMENU("Temp. Observing", tempScreen),
+    ITEM_BASIC("Hello World"),
+    ITEM_BASIC("I'm World"));
+// clang-format on
+
 // Sub Menu 1: Relays
 // clang-format off
 MENU_SCREEN(relayScreen, relayItems, 
@@ -63,14 +71,6 @@ MENU_SCREEN(tempScreen, tempItems,
     ITEM_BASIC(""), 
     ITEM_BASIC(""), 
     ITEM_BASIC(""));
-// clang-format on
-
-// clang-format off
-MENU_SCREEN(mainScreen, mainItems,
-    ITEM_BASIC("Relay Test"),
-    ITEM_SUBMENU("Temp. Observing", tempScreen),
-    ITEM_BASIC("Hello World"),
-    ITEM_BASIC("I'm World"));
 // clang-format on
 
 // RTOS func. to measure temperature value

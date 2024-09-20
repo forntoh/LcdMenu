@@ -18,11 +18,7 @@ const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 void inputCallback(char* value);
 void clearInput();
 
-// clang-format off
-MENU_SCREEN(userScreen, userItems,
-    ITEM_INPUT_CHARSET("User", charset, inputCallback),
-    ITEM_COMMAND("Clear", clearInput));
-// clang-format on
+extern MenuScreen* userScreen;
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
@@ -30,6 +26,12 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Settings"),
     ITEM_BASIC("More Settings"),
     ITEM_BASIC("And more Settings"));
+// clang-format on
+
+// clang-format off
+MENU_SCREEN(userScreen, userItems,
+    ITEM_INPUT_CHARSET("User", charset, inputCallback),
+    ITEM_COMMAND("Clear", clearInput));
 // clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);

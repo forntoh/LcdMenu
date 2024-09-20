@@ -13,10 +13,18 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
+extern MenuScreen* settingsScreen;
+extern MenuScreen* settings2Screen;
+
+// Define the main menu
 // clang-format off
-MENU_SCREEN(settings2Screen, settings2Items,
-    ITEM_BASIC("Backlight"),
-    ITEM_BASIC("Contrast"));
+MENU_SCREEN(mainScreen, mainItems,
+    ITEM_SUBMENU("Settings", settingsScreen),
+    ITEM_BASIC("Start service"),
+    ITEM_BASIC("Connect to WiFi"),
+    ITEM_BASIC("Blink SOS"),
+    ITEM_BASIC("Blink random"),
+    ITEM_SUBMENU("Settings 2", settings2Screen));
 // clang-format on
 
 // Create submenu and precise its parent
@@ -34,15 +42,10 @@ MENU_SCREEN(settingsScreen, settingsItems,
     ITEM_SUBMENU("Settings2", settings2Screen));
 // clang-format on
 
-// Define the main menu
 // clang-format off
-MENU_SCREEN(mainScreen, mainItems,
-    ITEM_SUBMENU("Settings", settingsScreen),
-    ITEM_BASIC("Start service"),
-    ITEM_BASIC("Connect to WiFi"),
-    ITEM_BASIC("Blink SOS"),
-    ITEM_BASIC("Blink random"),
-    ITEM_SUBMENU("Settings 2", settings2Screen));
+MENU_SCREEN(settings2Screen, settings2Items,
+    ITEM_BASIC("Backlight"),
+    ITEM_BASIC("Contrast"));
 // clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
