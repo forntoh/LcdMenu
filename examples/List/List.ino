@@ -1,15 +1,12 @@
 /*
  Menu Item List
-
  https://lcdmenu.forntoh.dev/examples/string-list
-
 */
-
 #include <ItemList.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
-#include <utils/SimpleNavConfig.h>
+#include <input/KeyboardAdapter.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -41,28 +38,16 @@ MENU_SCREEN(mainScreen, mainItems,
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-
-SimpleNavConfig navConfig = {
-    .menu = &menu,
-    .up = 'w',
-    .down = 's',
-    .enter = ' ',
-    .back = 'b',
-    .left = 'a',
-    .right = 'd',
-};
+KeyboardAdapter keyboard(&menu, &Serial);
 
 void setup() {
     Serial.begin(9600);
-    // Initialize LcdMenu with the menu items
     lcdAdapter.begin();
     menu.setScreen(mainScreen);
 }
 
 void loop() {
-    if (!Serial.available()) return;
-    char command = Serial.read();
-    processWithSimpleCommand(&navConfig, command);
+    keyboard.observe();
 }
 
 // Define the callbacks

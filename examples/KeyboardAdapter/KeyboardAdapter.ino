@@ -1,8 +1,6 @@
 /*
  * Usage example of `KeyboardAdapter`.
  */
-#define DEBUG
-
 #include <ItemInputCharset.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
