@@ -18,12 +18,11 @@ bool LcdMenu::process(const unsigned char c) {
     if (!enabled) {
         return false;
     }
-    MenuItem::Context context{this, &display, c};
-    return screen->process(context);
+    return screen->process(this, c);
 };
 
 void LcdMenu::reset() {
-    this->screen->reset(&display);
+    this->screen->setCursor(&display, 0);
 }
 
 void LcdMenu::hide() {

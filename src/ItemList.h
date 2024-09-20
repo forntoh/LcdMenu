@@ -25,6 +25,7 @@
  */
 #ifndef ItemList_H
 #define ItemList_H
+#include "LcdMenu.h"
 #include "MenuItem.h"
 #include <utils/utils.h>
 
@@ -102,66 +103,54 @@ class ItemList : public MenuItem {
         display->drawItem(row, text, ':', buf);
     }
 
-    bool process(Context& context) override {
-        const unsigned char c = context.command;
-        switch (c) {
-            case ENTER: return enter(context);
-            case BACK: return back(context);
-            case UP: return up(context);
-            case DOWN: return down(context);
-            default: return false;
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        DisplayInterface* display = menu->getDisplay();
+        if (display->getEditModeEnabled()) {
+            switch (command) {
+                case BACK:
+                    display->setEditModeEnabled(false);
+                    if (callback != NULL) {
+                        callback(itemIndex);
+                    }
+                    printLog(F("ItemList::exitEditMode"), getValue());
+                    return true;
+                case UP:
+                    selectNext(display);
+                    return true;
+                case DOWN:
+                    selectPrevious(display);
+                    return true;
+                default:
+                    return false;
+            }
+        } else {
+            switch (command) {
+                case ENTER:
+                    display->setEditModeEnabled(true);
+                    printLog(F("ItemList::enterEditMode"), getValue());
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 
-    bool enter(Context& context) {
-        DisplayInterface* display = context.display;
-        if (display->getEditModeEnabled()) {
-            return false;
-        }
-        display->setEditModeEnabled(true);
-        printLog(F("ItemList::enterEditMode"), getValue());
-        return true;
-    };
-
-    bool back(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
-        display->setEditModeEnabled(false);
-        if (callback != NULL) {
-            callback(itemIndex);
-        }
-        printLog(F("ItemList::exitEditMode"), getValue());
-        return true;
-    };
-
-    bool down(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void selectPrevious(DisplayInterface* display) {
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
         printLog(F("ItemList::down"), getValue());
-        return true;
     };
 
-    bool up(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void selectNext(DisplayInterface* display) {
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
         printLog(F("ItemList::up"), getValue());
-        return true;
     };
 };
 

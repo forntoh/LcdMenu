@@ -6,6 +6,7 @@
 #ifndef ItemProgress_H
 #define ItemProgress_H
 
+#include "LcdMenu.h"
 #include "MenuItem.h"
 #include <utils/utils.h>
 
@@ -49,23 +50,25 @@ class ItemProgress : public MenuItem {
     /**
      * @brief Increments the progress of the list.
      */
-    void increment() {
+    bool increment() {
         if (progress >= MAX_PROGRESS) {
-            return;
+            return false;
         }
         progress += stepLength;
         printLog(F("ItemProgress::increment"), getValue());
+        return true;
     }
 
     /**
      * @brief Decrements the progress of the list.
      */
-    void decrement() {
+    bool decrement() {
         if (progress <= MIN_PROGRESS) {
-            return;
+            return false;
         }
         progress -= stepLength;
         printLog(F("ItemProgress::decrement"), getValue());
+        return true;
     }
 
     /**
@@ -73,7 +76,7 @@ class ItemProgress : public MenuItem {
      * @param uint16_t progress for the item
      */
     void setProgress(uint16_t value) {
-        if (progress < MIN_PROGRESS || progress > MAX_PROGRESS) {
+        if (value < MIN_PROGRESS || progress > MAX_PROGRESS) {
             return;
         }
         progress = value;
@@ -113,64 +116,41 @@ class ItemProgress : public MenuItem {
         display->drawItem(row, text, ':', buf);
     }
 
-    bool process(Context& context) {
-        switch (context.command) {
-            case ENTER: return enter(context);
-            case BACK: return back(context);
-            case UP: return up(context);
-            case DOWN: return down(context);
-            default: return false;
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        DisplayInterface* display = menu->getDisplay();
+        if (display->getEditModeEnabled()) {
+            switch (command) {
+                case BACK:
+                    display->setEditModeEnabled(false);
+                    if (callback != NULL) {
+                        callback(progress);
+                    }
+                    printLog(F("ItemProgress::exitEditMode"), getValue());
+                    return true;
+                case UP:
+                    if (increment()) {
+                        MenuItem::draw(display);
+                    }
+                    return true;
+                case DOWN:
+                    if (decrement()) {
+                        MenuItem::draw(display);
+                    }
+                    return true;
+                default:
+                    return false;
+            }
+        } else {
+            switch (command) {
+                case ENTER:
+                    display->setEditModeEnabled(true);
+                    printLog(F("ItemProgress::enterEditMode"), getValue());
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
-
-    bool enter(Context& context) {
-        DisplayInterface* display = context.display;
-        if (display->getEditModeEnabled()) {
-            return false;
-        }
-        display->setEditModeEnabled(true);
-        printLog(F("ItemProgress::enterEditMode"), getValue());
-        return true;
-    };
-
-    bool back(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
-        display->setEditModeEnabled(false);
-        if (callback != NULL) {
-            callback(progress);
-        }
-        printLog(F("ItemProgress::exitEditMode"), getValue());
-        return true;
-    };
-
-    bool down(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
-        uint16_t oldProgress = progress;
-        decrement();
-        if (progress != oldProgress) {
-            MenuItem::draw(display);
-        }
-        return true;
-    };
-
-    bool up(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
-        uint16_t oldProgress = progress;
-        increment();
-        if (progress != oldProgress) {
-            MenuItem::draw(display);
-        }
-        return true;
-    };
 };
 
 #define ITEM_PROGRESS(...) (new ItemProgress(__VA_ARGS__))

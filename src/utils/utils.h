@@ -1,7 +1,7 @@
 #ifndef MenuUtils_H
 #define MenuUtils_H
-#include <Arduino.h>
 
+#include <Arduino.h>
 #include "constants.h"
 
 inline void substring(const char* str, uint8_t start, uint8_t size, char* substr) {

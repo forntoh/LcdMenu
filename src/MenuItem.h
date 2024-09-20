@@ -56,7 +56,7 @@ class MenuItem {
      * Get the text of the item
      * @return `String` - Item's text
      */
-    virtual const char* getText() { return text; }
+    const char* getText() { return text; }
     /**
      * Set the text of the item
      * @param text text to display for the item
@@ -64,11 +64,6 @@ class MenuItem {
     void setText(const char* text) { this->text = text; };
 
   protected:
-    struct Context {
-        LcdMenu* menu;
-        DisplayInterface* display;
-        const unsigned char command;
-    };
     /**
      * @brief Process a command decoded in 1 byte.
      * It can be a printable character or a control command like `ENTER` or `LEFT`.
@@ -79,7 +74,7 @@ class MenuItem {
      * @param context the context of call, contains at least character command (can be a printable character or a control command) and backreference to menu
      * @return true if command was successfully handled by item.
      */
-    virtual bool process(Context& context) { return false; };
+    virtual bool process(LcdMenu* menu, const unsigned char command) { return false; };
     /**
      * @brief Draw this menu item on specified display on current line.
      * @param display the display that should be used for draw
