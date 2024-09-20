@@ -14,14 +14,14 @@
 
 class ItemSubMenu : public MenuItem {
   private:
-    MenuScreen* screen;
+    MenuScreen*& screen;
 
   public:
     /**
      * @param text text to display for the item
      * @param screen the next screen to show
      */
-    ItemSubMenu(const char* text, MenuScreen* screen) : MenuItem(text), screen(screen) {}
+    ItemSubMenu(const char* text, MenuScreen*& screen) : MenuItem(text), screen(screen) {}
 
   protected:
     bool process(Context& context) {
