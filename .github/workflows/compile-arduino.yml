@@ -27,7 +27,7 @@ jobs:
             - name: Button
             - name: FreeRTOS
             - name: SimpleRotary
-            - name: LiquidCrystal_I2C
+            - name: LiquidCrystal I2C
 
       - name: Upload sketches reports
         uses: actions/upload-artifact@v4
