@@ -28,13 +28,13 @@ if __name__ == "__main__":
 
     replacement1 = """
 #include <Button.h>
-#include <input/ButtonInputAdapter.h>"""
+#include <input/ButtonAdapter.h>"""
 
     replacement2 = """
-ButtonInputAdapter upBtn(&menu, Button(5), UP);
-ButtonInputAdapter downBtn(&menu, Button(6), DOWN);
-ButtonInputAdapter enterBtn(&menu, Button(7), ENTER);
-ButtonInputAdapter backBtn(&menu, Button(8), BACK);"""
+ButtonAdapter upBtn(&menu, Button(5), UP);
+ButtonAdapter downBtn(&menu, Button(6), DOWN);
+ButtonAdapter enterBtn(&menu, Button(7), ENTER);
+ButtonAdapter backBtn(&menu, Button(8), BACK);"""
 
     replacement3 = """
     upBtn.observe();
