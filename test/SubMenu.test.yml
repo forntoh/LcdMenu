@@ -1,0 +1,37 @@
+name: Sub Menu Test
+version: 1
+author: Thomas Forntoh
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemSubMenu::changeScreen=Settings"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=1"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=2"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=3"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=4"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=5"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=6"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=7"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=8"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=9"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemSubMenu::changeScreen=Settings2"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=1"
+  - simulate: backButton-press
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - wait-serial: "#LOG# MenuScreen::back"
+  - simulate: backButton-press
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - wait-serial: "#LOG# MenuScreen::back"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=1"
