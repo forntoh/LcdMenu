@@ -9,8 +9,8 @@
 
 #ifndef ItemToggle_H
 #define ItemToggle_H
-#include "MenuItem.h"
 #include "LcdMenu.h"
+#include "MenuItem.h"
 #include <utils/utils.h>
 
 /**
