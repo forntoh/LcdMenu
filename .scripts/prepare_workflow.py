@@ -3,7 +3,6 @@ import re
 import sys
 
 press_holding_time = 100
-wait_time_after_release = 750
 
 def button_press_template(button_name):
     return f"""
@@ -19,7 +18,7 @@ def button_press_template(button_name):
   - delay: {wait_time_after_release}ms
   """    
 
-def replace_lines(file_path, replacements, serial_wait_time):
+def replace_lines(file_path, replacements, serial_wait_time, wait_time_after_release):
     total_wait_time = 0
     with open(file_path, 'r') as file:
         lines = file.readlines()
@@ -35,12 +34,13 @@ def replace_lines(file_path, replacements, serial_wait_time):
     return total_wait_time
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print("Usage: python prepare_workflow.py <file_path> <serial_wait_time>")
         sys.exit(1)
 
     file_path = sys.argv[1]
     serial_wait_time = int(sys.argv[2])
+    wait_time_after_release = int(sys.argv[3])
 
     replacements = {
         r".*- simulate: upButton-press": button_press_template("btn1"),
@@ -52,6 +52,6 @@ if __name__ == "__main__":
         r".*- simulate: backspaceButton-press": button_press_template("btn7"),
     }
 
-    total_wait_time = replace_lines(file_path, replacements, serial_wait_time)
+    total_wait_time = replace_lines(file_path, replacements, serial_wait_time, wait_time_after_release)
 
     print(total_wait_time)

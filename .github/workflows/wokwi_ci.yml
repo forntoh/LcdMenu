@@ -58,7 +58,7 @@ jobs:
           fi
       - name: Prepare Test Script
         run: |
-          RUN_DURATION=$(python .scripts/prepare_workflow.py ${{ env.TEST_FILE }} ${{ vars.WOKWI_SERIAL_DELAY }})
+          RUN_DURATION=$(python .scripts/prepare_workflow.py ${{ env.TEST_FILE }} ${{ vars.WOKWI_SERIAL_DELAY }} ${{ vars.BTN_RELEASE_WAIT }})
           echo "RUN_DURATION=$((RUN_DURATION + ${{ vars.WOKWI_TIMEOUT_BUFFER }}))" >> $GITHUB_ENV
 
       - name: Install PlatformIO
