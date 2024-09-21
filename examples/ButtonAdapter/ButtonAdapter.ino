@@ -23,9 +23,12 @@ MENU_SCREEN(mainScreen, mainItems,
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-ButtonAdapter upBtn(&menu, Button(2), UP);
-ButtonAdapter downBtn(&menu, Button(3), DOWN);
-ButtonAdapter enterBtn(&menu, Button(4), ENTER);
+Button upBtn(2);
+ButtonAdapter upBtnA(&menu, &upBtn, UP);
+Button downBtn(3);
+ButtonAdapter downBtnA(&menu, &downBtn, DOWN);
+Button enterBtn(4);
+ButtonAdapter enterBtnA(&menu, &enterBtn, ENTER);
 
 void setup() {
     upBtn.begin();
@@ -37,9 +40,9 @@ void setup() {
 }
 
 void loop() {
-    upBtn.observe();
-    downBtn.observe();
-    enterBtn.observe();
+    upBtnA.observe();
+    downBtnA.observe();
+    enterBtnA.observe();
 }
 /**
  * Define callback

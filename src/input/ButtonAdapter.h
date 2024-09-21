@@ -21,22 +21,18 @@
  */
 class ButtonAdapter : public InputInterface {
   private:
-    Button button;
+    Button* button;
     byte command;
 
   public:
     ButtonAdapter(
         LcdMenu* menu,
-        Button button,
+        Button* button,
         byte command)
         : InputInterface(menu), button(button), command(command) {}
 
-    void begin() {
-        button.begin();
-    }
-
     void observe() override {
-        if (button.pressed()) {
+        if (button->pressed()) {
             menu->process(command);
         }
     }

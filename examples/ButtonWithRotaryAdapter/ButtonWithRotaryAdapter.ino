@@ -35,8 +35,9 @@ LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
 SimpleRotary encoder(2, 3, 4);
-SimpleRotaryAdapter rotaryInput(&menu, &encoder);         // Rotary input adapter
-ButtonAdapter backspaceBtn(&menu, Button(5), BACKSPACE);  // Push button for backspace
+SimpleRotaryAdapter rotaryInput(&menu, &encoder);  // Rotary input adapter
+Button backspaceBtn(5);
+ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);  // Push button for backspace
 
 void setup() {
     backspaceBtn.begin();
@@ -47,7 +48,7 @@ void setup() {
 
 void loop() {
     rotaryInput.observe();
-    backspaceBtn.observe();
+    backspaceBtnA.observe();
 }
 
 // Define the callbacks
