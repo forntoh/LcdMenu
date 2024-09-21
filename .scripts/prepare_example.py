@@ -31,22 +31,38 @@ if __name__ == "__main__":
 #include <input/ButtonAdapter.h>"""
 
     replacement2 = """
-ButtonAdapter upBtn(&menu, Button(5), UP);
-ButtonAdapter downBtn(&menu, Button(6), DOWN);
-ButtonAdapter enterBtn(&menu, Button(7), ENTER);
-ButtonAdapter backBtn(&menu, Button(8), BACK);"""
+Button upBtn(5);
+ButtonAdapter upBtnA(&menu, &upBtn, UP);
+Button downBtn(6);
+ButtonAdapter downBtnA(&menu, &downBtn, DOWN);
+Button enterBtn(7);
+ButtonAdapter enterBtnA(&menu, &enterBtn, ENTER);
+Button backBtn(8);
+ButtonAdapter backBtnA(&menu, &backBtn, BACK);
+Button leftBtn(9);
+ButtonAdapter leftBtnA(&menu, &leftBtn, LEFT);
+Button rightBtn(10);
+ButtonAdapter rightBtnA(&menu, &rightBtn, RIGHT);
+Button backspaceBtn(11);
+ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);"""
 
     replacement3 = """
-    upBtn.observe();
-    downBtn.observe();
-    enterBtn.observe();
-    backBtn.observe();"""
+    upBtnA.observe();
+    downBtnA.observe();
+    enterBtnA.observe();
+    backBtnA.observe();
+    leftBtnA.observe();
+    rightBtnA.observe();
+    backspaceBtnA.observe();"""
 
     replacement4 = """
     upBtn.begin();
     downBtn.begin();
     enterBtn.begin();
     backBtn.begin();
+    leftBtn.begin();
+    rightBtn.begin();
+    backspaceBtn.begin();
     Serial.begin(9600);"""
 
     replacements = {

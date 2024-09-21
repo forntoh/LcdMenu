@@ -46,7 +46,10 @@ if __name__ == "__main__":
         r".*- simulate: upButton-press": button_press_template("btn1"),
         r".*- simulate: downButton-press": button_press_template("btn2"),
         r".*- simulate: enterButton-press": button_press_template("btn3"),
-        r".*- simulate: backButton-press": button_press_template("btn4")
+        r".*- simulate: backButton-press": button_press_template("btn4"),
+        r".*- simulate: leftButton-press": button_press_template("btn5"),
+        r".*- simulate: rightButton-press": button_press_template("btn6"),
+        r".*- simulate: backspaceButton-press": button_press_template("btn7"),
     }
 
     total_wait_time = replace_lines(file_path, replacements, serial_wait_time)
