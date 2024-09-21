@@ -150,7 +150,7 @@ class ItemList : public MenuItem {
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
-        printLog(F("ItemList::up"), getValue());
+        printLog(F("ItemList::selectNext"), getValue());
     };
 };
 
