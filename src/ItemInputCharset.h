@@ -107,6 +107,7 @@ class ItemInputCharset : public ItemInput {
         } else {
             display->drawChar(' ');
         }
+        printLog(F("ItemInputCharset::abortCharEdit"));
     }
     void commitCharEdit(DisplayInterface* display) {
         uint8_t length = strlen(value);
@@ -118,6 +119,7 @@ class ItemInputCharset : public ItemInput {
             value = buf;
         }
         abortCharEdit(display);
+        printLog(F("ItemInputCharset::commitCharEdit"), charset[charsetPosition]);
         ItemInput::right(display);
     }
     void showNextChar(DisplayInterface* display) {
