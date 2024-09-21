@@ -1,0 +1,41 @@
+name: ItemProgress Test
+version: 1
+author: Thomas Forntoh
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=1"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemProgress::enterEditMode=100m"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemProgress::increment=101m"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemProgress::increment=102m"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemProgress::increment=103m"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# ItemProgress::decrement=102m"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# ItemProgress::decrement=101m"
+  - simulate: backButton-press
+  - wait-serial: "#LOG# ItemProgress::exitEditMode=101m"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=2"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemProgress::enterEditMode=-1.00A"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemProgress::increment=-0.99A"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemProgress::increment=-0.98A"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemProgress::increment=-0.97A"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemProgress::increment=-0.96A"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# ItemProgress::decrement=-0.97A"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# ItemProgress::decrement=-0.98A"
+  - simulate: backButton-press
+  - wait-serial: "#LOG# ItemProgress::exitEditMode=-0.98A"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=3"
