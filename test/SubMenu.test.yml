@@ -5,6 +5,7 @@ steps:
   - wait-serial: "#LOG# LcdMenu::setScreen"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemSubMenu::changeScreen=Settings"
+  - wait-serial: "##LOG# LcdMenu::setScreen"
   - simulate: downButton-press
   - wait-serial: "#LOG# MenuScreen:down=1"
   - simulate: downButton-press
