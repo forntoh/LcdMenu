@@ -24,9 +24,10 @@ jobs:
           sketches-report-path: sketches-reports
           libraries: |
             - source-path: ./
-            - source-url: https://github.com/johnrickman/LiquidCrystal_I2C.git
-            - source-url: https://github.com/feilipu/Arduino_FreeRTOS_Library.git
-            - source-url: https://github.com/mprograms/SimpleRotary.git
+            - name: Button
+            - name: FreeRTOS
+            - name: SimpleRotary
+            - name: LiquidCrystal_I2C
 
       - name: Upload sketches reports
         uses: actions/upload-artifact@v4

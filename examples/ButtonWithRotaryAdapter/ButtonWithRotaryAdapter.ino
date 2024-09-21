@@ -1,6 +1,7 @@
 // Disable double press detection
 #define DOUBLE_PRESS_THRESHOLD 0
 
+#include <Button.h>
 #include <ItemInputCharset.h>
 #include <ItemList.h>
 #include <ItemToggle.h>
@@ -8,7 +9,7 @@
 #include <MenuScreen.h>
 #include <SimpleRotary.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
-#include <input/DigitalInputAdapter.h>
+#include <input/ButtonAdapter.h>
 #include <input/SimpleRotaryAdapter.h>
 
 #define LCD_ROWS 2
@@ -34,12 +35,13 @@ LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
 SimpleRotary encoder(2, 3, 4);
-SimpleRotaryAdapter rotaryInput(&menu, &encoder);       // Rotary input adapter
-DigitalInputAdapter backspaceBtn(&menu, 5, BACKSPACE);  // Push button for backspace
+SimpleRotaryAdapter rotaryInput(&menu, &encoder);         // Rotary input adapter
+ButtonAdapter backspaceBtn(&menu, Button(5), BACKSPACE);  // Push button for backspace
 
 void setup() {
-    Serial.begin(9600);
+    backspaceBtn.begin();
     lcdAdapter.begin();
+    Serial.begin(9600);
     menu.setScreen(mainScreen);
 }
 
