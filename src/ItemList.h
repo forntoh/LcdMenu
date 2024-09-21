@@ -141,7 +141,7 @@ class ItemList : public MenuItem {
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
-        printLog(F("ItemList::down"), getValue());
+        printLog(F("ItemList::selectPrevious"), getValue());
     };
 
     void selectNext(DisplayInterface* display) {
