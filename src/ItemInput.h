@@ -11,6 +11,7 @@
 #ifndef ItemInput_H
 #define ItemInput_H
 
+#include "LcdMenu.h"
 #include "MenuItem.h"
 #include <utils/utils.h>
 
@@ -139,29 +140,47 @@ class ItemInput : public MenuItem {
         substring(value, view, getViewSize(display), buf);
         display->drawItem(row, text, ':', buf);
     }
-    bool process(Context& context) override {
-        unsigned char c = context.command;
-        DisplayInterface* display = context.display;
-        if (isprint(c)) {
-            return typeChar(context);
-        }
-        switch (c) {
-            case ENTER: return enter(context);
-            case BACK: return back(context);
-            case UP: return display->getEditModeEnabled();
-            case DOWN: return display->getEditModeEnabled();
-            case LEFT: return left(context);
-            case RIGHT: return right(context);
-            case BACKSPACE: return backspace(context);
-            case CLEAR: return clear(context);
-            default: return false;
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        DisplayInterface* display = menu->getDisplay();
+        if (display->getEditModeEnabled()) {
+            if (isprint(command)) {
+                typeChar(display, command);
+                return true;
+            }
+            switch (command) {
+                case BACK:
+                    back(display);
+                    return true;
+                case UP:
+                    return true;
+                case DOWN:
+                    return true;
+                case LEFT:
+                    left(display);
+                    return true;
+                case RIGHT:
+                    right(display);
+                    return true;
+                case BACKSPACE:
+                    backspace(display);
+                    return true;
+                case CLEAR:
+                    clear(display);
+                    return true;
+                default:
+                    return false;
+            }
+        } else {
+            switch (command) {
+                case ENTER:
+                    enter(display);
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
-    bool enter(Context& context) {
-        DisplayInterface* display = context.display;
-        if (display->getEditModeEnabled()) {
-            return false;
-        }
+    void enter(DisplayInterface* display) {
         // Move cursor to the latest index
         uint8_t length = strlen(value);
         cursor = length;
@@ -176,13 +195,8 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2 + cursor - view));
         display->drawBlinker();
         printLog(F("ItemInput::enterEditMode"), value);
-        return true;
     };
-    bool back(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void back(DisplayInterface* display) {
         display->clearBlinker();
         display->setEditModeEnabled(false);
         // Move view to 0 and redraw before exit
@@ -193,15 +207,10 @@ class ItemInput : public MenuItem {
             callback(value);
         }
         printLog(F("ItemInput::exitEditMode"), value);
-        return true;
     };
-    bool left(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void left(DisplayInterface* display) {
         if (cursor == 0) {
-            return true;
+            return;
         }
         cursor--;
         if (cursor < view) {
@@ -211,15 +220,10 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
         // Log
         printLog(F("ItemInput::left"), value);
-        return true;
     };
-    bool right(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void right(DisplayInterface* display) {
         if (cursor == strlen(value)) {
-            return true;
+            return;
         }
         cursor++;
         uint8_t viewSize = getViewSize(display);
@@ -230,7 +234,6 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
         // Log
         printLog(F("ItemInput::right"), value);
-        return true;
     };
     /**
      * Execute a "backspace cmd" on menu
@@ -239,13 +242,9 @@ class ItemInput : public MenuItem {
      *
      * Removes the character at the current cursor position.
      */
-    bool backspace(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void backspace(DisplayInterface* display) {
         if (strlen(value) == 0 || cursor == 0) {
-            return true;
+            return;
         }
         remove(value, cursor - 1, 1);
         printLog(F("ItemInput::backspace"), value);
@@ -255,19 +254,13 @@ class ItemInput : public MenuItem {
         }
         MenuItem::draw(display);
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
-        return true;
     }
     /**
      * Display text at the cursor position
      * used for `Input` type menu items
      * @param character character to append
      */
-    bool typeChar(Context& context) {
-        DisplayInterface* display = context.display;
-        const char character = context.command;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void typeChar(DisplayInterface* display, const unsigned char character) {
         uint8_t length = strlen(value);
         if (cursor < length) {
             char start[length];
@@ -291,16 +284,11 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
         // Log
         printLog(F("ItemInput::typeChar"), character);
-        return true;
     }
     /**
      * Clear the value of the input field
      */
-    bool clear(Context& context) {
-        DisplayInterface* display = context.display;
-        if (!display->getEditModeEnabled()) {
-            return false;
-        }
+    void clear(DisplayInterface* display) {
         //
         // set the value
         //
@@ -312,7 +300,6 @@ class ItemInput : public MenuItem {
         //
         MenuItem::draw(display);
         display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2));
-        return true;
     }
 };
 

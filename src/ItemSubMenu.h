@@ -24,20 +24,18 @@ class ItemSubMenu : public MenuItem {
     ItemSubMenu(const char* text, MenuScreen*& screen) : MenuItem(text), screen(screen) {}
 
   protected:
-    bool process(Context& context) {
-        switch (context.command) {
-            case ENTER: return enter(context);
-            default: return false;
+    bool process(LcdMenu* menu, const unsigned char command) {
+        switch (command) {
+            case ENTER:
+                return true;
+            default:
+                return false;
         }
     }
-    /**
-     * Open next screen.
-     */
-    bool enter(Context& context) {
-        printLog(F("ItemSubMenu::enter"), text);
-        screen->setParent(context.menu->getScreen());
-        context.menu->setScreen(screen);
-        return true;
+    void changeScreen(LcdMenu* menu) {
+        printLog(F("ItemSubMenu::changeScreen"), text);
+        screen->setParent(menu->getScreen());
+        menu->setScreen(screen);
     }
 };
 

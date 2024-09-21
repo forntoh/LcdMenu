@@ -46,19 +46,21 @@ class ItemCommand : public MenuItem {
     void setCallBack(fptr callback) { this->callback = callback; };
 
   protected:
-    bool process(Context& context) override {
-        switch (context.command) {
-            case ENTER: return enter(context);
-            default: return false;
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        switch (command) {
+            case ENTER:
+                executeCommand();
+                return true;
+            default:
+                return false;
         }
     }
-    bool enter(Context& context) {
+    void executeCommand() {
         if (callback != NULL) {
             callback();
         }
         printLog(F("ItemCommand::enter"), text);
-        return true;
-    };
+    }
 };
 
 #define ITEM_COMMAND(...) (new ItemCommand(__VA_ARGS__))

@@ -9,6 +9,7 @@
 
 #ifndef ItemToggle_H
 #define ItemToggle_H
+#include "LcdMenu.h"
 #include "MenuItem.h"
 #include <utils/utils.h>
 
@@ -84,21 +85,24 @@ class ItemToggle : public MenuItem {
     };
 
   protected:
-    bool process(Context& context) override {
-        switch (context.command) {
-            case ENTER: return enter(context);
-            default: return false;
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        DisplayInterface* display = menu->getDisplay();
+        switch (command) {
+            case ENTER:
+                toggle(display);
+                return true;
+            default:
+                return false;
         }
     };
-    bool enter(Context& context) {
+    void toggle(DisplayInterface* display) {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);
-            printLog(F("ItemToggle::toggle"), enabled ? textOn : textOff);
         }
-        MenuItem::draw(context.display);
-        return true;
-    };
+        printLog(F("ItemToggle::toggle"), enabled ? textOn : textOff);
+        MenuItem::draw(display);
+    }
 };
 
 #define ITEM_TOGGLE(...) (new ItemToggle(__VA_ARGS__))

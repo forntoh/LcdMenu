@@ -25,11 +25,17 @@ class ItemBack : public MenuItem {
     ItemBack(const char* text = "..") : MenuItem(text) {}
 
   protected:
-    bool process(Context& context) override {
-        switch (context.command) {
-            case ENTER: context.menu->process(BACK); return true;
-            default: return false;
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        switch (command) {
+            case ENTER:
+                changeScreen(menu);
+                return true;
+            default:
+                return false;
         }
+    }
+    void changeScreen(LcdMenu* menu) {
+        menu->process(BACK);
     }
 };
 

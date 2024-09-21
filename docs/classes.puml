@@ -2,57 +2,97 @@
 ' https://www.plantuml.com/plantuml/uml/
 
 hide empty members
+left to right direction
+
+class InputInterface {
+    virtual void observe()
+}
+
+class DisplayInterface {
+    #uint8_t maxCols
+    #uint8_t maxRows
+    #uint8_t cursorRow
+    #uint8_t blinkerPosition
+    +bool isEditModeEnabled
+    +virtual void begin()
+    +uint8_t getMaxRows() const
+    +uint8_t getMaxCols() const
+    +virtual void clear()
+    +virtual void setBacklight(bool enabled)
+    +virtual void drawItem(uint8_t row, const char* text)
+    +virtual void drawItem(uint8_t row, const char* text, char separator, char* value)
+    +virtual void clearCursor()
+    +virtual void drawCursor()
+    +virtual void moveCursor(uint8_t newCursorRow)
+    +void setEditModeEnabled(bool enabled)
+    +bool getEditModeEnabled()
+    +uint8_t getCursorRow() const
+    +virtual void clearBlinker()
+    +virtual void drawBlinker()
+    +virtual void resetBlinker(uint8_t blinkerPosition)
+    +uint8_t getBlinkerPosition() const
+    +virtual bool drawChar(char c)
+    +virtual void clearUpIndicator()
+    +virtual void drawUpIndicator()
+    +virtual void clearDownIndicator()
+    +virtual void drawDownIndicator()
+    +virtual void restartTimer()
+}
 
 class LcdMenu {
-    +virtual bool process(char c)
+    -bool enabled
+    +DisplayInterface* getDisplay()
+    +MenuScreen* getScreen()
+    +void setScreen(MenuScreen* screen)
+    +uint8_t getCursor()
+    +MenuItem* getItemAt(uint8_t position)
+    +void setCursor(uint8_t cursor)
+    +bool process(const unsigned char c)
+    +void reset()
+    +void hide()
+    +void show()
+    +void refresh()
+
 }
 
 class MenuScreen {
-    #virtual bool process(Context context)
-    #virtual bool up()
-    #virtual bool down()
-    #virtual bool back()
-}
+    -uint8_t cursor
+    -uint8_t view
+    +void setParent(MenuScreen* parent)
+    +MenuItem* operator[](const uint8_t position)
+    +uint8_t getCursor()
+    +MenuItem* getItemAt(uint8_t position)
+    #void setCursor(DisplayInterface* display, uint8_t position)
+    #bool process(LcdMenu* menu, const unsigned char command)
+    #void draw(DisplayInterface* display)
+    #bool up(DisplayInterface* display)
+    #bool down(DisplayInterface* display)
+    #bool back(LcdMenu* menu)
+    #uint8_t itemsCount()
 
-struct MenuItem::Context {
-    LcdMenu* menu;
-    DisplayInterface* display;
-    const unsigned char command;
 }
 
 class MenuItem {
-    #virtual bool process(Context context)
+    #const char* text
+    +const char* getText()
+    +void setText(const char* text)
+    #virtual bool process(LcdMenu* menu, const unsigned char command)
+    #const void draw(DisplayInterface* display)
+    #virtual void draw(DisplayInterface* display, uint8_t row)
 }
 
-class ItemCommand {
-    #bool process(Context context) override
-    #bool enter(Context context)
-}
+InputInterface -r-> "1" LcdMenu : menu
+LcdMenu -r-> "1" DisplayInterface : display
+LcdMenu -d-> "1" MenuScreen : screen
+MenuScreen -d-> "1..*" MenuItem : items
+MenuScreen --> "0..1" MenuScreen : parent
 
-class ItemList {
-    #bool process(Context context) override
-    #bool up(Context context)
-    #bool down(Context context)
-    #bool enter(Context context)
-    #bool back(Context context)
-}
+LcdMenu::process .. MenuScreen::process
+LcdMenu::getCursor .. MenuScreen::getCursor
+LcdMenu::setCursor .. MenuScreen::setCursor
+LcdMenu::getItemAt .. MenuScreen::getItemAt
 
-class ItemInput {
-    #bool process(Context context) override
-    #bool up(Context context)
-    #bool down(Context context)
-    #bool enter(Context context)
-    #bool back(Context context)
-    #bool left(Context context)
-    #bool right(Context context)
-    #bool backspace(Context context)
-    #bool typeChar(Context context)
-    #bool clear(Context context)
-}
+MenuScreen::process .. MenuItem::process
+MenuScreen::draw .. MenuItem::draw
 
-LcdMenu -r-> MenuScreen
-MenuScreen -r-> MenuItem
-ItemCommand -u-|> MenuItem
-ItemList -u-|> MenuItem
-ItemInput -u-|> MenuItem
 @enduml

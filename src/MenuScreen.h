@@ -125,9 +125,11 @@ class MenuScreen {
         draw(display);
     }
     void draw(DisplayInterface* display) {
+        bool notFullView = false;
         for (uint8_t i = 0; i < display->getMaxRows(); i++) {
             MenuItem* item = this->items[view + i];
             if (item == nullptr) {
+                notFullView = true;
                 break;
             }
             item->draw(display, i);
@@ -137,35 +139,24 @@ class MenuScreen {
         } else {
             display->drawUpIndicator();
         }
-        if (items[view + display->getMaxRows()] != nullptr) {
-            display->drawDownIndicator();
-        } else {
+        if (notFullView || items[view + display->getMaxRows()] == nullptr) {
             display->clearDownIndicator();
+        } else {
+            display->drawDownIndicator();
         }
         display->moveCursor(cursor - view);
         display->drawCursor();  // In case if currentPosition was not changed between screens
     }
-    bool process(MenuItem::Context context) {
-        if (items[cursor]->process(context)) {
-            return true;
-        }
-        switch (context.command) {
-            case UP: return up(context);
-            case DOWN: return down(context);
-            case BACK: return back(context);
-            default: return false;
-        }
-    }
+    bool process(LcdMenu* menu, const unsigned char command);
     /**
      * Execute an "up press" on menu
      * When edit mode is enabled, this action is skipped
      */
-    bool up(MenuItem::Context context) {
+    void up(DisplayInterface* display) {
         if (cursor == 0) {
             printLog(F("MenuScreen:up"), cursor);
-            return false;
+            return;
         }
-        DisplayInterface* display = context.display;
         cursor--;
         if (cursor < view) {
             view--;
@@ -174,18 +165,16 @@ class MenuScreen {
             display->moveCursor(cursor - view);
         }
         printLog(F("MenuScreen:up"), cursor);
-        return true;
     }
     /**
      * Execute a "down press" on menu
      * When edit mode is enabled, this action is skipped
      */
-    bool down(MenuItem::Context context) {
+    void down(DisplayInterface* display) {
         if (cursor == itemsCount() - 1) {
             printLog(F("MenuScreen:down"), cursor);
-            return false;
+            return;
         }
-        DisplayInterface* display = context.display;
         cursor++;
         if (cursor > view + display->getMaxRows() - 1) {
             view++;
@@ -194,14 +183,7 @@ class MenuScreen {
             display->moveCursor(cursor - view);
         }
         printLog(F("MenuScreen:down"), cursor);
-        return true;
     }
-    /**
-     * Execute a "backpress" action on menu.
-     *
-     * Navigates up once.
-     */
-    bool back(MenuItem::Context context);
     /**
      * @brief Reset the screen to initial state.
      */
