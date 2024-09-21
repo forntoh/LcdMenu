@@ -10,7 +10,13 @@ jobs:
       - id: set-matrix
         run: |
           TMP="["
-          for FILE in examples/*/*.ino; do TMP="$TMP\"$FILE\","; done
+          for FILE in examples/*/*.ino; do
+            EXAMPLE_NAME=$(basename $FILE .ino)
+            TEST_FILE="test/$EXAMPLE_NAME.test.yml"
+            if [ -f "$TEST_FILE" ]; then
+              TMP="$TMP\"$FILE\","
+            fi
+          done
           TMP="${TMP::-1}]"
           echo "::set-output name=matrix::$TMP"
     outputs:
@@ -51,29 +57,24 @@ jobs:
             echo "TEST_FILE=test/$EXAMPLE_NAME.test.yml" >> $GITHUB_ENV
           fi
       - name: Prepare Test Script
-        if: env.TEST_FILE != ''
         run: |
           RUN_DURATION=$(python .scripts/prepare_workflow.py ${{ env.TEST_FILE }} ${{ vars.WOKWI_SERIAL_DELAY }})
           echo "RUN_DURATION=$((RUN_DURATION + ${{ vars.WOKWI_TIMEOUT_BUFFER }}))" >> $GITHUB_ENV
 
       - name: Install PlatformIO
-        if: env.TEST_FILE != ''
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade platformio
 
       - name: Install library dependencies
-        if: env.TEST_FILE != ''
         run: pio lib install
 
       - name: Build PlatformIO
-        if: env.TEST_FILE != ''
         run: pio run
         env:
           LOCAL_BUILD: 1
 
       - name: Running ${{ env.TEST_FILE }} on Wokwi
-        if: env.TEST_FILE != ''
         uses: wokwi/wokwi-ci-action@v1
         with:
           token: ${{ secrets.WOKWI_CLI_TOKEN }}
