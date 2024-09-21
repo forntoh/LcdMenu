@@ -53,15 +53,19 @@ class MenuItem {
   public:
     MenuItem(const char* text) : text(text) {}
     /**
-     * Get the text of the item
+     * @brief Get the text of the item
      * @return `String` - Item's text
      */
-    const char* getText() { return text; }
+    const char* getText() {
+        return text;
+    }
     /**
-     * Set the text of the item
+     * @brief Set the text of the item
      * @param text text to display for the item
      */
-    void setText(const char* text) { this->text = text; };
+    void setText(const char* text) {
+        this->text = text;
+    };
 
   protected:
     /**
@@ -71,10 +75,13 @@ class MenuItem {
      * If the parent of item received that handle was ignored it can execute it's own action on this command.
      * Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element.
      * Behaviour is very similar to Even Bubbling in JavaScript.
-     * @param context the context of call, contains at least character command (can be a printable character or a control command) and backreference to menu
+     * @param menu the owner menu of the item, can be used to retrieve required object, such as `DisplayInterface` or `MenuScreen`
+     * @param command the character command, can be a printable character or a control command
      * @return true if command was successfully handled by item.
      */
-    virtual bool process(LcdMenu* menu, const unsigned char command) { return false; };
+    virtual bool process(LcdMenu* menu, const unsigned char command) {
+        return false;
+    };
     /**
      * @brief Draw this menu item on specified display on current line.
      * @param display the display that should be used for draw
