@@ -3,7 +3,7 @@ import re
 import sys
 
 press_holding_time = 75
-wait_time_after_release = 650
+wait_time_after_release = 700
 
 def button_press_template(button_name):
     return f"""
