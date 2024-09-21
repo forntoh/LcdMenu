@@ -27,6 +27,7 @@ class ItemSubMenu : public MenuItem {
     bool process(LcdMenu* menu, const unsigned char command) {
         switch (command) {
             case ENTER:
+                changeScreen(menu);
                 return true;
             default:
                 return false;
