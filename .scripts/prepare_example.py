@@ -65,11 +65,16 @@ ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);"""
     backspaceBtn.begin();
     Serial.begin(9600);"""
 
+    replacement5 = """
+#define DISPLAY_TIMEOUT 2000
+#include <LcdMenu.h>"""
+
     replacements = {
         r"#include <input/.*Adapter.h>": replacement1,
         r".*Adapter .*\(&menu, .*\);": replacement2,
         r".*\.observe\(\);": replacement3,
-        r".*Serial.begin\(.*\);": replacement4
+        r".*Serial.begin\(.*\);": replacement4,
+        r"#include <LcdMenu.h>": replacement5
     }
 
     replace_lines(new_file_path, replacements)
