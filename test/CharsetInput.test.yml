@@ -1,0 +1,44 @@
+name: Charset Input Test
+version: 1
+author: Thomas Forntoh
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemInput::enterEditMode=0123456"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemInputCharset::up=0"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemInputCharset::up=0"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# ItemInputCharset::down=1"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# ItemInputCharset::down=2"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemInputCharset::commitCharEdit=2"
+  - wait-serial: "#LOG# ItemInput::right=01234562"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# ItemInput::left=01234562"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# ItemInput::left=01234562"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# ItemInputCharset::down=7"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemInputCharset::up=6"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemInputCharset::up=5"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemInputCharset::commitCharEdit=5"
+  - wait-serial: "#LOG# ItemInput::right=01234552"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# ItemInputCharset::up=1"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# ItemInputCharset::abortCharEdit"
+  - wait-serial: "#LOG# ItemInput::left=01234552"
+  - simulate: backspaceButton-press
+  - wait-serial: "#LOG# ItemInput::backspace=0123452"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# ItemInput::left=0123452"
+  - simulate: backspaceButton-press
+  - wait-serial: "#LOG# ItemInput::backspace=012452"
+  - simulate: backButton-press
+  - wait-serial: "#LOG# ItemInput::exitEditMode=012452"
