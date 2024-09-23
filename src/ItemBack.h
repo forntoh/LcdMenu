@@ -7,14 +7,14 @@
 /**
  * @class ItemBack
  * @brief A menu item that navigates back to the previous screen.
- * 
- * The ItemBack class represents a menu item that, when selected, 
+ *
+ * The ItemBack class represents a menu item that, when selected,
  * navigates back to the previous screen in the menu system.
- * 
+ *
  * @details
- * This class inherits from the MenuItem class and overrides the 
+ * This class inherits from the MenuItem class and overrides the
  * process method to handle the ENTER command by changing the screen.
- * 
+ *
  * @note The default text for this item is "..".
  */
 class ItemBack : public MenuItem {

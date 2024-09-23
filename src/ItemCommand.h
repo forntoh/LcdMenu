@@ -6,11 +6,11 @@
 /**
  * @class ItemCommand
  * @brief Represents a menu item that executes a command when selected.
- * 
+ *
  * The ItemCommand class inherits from MenuItem and allows for the execution
  * of a callback function when the item is entered. This is useful for creating
  * interactive menu items in an LCD menu system.
- * 
+ *
  * @note The callback function should match the signature defined by the fptr type.
  */
 class ItemCommand : public MenuItem {
