@@ -123,9 +123,20 @@ class ItemInput : public MenuItem {
     /**
      * Set the input value for this item.
      *
+     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
+     *
      * @param value The new input value.
+     *
+     * @return true if the value was changed, false otherwise.
      */
-    void setValue(char* value) { this->value = value; }
+    bool setValue(char* value) {
+        if (this->value != value) {
+            this->value = value;
+            printLog(F("ItemInput::setValue"), value);
+            return true;
+        }
+        return false;
+    }
     /**
      * Get the callback function for this item.
      *

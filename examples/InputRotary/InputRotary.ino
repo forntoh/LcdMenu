@@ -54,5 +54,7 @@ void inputCallback(char* value) {
 }
 
 void clearInput() {
-    (static_cast<ItemInput*>(userItems[0]))->setValue((char*)"");
+    if ((static_cast<ItemInput*>(userItems[0]))->setValue((char*)"")) {
+        menu.refresh();
+    }
 }

@@ -72,14 +72,18 @@ class ItemProgress : public MenuItem {
     }
 
     /**
-     * Set the progress on the item
+     * @brief Set the progress on the item
      * @param uint16_t progress for the item
+     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
+     *
+     * @return true if the progress was changed successfully, false otherwise.
      */
-    void setProgress(uint16_t value) {
-        if (value < MIN_PROGRESS || progress > MAX_PROGRESS) {
-            return;
+    bool setProgress(uint16_t value) {
+        if (value < MIN_PROGRESS || progress > MAX_PROGRESS || value == progress) {
+            return false;
         }
         progress = value;
+        return true;
     }
 
     /**
