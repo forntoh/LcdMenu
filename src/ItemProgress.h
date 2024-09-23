@@ -1,8 +1,3 @@
-/**
- * @file ItemProgress.h
- * @brief This file contains the declaration of the ItemProgress class.
- */
-
 #ifndef ItemProgress_H
 #define ItemProgress_H
 
@@ -11,8 +6,13 @@
 #include <utils/utils.h>
 
 /**
- * @class ItemProgress
- * @brief ItemProgress indicates that the current item is a list.
+ * @class ItemCommand
+ * @brief A menu item that represents a progress indicator.
+ *
+ * The ItemProgress class is a specialized MenuItem that displays and manages a progress value.
+ * It supports incrementing and decrementing the progress, as well as setting it directly.
+ * The progress can be mapped to a different value using a mapping function, and a callback
+ * function can be executed when the item is selected.
  */
 class ItemProgress : public MenuItem {
   protected:
@@ -27,9 +27,9 @@ class ItemProgress : public MenuItem {
      *
      * @param text The text of the menu item.
      * @param start The starting position of the list.
+     * @param stepLength The step length for incrementing or decrementing the progress.
      * @param mapping A pointer to the mapping function.
-     * @param callback A pointer to the callback function to execute when this
-     * menu item is selected.
+     * @param callback A pointer to the callback function to execute when this menu item is selected.
      */
     ItemProgress(const char* text, uint16_t start, uint8_t stepLength, fptrMapping mapping, fptrInt callback)
         : MenuItem(text),
@@ -85,7 +85,7 @@ class ItemProgress : public MenuItem {
     /**
      * Return the progress
      */
-    uint16_t getItemIndex() { return progress; }
+    uint16_t getProgress() { return progress; }
 
     /**
      * Return the callback
