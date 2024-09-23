@@ -17,7 +17,7 @@ class ItemList : public MenuItem {
     fptrInt callback = NULL;  ///< Pointer to a callback function
     String* items = NULL;     ///< Pointer to an array of items
     const uint8_t itemCount;  ///< The total number of items in the list
-    uint16_t itemIndex = 0;   ///< The current selected item index
+    uint8_t itemIndex = 0;    ///< The current selected item index
 
   public:
     /**
@@ -37,15 +37,21 @@ class ItemList : public MenuItem {
      *
      * @return The index of the currently selected item.
      */
-    uint16_t getItemIndex() { return itemIndex; }
+    uint8_t getItemIndex() { return itemIndex; }
 
     /**
      * @brief Changes the index of the current item.
+     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      *
-     * @return The index of the item to be selected.
+     * @return true if the index was changed successfully, false otherwise.
      */
-    void setItemIndex(uint16_t itemIndex) {
-        this->itemIndex = constrain(itemIndex, 0, (uint16_t)(itemCount)-1);
+    bool setItemIndex(uint8_t itemIndex) {
+        uint8_t desiredIndex = constrain(itemIndex, 0, itemCount - 1);
+        if (desiredIndex != this->itemIndex) {
+            this->itemIndex = desiredIndex;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -120,7 +126,7 @@ class ItemList : public MenuItem {
 
     void selectPrevious(DisplayInterface* display) {
         uint8_t previousIndex = itemIndex;
-        itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
+        itemIndex = constrain(itemIndex - 1, 0, itemCount - 1);
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
@@ -129,7 +135,7 @@ class ItemList : public MenuItem {
 
     void selectNext(DisplayInterface* display) {
         uint8_t previousIndex = itemIndex;
-        itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
+        itemIndex = constrain((itemIndex + 1) % itemCount, 0, itemCount - 1);
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
