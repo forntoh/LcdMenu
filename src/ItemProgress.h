@@ -1,6 +1,9 @@
 #ifndef ItemProgress_H
 #define ItemProgress_H
-
+//
+#define MIN_PROGRESS 0
+#define MAX_PROGRESS 1000
+//
 #include "LcdMenu.h"
 #include "MenuItem.h"
 #include <utils/utils.h>
@@ -110,6 +113,33 @@ class ItemProgress : public MenuItem {
             return buf;
         }
         return mapping(progress);
+    }
+
+    /**
+     * @brief Maps the progress value to a new range.
+     *
+     * @param progress The progress value to map.
+     * @param minValue The minimum value of the new range.
+     * @param maxValue The maximum value of the new range.
+     *
+     * @return The mapped value.
+     */
+    static inline long mapProgress(uint16_t progress, long minValue, long maxValue) {
+        return map(progress, MIN_PROGRESS, MAX_PROGRESS, minValue, maxValue);
+    }
+
+    /**
+     * @brief Maps the progress value to a new floating-point range.
+     *
+     * @param progress The progress value to map.
+     * @param minValue The minimum value of the new range.
+     * @param maxValue The maximum value of the new range.
+     *
+     * @return The mapped value.
+     */
+    static inline float mapProgress(uint16_t progress, float minValue, float maxValue) {
+        return static_cast<float>(progress) / MAX_PROGRESS * (maxValue - minValue) +
+               minValue;
     }
 
   protected:

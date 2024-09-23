@@ -1,5 +1,14 @@
 #pragma once
-
+//
+// Rotary encoder configuration
+//
+#ifndef LONG_PRESS_DURATION
+#define LONG_PRESS_DURATION 1000
+#endif
+#ifndef DOUBLE_PRESS_THRESHOLD
+#define DOUBLE_PRESS_THRESHOLD 300
+#endif
+//
 #include "InputInterface.h"
 #include <SimpleRotary.h>
 
