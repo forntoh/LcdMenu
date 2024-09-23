@@ -19,7 +19,7 @@ void callback(uint16_t pos);
 
 char* intMapping(uint16_t progress) {
     // Map the progress value to a new range (100 to 200)
-    long mapped = mapProgress(progress, 100L, 200L);
+    long mapped = ItemProgress::mapProgress(progress, 100L, 200L);
 
     // Buffer to store the converted stringV
     static char buffer[10];
@@ -37,7 +37,7 @@ char* intMapping(uint16_t progress) {
 char* floatMapping(uint16_t progress) {
     // Normalize the progress value and map it to the specified floating-point
     // range
-    float floatValue = mapProgress(progress, -1.0f, 1.0f);
+    float floatValue = ItemProgress::mapProgress(progress, -1.0f, 1.0f);
 
     // Buffer to store the converted string
     static char buffer[10];

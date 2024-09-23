@@ -1,5 +1,6 @@
 #pragma once
 
+#include "utils/liquidcrystal.h"
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 #include <utils/constants.h>

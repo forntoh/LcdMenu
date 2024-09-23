@@ -39,18 +39,6 @@ inline void remove(char* str, uint8_t index, uint8_t count) {
     memmove(str + index, str + index + count, len - count - index + 1);
 }
 
-inline long mapProgress(uint16_t progress, long minValue, long maxValue) {
-    // Map the progress value to a new range (minValue to maxValue)
-    return map(progress, MIN_PROGRESS, MAX_PROGRESS, minValue, maxValue);
-}
-
-inline float mapProgress(uint16_t progress, float minValue, float maxValue) {
-    // Normalize the progress value and map it to the specified floating-point
-    // range
-    return static_cast<float>(progress) / MAX_PROGRESS * (maxValue - minValue) +
-           minValue;
-}
-
 inline void printLog(const __FlashStringHelper* command) {
 #ifdef DEBUG
     Serial.print(F("#LOG# "));
