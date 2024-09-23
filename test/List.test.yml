@@ -24,12 +24,10 @@ steps:
   - simulate: downButton-press
   - wait-serial: "#LOG# ItemList::selectPrevious=12"
   - simulate: upButton-press
-  - wait-serial: "#LOG# ItemList::selectNext=12"
-  - simulate: upButton-press
   - wait-serial: "#LOG# ItemList::selectNext=32"
   - simulate: upButton-press
   - wait-serial: "#LOG# ItemList::selectNext=5"
   - simulate: upButton-press
   - wait-serial: "#LOG# ItemList::selectNext=7"
   - simulate: backButton-press
-  - wait-serial: "#LOG# ItemList::exitEditMode=5"
+  - wait-serial: "#LOG# ItemList::exitEditMode=7"
