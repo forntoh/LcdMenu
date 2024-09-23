@@ -1,20 +1,18 @@
-/**
- * ---
- *
- * # ItemCommand
- *
- * This item type indicates that the current item is a **command**.
- * When `enter()` is invoked, the command *(callback)* bound to this item is
- * invoked.
- */
-
 #ifndef ItemCommand_H
 #define ItemCommand_H
 
-// Include the header file for the base class.
 #include "MenuItem.h"
 
-// Declare a class for menu items that represent commands.
+/**
+ * @class ItemCommand
+ * @brief Represents a menu item that executes a command when selected.
+ * 
+ * The ItemCommand class inherits from MenuItem and allows for the execution
+ * of a callback function when the item is entered. This is useful for creating
+ * interactive menu items in an LCD menu system.
+ * 
+ * @note The callback function should match the signature defined by the fptr type.
+ */
 class ItemCommand : public MenuItem {
   private:
     // Declare a function pointer for the command callback.
