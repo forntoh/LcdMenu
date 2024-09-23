@@ -36,7 +36,7 @@ class MenuScreen;
 
 /**
  * @class MenuItem
- * @brief Represent sinle item in menu.
+ * @brief Represent single item in menu.
  *
  * ┌────────────────────────────┐
  * │ > T E X T                  │
@@ -61,11 +61,17 @@ class MenuItem {
     }
     /**
      * @brief Set the text of the item
+     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      * @param text text to display for the item
      */
     void setText(const char* text) {
         this->text = text;
     };
+
+    // Destructor
+    virtual ~MenuItem() {
+        delete[] text;
+    }
 
   protected:
     /**
