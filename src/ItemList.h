@@ -1,34 +1,17 @@
-/**
- * ---
- *
- * # ItemList
- *
- * This item type represents a **list**.
- *
- * ### Functionality
- * - `down()`: cycles down the list.
- * - `up()`: cycles up the list. This function can be used with a single button.
- *           Once the menu reaches the end of the list, it automatically
- *           starts back from the beginning.
- * - `enter()`: invokes the command (callback) bound to this item.
- *
- * ### Usage
- * This item can be used for other primitive data types; you just need to pass
- * them as strings, then parse the result to the desired datatype.
- *
- * ### Parameters
- * @param key: key of the item.
- * @param items: array of items to display.
- * @param itemCount: number of items in `items`.
- * @param callback: reference to a callback function that will be invoked
- * when the user selects an item from the list.
- */
 #ifndef ItemList_H
 #define ItemList_H
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include <utils/utils.h>
 
+/**
+ * @class ItemList
+ * @brief A class representing a list of items in a menu.
+ *
+ * The ItemList class extends the MenuItem class and provides functionality
+ * for displaying and interacting with a list of items in a menu. It supports
+ * navigation through the items and executing a callback function when an item
+ * is selected.
+ */
 class ItemList : public MenuItem {
   private:
     fptrInt callback = NULL;  ///< Pointer to a callback function

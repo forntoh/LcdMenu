@@ -1,17 +1,15 @@
-/**
- * ---
- *
- * # ItemSubMenu
- *
- * This item type indicates that the current item contains a sub menu.
- * The sub menu is opened when `enter()` is invoked.
- */
-
 #ifndef ItemSubMenu_H
 #define ItemSubMenu_H
 #include "LcdMenu.h"
 #include "MenuItem.h"
 
+/**
+ * @class ItemSubMenu
+ * @brief Represents a submenu item in a menu.
+ *
+ * This class extends the MenuItem class and provides functionality to navigate
+ * to a different screen when the item is selected.
+ */
 class ItemSubMenu : public MenuItem {
   private:
     MenuScreen*& screen;

@@ -68,6 +68,7 @@ class DisplayInterface {
     virtual void drawDownIndicator();
     // Timer
     virtual void restartTimer();
+    // Destructor
     virtual ~DisplayInterface() {}
 };
 

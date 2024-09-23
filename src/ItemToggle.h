@@ -1,14 +1,6 @@
-/**
- * ---
- *
- * # ItemToggle
- *
- * This item type indicates that the current item is **toggleable**.
- * When `enter()` is invoked, the state of `isOn` is toggled.
- */
-
 #ifndef ItemToggle_H
 #define ItemToggle_H
+
 #include "LcdMenu.h"
 #include "MenuItem.h"
 #include <utils/utils.h>
@@ -69,6 +61,7 @@ class ItemToggle : public MenuItem {
 
     /**
      * @brief Set the current state of this toggle item.
+     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      * @param isOn the new state
      */
     void setIsOn(boolean isOn) { this->enabled = isOn; }
