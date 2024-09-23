@@ -126,7 +126,7 @@ class ItemList : public MenuItem {
 
     void selectPrevious(DisplayInterface* display) {
         uint8_t previousIndex = itemIndex;
-        itemIndex = constrain(itemIndex - 1, 0, (uint16_t)(itemCount)-1);
+        itemIndex = constrain(itemIndex - 1, 0, itemCount - 1);
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
@@ -135,7 +135,7 @@ class ItemList : public MenuItem {
 
     void selectNext(DisplayInterface* display) {
         uint8_t previousIndex = itemIndex;
-        itemIndex = constrain((itemIndex + 1) % itemCount, 0, (uint16_t)(itemCount)-1);
+        itemIndex = constrain((itemIndex + 1) % itemCount, 0, itemCount - 1);
         if (previousIndex != itemIndex) {
             MenuItem::draw(display);
         }
