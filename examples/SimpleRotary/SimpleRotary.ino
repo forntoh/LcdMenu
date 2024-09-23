@@ -16,7 +16,7 @@ void colorsCallback(uint16_t pos);
 void toggleBacklight(uint16_t isOn);
 
 char* intMapping(uint16_t progress) {
-    long mapped = mapProgress(progress, 100L, 200L);
+    long mapped = ItemProgress::mapProgress(progress, 100L, 200L);
     static char buffer[10];
     itoa(mapped, buffer, 10);
     concat(buffer, 'm', buffer);
