@@ -16,9 +16,10 @@ class ItemFloatRange : public ItemRangeBase<float> {
         fptrFloat callback,
         const char* unit = NULL,
         float step = 0.1f,
-        bool commitOnChange = false,
-        uint8_t decimalPlaces = 1)
-        : ItemRangeBase(text, min, max, startingValue, callback, unit, step, commitOnChange), decimalPlaces(decimalPlaces) {}
+        bool commitOnChange = false)
+        : ItemRangeBase(text, min, max, startingValue, callback, unit, step, commitOnChange) {
+        decimalPlaces = calculateDecimalPlaces(step);
+    }
 
     char* getDisplayValue() override {
         static char buffer[20];
@@ -30,10 +31,25 @@ class ItemFloatRange : public ItemRangeBase<float> {
         return buffer;
     }
 
-    static uint8_t calculateWidth(float currentValue, uint8_t decimalPlaces) {
+    static inline uint8_t calculateWidth(float currentValue, uint8_t decimalPlaces) {
         int intPart = static_cast<int>(currentValue);
         int intPartWidth = (intPart == 0) ? 1 : static_cast<int>(log10(abs(intPart))) + 1;
         return intPartWidth + 1 + decimalPlaces;  // +1 for the decimal point
+    }
+
+    static uint8_t calculateDecimalPlaces(float step) {
+        char buffer[10];
+        dtostrf(step, 5, 5, buffer);
+
+        char* decimalPos = strchr(buffer, '.');
+        if (decimalPos == NULL) return 0;
+
+        uint8_t numDecimalPlaces = strlen(decimalPos + 1);
+        while (numDecimalPlaces > 0 && buffer[strlen(buffer) - 1] == '0') {
+            buffer[strlen(buffer) - 1] = '\0';
+            numDecimalPlaces--;
+        }
+        return numDecimalPlaces;
     }
 };
 
