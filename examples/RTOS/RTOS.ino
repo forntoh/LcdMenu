@@ -18,17 +18,17 @@ float temperature3;
 bool relay1State, relay2State, relay3State;
 
 // Relay 1 Toggle
-void toggleRelay1(uint8_t isOn) {
+void toggleRelay1(bool isOn) {
     printLog(F("relay1State"));
 }
 
 // Relay 2 Toggle
-void toggleRelay2(uint8_t isOn) {
+void toggleRelay2(bool isOn) {
     printLog(F("relay2State"));
 }
 
 // Relay 3 Toggle
-void toggleRelay3(uint8_t isOn) {
+void toggleRelay3(bool isOn) {
     printLog(F("relay3State"));
 }
 

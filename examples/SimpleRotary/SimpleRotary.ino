@@ -13,7 +13,7 @@
 // Declare the callbacks
 void callback(int pos);
 void colorsCallback(uint8_t pos);
-void toggleBacklight(uint8_t isOn);
+void toggleBacklight(bool isOn);
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
@@ -42,7 +42,7 @@ void setup() {
 void loop() { rotaryInput.observe(); }
 
 // Define the callbacks
-void toggleBacklight(uint8_t isOn) {
+void toggleBacklight(bool isOn) {
     lcdAdapter.setBacklight(isOn);
 }
 

@@ -17,7 +17,7 @@
 
 // Declare the callbacks
 void colorsCallback(uint8_t pos);
-void toggleBacklight(uint8_t isOn);
+void toggleBacklight(bool isOn);
 void inputCallback(char* value);
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
@@ -52,7 +52,7 @@ void loop() {
 }
 
 // Define the callbacks
-void toggleBacklight(uint8_t isOn) {
+void toggleBacklight(bool isOn) {
     lcdAdapter.setBacklight(isOn);
 }
 

@@ -6,6 +6,7 @@ typedef void (*fptrInt)(int);
 typedef void (*fptruInt)(uint8_t);
 typedef void (*fptrFloat)(float);
 typedef void (*fptrStr)(char*);
+typedef void (*fptrBool)(bool);
 //
 // Control codes
 //
