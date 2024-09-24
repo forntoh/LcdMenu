@@ -16,8 +16,8 @@
 #define LCD_COLS 16
 
 // Declare the callbacks
-void colorsCallback(uint16_t pos);
-void toggleBacklight(uint16_t isOn);
+void colorsCallback(uint8_t pos);
+void toggleBacklight(uint8_t isOn);
 void inputCallback(char* value);
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
@@ -52,11 +52,11 @@ void loop() {
 }
 
 // Define the callbacks
-void toggleBacklight(uint16_t isOn) {
+void toggleBacklight(uint8_t isOn) {
     lcdAdapter.setBacklight(isOn);
 }
 
-void colorsCallback(uint16_t pos) {
+void colorsCallback(uint8_t pos) {
     Serial.println(colors[pos]);
 }
 

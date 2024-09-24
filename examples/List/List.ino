@@ -12,8 +12,8 @@
 #define LCD_COLS 16
 
 // Declare the callbacks
-void colorsCallback(uint16_t pos);
-void numsCallback(uint16_t pos);
+void colorsCallback(uint8_t pos);
+void numsCallback(uint8_t pos);
 
 // Declare the array
 extern String colors[];
@@ -51,12 +51,12 @@ void loop() {
 }
 
 // Define the callbacks
-void colorsCallback(uint16_t pos) {
+void colorsCallback(uint8_t pos) {
     // do something with the index
     Serial.println(colors[pos]);
 }
 
-void numsCallback(uint16_t pos) {
+void numsCallback(uint8_t pos) {
     // do something with the index
     Serial.println(nums[pos]);
 }

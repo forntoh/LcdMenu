@@ -15,7 +15,7 @@
 #define LCD_COLS 16
 
 // Declare the call back function
-void toggleBacklight(uint16_t isOn);
+void toggleBacklight(uint8_t isOn);
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
