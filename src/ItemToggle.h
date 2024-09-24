@@ -19,17 +19,17 @@ class ItemToggle : public MenuItem {
     bool enabled = false;
     const char* textOn = NULL;
     const char* textOff = NULL;
-    fptrInt callback = NULL;
+    fptrBool callback = NULL;
 
   public:
     /**
      * @param key key of the item
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, fptrInt callback)
+    ItemToggle(const char* key, fptrBool callback)
         : ItemToggle(key, false, callback) {}
 
-    ItemToggle(const char* text, boolean enabled, fptrInt callback)
+    ItemToggle(const char* text, boolean enabled, fptrBool callback)
         : ItemToggle(text, "ON", "OFF", callback) {
         this->enabled = enabled;
     }
@@ -41,7 +41,7 @@ class ItemToggle : public MenuItem {
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* text, const char* textOn, const char* textOff, fptrInt callback)
+    ItemToggle(const char* text, const char* textOn, const char* textOff, fptrBool callback)
         : MenuItem(text),
           textOn(textOn),
           textOff(textOff),
@@ -51,7 +51,7 @@ class ItemToggle : public MenuItem {
      * @brief Get the integer callback function of this item.
      * @return the integer callback function
      */
-    fptrInt getCallbackInt() { return callback; }
+    fptrBool getCallbackInt() { return callback; }
 
     /**
      * @brief Get the current state of this toggle item.

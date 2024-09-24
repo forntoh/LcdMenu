@@ -73,4 +73,22 @@ inline void printLog(const __FlashStringHelper* command, const char* value) {
 #endif
 }
 
+inline void printLog(const __FlashStringHelper* command, float value) {
+#ifdef DEBUG
+    Serial.print(F("#LOG# "));
+    Serial.print(command);
+    Serial.print(F("="));
+    Serial.println(value);
+#endif
+}
+
+inline void printLog(const __FlashStringHelper* command, int value) {
+#ifdef DEBUG
+    Serial.print(F("#LOG# "));
+    Serial.print(command);
+    Serial.print(F("="));
+    Serial.println(value);
+#endif
+}
+
 #endif

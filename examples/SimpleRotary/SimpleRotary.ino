@@ -1,5 +1,5 @@
+#include <ItemIntRange.h>
 #include <ItemList.h>
-#include <ItemProgress.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
@@ -11,17 +11,9 @@
 #define LCD_COLS 16
 
 // Declare the callbacks
-void callback(uint16_t pos);
-void colorsCallback(uint16_t pos);
-void toggleBacklight(uint16_t isOn);
-
-char* intMapping(uint16_t progress) {
-    long mapped = ItemProgress::mapProgress(progress, 100L, 200L);
-    static char buffer[10];
-    itoa(mapped, buffer, 10);
-    concat(buffer, 'm', buffer);
-    return buffer;
-}
+void callback(int pos);
+void colorsCallback(uint8_t pos);
+void toggleBacklight(bool isOn);
 
 String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
@@ -30,7 +22,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Connect to WiFi"),
     ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
     ITEM_BASIC("Blink SOS"),
-    ITEM_PROGRESS("Dist", 10, intMapping, callback),
+    ITEM_INT_RANGE("Dist", 0, 50, 0, callback, (const char*) "m"),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Blink random"));
 // clang-format on
@@ -50,14 +42,14 @@ void setup() {
 void loop() { rotaryInput.observe(); }
 
 // Define the callbacks
-void toggleBacklight(uint16_t isOn) {
+void toggleBacklight(bool isOn) {
     lcdAdapter.setBacklight(isOn);
 }
 
-void callback(uint16_t pos) {
+void callback(int pos) {
     Serial.println(pos);
 }
 
-void colorsCallback(uint16_t pos) {
+void colorsCallback(uint8_t pos) {
     Serial.println(colors[pos]);
 }

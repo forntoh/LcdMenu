@@ -1,13 +1,3 @@
-/**
- * ---
- *
- * # ItemInput
- *
- * This is an item type where a user can type in information,
- * the information is persisted in the item and can be gotten later by
- * using `item->value`
- */
-
 #ifndef ItemInput_H
 #define ItemInput_H
 

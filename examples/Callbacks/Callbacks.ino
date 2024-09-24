@@ -15,7 +15,7 @@
 #define LCD_COLS 16
 
 // Declare the call back function
-void toggleBacklight(uint16_t isOn);
+void toggleBacklight(bool isOn);
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
@@ -44,6 +44,6 @@ void loop() {
 /**
  * Define callback
  */
-void toggleBacklight(uint16_t isOn) {
+void toggleBacklight(bool isOn) {
     lcdAdapter.setBacklight(isOn);
 }

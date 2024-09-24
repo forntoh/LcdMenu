@@ -15,7 +15,7 @@
 #define ITEM_LIST_INDEX 99
 
 void commandCallback() {}
-void toggleCallback(uint16_t) {}
+void toggleCallback(bool) {}
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,

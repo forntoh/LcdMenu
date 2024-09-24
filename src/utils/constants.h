@@ -2,9 +2,11 @@
 #include <Arduino.h>
 
 typedef void (*fptr)();
-typedef void (*fptrInt)(uint16_t);
+typedef void (*fptrInt)(int);
+typedef void (*fptruInt)(uint8_t);
+typedef void (*fptrFloat)(float);
 typedef void (*fptrStr)(char*);
-typedef char* (*fptrMapping)(uint16_t);
+typedef void (*fptrBool)(bool);
 //
 // Control codes
 //
