@@ -56,7 +56,7 @@ class ItemRangeBase : public MenuItem {
      * @brief Increments the value.
      */
     bool increment() {
-        if (currentValue >= maxValue) {
+        if (currentValue + step > maxValue) {
             return false;
         }
         currentValue += step;
@@ -68,7 +68,7 @@ class ItemRangeBase : public MenuItem {
      * @brief Decrements the value.
      */
     bool decrement() {
-        if (currentValue <= minValue) {
+        if (currentValue - step < minValue) {
             return false;
         }
         currentValue -= step;
