@@ -14,10 +14,10 @@
  */
 class ItemList : public MenuItem {
   private:
-    fptruInt callback = NULL;  ///< Pointer to a callback function
-    String* items = NULL;     ///< Pointer to an array of items
-    const uint8_t itemCount;  ///< The total number of items in the list
-    uint8_t itemIndex = 0;    ///< The current selected item index
+    fptruInt callback = NULL;
+    String* items = NULL;
+    const uint8_t itemCount;
+    uint8_t itemIndex = 0;
 
   public:
     /**
