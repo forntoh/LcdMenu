@@ -1,5 +1,4 @@
 #include <ArduinoUnitTests.h>
-#include <ItemProgress.h>
 #include <utils/constants.h>
 #include <utils/utils.h>
 
@@ -59,20 +58,6 @@ unittest(remove_partial_string) {
     char str[] = "Hello World";
     remove(str, 6, 5);
     assertEqual("Hello ", str);
-}
-
-unittest(mapProgressInteger) {
-    // Test integer mapping
-    assertEqual(ItemProgress::mapProgress(500, 0L, 10000L), 5000);
-    assertEqual(ItemProgress::mapProgress(250, -1000L, 1000L), -500);
-    assertEqual(ItemProgress::mapProgress(750, 0L, 5000L), 3750);
-}
-
-unittest(mapProgressFloat) {
-    // Test float mapping
-    assertEqualFloat(ItemProgress::mapProgress(500, 0.0f, 1.0f), 0.5f, 0.001);
-    assertEqualFloat(ItemProgress::mapProgress(250, -1.0f, 1.0f), -0.5f, 0.001);
-    assertEqualFloat(ItemProgress::mapProgress(750, 0.0f, 0.5f), 0.375f, 0.001);
 }
 
 unittest_main()

@@ -14,7 +14,7 @@
  */
 class ItemList : public MenuItem {
   private:
-    fptrInt callback = NULL;  ///< Pointer to a callback function
+    fptruInt callback = NULL;  ///< Pointer to a callback function
     String* items = NULL;     ///< Pointer to an array of items
     const uint8_t itemCount;  ///< The total number of items in the list
     uint8_t itemIndex = 0;    ///< The current selected item index
@@ -29,7 +29,7 @@ class ItemList : public MenuItem {
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
      */
-    ItemList(const char* key, String* items, const uint8_t itemCount, fptrInt callback)
+    ItemList(const char* key, String* items, const uint8_t itemCount, fptruInt callback)
         : MenuItem(key), callback(callback), items(items), itemCount(itemCount) {}
 
     /**
@@ -59,7 +59,7 @@ class ItemList : public MenuItem {
      *
      * @return The the callback bound to the current item.
      */
-    fptrInt getCallbackInt() { return callback; }
+    fptruInt getCallbackInt() { return callback; }
 
     /**
      * @brief Returns the total number of items in the list.
