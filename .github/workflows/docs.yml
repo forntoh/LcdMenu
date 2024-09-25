@@ -3,6 +3,11 @@ name: Generate and Deploy Doxygen Documentation
 on:
   push:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   generate-docs:
     runs-on: ubuntu-latest
