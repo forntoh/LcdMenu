@@ -46,7 +46,7 @@ def build(files):
                     if re.search(r"^.+\s[a-z][A-Za-z]+\(.*", stripped_line) != None:
                         words = re.findall(r"\w+", stripped_line)
                         methodName = words[1]
-                        if words[0] == 'const':
+                        if words[0] == 'const' or words[0] == 'inline':
                             methodName = words[2]
                         keyword_2_data.add(methodName + "	KEYWORD2\n")
                 if len(stripped_line) > 7 and stripped_line.startswith('class '):
@@ -61,11 +61,11 @@ def build(files):
     with open("keywords.txt", "w") as a_file:
         a_file.truncate()
         a_file.write(pre_key_1)
-        a_file.writelines(keyword_1_data)
+        a_file.writelines(sorted(keyword_1_data))
         a_file.write(pre_key_2)
-        a_file.writelines(keyword_2_data)
+        a_file.writelines(sorted(keyword_2_data))
         a_file.write(pre_lit_1)
-        a_file.writelines(literal_1_data)
+        a_file.writelines(sorted(literal_1_data))
         print("Updated keywords")
     
 if __name__ == '__main__':
