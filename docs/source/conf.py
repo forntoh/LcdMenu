@@ -28,3 +28,24 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['../_static']
+
+html_sidebars = {
+    '**': [
+        'globaltoc.html', 
+        'localtoc.html', 
+        'relations.html', 
+        'searchbox.html'
+    ]
+}
+
+html_theme_options = {
+    'collapse_navigation': False,
+    'sticky_navigation': True,
+    'navigation_depth': 3,
+    'includehidden': True,
+    'titles_only': False
+}
+
+html_css_files = [
+    'custom.css',
+]
