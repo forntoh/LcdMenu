@@ -25,7 +25,7 @@ jobs:
         run: doxygen docs/Doxyfile
 
       - name: Generate Sphinx documentation from Doxygen
-        run: python .scripts/link_doxygen_to_sphinx.py
+        run: python .scripts/link_doxygen_sphinx.py
 
       - name: Generate Sphinx documentation
         run: make -C docs html
