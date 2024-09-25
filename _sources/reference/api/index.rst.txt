@@ -1,0 +1,23 @@
+Class reference
+===============
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Class reference
+
+   ItemIntRange
+   ItemToggle
+   ItemRangeBase
+   MenuScreen
+   ItemInputCharset
+   MenuItem
+   ItemList
+   ItemFloatRange
+   ItemInput
+   ItemCommand
+   ItemBack
+   LcdMenu
+   ItemSubMenu
+   display/index
+   input/index

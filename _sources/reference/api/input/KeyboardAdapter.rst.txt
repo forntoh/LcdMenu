@@ -1,0 +1,5 @@
+KeyboardAdapter
+===============
+
+.. doxygenfile:: KeyboardAdapter.h
+   :project: LcdMenu

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ItemFloatRange &mdash; LcdMenu  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe1cf113" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ItemInput" href="ItemInput.html" />
+    <link rel="prev" title="ItemList" href="ItemList.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LcdMenu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Class reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemIntRange.html#_CPPv412ItemIntRange"><code class="docutils literal notranslate"><span class="pre">ItemIntRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemToggle.html#_CPPv410ItemToggle"><code class="docutils literal notranslate"><span class="pre">ItemToggle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemRangeBase.html#_CPPv4I0E13ItemRangeBase"><code class="docutils literal notranslate"><span class="pre">ItemRangeBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MenuScreen.html">MenuScreen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MenuScreen.html#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInputCharset.html#_CPPv416ItemInputCharset"><code class="docutils literal notranslate"><span class="pre">ItemInputCharset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemList.html#_CPPv48ItemList"><code class="docutils literal notranslate"><span class="pre">ItemList</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ItemFloatRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv414ItemFloatRange"><code class="docutils literal notranslate"><span class="pre">ItemFloatRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInput.html#_CPPv49ItemInput"><code class="docutils literal notranslate"><span class="pre">ItemInput</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemCommand.html#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemBack.html#_CPPv48ItemBack"><code class="docutils literal notranslate"><span class="pre">ItemBack</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu"><code class="docutils literal notranslate"><span class="pre">LcdMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemSubMenu.html#_CPPv411ItemSubMenu"><code class="docutils literal notranslate"><span class="pre">ItemSubMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/DisplayInterface.html">DisplayInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="input/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/SimpleRotaryAdapter.html">SimpleRotaryAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/InputInterface.html">InputInterface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration_guides/index.html">Migration guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../migration_guides/v5.x.html">V5.000</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LcdMenu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Class reference</a></li>
+      <li class="breadcrumb-item active">ItemFloatRange</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/api/ItemFloatRange.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="itemfloatrange">
+<h1>ItemFloatRange<a class="headerlink" href="#itemfloatrange" title="Link to this heading"></a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ITEM_FLOAT_RANGE">
+<span class="target" id="ItemFloatRange_8h_1ad14c7e0f516714b1365153362de52886"></span><span class="sig-name descname"><span class="n"><span class="pre">ITEM_FLOAT_RANGE</span></span></span><span class="sig-paren">(</span><span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ITEM_FLOAT_RANGE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv414ItemFloatRange">
+<span id="_CPPv314ItemFloatRange"></span><span id="_CPPv214ItemFloatRange"></span><span id="ItemFloatRange"></span><span class="target" id="classItemFloatRange"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemFloatRange</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="ItemRangeBase.html#_CPPv4I0E13ItemRangeBase" title="ItemRangeBase"><span class="n"><span class="pre">ItemRangeBase</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">float</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv414ItemFloatRange" title="Link to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ItemFloatRange14ItemFloatRangeEPKcKfKff9fptrFloatPKcfb">
+<span id="_CPPv3N14ItemFloatRange14ItemFloatRangeEPKcKfKff9fptrFloatPKcfb"></span><span id="_CPPv2N14ItemFloatRange14ItemFloatRangeEPKcKfKff9fptrFloatPKcfb"></span><span id="ItemFloatRange::ItemFloatRange__cCP.floatC.floatC.float.fptrFloat.cCP.float.b"></span><span class="target" id="classItemFloatRange_1ae1c8b184873c84d8c869afadcc61f91f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemFloatRange</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">min</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">startingValue</span></span>, <span class="n"><span class="pre">fptrFloat</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">unit</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">step</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0.1f</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">commitOnChange</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ItemFloatRange14ItemFloatRangeEPKcKfKff9fptrFloatPKcfb" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ItemFloatRange15getDisplayValueEv">
+<span id="_CPPv3N14ItemFloatRange15getDisplayValueEv"></span><span id="_CPPv2N14ItemFloatRange15getDisplayValueEv"></span><span id="ItemFloatRange::getDisplayValue"></span><span class="target" id="classItemFloatRange_1aebef5612f5fdd7159088e405ad6535f5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getDisplayValue</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N14ItemFloatRange15getDisplayValueEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Returns the value to be displayed. If a unit is provided, it will be concatenated to the value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value to be displayed. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ItemFloatRange14calculateWidthEf7uint8_t">
+<span id="_CPPv3N14ItemFloatRange14calculateWidthEf7uint8_t"></span><span id="_CPPv2N14ItemFloatRange14calculateWidthEf7uint8_t"></span><span id="ItemFloatRange::calculateWidth__float.uint8_t"></span><span class="target" id="classItemFloatRange_1a9740c4c675757aed379244ffd90cc871"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">calculateWidth</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">currentValue</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">decimalPlaces</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ItemFloatRange14calculateWidthEf7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ItemFloatRange22calculateDecimalPlacesEf">
+<span id="_CPPv3N14ItemFloatRange22calculateDecimalPlacesEf"></span><span id="_CPPv2N14ItemFloatRange22calculateDecimalPlacesEf"></span><span id="ItemFloatRange::calculateDecimalPlaces__float"></span><span class="target" id="classItemFloatRange_1a5c3966281c285d7545d68a8f32e1091f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">calculateDecimalPlaces</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">step</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ItemFloatRange22calculateDecimalPlacesEf" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N14ItemFloatRange13decimalPlacesE">
+<span id="_CPPv3N14ItemFloatRange13decimalPlacesE"></span><span id="_CPPv2N14ItemFloatRange13decimalPlacesE"></span><span id="ItemFloatRange::decimalPlaces__uint8_t"></span><span class="target" id="classItemFloatRange_1a230d9bf32b08633be29d0543f04784e6"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">decimalPlaces</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><a class="headerlink" href="#_CPPv4N14ItemFloatRange13decimalPlacesE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ItemList.html" class="btn btn-neutral float-left" title="ItemList" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ItemInput.html" class="btn btn-neutral float-right" title="ItemInput" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Thomas Forntoh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

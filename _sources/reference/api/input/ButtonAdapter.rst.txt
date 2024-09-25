@@ -1,0 +1,5 @@
+ButtonAdapter
+=============
+
+.. doxygenfile:: ButtonAdapter.h
+   :project: LcdMenu

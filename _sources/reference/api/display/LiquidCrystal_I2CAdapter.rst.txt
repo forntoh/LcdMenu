@@ -1,0 +1,5 @@
+LiquidCrystal_I2CAdapter
+========================
+
+.. doxygenfile:: LiquidCrystal_I2CAdapter.h
+   :project: LcdMenu

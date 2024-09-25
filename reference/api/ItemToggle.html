@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ItemToggle &mdash; LcdMenu  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe1cf113" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ItemRangeBase" href="ItemRangeBase.html" />
+    <link rel="prev" title="ItemIntRange" href="ItemIntRange.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LcdMenu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Class reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemIntRange.html#_CPPv412ItemIntRange"><code class="docutils literal notranslate"><span class="pre">ItemIntRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ItemToggle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv410ItemToggle"><code class="docutils literal notranslate"><span class="pre">ItemToggle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemRangeBase.html#_CPPv4I0E13ItemRangeBase"><code class="docutils literal notranslate"><span class="pre">ItemRangeBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MenuScreen.html">MenuScreen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MenuScreen.html#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInputCharset.html#_CPPv416ItemInputCharset"><code class="docutils literal notranslate"><span class="pre">ItemInputCharset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemList.html#_CPPv48ItemList"><code class="docutils literal notranslate"><span class="pre">ItemList</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemFloatRange.html#_CPPv414ItemFloatRange"><code class="docutils literal notranslate"><span class="pre">ItemFloatRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInput.html#_CPPv49ItemInput"><code class="docutils literal notranslate"><span class="pre">ItemInput</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemCommand.html#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemBack.html#_CPPv48ItemBack"><code class="docutils literal notranslate"><span class="pre">ItemBack</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu"><code class="docutils literal notranslate"><span class="pre">LcdMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemSubMenu.html#_CPPv411ItemSubMenu"><code class="docutils literal notranslate"><span class="pre">ItemSubMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/DisplayInterface.html">DisplayInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="input/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/SimpleRotaryAdapter.html">SimpleRotaryAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/InputInterface.html">InputInterface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration_guides/index.html">Migration guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../migration_guides/v5.x.html">V5.000</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LcdMenu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Class reference</a></li>
+      <li class="breadcrumb-item active">ItemToggle</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/api/ItemToggle.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="itemtoggle">
+<h1>ItemToggle<a class="headerlink" href="#itemtoggle" title="Link to this heading"></a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ITEM_TOGGLE">
+<span class="target" id="ItemToggle_8h_1adfe455db886fe18e0445db173ab7f086"></span><span class="sig-name descname"><span class="n"><span class="pre">ITEM_TOGGLE</span></span></span><span class="sig-paren">(</span><span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ITEM_TOGGLE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv410ItemToggle">
+<span id="_CPPv310ItemToggle"></span><span id="_CPPv210ItemToggle"></span><span id="ItemToggle"></span><span class="target" id="classItemToggle"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemToggle</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><a class="headerlink" href="#_CPPv410ItemToggle" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ItemToggle.h&gt;</em></div>
+<p>Item that allows user to toggle between ON/OFF states. </p>
+<p>┌────────────────────────────┐ │ &gt; T E X T : O F F │ └────────────────────────────┘</p>
+<p>Additionally to <code class="docutils literal notranslate"><span class="pre">text</span></code> this item has ON/OFF <code class="docutils literal notranslate"><span class="pre">enabled</span></code> state. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle10ItemToggleEPKc8fptrBool">
+<span id="_CPPv3N10ItemToggle10ItemToggleEPKc8fptrBool"></span><span id="_CPPv2N10ItemToggle10ItemToggleEPKc8fptrBool"></span><span id="ItemToggle::ItemToggle__cCP.fptrBool"></span><span class="target" id="classItemToggle_1a898c368f9b677301eaab467bb79909b1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemToggle</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <span class="n"><span class="pre">fptrBool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle10ItemToggleEPKc8fptrBool" title="Link to this definition"></a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – key of the item </p></li>
+<li><p><strong>callback</strong> – reference to callback function </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle10ItemToggleEPKc7boolean8fptrBool">
+<span id="_CPPv3N10ItemToggle10ItemToggleEPKc7boolean8fptrBool"></span><span id="_CPPv2N10ItemToggle10ItemToggleEPKc7boolean8fptrBool"></span><span id="ItemToggle::ItemToggle__cCP.boolean.fptrBool"></span><span class="target" id="classItemToggle_1a1be43d4ed25dbe770af5b60b3180a4c8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemToggle</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="n"><span class="pre">boolean</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span>, <span class="n"><span class="pre">fptrBool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle10ItemToggleEPKc7boolean8fptrBool" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle10ItemToggleEPKcPKcPKc8fptrBool">
+<span id="_CPPv3N10ItemToggle10ItemToggleEPKcPKcPKc8fptrBool"></span><span id="_CPPv2N10ItemToggle10ItemToggleEPKcPKcPKc8fptrBool"></span><span id="ItemToggle::ItemToggle__cCP.cCP.cCP.fptrBool"></span><span class="target" id="classItemToggle_1aa6770d03fe19e4f51eee9f6b477cb491"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemToggle</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">textOn</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">textOff</span></span>, <span class="n"><span class="pre">fptrBool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle10ItemToggleEPKcPKcPKc8fptrBool" title="Link to this definition"></a><br /></dt>
+<dd><p>Create an <a class="reference internal" href="#classItemToggle"><span class="std std-ref">ItemToggle</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> – the text of the item </p></li>
+<li><p><strong>textOn</strong> – display text when ON </p></li>
+<li><p><strong>textOff</strong> – display text when OFF </p></li>
+<li><p><strong>callback</strong> – reference to callback function </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle14getCallbackIntEv">
+<span id="_CPPv3N10ItemToggle14getCallbackIntEv"></span><span id="_CPPv2N10ItemToggle14getCallbackIntEv"></span><span id="ItemToggle::getCallbackInt"></span><span class="target" id="classItemToggle_1a716050b788afca7e903c2fd83126e5da"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">fptrBool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCallbackInt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle14getCallbackIntEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the integer callback function of this item. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the integer callback function </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle4isOnEv">
+<span id="_CPPv3N10ItemToggle4isOnEv"></span><span id="_CPPv2N10ItemToggle4isOnEv"></span><span id="ItemToggle::isOn"></span><span class="target" id="classItemToggle_1a74328b67025fec87deebebf847ff01ee"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">boolean</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isOn</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle4isOnEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current state of this toggle item. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the current state </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle7setIsOnE7boolean">
+<span id="_CPPv3N10ItemToggle7setIsOnE7boolean"></span><span id="_CPPv2N10ItemToggle7setIsOnE7boolean"></span><span id="ItemToggle::setIsOn__boolean"></span><span class="target" id="classItemToggle_1a90d21a81a7f715706135a6da371aff69"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setIsOn</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">boolean</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isOn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle7setIsOnE7boolean" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the current state of this toggle item. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You need to call <code class="docutils literal notranslate"><a class="reference internal" href="LcdMenu.html#classLcdMenu_1a356d4a6e14fdbe51d53d8e86b7217077"><span class="std std-ref"><span class="pre">LcdMenu::refresh</span></span></a></code> after this method to see the changes. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>isOn</strong> – the new state </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle9getTextOnEv">
+<span id="_CPPv3N10ItemToggle9getTextOnEv"></span><span id="_CPPv2N10ItemToggle9getTextOnEv"></span><span id="ItemToggle::getTextOn"></span><span class="target" id="classItemToggle_1a435a25d1d3db98ce1024d5aa7a85d57f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getTextOn</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle9getTextOnEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle10getTextOffEv">
+<span id="_CPPv3N10ItemToggle10getTextOffEv"></span><span id="_CPPv2N10ItemToggle10getTextOffEv"></span><span id="ItemToggle::getTextOff"></span><span class="target" id="classItemToggle_1ab6f01d7a5e6075c996641d41ab00595c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getTextOff</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle10getTextOffEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle4drawEP16DisplayInterface7uint8_t">
+<span id="_CPPv3N10ItemToggle4drawEP16DisplayInterface7uint8_t"></span><span id="_CPPv2N10ItemToggle4drawEP16DisplayInterface7uint8_t"></span><span id="ItemToggle::draw__DisplayInterfaceP.uint8_t"></span><span class="target" id="classItemToggle_1a614c368bb999e876a92950cb4fcb787c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">row</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N10ItemToggle4drawEP16DisplayInterface7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw this menu item on specified display on specified line. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> – the display that should be used for draw </p></li>
+<li><p><strong>row</strong> – the number of row to draw on </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle7processEP7LcdMenuKh">
+<span id="_CPPv3N10ItemToggle7processEP7LcdMenuKh"></span><span id="_CPPv2N10ItemToggle7processEP7LcdMenuKh"></span><span id="ItemToggle::process__LcdMenuP.unsigned-cC"></span><span class="target" id="classItemToggle_1a0f39e246b1410ab74811543d19f3e236"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N10ItemToggle7processEP7LcdMenuKh" title="Link to this definition"></a><br /></dt>
+<dd><p>Process a command decoded in 1 byte. It can be a printable character or a control command like <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> or <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>. Return value is used to determine operation was successful or ignored. If the parent of item received that handle was ignored it can execute it’s own action on this command. Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element. Behaviour is very similar to Even Bubbling in JavaScript. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>menu</strong> – the owner menu of the item, can be used to retrieve required object, such as <code class="docutils literal notranslate"><a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref"><span class="pre">DisplayInterface</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="MenuScreen.html#classMenuScreen"><span class="std std-ref"><span class="pre">MenuScreen</span></span></a></code></p></li>
+<li><p><strong>command</strong> – the character command, can be a printable character or a control command </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if command was successfully handled by item. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle6toggleEP16DisplayInterface">
+<span id="_CPPv3N10ItemToggle6toggleEP16DisplayInterface"></span><span id="_CPPv2N10ItemToggle6toggleEP16DisplayInterface"></span><span id="ItemToggle::toggle__DisplayInterfaceP"></span><span class="target" id="classItemToggle_1a481e30c0549fa72c5a2e2f72b7473e4a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toggle</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemToggle6toggleEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle7enabledE">
+<span id="_CPPv3N10ItemToggle7enabledE"></span><span id="_CPPv2N10ItemToggle7enabledE"></span><span id="ItemToggle::enabled__b"></span><span class="target" id="classItemToggle_1aed0e2b7072350e5dc491d0b6ef0e4c5d"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enabled</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N10ItemToggle7enabledE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle6textOnE">
+<span id="_CPPv3N10ItemToggle6textOnE"></span><span id="_CPPv2N10ItemToggle6textOnE"></span><span id="ItemToggle::textOn__cCP"></span><span class="target" id="classItemToggle_1ae68e22e4a8527ace9556b3c1e563cb31"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">textOn</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10ItemToggle6textOnE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle7textOffE">
+<span id="_CPPv3N10ItemToggle7textOffE"></span><span id="_CPPv2N10ItemToggle7textOffE"></span><span id="ItemToggle::textOff__cCP"></span><span class="target" id="classItemToggle_1a9481ba78e8b6f6d38e0ca9f9ca5605cb"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">textOff</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10ItemToggle7textOffE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemToggle8callbackE">
+<span id="_CPPv3N10ItemToggle8callbackE"></span><span id="_CPPv2N10ItemToggle8callbackE"></span><span id="ItemToggle::callback__fptrBool"></span><span class="target" id="classItemToggle_1a6a323005d349f9344cb883e6d2574c37"></span><span class="n"><span class="pre">fptrBool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10ItemToggle8callbackE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ItemIntRange.html" class="btn btn-neutral float-left" title="ItemIntRange" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ItemRangeBase.html" class="btn btn-neutral float-right" title="ItemRangeBase" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Thomas Forntoh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+LiquidCrystalAdapter
+====================
+
+.. doxygenfile:: LiquidCrystalAdapter.h
+   :project: LcdMenu

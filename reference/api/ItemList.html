@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ItemList &mdash; LcdMenu  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe1cf113" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ItemFloatRange" href="ItemFloatRange.html" />
+    <link rel="prev" title="MenuItem" href="MenuItem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LcdMenu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Class reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemIntRange.html#_CPPv412ItemIntRange"><code class="docutils literal notranslate"><span class="pre">ItemIntRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemToggle.html#_CPPv410ItemToggle"><code class="docutils literal notranslate"><span class="pre">ItemToggle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemRangeBase.html#_CPPv4I0E13ItemRangeBase"><code class="docutils literal notranslate"><span class="pre">ItemRangeBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MenuScreen.html">MenuScreen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MenuScreen.html#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInputCharset.html#_CPPv416ItemInputCharset"><code class="docutils literal notranslate"><span class="pre">ItemInputCharset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ItemList</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv48ItemList"><code class="docutils literal notranslate"><span class="pre">ItemList</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemFloatRange.html#_CPPv414ItemFloatRange"><code class="docutils literal notranslate"><span class="pre">ItemFloatRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInput.html#_CPPv49ItemInput"><code class="docutils literal notranslate"><span class="pre">ItemInput</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemCommand.html#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemBack.html#_CPPv48ItemBack"><code class="docutils literal notranslate"><span class="pre">ItemBack</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu"><code class="docutils literal notranslate"><span class="pre">LcdMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemSubMenu.html#_CPPv411ItemSubMenu"><code class="docutils literal notranslate"><span class="pre">ItemSubMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/DisplayInterface.html">DisplayInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="input/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/SimpleRotaryAdapter.html">SimpleRotaryAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/InputInterface.html">InputInterface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration_guides/index.html">Migration guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../migration_guides/v5.x.html">V5.000</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LcdMenu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Class reference</a></li>
+      <li class="breadcrumb-item active">ItemList</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/api/ItemList.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="itemlist">
+<h1>ItemList<a class="headerlink" href="#itemlist" title="Link to this heading"></a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ITEM_STRING_LIST">
+<span class="target" id="ItemList_8h_1a5c9dd5a0f1e2ce8dfba52b49943c2f14"></span><span class="sig-name descname"><span class="n"><span class="pre">ITEM_STRING_LIST</span></span></span><span class="sig-paren">(</span><span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ITEM_STRING_LIST" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv48ItemList">
+<span id="_CPPv38ItemList"></span><span id="_CPPv28ItemList"></span><span id="ItemList"></span><span class="target" id="classItemList"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemList</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><a class="headerlink" href="#_CPPv48ItemList" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ItemList.h&gt;</em></div>
+<p>A class representing a list of items in a menu. </p>
+<p>The <a class="reference internal" href="#classItemList"><span class="std std-ref">ItemList</span></a> class extends the <a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref">MenuItem</span></a> class and provides functionality for displaying and interacting with a list of items in a menu. It supports navigation through the items and executing a callback function when an item is selected. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList8ItemListEPKcP6StringK7uint8_t8fptruInt">
+<span id="_CPPv3N8ItemList8ItemListEPKcP6StringK7uint8_t8fptruInt"></span><span id="_CPPv2N8ItemList8ItemListEPKcP6StringK7uint8_t8fptruInt"></span><span id="ItemList::ItemList__cCP.StringP.uint8_tC.fptruInt"></span><span class="target" id="classItemList_1a74ad3f7ac58566f2580c0c6d27a02062"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemList</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <span class="n"><span class="pre">String</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">items</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemCount</span></span>, <span class="n"><span class="pre">fptruInt</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList8ItemListEPKcP6StringK7uint8_t8fptruInt" title="Link to this definition"></a><br /></dt>
+<dd><p>Constructs a new <a class="reference internal" href="#classItemList"><span class="std std-ref">ItemList</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – The key of the menu item. </p></li>
+<li><p><strong>items</strong> – The array of items to display. </p></li>
+<li><p><strong>itemCount</strong> – The number of items in the array. </p></li>
+<li><p><strong>callback</strong> – A pointer to the callback function to execute when this menu item is selected. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList12getItemIndexEv">
+<span id="_CPPv3N8ItemList12getItemIndexEv"></span><span id="_CPPv2N8ItemList12getItemIndexEv"></span><span id="ItemList::getItemIndex"></span><span class="target" id="classItemList_1a02e29d51cce74cffc32662ba8a6b0675"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getItemIndex</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList12getItemIndexEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Returns the index of the currently selected item. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The index of the currently selected item. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList12setItemIndexE7uint8_t">
+<span id="_CPPv3N8ItemList12setItemIndexE7uint8_t"></span><span id="_CPPv2N8ItemList12setItemIndexE7uint8_t"></span><span id="ItemList::setItemIndex__uint8_t"></span><span class="target" id="classItemList_1ab308a2f9557a677d4437929ebbd20bed"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setItemIndex</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemIndex</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList12setItemIndexE7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Changes the index of the current item. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You need to call <code class="docutils literal notranslate"><a class="reference internal" href="LcdMenu.html#classLcdMenu_1a356d4a6e14fdbe51d53d8e86b7217077"><span class="std std-ref"><span class="pre">LcdMenu::refresh</span></span></a></code> after this method to see the changes.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if the index was changed successfully, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList14getCallbackIntEv">
+<span id="_CPPv3N8ItemList14getCallbackIntEv"></span><span id="_CPPv2N8ItemList14getCallbackIntEv"></span><span id="ItemList::getCallbackInt"></span><span class="target" id="classItemList_1a66dfe572e650d598cea4158c92fe4b9b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">fptruInt</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCallbackInt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList14getCallbackIntEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the callback bound to the current item. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The the callback bound to the current item. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList12getItemCountEv">
+<span id="_CPPv3N8ItemList12getItemCountEv"></span><span id="_CPPv2N8ItemList12getItemCountEv"></span><span id="ItemList::getItemCount"></span><span class="target" id="classItemList_1a4ba7765180ddc679844bed2ce691287b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getItemCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList12getItemCountEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Returns the total number of items in the list. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The total number of items in the list. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList8getItemsEv">
+<span id="_CPPv3N8ItemList8getItemsEv"></span><span id="_CPPv2N8ItemList8getItemsEv"></span><span id="ItemList::getItems"></span><span class="target" id="classItemList_1a92b03a8a0aac29ad3fc16c4af285415b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">String</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getItems</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList8getItemsEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Returns a pointer to the array of items. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pointer to the array of items. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList8getValueEv">
+<span id="_CPPv3N8ItemList8getValueEv"></span><span id="_CPPv2N8ItemList8getValueEv"></span><span id="ItemList::getValue"></span><span class="target" id="classItemList_1a39d90fbb20088903ee5f500d89e2fa73"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getValue</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList8getValueEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Returns the value of the currently selected item. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of the currently selected item. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList4drawEP16DisplayInterface7uint8_t">
+<span id="_CPPv3N8ItemList4drawEP16DisplayInterface7uint8_t"></span><span id="_CPPv2N8ItemList4drawEP16DisplayInterface7uint8_t"></span><span id="ItemList::draw__DisplayInterfaceP.uint8_t"></span><span class="target" id="classItemList_1a021e679ceb25f010f71c2dd36193ea82"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">row</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8ItemList4drawEP16DisplayInterface7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw this menu item on specified display on specified line. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> – the display that should be used for draw </p></li>
+<li><p><strong>row</strong> – the number of row to draw on </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList7processEP7LcdMenuKh">
+<span id="_CPPv3N8ItemList7processEP7LcdMenuKh"></span><span id="_CPPv2N8ItemList7processEP7LcdMenuKh"></span><span id="ItemList::process__LcdMenuP.unsigned-cC"></span><span class="target" id="classItemList_1adccaa2c35640dd1cfa60dfd81a5ac609"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8ItemList7processEP7LcdMenuKh" title="Link to this definition"></a><br /></dt>
+<dd><p>Process a command decoded in 1 byte. It can be a printable character or a control command like <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> or <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>. Return value is used to determine operation was successful or ignored. If the parent of item received that handle was ignored it can execute it’s own action on this command. Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element. Behaviour is very similar to Even Bubbling in JavaScript. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>menu</strong> – the owner menu of the item, can be used to retrieve required object, such as <code class="docutils literal notranslate"><a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref"><span class="pre">DisplayInterface</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="MenuScreen.html#classMenuScreen"><span class="std std-ref"><span class="pre">MenuScreen</span></span></a></code></p></li>
+<li><p><strong>command</strong> – the character command, can be a printable character or a control command </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if command was successfully handled by item. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList14selectPreviousEP16DisplayInterface">
+<span id="_CPPv3N8ItemList14selectPreviousEP16DisplayInterface"></span><span id="_CPPv2N8ItemList14selectPreviousEP16DisplayInterface"></span><span id="ItemList::selectPrevious__DisplayInterfaceP"></span><span class="target" id="classItemList_1a81ccb021800ec2db5dea47e4d5426f68"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">selectPrevious</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList14selectPreviousEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList10selectNextEP16DisplayInterface">
+<span id="_CPPv3N8ItemList10selectNextEP16DisplayInterface"></span><span id="_CPPv2N8ItemList10selectNextEP16DisplayInterface"></span><span id="ItemList::selectNext__DisplayInterfaceP"></span><span class="target" id="classItemList_1a96201839e284b3e5941e714ee78c04c3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">selectNext</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ItemList10selectNextEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList8callbackE">
+<span id="_CPPv3N8ItemList8callbackE"></span><span id="_CPPv2N8ItemList8callbackE"></span><span id="ItemList::callback__fptruInt"></span><span class="target" id="classItemList_1ac61d9f831b36dfbbf821fbe09ddf8424"></span><span class="n"><span class="pre">fptruInt</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N8ItemList8callbackE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList5itemsE">
+<span id="_CPPv3N8ItemList5itemsE"></span><span id="_CPPv2N8ItemList5itemsE"></span><span id="ItemList::items__StringP"></span><span class="target" id="classItemList_1a31b820a43c7af3d2d499318ea9fb2127"></span><span class="n"><span class="pre">String</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">items</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N8ItemList5itemsE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList9itemCountE">
+<span id="_CPPv3N8ItemList9itemCountE"></span><span id="_CPPv2N8ItemList9itemCountE"></span><span id="ItemList::itemCount__uint8_tC"></span><span class="target" id="classItemList_1aa0f26e35e0879d57afa671d00c921bb3"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemCount</span></span></span><a class="headerlink" href="#_CPPv4N8ItemList9itemCountE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8ItemList9itemIndexE">
+<span id="_CPPv3N8ItemList9itemIndexE"></span><span id="_CPPv2N8ItemList9itemIndexE"></span><span id="ItemList::itemIndex__uint8_t"></span><span class="target" id="classItemList_1a45305a483588a36614c5ebfba34bf8c1"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemIndex</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N8ItemList9itemIndexE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MenuItem.html" class="btn btn-neutral float-left" title="MenuItem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ItemFloatRange.html" class="btn btn-neutral float-right" title="ItemFloatRange" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Thomas Forntoh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

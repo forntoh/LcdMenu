@@ -1,0 +1,12 @@
+input
+=====
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: input
+
+   ButtonAdapter
+   SimpleRotaryAdapter
+   KeyboardAdapter
+   InputInterface

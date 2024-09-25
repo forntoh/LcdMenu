@@ -1,0 +1,5 @@
+SimpleRotaryAdapter
+===================
+
+.. doxygenfile:: SimpleRotaryAdapter.h
+   :project: LcdMenu

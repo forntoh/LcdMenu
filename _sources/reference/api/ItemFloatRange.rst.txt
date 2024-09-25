@@ -1,0 +1,5 @@
+ItemFloatRange
+==============
+
+.. doxygenfile:: ItemFloatRange.h
+   :project: LcdMenu

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MenuScreen &mdash; LcdMenu  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe1cf113" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ItemInputCharset" href="ItemInputCharset.html" />
+    <link rel="prev" title="ItemRangeBase" href="ItemRangeBase.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LcdMenu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Class reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemIntRange.html#_CPPv412ItemIntRange"><code class="docutils literal notranslate"><span class="pre">ItemIntRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemToggle.html#_CPPv410ItemToggle"><code class="docutils literal notranslate"><span class="pre">ItemToggle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemRangeBase.html#_CPPv4I0E13ItemRangeBase"><code class="docutils literal notranslate"><span class="pre">ItemRangeBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MenuScreen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInputCharset.html#_CPPv416ItemInputCharset"><code class="docutils literal notranslate"><span class="pre">ItemInputCharset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemList.html#_CPPv48ItemList"><code class="docutils literal notranslate"><span class="pre">ItemList</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemFloatRange.html#_CPPv414ItemFloatRange"><code class="docutils literal notranslate"><span class="pre">ItemFloatRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemInput.html#_CPPv49ItemInput"><code class="docutils literal notranslate"><span class="pre">ItemInput</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemCommand.html#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemBack.html#_CPPv48ItemBack"><code class="docutils literal notranslate"><span class="pre">ItemBack</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu"><code class="docutils literal notranslate"><span class="pre">LcdMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ItemSubMenu.html#_CPPv411ItemSubMenu"><code class="docutils literal notranslate"><span class="pre">ItemSubMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/DisplayInterface.html">DisplayInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="input/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/SimpleRotaryAdapter.html">SimpleRotaryAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input/InputInterface.html">InputInterface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration_guides/index.html">Migration guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../migration_guides/v5.x.html">V5.000</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LcdMenu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Class reference</a></li>
+      <li class="breadcrumb-item active">MenuScreen</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/api/MenuScreen.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="menuscreen">
+<h1>MenuScreen<a class="headerlink" href="#menuscreen" title="Link to this heading"></a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MENU_SCREEN">
+<span class="target" id="MenuScreen_8h_1a3a56e2cb21dc12e2ec0457c9a1026712"></span><span class="sig-name descname"><span class="n"><span class="pre">MENU_SCREEN</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">screen</span></span>, <span class="n"><span class="pre">items</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MENU_SCREEN" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv410MenuScreen">
+<span id="_CPPv310MenuScreen"></span><span id="_CPPv210MenuScreen"></span><span id="MenuScreen"></span><span class="target" id="classMenuScreen"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MenuScreen</span></span></span><a class="headerlink" href="#_CPPv410MenuScreen" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;MenuScreen.h&gt;</em></div>
+<p>Represents single screen with number of menu items. Contains logic of navigating between items. Stores current cursor and view. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem">
+<span id="_CPPv3N10MenuScreen10MenuScreenEPP8MenuItem"></span><span id="_CPPv2N10MenuScreen10MenuScreenEPP8MenuItem"></span><span id="MenuScreen::MenuScreen__MenuItemPP"></span><span class="target" id="classMenuScreen_1a4f32677ed1b44fa21a36cd3bd611cb16"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MenuScreen</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">items</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem" title="Link to this definition"></a><br /></dt>
+<dd><p>Constructor </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9setParentEP10MenuScreen">
+<span id="_CPPv3N10MenuScreen9setParentEP10MenuScreen"></span><span id="_CPPv2N10MenuScreen9setParentEP10MenuScreen"></span><span id="MenuScreen::setParent__MenuScreenP"></span><span class="target" id="classMenuScreen_1a944784683783b3d77738aeb36b0b9a36"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setParent</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410MenuScreen" title="MenuScreen"><span class="n"><span class="pre">MenuScreen</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">parent</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9setParentEP10MenuScreen" title="Link to this definition"></a><br /></dt>
+<dd><p>Set new parent screen. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9getCursorEv">
+<span id="_CPPv3N10MenuScreen9getCursorEv"></span><span id="_CPPv2N10MenuScreen9getCursorEv"></span><span id="MenuScreen::getCursor"></span><span class="target" id="classMenuScreen_1a6256de2f1ee1412c378504642085fe18"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCursor</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9getCursorEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get current cursor position. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9getItemAtE7uint8_t">
+<span id="_CPPv3N10MenuScreen9getItemAtE7uint8_t"></span><span id="_CPPv2N10MenuScreen9getItemAtE7uint8_t"></span><span id="MenuScreen::getItemAt__uint8_t"></span><span class="target" id="classMenuScreen_1adc74efabe43478855bf14b15f3e135bc"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getItemAt</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9getItemAtE7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a <code class="docutils literal notranslate"><a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref"><span class="pre">MenuItem</span></span></a></code> at position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref"><span class="pre">MenuItem</span></span></a></code> - item at <code class="docutils literal notranslate"><span class="pre">position</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreenixEK7uint8_t">
+<span id="_CPPv3N10MenuScreenixEK7uint8_t"></span><span id="_CPPv2N10MenuScreenixEK7uint8_t"></span><span id="MenuScreen::subscript-operator__uint8_tC"></span><span class="target" id="classMenuScreen_1a80583c10d0be16161b5dda1b5d94255b"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreenixEK7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Get a <code class="docutils literal notranslate"><a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref"><span class="pre">MenuItem</span></span></a></code> at position. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref"><span class="pre">MenuItem</span></span></a></code> - item at <code class="docutils literal notranslate"><span class="pre">position</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen10itemsCountEv">
+<span id="_CPPv3N10MenuScreen10itemsCountEv"></span><span id="_CPPv2N10MenuScreen10itemsCountEv"></span><span id="MenuScreen::itemsCount"></span><span class="target" id="classMenuScreen_1ad56b54c80e60d707f49cbd11505d050e"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemsCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen10itemsCountEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the number of items in the menu. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t">
+<span id="_CPPv3N10MenuScreen9setCursorEP16DisplayInterface7uint8_t"></span><span id="_CPPv2N10MenuScreen9setCursorEP16DisplayInterface7uint8_t"></span><span id="MenuScreen::setCursor__DisplayInterfaceP.uint8_t"></span><span class="target" id="classMenuScreen_1a318cbb17efcb3d2e7957220149c8dc01"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCursor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Move cursor to specified position. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen4drawEP16DisplayInterface">
+<span id="_CPPv3N10MenuScreen4drawEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen4drawEP16DisplayInterface"></span><span id="MenuScreen::draw__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1a941a54aedc53cf4a77c466c8d7e0767f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen4drawEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<dd><p>Draw the screen on display. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen7processEP7LcdMenuKh">
+<span id="_CPPv3N10MenuScreen7processEP7LcdMenuKh"></span><span id="_CPPv2N10MenuScreen7processEP7LcdMenuKh"></span><span id="MenuScreen::process__LcdMenuP.unsigned-cC"></span><span class="target" id="classMenuScreen_1afc59ca40194edbb9c355d6f3d0ed73ac"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen7processEP7LcdMenuKh" title="Link to this definition"></a><br /></dt>
+<dd><p>Process the command. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the command was processed, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen2upEP16DisplayInterface">
+<span id="_CPPv3N10MenuScreen2upEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen2upEP16DisplayInterface"></span><span id="MenuScreen::up__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1ae6d28054fde75c3b22fcf2f0f881e03a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">up</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen2upEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<dd><p>Move cursor up. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen4downEP16DisplayInterface">
+<span id="_CPPv3N10MenuScreen4downEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen4downEP16DisplayInterface"></span><span id="MenuScreen::down__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1aaba94020d97a9a1d472c6ff02888bebc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">down</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen4downEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<dd><p>Move cursor down. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen5resetEP16DisplayInterface">
+<span id="_CPPv3N10MenuScreen5resetEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen5resetEP16DisplayInterface"></span><span id="MenuScreen::reset__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1a8a30aa2a0d036b849a7c7ec503f9efd0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen5resetEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<dd><p>Reset the screen to initial state. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="target" id="classMenuScreen_1a68db6f8feb4711646ea5569bb9484d19"></span><span class="sig-name descname"><span class="pre">friend</span> <span class="pre">LcdMenu</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen6parentE">
+<span id="_CPPv3N10MenuScreen6parentE"></span><span id="_CPPv2N10MenuScreen6parentE"></span><span id="MenuScreen::parent__MenuScreenP"></span><span class="target" id="classMenuScreen_1a6b1ce589b940ea6ca50cfb3b2454d2d3"></span><a class="reference internal" href="#_CPPv410MenuScreen" title="MenuScreen"><span class="n"><span class="pre">MenuScreen</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">parent</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen6parentE" title="Link to this definition"></a><br /></dt>
+<dd><p>Previous screen. When <code class="docutils literal notranslate"><span class="pre">BACK</span></code> command received this screen will be shown. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen5itemsE">
+<span id="_CPPv3N10MenuScreen5itemsE"></span><span id="_CPPv2N10MenuScreen5itemsE"></span><span id="MenuScreen::items__MenuItemPP"></span><span class="target" id="classMenuScreen_1ab17ed71d7754dbe071787beea61b012e"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">items</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen5itemsE" title="Link to this definition"></a><br /></dt>
+<dd><p>The menu items to be displayed on screen. These items will be drawn on display. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen6cursorE">
+<span id="_CPPv3N10MenuScreen6cursorE"></span><span id="_CPPv2N10MenuScreen6cursorE"></span><span id="MenuScreen::cursor__uint8_t"></span><span class="target" id="classMenuScreen_1ab6df4ab0245f7376aaf5cadd63f917b9"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cursor</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen6cursorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Cursor position. </p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="n">X</span>
+<span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
+</pre></div>
+</div>
+ ┌───────────────┐ │ X X X │ │ X X X X │ │ &gt; X X X X X X │ &lt;── cursor │ X X X X X │ └───────────────┘ X X X X X X X X X X</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">up</span></code> or <code class="docutils literal notranslate"><span class="pre">down</span></code> then this position will be moved over the items accordingly. Always in range [<code class="docutils literal notranslate"><span class="pre">view</span></code>, <code class="docutils literal notranslate"><span class="pre">view</span></code> + <code class="docutils literal notranslate"><span class="pre">display.getMaxRows()</span></code> - 1]. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen4viewE">
+<span id="_CPPv3N10MenuScreen4viewE"></span><span id="_CPPv2N10MenuScreen4viewE"></span><span id="MenuScreen::view__uint8_t"></span><span class="target" id="classMenuScreen_1aa71669e0a4949e17b9ae66a21a778a2d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen4viewE" title="Link to this definition"></a><br /></dt>
+<dd><p>First visible item’s position in the menu array. </p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="n">X</span>
+<span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
+</pre></div>
+</div>
+<p>┌───────────────┐ │ X X X │ &lt;── view</p>
+<p>│   X X X X     │</p>
+<p>│ &gt; X X X X X X │ │ X X X X X │ └───────────────┘ X X X X X X X X X X</p>
+</p>
+<p>Is moved when <code class="docutils literal notranslate"><span class="pre">cursor</span></code> crosses the borders of visible area. When number of items &lt; <code class="docutils literal notranslate"><span class="pre">display.getMaxRows()</span></code> this index should be 0. The size of the view is always the same and equals to <code class="docutils literal notranslate"><span class="pre">display.getMaxRows()</span></code>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ItemRangeBase.html" class="btn btn-neutral float-left" title="ItemRangeBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ItemInputCharset.html" class="btn btn-neutral float-right" title="ItemInputCharset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Thomas Forntoh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeyboardAdapter &mdash; LcdMenu  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe1cf113" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="InputInterface" href="InputInterface.html" />
+    <link rel="prev" title="SimpleRotaryAdapter" href="SimpleRotaryAdapter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            LcdMenu
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Class reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ItemIntRange.html">ItemIntRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemIntRange.html#_CPPv412ItemIntRange"><code class="docutils literal notranslate"><span class="pre">ItemIntRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemToggle.html#_CPPv410ItemToggle"><code class="docutils literal notranslate"><span class="pre">ItemToggle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemRangeBase.html">ItemRangeBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemRangeBase.html#_CPPv4I0E13ItemRangeBase"><code class="docutils literal notranslate"><span class="pre">ItemRangeBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MenuScreen.html">MenuScreen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MenuScreen.html#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemInputCharset.html#_CPPv416ItemInputCharset"><code class="docutils literal notranslate"><span class="pre">ItemInputCharset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../MenuItem.html#_CPPv48MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemList.html#_CPPv48ItemList"><code class="docutils literal notranslate"><span class="pre">ItemList</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemFloatRange.html">ItemFloatRange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemFloatRange.html#_CPPv414ItemFloatRange"><code class="docutils literal notranslate"><span class="pre">ItemFloatRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemInput.html#_CPPv49ItemInput"><code class="docutils literal notranslate"><span class="pre">ItemInput</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemCommand.html#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemBack.html#_CPPv48ItemBack"><code class="docutils literal notranslate"><span class="pre">ItemBack</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu"><code class="docutils literal notranslate"><span class="pre">LcdMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ItemSubMenu.html#_CPPv411ItemSubMenu"><code class="docutils literal notranslate"><span class="pre">ItemSubMenu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../display/LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../display/DisplayInterface.html">DisplayInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../display/LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">input</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SimpleRotaryAdapter.html">SimpleRotaryAdapter</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">KeyboardAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputInterface.html">InputInterface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration_guides/index.html">Migration guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../migration_guides/v5.x.html">V5.000</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">LcdMenu</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Class reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">input</a></li>
+      <li class="breadcrumb-item active">KeyboardAdapter</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/api/input/KeyboardAdapter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="keyboardadapter">
+<h1>KeyboardAdapter<a class="headerlink" href="#keyboardadapter" title="Link to this heading"></a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.BS">
+<span class="target" id="KeyboardAdapter_8h_1a580a88f98668df1ac5e1683cae31c0b3"></span><span class="sig-name descname"><span class="n"><span class="pre">BS</span></span></span><a class="headerlink" href="#c.BS" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.LF">
+<span class="target" id="KeyboardAdapter_8h_1a350c9d6cb81908d59427ee96844d1a9c"></span><span class="sig-name descname"><span class="n"><span class="pre">LF</span></span></span><a class="headerlink" href="#c.LF" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.CR">
+<span class="target" id="KeyboardAdapter_8h_1a876ce77f3c672c7162658151e648389e"></span><span class="sig-name descname"><span class="n"><span class="pre">CR</span></span></span><a class="headerlink" href="#c.CR" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESC">
+<span class="target" id="KeyboardAdapter_8h_1a4af1b6159e447ba72652bb7fcdfa726e"></span><span class="sig-name descname"><span class="n"><span class="pre">ESC</span></span></span><a class="headerlink" href="#c.ESC" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.DEL">
+<span class="target" id="KeyboardAdapter_8h_1ad1e508e805e4ddbc05119be4bb260985"></span><span class="sig-name descname"><span class="n"><span class="pre">DEL</span></span></span><a class="headerlink" href="#c.DEL" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.C2_CSI_TERMINAL_MIN">
+<span class="target" id="KeyboardAdapter_8h_1a4b7d8578209d13d275adf5369bd5c4d4"></span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI_TERMINAL_MIN</span></span></span><a class="headerlink" href="#c.C2_CSI_TERMINAL_MIN" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.C2_CSI_TERMINAL_MAX">
+<span class="target" id="KeyboardAdapter_8h_1a0e2906f4a148d4d01a71e00661052b3f"></span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI_TERMINAL_MAX</span></span></span><a class="headerlink" href="#c.C2_CSI_TERMINAL_MAX" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.THRESHOLD">
+<span class="target" id="KeyboardAdapter_8h_1a4679d8ea8690999a6c6c7c0cb245c879"></span><span class="sig-name descname"><span class="n"><span class="pre">THRESHOLD</span></span></span><a class="headerlink" href="#c.THRESHOLD" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.CSI_BUFFER_SIZE">
+<span class="target" id="KeyboardAdapter_8h_1a6ccc002023cadd7285ce2f06e5c9d01c"></span><span class="sig-name descname"><span class="n"><span class="pre">CSI_BUFFER_SIZE</span></span></span><a class="headerlink" href="#c.CSI_BUFFER_SIZE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv415KeyboardAdapter">
+<span id="_CPPv315KeyboardAdapter"></span><span id="_CPPv215KeyboardAdapter"></span><span id="KeyboardAdapter"></span><span class="target" id="classKeyboardAdapter"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyboardAdapter</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="InputInterface.html#_CPPv414InputInterface" title="InputInterface"><span class="n"><span class="pre">InputInterface</span></span></a><a class="headerlink" href="#_CPPv415KeyboardAdapter" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;KeyboardAdapter.h&gt;</em></div>
+<p>Input interface to keyboard. Uses default buttons layout: </p>
+<p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Arrows</span></code> for <code class="docutils literal notranslate"><span class="pre">LEFT/RIGHT/UP/DOWN</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enter</span></code> for <code class="docutils literal notranslate"><span class="pre">ENTER</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Escape</span></code> for <code class="docutils literal notranslate"><span class="pre">BACK</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Delete</span></code> for <code class="docutils literal notranslate"><span class="pre">CLEAR</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Backspace</span></code> for <code class="docutils literal notranslate"><span class="pre">BACKSPACE</span></code>;</p></li>
+</ul>
+</p>
+<p>Keyboard can send multiple-bytes commands. Implementation should convert it to one byte command.</p>
+<p>Implementation details. Mapping: <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">128</span> <span class="pre">of</span> <span class="pre">ASCII</span></code> -&gt; as is <code class="docutils literal notranslate"><span class="pre">\r</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> <code class="docutils literal notranslate"><span class="pre">\n</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> <code class="docutils literal notranslate"><span class="pre">\r\n</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> <code class="docutils literal notranslate"><span class="pre">ESC</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">BACK</span></code> <code class="docutils literal notranslate"><span class="pre">ESC</span> <span class="pre">[</span> <span class="pre">A</span></code> (up arrow) -&gt; <code class="docutils literal notranslate"><span class="pre">UP</span></code> <code class="docutils literal notranslate"><span class="pre">ESC</span> <span class="pre">[</span> <span class="pre">B</span></code> (down arrow) -&gt; <code class="docutils literal notranslate"><span class="pre">DOWN</span></code> <code class="docutils literal notranslate"><span class="pre">ESC</span> <span class="pre">[</span> <span class="pre">C</span></code> (right arrow) -&gt; <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code> <code class="docutils literal notranslate"><span class="pre">ESC</span> <span class="pre">[</span> <span class="pre">D</span></code> (left arrow) -&gt; <code class="docutils literal notranslate"><span class="pre">LEFT</span></code> <code class="docutils literal notranslate"><span class="pre">ESC</span> <span class="pre">[</span> <span class="pre">3</span> <span class="pre">~</span></code> (Delete button) -&gt; <code class="docutils literal notranslate"><span class="pre">CLEAR</span></code></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream">
+<span id="_CPPv3N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream"></span><span id="_CPPv2N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream"></span><span id="KeyboardAdapter::KeyboardAdapter__LcdMenuP.StreamP"></span><span class="target" id="classKeyboardAdapter_1ac54f7bb8ad744bef468836bcbd124e4d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyboardAdapter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="n"><span class="pre">Stream</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7observeEv">
+<span id="_CPPv3N15KeyboardAdapter7observeEv"></span><span id="_CPPv2N15KeyboardAdapter7observeEv"></span><span id="KeyboardAdapter::observe"></span><span class="target" id="classKeyboardAdapter_1a52e06c3c8b7027b6ac6d3c8894526592"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">observe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7observeEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-types">Private Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSetE">
+<span id="_CPPv3N15KeyboardAdapter7CodeSetE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSetE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CodeSet</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="Link to this definition"></a><br /></dt>
+<dd><p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/ANSI_escape_code">https://en.wikipedia.org/wiki/ANSI_escape_code</a></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797">https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797</a></p>
+</div>
+</p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet2C0E">
+<span id="_CPPv3N15KeyboardAdapter7CodeSet2C0E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C0E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea9c5959e6f08f10d0edbadf5be1f33c53"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C0</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C0E" title="Link to this definition"></a><br /></dt>
+<dd><p>Main ASCII code set. Initially defined as part of ASCII, the default C0 control code set is now defined in ISO 6429 (ECMA-48). </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet2C1E">
+<span id="_CPPv3N15KeyboardAdapter7CodeSet2C1E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C1E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea1a2ddc2db4693cfd16d534cde5572cc1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C1</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C1E" title="Link to this definition"></a><br /></dt>
+<dd><p>Fe Escape sequences. Starts with ESC. Terminates with [0x40, 0x5F]. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE">
+<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_CSIE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_CSIE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea8887e0a4e992bf98b2de19432b194cb7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE" title="Link to this definition"></a><br /></dt>
+<dd><p>Control Sequence Introducer. Starts with ESC [. Terminates with [0x40, 0x7E]. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE">
+<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_DCSE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_DCSE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ead9186e754eca8fdb07a57354fc3c3b62"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_DCS</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE" title="Link to this definition"></a><br /></dt>
+<dd><p>Device Control String. Starts with ESC P. Terminates with ESC . </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE">
+<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_OSCE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_OSCE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5eaeb4e25acf3aa21e15735c660bf593716"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_OSC</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE" title="Link to this definition"></a><br /></dt>
+<dd><p>Operating System Command. Starts with ESC ]. Terminates with ESC . Currently not implemented. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet2C3E">
+<span id="_CPPv3N15KeyboardAdapter7CodeSet2C3E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C3E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea3abe124ecc82bf2c2e22e6058f38c50c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C3</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C3E" title="Link to this definition"></a><br /></dt>
+<dd><p>Expect string terminator. Currently not implemented. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter5resetEv">
+<span id="_CPPv3N15KeyboardAdapter5resetEv"></span><span id="_CPPv2N15KeyboardAdapter5resetEv"></span><span id="KeyboardAdapter::reset"></span><span class="target" id="classKeyboardAdapter_1a9cb7747c8fe1dd6745ccbed22fbcd274"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter5resetEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Reset to initial state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter11hasLastCharEv">
+<span id="_CPPv3N15KeyboardAdapter11hasLastCharEv"></span><span id="_CPPv2N15KeyboardAdapter11hasLastCharEv"></span><span id="KeyboardAdapter::hasLastChar"></span><span class="target" id="classKeyboardAdapter_1a518e49dbfa823b8377dd25e7b483d00b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasLastChar</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter11hasLastCharEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter12saveLastCharEh">
+<span id="_CPPv3N15KeyboardAdapter12saveLastCharEh"></span><span id="_CPPv2N15KeyboardAdapter12saveLastCharEh"></span><span id="KeyboardAdapter::saveLastChar__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1afef69d3825aef2991a14bda5114879e7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">saveLastChar</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter12saveLastCharEh" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter10handleIdleEv">
+<span id="_CPPv3N15KeyboardAdapter10handleIdleEv"></span><span id="_CPPv2N15KeyboardAdapter10handleIdleEv"></span><span id="KeyboardAdapter::handleIdle"></span><span class="target" id="classKeyboardAdapter_1ad9a6d0d8002fe66523d4c6f0ed80bbaa"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleIdle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter10handleIdleEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Handle idle state when there are no input for some time. </p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>THRESHOLD - timeout in ms. </p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter14handleReceivedEh">
+<span id="_CPPv3N15KeyboardAdapter14handleReceivedEh"></span><span id="_CPPv2N15KeyboardAdapter14handleReceivedEh"></span><span id="KeyboardAdapter::handleReceived__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1a1896a5889c731d72927a81ed049bf6d4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleReceived</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter14handleReceivedEh" title="Link to this definition"></a><br /></dt>
+<dd><p>Handle received command. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>command</strong> – the received command </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter6streamE">
+<span id="_CPPv3N15KeyboardAdapter6streamE"></span><span id="_CPPv2N15KeyboardAdapter6streamE"></span><span id="KeyboardAdapter::stream__StreamP"></span><span class="target" id="classKeyboardAdapter_1a78de6e6eba631303378b2914f9fd6e43"></span><span class="n"><span class="pre">Stream</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">stream</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter6streamE" title="Link to this definition"></a><br /></dt>
+<dd><p>Input stream. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7codeSetE">
+<span id="_CPPv3N15KeyboardAdapter7codeSetE"></span><span id="_CPPv2N15KeyboardAdapter7codeSetE"></span><span id="KeyboardAdapter::codeSet__CodeSet"></span><span class="target" id="classKeyboardAdapter_1aef16e51db0310c6aca4535f1e992ed57"></span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="KeyboardAdapter::CodeSet"><span class="n"><span class="pre">CodeSet</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">codeSet</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="KeyboardAdapter::CodeSet"><span class="n"><span class="pre">CodeSet</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet2C0E" title="KeyboardAdapter::CodeSet::C0"><span class="n"><span class="pre">C0</span></span></a><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7codeSetE" title="Link to this definition"></a><br /></dt>
+<dd><p>Internal state of current code set. As stream receives bytes asynchronously, multiple bytes command can arrive in several calls. Need to store current state between calls. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter8lastCharE">
+<span id="_CPPv3N15KeyboardAdapter8lastCharE"></span><span id="_CPPv2N15KeyboardAdapter8lastCharE"></span><span id="KeyboardAdapter::lastChar__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1aba6c8e614e6881674c766b5db8bce19e"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastChar</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter8lastCharE" title="Link to this definition"></a><br /></dt>
+<dd><p>Last received character. Used to detect 2 chars sequences, e.g. <code class="docutils literal notranslate"><span class="pre">\r\n</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter17lastCharTimestampE">
+<span id="_CPPv3N15KeyboardAdapter17lastCharTimestampE"></span><span id="_CPPv2N15KeyboardAdapter17lastCharTimestampE"></span><span id="KeyboardAdapter::lastCharTimestamp__unsigned-l"></span><span class="target" id="classKeyboardAdapter_1aab904c303a143de422de4b1042ffd245"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastCharTimestamp</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter17lastCharTimestampE" title="Link to this definition"></a><br /></dt>
+<dd><p>Milliseconds timestamp of last received character. Used for detecting ESC with no chars next or single <code class="docutils literal notranslate"><span class="pre">\r</span></code> without <code class="docutils literal notranslate"><span class="pre">\n</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter9csiBufferE">
+<span id="_CPPv3N15KeyboardAdapter9csiBufferE"></span><span id="_CPPv2N15KeyboardAdapter9csiBufferE"></span><span id="KeyboardAdapter::csiBuffer__cA"></span><span class="target" id="classKeyboardAdapter_1ac99604891d83d1495a56a516b7ccf602"></span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csiBuffer</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">CSI_BUFFER_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter9csiBufferE" title="Link to this definition"></a><br /></dt>
+<dd><p>Buffer to store already read values of “intermediate bytes”. Multiple bytes command for CSI is in form of <code class="docutils literal notranslate"><span class="pre">ESC</span> <span class="pre">[</span> <span class="pre">&lt;intermediate</span> <span class="pre">bytes&gt;</span> <span class="pre">&lt;terminal</span> <span class="pre">byte&gt;</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter15csiBufferCursorE">
+<span id="_CPPv3N15KeyboardAdapter15csiBufferCursorE"></span><span id="_CPPv2N15KeyboardAdapter15csiBufferCursorE"></span><span id="KeyboardAdapter::csiBufferCursor__uint8_t"></span><span class="target" id="classKeyboardAdapter_1ad1a75491a133251baaa573be969cb648"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csiBufferCursor</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter15csiBufferCursorE" title="Link to this definition"></a><br /></dt>
+<dd><p>Points to next available byte in <code class="docutils literal notranslate"><span class="pre">csiBuffer</span></code>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SimpleRotaryAdapter.html" class="btn btn-neutral float-left" title="SimpleRotaryAdapter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="InputInterface.html" class="btn btn-neutral float-right" title="InputInterface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Thomas Forntoh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
