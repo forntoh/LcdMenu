@@ -38,8 +38,8 @@
  * - Long press for going back
  * - Double press for backspacing
  *
- * The values for long press duration (defined as `LONG_PRESS_DURATION`) and
- * double press threshold (defined as `DOUBLE_PRESS_THRESHOLD`) can be
+ * The values for long press duration (defined as #LONG_PRESS_DURATION) and
+ * double press threshold (defined as #DOUBLE_PRESS_THRESHOLD) can be
  * overwritten by defining new ones with #define.
  *
  * @param menu Pointer to the LcdMenu instance that this adapter will control.

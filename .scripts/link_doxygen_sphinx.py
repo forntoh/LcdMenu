@@ -15,7 +15,7 @@ def create_rst_file(src_path, dest_path):
         rst_file.write(f'   :project: LcdMenu\n')
 
 def create_index_file(directory, entries, subdirs, is_root=False):
-    dir_name = os.path.basename(directory) if not is_root else "Class refefence"
+    dir_name = os.path.basename(directory) if not is_root else "Class reference"
     index_path = os.path.join(directory, 'index.rst')
     with open(index_path, 'w') as index_file:
         index_file.write(f'{dir_name}\n')

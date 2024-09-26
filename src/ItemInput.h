@@ -230,6 +230,9 @@ class ItemInput : public MenuItem {
         // Log
         printLog(F("ItemInput::left"), value);
     };
+    /**
+     * @brief Moves the cursor to the right within the input value.
+     */
     void right(DisplayInterface* display) {
         if (cursor == strlen(value)) {
             return;
@@ -243,13 +246,9 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
         // Log
         printLog(F("ItemInput::right"), value);
-    };
+    }
     /**
-     * Execute a "backspace cmd" on menu
-     *
-     * @note Works only for `ItemInput` type*
-     *
-     * Removes the character at the current cursor position.
+     * @brief Handles the backspace action for the input field.
      */
     void backspace(DisplayInterface* display) {
         if (strlen(value) == 0 || cursor == 0) {
@@ -265,9 +264,16 @@ class ItemInput : public MenuItem {
         display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
     }
     /**
-     * Display text at the cursor position
-     * used for `Input` type menu items
-     * @param character character to append
+     * @brief Types a character into the current input value at the cursor position.
+     *
+     * This function inserts a character into the `value` string at the current cursor position.
+     * If the cursor is within the current length of the string, the string is split and the character
+     * is inserted in between. If the cursor is at the end of the string, the character is appended.
+     * The cursor is then incremented, and the view is adjusted if necessary.
+     * Finally, the display is updated and the blinker position is reset.
+     *
+     * @param display Pointer to the DisplayInterface object used for rendering.
+     * @param character The character to be typed into the input value.
      */
     void typeChar(DisplayInterface* display, const unsigned char character) {
         uint8_t length = strlen(value);
@@ -295,18 +301,11 @@ class ItemInput : public MenuItem {
         printLog(F("ItemInput::typeChar"), character);
     }
     /**
-     * Clear the value of the input field
+     * @brief Clear the value of the input field
      */
     void clear(DisplayInterface* display) {
-        //
-        // set the value
-        //
         value = (char*)"";
-        // Log
         printLog(F("ItemInput::clear"), value);
-        //
-        // update blinker position
-        //
         MenuItem::draw(display);
         display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2));
     }

@@ -37,7 +37,7 @@ class ItemRangeBase : public MenuItem {
      * @param text The text of the item.
      * @param min The minimum value.
      * @param max The maximum value.
-     * @param current The current value.
+     * @param startingValue The current value.
      * @param callback A pointer to the callback function to execute when this menu item is selected.
      * @param unit The unit e.g. "%", "°C", "°F".
      * @param step The step value for increment/decrement.

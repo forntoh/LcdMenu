@@ -13,9 +13,25 @@ class ItemInputCharset : public ItemInput {
     bool charEdit = false;
 
   public:
+    /**
+     * @brief Construct a new ItemInputCharset object with an initial value.
+     * 
+     * @param text The text to display for the item.
+     * @param value The initial value for the input.
+     * @param charset The charset to use for input.
+     * @param callback A reference to the callback function to be invoked when
+     * the input is submitted.
+     */
     ItemInputCharset(const char* text, char* value, const char* charset, fptrStr callback)
         : ItemInput(text, value, callback), charset(charset) {}
 
+    /**
+     * @brief Construct a new ItemInputCharset object with no initial value.
+     * @param text The text to display for the item.
+     * @param charset The charset to use for input.
+     * @param callback A reference to the callback function to be invoked when
+     * the input is submitted.
+     */
     ItemInputCharset(const char* text, const char* charset, fptrStr callback)
         : ItemInputCharset(text, (char*)"", charset, callback) {}
 
@@ -109,6 +125,10 @@ class ItemInputCharset : public ItemInput {
         }
         printLog(F("ItemInputCharset::abortCharEdit"));
     }
+    /**
+     * @brief Commit char edit mode.
+     * Replace char at cursor position with selected char from charset.
+     */
     void commitCharEdit(DisplayInterface* display) {
         uint8_t length = strlen(value);
         if (cursor < length) {
@@ -122,6 +142,9 @@ class ItemInputCharset : public ItemInput {
         printLog(F("ItemInputCharset::commitCharEdit"), charset[charsetPosition]);
         ItemInput::right(display);
     }
+    /**
+     * @brief Show next char from charset.
+     */
     void showNextChar(DisplayInterface* display) {
         if (charset[charsetPosition + 1] == '\0') {
             charsetPosition = 0;
@@ -130,6 +153,9 @@ class ItemInputCharset : public ItemInput {
         }
         display->drawChar(charset[charsetPosition]);
     }
+    /**
+     * @brief Show previous char from charset.
+     */
     void showPreviousChar(DisplayInterface* display) {
         charsetPosition = max(charsetPosition - 1, 0);
         display->drawChar(charset[charsetPosition]);
