@@ -11,9 +11,11 @@ template <typename T>
  *        It can be used to display all sorts of values that can be incremented or decremented.
  *        You can additionally pass a unit to be displayed after the value. e.g. "%", "°C", "°F" etc.
  *
+ * ```
  * ┌──────────────────────────────────┐
  * │ > T E X T : V A L U E U N I T    │
  * └──────────────────────────────────┘
+ * ```
  *
  * Additionally to `text` this item has float `currentValue`.
  * Has internal `edit` state.

@@ -8,9 +8,11 @@
 /**
  * @brief Item that allows user to input string information.
  *
+ * ```
  * ┌────────────────────────────┐
  * │ > T E X T : V A L U E      │
  * └────────────────────────────┘
+ * ```
  *
  * Additionally to `text` this item has string `value`.
  * Has internal `edit` state.
@@ -25,11 +27,13 @@ class ItemInput : public MenuItem {
     /**
      * @brief The index of first visible character.
      *
+     * ```
      *          visible area
      *        ┌───────────────┐
      * X X X X│X X X X █ X X X│X X
      *        └───────────────┘
      *   view--^
+     * ```
      *
      * Is moved when `cursor` crosses the borders of visible area.
      * When length of `value` < `viewSize` this index should be 0.
@@ -38,11 +42,13 @@ class ItemInput : public MenuItem {
     /**
      * @brief Current index of the char to be edited.
      *
+     * ```
      *          visible area
      *        ┌───────────────┐
      * X X X X│X X X X █ X X X│X X
      *        └───────────────┘
      *         cursor--^
+     * ```
      *
      * When `left` or `right` then this position will be moved over the string accordingly.
      * When `type` then new character will be appended on this position.
@@ -58,11 +64,13 @@ class ItemInput : public MenuItem {
     /**
      * @brief The number of visible characters.
      *
+     * ```
      *          visible area
      *        ┌───────────────┐
      * X X X X│X X X X █ X X X│X X
      *        ├───────────────┤
      *        │<── viewSize ─>│
+     * ```
      *
      * Effectively const, but initialized lately when display is injected.
      */
@@ -239,7 +247,7 @@ class ItemInput : public MenuItem {
     /**
      * Execute a "backspace cmd" on menu
      *
-     * *NB: Works only for `ItemInput` type*
+     * @note Works only for `ItemInput` type*
      *
      * Removes the character at the current cursor position.
      */

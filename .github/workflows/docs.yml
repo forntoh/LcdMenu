@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install doxygen graphviz
-          pip install requests sphinx breathe sphinxawesome_theme myst-parser
+          pip install requests sphinx sphinx_design breathe sphinxawesome_theme myst-parser
 
       - name: Generate Doxygen documentation
         run: doxygen docs/Doxyfile
@@ -29,6 +29,10 @@ jobs:
 
       - name: Run changelog updater
         run: python .scripts/update_changelog.py
+
+      - name: Append includes to index files
+        run: |
+          python .scripts/append_includes.py docs/source/reference/migration desc false
 
       - name: Generate Sphinx documentation
         run: make -C docs html

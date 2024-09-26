@@ -1,0 +1,11 @@
+Migration from v4.x to v5.x
+---------------------------
+
+This guide details the changes and how to change your code to migrate to |project| v5.x.
+
+This is a major release with a lot of changes.
+
+.. caution::
+
+   :octicon:`alert`
+   This guide is a work in progress and will be updated as the release progresses.

@@ -8,9 +8,11 @@
 /**
  * @brief Item that allows user to toggle between ON/OFF states.
  *
+ * ```
  * ┌────────────────────────────┐
  * │ > T E X T : O F F          │
  * └────────────────────────────┘
+ * ```
  *
  * Additionally to `text` this item has ON/OFF `enabled` state.
  */

@@ -5,6 +5,7 @@
 #include <utils/constants.h>
 
 /**
+ * ```
  *    ┌── Cursor
  *    v            v──── Items
  *   ┌──┬──────────────────────────────────────┬──┐
@@ -15,7 +16,7 @@
  *   └──┴──────────────────────────────────────┴──┘
  *                       Blinker ──^            ^
  *                               Indicators ────┘
- *
+ * ```
  */
 class DisplayInterface {
   protected:

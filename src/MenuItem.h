@@ -38,10 +38,11 @@ class MenuScreen;
  * @class MenuItem
  * @brief Represent single item in menu.
  *
+ * ```
  * ┌────────────────────────────┐
  * │ > T E X T                  │
  * └────────────────────────────┘
- *
+ * ```
  */
 class MenuItem {
     friend LcdMenu;

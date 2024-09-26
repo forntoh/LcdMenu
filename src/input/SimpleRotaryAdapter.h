@@ -2,9 +2,22 @@
 //
 // Rotary encoder configuration
 //
+/**
+ * @brief Duration for a long press in milliseconds.
+ *
+ * This value defines the duration (in milliseconds) that a button must be pressed
+ * to be considered a long press. The default value is 1000 milliseconds.
+ */
 #ifndef LONG_PRESS_DURATION
 #define LONG_PRESS_DURATION 1000
 #endif
+/**
+ * @brief Threshold for detecting a double press in milliseconds.
+ *
+ * This value defines the maximum time interval (in milliseconds) between two
+ * consecutive button presses to be considered a double press. The default value
+ * is 300 milliseconds.
+ */
 #ifndef DOUBLE_PRESS_THRESHOLD
 #define DOUBLE_PRESS_THRESHOLD 300
 #endif
@@ -25,8 +38,8 @@
  * - Long press for going back
  * - Double press for backspacing
  *
- * The values for long press duration (defined as LONG_PRESS_DURATION) and
- * double press threshold (defined as DOUBLE_PRESS_THRESHOLD) can be
+ * The values for long press duration (defined as `LONG_PRESS_DURATION`) and
+ * double press threshold (defined as `DOUBLE_PRESS_THRESHOLD`) can be
  * overwritten by defining new ones with #define.
  *
  * @param menu Pointer to the LcdMenu instance that this adapter will control.

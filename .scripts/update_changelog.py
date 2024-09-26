@@ -48,6 +48,7 @@ def update_changelog(releases):
         file.write("\n")
         for release in releases:
             file.write(format_release(release))
+            print(f"Added release: {release['name']}")
             file.write("\n")
 
 if __name__ == "__main__":

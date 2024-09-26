@@ -32,8 +32,12 @@
 #include <utils/utils.h>
 
 /**
- * The LcdMenu class contains all fields and methods to manipulate the menu
- * items.
+ * @class LcdMenu
+ * @brief Represents the main menu object.
+ * 
+ * The LcdMenu class is the main object that manages the menu system. It is
+ * responsible for displaying the menu on the screen, processing user input,
+ * and updating the display based on the user's actions.
  */
 class LcdMenu {
   private:

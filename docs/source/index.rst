@@ -1,4 +1,4 @@
-LcdMenu documentation
+|project|
 =====================
 
 Add your content using `reStructuredText` syntax. See the `reStructuredText documentation <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_ for details.
@@ -9,3 +9,10 @@ Add your content using `reStructuredText` syntax. See the `reStructuredText docu
 
     reference/api/index
     reference/changelog
+    reference/migration/index
+    reference/faq
+    reference/license
+    reference/acknowledgements
+    reference/feedback
+    reference/limitations
+

@@ -28,6 +28,7 @@ class MenuScreen {
     /**
      * @brief Cursor position.
      *
+     * ```
      *     X X
      *     X X X X X
      * ┌───────────────┐
@@ -38,6 +39,7 @@ class MenuScreen {
      * └───────────────┘
      *     X X X X
      *     X X X X X X
+     * ```
      *
      * When `up` or `down` then this position will be moved over the items accordingly.
      * Always in range [`view`, `view` + `display.getMaxRows()` - 1].
@@ -46,6 +48,7 @@ class MenuScreen {
     /**
      * @brief First visible item's position in the menu array.
      *
+     * ```
      *     X X
      *     X X X X X
      * ┌───────────────┐
@@ -56,6 +59,7 @@ class MenuScreen {
      * └───────────────┘
      *     X X X X
      *     X X X X X X
+     * ```
      *
      * Is moved when `cursor` crosses the borders of visible area.
      * When number of items < `display.getMaxRows()` this index should be 0.
