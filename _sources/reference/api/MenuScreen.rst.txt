@@ -1,5 +1,0 @@
-MenuScreen
-==========
-
-.. doxygenfile:: MenuScreen.h
-   :project: LcdMenu

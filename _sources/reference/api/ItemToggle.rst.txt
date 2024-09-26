@@ -1,5 +1,0 @@
-ItemToggle
-==========
-
-.. doxygenfile:: ItemToggle.h
-   :project: LcdMenu

@@ -1,5 +1,0 @@
-ItemInputCharset
-================
-
-.. doxygenfile:: ItemInputCharset.h
-   :project: LcdMenu

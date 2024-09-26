@@ -1,5 +1,0 @@
-InputInterface
-==============
-
-.. doxygenfile:: InputInterface.h
-   :project: LcdMenu

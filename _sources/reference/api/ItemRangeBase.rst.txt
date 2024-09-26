@@ -1,5 +1,0 @@
-ItemRangeBase
-=============
-
-.. doxygenfile:: ItemRangeBase.h
-   :project: LcdMenu
