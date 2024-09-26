@@ -5,7 +5,7 @@ import requests
 GITHUB_API_URL = "https://api.github.com/repos/{owner}/{repo}/releases"
 OWNER = "forntoh"
 REPO = "LcdMenu"
-CHANGELOG_FILE = "docs/source/reference/changelog/index.rst"
+CHANGELOG_FILE = "docs/source/reference/changelog.rst"
 
 def fetch_releases():
     url = GITHUB_API_URL.format(owner=OWNER, repo=REPO)
