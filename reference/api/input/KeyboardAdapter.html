@@ -1,205 +1,162 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../../">
+
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../../../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KeyboardAdapter &mdash; LcdMenu  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=fe1cf113" />
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="InputInterface" href="InputInterface.html" />
-    <link rel="prev" title="SimpleRotaryAdapter" href="SimpleRotaryAdapter.html" /> 
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>KeyboardAdapter | LcdMenu  documentation</title>
+<meta content="KeyboardAdapter | LcdMenu  documentation" property="og:title"/>
+<meta content="KeyboardAdapter | LcdMenu  documentation" name="twitter:title"/>
+<link href="../../../_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="InputInterface.html" rel="next" title="InputInterface"/>
+<link href="SimpleRotaryAdapter.html" rel="prev" title="SimpleRotaryAdapter"/>
+<script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
 </head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../../index.html" class="icon icon-home">
-            LcdMenu
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
+<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
+      Skip to content
+    </a><header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+<div class="hidden mr-4 md:flex">
+<a class="flex items-center mr-6" href="../../../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">LcdMenu  documentation</span>
+</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
+<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
+</svg>
+<span class="sr-only">Toggle navigation menu</span>
+</button>
+<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../../../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
+<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+<span class="text-xs">⌘</span>
+    K
+  </kbd>
+</form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<nav class="flex items-center space-x-1">
+<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
+<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
+</svg>
+<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
+</svg>
+</button>
+</nav>
+</div>
+</div>
+</header>
+<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
+<a class="!justify-start text-sm md:!hidden bg-background" href="../../../index.html"><span class="font-bold text-clip whitespace-nowrap">LcdMenu  documentation</span>
+</a>
+<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Class reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../ItemIntRange.html">ItemIntRange</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemIntRange.html#_CPPv412ItemIntRange"><code class="docutils literal notranslate"><span class="pre">ItemIntRange</span></code></a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../index.html">Class refefence<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../ItemIntRange.html">ItemIntRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemRangeBase.html">ItemRangeBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MenuScreen.html">MenuScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemFloatRange.html">ItemFloatRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">input</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemToggle.html#_CPPv410ItemToggle"><code class="docutils literal notranslate"><span class="pre">ItemToggle</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemRangeBase.html">ItemRangeBase</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemRangeBase.html#_CPPv4I0E13ItemRangeBase"><code class="docutils literal notranslate"><span class="pre">ItemRangeBase</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../MenuScreen.html">MenuScreen</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../MenuScreen.html#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemInputCharset.html#_CPPv416ItemInputCharset"><code class="docutils literal notranslate"><span class="pre">ItemInputCharset</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../MenuItem.html#_CPPv48MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemList.html#_CPPv48ItemList"><code class="docutils literal notranslate"><span class="pre">ItemList</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemFloatRange.html">ItemFloatRange</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemFloatRange.html#_CPPv414ItemFloatRange"><code class="docutils literal notranslate"><span class="pre">ItemFloatRange</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemInput.html#_CPPv49ItemInput"><code class="docutils literal notranslate"><span class="pre">ItemInput</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemCommand.html#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemBack.html#_CPPv48ItemBack"><code class="docutils literal notranslate"><span class="pre">ItemBack</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu"><code class="docutils literal notranslate"><span class="pre">LcdMenu</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ItemSubMenu.html#_CPPv411ItemSubMenu"><code class="docutils literal notranslate"><span class="pre">ItemSubMenu</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../display/LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../display/DisplayInterface.html">DisplayInterface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../display/LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
-</ul>
-</li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">input</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="ButtonAdapter.html">ButtonAdapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="SimpleRotaryAdapter.html">SimpleRotaryAdapter</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">KeyboardAdapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InputInterface.html">InputInterface</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../migration_guides/index.html">Migration guides</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../migration_guides/v5.x.html">V5.000</a></li>
-</ul>
-</li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">LcdMenu</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Class reference</a></li>
-          <li class="breadcrumb-item"><a href="index.html">input</a></li>
-      <li class="breadcrumb-item active">KeyboardAdapter</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../../_sources/reference/api/input/KeyboardAdapter.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
+</nav>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="keyboardadapter">
-<h1>KeyboardAdapter<a class="headerlink" href="#keyboardadapter" title="Link to this heading"></a></h1>
+</div>
+<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
+<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
+</svg>
+</button>
+</aside>
+<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../../../index.html">
+<span class="hidden md:inline">LcdMenu  documentation</span>
+<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
+</svg>
+</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../index.html">Class refefence</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">input</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">KeyboardAdapter</span>
+</nav>
+<div id="content" role="main">
+<section id="keyboardadapter">
+<h1>KeyboardAdapter<a class="headerlink" href="#keyboardadapter" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.BS">
-<span class="target" id="KeyboardAdapter_8h_1a580a88f98668df1ac5e1683cae31c0b3"></span><span class="sig-name descname"><span class="n"><span class="pre">BS</span></span></span><a class="headerlink" href="#c.BS" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a580a88f98668df1ac5e1683cae31c0b3"></span><span class="sig-name descname"><span class="n"><span class="pre">BS</span></span></span><a class="headerlink" href="#c.BS" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.BS'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.LF">
-<span class="target" id="KeyboardAdapter_8h_1a350c9d6cb81908d59427ee96844d1a9c"></span><span class="sig-name descname"><span class="n"><span class="pre">LF</span></span></span><a class="headerlink" href="#c.LF" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a350c9d6cb81908d59427ee96844d1a9c"></span><span class="sig-name descname"><span class="n"><span class="pre">LF</span></span></span><a class="headerlink" href="#c.LF" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.LF'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.CR">
-<span class="target" id="KeyboardAdapter_8h_1a876ce77f3c672c7162658151e648389e"></span><span class="sig-name descname"><span class="n"><span class="pre">CR</span></span></span><a class="headerlink" href="#c.CR" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a876ce77f3c672c7162658151e648389e"></span><span class="sig-name descname"><span class="n"><span class="pre">CR</span></span></span><a class="headerlink" href="#c.CR" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.CR'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ESC">
-<span class="target" id="KeyboardAdapter_8h_1a4af1b6159e447ba72652bb7fcdfa726e"></span><span class="sig-name descname"><span class="n"><span class="pre">ESC</span></span></span><a class="headerlink" href="#c.ESC" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a4af1b6159e447ba72652bb7fcdfa726e"></span><span class="sig-name descname"><span class="n"><span class="pre">ESC</span></span></span><a class="headerlink" href="#c.ESC" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.ESC'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.DEL">
-<span class="target" id="KeyboardAdapter_8h_1ad1e508e805e4ddbc05119be4bb260985"></span><span class="sig-name descname"><span class="n"><span class="pre">DEL</span></span></span><a class="headerlink" href="#c.DEL" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1ad1e508e805e4ddbc05119be4bb260985"></span><span class="sig-name descname"><span class="n"><span class="pre">DEL</span></span></span><a class="headerlink" href="#c.DEL" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.DEL'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.C2_CSI_TERMINAL_MIN">
-<span class="target" id="KeyboardAdapter_8h_1a4b7d8578209d13d275adf5369bd5c4d4"></span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI_TERMINAL_MIN</span></span></span><a class="headerlink" href="#c.C2_CSI_TERMINAL_MIN" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a4b7d8578209d13d275adf5369bd5c4d4"></span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI_TERMINAL_MIN</span></span></span><a class="headerlink" href="#c.C2_CSI_TERMINAL_MIN" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.C2_CSI_TERMINAL_MIN'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.C2_CSI_TERMINAL_MAX">
-<span class="target" id="KeyboardAdapter_8h_1a0e2906f4a148d4d01a71e00661052b3f"></span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI_TERMINAL_MAX</span></span></span><a class="headerlink" href="#c.C2_CSI_TERMINAL_MAX" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a0e2906f4a148d4d01a71e00661052b3f"></span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI_TERMINAL_MAX</span></span></span><a class="headerlink" href="#c.C2_CSI_TERMINAL_MAX" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.C2_CSI_TERMINAL_MAX'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.THRESHOLD">
-<span class="target" id="KeyboardAdapter_8h_1a4679d8ea8690999a6c6c7c0cb245c879"></span><span class="sig-name descname"><span class="n"><span class="pre">THRESHOLD</span></span></span><a class="headerlink" href="#c.THRESHOLD" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a4679d8ea8690999a6c6c7c0cb245c879"></span><span class="sig-name descname"><span class="n"><span class="pre">THRESHOLD</span></span></span><a class="headerlink" href="#c.THRESHOLD" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.THRESHOLD'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.CSI_BUFFER_SIZE">
-<span class="target" id="KeyboardAdapter_8h_1a6ccc002023cadd7285ce2f06e5c9d01c"></span><span class="sig-name descname"><span class="n"><span class="pre">CSI_BUFFER_SIZE</span></span></span><a class="headerlink" href="#c.CSI_BUFFER_SIZE" title="Link to this definition"></a><br /></dt>
+<span class="target" id="KeyboardAdapter_8h_1a6ccc002023cadd7285ce2f06e5c9d01c"></span><span class="sig-name descname"><span class="n"><span class="pre">CSI_BUFFER_SIZE</span></span></span><a class="headerlink" href="#c.CSI_BUFFER_SIZE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.CSI_BUFFER_SIZE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 </div>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv415KeyboardAdapter">
-<span id="_CPPv315KeyboardAdapter"></span><span id="_CPPv215KeyboardAdapter"></span><span id="KeyboardAdapter"></span><span class="target" id="classKeyboardAdapter"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyboardAdapter</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="InputInterface.html#_CPPv414InputInterface" title="InputInterface"><span class="n"><span class="pre">InputInterface</span></span></a><a class="headerlink" href="#_CPPv415KeyboardAdapter" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv315KeyboardAdapter"></span><span id="_CPPv215KeyboardAdapter"></span><span id="KeyboardAdapter"></span><span class="target" id="classKeyboardAdapter"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyboardAdapter</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="InputInterface.html#_CPPv414InputInterface" title="InputInterface"><span class="n"><span class="pre">InputInterface</span></span></a><a class="headerlink" href="#_CPPv415KeyboardAdapter" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv415KeyboardAdapter'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><div class="docutils container">
 <em>#include &lt;KeyboardAdapter.h&gt;</em></div>
 <p>Input interface to keyboard. Uses default buttons layout: </p>
@@ -217,20 +174,18 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream">
-<span id="_CPPv3N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream"></span><span id="_CPPv2N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream"></span><span id="KeyboardAdapter::KeyboardAdapter__LcdMenuP.StreamP"></span><span class="target" id="classKeyboardAdapter_1ac54f7bb8ad744bef468836bcbd124e4d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyboardAdapter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="n"><span class="pre">Stream</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream"></span><span id="_CPPv2N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream"></span><span id="KeyboardAdapter::KeyboardAdapter__LcdMenuP.StreamP"></span><span class="target" id="classKeyboardAdapter_1ac54f7bb8ad744bef468836bcbd124e4d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">KeyboardAdapter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="n"><span class="pre">Stream</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7observeEv">
-<span id="_CPPv3N15KeyboardAdapter7observeEv"></span><span id="_CPPv2N15KeyboardAdapter7observeEv"></span><span id="KeyboardAdapter::observe"></span><span class="target" id="classKeyboardAdapter_1a52e06c3c8b7027b6ac6d3c8894526592"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">observe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7observeEv" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7observeEv"></span><span id="_CPPv2N15KeyboardAdapter7observeEv"></span><span id="KeyboardAdapter::observe"></span><span class="target" id="classKeyboardAdapter_1a52e06c3c8b7027b6ac6d3c8894526592"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">observe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7observeEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7observeEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-types">Private Types</p>
 <dl class="cpp enum-class">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSetE">
-<span id="_CPPv3N15KeyboardAdapter7CodeSetE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSetE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CodeSet</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7CodeSetE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSetE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CodeSet</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7CodeSetE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p><div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/ANSI_escape_code">https://en.wikipedia.org/wiki/ANSI_escape_code</a></p>
@@ -243,64 +198,54 @@
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet2C0E">
-<span id="_CPPv3N15KeyboardAdapter7CodeSet2C0E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C0E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea9c5959e6f08f10d0edbadf5be1f33c53"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C0</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C0E" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7CodeSet2C0E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C0E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea9c5959e6f08f10d0edbadf5be1f33c53"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C0</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C0E" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7CodeSet2C0E'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Main ASCII code set. Initially defined as part of ASCII, the default C0 control code set is now defined in ISO 6429 (ECMA-48). </p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet2C1E">
-<span id="_CPPv3N15KeyboardAdapter7CodeSet2C1E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C1E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea1a2ddc2db4693cfd16d534cde5572cc1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C1</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C1E" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7CodeSet2C1E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C1E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea1a2ddc2db4693cfd16d534cde5572cc1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C1</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C1E" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7CodeSet2C1E'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Fe Escape sequences. Starts with ESC. Terminates with [0x40, 0x5F]. </p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE">
-<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_CSIE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_CSIE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea8887e0a4e992bf98b2de19432b194cb7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_CSIE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_CSIE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea8887e0a4e992bf98b2de19432b194cb7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_CSI</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Control Sequence Introducer. Starts with ESC [. Terminates with [0x40, 0x7E]. </p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE">
-<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_DCSE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_DCSE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ead9186e754eca8fdb07a57354fc3c3b62"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_DCS</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_DCSE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_DCSE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ead9186e754eca8fdb07a57354fc3c3b62"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_DCS</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Device Control String. Starts with ESC P. Terminates with ESC . </p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE">
-<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_OSCE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_OSCE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5eaeb4e25acf3aa21e15735c660bf593716"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_OSC</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7CodeSet6C2_OSCE"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet6C2_OSCE"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5eaeb4e25acf3aa21e15735c660bf593716"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C2_OSC</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Operating System Command. Starts with ESC ]. Terminates with ESC . Currently not implemented. </p>
 </dd></dl>
-
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7CodeSet2C3E">
-<span id="_CPPv3N15KeyboardAdapter7CodeSet2C3E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C3E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea3abe124ecc82bf2c2e22e6058f38c50c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C3</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C3E" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7CodeSet2C3E"></span><span id="_CPPv2N15KeyboardAdapter7CodeSet2C3E"></span><span class="target" id="classKeyboardAdapter_1a108745198bbbd9b71fcc495a23250c5ea3abe124ecc82bf2c2e22e6058f38c50c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C3</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7CodeSet2C3E" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7CodeSet2C3E'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Expect string terminator. Currently not implemented. </p>
 </dd></dl>
-
 </dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter5resetEv">
-<span id="_CPPv3N15KeyboardAdapter5resetEv"></span><span id="_CPPv2N15KeyboardAdapter5resetEv"></span><span id="KeyboardAdapter::reset"></span><span class="target" id="classKeyboardAdapter_1a9cb7747c8fe1dd6745ccbed22fbcd274"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter5resetEv" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter5resetEv"></span><span id="_CPPv2N15KeyboardAdapter5resetEv"></span><span id="KeyboardAdapter::reset"></span><span class="target" id="classKeyboardAdapter_1a9cb7747c8fe1dd6745ccbed22fbcd274"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter5resetEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter5resetEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Reset to initial state. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter11hasLastCharEv">
-<span id="_CPPv3N15KeyboardAdapter11hasLastCharEv"></span><span id="_CPPv2N15KeyboardAdapter11hasLastCharEv"></span><span id="KeyboardAdapter::hasLastChar"></span><span class="target" id="classKeyboardAdapter_1a518e49dbfa823b8377dd25e7b483d00b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasLastChar</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter11hasLastCharEv" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter11hasLastCharEv"></span><span id="_CPPv2N15KeyboardAdapter11hasLastCharEv"></span><span id="KeyboardAdapter::hasLastChar"></span><span class="target" id="classKeyboardAdapter_1a518e49dbfa823b8377dd25e7b483d00b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasLastChar</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter11hasLastCharEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter11hasLastCharEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter12saveLastCharEh">
-<span id="_CPPv3N15KeyboardAdapter12saveLastCharEh"></span><span id="_CPPv2N15KeyboardAdapter12saveLastCharEh"></span><span id="KeyboardAdapter::saveLastChar__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1afef69d3825aef2991a14bda5114879e7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">saveLastChar</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter12saveLastCharEh" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter12saveLastCharEh"></span><span id="_CPPv2N15KeyboardAdapter12saveLastCharEh"></span><span id="KeyboardAdapter::saveLastChar__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1afef69d3825aef2991a14bda5114879e7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">saveLastChar</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter12saveLastCharEh" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter12saveLastCharEh'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter10handleIdleEv">
-<span id="_CPPv3N15KeyboardAdapter10handleIdleEv"></span><span id="_CPPv2N15KeyboardAdapter10handleIdleEv"></span><span id="KeyboardAdapter::handleIdle"></span><span class="target" id="classKeyboardAdapter_1ad9a6d0d8002fe66523d4c6f0ed80bbaa"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleIdle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter10handleIdleEv" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter10handleIdleEv"></span><span id="_CPPv2N15KeyboardAdapter10handleIdleEv"></span><span id="KeyboardAdapter::handleIdle"></span><span class="target" id="classKeyboardAdapter_1ad9a6d0d8002fe66523d4c6f0ed80bbaa"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleIdle</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter10handleIdleEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter10handleIdleEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Handle idle state when there are no input for some time. </p>
 <p><div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -308,10 +253,9 @@
 </div>
 </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter14handleReceivedEh">
-<span id="_CPPv3N15KeyboardAdapter14handleReceivedEh"></span><span id="_CPPv2N15KeyboardAdapter14handleReceivedEh"></span><span id="KeyboardAdapter::handleReceived__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1a1896a5889c731d72927a81ed049bf6d4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleReceived</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter14handleReceivedEh" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter14handleReceivedEh"></span><span id="_CPPv2N15KeyboardAdapter14handleReceivedEh"></span><span id="KeyboardAdapter::handleReceived__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1a1896a5889c731d72927a81ed049bf6d4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleReceived</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter14handleReceivedEh" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter14handleReceivedEh'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Handle received command. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -319,80 +263,103 @@
 </dd>
 </dl>
 </dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter6streamE">
-<span id="_CPPv3N15KeyboardAdapter6streamE"></span><span id="_CPPv2N15KeyboardAdapter6streamE"></span><span id="KeyboardAdapter::stream__StreamP"></span><span class="target" id="classKeyboardAdapter_1a78de6e6eba631303378b2914f9fd6e43"></span><span class="n"><span class="pre">Stream</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">stream</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter6streamE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter6streamE"></span><span id="_CPPv2N15KeyboardAdapter6streamE"></span><span id="KeyboardAdapter::stream__StreamP"></span><span class="target" id="classKeyboardAdapter_1a78de6e6eba631303378b2914f9fd6e43"></span><span class="n"><span class="pre">Stream</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">stream</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter6streamE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter6streamE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Input stream. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter7codeSetE">
-<span id="_CPPv3N15KeyboardAdapter7codeSetE"></span><span id="_CPPv2N15KeyboardAdapter7codeSetE"></span><span id="KeyboardAdapter::codeSet__CodeSet"></span><span class="target" id="classKeyboardAdapter_1aef16e51db0310c6aca4535f1e992ed57"></span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="KeyboardAdapter::CodeSet"><span class="n"><span class="pre">CodeSet</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">codeSet</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="KeyboardAdapter::CodeSet"><span class="n"><span class="pre">CodeSet</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet2C0E" title="KeyboardAdapter::CodeSet::C0"><span class="n"><span class="pre">C0</span></span></a><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7codeSetE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter7codeSetE"></span><span id="_CPPv2N15KeyboardAdapter7codeSetE"></span><span id="KeyboardAdapter::codeSet__CodeSet"></span><span class="target" id="classKeyboardAdapter_1aef16e51db0310c6aca4535f1e992ed57"></span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="KeyboardAdapter::CodeSet"><span class="n"><span class="pre">CodeSet</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">codeSet</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSetE" title="KeyboardAdapter::CodeSet"><span class="n"><span class="pre">CodeSet</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet2C0E" title="KeyboardAdapter::CodeSet::C0"><span class="n"><span class="pre">C0</span></span></a><a class="headerlink" href="#_CPPv4N15KeyboardAdapter7codeSetE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter7codeSetE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Internal state of current code set. As stream receives bytes asynchronously, multiple bytes command can arrive in several calls. Need to store current state between calls. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter8lastCharE">
-<span id="_CPPv3N15KeyboardAdapter8lastCharE"></span><span id="_CPPv2N15KeyboardAdapter8lastCharE"></span><span id="KeyboardAdapter::lastChar__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1aba6c8e614e6881674c766b5db8bce19e"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastChar</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter8lastCharE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter8lastCharE"></span><span id="_CPPv2N15KeyboardAdapter8lastCharE"></span><span id="KeyboardAdapter::lastChar__unsigned-c"></span><span class="target" id="classKeyboardAdapter_1aba6c8e614e6881674c766b5db8bce19e"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastChar</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter8lastCharE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter8lastCharE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Last received character. Used to detect 2 chars sequences, e.g. <code class="docutils literal notranslate"><span class="pre">\r\n</span></code>. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter17lastCharTimestampE">
-<span id="_CPPv3N15KeyboardAdapter17lastCharTimestampE"></span><span id="_CPPv2N15KeyboardAdapter17lastCharTimestampE"></span><span id="KeyboardAdapter::lastCharTimestamp__unsigned-l"></span><span class="target" id="classKeyboardAdapter_1aab904c303a143de422de4b1042ffd245"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastCharTimestamp</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter17lastCharTimestampE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter17lastCharTimestampE"></span><span id="_CPPv2N15KeyboardAdapter17lastCharTimestampE"></span><span id="KeyboardAdapter::lastCharTimestamp__unsigned-l"></span><span class="target" id="classKeyboardAdapter_1aab904c303a143de422de4b1042ffd245"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastCharTimestamp</span></span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter17lastCharTimestampE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter17lastCharTimestampE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Milliseconds timestamp of last received character. Used for detecting ESC with no chars next or single <code class="docutils literal notranslate"><span class="pre">\r</span></code> without <code class="docutils literal notranslate"><span class="pre">\n</span></code>. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter9csiBufferE">
-<span id="_CPPv3N15KeyboardAdapter9csiBufferE"></span><span id="_CPPv2N15KeyboardAdapter9csiBufferE"></span><span id="KeyboardAdapter::csiBuffer__cA"></span><span class="target" id="classKeyboardAdapter_1ac99604891d83d1495a56a516b7ccf602"></span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csiBuffer</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">CSI_BUFFER_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter9csiBufferE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter9csiBufferE"></span><span id="_CPPv2N15KeyboardAdapter9csiBufferE"></span><span id="KeyboardAdapter::csiBuffer__cA"></span><span class="target" id="classKeyboardAdapter_1ac99604891d83d1495a56a516b7ccf602"></span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csiBuffer</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">CSI_BUFFER_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter9csiBufferE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter9csiBufferE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Buffer to store already read values of “intermediate bytes”. Multiple bytes command for CSI is in form of <code class="docutils literal notranslate"><span class="pre">ESC</span> <span class="pre">[</span> <span class="pre">&lt;intermediate</span> <span class="pre">bytes&gt;</span> <span class="pre">&lt;terminal</span> <span class="pre">byte&gt;</span></code>. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N15KeyboardAdapter15csiBufferCursorE">
-<span id="_CPPv3N15KeyboardAdapter15csiBufferCursorE"></span><span id="_CPPv2N15KeyboardAdapter15csiBufferCursorE"></span><span id="KeyboardAdapter::csiBufferCursor__uint8_t"></span><span class="target" id="classKeyboardAdapter_1ad1a75491a133251baaa573be969cb648"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csiBufferCursor</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter15csiBufferCursorE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N15KeyboardAdapter15csiBufferCursorE"></span><span id="_CPPv2N15KeyboardAdapter15csiBufferCursorE"></span><span id="KeyboardAdapter::csiBufferCursor__uint8_t"></span><span class="target" id="classKeyboardAdapter_1ad1a75491a133251baaa573be969cb648"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csiBufferCursor</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N15KeyboardAdapter15csiBufferCursorE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15KeyboardAdapter15csiBufferCursorE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Points to next available byte in <code class="docutils literal notranslate"><span class="pre">csiBuffer</span></code>. </p>
 </dd></dl>
-
 </div>
 </dd></dl>
-
 </section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="SimpleRotaryAdapter.html" class="btn btn-neutral float-left" title="SimpleRotaryAdapter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="InputInterface.html" class="btn btn-neutral float-right" title="InputInterface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2024, Thomas Forntoh.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
+</div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
+<div class="mr-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="SimpleRotaryAdapter.html">
+<svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+        SimpleRotaryAdapter
+      </a>
+</div>
+<div class="ml-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="InputInterface.html">
+        InputInterface
+        <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</a>
+</div>
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#_CPPv415KeyboardAdapter'" class="reference internal" href="#_CPPv415KeyboardAdapter"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream'" class="reference internal" href="#_CPPv4N15KeyboardAdapter15KeyboardAdapterEP7LcdMenuP6Stream"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::KeyboardAdapter()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7observeEv'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7observeEv"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::observe()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7CodeSetE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSetE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::CodeSet</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7CodeSet2C0E'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet2C0E"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::CodeSet::C0</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7CodeSet2C1E'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet2C1E"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::CodeSet::C1</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_CSIE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::CodeSet::C2_CSI</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_DCSE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::CodeSet::C2_DCS</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet6C2_OSCE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::CodeSet::C2_OSC</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7CodeSet2C3E'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7CodeSet2C3E"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::CodeSet::C3</span></code></a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter5resetEv'" class="reference internal" href="#_CPPv4N15KeyboardAdapter5resetEv"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::reset()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter11hasLastCharEv'" class="reference internal" href="#_CPPv4N15KeyboardAdapter11hasLastCharEv"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::hasLastChar()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter12saveLastCharEh'" class="reference internal" href="#_CPPv4N15KeyboardAdapter12saveLastCharEh"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::saveLastChar()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter10handleIdleEv'" class="reference internal" href="#_CPPv4N15KeyboardAdapter10handleIdleEv"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::handleIdle()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter14handleReceivedEh'" class="reference internal" href="#_CPPv4N15KeyboardAdapter14handleReceivedEh"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::handleReceived()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter6streamE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter6streamE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::stream</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter7codeSetE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter7codeSetE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::codeSet</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter8lastCharE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter8lastCharE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::lastChar</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter17lastCharTimestampE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter17lastCharTimestampE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::lastCharTimestamp</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter9csiBufferE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter9csiBufferE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::csiBuffer</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15KeyboardAdapter15csiBufferCursorE'" class="reference internal" href="#_CPPv4N15KeyboardAdapter15csiBufferCursorE"><code class="docutils literal notranslate"><span class="pre">KeyboardAdapter::csiBufferCursor</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</aside>
+</main>
+</div>
+</div><footer class="py-6 border-t border-border md:py-0">
+<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, Thomas Forntoh Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.3.7</a></p>
+</div>
+</div>
 </footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
+</div>
+<script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+<script src="../../../_static/doctools.js?v=9a2dae69"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script defer="defer" src="../../../_static/theme.js?v=e82a16a3"></script>
 </body>
 </html>

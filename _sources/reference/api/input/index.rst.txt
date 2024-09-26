@@ -2,8 +2,7 @@ input
 =====
 
 .. toctree::
-   :maxdepth: 2
-   :hidden:
+   :maxdepth: 1
    :caption: input
 
    ButtonAdapter

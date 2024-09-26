@@ -1,10 +1,16 @@
-Class reference
+Class refefence
 ===============
 
+.. rst-class:: lead
+
+This section contains the class reference documentation for the |project| library.
+Here you will find detailed descriptions of all the classes, their methods, and attributes.
+
+--------------------------------------------------------------------------------
+
 .. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Class reference
+   :maxdepth: 1
+   :caption: Class refefence
 
    ItemIntRange
    ItemToggle

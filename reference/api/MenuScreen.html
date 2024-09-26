@@ -1,164 +1,129 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../">
+
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MenuScreen &mdash; LcdMenu  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=fe1cf113" />
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ItemInputCharset" href="ItemInputCharset.html" />
-    <link rel="prev" title="ItemRangeBase" href="ItemRangeBase.html" /> 
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>MenuScreen | LcdMenu  documentation</title>
+<meta content="MenuScreen | LcdMenu  documentation" property="og:title"/>
+<meta content="MenuScreen | LcdMenu  documentation" name="twitter:title"/>
+<link href="../../_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
+<link href="../../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="ItemInputCharset.html" rel="next" title="ItemInputCharset"/>
+<link href="ItemRangeBase.html" rel="prev" title="ItemRangeBase"/>
+<script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
 </head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            LcdMenu
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
+<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
+      Skip to content
+    </a><header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+<div class="hidden mr-4 md:flex">
+<a class="flex items-center mr-6" href="../../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">LcdMenu  documentation</span>
+</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
+<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
+</svg>
+<span class="sr-only">Toggle navigation menu</span>
+</button>
+<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
+<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+<span class="text-xs">⌘</span>
+    K
+  </kbd>
+</form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<nav class="flex items-center space-x-1">
+<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
+<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
+</svg>
+<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
+</svg>
+</button>
+</nav>
+</div>
+</div>
+</header>
+<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
+<a class="!justify-start text-sm md:!hidden bg-background" href="../../index.html"><span class="font-bold text-clip whitespace-nowrap">LcdMenu  documentation</span>
+</a>
+<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Class reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemIntRange.html#_CPPv412ItemIntRange"><code class="docutils literal notranslate"><span class="pre">ItemIntRange</span></code></a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Class refefence<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MenuScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemToggle.html#_CPPv410ItemToggle"><code class="docutils literal notranslate"><span class="pre">ItemToggle</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemRangeBase.html#_CPPv4I0E13ItemRangeBase"><code class="docutils literal notranslate"><span class="pre">ItemRangeBase</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">MenuScreen</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemInputCharset.html#_CPPv416ItemInputCharset"><code class="docutils literal notranslate"><span class="pre">ItemInputCharset</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemList.html#_CPPv48ItemList"><code class="docutils literal notranslate"><span class="pre">ItemList</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemFloatRange.html#_CPPv414ItemFloatRange"><code class="docutils literal notranslate"><span class="pre">ItemFloatRange</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemInput.html#_CPPv49ItemInput"><code class="docutils literal notranslate"><span class="pre">ItemInput</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemCommand.html#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemBack.html#_CPPv48ItemBack"><code class="docutils literal notranslate"><span class="pre">ItemBack</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu"><code class="docutils literal notranslate"><span class="pre">LcdMenu</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ItemSubMenu.html#_CPPv411ItemSubMenu"><code class="docutils literal notranslate"><span class="pre">ItemSubMenu</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="display/DisplayInterface.html">DisplayInterface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="display/LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="input/ButtonAdapter.html">ButtonAdapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="input/SimpleRotaryAdapter.html">SimpleRotaryAdapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="input/KeyboardAdapter.html">KeyboardAdapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="input/InputInterface.html">InputInterface</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../migration_guides/index.html">Migration guides</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../migration_guides/v5.x.html">V5.000</a></li>
-</ul>
-</li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">LcdMenu</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">Class reference</a></li>
-      <li class="breadcrumb-item active">MenuScreen</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/reference/api/MenuScreen.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
+</nav>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="menuscreen">
-<h1>MenuScreen<a class="headerlink" href="#menuscreen" title="Link to this heading"></a></h1>
+</div>
+<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
+<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
+</svg>
+</button>
+</aside>
+<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../../index.html">
+<span class="hidden md:inline">LcdMenu  documentation</span>
+<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
+</svg>
+</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Class refefence</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">MenuScreen</span>
+</nav>
+<div id="content" role="main">
+<section id="menuscreen">
+<h1>MenuScreen<a class="headerlink" href="#menuscreen" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.MENU_SCREEN">
-<span class="target" id="MenuScreen_8h_1a3a56e2cb21dc12e2ec0457c9a1026712"></span><span class="sig-name descname"><span class="n"><span class="pre">MENU_SCREEN</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">screen</span></span>, <span class="n"><span class="pre">items</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MENU_SCREEN" title="Link to this definition"></a><br /></dt>
+<span class="target" id="MenuScreen_8h_1a3a56e2cb21dc12e2ec0457c9a1026712"></span><span class="sig-name descname"><span class="n"><span class="pre">MENU_SCREEN</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">screen</span></span>, <span class="n"><span class="pre">items</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MENU_SCREEN" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.MENU_SCREEN'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-
 </div>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv410MenuScreen">
-<span id="_CPPv310MenuScreen"></span><span id="_CPPv210MenuScreen"></span><span id="MenuScreen"></span><span class="target" id="classMenuScreen"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MenuScreen</span></span></span><a class="headerlink" href="#_CPPv410MenuScreen" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv310MenuScreen"></span><span id="_CPPv210MenuScreen"></span><span id="MenuScreen"></span><span class="target" id="classMenuScreen"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MenuScreen</span></span></span><a class="headerlink" href="#_CPPv410MenuScreen" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv410MenuScreen'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><div class="docutils container">
 <em>#include &lt;MenuScreen.h&gt;</em></div>
 <p>Represents single screen with number of menu items. Contains logic of navigating between items. Stores current cursor and view. </p>
@@ -166,25 +131,22 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem">
-<span id="_CPPv3N10MenuScreen10MenuScreenEPP8MenuItem"></span><span id="_CPPv2N10MenuScreen10MenuScreenEPP8MenuItem"></span><span id="MenuScreen::MenuScreen__MenuItemPP"></span><span class="target" id="classMenuScreen_1a4f32677ed1b44fa21a36cd3bd611cb16"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MenuScreen</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">items</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen10MenuScreenEPP8MenuItem"></span><span id="_CPPv2N10MenuScreen10MenuScreenEPP8MenuItem"></span><span id="MenuScreen::MenuScreen__MenuItemPP"></span><span class="target" id="classMenuScreen_1a4f32677ed1b44fa21a36cd3bd611cb16"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MenuScreen</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">items</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Constructor </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9setParentEP10MenuScreen">
-<span id="_CPPv3N10MenuScreen9setParentEP10MenuScreen"></span><span id="_CPPv2N10MenuScreen9setParentEP10MenuScreen"></span><span id="MenuScreen::setParent__MenuScreenP"></span><span class="target" id="classMenuScreen_1a944784683783b3d77738aeb36b0b9a36"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setParent</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410MenuScreen" title="MenuScreen"><span class="n"><span class="pre">MenuScreen</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">parent</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9setParentEP10MenuScreen" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen9setParentEP10MenuScreen"></span><span id="_CPPv2N10MenuScreen9setParentEP10MenuScreen"></span><span id="MenuScreen::setParent__MenuScreenP"></span><span class="target" id="classMenuScreen_1a944784683783b3d77738aeb36b0b9a36"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setParent</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410MenuScreen" title="MenuScreen"><span class="n"><span class="pre">MenuScreen</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">parent</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9setParentEP10MenuScreen" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen9setParentEP10MenuScreen'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Set new parent screen. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9getCursorEv">
-<span id="_CPPv3N10MenuScreen9getCursorEv"></span><span id="_CPPv2N10MenuScreen9getCursorEv"></span><span id="MenuScreen::getCursor"></span><span class="target" id="classMenuScreen_1a6256de2f1ee1412c378504642085fe18"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCursor</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9getCursorEv" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen9getCursorEv"></span><span id="_CPPv2N10MenuScreen9getCursorEv"></span><span id="MenuScreen::getCursor"></span><span class="target" id="classMenuScreen_1a6256de2f1ee1412c378504642085fe18"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCursor</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9getCursorEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen9getCursorEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Get current cursor position. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9getItemAtE7uint8_t">
-<span id="_CPPv3N10MenuScreen9getItemAtE7uint8_t"></span><span id="_CPPv2N10MenuScreen9getItemAtE7uint8_t"></span><span id="MenuScreen::getItemAt__uint8_t"></span><span class="target" id="classMenuScreen_1adc74efabe43478855bf14b15f3e135bc"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getItemAt</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9getItemAtE7uint8_t" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen9getItemAtE7uint8_t"></span><span id="_CPPv2N10MenuScreen9getItemAtE7uint8_t"></span><span id="MenuScreen::getItemAt__uint8_t"></span><span class="target" id="classMenuScreen_1adc74efabe43478855bf14b15f3e135bc"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getItemAt</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9getItemAtE7uint8_t" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen9getItemAtE7uint8_t'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Get a <code class="docutils literal notranslate"><a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref"><span class="pre">MenuItem</span></span></a></code> at position. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -192,10 +154,9 @@
 </dd>
 </dl>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreenixEK7uint8_t">
-<span id="_CPPv3N10MenuScreenixEK7uint8_t"></span><span id="_CPPv2N10MenuScreenixEK7uint8_t"></span><span id="MenuScreen::subscript-operator__uint8_tC"></span><span class="target" id="classMenuScreen_1a80583c10d0be16161b5dda1b5d94255b"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreenixEK7uint8_t" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreenixEK7uint8_t"></span><span id="_CPPv2N10MenuScreenixEK7uint8_t"></span><span id="MenuScreen::subscript-operator__uint8_tC"></span><span class="target" id="classMenuScreen_1a80583c10d0be16161b5dda1b5d94255b"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreenixEK7uint8_t" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreenixEK7uint8_t'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Get a <code class="docutils literal notranslate"><a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref"><span class="pre">MenuItem</span></span></a></code> at position. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -203,31 +164,27 @@
 </dd>
 </dl>
 </dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen10itemsCountEv">
-<span id="_CPPv3N10MenuScreen10itemsCountEv"></span><span id="_CPPv2N10MenuScreen10itemsCountEv"></span><span id="MenuScreen::itemsCount"></span><span class="target" id="classMenuScreen_1ad56b54c80e60d707f49cbd11505d050e"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemsCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen10itemsCountEv" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen10itemsCountEv"></span><span id="_CPPv2N10MenuScreen10itemsCountEv"></span><span id="MenuScreen::itemsCount"></span><span class="target" id="classMenuScreen_1ad56b54c80e60d707f49cbd11505d050e"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemsCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen10itemsCountEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen10itemsCountEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Get the number of items in the menu. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t">
-<span id="_CPPv3N10MenuScreen9setCursorEP16DisplayInterface7uint8_t"></span><span id="_CPPv2N10MenuScreen9setCursorEP16DisplayInterface7uint8_t"></span><span id="MenuScreen::setCursor__DisplayInterfaceP.uint8_t"></span><span class="target" id="classMenuScreen_1a318cbb17efcb3d2e7957220149c8dc01"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCursor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen9setCursorEP16DisplayInterface7uint8_t"></span><span id="_CPPv2N10MenuScreen9setCursorEP16DisplayInterface7uint8_t"></span><span id="MenuScreen::setCursor__DisplayInterfaceP.uint8_t"></span><span class="target" id="classMenuScreen_1a318cbb17efcb3d2e7957220149c8dc01"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCursor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Move cursor to specified position. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen4drawEP16DisplayInterface">
-<span id="_CPPv3N10MenuScreen4drawEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen4drawEP16DisplayInterface"></span><span id="MenuScreen::draw__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1a941a54aedc53cf4a77c466c8d7e0767f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen4drawEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen4drawEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen4drawEP16DisplayInterface"></span><span id="MenuScreen::draw__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1a941a54aedc53cf4a77c466c8d7e0767f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen4drawEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen4drawEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Draw the screen on display. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen7processEP7LcdMenuKh">
-<span id="_CPPv3N10MenuScreen7processEP7LcdMenuKh"></span><span id="_CPPv2N10MenuScreen7processEP7LcdMenuKh"></span><span id="MenuScreen::process__LcdMenuP.unsigned-cC"></span><span class="target" id="classMenuScreen_1afc59ca40194edbb9c355d6f3d0ed73ac"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen7processEP7LcdMenuKh" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen7processEP7LcdMenuKh"></span><span id="_CPPv2N10MenuScreen7processEP7LcdMenuKh"></span><span id="MenuScreen::process__LcdMenuP.unsigned-cC"></span><span class="target" id="classMenuScreen_1afc59ca40194edbb9c355d6f3d0ed73ac"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen7processEP7LcdMenuKh" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen7processEP7LcdMenuKh'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Process the command. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -235,25 +192,21 @@
 </dd>
 </dl>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen2upEP16DisplayInterface">
-<span id="_CPPv3N10MenuScreen2upEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen2upEP16DisplayInterface"></span><span id="MenuScreen::up__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1ae6d28054fde75c3b22fcf2f0f881e03a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">up</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen2upEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen2upEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen2upEP16DisplayInterface"></span><span id="MenuScreen::up__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1ae6d28054fde75c3b22fcf2f0f881e03a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">up</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen2upEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen2upEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Move cursor up. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen4downEP16DisplayInterface">
-<span id="_CPPv3N10MenuScreen4downEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen4downEP16DisplayInterface"></span><span id="MenuScreen::down__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1aaba94020d97a9a1d472c6ff02888bebc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">down</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen4downEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen4downEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen4downEP16DisplayInterface"></span><span id="MenuScreen::down__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1aaba94020d97a9a1d472c6ff02888bebc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">down</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen4downEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen4downEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Move cursor down. </p>
 </dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen5resetEP16DisplayInterface">
-<span id="_CPPv3N10MenuScreen5resetEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen5resetEP16DisplayInterface"></span><span id="MenuScreen::reset__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1a8a30aa2a0d036b849a7c7ec503f9efd0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen5resetEP16DisplayInterface" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen5resetEP16DisplayInterface"></span><span id="_CPPv2N10MenuScreen5resetEP16DisplayInterface"></span><span id="MenuScreen::reset__DisplayInterfaceP"></span><span class="target" id="classMenuScreen_1a8a30aa2a0d036b849a7c7ec503f9efd0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10MenuScreen5resetEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen5resetEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Reset the screen to initial state. </p>
 </dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
@@ -261,38 +214,34 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="classMenuScreen_1a68db6f8feb4711646ea5569bb9484d19"></span><span class="sig-name descname"><span class="pre">friend</span> <span class="pre">LcdMenu</span></span></dt>
 <dd></dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen6parentE">
-<span id="_CPPv3N10MenuScreen6parentE"></span><span id="_CPPv2N10MenuScreen6parentE"></span><span id="MenuScreen::parent__MenuScreenP"></span><span class="target" id="classMenuScreen_1a6b1ce589b940ea6ca50cfb3b2454d2d3"></span><a class="reference internal" href="#_CPPv410MenuScreen" title="MenuScreen"><span class="n"><span class="pre">MenuScreen</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">parent</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen6parentE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen6parentE"></span><span id="_CPPv2N10MenuScreen6parentE"></span><span id="MenuScreen::parent__MenuScreenP"></span><span class="target" id="classMenuScreen_1a6b1ce589b940ea6ca50cfb3b2454d2d3"></span><a class="reference internal" href="#_CPPv410MenuScreen" title="MenuScreen"><span class="n"><span class="pre">MenuScreen</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">parent</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen6parentE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen6parentE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Previous screen. When <code class="docutils literal notranslate"><span class="pre">BACK</span></code> command received this screen will be shown. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen5itemsE">
-<span id="_CPPv3N10MenuScreen5itemsE"></span><span id="_CPPv2N10MenuScreen5itemsE"></span><span id="MenuScreen::items__MenuItemPP"></span><span class="target" id="classMenuScreen_1ab17ed71d7754dbe071787beea61b012e"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">items</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen5itemsE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen5itemsE"></span><span id="_CPPv2N10MenuScreen5itemsE"></span><span id="MenuScreen::items__MenuItemPP"></span><span class="target" id="classMenuScreen_1ab17ed71d7754dbe071787beea61b012e"></span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">items</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen5itemsE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen5itemsE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>The menu items to be displayed on screen. These items will be drawn on display. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen6cursorE">
-<span id="_CPPv3N10MenuScreen6cursorE"></span><span id="_CPPv2N10MenuScreen6cursorE"></span><span id="MenuScreen::cursor__uint8_t"></span><span class="target" id="classMenuScreen_1ab6df4ab0245f7376aaf5cadd63f917b9"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cursor</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen6cursorE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen6cursorE"></span><span id="_CPPv2N10MenuScreen6cursorE"></span><span id="MenuScreen::cursor__uint8_t"></span><span class="target" id="classMenuScreen_1ab6df4ab0245f7376aaf5cadd63f917b9"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cursor</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen6cursorE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen6cursorE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Cursor position. </p>
-<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="n">X</span>
-<span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
-</pre></div>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">X</span> <span class="n">X</span>
+</span><span id="line-2"><span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
+</span></code></pre></div>
 </div>
  ┌───────────────┐ │ X X X │ │ X X X X │ │ &gt; X X X X X X │ &lt;── cursor │ X X X X X │ └───────────────┘ X X X X X X X X X X</p>
 <p>When <code class="docutils literal notranslate"><span class="pre">up</span></code> or <code class="docutils literal notranslate"><span class="pre">down</span></code> then this position will be moved over the items accordingly. Always in range [<code class="docutils literal notranslate"><span class="pre">view</span></code>, <code class="docutils literal notranslate"><span class="pre">view</span></code> + <code class="docutils literal notranslate"><span class="pre">display.getMaxRows()</span></code> - 1]. </p>
 </dd></dl>
-
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N10MenuScreen4viewE">
-<span id="_CPPv3N10MenuScreen4viewE"></span><span id="_CPPv2N10MenuScreen4viewE"></span><span id="MenuScreen::view__uint8_t"></span><span class="target" id="classMenuScreen_1aa71669e0a4949e17b9ae66a21a778a2d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen4viewE" title="Link to this definition"></a><br /></dt>
+<span id="_CPPv3N10MenuScreen4viewE"></span><span id="_CPPv2N10MenuScreen4viewE"></span><span id="MenuScreen::view__uint8_t"></span><span class="target" id="classMenuScreen_1aa71669e0a4949e17b9ae66a21a778a2d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N10MenuScreen4viewE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10MenuScreen4viewE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>First visible item’s position in the menu array. </p>
-<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="n">X</span>
-<span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
-</pre></div>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">X</span> <span class="n">X</span>
+</span><span id="line-2"><span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span>
+</span></code></pre></div>
 </div>
 <p>┌───────────────┐ │ X X X │ &lt;── view</p>
 <p>│   X X X X     │</p>
@@ -300,41 +249,64 @@
 </p>
 <p>Is moved when <code class="docutils literal notranslate"><span class="pre">cursor</span></code> crosses the borders of visible area. When number of items &lt; <code class="docutils literal notranslate"><span class="pre">display.getMaxRows()</span></code> this index should be 0. The size of the view is always the same and equals to <code class="docutils literal notranslate"><span class="pre">display.getMaxRows()</span></code>. </p>
 </dd></dl>
-
 </div>
 </dd></dl>
-
 </section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ItemRangeBase.html" class="btn btn-neutral float-left" title="ItemRangeBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ItemInputCharset.html" class="btn btn-neutral float-right" title="ItemInputCharset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2024, Thomas Forntoh.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
+</div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
+<div class="mr-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ItemRangeBase.html">
+<svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+        ItemRangeBase
+      </a>
+</div>
+<div class="ml-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ItemInputCharset.html">
+        ItemInputCharset
+        <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</a>
+</div>
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#_CPPv410MenuScreen'" class="reference internal" href="#_CPPv410MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem'" class="reference internal" href="#_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuScreen::MenuScreen()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen9setParentEP10MenuScreen'" class="reference internal" href="#_CPPv4N10MenuScreen9setParentEP10MenuScreen"><code class="docutils literal notranslate"><span class="pre">MenuScreen::setParent()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen9getCursorEv'" class="reference internal" href="#_CPPv4N10MenuScreen9getCursorEv"><code class="docutils literal notranslate"><span class="pre">MenuScreen::getCursor()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen9getItemAtE7uint8_t'" class="reference internal" href="#_CPPv4N10MenuScreen9getItemAtE7uint8_t"><code class="docutils literal notranslate"><span class="pre">MenuScreen::getItemAt()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreenixEK7uint8_t'" class="reference internal" href="#_CPPv4N10MenuScreenixEK7uint8_t"><code class="docutils literal notranslate"><span class="pre">MenuScreen::operator[]()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen10itemsCountEv'" class="reference internal" href="#_CPPv4N10MenuScreen10itemsCountEv"><code class="docutils literal notranslate"><span class="pre">MenuScreen::itemsCount()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t'" class="reference internal" href="#_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t"><code class="docutils literal notranslate"><span class="pre">MenuScreen::setCursor()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen4drawEP16DisplayInterface'" class="reference internal" href="#_CPPv4N10MenuScreen4drawEP16DisplayInterface"><code class="docutils literal notranslate"><span class="pre">MenuScreen::draw()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen7processEP7LcdMenuKh'" class="reference internal" href="#_CPPv4N10MenuScreen7processEP7LcdMenuKh"><code class="docutils literal notranslate"><span class="pre">MenuScreen::process()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen2upEP16DisplayInterface'" class="reference internal" href="#_CPPv4N10MenuScreen2upEP16DisplayInterface"><code class="docutils literal notranslate"><span class="pre">MenuScreen::up()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen4downEP16DisplayInterface'" class="reference internal" href="#_CPPv4N10MenuScreen4downEP16DisplayInterface"><code class="docutils literal notranslate"><span class="pre">MenuScreen::down()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen5resetEP16DisplayInterface'" class="reference internal" href="#_CPPv4N10MenuScreen5resetEP16DisplayInterface"><code class="docutils literal notranslate"><span class="pre">MenuScreen::reset()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen6parentE'" class="reference internal" href="#_CPPv4N10MenuScreen6parentE"><code class="docutils literal notranslate"><span class="pre">MenuScreen::parent</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen5itemsE'" class="reference internal" href="#_CPPv4N10MenuScreen5itemsE"><code class="docutils literal notranslate"><span class="pre">MenuScreen::items</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen6cursorE'" class="reference internal" href="#_CPPv4N10MenuScreen6cursorE"><code class="docutils literal notranslate"><span class="pre">MenuScreen::cursor</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10MenuScreen4viewE'" class="reference internal" href="#_CPPv4N10MenuScreen4viewE"><code class="docutils literal notranslate"><span class="pre">MenuScreen::view</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</aside>
+</main>
+</div>
+</div><footer class="py-6 border-t border-border md:py-0">
+<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, Thomas Forntoh Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.3.7</a></p>
+</div>
+</div>
 </footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
+</div>
+<script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+<script src="../../_static/doctools.js?v=9a2dae69"></script>
+<script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script defer="defer" src="../../_static/theme.js?v=e82a16a3"></script>
 </body>
 </html>

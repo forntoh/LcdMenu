@@ -1,5 +1,0 @@
-V5.000
-======
-
-Add your content using `reStructuredText` syntax. See the
-`reStructuredText documentation <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`\_ for details.
