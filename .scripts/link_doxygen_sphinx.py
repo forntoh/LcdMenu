@@ -13,16 +13,21 @@ def create_rst_file(src_path, dest_path):
         rst_file.write(f'{"=" * len(filename)}\n\n')
         rst_file.write(f'.. doxygenfile:: {filename}.h\n')
         rst_file.write(f'   :project: LcdMenu\n')
-        
+
 def create_index_file(directory, entries, subdirs, is_root=False):
-    dir_name = os.path.basename(directory) if not is_root else "Class reference"
+    dir_name = os.path.basename(directory) if not is_root else "Class refefence"
     index_path = os.path.join(directory, 'index.rst')
     with open(index_path, 'w') as index_file:
         index_file.write(f'{dir_name}\n')
         index_file.write(f'{"=" * len(dir_name)}\n\n')
+        if is_root:
+            index_file.write('.. rst-class:: lead\n\n')
+            index_file.write('This section contains the class reference documentation for the |project| library.\n')
+            index_file.write('Here you will find detailed descriptions of all the classes, their methods, and attributes.\n\n')
+            index_file.write('-'*80)
+            index_file.write('\n\n')
         index_file.write('.. toctree::\n')
-        index_file.write('   :maxdepth: 2\n')
-        index_file.write(f'   :hidden:\n')
+        index_file.write('   :maxdepth: 1\n')
         index_file.write(f'   :caption: {dir_name}\n\n')
         for entry in entries:
             relative_entry = os.path.relpath(entry, directory).replace('.rst', '')

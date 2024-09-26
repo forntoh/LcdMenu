@@ -19,13 +19,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install doxygen graphviz
-          pip install sphinx breathe sphinx_rtd_theme myst-parser
+          pip install requests sphinx breathe sphinxawesome_theme myst-parser
 
       - name: Generate Doxygen documentation
         run: doxygen docs/Doxyfile
 
       - name: Generate Sphinx documentation from Doxygen
         run: python .scripts/link_doxygen_sphinx.py
+
+      - name: Run changelog updater
+        run: python .scripts/update_changelog.py
 
       - name: Generate Sphinx documentation
         run: make -C docs html
