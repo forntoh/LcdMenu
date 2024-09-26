@@ -77,7 +77,7 @@
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../index.html">Class refefence<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../index.html">Class reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../ItemIntRange.html">ItemIntRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemRangeBase.html">ItemRangeBase</a></li>
@@ -116,7 +116,7 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../index.html">Class refefence</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../index.html">Class reference</a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">display</a>
 <div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">LiquidCrystalAdapter</span>
 </nav>
@@ -126,7 +126,26 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv420LiquidCrystalAdapter">
 <span id="_CPPv320LiquidCrystalAdapter"></span><span id="_CPPv220LiquidCrystalAdapter"></span><span id="LiquidCrystalAdapter"></span><span class="target" id="classLiquidCrystalAdapter"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LiquidCrystalAdapter</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><a class="headerlink" href="#_CPPv420LiquidCrystalAdapter" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv420LiquidCrystalAdapter'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><div class="docutils container">
+<em>#include &lt;LiquidCrystalAdapter.h&gt;</em></div>
+<p>Adapter class for interfacing with LiquidCrystal displays. </p>
+<p>This class provides an implementation of the <a class="reference internal" href="DisplayInterface.html#classDisplayInterface"><span class="std std-ref">DisplayInterface</span></a> for LiquidCrystal displays. It includes methods for initializing the display, drawing items, handling cursors, and managing custom characters such as up and down arrows.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class assumes that the LiquidCrystal library is included and available.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param lcd<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pointer to a LiquidCrystal object. </p>
+</dd>
+<dt class="field-even">Param maxCols<span class="colon">:</span></dt>
+<dd class="field-even"><p>Maximum number of columns on the display. </p>
+</dd>
+<dt class="field-odd">Param maxRows<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Maximum number of rows on the display. </p>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N20LiquidCrystalAdapter20LiquidCrystalAdapterEP13LiquidCrystal7uint8_t7uint8_t">

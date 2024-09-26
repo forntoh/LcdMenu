@@ -77,7 +77,7 @@
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Class refefence<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Class reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
@@ -116,7 +116,7 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Class refefence</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Class reference</a>
 <div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">ItemInput</span>
 </nav>
 <div id="content" role="main">
@@ -235,7 +235,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>display</strong> – the display that should be used for draw </p></li>
+<li><p><strong>display</strong> – Pointer to the <a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref">DisplayInterface</span></a> object used for rendering. </p></li>
 <li><p><strong>row</strong> – the number of row to draw on </p></li>
 </ul>
 </dd>
@@ -272,32 +272,31 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ItemInput5rightEP16DisplayInterface">
 <span id="_CPPv3N9ItemInput5rightEP16DisplayInterface"></span><span id="_CPPv2N9ItemInput5rightEP16DisplayInterface"></span><span id="ItemInput::right__DisplayInterfaceP"></span><span class="target" id="classItemInput_1a550cd1a8bd03841d1bf8c33f2d2a0f76"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">right</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ItemInput5rightEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemInput5rightEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd></dd></dl>
+<dd><p>Moves the cursor to the right within the input value. </p>
+</dd></dl>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ItemInput9backspaceEP16DisplayInterface">
 <span id="_CPPv3N9ItemInput9backspaceEP16DisplayInterface"></span><span id="_CPPv2N9ItemInput9backspaceEP16DisplayInterface"></span><span id="ItemInput::backspace__DisplayInterfaceP"></span><span class="target" id="classItemInput_1a976d001fff4e1f1694917417607bb9de"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">backspace</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ItemInput9backspaceEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemInput9backspaceEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Execute a “backspace cmd” on menu</p>
-<p>
-Removes the character at the current cursor position. </p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Works only for <code class="docutils literal notranslate"><a class="reference internal" href="#classItemInput"><span class="std std-ref"><span class="pre">ItemInput</span></span></a></code> type*</p>
-</div>
+<dd><p>Handles the backspace action for the input field. </p>
 </dd></dl>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ItemInput8typeCharEP16DisplayInterfaceKh">
 <span id="_CPPv3N9ItemInput8typeCharEP16DisplayInterfaceKh"></span><span id="_CPPv2N9ItemInput8typeCharEP16DisplayInterfaceKh"></span><span id="ItemInput::typeChar__DisplayInterfaceP.unsigned-cC"></span><span class="target" id="classItemInput_1a60f2afbabc307026fdf78a86c9660324"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">typeChar</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">character</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ItemInput8typeCharEP16DisplayInterfaceKh" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemInput8typeCharEP16DisplayInterfaceKh'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Display text at the cursor position used for <code class="docutils literal notranslate"><span class="pre">Input</span></code> type menu items </p>
+<dd><p>Types a character into the current input value at the cursor position. </p>
+<p>This function inserts a character into the <code class="docutils literal notranslate"><span class="pre">value</span></code> string at the current cursor position. If the cursor is within the current length of the string, the string is split and the character is inserted in between. If the cursor is at the end of the string, the character is appended. The cursor is then incremented, and the view is adjusted if necessary. Finally, the display is updated and the blinker position is reset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>character</strong> – character to append </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display</strong> – Pointer to the <a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref">DisplayInterface</span></a> object used for rendering. </p></li>
+<li><p><strong>character</strong> – The character to be typed into the input value. </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ItemInput5clearEP16DisplayInterface">
 <span id="_CPPv3N9ItemInput5clearEP16DisplayInterface"></span><span id="_CPPv2N9ItemInput5clearEP16DisplayInterface"></span><span id="ItemInput::clear__DisplayInterfaceP"></span><span class="target" id="classItemInput_1a11b720a514ffc1be1a5032876402349b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ItemInput5clearEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemInput5clearEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Clear the value of the input field </p>
+<dd><p>Clear the value of the input field. </p>
 </dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
