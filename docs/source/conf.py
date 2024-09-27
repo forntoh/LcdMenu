@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from sphinxawesome_theme.postprocess import Icons
 
@@ -28,10 +29,17 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.extlinks",
     "sphinx.ext.viewcode",
+    'sphinxcontrib.plantuml',
     # "sphinx_sitemap",
     "sphinx_design",
     # "sphinx_docsearch",
 ]
+
+if os.getenv('GITHUB_ACTIONS'):
+    plantuml = 'java -jar /usr/share/plantuml/plantuml.jar'
+else:
+    plantuml = 'java -jar /opt/homebrew/Cellar/plantuml/1.2024.7/libexec/plantuml.jar'
+
 
 breathe_projects = { "LcdMenu": "../doxygen/xml/" }
 breathe_default_project = "LcdMenu"

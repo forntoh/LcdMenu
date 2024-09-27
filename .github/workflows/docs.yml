@@ -1,4 +1,4 @@
-name: Generate and Deploy Doxygen Documentation
+name: Build and Deploy Docs
 
 on:
   push:
@@ -9,17 +9,24 @@ permissions:
   id-token: write
 
 jobs:
-  generate-docs:
+  build-docs:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
       - name: Install dependencies
         run: |
-          sudo apt-get install doxygen graphviz
-          pip install requests sphinx sphinx_design breathe sphinxawesome_theme myst-parser
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz default-jre plantuml
 
       - name: Generate Doxygen documentation
         run: doxygen docs/Doxyfile
@@ -35,7 +42,10 @@ jobs:
           python .scripts/append_includes.py docs/source/reference/migration desc false
 
       - name: Generate Sphinx documentation
-        run: make -C docs html
+        run: make html
+        working-directory: docs
+        env:
+          GITHUB_ACTIONS: true
 
       - name: Deploy documentation
         uses: peaceiris/actions-gh-pages@v3

@@ -1,0 +1,9 @@
+requests
+breathe
+sphinx
+sphinxcontrib-plantuml
+sphinxawesome-theme
+sphinx.ext.autodoc
+sphinx.ext.extlinks
+sphinx.ext.viewcode
+sphinx_design

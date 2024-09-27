@@ -7,6 +7,7 @@ Add your content using `reStructuredText` syntax. See the `reStructuredText docu
     :maxdepth: 2
     :caption: Reference
 
+    reference/uml
     reference/api/index
     reference/changelog
     reference/migration/index
