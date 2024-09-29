@@ -16,7 +16,6 @@ Each menu item can be selected and interacted with by the user.
     basic
     command
     submenu
-    toggle
     value
     list
     custom

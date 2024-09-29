@@ -14,7 +14,7 @@ from sphinxawesome_theme.postprocess import Icons
 # Project information
 project = 'LcdMenu'
 author = 'Thomas Forntoh'
-copyright = f'{datetime.date.today().year}, {author} - All rights reserved - '
+copyright = f'{datetime.date.today().year}, {author},'
 
 rst_prolog = f"""
 .. |project| replace:: {project}
@@ -66,6 +66,12 @@ html_theme_options = {
     'show_scrolltop': True,
     'show_prev_next': True,
     "extra_header_link_icons" : {
+        "about the author": {
+            "link": "https://forntoh.dev",
+            "icon": (
+                '<svg height="24px" style="margin-top:-2px;display:inline" viewBox="0 0 16 14"><path fill="currentColor" d="M0 5h9v4H0zM0 10h4v4H0zM0 0h16v4H0zM10 5h4v9h-4z"/></svg>'
+            ),
+        },
         "repository on GitHub": {
             "link": "https://github.com/forntoh/LcdMenu",
             "icon": (
@@ -92,7 +98,7 @@ html_theme_options = {
                 '22.647c0-11.996-9.726-21.72-21.722-21.72" '
                 'fill="currentColor"/></svg>'
             ),
-        },
+        }
     },
 }
 
