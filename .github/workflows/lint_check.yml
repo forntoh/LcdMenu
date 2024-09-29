@@ -5,6 +5,9 @@ on:
     branches:
       - master
   pull_request_target:
+    paths:
+      - 'src/**'
+      - '.github/workflows/lint_check.yml'
 
 jobs:
   run-linters:
