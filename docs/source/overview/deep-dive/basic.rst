@@ -1,4 +1,4 @@
-Basic menu item
+Basic Menu Item
 ---------------
 
 The basic menu item is a simple menu item that displays a text label on the screen.
