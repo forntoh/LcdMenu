@@ -1,5 +1,10 @@
 name: Compile Examples
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/compile-arduino.yml"
 
 jobs:
   compile:

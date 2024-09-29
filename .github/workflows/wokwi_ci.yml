@@ -1,6 +1,11 @@
 name: Wokwi CI
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/wokwi_ci.yml"
 
 jobs:
   provide-examples:
