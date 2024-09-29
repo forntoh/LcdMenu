@@ -15,9 +15,10 @@ including LCD displays and OLED displays *(coming soon)*.
     :alt: Example of a menu system created with |project|
     :align: center
 
-.. grid:: 3
+.. grid:: 1 2 3 3
 
     .. grid-item-card:: :octicon:`home;3.5em`
+        :columns: 12 6 4 4
         :text-align: center
         :link: overview/getting-started
         :link-type: doc
@@ -29,6 +30,7 @@ including LCD displays and OLED displays *(coming soon)*.
         Get started with |project| in minutes.
 
     .. grid-item-card:: :octicon:`book;3.5em`
+        :columns: 12 6 4 4
         :text-align: center
         :link: reference/api/index
         :link-type: doc
@@ -40,6 +42,7 @@ including LCD displays and OLED displays *(coming soon)*.
         Explore the |project| API in detail.
 
     .. grid-item-card:: :octicon:`sync;3.5em`
+        :columns: 12 12 4 4
         :text-align: center
         :link: reference/migration/index
         :link-type: doc
