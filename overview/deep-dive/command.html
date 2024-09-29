@@ -16,7 +16,7 @@
 <link href="../../_static/awesome-sphinx-design.css?v=a54cf077" rel="stylesheet" type="text/css"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="../../reference/uml.html" rel="next" title="Class Diagram"/>
+<link href="../../reference/samples/index.html" rel="next" title="Code Samples"/>
 <link href="basic.html" rel="prev" title="Basic Menu Item"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -86,6 +86,24 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../reference/samples/index.html">Code Samples<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SimpleRotary.html">SimpleRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/List.html">List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SubMenu.html">SubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/InputRotary.html">InputRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/Callbacks.html">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SimpleInput.html">SimpleInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/IntFloatValues.html">IntFloatValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/uml.html">Class Diagram</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../reference/api/index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemIntRange.html">ItemIntRange</a></li>
@@ -142,8 +160,8 @@ It is useful for creating menu items that perform a specific action when selecte
 <li><p>Triggering an event or action (e.g., sending a message)</p></li>
 </ul>
 <p>There are two variants of the command menu item:</p>
-<section id="basic-command-menu-item">
-<h2>Basic command menu item<a class="headerlink" href="#basic-command-menu-item" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#basic-command-menu-item'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<section id="basic-command-item">
+<h2>Basic command item<a class="headerlink" href="#basic-command-item" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#basic-command-item'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
 <p>The basic command menu item is a simple menu item that executes a lambda function when selected.</p>
 <p>A command menu item can be created using the following syntax:</p>
 <div class="sd-tab-set docutils">
@@ -183,7 +201,7 @@ As a function pointer</label><div class="sd-tab-content docutils">
 </div>
 <p>Another example of a command menu item is the <code class="docutils literal notranslate"><span class="pre">ITEM_BACK</span></code>, which is used to navigate back to the previous menu screen.
 This is useful when you don’t have a dedicated “Back” input button on your setup.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// You caan also pass a custom text for the back item</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// You can also pass a custom text for the back item</span>
 </span><span id="line-2"><span class="n">ITEM_BACK</span><span class="p">()</span>
 </span></code></pre></div>
 </div>
@@ -191,8 +209,8 @@ This is useful when you don’t have a dedicated “Back” input button on your
 <p>Find more information about the command menu item <a class="reference internal" href="../../reference/api/ItemCommand.html"><span class="doc">here</span></a> and the back menu item <a class="reference internal" href="../../reference/api/ItemBack.html"><span class="doc">here</span></a>.</p>
 </section>
 </section>
-<section id="toggle-command-menu-item">
-<h2>Toggle command menu item<a class="headerlink" href="#toggle-command-menu-item" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#toggle-command-menu-item'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<section id="toggle-menu-item">
+<h2>Toggle menu item<a class="headerlink" href="#toggle-menu-item" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#toggle-menu-item'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
 <p>The toggle command menu item is a menu item that toggles between two states when selected by the user.</p>
 <p>A toggle command menu item can be created using the following syntax:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// The initial state of the toggle menu item is set to false</span>
@@ -231,8 +249,8 @@ There are other ways to create a toggle command menu item, check the <a class="r
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../../reference/uml.html">
-        Class Diagram
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../../reference/samples/index.html">
+        Code Samples
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -241,11 +259,11 @@ There are other ways to create a toggle command menu item, check the <a class="r
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#basic-command-menu-item'" class="reference internal" href="#basic-command-menu-item">Basic command menu item</a><ul>
+<li><a :data-current="activeSection === '#basic-command-item'" class="reference internal" href="#basic-command-item">Basic command item</a><ul>
 <li><a :data-current="activeSection === '#example'" class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#toggle-command-menu-item'" class="reference internal" href="#toggle-command-menu-item">Toggle command menu item</a><ul>
+<li><a :data-current="activeSection === '#toggle-menu-item'" class="reference internal" href="#toggle-menu-item">Toggle menu item</a><ul>
 <li><a :data-current="activeSection === '#id1'" class="reference internal" href="#id1">Example</a></li>
 </ul>
 </li>

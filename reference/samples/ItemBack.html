@@ -7,17 +7,17 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>API reference | LcdMenu</title>
-<meta content="API reference | LcdMenu" property="og:title"/>
-<meta content="API reference | LcdMenu" name="twitter:title"/>
+<title>ItemBack | LcdMenu</title>
+<meta content="ItemBack | LcdMenu" property="og:title"/>
+<meta content="ItemBack | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
 <link href="../../_static/awesome-sphinx-design.css?v=a54cf077" rel="stylesheet" type="text/css"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="ItemIntRange.html" rel="next" title="ItemIntRange"/>
-<link href="../uml.html" rel="prev" title="Class Diagram"/>
+<link href="Basic.html" rel="next" title="Basic"/>
+<link href="MenuTimeout.html" rel="prev" title="MenuTimeout"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -86,41 +86,41 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../samples/index.html">Code Samples<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/SimpleRotary.html">SimpleRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/List.html">List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/SubMenu.html">SubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/ButtonAdapter.html">ButtonAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/InputRotary.html">InputRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/CharsetInput.html">CharsetInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/MenuTimeout.html">MenuTimeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/Basic.html">Basic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/Callbacks.html">Callbacks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/SimpleInput.html">SimpleInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/IntFloatValues.html">IntFloatValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/RTOS.html">RTOS</a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Code Samples<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimpleRotary.html">SimpleRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="List.html">List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SubMenu.html">SubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InputRotary.html">InputRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CharsetInput.html">CharsetInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Callbacks.html">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimpleInput.html">SimpleInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IntFloatValues.html">IntFloatValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RTOS.html">RTOS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../uml.html">Class Diagram</a></li>
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="current reference internal expandable" href="#">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MenuScreen.html">MenuScreen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a></li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../api/index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemIntRange.html">ItemIntRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemToggle.html">ItemToggle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemRangeBase.html">ItemRangeBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/MenuScreen.html">MenuScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemList.html">ItemList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemFloatRange.html">ItemFloatRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemInput.html">ItemInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemCommand.html">ItemCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/display/index.html">display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/input/index.html">input</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
@@ -145,47 +145,71 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">API reference</span>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Code Samples</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">ItemBack</span>
 </nav>
 <div id="content" role="main">
-<section id="api-reference">
-<h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p class="lead">This section contains the API reference documentation for the LcdMenu library.
-Here you will find detailed descriptions of all the classes, their methods, and attributes.</p>
-<hr class="docutils"/>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemToggle.html">ItemToggle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MenuScreen.html">MenuScreen</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemList.html">ItemList</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemInput.html">ItemInput</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemCommand.html">ItemCommand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="display/index.html">display</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input/index.html">input</a></li>
-</ul>
+<section id="itemback">
+<h1>ItemBack<a class="headerlink" href="#itemback" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ItemBack.h&gt;</span>
+</span><span id="line-2"><span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ItemSubMenu.h&gt;</span>
+</span><span id="line-3"><span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;LcdMenu.h&gt;</span>
+</span><span id="line-4"><span class="linenos"> 4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;MenuScreen.h&gt;</span>
+</span><span id="line-5"><span class="linenos"> 5</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;display/LiquidCrystal_I2CAdapter.h&gt;</span>
+</span><span id="line-6"><span class="linenos"> 6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/KeyboardAdapter.h&gt;</span>
+</span><span id="line-7"><span class="linenos"> 7</span>
+</span><span id="line-8"><span class="linenos"> 8</span><span class="cp">#define LCD_ROWS 2</span>
+</span><span id="line-9"><span class="linenos"> 9</span><span class="cp">#define LCD_COLS 16</span>
+</span><span id="line-10"><span class="linenos">10</span>
+</span><span id="line-11"><span class="linenos">11</span><span class="k">extern</span><span class="w"> </span><span class="n">MenuScreen</span><span class="o">*</span><span class="w"> </span><span class="n">settingsScreen</span><span class="p">;</span>
+</span><span id="line-12"><span class="linenos">12</span>
+</span><span id="line-13"><span class="linenos">13</span><span class="c1">// Define the main menu</span>
+</span><span id="line-14"><span class="linenos">14</span><span class="c1">// clang-format off</span>
+</span><span id="line-15"><span class="linenos">15</span><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
+</span><span id="line-16"><span class="linenos">16</span><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Start service"</span><span class="p">),</span>
+</span><span id="line-17"><span class="linenos">17</span><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Connect to WiFi"</span><span class="p">),</span>
+</span><span id="line-18"><span class="linenos">18</span><span class="w">    </span><span class="n">ITEM_SUBMENU</span><span class="p">(</span><span class="s">"Settings"</span><span class="p">,</span><span class="w"> </span><span class="n">settingsScreen</span><span class="p">),</span>
+</span><span id="line-19"><span class="linenos">19</span><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Blink SOS"</span><span class="p">),</span>
+</span><span id="line-20"><span class="linenos">20</span><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Blink random"</span><span class="p">));</span>
+</span><span id="line-21"><span class="linenos">21</span>
+</span><span id="line-22"><span class="linenos">22</span><span class="c1">// Create submenu and precise its parent</span>
+</span><span id="line-23"><span class="linenos">23</span><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">settingsScreen</span><span class="p">,</span><span class="w"> </span><span class="n">settingsItems</span><span class="p">,</span>
+</span><span id="line-24"><span class="linenos">24</span><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Backlight"</span><span class="p">),</span>
+</span><span id="line-25"><span class="linenos">25</span><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Contrast"</span><span class="p">),</span>
+</span><span id="line-26"><span class="linenos">26</span><span class="w">    </span><span class="n">ITEM_BACK</span><span class="p">());</span>
+</span><span id="line-27"><span class="linenos">27</span><span class="c1">// clang-format on</span>
+</span><span id="line-28"><span class="linenos">28</span>
+</span><span id="line-29"><span class="linenos">29</span><span class="n">LiquidCrystal_I2C</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="mh">0x27</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_COLS</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_ROWS</span><span class="p">);</span>
+</span><span id="line-30"><span class="linenos">30</span><span class="n">LiquidCrystal_I2CAdapter</span><span class="w"> </span><span class="nf">lcdAdapter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_COLS</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_ROWS</span><span class="p">);</span>
+</span><span id="line-31"><span class="linenos">31</span><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">lcdAdapter</span><span class="p">);</span>
+</span><span id="line-32"><span class="linenos">32</span>
+</span><span id="line-33"><span class="linenos">33</span><span class="c1">// Initialize the KeyboardAdapter</span>
+</span><span id="line-34"><span class="linenos">34</span><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Serial</span><span class="p">);</span>
+</span><span id="line-35"><span class="linenos">35</span>
+</span><span id="line-36"><span class="linenos">36</span><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-37"><span class="linenos">37</span><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+</span><span id="line-38"><span class="linenos">38</span><span class="w">    </span><span class="n">lcdAdapter</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span><span id="line-39"><span class="linenos">39</span><span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="n">setScreen</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">);</span>
+</span><span id="line-40"><span class="linenos">40</span><span class="p">}</span>
+</span><span id="line-41"><span class="linenos">41</span>
+</span><span id="line-42"><span class="linenos">42</span><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-43"><span class="linenos">43</span><span class="w">    </span><span class="n">keyboard</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-44"><span class="linenos">44</span><span class="p">}</span>
+</span></code></pre></div>
 </div>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../uml.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="MenuTimeout.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Class Diagram
+        MenuTimeout
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ItemIntRange.html">
-        ItemIntRange
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="Basic.html">
+        Basic
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
