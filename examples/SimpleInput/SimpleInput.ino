@@ -1,7 +1,3 @@
-/*
- Simple Input
- https://lcdmenu.forntoh.dev/examples/simple-input
-*/
 #include <ItemInput.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>

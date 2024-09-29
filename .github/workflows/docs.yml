@@ -34,6 +34,9 @@ jobs:
       - name: Generate Sphinx documentation from Doxygen
         run: python .scripts/link_doxygen_sphinx.py
 
+      - name: Link Examples
+        run: python .scripts/link_examples_sphinx.py
+
       - name: Run changelog updater
         run: python .scripts/update_changelog.py
 

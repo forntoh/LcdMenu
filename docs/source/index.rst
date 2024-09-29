@@ -66,6 +66,7 @@ including LCD displays and OLED displays *(coming soon)*.
     :caption: Reference
     :hidden:
 
+    reference/samples/index
     reference/uml
     reference/api/index
     reference/changelog

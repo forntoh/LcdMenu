@@ -12,8 +12,8 @@ This can be used in various scenarios, such as:
 
 There are two variants of the command menu item:
 
-Basic command menu item
-~~~~~~~~~~~~~~~~~~~~~~~~
+Basic command item
+~~~~~~~~~~~~~~~~~~
 
 The basic command menu item is a simple menu item that executes a lambda function when selected.
 
@@ -62,15 +62,15 @@ This is useful when you don't have a dedicated "Back" input button on your setup
 
 .. code-block:: cpp
 
-    // You caan also pass a custom text for the back item
+    // You can also pass a custom text for the back item
     ITEM_BACK()
 
 When the "Back" menu item is selected, the menu will navigate back to the previous screen.
 
 Find more information about the command menu item :doc:`here </reference/api/ItemCommand>` and the back menu item :doc:`here </reference/api/ItemBack>`.
 
-Toggle command menu item
-~~~~~~~~~~~~~~~~~~~~~~~~
+Toggle menu item
+~~~~~~~~~~~~~~~~
 
 The toggle command menu item is a menu item that toggles between two states when selected by the user.
 
