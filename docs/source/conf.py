@@ -14,7 +14,7 @@ from sphinxawesome_theme.postprocess import Icons
 # Project information
 project = 'LcdMenu'
 author = 'Thomas Forntoh'
-copyright = f'{datetime.date.today().year}, {author},'
+copyright = f'{datetime.date.today().year}, {author}'
 
 rst_prolog = f"""
 .. |project| replace:: {project}
@@ -56,6 +56,9 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_title = f'{project}'
 html_theme = 'sphinxawesome_theme'
 html_static_path = ['../_static']
+templates_path = ['../_templates']
+html_css_files = ['custom.css']
+html_show_sphinx = False
 html_domain_indices = False  # Don't need module indices
 html_copy_source = False  # Don't need sources
 html_sidebars = {
