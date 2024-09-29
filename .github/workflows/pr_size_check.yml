@@ -1,6 +1,6 @@
 name: PR Size Checker
 on:
-  pull_request:
+  pull_request_target:
     branches-ignore:
       - master
 
@@ -12,5 +12,5 @@ jobs:
       - uses: budougumi0617/action-pr-size-checker@v0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          max_added_count: ${{ vars.PR_SIZE_LIMIT || 600 }}
-          filter_pattern: ${{ vars.PR_SIZE_IGNORE_PATTERN || '.*.yml|.*.json|.*.md|.*.puml|Gemfile|platformio.ini|wokwi.toml|keywords.txt|test/.*.cpp' }}
+          max_added_count: ${{ vars.PR_SIZE_LIMIT }}
+          filter_pattern: ${{ vars.PR_SIZE_IGNORE_PATTERN }}
