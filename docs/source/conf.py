@@ -65,6 +65,8 @@ html_sidebars = {
     "**": ["sidebar_main_nav_links.html", "sidebar_toc.html"]
 }
 html_permalinks_icon = Icons.permalinks_icon
+html_logo = "../_static/lcdmenu.svg"
+html_favicon = "../_static/lcdmenu.svg"
 html_theme_options = {
     'show_scrolltop': True,
     'show_prev_next': True,
