@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Range item | LcdMenu</title>
-<meta content="Range item | LcdMenu" property="og:title"/>
-<meta content="Range item | LcdMenu" name="twitter:title"/>
+<title>List menu item | LcdMenu</title>
+<meta content="List menu item | LcdMenu" property="og:title"/>
+<meta content="List menu item | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../_static/lcdmenu.svg" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="input.html" rel="next" title="Input item"/>
-<link href="list.html" rel="prev" title="List menu item"/>
+<link href="range.html" rel="next" title="Range item"/>
+<link href="submenu.html" rel="prev" title="Sub-menu item"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -87,12 +87,12 @@
 <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Deep Dive<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="basic.html">Basic Menu Item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="command.html">Command Menu Item</a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="submenu.html">Sub-menu item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="list.html">List menu item</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Range item</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">List menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="range.html">Range item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input.html">Input item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input-charset.html">Charset input item</a></li>
 </ul>
@@ -177,107 +177,61 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Deep Dive</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Range item</span>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Item overview</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">List menu item</span>
 </nav>
 <div id="content" role="main">
-<section id="range-item">
-<h1>Range item<a class="headerlink" href="#range-item" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The range item is a menu item that allows the user to select a value within a specified range.
-It is used to create a menu item that presents a range of values to the user, such as a brightness level or a volume setting.</p>
-<p>This can be useful for creating a menu item that allows the user to adjust a setting within a specific range of values.</p>
-<p>There are two types of range items: integer range and float range.</p>
-<section id="integer-range">
-<h2>Integer range<a class="headerlink" href="#integer-range" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#integer-range'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>An integer range item can be created using the following syntax:</p>
+<section id="list-menu-item">
+<h1>List menu item<a class="headerlink" href="#list-menu-item" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>The list menu item is a menu item that displays a list of string items on the screen.
+It is used to present a list of options to the user, allowing them to select one of the items.</p>
+<p>This can be useful for creating a menu item that presents a list of options to the user, such as
+a list of colors, fonts, or other settings.</p>
+<p>A list menu item can be created using the following syntax:</p>
+<p>You first need to define the list of string items that will be displayed in the list:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">String</span><span class="w"> </span><span class="n">listItems</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-2"><span class="w">    </span><span class="s">"Item 1"</span><span class="p">,</span>
+</span><span id="line-3"><span class="w">    </span><span class="s">"Item 2"</span><span class="p">,</span>
+</span><span id="line-4"><span class="w">    </span><span class="s">"Item 3"</span><span class="p">,</span>
+</span><span id="line-5"><span class="w">    </span><span class="s">"Item 4"</span>
+</span><span id="line-6"><span class="p">};</span>
+</span></code></pre></div>
+</div>
+<p>Then you can create a list menu item entry in the menu screen while precising a callback function
+that will be called when an item is selected:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// ... More menu items</span>
-</span><span id="line-2"><span class="n">ITEM_INT_RANGE</span><span class="p">(</span><span class="s">"Brightness"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-3"><span class="w">    </span><span class="c1">// Callback function to handle value change</span>
-</span><span id="line-4"><span class="w">    </span><span class="c1">// value is the selected value within the range</span>
-</span><span id="line-5"><span class="w">    </span><span class="c1">// Do something with the selected value</span>
+</span><span id="line-2"><span class="n">ITEM_LIST</span><span class="p">(</span><span class="s">"List 1"</span><span class="p">,</span><span class="w"> </span><span class="n">listItems</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-3"><span class="w">    </span><span class="c1">// Callback function to handle item selection</span>
+</span><span id="line-4"><span class="w">    </span><span class="c1">// index is the index of the selected item in the list</span>
+</span><span id="line-5"><span class="w">    </span><span class="c1">// Do something with the selected item</span>
 </span><span id="line-6"><span class="p">})</span>
 </span><span id="line-7"><span class="c1">// ... More menu items</span>
 </span></code></pre></div>
 </div>
-<ul class="simple">
-<li><p>The first argument is the name of the range item.</p></li>
-<li><p>The second argument is the minimum value of the range.</p></li>
-<li><p>The third argument is the maximum value of the range.</p></li>
-<li><p>The fourth argument is the initial value of the range.</p></li>
-<li><p>The last argument is a callback function that will be called when the value is changed.</p></li>
-</ul>
-<p>When the <code class="docutils literal notranslate"><span class="pre">Brightness</span></code> menu item is selected, the user can adjust the brightness level within the range of 0 to 100.</p>
-<p>You can also optionally specify a unit string to be displayed next to the value:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// ... More menu items</span>
-</span><span id="line-2"><span class="n">ITEM_INT_RANGE</span><span class="p">(</span><span class="s">"Volume"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-3"><span class="w">    </span><span class="c1">// Callback function to handle value change</span>
-</span><span id="line-4"><span class="w">    </span><span class="c1">// value is the selected value within the range</span>
-</span><span id="line-5"><span class="w">    </span><span class="c1">// Do something with the selected value</span>
-</span><span id="line-6"><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s">"dB"</span><span class="p">),</span>
-</span><span id="line-7"><span class="c1">// ... More menu items</span>
-</span></code></pre></div>
-</div>
-<p>When the <code class="docutils literal notranslate"><span class="pre">Volume</span></code> menu item is selected, the user can adjust the volume level within the range of 0 to 100, with the unit string <strong>“dB”</strong> displayed next to the value.</p>
-<a class="reference internal image-reference" href="../../_images/item-int-range.gif"><img alt="Example of an integer range menu item" src="../../_images/item-int-range.gif" style="width: 400px;"/>
+<p>When the <code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">1</span></code> menu item is selected, the list of items will be displayed on the screen, allowing the user to select one of the items.</p>
+<a class="reference internal image-reference" href="../../_images/item-list.gif"><img alt="Example of a list menu item" src="../../_images/item-list.gif" style="width: 400px;"/>
 </a>
-<p>Find more information about the range menu item in the <a class="reference internal" href="../../reference/api/ItemIntRange.html"><span class="doc">API reference</span></a>.</p>
-</section>
-<section id="float-range">
-<h2>Float range<a class="headerlink" href="#float-range" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#float-range'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>A float range item can be created using the following syntax:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// ... More menu items</span>
-</span><span id="line-2"><span class="n">ITEM_FLOAT_RANGE</span><span class="p">(</span><span class="s">"Dist"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">100.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0f</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">float</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-3"><span class="w">    </span><span class="c1">// Callback function to handle value change</span>
-</span><span id="line-4"><span class="w">    </span><span class="c1">// value is the selected value within the range</span>
-</span><span id="line-5"><span class="w">    </span><span class="c1">// Do something with the selected value</span>
-</span><span id="line-6"><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s">" km"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">),</span>
-</span><span id="line-7"><span class="c1">// ... More menu items</span>
-</span></code></pre></div>
-</div>
-<ul class="simple">
-<li><p>The last argument is the step size of the range (the increment or decrement value when changing the value).
-This argument also determines the number of decimal places to display.
-For example, a step size of <code class="docutils literal notranslate"><span class="pre">0.5</span></code> will display values with one decimal place,
-while a step size of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> will display values with two decimal places.</p></li>
-</ul>
-<p>When the <code class="docutils literal notranslate"><span class="pre">Dist</span></code> menu item is selected, the user can adjust the pressure within the range of 0.0 to 100.0, with the unit string <strong>“km”</strong> displayed next to the value.</p>
-<a class="reference internal image-reference" href="../../_images/item-float-range.png"><img alt="Example of a float range menu item" src="../../_images/item-float-range.png" style="width: 400px;"/>
-</a>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>These item types support two ways of committing the value change:
-Committing the value after every change executing the callback function or only when the user exits the item.</p>
-<p>The default behavior is to commit the value only when the user exits the item.
-Check the API reference for more information on how to configure this behavior.</p>
-</div>
-<p>Find more information about the range menu item in the <a class="reference internal" href="../../reference/api/ItemFloatRange.html"><span class="doc">API reference</span></a>.</p>
-</section>
+<p>You can create multiple list menu items in the same menu screen, each with its own list of items.</p>
+<p>Find more information about the list menu item in the <a class="reference internal" href="../../reference/api/ItemList.html"><span class="doc">API reference</span></a>.</p>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="list.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="submenu.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        List menu item
+        Sub-menu item
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="input.html">
-        Input item
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="range.html">
+        Range item
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
 </a>
 </div>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
-<ul>
-<li><a :data-current="activeSection === '#integer-range'" class="reference internal" href="#integer-range">Integer range</a></li>
-<li><a :data-current="activeSection === '#float-range'" class="reference internal" href="#float-range">Float range</a></li>
-</ul>
-</div>
-</aside>
+</div></div>
 </main>
 </div>
 </div><footer class="py-6 border-t border-border md:py-0">

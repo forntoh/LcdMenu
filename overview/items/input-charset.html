@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Input item | LcdMenu</title>
-<meta content="Input item | LcdMenu" property="og:title"/>
-<meta content="Input item | LcdMenu" name="twitter:title"/>
+<title>Charset input item | LcdMenu</title>
+<meta content="Charset input item | LcdMenu" property="og:title"/>
+<meta content="Charset input item | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../_static/lcdmenu.svg" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="input-charset.html" rel="next" title="Charset input item"/>
-<link href="range.html" rel="prev" title="Range item"/>
+<link href="../../reference/samples/index.html" rel="next" title="Code Samples"/>
+<link href="input.html" rel="prev" title="Input item"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -87,14 +87,14 @@
 <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Deep Dive<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="basic.html">Basic Menu Item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="command.html">Command Menu Item</a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="list.html">List menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="range.html">Range item</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Input item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input-charset.html">Charset input item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input item</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Charset input item</a></li>
 </ul>
 </li>
 </ul>
@@ -177,67 +177,51 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Deep Dive</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Input item</span>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Item overview</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Charset input item</span>
 </nav>
 <div id="content" role="main">
-<section id="input-item">
-<h1>Input item<a class="headerlink" href="#input-item" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The input item is a menu item that allows the user to input a string value.
-The input item can be used to collect user input and store it in a variable.</p>
-<p>The input item has the following properties:</p>
+<section id="charset-input-item">
+<h1>Charset input item<a class="headerlink" href="#charset-input-item" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>The charset input item is a menu item that allows the user to input a string value with a specific charset.
+It extends the <span class="xref std std-doc">input item</span> and adds a charset property.</p>
+<p>The charset input can be useful in scenarios where you don’t have a full keyboard/keypad available,
+and you want to be able to use the <code class="docutils literal notranslate"><span class="pre">up</span></code> and <code class="docutils literal notranslate"><span class="pre">down</span></code> action to cycle through a set of characters.</p>
+<p>It can also be used to restrict the input value to a specific set of characters.</p>
+<p>The charset input item has the following properties:</p>
 <ul class="simple">
 <li><p><strong>label</strong>: The label that is displayed on the screen.</p></li>
 <li><p><strong>default</strong>: The default value that is displayed in the input field.</p></li>
+<li><p><strong>charset</strong>: The charset that is used to restrict the input value.</p></li>
 <li><p><strong>callback</strong>: A callback function that is called when the input is submitted.</p></li>
 </ul>
-<p>The input item can be created using the following syntax:</p>
-<p>You can create an input item by specifying the label and the default value:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">ITEM_INPUT</span><span class="p">(</span><span class="s">"Name"</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<p>The charset input item can be created using the following syntax:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">ITEM_INPUT_CHARSET</span><span class="p">(</span><span class="s">"Pass"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s">"0123456789"</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="line-2"><span class="w">    </span><span class="c1">// Callback function to handle input submission</span>
 </span><span id="line-3"><span class="w">    </span><span class="c1">// value is the string value entered by the user</span>
 </span><span id="line-4"><span class="w">    </span><span class="c1">// Do something with the input value</span>
 </span><span id="line-5"><span class="p">})</span>
 </span></code></pre></div>
 </div>
-<p>When the <code class="docutils literal notranslate"><span class="pre">Name</span></code> menu item is selected, an input field will be displayed on the screen, allowing the user to enter a string value.</p>
-<a class="reference internal image-reference" href="../../_images/item-input.gif"><img alt="Example of an input menu item" src="../../_images/item-input.gif" style="width: 400px;"/>
+<p>When the <code class="docutils literal notranslate"><span class="pre">Pass</span></code> menu item is selected, an input field will be displayed on the screen, allowing the user to enter a string value.
+The input value will be restricted to the characters specified in the charset.</p>
+<a class="reference internal image-reference" href="../../_images/item-charset-input.gif"><img alt="Example of a charset input menu item" src="../../_images/item-charset-input.gif" style="width: 400px;"/>
 </a>
-<p>You can create multiple input items in the same menu screen, each with its own label and default value.</p>
-<p>This item can be further extended by creating a new class which inherits from <code class="docutils literal notranslate"><span class="pre">ItemInput</span></code>, for example you might need to:</p>
-<ul class="simple">
-<li><p>Validate the input value before accepting it.</p></li>
-<li><p>Limit the input length.</p></li>
-<li><p>Display a message when the input is submitted.</p></li>
-<li><p>etc.</p></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="k">class</span><span class="w"> </span><span class="nc">CustomInput</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ItemInput</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="k">public</span><span class="o">:</span>
-</span><span id="line-3"><span class="w">    </span><span class="n">CustomInput</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">default_value</span><span class="p">,</span><span class="w"> </span><span class="n">fptrStr</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span>
-</span><span id="line-4"><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">ItemInput</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">default_value</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
-</span><span id="line-5">
-</span><span id="line-6"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">on_submit</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-7"><span class="w">        </span><span class="c1">// Custom logic to handle input submission</span>
-</span><span id="line-8"><span class="w">        </span><span class="c1">// value is the string value entered by the user</span>
-</span><span id="line-9"><span class="w">        </span><span class="c1">// Do something with the input value</span>
-</span><span id="line-10"><span class="w">    </span><span class="p">}</span>
-</span><span id="line-11"><span class="p">};</span>
-</span></code></pre></div>
-</div>
-<p>For more information about the input item, check the <a class="reference internal" href="../../reference/api/ItemInput.html"><span class="doc">API reference</span></a>.</p>
+<p>You can create multiple charset input items in the same menu screen, each with its own label, default value, and charset.</p>
+<p>For more information about the charset input item, check the <a class="reference internal" href="../../reference/api/ItemInputCharset.html"><span class="doc">API reference</span></a>.</p>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="range.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="input.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Range item
+        Input item
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="input-charset.html">
-        Charset input item
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../../reference/samples/index.html">
+        Code Samples
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>

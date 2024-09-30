@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Command Menu Item | LcdMenu</title>
-<meta content="Command Menu Item | LcdMenu" property="og:title"/>
-<meta content="Command Menu Item | LcdMenu" name="twitter:title"/>
+<title>Sub-menu item | LcdMenu</title>
+<meta content="Sub-menu item | LcdMenu" property="og:title"/>
+<meta content="Sub-menu item | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../_static/lcdmenu.svg" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="submenu.html" rel="next" title="Sub-menu item"/>
-<link href="basic.html" rel="prev" title="Basic Menu Item"/>
+<link href="list.html" rel="next" title="List menu item"/>
+<link href="command.html" rel="prev" title="Command menu item"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -87,10 +87,10 @@
 <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Deep Dive<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="basic.html">Basic Menu Item</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Command Menu Item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="submenu.html">Sub-menu item</a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command.html">Command menu item</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="list.html">List menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="range.html">Range item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input.html">Input item</a></li>
@@ -177,128 +177,54 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Deep Dive</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Command Menu Item</span>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Item overview</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Sub-menu item</span>
 </nav>
 <div id="content" role="main">
-<section id="command-menu-item">
-<h1>Command Menu Item<a class="headerlink" href="#command-menu-item" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The command menu item is a menu item that executes a function when selected by the user.
-It is useful for creating menu items that perform a specific action when selected.</p>
-<p>This can be used in various scenarios, such as:</p>
-<ul class="simple">
-<li><p>Controlling a device or sensor (e.g., turning on a motor)</p></li>
-<li><p>Changing a setting or configuration (e.g. saving a setting/value)</p></li>
-<li><p>Triggering an event or action (e.g., sending a message)</p></li>
-</ul>
-<p>There are two variants of the command menu item:</p>
-<section id="basic-command-item">
-<h2>Basic command item<a class="headerlink" href="#basic-command-item" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#basic-command-item'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>The basic command menu item is a simple menu item that executes a lambda function when selected.</p>
-<p>A command menu item can be created using the following syntax:</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
-<label class="sd-tab-label" for="sd-tab-item-0">
-As a lambda function</label><div class="sd-tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">ITEM_COMMAND</span><span class="p">(</span><span class="s">"Item 1"</span><span class="p">,</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="c1">// Function body</span>
-</span><span id="line-3"><span class="p">})</span>
+<section id="sub-menu-item">
+<h1>Sub-menu item<a class="headerlink" href="#sub-menu-item" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>The sub-menu item is a menu item that opens a new menu screen when selected.
+It is used to create a hierarchical menu structure with multiple levels of navigation.</p>
+<p>This can be useful for organizing menu items into categories or sub-menus, making it easier for users to navigate through the menu system.</p>
+<p>A sub-menu item can be created using the following syntax:</p>
+<p>You first need to define the sub-menu screen with the desired menu items:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">subMenuScreen</span><span class="p">,</span><span class="w"> </span><span class="n">subMenuItems</span><span class="p">,</span>
+</span><span id="line-2"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Sub-item 1"</span><span class="p">),</span>
+</span><span id="line-3"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Sub-item 2"</span><span class="p">),</span>
+</span><span id="line-4"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Sub-item 3"</span><span class="p">),</span>
+</span><span id="line-5"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Sub-item 4"</span><span class="p">));</span>
 </span></code></pre></div>
 </div>
-</div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
-<label class="sd-tab-label" for="sd-tab-item-1">
-As a function pointer</label><div class="sd-tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// Function definition</span>
-</span><span id="line-2"><span class="kt">void</span><span class="w"> </span><span class="nf">myFunction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-3"><span class="w">    </span><span class="c1">// Function body</span>
-</span><span id="line-4"><span class="p">}</span>
-</span><span id="line-5"><span class="c1">// Create a command menu item</span>
-</span><span id="line-6"><span class="n">ITEM_COMMAND</span><span class="p">(</span><span class="s">"Item 1"</span><span class="p">,</span><span class="w"> </span><span class="n">myFunction</span><span class="p">)</span>
+<p>Then you can create a sub-menu item entry that links to the sub-menu screen in the parent menu:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// ... More menu items</span>
+</span><span id="line-2"><span class="n">ITEM_SUBMENU</span><span class="p">(</span><span class="s">"Sub-menu 1"</span><span class="p">,</span><span class="w"> </span><span class="n">subMenuScreen</span><span class="p">)</span>
+</span><span id="line-3"><span class="c1">// ... More menu items</span>
 </span></code></pre></div>
 </div>
-</div>
-</div>
-<section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#example'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
-<p>Let’s take a look at an example of a command menu item that simply prints a message to the serial monitor when selected:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">ITEM_COMMAND</span><span class="p">(</span><span class="s">"Print Message"</span><span class="p">,</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">);</span>
-</span><span id="line-3"><span class="p">})</span>
-</span></code></pre></div>
-</div>
-<p>When the “Print Message” menu item is selected, the message “Hello, world!” will be printed to the serial monitor.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="gp">$ </span>Hello,<span class="w"> </span>world!
-</span></code></pre></div>
-</div>
-<p>Another example of a command menu item is the <code class="docutils literal notranslate"><span class="pre">ITEM_BACK</span></code>, which is used to navigate back to the previous menu screen.
-This is useful when you don’t have a dedicated “Back” input button on your setup.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// You can also pass a custom text for the back item</span>
-</span><span id="line-2"><span class="n">ITEM_BACK</span><span class="p">()</span>
-</span></code></pre></div>
-</div>
-<p>When the “Back” menu item is selected, the menu will navigate back to the previous screen.</p>
-<p>Find more information about the command menu item <a class="reference internal" href="../../reference/api/ItemCommand.html"><span class="doc">here</span></a> and the back menu item <a class="reference internal" href="../../reference/api/ItemBack.html"><span class="doc">here</span></a>.</p>
-</section>
-</section>
-<section id="toggle-menu-item">
-<h2>Toggle menu item<a class="headerlink" href="#toggle-menu-item" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#toggle-menu-item'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>The toggle command menu item is a menu item that toggles between two states when selected by the user.</p>
-<p>A toggle command menu item can be created using the following syntax:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// The initial state of the toggle menu item is set to false</span>
-</span><span id="line-2"><span class="n">ITEM_TOGGLE</span><span class="p">(</span><span class="s">"Item 1"</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">bool</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-3"><span class="w">    </span><span class="c1">// Function body</span>
-</span><span id="line-4"><span class="p">})</span>
-</span></code></pre></div>
-</div>
-<p>The toggle command menu item takes a lambda function that accepts a boolean parameter representing the current state of the item.
-There are other ways to create a toggle command menu item, check the <a class="reference internal" href="../../reference/api/ItemToggle.html"><span class="doc">API reference</span></a> for more information.</p>
-<section id="id1">
-<h3>Example<a class="headerlink" href="#id1" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id1'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
-<p>Let’s take a look at an example of a toggle command menu item that toggles an LED on and off when selected:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// The initial state of the toggle menu item is set to false</span>
-</span><span id="line-2"><span class="n">ITEM_TOGGLE</span><span class="p">(</span><span class="s">"Red LED"</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">bool</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-3"><span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">HIGH</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
-</span><span id="line-4"><span class="p">})</span>
-</span></code></pre></div>
-</div>
-<p>When the “Toggle LED” menu item is selected, the LED connected to the <code class="docutils literal notranslate"><span class="pre">LED_PIN</span></code> pin will be toggled on and off.</p>
-<a class="reference internal image-reference" href="../../_images/item-toggle.png"><img alt="Toggle menu item" src="../../_images/item-toggle.png" style="width: 400px;"/>
+<p>When the <code class="docutils literal notranslate"><span class="pre">Sub-menu</span> <span class="pre">1</span></code> menu item is selected, the sub-menu screen will be displayed, showing the list of sub-items.</p>
+<a class="reference internal image-reference" href="../../_images/item-submenu.gif"><img alt="Example of a sub-menu item" src="../../_images/item-submenu.gif" style="width: 400px;"/>
 </a>
-</section>
-</section>
+<p>You can create multiple levels of sub-menus by nesting sub-menu items within other sub-menu screens.</p>
+<p>Find more information about the sub-menu item in the <a class="reference internal" href="../../reference/api/ItemSubMenu.html"><span class="doc">API reference</span></a>.</p>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="basic.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="command.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Basic Menu Item
+        Command menu item
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="submenu.html">
-        Sub-menu item
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="list.html">
+        List menu item
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
 </a>
 </div>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
-<ul>
-<li><a :data-current="activeSection === '#basic-command-item'" class="reference internal" href="#basic-command-item">Basic command item</a><ul>
-<li><a :data-current="activeSection === '#example'" class="reference internal" href="#example">Example</a></li>
-</ul>
-</li>
-<li><a :data-current="activeSection === '#toggle-menu-item'" class="reference internal" href="#toggle-menu-item">Toggle menu item</a><ul>
-<li><a :data-current="activeSection === '#id1'" class="reference internal" href="#id1">Example</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</aside>
+</div></div>
 </main>
 </div>
 </div><footer class="py-6 border-t border-border md:py-0">
