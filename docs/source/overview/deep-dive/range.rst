@@ -66,7 +66,7 @@ A float range item can be created using the following syntax:
     }, (const char*) " km", 0.5f),
     // ... More menu items
 
-- The fifth argument is the step size of the range (the increment or decrement value when changing the value).
+- The last argument is the step size of the range (the increment or decrement value when changing the value).
   This argument also determines the number of decimal places to display.
   For example, a step size of ``0.5`` will display values with one decimal place,
   while a step size of ``0.01`` will display values with two decimal places.
