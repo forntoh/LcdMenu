@@ -69,4 +69,4 @@ The menu is controlled using the serial monitor, where you can navigate through 
 
 For detailed information on how to use |project|, check out the :doc:`API Reference </reference/api/index>`.
 
-In the next chapter, we will go through the different components of the library and how to use them to create more complex menu systems.
+In the next chapters, we will go through the different components of the library and how to use them to create more complex menu systems.

@@ -16,6 +16,7 @@ A basic menu item can be created using the following syntax:
 This is how a basic menu item is rendered on a 16x2 LCD screen:
 
 .. image:: images/item-basic.png
+    :width: 400px
     :alt: Basic menu item
 
 Find more information about the basic menu item in the :doc:`API reference </reference/api/MenuItem>`.

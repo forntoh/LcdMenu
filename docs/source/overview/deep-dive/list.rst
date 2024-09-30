@@ -36,6 +36,7 @@ that will be called when an item is selected:
 When the ``List 1`` menu item is selected, the list of items will be displayed on the screen, allowing the user to select one of the items.
 
 .. image:: images/item-list.gif
+    :width: 400px
     :alt: Example of a list menu item
 
 You can create multiple list menu items in the same menu screen, each with its own list of items.
