@@ -16,8 +16,9 @@ Each menu item can be selected and interacted with by the user.
     basic
     command
     submenu
-    value
     list
-    custom
+    range
+    input
+    input-charset
 
 You can also create your own custom menu items by extending the base menu item class.
