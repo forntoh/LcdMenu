@@ -71,7 +71,7 @@ including LCD displays and OLED displays *(coming soon)*.
     :hidden:
 
     overview/getting-started
-    overview/deep-dive/index
+    overview/items/index
 
 .. toctree::
     :maxdepth: 2

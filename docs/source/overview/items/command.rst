@@ -1,4 +1,4 @@
-Command Menu Item
+Command menu item
 -----------------
 
 The command menu item is a menu item that executes a function when selected by the user.
