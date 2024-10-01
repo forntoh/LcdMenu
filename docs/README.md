@@ -18,25 +18,24 @@ To build the documentation, run the following command:
 make -C docs html
 ```
 
-There are other documentation files that are generated using some custom scripts. To generate these files, run the following commands:
+The generated HTML files will be available in the `docs/build/html` directory.
 
-You will need to have Doxygen installed to generate the Doxygen documentation.
+---
+
+There are other documentation files that are generated using some custom scripts, run the `docs.sh` file to generate them:
+
+- You will need to have Doxygen installed to generate the Doxygen documentation.
+
+To run the docs.sh file in the terminal, you need to ensure it has execute permissions and then execute it. Here are the steps:
+
+1. Give execute permissions to the script:
 
 ```bash
-# Generate Doxygen documentation
-doxygen docs/Doxyfile
-
-# Generate Sphinx documentation from Doxygen
-python .scripts/link_doxygen_sphinx.py
-
-# Link Examples
-python .scripts/link_examples_sphinx.py
-
-# Run changelog updater
-python .scripts/update_changelog.py
-
-# Append includes to index files
-python .scripts/append_includes.py docs/source/reference/migration desc false
+chmod +x docs.sh
 ```
 
-The generated HTML files will be available in the `docs/build/html` directory.
+2. Run the script:
+
+```bash
+./docs.sh
+```
