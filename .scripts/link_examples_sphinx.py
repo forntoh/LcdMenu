@@ -16,7 +16,7 @@ def create_rst_file(src_path, dest_path):
         rst_file.write(f'   :linenos:\n\n')
 
 def create_index_file(directory, entries):
-    dir_name = "Code Samples"
+    dir_name = "Code samples"
     index_path = os.path.join(directory, 'index.rst')
     os.makedirs(os.path.dirname(index_path), exist_ok=True)
     with open(index_path, 'w') as index_file:
