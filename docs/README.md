@@ -26,6 +26,8 @@ There are other documentation files that are generated using some custom scripts
 
 - You will need to have Doxygen installed to generate the Doxygen documentation.
 
+> sudo apt-get install -y doxygen
+
 To run the docs.sh file in the terminal, you need to ensure it has execute permissions and then execute it. Here are the steps:
 
 1. Give execute permissions to the script:
