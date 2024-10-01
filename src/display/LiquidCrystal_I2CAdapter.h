@@ -11,14 +11,14 @@
 /**
  * @class LiquidCrystal_I2CAdapter
  * @brief Adapter class for interfacing with LiquidCrystal_I2C displays.
- * 
+ *
  * This class provides an interface to control LiquidCrystal_I2C displays,
  * implementing the DisplayInterface. It includes methods for initializing
  * the display, drawing items, handling cursors, and managing backlight and
  * display states.
- * 
+ *
  * @note This class assumes that the LiquidCrystal_I2C library is included and available.
- * 
+ *
  * @param lcd Pointer to a LiquidCrystal_I2C object.
  * @param maxCols Maximum number of columns on the display.
  * @param maxRows Maximum number of rows on the display.

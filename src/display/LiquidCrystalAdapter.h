@@ -11,13 +11,13 @@
 /**
  * @class LiquidCrystalAdapter
  * @brief Adapter class for interfacing with LiquidCrystal displays.
- * 
+ *
  * This class provides an implementation of the DisplayInterface for LiquidCrystal displays.
  * It includes methods for initializing the display, drawing items, handling cursors, and managing
  * custom characters such as up and down arrows.
- * 
+ *
  * @note This class assumes that the LiquidCrystal library is included and available.
- * 
+ *
  * @param lcd Pointer to a LiquidCrystal object.
  * @param maxCols Maximum number of columns on the display.
  * @param maxRows Maximum number of rows on the display.

@@ -26,9 +26,9 @@
  * Implementation should convert it to one byte command.
  *
  * Implementation details.
- * 
+ *
  * Mapping:
- * 
+ *
  * - `First 128 of ASCII`        -> as is
  * - `\r`                        -> `ENTER`
  * - `\n`                        -> `ENTER`

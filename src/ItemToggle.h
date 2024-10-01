@@ -26,7 +26,7 @@ class ItemToggle : public MenuItem {
   public:
     /**
      * @brief Create an ItemToggle object with default values as `ON` and `OFF`.
-     * 
+     *
      * @param key key of the item
      * @param callback reference to callback function
      */
@@ -36,10 +36,10 @@ class ItemToggle : public MenuItem {
     /**
      * @brief Construct a new Item Toggle object with an initial state
      * and default ON/OFF texts.
-     * 
-     * @param text 
-     * @param enabled 
-     * @param callback 
+     *
+     * @param text
+     * @param enabled
+     * @param callback
      */
     ItemToggle(const char* text, boolean enabled, fptrBool callback)
         : ItemToggle(text, "ON", "OFF", callback) {

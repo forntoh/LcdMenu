@@ -15,7 +15,7 @@ class ItemInputCharset : public ItemInput {
   public:
     /**
      * @brief Construct a new ItemInputCharset object with an initial value.
-     * 
+     *
      * @param text The text to display for the item.
      * @param value The initial value for the input.
      * @param charset The charset to use for input.
