@@ -4,5 +4,5 @@
         fill="#0068BB" />
     <path id="frame"
         d="M0.5 0C0.22386 0 0 0.22386 0 0.5V16H7V14H9V16H9.5H10H10.5H11V14H13V16H20V0.5C20 0.22386 19.7761 0 19.5 0H0.5ZM2 2H18V11H2C2 9.076 2 3.92405 2 2ZM3 13C4 13 4 13 4 14C4 15 4 15 3 15C2 15 2 15 2 14C2 13 2 13 3 13ZM17 13C18 13 18 13 18 14C18 15 18 15 17 15C16 15 16 15 16 14C16 13 16 13 17 13Z"
-        fill="currentColor" />
+        fill="var(--fgColor-default, var(--color-fg-default, currentColor))" />
 </svg>
