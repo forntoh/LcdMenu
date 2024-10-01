@@ -85,7 +85,7 @@ void loop() {
 This example creates a simple menu with four items and displays it on a 16x2 LCD screen.
 The menu is controlled using the serial monitor, where you can navigate through the items using the arrow keys.
 
-For detailed information on how to use LcdMenu, check out the [official docs](https://lcdmen.forntoh.dev)
+For detailed information on how to use LcdMenu, check out the [official docs](https://lcdmenu.forntoh.dev)
 
 ---
 
