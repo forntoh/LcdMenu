@@ -80,8 +80,8 @@ including LCD displays and OLED displays *(coming soon)*.
     :hidden:
 
     reference/samples/index
-    reference/uml
     reference/api/index
+    reference/uml
     reference/changelog
     reference/migration/index
     reference/faq
