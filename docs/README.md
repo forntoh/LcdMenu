@@ -33,7 +33,7 @@ python .scripts/link_doxygen_sphinx.py
 python .scripts/link_examples_sphinx.py
 
 # Run changelog updater
-run: python .scripts/update_changelog.py
+python .scripts/update_changelog.py
 
 # Append includes to index files
 python .scripts/append_includes.py docs/source/reference/migration desc false
