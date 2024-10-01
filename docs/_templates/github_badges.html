@@ -1,0 +1,32 @@
+<hr style="border-color: hsl(var(--border)); margin-bottom: 30px" />
+
+<div class="flex flex-col gap-4">
+  <div class="star-on-github">
+    <a
+      class="github-button"
+      href="https://github.com/{{ github_user }}/{{ github_repo }}"
+      data-color-scheme="no-preference: light; light: light; dark: dark;"
+      data-icon="octicon-star"
+      data-size="large"
+      data-show-count="true"
+      aria-label="Star {{ github_user }}/{{ github_repo }} on GitHub"
+    >
+      Star on GitHub
+    </a>
+  </div>
+  <div class="edit-on-github">
+    <a
+      class="github-button"
+      href="https://github.com/{{ github_user }}/{{ github_repo }}/edit/{{ github_version }}{{ conf_py_path }}{{ pagename }}.rst"
+      data-color-scheme="no-preference: light; light: light; dark: dark;"
+      data-icon="octicon-pencil"
+      data-size="large"
+      target="_blank"
+      aria-label="Edit {{ github_user }}/{{ github_repo }} on GitHub"
+    >
+      Edit on GitHub
+    </a>
+  </div>
+</div>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>

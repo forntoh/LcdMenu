@@ -62,7 +62,7 @@ html_show_sphinx = False
 html_domain_indices = False  # Don't need module indices
 html_copy_source = False  # Don't need sources
 html_sidebars = {
-    "**": ["sidebar_main_nav_links.html", "sidebar_toc.html", "star_on_github.html", "edit_on_github.html"]
+    "**": ["sidebar_main_nav_links.html", "sidebar_toc.html", "github_badges.html"]
 }
 # Enable "Edit on GitHub" links
 html_context = {
