@@ -1,5 +1,5 @@
-|project| FAQ
-=============
+FAQ
+===
 
 This is a list of Frequently Asked Questions about |project|. Feel free to suggest new entries!
 
@@ -28,3 +28,5 @@ This is a list of Frequently Asked Questions about |project|. Feel free to sugge
     To hide the menu, you can call the :cpp:func:`LcdMenu::hide` method.
     This will clear the screen and stop the menu from rendering.
     To show the menu again, call the :cpp:func:`LcdMenu::show` method.
+
+You can find extended `discussions <https://github.com/forntoh/LcdMenu/discussions>`_ on the GitHub repository.
