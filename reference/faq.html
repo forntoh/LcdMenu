@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Class diagram | LcdMenu</title>
-<meta content="Class diagram | LcdMenu" property="og:title"/>
-<meta content="Class diagram | LcdMenu" name="twitter:title"/>
+<title>LcdMenu FAQ | LcdMenu</title>
+<meta content="LcdMenu FAQ | LcdMenu" property="og:title"/>
+<meta content="LcdMenu FAQ | LcdMenu" name="twitter:title"/>
 <link href="../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,7 @@
 <link href="../_static/lcdmenu.svg" rel="icon"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
-<link href="migration/index.html" rel="next" title="Migration"/>
-<link href="api/input/InputInterface.html" rel="prev" title="InputInterface"/>
+<link href="migration/index.html" rel="prev" title="Migration"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -150,9 +149,9 @@
 <li class="toctree-l2"><a class="reference internal" href="api/input/index.html">input</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Class diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uml.html">Class diagram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="migration/index.html">Migration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQs</a></li>
 </ul>
 </nav><hr style="border-color: hsl(var(--border));"/>
 <div class="flex flex-col gap-4 my-8">
@@ -162,7 +161,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/uml.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/faq.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -203,228 +202,46 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Class diagram</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">LcdMenu FAQ</span>
 </nav>
 <div id="content" role="main">
-<section id="class-diagram">
-<h1>Class diagram<a class="headerlink" href="#class-diagram" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The class diagram shows the relationships between the classes in the LcdMenu library.</p>
-<p class="plantuml">
-<img alt="@startuml
-skinparam backgroundColor #FFFFFF60
-' https://www.plantuml.com/plantuml/uml/
-
-hide empty members
-left to right direction
-
-class InputInterface {
-    virtual void observe()
-}
-
-class DisplayInterface {
-    #uint8_t maxCols
-    #uint8_t maxRows
-    #uint8_t cursorRow
-    #uint8_t blinkerPosition
-    +bool isEditModeEnabled
-    +virtual void begin()
-    +uint8_t getMaxRows() const
-    +uint8_t getMaxCols() const
-    +virtual void clear()
-    +virtual void setBacklight(bool enabled)
-    +virtual void drawItem(uint8_t row, const char* text)
-    +virtual void drawItem(uint8_t row, const char* text, char separator, char* value)
-    +virtual void clearCursor()
-    +virtual void drawCursor()
-    +virtual void moveCursor(uint8_t newCursorRow)
-    +void setEditModeEnabled(bool enabled)
-    +bool getEditModeEnabled()
-    +uint8_t getCursorRow() const
-    +virtual void clearBlinker()
-    +virtual void drawBlinker()
-    +virtual void resetBlinker(uint8_t blinkerPosition)
-    +uint8_t getBlinkerPosition() const
-    +virtual bool drawChar(char c)
-    +virtual void clearUpIndicator()
-    +virtual void drawUpIndicator()
-    +virtual void clearDownIndicator()
-    +virtual void drawDownIndicator()
-    +virtual void restartTimer()
-}
-
-class LcdMenu {
-    -bool enabled
-    +DisplayInterface* getDisplay()
-    +MenuScreen* getScreen()
-    +void setScreen(MenuScreen* screen)
-    +uint8_t getCursor()
-    +MenuItem* getItemAt(uint8_t position)
-    +void setCursor(uint8_t cursor)
-    +bool process(const unsigned char c)
-    +void reset()
-    +void hide()
-    +void show()
-    +void refresh()
-
-}
-
-class MenuScreen {
-    -uint8_t cursor
-    -uint8_t view
-    +void setParent(MenuScreen* parent)
-    +MenuItem* operator[](const uint8_t position)
-    +uint8_t getCursor()
-    +MenuItem* getItemAt(uint8_t position)
-    #void setCursor(DisplayInterface* display, uint8_t position)
-    #bool process(LcdMenu* menu, const unsigned char command)
-    #void draw(DisplayInterface* display)
-    #bool up(DisplayInterface* display)
-    #bool down(DisplayInterface* display)
-    #bool back(LcdMenu* menu)
-    #uint8_t itemsCount()
-
-}
-
-class MenuItem {
-    #const char* text
-    +const char* getText()
-    +void setText(const char* text)
-    #virtual bool process(LcdMenu* menu, const unsigned char command)
-    #const void draw(DisplayInterface* display)
-    #virtual void draw(DisplayInterface* display, uint8_t row)
-}
-
-InputInterface -r-&gt; &quot;1&quot; LcdMenu : menu
-LcdMenu -r-&gt; &quot;1&quot; DisplayInterface : display
-LcdMenu -d-&gt; &quot;1&quot; MenuScreen : screen
-MenuScreen -d-&gt; &quot;1..*&quot; MenuItem : items
-MenuScreen --&gt; &quot;0..1&quot; MenuScreen : parent
-
-LcdMenu::process .. MenuScreen::process
-LcdMenu::getCursor .. MenuScreen::getCursor
-LcdMenu::setCursor .. MenuScreen::setCursor
-LcdMenu::getItemAt .. MenuScreen::getItemAt
-
-MenuScreen::process .. MenuItem::process
-MenuScreen::draw .. MenuItem::draw
-
-@enduml
-" src="../_images/plantuml-e061e821a108ee91d62bf63bc49b23b9d63c9117.png"/>
-</p>
-<p class="plantuml">
-<img alt="@startuml
-skinparam backgroundColor #FFFFFF60
-' https://www.plantuml.com/plantuml/uml/
-
-hide empty members
-left to right direction
-
-class MenuItem {
-    #const char* text
-    +const char* getText()
-    +void setText(const char* text)
-    #virtual bool process(LcdMenu* menu, const unsigned char command)
-    #const void draw(DisplayInterface* display)
-    #virtual void draw(DisplayInterface* display, uint8_t row)
-}
-
-class ItemBack {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    #void changeScreen(LcdMenu* menu)
-}
-
-class ItemSubMenu {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    #void changeScreen(LcdMenu* menu)
-}
-
-class ItemToggle {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    #void toggle(DisplayInterface* display)
-}
-
-class ItemCommand {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    #void executeCommand()
-}
-
-class ItemInput {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    #void up(DisplayInterface* display)
-    #void down(DisplayInterface* display)
-    #void enter(DisplayInterface* display)
-    #void back(DisplayInterface* display)
-    #void left(DisplayInterface* display)
-    #void right(DisplayInterface* display)
-    #void backspace(DisplayInterface* display)
-    #void typeChar(DisplayInterface* display, const unsigned char command)
-    #void clear(DisplayInterface* display)
-}
-
-class ItemInputCharset {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    #void initCharEdit()
-    #void abortCharEdit(DisplayInterface* display)
-    #void commitCharEdit(DisplayInterface* display)
-    #void showNextChar(DisplayInterface* display)
-    #void showPreviousChar(DisplayInterface* display)
-}
-
-class ItemList {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    #void selectPrevious(DisplayInterface* display)
-    #void selectNext(DisplayInterface* display)
-}
-
-class ItemProgress {
-    #bool process(LcdMenu* menu, const unsigned char command) override
-    ..
-    +void increment()
-    +void decrement()
-}
-
-class EditMode as &quot;???&quot; {
-}
-
-note bottom of EditMode : Someone who holds edit mode
-
-ItemBack -u-|&gt; MenuItem
-ItemSubMenu -u-|&gt; MenuItem
-ItemToggle -u-|&gt; MenuItem
-ItemCommand -u-|&gt; MenuItem
-EditMode -u-|&gt; MenuItem
-ItemList -u-|&gt; EditMode
-ItemProgress -u-|&gt; EditMode
-ItemInput -u-|&gt; EditMode
-ItemInputCharset -u-|&gt; ItemInput
-
-@enduml
-" src="../_images/plantuml-a2421ade400fab947a336c874ab5d1d95aa32713.png"/>
-</p>
-</section>
+<section id="project-faq">
+<h1>LcdMenu FAQ<a class="headerlink" href="#project-faq" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>This is a list of Frequently Asked Questions about LcdMenu. Feel free to suggest new entries!</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in-slide-down">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">How do I get started with LcdMenu?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">To get started with LcdMenu, follow the steps in the <a class="reference internal" href="../overview/getting-started.html"><span class="doc">Getting Started guide</span></a>.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in-slide-down">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">How do I create a custom menu item?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">To create a new menu item, you need to extend the base menu item class and implement the necessary methods.
+Check the <a class="reference internal" href="api/MenuItem.html"><span class="doc">API reference</span></a> for more information.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in-slide-down">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">How do I update a menu item on runtime?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">To update any attribute of a menu item on runtime, you need to call the appropriate setter method.</p>
+<p class="sd-card-text">For example, to update the text of a basic menu item, you can call the <a class="reference internal" href="api/MenuItem.html#_CPPv4N8MenuItem7setTextEPKc" title="MenuItem::setText"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">MenuItem::setText()</span></code></a> method.
+Then call the <a class="reference internal" href="api/LcdMenu.html#_CPPv4N7LcdMenu7refreshEv" title="LcdMenu::refresh"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">LcdMenu::refresh()</span></code></a> method to refresh the screen.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in-slide-down">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">How do I hide the menu?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">To hide the menu, you can call the <a class="reference internal" href="api/LcdMenu.html#_CPPv4N7LcdMenu4hideEv" title="LcdMenu::hide"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">LcdMenu::hide()</span></code></a> method.
+This will clear the screen and stop the menu from rendering.
+To show the menu again, call the <a class="reference internal" href="api/LcdMenu.html#_CPPv4N7LcdMenu4showEv" title="LcdMenu::show"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">LcdMenu::show()</span></code></a> method.</p>
+</div>
+</details></section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="api/input/InputInterface.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="migration/index.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        InputInterface
-      </a>
-</div>
-<div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="migration/index.html">
         Migration
-        <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<polyline points="9 18 15 12 9 6"></polyline>
-</svg>
-</a>
+      </a>
 </div>
 </div></div>
 </main>
