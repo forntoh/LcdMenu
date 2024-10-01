@@ -1,6 +1,4 @@
 License
 =======
 
-.. literalinclude:: ../../../LICENSE
-    :language: none
-    :encoding: utf-8
+.. include:: ../../../LICENSE
