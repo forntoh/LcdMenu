@@ -19,7 +19,6 @@
   <a href="https://github.com/forntoh/LcdMenu/commits/master">
     <img src="https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease" alt="GitHub Commits Badge"/>
   </a>
-  <img src="https://visitor-badge.laobi.icu/badge?page_id=forntoh.LcdMenu" alt="Visitors Count"/>
 </p>
 
 LcdMenu is an open-source Arduino library for creating menu systems. It is designed to be easy to use and flexible enough to support a wide range of use cases.
