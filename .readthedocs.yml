@@ -10,11 +10,9 @@ build:
     python: "3.12"
   jobs:
     post_install:
-      - apt-get update
-      - apt-get install -y doxygen graphviz default-jre plantuml
+      - sudo apt-get update
+      - sudo apt-get install -y doxygen graphviz default-jre plantuml
     pre_build:
-      - apt-get update
-      - apt-get install -y doxygen graphviz default-jre plantuml
       - chmod +x docs/pre_build.bat
       - docs/pre_build.bat
 
