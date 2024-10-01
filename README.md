@@ -1,4 +1,9 @@
-<h1 align="center"><img src="docs/assets/lcdmenu.svg" height="56"></img><br>LcdMenu</h1>
+<h1 align="center">
+  <picture>
+    <source srcset="docs/assets/logo-dark.png" media="(prefers-color-scheme: dark)">
+    <img src="docs/assets/logo-light.png" alt="LcdMenu Logo" height="56">
+  </picture></img><br>LcdMenu
+  </h1>
 
 <p align="center">
   <a href="https://www.ardu-badge.com/LcdMenu">
