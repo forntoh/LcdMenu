@@ -2,7 +2,7 @@ Charset input item
 ------------------
 
 The charset input item is a menu item that allows the user to input a string value with a specific charset.
-It extends the :doc:`input item </overview/deep-dive/input>` and adds a charset property.
+It extends the :doc:`input item </overview/items/input>` and adds a charset property.
 
 The charset input can be useful in scenarios where you don't have a full keyboard/keypad available,
 and you want to be able to use the ``up`` and ``down`` action to cycle through a set of characters.
