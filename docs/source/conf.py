@@ -62,7 +62,15 @@ html_show_sphinx = False
 html_domain_indices = False  # Don't need module indices
 html_copy_source = False  # Don't need sources
 html_sidebars = {
-    "**": ["sidebar_main_nav_links.html", "sidebar_toc.html"]
+    "**": ["sidebar_main_nav_links.html", "sidebar_toc.html", "star_on_github.html", "edit_on_github.html"]
+}
+# Enable "Edit on GitHub" links
+html_context = {
+    "display_github": True,  # Integrate GitHub
+    "github_user": "forntoh",  # GitHub username
+    "github_repo": "LcdMenu",  # GitHub repository name
+    "github_version": "master",  # The branch
+    "conf_py_path": "/docs/source/",  # Path in the repository to the docs directory
 }
 html_permalinks_icon = Icons.permalinks_icon
 html_logo = "../assets/lcdmenu.svg"
