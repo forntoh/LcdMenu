@@ -30,7 +30,8 @@
       "*.toml",
       "docs/",
       "requirements.txt",
-      "version"
+      "version",
+      "*.sh"
     ]
   }
 }
