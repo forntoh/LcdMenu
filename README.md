@@ -13,13 +13,12 @@
     <img src="https://badges.registry.platformio.org/packages/forntoh/library/LcdMenu.svg" alt="PlatformIO Badge"/>
   </a>
   <img src="https://img.shields.io/github/check-runs/forntoh/LcdMenu/master?logo=githubactions&logoColor=%23ffffff" alt="Check Runs Badge"/>
-  <a href="https://lcdmen.forntoh.dev">
+  <a href="https://lcdmenu.forntoh.dev">
     <img src="https://img.shields.io/github/actions/workflow/status/forntoh/LcdMenu/docs.yml?label=docs&logo=google%20docs&logoColor=%23efefef" alt="Documentation Status Badge"/>
   </a>
   <a href="https://github.com/forntoh/LcdMenu/commits/master">
     <img src="https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease" alt="GitHub Commits Badge"/>
   </a>
-  <img src="https://visitor-badge.laobi.icu/badge?page_id=forntoh.LcdMenu" alt="Visitors Count"/>
 </p>
 
 LcdMenu is an open-source Arduino library for creating menu systems. It is designed to be easy to use and flexible enough to support a wide range of use cases.
