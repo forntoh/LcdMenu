@@ -8,9 +8,12 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.12"
+  apt_packages:
+    - doxygen
+    - graphviz
+    - default-jre
+    - plantuml
   jobs:
-    pre_system_dependencies:
-      - apt-get install -y doxygen graphviz default-jre plantuml
     pre_build:
       - chmod +x docs/pre_build.bat
       - docs/pre_build.bat
