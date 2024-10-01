@@ -62,7 +62,8 @@ html_show_sphinx = False
 html_domain_indices = False  # Don't need module indices
 html_copy_source = False  # Don't need sources
 html_sidebars = {
-    "**": ["sidebar_main_nav_links.html", "sidebar_toc.html", "github_badges.html"]
+    "reference/changelog": ["sidebar_main_nav_links.html"],
+    "**": ["sidebar_main_nav_links.html", "sidebar_toc.html", "github_badges.html"],
 }
 # Enable "Edit on GitHub" links
 html_context = {
@@ -78,6 +79,7 @@ html_favicon = "../assets/lcdmenu.svg"
 html_theme_options = {
     'show_scrolltop': True,
     'show_prev_next': True,
+    "main_nav_links" : {"Docs": "index", "Changelog": "reference/changelog"},
     "extra_header_link_icons" : {
         "about the author": {
             "link": "https://forntoh.dev",
