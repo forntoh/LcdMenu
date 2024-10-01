@@ -30,25 +30,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r docs/requirements.txt
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz default-jre plantuml
 
-      - name: Generate Doxygen documentation
-        run: doxygen docs/Doxyfile
-
-      - name: Generate Sphinx documentation from Doxygen
-        run: python .scripts/link_doxygen_sphinx.py
-
-      - name: Link Examples
-        run: python .scripts/link_examples_sphinx.py
-
-      - name: Run changelog updater
-        run: python .scripts/update_changelog.py
-
-      - name: Append includes to index files
+      - name: Pre-build
         run: |
-          python .scripts/append_includes.py docs/source/reference/migration desc false
+          chmod +x docs/pre_build.bat
+          docs/pre_build.bat
 
       - name: Generate Sphinx documentation
         run: make html

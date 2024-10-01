@@ -29,9 +29,7 @@
       "Gemfile",
       "*.toml",
       "docs/",
-      "requirements.txt",
-      "version",
-      "*.sh"
+      "version"
     ]
   }
 }

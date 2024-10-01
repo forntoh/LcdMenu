@@ -22,7 +22,7 @@ The generated HTML files will be available in the `docs/build/html` directory.
 
 ---
 
-There are other documentation files that are generated using some custom scripts, run the `docs.sh` file to generate them:
+There are other documentation files that are generated using some custom scripts, run the `pre_build.bat` file to generate them:
 
 - You will need to have Doxygen installed to generate the Doxygen documentation.
 
@@ -31,11 +31,11 @@ To run the docs.sh file in the terminal, you need to ensure it has execute permi
 1. Give execute permissions to the script:
 
 ```bash
-chmod +x docs.sh
+chmod +x pre_build.bat
 ```
 
 2. Run the script:
 
 ```bash
-./docs.sh
+dosc/pre_build.bat
 ```
