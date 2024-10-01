@@ -75,9 +75,10 @@ html_context = {
     "conf_py_path": "/docs/source/",  # Path in the repository to the docs directory
 }
 html_permalinks_icon = Icons.permalinks_icon
-html_logo = "../assets/lcdmenu.svg"
 html_favicon = "../assets/lcdmenu.svg"
 html_theme_options = {
+    'logo_light': '../assets/logo-light.png',
+    'logo_dark': '../assets/logo-dark.png',
     'show_scrolltop': True,
     'show_prev_next': True,
     "main_nav_links" : {"Docs": "index", "Changelog": "reference/changelog", "License": "reference/license"},
