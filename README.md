@@ -1,13 +1,39 @@
-# LcdMenu 📟
-
-[![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
-[![PlatformIO Registry](https://badges.registry.platformio.org/packages/forntoh/library/LcdMenu.svg)](https://registry.platformio.org/libraries/forntoh/LcdMenu)
-[![Badge Commits since latest](https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease)](https://github.com/forntoh/LcdMenu/commits/master)
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=forntoh.LcdMenu)
+<h1 align="center"><img src="docs/assets/lcdmenu.svg" height="56"></img><br>LcdMenu</h1>
+<p align="center">
+    <a href="https://www.ardu-badge.com/LcdMenu">
+      <img
+        src="https://www.ardu-badge.com/badge/LcdMenu.svg"
+        alt="Arduino Library Badge"
+      />
+    </a>
+    <a href="https://registry.platformio.org/libraries/forntoh/LcdMenu">
+      <img
+        src="https://badges.registry.platformio.org/packages/forntoh/library/LcdMenu.svg"
+        alt="PlatformIO Badge"
+      />
+    </a>
+  <img
+    src="https://img.shields.io/github/check-runs/forntoh/LcdMenu/master?logo=githubactions&logoColor=%23ffffff"
+    alt="Check Runs Badge"
+  />
+    <a href="https://lcdmen.forntoh.dev">
+      <img
+        src="https://img.shields.io/github/actions/workflow/status/forntoh/LcdMenu/docs.yml?label=docs&logo=google%20docs&logoColor=%23efefef"
+        alt="Documentation Status Badge"
+      />
+    </a>
+    <a href="https://github.com/forntoh/LcdMenu/commits/master">
+      <img
+        src="https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease"
+        alt="GitHub Commits Badge"
+      />
+    </a>
+   <img src="https://visitor-badge.laobi.icu/badge?page_id=forntoh.LcdMenu" alt="Visitors Count">
+</p>
 
 LcdMenu is an open-source Arduino library for creating menu systems. It is designed to be easy to use and flexible enough to support a wide range of use cases.
 
-With LcdMenu, you can create a menu system for your Arduino project with minimal effort. The library provides a simple API for creating menus and handling user input. There are also a number of built-in [display interfaces](reference/api/display/index) to choose from, including LCD displays and OLED displays *(coming soon)*.
+With LcdMenu, you can create a menu system for your Arduino project with minimal effort. The library provides a simple API for creating menus and handling user input. There are also a number of built-in [display interfaces](reference/api/display/index) to choose from, including LCD displays and OLED displays _(coming soon)_.
 
 ![Example of a menu system created with LcdMenu](https://i.imgur.com/nViET8b.gif)
 
@@ -25,10 +51,10 @@ Follow [this guide](https://www.ardu-badge.com/LcdMenu) to install the library w
 
 3. Add the LcdMenu library to your project by adding the following line to your `platformio.ini` file:
 
-    ```bash
-    lib_deps =
-        forntoh/LcdMenu@^5.0.0
-    ```
+   ```bash
+   lib_deps =
+       forntoh/LcdMenu@^5.0.0
+   ```
 
 4. Save the changes to the `platformio.ini` file.
 
