@@ -35,6 +35,8 @@ class DisplayInterface {
     // Items
     virtual void drawItem(uint8_t row, const char* text);
     virtual void drawItem(uint8_t row, const char* text, char separator, char* value);
+    virtual void drawAt(uint8_t row, uint8_t col, char* value);
+    virtual void clearAfter(uint8_t row, uint8_t col);
     // Cursor
     virtual void clearCursor();
     virtual void drawCursor();
