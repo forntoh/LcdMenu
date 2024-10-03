@@ -2,6 +2,8 @@ name: Build and Deploy Docs
 
 on:
   push:
+    branches:
+      - master
     paths:
       - "src/**"
       - "docs/**"
