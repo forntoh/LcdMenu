@@ -9,7 +9,7 @@ Display interface changes
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In v4.x, the display instance was created and initialised in the display adapter.
-In this version, the display instance is created separetely and passed to the display adapter.
+In this version, the display instance is created separately and passed to the display adapter.
 The existing display adapters have been renamed and placed in a new directory to closely match the display they are designed for.
 
 Imports
@@ -142,7 +142,7 @@ Initialisation of the menu
 Menu control changes
 ^^^^^^^^^^^^^^^^^^^^
 
-Instead of having multple control functions, the menu control functions have been consolidated into a single control function:
+Instead of having multiple control functions, the menu control functions have been consolidated into a single control function:
 :cpp:func:`LcdMenu::process`
 
 Checkout this :doc:`guide </overview/control/index>` for a detailed explanation of the new menu control system.
