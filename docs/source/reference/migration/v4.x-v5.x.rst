@@ -5,7 +5,144 @@ This guide details the changes and how to change your code to migrate to |projec
 
 This is a major release with a lot of changes.
 
-.. caution::
+Display interface changes
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   :octicon:`alert`
-   This guide is a work in progress and will be updated as the release progresses.
+In v4.x, the display instance was created and initialised in the display adapter.
+In this version, the display instance is created separetely and passed to the display adapter.
+The existing display adapters have been renamed and placed in a new directory to closely match the display they are designed for.
+
+Imports
++++++++
+
+The first change you'll need to make is to add the import for your desired display interface.
+
+.. tab-set::
+    :sync-group: display
+
+    .. tab-item:: Liquid Crystal I2C
+         :sync: lcd_i2c
+
+         .. code-block:: cpp
+            :emphasize-added: 2,3
+            :emphasize-removed: 1
+
+            #include <interface/LiquidCrystalI2CAdapter.h>
+            #include <LiquidCrystal_I2C.h>
+            #include <display/LiquidCrystal_I2CAdapter.h>
+
+    .. tab-item:: Liquid Crystal
+         :sync: lcd
+
+         .. code-block:: cpp
+            :emphasize-added: 2,3
+            :emphasize-removed: 1
+
+            #include <interface/LiquidCrystalAdapter.h>
+            #include <LiquidCrystal.h>
+            #include <display/LiquidCrystalAdapter.h>
+
+Construct the display adapter interface
++++++++++++++++++++++++++++++++++++++++
+
+The display instance is created and passed to the display adapter.
+
+.. tab-set::
+    :sync-group: display
+
+    .. tab-item:: Liquid Crystal I2C
+         :sync: lcd_i2c
+
+         .. code-block:: cpp
+            :emphasize-removed: 1
+            :emphasize-added: 2,3
+
+            LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+            LiquidCrystal_I2C lcd(0x27, 16, 2);
+            LiquidCrystal_I2CAdapter lcdAdapter(lcd);
+
+    .. tab-item:: Liquid Crystal
+         :sync: lcd
+
+         .. code-block:: cpp
+            :emphasize-removed: 1
+            :emphasize-added: 2,3
+
+            LiquidCrystalAdapter lcdAdapter(12, 11, 5, 4, 3, 2);
+            LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+            LiquidCrystalAdapter lcdAdapter(lcd);
+
+Initialise the menu
++++++++++++++++++++
+
+The next change is to create and initialise the menu with the display adapter interface.
+
+.. code-block:: cpp
+
+   LcdMenu menu(lcdAdapter);
+
+Finally, begin the display instance in the setup function.
+
+.. tab-set::
+    :sync-group: display
+
+    .. tab-item:: Liquid Crystal I2C
+         :sync: lcd_i2c
+
+         .. code-block:: cpp
+
+            void setup() {
+               lcd.begin();
+            }
+
+    .. tab-item:: Liquid Crystal
+         :sync: lcd
+
+         .. code-block:: cpp
+
+            void setup() {
+               lcd.begin();
+            }
+
+Menu creation changes
+^^^^^^^^^^^^^^^^^^^^^
+
+In previous versions, menus were created using the ``MAIN_MENU`` and ``SUB_MENU`` macros.
+In this version, menus are created using the ``MENU_SCREEN`` macro.
+
+.. code-block:: cpp
+   :emphasize-removed: 1,10
+   :emphasize-added: 2,11
+
+   MAIN_MENU(
+   MENU_SCREEN(mainScreen, mainItems,
+      ITEM("Start service"),
+      ITEM("Connect to WiFi"),
+      SUBMENU("Settings", settingsScreen),
+      ITEM("Blink SOS"),
+      ITEM("Blink random"));
+
+   // Settings menu
+   SUB_MENU(settingsMenu,
+   MENU_SCREEN(settingsScreen, settingsItems,
+      ITEM("Change password"),
+      ITEM("Change username"),
+      ITEM("Change email"));
+
+Initialisation of the menu
++++++++++++++++++++++++++++
+  
+.. code-block:: cpp
+   :emphasize-removed: 1
+   :emphasize-added: 2
+
+   menu.initialize(mainMenu);
+   menu.setScreen(mainScreen);
+
+Menu control changes
+^^^^^^^^^^^^^^^^^^^^
+
+Instead of having multple control functions, the menu control functions have been consolidated into a single control function:
+:cpp:func:`LcdMenu::process`
+
+Checkout this :doc:`guide </overview/control/index>` for a detailed explanation of the new menu control system.
