@@ -33,7 +33,13 @@ class ItemControlBaseMany : public MenuItem {
         col += display->drawAt(row, col, (char*)this->text);
         col += display->drawAt(row, col, ':');
         uint8_t limit = maxCols - col;
-        Serial.print("Call draw on (row="); Serial.print(row); Serial.print(", col="); Serial.print(col); Serial.print(", limit="); Serial.print(limit); Serial.println(")");
+        Serial.print("Call draw on (row=");
+        Serial.print(row);
+        Serial.print(", col=");
+        Serial.print(col);
+        Serial.print(", limit=");
+        Serial.print(limit);
+        Serial.println(")");
         char buffer[limit];
         buffer[0] = '\0';  // Cleanup
         uint8_t accum = 0;
@@ -44,9 +50,16 @@ class ItemControlBaseMany : public MenuItem {
             for (size_t i = 0; i < size; i++) {
                 accum += controls[i]->draw2(text, 20);
                 rightTrim = accum - limit;
-                Serial.print("Right iteration ["); Serial.print(i); Serial.print("], text=["); Serial.print(text); Serial.print("], rightTrim=["); Serial.print(rightTrim); Serial.println("]");
+                Serial.print("Right iteration [");
+                Serial.print(i);
+                Serial.print("], text=[");
+                Serial.print(text);
+                Serial.print("], rightTrim=[");
+                Serial.print(rightTrim);
+                Serial.println("]");
                 if (rightTrim >= 0) {
-                    Serial.print("rightTrim exceed "); Serial.println(rightTrim);
+                    Serial.print("rightTrim exceed ");
+                    Serial.println(rightTrim);
                     substring(text, 0, strlen(text) - rightTrim, text);
                     concat(buffer, text, buffer);
                     break;
@@ -63,10 +76,17 @@ class ItemControlBaseMany : public MenuItem {
             while (left >= 0 && leftTrim < 0) {
                 accum += controls[left]->draw2(texts[left], 20);
                 leftTrim = accum - limit;
-                Serial.print("Left iteration ["); Serial.print(left); Serial.print("], texts[left]=["); Serial.print(texts[left]); Serial.print("], leftTrim=["); Serial.print(leftTrim); Serial.println("]");
+                Serial.print("Left iteration [");
+                Serial.print(left);
+                Serial.print("], texts[left]=[");
+                Serial.print(texts[left]);
+                Serial.print("], leftTrim=[");
+                Serial.print(leftTrim);
+                Serial.println("]");
                 left--;
                 if (leftTrim >= 0) {
-                    Serial.print("leftTrim exceed "); Serial.println(leftTrim);
+                    Serial.print("leftTrim exceed ");
+                    Serial.println(leftTrim);
                     break;
                 }
             }
@@ -77,47 +97,74 @@ class ItemControlBaseMany : public MenuItem {
                 while (right < (int)size && rightTrim < 0) {
                     accum += controls[right]->draw2(texts[right], 20);
                     rightTrim = accum - limit;
-                    Serial.print("Right iteration ["); Serial.print(right); Serial.print("], texts[right]=["); Serial.print(texts[right]); Serial.print("], rightTrim=["); Serial.print(rightTrim); Serial.println("]");
+                    Serial.print("Right iteration [");
+                    Serial.print(right);
+                    Serial.print("], texts[right]=[");
+                    Serial.print(texts[right]);
+                    Serial.print("], rightTrim=[");
+                    Serial.print(rightTrim);
+                    Serial.println("]");
                     right++;
                     if (rightTrim >= 0) {
-                        Serial.print("rightTrim exceed "); Serial.println(rightTrim);
+                        Serial.print("rightTrim exceed ");
+                        Serial.println(rightTrim);
                         break;
                     }
                 }
                 Serial.println("Right iteration end");
             }
-            Serial.println("Constructing..."); Serial.print("left="); Serial.print(left); Serial.print(", right="); Serial.println(right);
+            Serial.println("Constructing...");
+            Serial.print("left=");
+            Serial.print(left);
+            Serial.print(", right=");
+            Serial.println(right);
             for (uint8_t i = left + 1; i < right; i++) {
                 char* text = texts[i];
-                Serial.print("Handle ("); Serial.print(i); Serial.print(") "); Serial.println(text);
+                Serial.print("Handle (");
+                Serial.print(i);
+                Serial.print(") ");
+                Serial.println(text);
                 if (i == left + 1 && leftTrim > 0) {
                     substring(text, leftTrim, strlen(text) - leftTrim, text);
-                    Serial.print("After left substring ["); Serial.print(text); Serial.println("]");
+                    Serial.print("After left substring [");
+                    Serial.print(text);
+                    Serial.println("]");
                 }
                 if (i == right - 1 && rightTrim > 0) {
                     substring(text, 0, strlen(text) - rightTrim, text);
-                    Serial.print("After right substring ["); Serial.print(text); Serial.println("]");
+                    Serial.print("After right substring [");
+                    Serial.print(text);
+                    Serial.println("]");
                 }
                 concat(buffer, text, buffer);
                 if (i == current) {
-                    Serial.print("Cuurent widget, buffer=["); Serial.print(buffer); Serial.print("], offset="); Serial.println(controls[i]->getBlinkerOffset());
+                    Serial.print("Cuurent widget, buffer=[");
+                    Serial.print(buffer);
+                    Serial.print("], offset=");
+                    Serial.println(controls[i]->getBlinkerOffset());
                     blinkerPosition = strlen(buffer) - controls[i]->getBlinkerOffset() - 1;
-                    Serial.print("blinker global offset = "); Serial.println(blinkerPosition);
+                    Serial.print("blinker global offset = ");
+                    Serial.println(blinkerPosition);
                 }
             }
         }
-        Serial.print("Constructed ["); Serial.print(buffer); Serial.println("]");
+        Serial.print("Constructed [");
+        Serial.print(buffer);
+        Serial.println("]");
         display->drawAt(row, col, buffer);
         if (rightTrim < 0) {
-            Serial.print("Call clearAfter "); Serial.println(col + strlen(buffer));
+            Serial.print("Call clearAfter ");
+            Serial.println(col + strlen(buffer));
             display->clearAfter(row, col + strlen(buffer) - 1);
         }
         if (display->getEditModeEnabled()) {
             display->drawBlinker();
-            Serial.print("blinkerPosition = "); Serial.println(col + blinkerPosition);
+            Serial.print("blinkerPosition = ");
+            Serial.println(col + blinkerPosition);
             display->resetBlinker(col + blinkerPosition);
         }
-        Serial.println(""); Serial.println("");
+        Serial.println("");
+        Serial.println("");
     }
 
     virtual void triggerCallback() = 0;

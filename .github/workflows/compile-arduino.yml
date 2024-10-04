@@ -33,6 +33,7 @@ jobs:
             - name: FreeRTOS
             - name: SimpleRotary
             - name: LiquidCrystal I2C
+            - name: printf
 
       - name: Upload sketches reports
         uses: actions/upload-artifact@v4
