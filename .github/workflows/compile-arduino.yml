@@ -1,5 +1,12 @@
 name: Compile Examples
 on:
+  push:
+    branches:
+      - master
+    paths:
+      - "src/**"
+      - "examples/**"
+      - ".github/workflows/compile-arduino.yml"
   pull_request:
     paths:
       - "src/**"
