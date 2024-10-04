@@ -1,6 +1,7 @@
 name: Build and Deploy Docs
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -10,6 +11,9 @@ on:
       - "examples/**"
       - ".scripts/**"
       - ".github/workflows/docs.yml"
+  release:
+    types: 
+      - published
 
 permissions:
   contents: write
