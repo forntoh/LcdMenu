@@ -1,0 +1,64 @@
+@startuml
+' https://www.plantuml.com/plantuml/uml/
+
+hide empty members
+
+abstract class MenuItemBase {
+    #const char* text
+    +const char* getText()
+    +void setText(const char* text)
+    #virtual bool process(LcdMenu* menu, const unsigned char command)
+    #const void draw(DisplayInterface* display)
+    #virtual void draw(DisplayInterface* display, uint8_t row)
+}
+
+abstract class MenuItemMultipleBase {
+    #Control** controls
+    #const uint8_t size
+    #uint8_t current
+    #bool process(LcdMenu* menu, const unsigned char command) override
+    #void draw(DisplayInterface* display, uint8_t row) override
+    #virtual void triggerCallback()
+}
+
+class "MenuItem<>" as MenuItem0 {
+    #fptr<> callback
+    #bool process(LcdMenu* menu, const unsigned char command) override
+    #void draw(DisplayInterface* display, uint8_t row) override
+}
+
+class "MenuItem<T0>" as MenuItem1 {
+    #ControlValue<T0>* control
+    #fptr<T0> callback
+    #bool process(LcdMenu* menu, const unsigned char command) override
+    #void draw(DisplayInterface* display, uint8_t row) override
+}
+
+class "MenuItem<T0, T1>" as MenuItem2 {
+    #fptr<T0, T1> callback
+    #void triggerCallback() override
+    +void setValues(T0 value0, T1 value1)
+}
+
+class "MenuItem<T0, T1, T3>" as MenuItem3 {
+    #fptr<T0, T1, T3> callback
+    #void triggerCallback() override
+    +void setValues(T0 value0, T1 value1, T2 value2)
+}
+
+MenuItemMultipleBase -u-|> MenuItemBase
+MenuItem0 -u--|> MenuItemBase
+MenuItem1 -u--|> MenuItemBase
+MenuItem2 -u-|> MenuItemMultipleBase
+MenuItem3 -u-|> MenuItemMultipleBase
+
+MenuItem0 -[hidden]r-> MenuItem1
+MenuItem1 -[hidden]r-> MenuItem2
+MenuItem2 -[hidden]r-> MenuItem3
+
+note bottom of MenuItem0: 0 slots
+note bottom of MenuItem1: 1 slot
+note bottom of MenuItem2: 2 slots
+note bottom of MenuItem3: 3 slots
+
+@enduml

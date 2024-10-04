@@ -26,10 +26,6 @@ class LiquidCrystalAdapter : public DisplayInterface {
         lcd->clear();
         lcd->createChar(0, upArrow);
         lcd->createChar(1, downArrow);
-        byte celsius[8] = {B11100, B10100, B11100, B0000, B00000, B00000, B00000, B00000};
-        byte plusMinus[] = {B00000, B00100, B01110, B00100, B00000, B01110, B00000, B00000};
-        lcd->createChar(2, celsius);
-        lcd->createChar(3, plusMinus);
         startTime = millis();
     }
 
@@ -73,10 +69,16 @@ class LiquidCrystalAdapter : public DisplayInterface {
         }
     }
 
-    void drawAt(uint8_t row, uint8_t col, char* value) override {
+    size_t drawAt(uint8_t row, uint8_t col, char* value) override {
         restartTimer();
         lcd->setCursor(col, row);
-        lcd->print(value);
+        return lcd->print(value);
+    }
+
+    size_t drawAt(uint8_t row, uint8_t col, const char value) override {
+        restartTimer();
+        lcd->setCursor(col, row);
+        return lcd->print(value);
     }
 
     void clearAfter(uint8_t row, uint8_t col) override {

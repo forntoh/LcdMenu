@@ -73,6 +73,10 @@ void setup() {
     lcdAdapter.begin();
     Serial.begin(9600);
     menu.setScreen(mainScreen);
+    byte celsius[8] = {B11100, B10100, B11100, B0000, B00000, B00000, B00000, B00000};
+    byte plusMinus[8] = {B00000, B00100, B01110, B00100, B00000, B01110, B00000, B00000};
+    lcd.createChar(2, celsius);
+    lcd.createChar(3, plusMinus);
 }
 
 void loop() {
