@@ -1,0 +1,54 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "src/**"
+      - "docs/**"
+      - "examples/**"
+      - ".scripts/**"
+      - ".github/workflows/docs.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs/requirements.txt
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz default-jre plantuml
+
+      - name: Pre-build
+        run: |
+          chmod +x docs/pre_build.bat
+          docs/pre_build.bat
+
+      - name: Generate Sphinx documentation
+        run: make html
+        working-directory: docs
+        env:
+          GITHUB_ACTIONS: true
+
+      - name: Deploy documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build/html

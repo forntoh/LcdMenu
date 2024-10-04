@@ -1,10 +1,3 @@
-/*
- Menu Timeout
-
- https://lcdmenu.forntoh.dev/examples/timeout
-
-*/
-
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>

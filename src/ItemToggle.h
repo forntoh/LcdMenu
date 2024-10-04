@@ -8,9 +8,11 @@
 /**
  * @brief Item that allows user to toggle between ON/OFF states.
  *
+ * ```
  * ┌────────────────────────────┐
  * │ > T E X T : O F F          │
  * └────────────────────────────┘
+ * ```
  *
  * Additionally to `text` this item has ON/OFF `enabled` state.
  */
@@ -23,19 +25,29 @@ class ItemToggle : public MenuItem {
 
   public:
     /**
+     * @brief Create an ItemToggle object with default values as `ON` and `OFF`.
+     *
      * @param key key of the item
      * @param callback reference to callback function
      */
     ItemToggle(const char* key, fptrBool callback)
         : ItemToggle(key, false, callback) {}
 
+    /**
+     * @brief Construct a new Item Toggle object with an initial state
+     * and default ON/OFF texts.
+     *
+     * @param text
+     * @param enabled
+     * @param callback
+     */
     ItemToggle(const char* text, boolean enabled, fptrBool callback)
         : ItemToggle(text, "ON", "OFF", callback) {
         this->enabled = enabled;
     }
 
     /**
-     * @brief Create an ItemToggle object.
+     * @brief Construct a new Item Toggle object.
      * @param text the text of the item
      * @param textOn display text when ON
      * @param textOff display text when OFF

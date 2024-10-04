@@ -1,10 +1,3 @@
-/*
- Basic Menu
-
- https://lcdmenu.forntoh.dev/examples/basic
-
-*/
-
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>

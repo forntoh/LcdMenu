@@ -1,0 +1,55 @@
+Migration from v3.x to v4.x
+-------------------------------
+
+This guide details the changes and how to change your code to migrate to LcdMenu v4.x.
+
+New imports
+^^^^^^^^^^^
+
+The biggest change from this version is the separation of the menu drawing logic from the menu control logic.
+
+The first change you'll need to make is to add the import for your desired display interface,
+seen all the available interfaces :doc:`here <../api/display/index>`
+
+.. code-block:: c++
+
+   #include <interface/LiquidCrystalI2CAdapter.h>
+
+Construct the display adapter interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The second change is to construct the display adapter interface.
+For example, if you are using the LiquidCrystalI2CAdapter, you will need to construct it like this:
+
+.. code-block:: c++
+    
+   LiquidCrystalI2CAdapter lcd(0x27, 16, 2);
+
+Finally, initialise the  menu
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The final change is to initialise the menu with the display adapter interface.
+For example, if you are using the LiquidCrystalI2CAdapter, you will need to initialise the menu like this:
+
+.. code-block:: c++
+
+   menu.initialize(mainMenu);
+
+That's it! You should now be able to run your code with LcdMenu v4.x.
+
+Other changes
+^^^^^^^^^^^^^
+
+Cursor icon, edit cursor icon and display timeout are now updated by defining the following constants:
+
+.. code-block:: c++
+
+   #define CURSOR_ICON 0x00
+   #define EDIT_CURSOR_ICON 0x00
+   #define DISPLAY_TIMEOUT 10000 // 10 seconds
+
+.. note::
+
+   The lcd instance now resides in the adapter so if you need to perform custom printing or any other
+   function of LiquidCrystal like turning on/off backlight, you now need to reference it from the
+   lcdAdapter not the menu.

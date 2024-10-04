@@ -1,10 +1,3 @@
-/*
- Menu Item Callbacks
-
- https://lcdmenu.forntoh.dev/examples/command-and-toggle
-
-*/
-
 #include <ItemToggle.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>

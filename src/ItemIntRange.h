@@ -3,6 +3,10 @@
 
 #include "ItemRangeBase.h"
 
+/**
+ * @brief Item that allows user to input integer information within a range.
+ * The value can be incremented or decremented by a specified step.
+ */
 class ItemIntRange : public ItemRangeBase<int> {
   public:
     ItemIntRange(

@@ -1,130 +1,93 @@
-# LcdMenu 📟
+<h1 align="center">
+  <picture>
+    <source srcset="docs/assets/logo-dark.png" media="(prefers-color-scheme: dark)">
+    <img src="docs/assets/logo-light.png" alt="LcdMenu Logo" height="56">
+  </picture></img><br>LcdMenu
+  </h1>
 
-[![arduino-library-badge](https://www.ardu-badge.com/badge/LcdMenu.svg?)](https://www.ardu-badge.com/LcdMenu)
-[![PlatformIO Registry](https://badges.registry.platformio.org/packages/forntoh/library/LcdMenu.svg)](https://registry.platformio.org/libraries/forntoh/LcdMenu)
-[![Badge Commits since latest](https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease)](https://github.com/forntoh/LcdMenu/commits/master)
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=forntoh.LcdMenu)
+<p align="center">
+  <a href="https://www.ardu-badge.com/LcdMenu">
+    <img src="https://www.ardu-badge.com/badge/LcdMenu.svg" alt="Arduino Library Badge"/>
+  </a>
+  <a href="https://registry.platformio.org/libraries/forntoh/LcdMenu">
+    <img src="https://badges.registry.platformio.org/packages/forntoh/library/LcdMenu.svg" alt="PlatformIO Badge"/>
+  </a>
+  <img src="https://img.shields.io/github/check-runs/forntoh/LcdMenu/master?logo=githubactions&logoColor=%23ffffff" alt="Check Runs Badge"/>
+  <a href="https://lcdmenu.forntoh.dev">
+    <img src="https://img.shields.io/github/actions/workflow/status/forntoh/LcdMenu/docs.yml?label=docs&logo=google%20docs&logoColor=%23efefef" alt="Documentation Status Badge"/>
+  </a>
+  <a href="https://github.com/forntoh/LcdMenu/commits/master">
+    <img src="https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease" alt="GitHub Commits Badge"/>
+  </a>
+</p>
 
-LcdMenu is an Arduino library that enables you to create interactive menus and navigation systems for LCD displays. With LcdMenu, you can easily add menus to your projects and navigate through them using buttons or any input device you want. The library supports a wide range of LCD display modules, including character and alphanumeric displays.
+LcdMenu is an open-source Arduino library for creating menu systems. It is designed to be easy to use and flexible enough to support a wide range of use cases.
 
-![Basic](https://i.imgur.com/nViET8b.gif)
+With LcdMenu, you can create a menu system for your Arduino project with minimal effort. The library provides a simple API for creating menus and handling user input. There are also a number of built-in [display interfaces](reference/api/display/index) to choose from, including LCD displays and OLED displays _(coming soon)_.
 
-## Features
+<p align="center">
+  <img src="https://i.imgur.com/nViET8b.gif" alt="Example of a menu system created with LcdMenu">
+</p>
 
-- **Dynamic menus**: Create menus with multiple levels and submenus.
-- **Multiple menu item types**: Choose from different menu item types such as
-  - Command: Execute a function when selected
-  - Toggle: Toggle a value when selected
-  - Input: Prompt the user to enter a value when selected
-  - Sub-menus: Create sub-menus that lead to a separate menu
-  - Lists: Create menu items that display a value chosen from a list of strings
-  - Editing: Edit menu items and their values in place
-  - Navigating: Navigate menus using left, right, up, and down buttons or any input device you want
-- **Callback functions**: Assign functions to menu items to execute specific tasks when triggered
-- **LCD display modules**: Supports a wide range of LCD display modules, including character and alphanumeric displays
+## Quick Start
 
-## 🚀 New in Version 4.0.0 🚀
+LcdMenu is a simple but powerful library for creating menu systems on embedded devices. It is designed to be easy to use and to work with a wide range of display interfaces and provide various helpers for handling user input like rotary encoders and buttons.
 
-### Display Interface Abstraction
-
-- Introduced a new `DisplayInterface` class, which abstracts the display management and makes it easier to integrate different display types without modifying the core logic.
-- This interface allows developers to implement custom display adapters, enabling support for a variety of display modules.
-
-Find all the available adapters [here](/src/interface/)
-
-### Improved Modularity and Flexibility
-
-By decoupling the display management logic from the specific hardware, the system is now more modular and easier to extend with new display types.
-
-## Installation
+### Installation
 
 Follow [this guide](https://www.ardu-badge.com/LcdMenu) to install the library with **Arduino Library Manager** or install it with **PlatformIO** using the steps below:
 
 1. Open the PlatformIO IDE or VSCode with PlatformIO extension installed.
-1. Create a new project or open an existing one.
-1. Add the LcdMenu library to your project by adding the following line to your `platformio.ini` file:
 
-   ```makefile
+2. Create a new project or open an existing one.
+
+3. Add the LcdMenu library to your project by adding the following line to your `platformio.ini` file:
+
+   ```bash
    lib_deps =
-       forntoh/LcdMenu@^4.0.0
-
+       forntoh/LcdMenu@^5.0.0
    ```
 
-1. Save the changes to the `platformio.ini` file.
+4. Save the changes to the `platformio.ini` file.
 
-1. Build and upload your project to your device.
+5. Build and upload your project to your device.
 
-## Usage
+### Usage
 
-To use the LcdMenu library in your project, follow these steps:
-
-#### 1. Include the LcdMenu library in your sketch
+To create a menu system with LcdMenu, you need to define a menu structure, a display interface, and an input method to interact with the menu. For this example, we will use the `LiquidCrystal_I2C` display interface and `KeyboardAdapter` for user input to read from the serial monitor. You can replace these with other display interfaces and input methods as needed or create your own.
 
 ```cpp
 #include <LcdMenu.h>
-#include <interface/YourDesiredAdapter.h>
+#include <MenuScreen.h>
+#include <display/LiquidCrystal_I2CAdapter.h>
+#include <input/KeyboardAdapter.h>
+
+MENU_SCREEN(mainScreen, mainItems,
+    ITEM_BASIC("Item 1"),
+    ITEM_BASIC("Item 2"),
+    ITEM_BASIC("Item 3"),
+    ITEM_BASIC("Item 4"));
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd, 16, 2);
+LcdMenu menu(lcdAdapter);
+KeyboardAdapter keyboard(&menu, &Serial);
+
+void setup() {
+    Serial.begin(9600);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
+}
+
+void loop() {
+    keyboard.observe();
+}
 ```
 
-Find currently available display interfaces [here](/src/interface/)
+This example creates a simple menu with four items and displays it on a 16x2 LCD screen.
+The menu is controlled using the serial monitor, where you can navigate through the items using the arrow keys.
 
-Optionally add `#include <utils/commandProccesors.h>`, this is a helper for processing menu commands.
-
-You will need to add other includes for the types of menu items you wish to use, the available types are described in the next step.
-
-#### 2. Create the main menu, use the provided macro `MAIN_MENU()` e.g.
-
-```js
-MAIN_MENU(
-  ITEM_INPUT("Connect", resultCallback),
-  ITEM_BASIC("Settings"),
-  ITEM_COMMAND("Backlight", toggleBacklight),
-  ITEM_TOGGLE("Toggle", "ON", "OFF", toggleStuff)
-);
-```
-
-Replace the sample menu items with your own menu items. Here are the different types of menu items available:
-
-| Type               | Description                                                                 | Import             |
-| ------------------ | --------------------------------------------------------------------------- | ------------------ |
-| `ITEM_BASIC`       | a basic menu item with **no functionality**                                 | N/A                |
-| `ITEM_COMMAND`     | a menu item that **executes** a function when selected                      | `<ItemCommand.h>`  |
-| `ITEM_TOGGLE`      | a menu item that **toggles** a value when selected                          | `<ItemToggle.h>`   |
-| `ITEM_INPUT`       | a menu item that **prompts** the user to enter a value                      | `<ItemInput.h>`    |
-| `ITEM_SUBMENU`     | a menu item that leads to a **sub-menu** when selected                      | `<ItemSubMenu.h>`  |
-| `ITEM_STRING_LIST` | a menu item that displays a value that is chosen form a **list of strings** | `<ItemList.h>`     |
-| `ITEM_PROGRESS`    | a menu item that displays a value that is chosen form a given range         | `<ItemPregress.h>` |
-
-For each menu item, specify the menu item text, and any necessary parameters. For example, in `ITEM_COMMAND("Backlight", toggleBacklight)`, `"Backlight"` is the menu item text and `toggleBacklight` is the function to be executed when the item is selected.
-
-#### 3. Once you have created your menu, initialize LcdMenu with the menu items in the `setup()`
-
-```cpp
-menu.initialize(mainMenu);
-```
-
-#### 4. In the `loop()` function, define how you want to navigate the menu
-
-You can use any input method of your choice to perform actions on the menu
-
-The most essential actions are:
-
-- `menu.up()` and `menu.down()` - Go up and down the menu
-- `menu.left()` and `menu.right()` - if the menu is in edit mode,
-  - for `ITEM_INPUT` it moves along the characters of the value.
-  - for `ITEM_STRING_LIST` it cycles through the items.
-  - for `ITEM_PROGRESS` goes up or down the range.
-- `menu.enter()` - if the active item is
-  - `ITEM_INPUT`, `ITEM_PROGRESS` or `ITEM_STRING_LIST` it goes into edit mode.
-  - `ITEM_COMAND` or `ITEM_TOGGLE` it executes the bound callback
-  - `ITEM_SUBMENU` it enters the sub-menu.
-- `menu.back()` - either exits edit mode or goes to back to a parent menu depending on the active item.
-  - `ITEM_INPUT`, `ITEM_PROGRESS` or `ITEM_STRING_LIST` exits edit mode and executes the callback bound to the item.
-
-The above actions are all encapsulated in this handy helper [utils/commandProccesors.h](/src/utils/commandProccesors.h) for processing menu commands.
-
-Full examples can be found [here](/examples/) 👈
-
-### And that's it! You should now have a fully functional LCD menu system for your Arduino project
+For detailed information on how to use LcdMenu, check out the [official docs](https://lcdmenu.forntoh.dev)
 
 ---
 
