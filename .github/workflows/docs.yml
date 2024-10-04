@@ -2,15 +2,6 @@ name: Build and Deploy Docs
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - "src/**"
-      - "docs/**"
-      - "examples/**"
-      - ".scripts/**"
-      - ".github/workflows/docs.yml"
   release:
     types: 
       - published
