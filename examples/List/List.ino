@@ -1,21 +1,15 @@
-/*
- Menu Item List
-
- https://lcdmenu.forntoh.dev/examples/string-list
-
-*/
-
 #include <ItemList.h>
 #include <LcdMenu.h>
-#include <interface/LiquidCrystalI2CAdapter.h>
-#include <utils/SimpleNavConfig.h>
+#include <MenuScreen.h>
+#include <display/LiquidCrystal_I2CAdapter.h>
+#include <input/KeyboardAdapter.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
 // Declare the callbacks
-void colorsCallback(uint16_t pos);
-void numsCallback(uint16_t pos);
+void colorsCallback(uint8_t pos);
+void numsCallback(uint8_t pos);
 
 // Declare the array
 extern String colors[];
@@ -28,45 +22,37 @@ extern String nums[];
 String nums[] = {"5", "7", "9", "12", "32"};
 
 // Initialize the main menu items
-MAIN_MENU(
+// clang-format off
+MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("List demo"),
     ITEM_STRING_LIST("Col", colors, 8, colorsCallback),
     ITEM_STRING_LIST("Num", nums, 5, numsCallback),
     ITEM_BASIC("Example"));
+// clang-format on
 
 // Construct the LcdMenu
-LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-
-SimpleNavConfig navConfig = {
-    .menu = &menu,
-    .up = 'w',
-    .down = 's',
-    .enter = ' ',
-    .back = 'b',
-    .left = 'a',
-    .right = 'd',
-};
+KeyboardAdapter keyboard(&menu, &Serial);
 
 void setup() {
     Serial.begin(9600);
-    // Initialize LcdMenu with the menu items
-    menu.initialize(mainMenu);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
 }
 
 void loop() {
-    if (!Serial.available()) return;
-    char command = Serial.read();
-    processWithSimpleCommand(&navConfig, command);
+    keyboard.observe();
 }
 
 // Define the callbacks
-void colorsCallback(uint16_t pos) {
+void colorsCallback(uint8_t pos) {
     // do something with the index
     Serial.println(colors[pos]);
 }
 
-void numsCallback(uint16_t pos) {
+void numsCallback(uint8_t pos) {
     // do something with the index
     Serial.println(nums[pos]);
 }

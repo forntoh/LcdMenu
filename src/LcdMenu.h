@@ -25,558 +25,99 @@
 */
 #pragma once
 
+#include "MenuScreen.h"
+#include "display/DisplayInterface.h"
+#include "utils/constants.h"
 #include <MenuItem.h>
 #include <utils/utils.h>
 
-#include "interface/DisplayInterface.h"
-
 /**
- * The LcdMenu class contains all fields and methods to manipulate the menu
- * items.
+ * @class LcdMenu
+ * @brief Represents the main menu object.
+ *
+ * The LcdMenu class is the main object that manages the menu system. It is
+ * responsible for displaying the menu on the screen, processing user input,
+ * and updating the display based on the user's actions.
  */
 class LcdMenu {
-   private:
-    uint8_t cursorPosition = 1;
-    uint8_t previousCursorPosition = 1;
+  private:
     /**
-     * First visible item's position in the menu array
+     * @brief Display Interface.
      */
-    uint8_t top = 1;
-    uint8_t previousTop = 1;
-
+    DisplayInterface& display;
     /**
-     * Will prevent left and right movement when in edit mode and character
-     * picker is active
+     * @brief Currently visible menu screen.
      */
-    bool isCharPickerActive = false;
+    MenuScreen* screen = NULL;
     /**
-     * Last visible item's position in the menu array
-     */
-    uint8_t bottom = 0;
-    uint8_t previousBottom = 0;
-    uint8_t maxRows;
-    uint8_t maxCols;
-    /**
-     * Array of menu items
-     */
-    MenuItem** currentMenuTable = NULL;
-    /**
+     * @brief Enabled flag of menu.
      * Determines whether the screen should be updated after an action. Set it
      * to `false` when you want to display any other content on the screen then
      * set it back to `true` to show the menu.
      */
-    bool enableUpdate = true;
-    /**
-     * Reset the display
-     * @param isHistoryAvailable indicates if there is a previous position
-     */
-    void reset(boolean isHistoryAvailable) {
-        if (isHistoryAvailable) {
-            cursorPosition = previousCursorPosition;
-            top = previousTop;
-            bottom = previousBottom;
-        } else {
-            previousCursorPosition = cursorPosition;
-            previousTop = top;
-            previousBottom = bottom;
+    bool enabled = true;
 
-            cursorPosition = 1;
-            top = 1;
-            bottom = maxRows;
-        }
-        update();
-    }
-
-   public:
+  public:
     /**
-     * ## Public Fields
+     * Construct new instance of `LcdMenu`.
      */
+    LcdMenu(DisplayInterface& display) : display(display) {}
     /**
-     * Display Interface
+     * @brief Get the display.
+     * @return the display
      */
-    DisplayInterface& lcd;
-
+    DisplayInterface* getDisplay();
     /**
-     * # Constructor
+     * @brief Get the screen that currently on display.
+     * @return currently active screen
      */
-
-    LcdMenu(DisplayInterface& display) : lcd(display) {
-        bottom = lcd.getMaxRows();
-        maxRows = lcd.getMaxRows();
-        maxCols = lcd.getMaxCols();
-    }
-
-    void initialize(MenuItem* menu[]) {
-        lcd.begin();
-        currentMenuTable = menu;
-        update();
-    }
-    /*
-     * Draw the menu items and cursor
-     */
-    void update() {
-        if (!enableUpdate) return;
-        lcd.update(currentMenuTable, cursorPosition, top, bottom);
-    }
+    MenuScreen* getScreen();
     /**
-     * Reset the display
+     * @brief Set new screen to display.
+     * The only place that clears whole screen.
+     * Then it Will `draw` of new screen screen on display.
+     * @param screen the new screen to display
      */
-    void resetMenu() { this->reset(false); }
+    void setScreen(MenuScreen* screen);
     /**
-     * Execute an "up press" on menu
-     * When edit mode is enabled, this action is skipped
+     * @brief Process the input character.
+     * @param c the input character
+     * @return `true` if the input was processed successfully
      */
-    void up() {
-        //
-        // determine if cursor ia at start of menu items
-        //
-        if (lcd.isAtTheStart() || lcd.getEditModeEnabled()) return;
-        cursorPosition--;
-        // Log
-        printCmd(F("UP"), cursorPosition);
-        //
-        // determine if cursor is at the top of the screen
-        //
-        if (cursorPosition < top) {
-            //
-            // scroll up once
-            //
-            top--;
-            bottom--;
-        }
-        update();
-    }
+    bool process(const unsigned char c);
     /**
-     * Execute a "down press" on menu
-     * When edit mode is enabled, this action is skipped
+     * @brief Reset current screen to initial state.
+     * Moves cursor and view positions to zero.
      */
-    void down() {
-        //
-        // determine if cursor has passed the end
-        //
-        if (lcd.isAtTheEnd() || lcd.getEditModeEnabled()) return;
-        cursorPosition++;
-        // Log
-        printCmd(F("DOWN"), cursorPosition);
-        //
-        // determine if cursor is at the bottom of the screen
-        //
-        if (cursorPosition > bottom) {
-            //
-            // scroll down once
-            //
-            top++;
-            bottom++;
-        }
-        update();
-    }
+    void reset();
     /**
-     * Execute an "enter" action on menu.
-     *
-     * It does the following depending on the type of the current menu item:
-     *
-     * - Open a sub menu.
-     * - Execute a callback action.
-     * - Toggle the state of an item.
-     */
-    void enter() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        // Log
-        printCmd(F("ENTER"), item->getType());
-        //
-        // determine the type of menu entry, then execute it
-        //
-        switch (item->getType()) {
-            //
-            // switch the menu to the selected sub menu
-            //
-            case MENU_ITEM_SUB_MENU: {
-                //
-                // check if there is a sub menu
-                //
-                if (item->getSubMenu() == NULL) return;
-                currentMenuTable = item->getSubMenu();
-                //
-                // display the sub menu
-                //
-                reset(false);
-                break;
-            }
-#ifdef ItemCommand_H
-            //
-            // execute the menu item's function
-            //
-            case MENU_ITEM_COMMAND: {
-                //
-                // execute the menu item's function
-                //
-                if (item->getCallback() != NULL) (item->getCallback())();
-                //
-                // display the menu again
-                //
-                update();
-                break;
-            }
-#endif
-#ifdef ItemToggle_H
-            case MENU_ITEM_TOGGLE: {
-                //
-                // toggle the value of isOn
-                //
-                item->setIsOn(!item->isOn());
-                //
-                // execute the menu item's function
-                //
-                if (item->getCallbackInt() != NULL)
-                    (item->getCallbackInt())(item->isOn());
-                //
-                // display the menu again
-                //
-                update();
-                break;
-            }
-#endif
-#ifdef ItemInput_H
-            case MENU_ITEM_INPUT: {
-                if (!lcd.getEditModeEnabled()) {
-                    lcd.setEditModeEnabled(true);
-                    lcd.drawCursor();
-                }
-                break;
-            }
-#endif
-            case MENU_ITEM_PROGRESS:
-            case MENU_ITEM_LIST: {
-                if (!lcd.getEditModeEnabled()) {
-                    lcd.setEditModeEnabled(true);
-                    lcd.drawCursor();
-                }
-                break;
-            }
-        }
-    }
-    /**
-     * Execute a "backpress" action on menu.
-     *
-     * Navigates up once.
-     */
-    void back() {
-        // Log
-        printCmd(F("BACK"));
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        // Back action different when on ItemInput
-        //
-        if (lcd.getEditModeEnabled()) switch (item->getType()) {
-#ifdef ItemInput_H
-                case MENU_ITEM_INPUT:
-                    // Disable edit mode
-                    lcd.setEditModeEnabled(false);
-                    update();
-                    // Execute callback function
-                    if (item->getCallbackStr() != NULL)
-                        (item->getCallbackStr())(item->getValue());
-                    // Interrupt going back to parent menu
-                    return;
-#endif
-#if defined(ItemProgress_H) || defined(ItemList_H)
-                case MENU_ITEM_LIST:
-                case MENU_ITEM_PROGRESS:
-                    // Disable edit mode
-                    lcd.setEditModeEnabled(false);
-                    update();
-                    // Execute callback function
-                    if (item->getCallbackInt() != NULL)
-                        (item->getCallbackInt())(item->getItemIndex());
-                    // Interrupt going back to parent menu
-                    return;
-#endif
-                default:
-                    break;
-            }
-        //
-        // check if this is a sub menu, if so go back to its parent
-        //
-        if (isSubMenu()) {
-            currentMenuTable = currentMenuTable[0]->getSubMenu();
-            reset(true);
-        }
-    }
-    /**
-     * Execute a "left press" on menu
-     *
-     * *NB: Works only for `ItemInput` and `ItemList` types*
-     *
-     * Moves the cursor one step to the left.
-     */
-    void left() {
-        //
-        if (lcd.getEditModeEnabled() && isCharPickerActive) return;
-        //
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        // get the type of the currently displayed menu
-        //
-#ifdef ItemList_H
-        uint8_t previousIndex = item->getItemIndex();
-#endif
-        switch (item->getType()) {
-#ifdef ItemList_H
-            case MENU_ITEM_LIST: {
-                if (lcd.getEditModeEnabled()) {
-                    item->setItemIndex(item->getItemIndex() - 1);
-                    if (previousIndex != item->getItemIndex()) update();
-                    // Log
-                    printCmd(F("LEFT"),
-                             item->getItems()[item->getItemIndex()].c_str());
-                }
-                break;
-            }
-#endif
-#ifdef ItemInput_H
-            case MENU_ITEM_INPUT: {
-                lcd.blinkerPosition--;
-                lcd.resetBlinker();
-                // Log
-                printCmd(F("LEFT"),
-                         item->getValue()[lcd.blinkerPosition -
-                                          (strlen(item->getText()) + 2)]);
-                break;
-            }
-#endif
-#ifdef ItemProgress_H
-            case MENU_ITEM_PROGRESS: {
-                if (lcd.getEditModeEnabled() &&
-                    item->getItemIndex() > MIN_PROGRESS) {
-                    item->decrement();
-                    update();
-                    // Log
-                    printCmd(F("LEFT"), item->getValue());
-                }
-                break;
-            }
-#endif
-            default:
-                // Log
-                printCmd(F("LEFT"));
-                break;
-        }
-    }
-    /**
-     * Execute a "right press" on menu
-     *
-     * *NB: Works only for `ItemInput` and `ItemList` types*
-     *
-     * Moves the cursor one step to the right.
-     */
-    void right() {
-        //
-        // Is the menu in edit mode and is the character picker active?
-        //
-        if (lcd.getEditModeEnabled() && isCharPickerActive) return;
-        //
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        // get the type of the currently displayed menu
-        //
-        switch (item->getType()) {
-#ifdef ItemList_H
-            case MENU_ITEM_LIST: {
-                if (lcd.getEditModeEnabled()) {
-                    item->setItemIndex((item->getItemIndex() + 1) %
-                                       item->getItemCount());
-                    // constrain(item->itemIndex + 1, 0, item->itemCount - 1);
-                    update();
-                    // Log
-                    printCmd(F("RIGHT"),
-                             item->getItems()[item->getItemIndex()].c_str());
-                }
-                break;
-            }
-#endif
-#ifdef ItemInput_H
-            case MENU_ITEM_INPUT: {
-                lcd.blinkerPosition++;
-                lcd.resetBlinker();
-                // Log
-                printCmd(F("RIGHT"),
-                         item->getValue()[lcd.blinkerPosition -
-                                          (strlen(item->getText()) + 2)]);
-                break;
-            }
-#endif
-#ifdef ItemProgress_H
-            case MENU_ITEM_PROGRESS: {
-                if (lcd.getEditModeEnabled() &&
-                    item->getItemIndex() < MAX_PROGRESS) {
-                    item->increment();
-                    update();
-                    // Log
-                    printCmd(F("RIGHT"), item->getValue());
-                }
-                break;
-            }
-#endif
-            default:
-                // Log
-                printCmd(F("RIGHT"));
-                break;
-        }
-    }
-#ifdef ItemInput_H
-    /**
-     * Execute a "backspace cmd" on menu
-     *
-     * *NB: Works only for `ItemInput` type*
-     *
-     * Removes the character at the current cursor position.
-     */
-    void backspace() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        if (item->getType() != MENU_ITEM_INPUT) return;
-        //
-        uint8_t p = lcd.blinkerPosition - (strlen(item->getText()) + 2) - 1;
-        remove(item->getValue(), p, 1);
-        // Log
-        printCmd(F("BACKSPACE"), item->getValue());
-        //
-        lcd.blinkerPosition--;
-        update();
-    }
-    /**
-     * Display text at the cursor position
-     * used for `Input` type menu items
-     * @param character character to append
-     */
-    void type(const char character) {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        if (item->getType() != MENU_ITEM_INPUT || !lcd.getEditModeEnabled())
-            return;
-        //
-        // calculate lower and upper bound
-        //
-        uint8_t length = strlen(item->getValue());
-        uint8_t lb = strlen(item->getText()) + 2;
-        uint8_t ub = lb + length;
-        ub = constrain(ub, lb, maxCols - 2);
-        //
-        // update text
-        //
-        if (lcd.blinkerPosition < ub) {
-            char start[10];
-            char end[10];
-            char* joined = new char[maxCols - lb];
-            substring(item->getValue(), 0, lcd.blinkerPosition - lb, start);
-            substring(item->getValue(), lcd.blinkerPosition + 1 - lb, length,
-                      end);
-            concat(start, character, end, joined);
-            item->setValue(joined);
-        } else {
-            char* buf = new char[length + 2];
-            concat(item->getValue(), character, buf);
-            item->setValue(buf);
-        }
-        //
-        isCharPickerActive = false;
-        //
-        // update blinker position
-        //
-        lcd.blinkerPosition++;
-        //
-        // repaint menu
-        //
-        update();
-        // Log
-        printCmd(F("TYPE-CHAR"), character);
-    }
-    void drawChar(char c) { isCharPickerActive = lcd.drawChar(c); }
-    /**
-     * Clear the value of the input field
-     */
-    void clear() {
-        MenuItem* item = currentMenuTable[cursorPosition];
-        //
-        if (item->getType() != MENU_ITEM_INPUT) return;
-        //
-        // set the value
-        //
-        item->setValue((char*)"");
-        // Log
-        printCmd(F("CLEAR"), item->getValue());
-        //
-        // update blinker position
-        //
-        lcd.blinkerPosition = 0;
-        //
-        // repaint menu
-        //
-        update();
-    }
-#endif
-    /**
+     * @brief Hide the menu.
      * When you want to display any other content on the screen then
      * call this function then display your content, later call
      * `show()` to show the menu
      */
-    void hide() {
-        enableUpdate = false;
-        lcd.clear();
-    }
+    void hide();
     /**
-     * Show the menu
+     * @brief Show the menu.
      */
-    void show() {
-        enableUpdate = true;
-        update();
-    }
+    void show();
     /**
-     * Get the current cursor position
-     * @return `cursorPosition` e.g. 1, 2, 3...
+     * @brief Get the current cursor position of current screen.
+     * @return the 0-based `cursor` position
      */
-    uint8_t getCursorPosition() { return this->cursorPosition; }
+    uint8_t getCursor();
     /**
-     * Set the current cursor position
-     * @param position
+     * @brief Set the current cursor position
+     * @param cursor the 0-based `cursor` position
      */
-    void setCursorPosition(uint8_t position) {
-        uint8_t bottom = position;
-        bool isNotEnd = false;
-
-        do {
-            isNotEnd = currentMenuTable[++bottom]->getType() !=
-                           MENU_ITEM_END_OF_MENU &&
-                       bottom < maxRows + 20;
-        } while (isNotEnd);
-
-        uint8_t max = maxRows - 1;
-
-        this->cursorPosition = position + 1;
-        this->bottom = constrain(cursorPosition + max, max, bottom - 1);
-        this->top = this->bottom - max;
-    }
+    void setCursor(uint8_t cursor);
     /**
-     * Check if currently displayed menu is a sub menu.
+     * @brief Get `MenuItem` at position on current screen.
+     * @return `MenuItem` item at `position`
      */
-    bool isSubMenu() {
-        byte menuItemType = currentMenuTable[0]->getType();
-        return menuItemType == MENU_ITEM_SUB_MENU_HEADER;
-    }
+    MenuItem* getItemAt(uint8_t position);
     /**
-     * Get a `MenuItem` at position
-     * @return `MenuItem` - item at `position`
+     * @brief Refresh the current screen.
      */
-    MenuItem* getItemAt(uint8_t position) { return currentMenuTable[position]; }
-    /**
-     * Get a `MenuItem` at position using operator function
-     * e.g `menu[menu.getCursorPosition()]` will return the item at the
-     * current cursor position NB: This is relative positioning (i.e. if a
-     * submenu is currently being displayed, menu[1] will return item 1 in
-     * the current menu)
-     * @return `MenuItem` - item at `position`
-     */
-    MenuItem* operator[](const uint8_t position) {
-        return currentMenuTable[position];
-    }
+    void refresh();
 };

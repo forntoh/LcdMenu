@@ -1,56 +1,54 @@
-/*
- Sub Menu
-
- https://lcdmenu.forntoh.dev/examples/submenu
-
-*/
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
-#include <interface/LiquidCrystalI2CAdapter.h>
-#include <utils/SimpleNavConfig.h>
-#include <utils/commandProccesors.h>
+#include <MenuScreen.h>
+#include <display/LiquidCrystal_I2CAdapter.h>
+#include <input/KeyboardAdapter.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-extern MenuItem *settingsMenu[];
+extern MenuScreen* settingsScreen;
+extern MenuScreen* settings2Screen;
 
 // Define the main menu
-MAIN_MENU(
+// clang-format off
+MENU_SCREEN(mainScreen, mainItems,
+    ITEM_SUBMENU("Settings", settingsScreen),
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
-    ITEM_SUBMENU("Settings", settingsMenu),
     ITEM_BASIC("Blink SOS"),
-    ITEM_BASIC("Blink random"));
-/**
- * Create submenu and precise its parent
- */
-SUB_MENU(
-    settingsMenu,
-    mainMenu,
+    ITEM_BASIC("Blink random"),
+    ITEM_SUBMENU("Settings 2", settings2Screen));
+
+// Create submenu and precise its parent
+MENU_SCREEN(settingsScreen, settingsItems,
+    ITEM_BASIC("Backlight"),
+    ITEM_BASIC("Contrast"),
+    ITEM_BASIC("Contrast1"),
+    ITEM_BASIC("Contrast2"),
+    ITEM_BASIC("Contrast3"),
+    ITEM_BASIC("Contrast4"),
+    ITEM_BASIC("Contrast5"),
+    ITEM_BASIC("Contrast6"),
+    ITEM_BASIC("Contrast7"),
+    ITEM_SUBMENU("Settings2", settings2Screen));
+
+MENU_SCREEN(settings2Screen, settings2Items,
     ITEM_BASIC("Backlight"),
     ITEM_BASIC("Contrast"));
+// clang-format on
 
-LiquidCrystalI2CAdapter lcdAdapter(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
 LcdMenu menu(lcdAdapter);
-
-SimpleNavConfig navConfig = {
-    .menu = &menu,
-    .up = 'w',
-    .down = 's',
-    .enter = ' ',
-    .back = 'b',
-    .left = NULL,
-    .right = NULL,
-};
+KeyboardAdapter keyboard(&menu, &Serial);
 
 void setup() {
     Serial.begin(9600);
-    menu.initialize(mainMenu);
+    lcdAdapter.begin();
+    menu.setScreen(mainScreen);
 }
 
 void loop() {
-    if (!Serial.available()) return;
-    char command = Serial.read();
-    processWithSimpleCommand(&navConfig, command);
+    keyboard.observe();
 }

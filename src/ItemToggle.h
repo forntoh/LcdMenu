@@ -1,41 +1,60 @@
-/**
- * ---
- *
- * # ItemToggle
- *
- * This item type indicates that the current item is **toggleable**.
- * When `enter()` is invoked, the state of `isOn` is toggled.
- */
-
 #ifndef ItemToggle_H
 #define ItemToggle_H
-#include "MenuItem.h"
 
+#include "LcdMenu.h"
+#include "MenuItem.h"
+#include <utils/utils.h>
+
+/**
+ * @brief Item that allows user to toggle between ON/OFF states.
+ *
+ * ```
+ * ┌────────────────────────────┐
+ * │ > T E X T : O F F          │
+ * └────────────────────────────┘
+ * ```
+ *
+ * Additionally to `text` this item has ON/OFF `enabled` state.
+ */
 class ItemToggle : public MenuItem {
-   private:
+  private:
     bool enabled = false;
     const char* textOn = NULL;
     const char* textOff = NULL;
-    fptrInt callback = NULL;
+    fptrBool callback = NULL;
 
-   public:
+  public:
     /**
+     * @brief Create an ItemToggle object with default values as `ON` and `OFF`.
+     *
      * @param key key of the item
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, fptrInt callback)
-        : ItemToggle(key, "ON", "OFF", callback) {}
+    ItemToggle(const char* key, fptrBool callback)
+        : ItemToggle(key, false, callback) {}
 
     /**
-     * @brief Create an ItemToggle object.
-     * @param key key of the item
+     * @brief Construct a new Item Toggle object with an initial state
+     * and default ON/OFF texts.
+     *
+     * @param text
+     * @param enabled
+     * @param callback
+     */
+    ItemToggle(const char* text, boolean enabled, fptrBool callback)
+        : ItemToggle(text, "ON", "OFF", callback) {
+        this->enabled = enabled;
+    }
+
+    /**
+     * @brief Construct a new Item Toggle object.
+     * @param text the text of the item
      * @param textOn display text when ON
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, const char* textOn, const char* textOff,
-               fptrInt callback)
-        : MenuItem(key, MENU_ITEM_TOGGLE),
+    ItemToggle(const char* text, const char* textOn, const char* textOff, fptrBool callback)
+        : MenuItem(text),
           textOn(textOn),
           textOff(textOff),
           callback(callback) {}
@@ -44,23 +63,51 @@ class ItemToggle : public MenuItem {
      * @brief Get the integer callback function of this item.
      * @return the integer callback function
      */
-    fptrInt getCallbackInt() override { return callback; }
+    fptrBool getCallbackInt() { return callback; }
 
     /**
      * @brief Get the current state of this toggle item.
      * @return the current state
      */
-    boolean isOn() override { return enabled; }
+    boolean isOn() { return enabled; }
 
     /**
      * @brief Set the current state of this toggle item.
+     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      * @param isOn the new state
      */
-    void setIsOn(boolean isOn) override { this->enabled = isOn; }
+    void setIsOn(boolean isOn) { this->enabled = isOn; }
 
-    const char* getTextOn() override { return this->textOn; }
+    const char* getTextOn() { return this->textOn; }
 
-    const char* getTextOff() override { return this->textOff; }
+    const char* getTextOff() { return this->textOff; }
+
+    void draw(DisplayInterface* display, uint8_t row) override {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(enabled ? textOn : textOff, 0, maxCols - strlen(text) - 2, buf);
+        display->drawItem(row, text, ':', buf);
+    };
+
+  protected:
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        DisplayInterface* display = menu->getDisplay();
+        switch (command) {
+            case ENTER:
+                toggle(display);
+                return true;
+            default:
+                return false;
+        }
+    };
+    void toggle(DisplayInterface* display) {
+        enabled = !enabled;
+        if (callback != NULL) {
+            callback(enabled);
+        }
+        printLog(F("ItemToggle::toggle"), enabled ? textOn : textOff);
+        MenuItem::draw(display);
+    }
 };
 
 #define ITEM_TOGGLE(...) (new ItemToggle(__VA_ARGS__))

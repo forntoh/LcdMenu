@@ -1,0 +1,87 @@
+name: Wokwi CI
+
+on:
+  pull_request_target:
+    paths:
+      - "src/**"
+      - "examples/**"
+      - ".github/workflows/wokwi_ci.yml"
+
+jobs:
+  provide-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: |
+          TMP="["
+          for FILE in examples/*/*.ino; do
+            EXAMPLE_NAME=$(basename $FILE .ino)
+            TEST_FILE="test/$EXAMPLE_NAME.test.yml"
+            if [ -f "$TEST_FILE" ]; then
+              TMP="$TMP\"$FILE\","
+            fi
+          done
+          TMP="${TMP::-1}]"
+          echo "::set-output name=matrix::$TMP"
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  run-ci:
+    needs: provide-examples
+    strategy:
+      matrix:
+        example: ${{ fromJson(needs.provide-examples.outputs.matrix) }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Prepare Example File
+        run: |
+          EXAMPLE_FILE=$(python .scripts/prepare_example.py ${{ matrix.example }})
+          EXAMPLE_NAME=$(basename $EXAMPLE_FILE .cpp)
+          cp $EXAMPLE_FILE src/main.cpp
+
+          if [ -f "test/$EXAMPLE_NAME.test.yml" ]; then
+            echo "TEST_FILE=test/$EXAMPLE_NAME.test.yml" >> $GITHUB_ENV
+          fi
+      - name: Prepare Test Script
+        run: |
+          RUN_DURATION=$(python .scripts/prepare_workflow.py ${{ env.TEST_FILE }} ${{ vars.WOKWI_CI_TIMINGS }})
+          echo "RUN_DURATION=$((RUN_DURATION + ${{ vars.WOKWI_TIMEOUT_BUFFER }}))" >> $GITHUB_ENV
+
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+
+      - name: Install library dependencies
+        run: pio lib install
+
+      - name: Build PlatformIO
+        run: pio run
+        env:
+          LOCAL_BUILD: 1
+
+      - name: Running ${{ env.TEST_FILE }} on Wokwi
+        uses: wokwi/wokwi-ci-action@v1
+        with:
+          token: ${{ secrets.WOKWI_CLI_TOKEN }}
+          scenario: ${{ env.TEST_FILE }}
+          timeout: ${{ env.RUN_DURATION }}

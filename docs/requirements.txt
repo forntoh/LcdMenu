@@ -1,0 +1,6 @@
+requests
+breathe
+sphinx
+sphinxcontrib-plantuml
+sphinxawesome-theme
+sphinx_design

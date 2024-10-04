@@ -1,8 +1,8 @@
 #ifndef MenuUtils_H
 #define MenuUtils_H
-#include <Arduino.h>
 
 #include "constants.h"
+#include <Arduino.h>
 
 inline void substring(const char* str, uint8_t start, uint8_t size, char* substr) {
     strncpy(substr, str + start, size);
@@ -39,46 +39,52 @@ inline void remove(char* str, uint8_t index, uint8_t count) {
     memmove(str + index, str + index + count, len - count - index + 1);
 }
 
-inline long mapProgress(uint16_t progress, long minValue, long maxValue) {
-    // Map the progress value to a new range (minValue to maxValue)
-    return map(progress, MIN_PROGRESS, MAX_PROGRESS, minValue, maxValue);
-}
-
-inline float mapProgress(uint16_t progress, float minValue, float maxValue) {
-    // Normalize the progress value and map it to the specified floating-point
-    // range
-    return static_cast<float>(progress) / MAX_PROGRESS * (maxValue - minValue) +
-           minValue;
-}
-
-inline void printCmd(const __FlashStringHelper* command) {
+inline void printLog(const __FlashStringHelper* command) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
     Serial.println(command);
 #endif
 }
 
-inline void printCmd(const __FlashStringHelper* command, const char value) {
+inline void printLog(const __FlashStringHelper* command, const char value) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
     Serial.print(command);
     Serial.print(F("="));
     Serial.println(value);
 #endif
 }
 
-inline void printCmd(const __FlashStringHelper* command, const uint8_t value) {
+inline void printLog(const __FlashStringHelper* command, const uint8_t value) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
     Serial.print(command);
     Serial.print(F("="));
     Serial.println(value, DEC);
 #endif
 }
 
-inline void printCmd(const __FlashStringHelper* command, const char* value) {
+inline void printLog(const __FlashStringHelper* command, const char* value) {
 #ifdef DEBUG
-    Serial.print(F("#CMD# "));
+    Serial.print(F("#LOG# "));
+    Serial.print(command);
+    Serial.print(F("="));
+    Serial.println(value);
+#endif
+}
+
+inline void printLog(const __FlashStringHelper* command, float value) {
+#ifdef DEBUG
+    Serial.print(F("#LOG# "));
+    Serial.print(command);
+    Serial.print(F("="));
+    Serial.println(value);
+#endif
+}
+
+inline void printLog(const __FlashStringHelper* command, int value) {
+#ifdef DEBUG
+    Serial.print(F("#LOG# "));
     Serial.print(command);
     Serial.print(F("="));
     Serial.println(value);

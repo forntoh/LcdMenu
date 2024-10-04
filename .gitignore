@@ -1,3 +1,6 @@
+.env
+.vars
+.secrets
 .pio
 .vscode/
 src/main.cpp
@@ -7,3 +10,6 @@ _site/
 .arduino_ci/
 *.tar.gz
 *.lock
+_build/
+docs/doxygen/
+docs/source/reference/api

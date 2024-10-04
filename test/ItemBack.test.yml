@@ -1,0 +1,19 @@
+name: ItemBack Test
+version: 1
+author: Thomas Forntoh
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=1"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=2"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemSubMenu::changeScreen=Settings"
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=1"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=2"
+  - simulate: backButton-press
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - wait-serial: "#LOG# MenuScreen::back"

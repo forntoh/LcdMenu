@@ -1,0 +1,38 @@
+{% extends "!page.html" %}
+{{ super() }}
+
+{%- block body_before %}
+  <div class="flex-col gap-4 md:flex-row mb-4 hidden md:flex">
+    <a href="https://www.ardu-badge.com/LcdMenu">
+      <img
+        src="https://www.ardu-badge.com/badge/LcdMenu.svg"
+        alt="Arduino Library Badge"
+      />
+    </a>
+    <a href="https://registry.platformio.org/libraries/forntoh/LcdMenu">
+      <img
+        src="https://badges.registry.platformio.org/packages/forntoh/library/LcdMenu.svg"
+        alt="PlatformIO Badge"
+      />
+    </a>
+    <a href="">
+      <img
+        src="https://img.shields.io/github/check-runs/forntoh/LcdMenu/master?logo=githubactions&logoColor=%23ffffff"
+        alt="Check Runs Badge"
+      />
+    </a>
+    <a href="">
+      <img
+        src="https://img.shields.io/github/actions/workflow/status/forntoh/LcdMenu/docs.yml?label=docs&logo=google%20docs&logoColor=%23efefef"
+        alt="Documentation Status Badge"
+      />
+    </a>
+    <a href="https://github.com/forntoh/LcdMenu/commits/master">
+      <img
+        src="https://img.shields.io/github/commits-since/forntoh/LcdMenu/latest?color=yellow&logo=semanticrelease"
+        alt="GitHub Commits Badge"
+      />
+    </a>
+  </div>
+  <hr class="docutils mb-4 hidden md:flex" style="border-color: hsl(var(--border));">
+{%- endblock %}

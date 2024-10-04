@@ -3,7 +3,7 @@
 
   MIT License
 
-  Copyright (c) 2020-2023 Forntoh Thomas
+  Copyright (c) 2020-2024 Forntoh Thomas
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -27,208 +27,86 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
+#include "display/DisplayInterface.h"
 #include "utils/constants.h"
+#include <utils/utils.h>
+
+class LcdMenu;
+class MenuScreen;
 
 /**
- * The MenuItem class
+ * @class MenuItem
+ * @brief Represent single item in menu.
+ *
+ * ```
+ * ┌────────────────────────────┐
+ * │ > T E X T                  │
+ * └────────────────────────────┘
+ * ```
  */
 class MenuItem {
-   protected:
+    friend LcdMenu;
+    friend MenuScreen;
+
+  protected:
     const char* text = NULL;
-    byte type = MENU_ITEM_NONE;
 
-   public:
+  public:
     MenuItem(const char* text) : text(text) {}
-    MenuItem(const char* text, byte type) : text(text), type(type) {}
     /**
-     * ## Getters
-     */
-
-    /**
-     * `Boolean` state of the item *(either ON or OFF)*
-     */
-    virtual boolean isOn() { return false; }
-    /**
-     * String value of an `ItemInput`
-     */
-    virtual char* getValue() { return NULL; }
-    /**
-     * Get the text of the item
+     * @brief Get the text of the item
      * @return `String` - Item's text
      */
-    virtual const char* getText() { return text; }
+    const char* getText() {
+        return text;
+    }
     /**
-     * Get the callback of the item
-     * @return `ftpr` - Item's callback
-     */
-    virtual fptr getCallback() { return NULL; }
-    /**
-     * Get the callback of the item
-     * @return `fptrInt` - Item's callback
-     */
-    virtual fptrInt getCallbackInt() { return NULL; }
-    /**
-     * Get the callback of the item
-     * @return `fptrStr` - Item's callback
-     */
-    virtual fptrStr getCallbackStr() { return NULL; }
-    /**
-     * Get the sub menu at item
-     * @return `MenuItem*` - Submenu at item
-     */
-    virtual MenuItem** getSubMenu() { return NULL; }
-    /**
-     * Get the type of the item
-     * @return `byte` - type of menu item
-     */
-    byte getType() { return type; }
-    /**
-     * Get the text when toggle is ON
-     * @return `String` - ON text
-     */
-    virtual const char* getTextOn() { return NULL; }
-    /**
-     * Get the text when toggle is OFF
-     * @return `String` - OFF text
-     */
-    virtual const char* getTextOff() { return NULL; }
-    /**
-     * Current index of list for `ItemList`
-     */
-    virtual uint16_t getItemIndex() { return 0; }
-    /**
-     * Number of items in the list for `ItemList`
-     */
-    virtual uint8_t getItemCount() { return 0; };
-    /**
-     * Get the list of items
-     * @return `String*` - List of items
-     */
-    virtual String* getItems() { return NULL; }
-    /**
-     * @brief Increments the progress of the list.
-     */
-    virtual void increment(){};
-    /**
-     * @brief Decrements the progress of the list.
-     */
-    virtual void decrement(){};
-    /**
-     * ## Setters
-     */
-
-    /**
-     * `Boolean` state of the item *(either ON or OFF)*
-     */
-    virtual void setIsOn(boolean isOn){};
-    /**
-     * String value of an `ItemInput`
-     */
-    virtual void setValue(char* value){};
-    /**
-     * Set the text of the item
+     * @brief Set the text of the item
+     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      * @param text text to display for the item
      */
-    void setText(const char* text) { this->text = text; };
-    /**
-     * Set the callback on the item
-     * @param callback reference to callback function
-     */
-    virtual void setCallBack(fptr callback){};
-    /**
-     * Current index of list for `ItemList`
-     */
-    virtual void setItemIndex(uint16_t itemIndex){};
-    /**
-     * Set the progress on the item
-     * @param uint16_t progress for the item
-     */
-    virtual void setProgress(uint16_t value){};
+    void setText(const char* text) {
+        this->text = text;
+    };
 
-    /**
-     * Operators
-     */
+    // Destructor
+    ~MenuItem() noexcept = default;
 
+  protected:
     /**
-     * Get item at index from the submenu
-     * @param index for the item
+     * @brief Process a command decoded in 1 byte.
+     * It can be a printable character or a control command like `ENTER` or `LEFT`.
+     * Return value is used to determine operation was successful or ignored.
+     * If the parent of item received that handle was ignored it can execute it's own action on this command.
+     * Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element.
+     * Behaviour is very similar to Even Bubbling in JavaScript.
+     * @param menu the owner menu of the item, can be used to retrieve required object, such as `DisplayInterface` or `MenuScreen`
+     * @param command the character command, can be a printable character or a control command
+     * @return true if command was successfully handled by item.
      */
-    virtual MenuItem* operator[](const uint8_t index) { return NULL; };
+    virtual bool process(LcdMenu* menu, const unsigned char command) {
+        return false;
+    };
+    /**
+     * @brief Draw this menu item on specified display on current line.
+     * @param display Pointer to the DisplayInterface object used for rendering.
+     */
+    const void draw(DisplayInterface* display) {
+        draw(display, display->getCursorRow());
+    };
+    /**
+     * @brief Draw this menu item on specified display on specified line.
+     * @param display Pointer to the DisplayInterface object used for rendering.
+     * @param row the number of row to draw on
+     */
+    virtual void draw(DisplayInterface* display, uint8_t row) {
+        uint8_t maxCols = display->getMaxCols();
+        static char* buf = new char[maxCols];
+        substring(text, 0, maxCols - 2, buf);
+        display->drawItem(row, buf);
+    };
 };
+
 #define ITEM_BASIC(...) (new MenuItem(__VA_ARGS__))
-
-/**
- *
- * # ItemHeader
- *
- * This item must be present at the all menus collections *(the first item in
- * the array)*.
- *
- * **Example**
- *
- * ```cpp
- * MenuItem mainMenu[] = {ItemHeader(),
- *                        MenuItem("Item 1"),
- *                        MenuItem("Item 2"),
- *                        ...
- * ```
- */
-
-class ItemHeader : public MenuItem {
-   protected:
-    MenuItem** parent = NULL;
-
-    ItemHeader(const char* text, MenuItem** parent, byte type)
-        : MenuItem(text, type), parent(parent) {}
-
-   public:
-    /**
-     */
-    ItemHeader() : ItemHeader("", NULL, MENU_ITEM_MAIN_MENU_HEADER) {}
-    /**
-     * @param parent the parent menu item
-     */
-    ItemHeader(MenuItem** parent)
-        : ItemHeader("", parent, MENU_ITEM_SUB_MENU_HEADER) {}
-
-    MenuItem** getSubMenu() override { return this->parent; };
-
-    MenuItem* operator[](const uint8_t index) override {
-        return getSubMenu()[index];
-    }
-};
-
-/**
- * ---
- *
- * # ItemFooter
- *
- * This item must be present at the all menus *(the last item in the array)*
- *
- * **Example**
- *
- * ```cpp
- * MenuItem mainMenu[] = {ItemHeader(),
- *                        MenuItem("Item 1"),
- *                        MenuItem("Item 2"),
- *                        ...
- *                        ItemFooter()};
- * ```
- */
-
-class ItemFooter : public MenuItem {
-   public:
-    /**
-     */
-    ItemFooter() : MenuItem(NULL, MENU_ITEM_END_OF_MENU) {}
-};
-
-#define MAIN_MENU(...)           \
-    extern MenuItem* mainMenu[]; \
-    MenuItem* mainMenu[] = {new ItemHeader(), __VA_ARGS__, new ItemFooter()}
-
-#define SUB_MENU(subMenu, parent, ...)                          \
-    MenuItem* subMenu[] = {new ItemHeader(parent), __VA_ARGS__, \
-                           new ItemFooter()}
 
 #endif

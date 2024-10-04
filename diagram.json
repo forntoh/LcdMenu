@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "Uri Shaked",
+  "author": "Thomas Forntoh",
   "editor": "wokwi",
   "parts": [
     { "type": "wokwi-arduino-uno", "id": "uno", "top": 200, "left": 20, "attrs": {} },
@@ -12,6 +12,55 @@
       "left": 318.1,
       "rotate": 90,
       "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 198.2,
+      "left": 489.6,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": 294.2,
+      "left": 489.6,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn3",
+      "top": 246.2,
+      "left": 489.6,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn4",
+      "top": 380.6,
+      "left": 393.6,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn5",
+      "top": 246.2,
+      "left": 422.4,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn6",
+      "top": 246.2,
+      "left": 556.8,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-pushbutton-6mm",
+      "id": "btn7",
+      "top": 353,
+      "left": 412.8,
+      "attrs": { "color": "yellow" }
     }
   ],
   "connections": [
@@ -19,11 +68,25 @@
     [ "lcd1:SCL", "uno:A5", "limegreen", [ "h-16.48", "v370.62", "h268.87" ] ],
     [ "lcd1:VCC", "uno:5V", "red", [ "h-42.82", "v366.38", "h199.71" ] ],
     [ "lcd1:GND", "uno:GND.1", "black", [ "h-24.23", "v175.22" ] ],
-    [ "encoder1:CLK", "uno:2", "green", [ "v2.1", "h-90.4" ] ],
-    [ "encoder1:DT", "uno:3", "green", [ "h-0.1", "v74.6" ] ],
-    [ "encoder1:SW", "uno:4", "green", [ "h-0.1", "v74.6" ] ],
-    [ "encoder1:GND", "uno:GND.1", "black", [ "h-0.8", "v74.6" ] ],
-    [ "encoder1:VCC", "uno:5V", "red", [ "h-0.4", "v288", "h-194.4" ] ]
+    [ "encoder1:CLK", "uno:2", "blue", [ "v28.8", "h-146.7" ] ],
+    [ "encoder1:DT", "uno:3", "orange", [ "h-0.1", "v57.6", "h-146.6" ] ],
+    [ "encoder1:SW", "uno:4", "green", [ "h-0.1", "v48", "h-146.5" ] ],
+    [ "encoder1:GND", "uno:GND.1", "black", [ "h-0.8", "v38.4", "h-229.3" ] ],
+    [ "encoder1:VCC", "uno:5V", "red", [ "h-0.4", "v288", "h-194.4" ] ],
+    [ "btn1:1.l", "uno:5", "green", [ "h-163.2", "v-11.8" ] ],
+    [ "btn1:2.l", "uno:GND.1", "black", [ "h0" ] ],
+    [ "btn2:1.l", "uno:6", "green", [ "h0" ] ],
+    [ "btn3:1.l", "uno:7", "green", [ "v-28.8", "h-280.6" ] ],
+    [ "btn4:1.l", "uno:8", "green", [ "h0" ] ],
+    [ "btn2:2.l", "uno:GND.1", "black", [ "h0" ] ],
+    [ "btn3:2.l", "uno:GND.1", "black", [ "v29", "h-354.1" ] ],
+    [ "btn4:2.l", "uno:GND.1", "black", [ "h0" ] ],
+    [ "btn5:1.l", "uno:9", "green", [ "h0" ] ],
+    [ "btn6:1.l", "uno:10", "green", [ "v-19.2", "h-392.9" ] ],
+    [ "btn5:2.l", "uno:GND.1", "black", [ "h0" ] ],
+    [ "btn6:2.l", "uno:GND.1", "black", [ "v19.4", "h-430.9" ] ],
+    [ "btn7:1.l", "uno:11", "green", [ "h0" ] ],
+    [ "btn7:2.l", "uno:GND.2", "black", [ "h0" ] ]
   ],
   "dependencies": {}
 }
