@@ -75,7 +75,7 @@ html_context = {
     "conf_py_path": "/docs/source/",  # Path in the repository to the docs directory
 }
 html_permalinks_icon = Icons.permalinks_icon
-html_favicon = "../assets/favicon.ico"
+html_favicon = "../assets/favicon.png"
 html_theme_options = {
     'logo_light': '../assets/logo-light.png',
     'logo_dark': '../assets/logo-dark.png',
