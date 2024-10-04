@@ -28,7 +28,7 @@ There are other documentation files that are generated using some custom scripts
 
 > sudo apt-get install -y doxygen
 
-To run the docs.sh file in the terminal, you need to ensure it has execute permissions and then execute it. Here are the steps:
+To run the pre_build.bat file in the terminal, you need to ensure it has execute permissions and then execute it. Here are the steps:
 
 1. Give execute permissions to the script:
 
@@ -39,5 +39,5 @@ chmod +x pre_build.bat
 2. Run the script:
 
 ```bash
-dosc/pre_build.bat
+docs/pre_build.bat
 ```

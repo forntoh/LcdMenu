@@ -25,7 +25,7 @@
 - [ ] I have included an example sketch file.
 - [ ] I have commented my code thoroughly.
 - [ ] I have added documentation for the new feature.
-- [ ] I have generated and reviewed the documentation locally or on readthe docs.
+- [ ] I have generated and reviewed the documentation locally.
 - [ ] I have created a functionality test to validate the new feature.
 
 ## Description
