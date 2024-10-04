@@ -138,7 +138,7 @@ class ItemControlBaseMany : public MenuItem {
                 }
                 concat(buffer, text, buffer);
                 if (i == current) {
-                    Serial.print("Cuurent widget, buffer=[");
+                    Serial.print("Current widget, buffer=[");
                     Serial.print(buffer);
                     Serial.print("], offset=");
                     Serial.println(controls[i]->getBlinkerOffset());
