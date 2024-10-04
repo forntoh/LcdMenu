@@ -25,17 +25,20 @@
  * Keyboard can send multiple-bytes commands.
  * Implementation should convert it to one byte command.
  *
- * Implementation details. Mapping:
- * `First 128 of ASCII`        -> as is
- * `\r`                        -> `ENTER`
- * `\n`                        -> `ENTER`
- * `\r\n`                      -> `ENTER`
- * `ESC`                       -> `BACK`
- * `ESC [ A` (up arrow)        -> `UP`
- * `ESC [ B` (down arrow)      -> `DOWN`
- * `ESC [ C` (right arrow)     -> `RIGHT`
- * `ESC [ D` (left arrow)      -> `LEFT`
- * `ESC [ 3 ~` (Delete button) -> `CLEAR`
+ * Implementation details.
+ *
+ * Mapping:
+ *
+ * - `First 128 of ASCII`        -> as is
+ * - `\r`                        -> `ENTER`
+ * - `\n`                        -> `ENTER`
+ * - `\r\n`                      -> `ENTER`
+ * - `ESC`                       -> `BACK`
+ * - `ESC [ A` (up arrow)        -> `UP`
+ * - `ESC [ B` (down arrow)      -> `DOWN`
+ * - `ESC [ C` (right arrow)     -> `RIGHT`
+ * - `ESC [ D` (left arrow)      -> `LEFT`
+ * - `ESC [ 3 ~` (Delete button) -> `CLEAR`
  */
 class KeyboardAdapter : public InputInterface {
   private:

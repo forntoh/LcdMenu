@@ -1,4 +1,5 @@
 @startuml
+skinparam backgroundColor #FFFFFF60
 ' https://www.plantuml.com/plantuml/uml/
 
 hide empty members

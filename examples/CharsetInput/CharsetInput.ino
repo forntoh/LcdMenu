@@ -1,10 +1,3 @@
-/*
- Charset Input
-
- https://lcdmenu.forntoh.dev/examples/input-from-character-set
-
-*/
-
 #include <ItemInput.h>
 #include <ItemInputCharset.h>
 #include <LcdMenu.h>

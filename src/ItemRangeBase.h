@@ -11,9 +11,11 @@ template <typename T>
  *        It can be used to display all sorts of values that can be incremented or decremented.
  *        You can additionally pass a unit to be displayed after the value. e.g. "%", "°C", "°F" etc.
  *
+ * ```
  * ┌──────────────────────────────────┐
  * │ > T E X T : V A L U E U N I T    │
  * └──────────────────────────────────┘
+ * ```
  *
  * Additionally to `text` this item has float `currentValue`.
  * Has internal `edit` state.
@@ -35,7 +37,7 @@ class ItemRangeBase : public MenuItem {
      * @param text The text of the item.
      * @param min The minimum value.
      * @param max The maximum value.
-     * @param current The current value.
+     * @param startingValue The current value.
      * @param callback A pointer to the callback function to execute when this menu item is selected.
      * @param unit The unit e.g. "%", "°C", "°F".
      * @param step The step value for increment/decrement.

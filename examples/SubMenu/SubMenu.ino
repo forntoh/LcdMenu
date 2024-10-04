@@ -1,9 +1,3 @@
-/*
- Sub Menu
-
- https://lcdmenu.forntoh.dev/examples/submenu
-
-*/
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>

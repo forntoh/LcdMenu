@@ -1,7 +1,3 @@
-/*
- Menu Item List
- https://lcdmenu.forntoh.dev/examples/string-list
-*/
 #include <ItemList.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>

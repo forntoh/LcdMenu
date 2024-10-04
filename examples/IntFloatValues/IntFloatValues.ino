@@ -1,10 +1,3 @@
-/*
- Menu Item Progress
-
- https://lcdmenu.forntoh.dev/examples/string-list
-
-*/
-
 #include <ItemFloatRange.h>
 #include <ItemIntRange.h>
 #include <LcdMenu.h>

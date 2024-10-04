@@ -28,7 +28,8 @@
       "diagram.json",
       "Gemfile",
       "*.toml",
-      "docs/"
+      "docs/",
+      "version"
     ]
   }
 }

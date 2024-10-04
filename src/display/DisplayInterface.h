@@ -5,6 +5,13 @@
 #include <utils/constants.h>
 
 /**
+ * @class DisplayInterface
+ * @brief An abstract base class for display interfaces.
+ *
+ * This class provides a common interface for various display implementations.
+ * It includes methods for managing display properties, cursor, blinker, and indicators.
+ *
+ * ```
  *    ┌── Cursor
  *    v            v──── Items
  *   ┌──┬──────────────────────────────────────┬──┐
@@ -15,7 +22,7 @@
  *   └──┴──────────────────────────────────────┴──┘
  *                       Blinker ──^            ^
  *                               Indicators ────┘
- *
+ * ```
  */
 class DisplayInterface {
   protected:

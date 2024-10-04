@@ -13,6 +13,7 @@ def build(files, version):
         data = ''
         separator = ''
         if file.endswith('.json'): separator = ": "
+        elif file.endswith('.rst'): separator = '^'
         else: separator = '='
 
         with open(file, "r") as a_file:
@@ -20,7 +21,11 @@ def build(files, version):
                 stripped_line = line.strip()
                 key = stripped_line.split(separator, 1)[0]
 
-                if re.search("version", key) != None:
+
+                if separator == '^' and re.search("forntoh/LcdMenu", key) != None:
+                    spaces = len(line) - len(line.lstrip())
+                    data+=(' ' * spaces + key + separator + version + '\n')
+                elif re.search("version", key) != None:
                     anchor = ''
                     suffix = ''
                     prefix = ''
