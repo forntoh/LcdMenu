@@ -54,19 +54,23 @@ jobs:
           git push origin "${{ env.UPDATED_VERSION }}"
 
       - name: Publish to PlatformIO
+        id: publish
         run: yes y | pio pkg publish
+        continue-on-error: true
+
+      - name: Revert push and delete tag if publish fails
+        if: failure()
+        run: |
+          git reset --hard HEAD~1
+          git push origin +HEAD
+          git tag -d ${{ github.ref_name }}
+          git push origin :refs/tags/${{ github.ref_name }}
 
       - name: Create GitHub Release
-        if: ${{ env.UPDATED_VERSION != '' }}
-        run: |
-          curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "tag_name": "${{ env.UPDATED_VERSION }}",
-              "target_commitish": "master",
-              "name": "LcdMenu ${{ env.UPDATED_VERSION }}",
-              "draft": true,
-              "prerelease": false
-            }' \
-            "https://api.github.com/repos/${{ github.repository }}/releases"
+        if: success()
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: LcdMenu v${{ github.ref_name }}
+          draft: true
+          prerelease: false
