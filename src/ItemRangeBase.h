@@ -8,7 +8,7 @@
 template <typename T>
 /**
  * @brief Item that allows user to select a value from a range.
- *        It can be used to display all sorts of values that can be incremented or decremented.
+ *        It can be used to renderer all sorts of values that can be incremented or decremented.
  *        You can additionally pass a unit to be displayed after the value. e.g. "%", "°C", "°F" etc.
  *
  * ```
@@ -107,19 +107,22 @@ class ItemRangeBase : public MenuItem {
     virtual char* getDisplayValue() = 0;
 
   protected:
-    void draw(DisplayInterface* display, uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
+    void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
+        uint8_t maxCols = renderer->getMaxCols();
+        static char* vbuf = new char[maxCols];
+        substring(getDisplayValue(), 0, maxCols - strlen(text) - 2, vbuf);
         static char* buf = new char[maxCols];
-        substring(getDisplayValue(), 0, maxCols - strlen(text) - 2, buf);
-        display->drawItem(row, text, ':', buf);
+        concat(text, ':', buf);
+        concat(buf, vbuf, buf);
+        renderer->drawItem(itemIndex, screenRow, buf);
     }
 
     bool process(LcdMenu* menu, const unsigned char command) override {
-        DisplayInterface* display = menu->getDisplay();
-        if (display->getEditModeEnabled()) {
+        MenuRenderer* renderer = menu->getRenderer();
+        if (renderer->isInEditMode()) {
             switch (command) {
                 case BACK:
-                    display->setEditModeEnabled(false);
+                    renderer->setEditMode(false);
                     if (callback != NULL && !commitOnChange) {
                         callback(currentValue);
                     }
@@ -127,7 +130,7 @@ class ItemRangeBase : public MenuItem {
                     return true;
                 case UP:
                     if (increment()) {
-                        MenuItem::draw(display);
+                        MenuItem::draw(renderer);
                         if (commitOnChange && callback != NULL) {
                             callback(currentValue);
                         }
@@ -135,7 +138,7 @@ class ItemRangeBase : public MenuItem {
                     return true;
                 case DOWN:
                     if (decrement()) {
-                        MenuItem::draw(display);
+                        MenuItem::draw(renderer);
                         if (commitOnChange && callback != NULL) {
                             callback(currentValue);
                         }
@@ -147,7 +150,7 @@ class ItemRangeBase : public MenuItem {
         } else {
             switch (command) {
                 case ENTER:
-                    display->setEditModeEnabled(true);
+                    renderer->setEditMode(true);
                     printLog(F("ItemRangeBase::enterEditMode"), currentValue);
                     return true;
                 default:
