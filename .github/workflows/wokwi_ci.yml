@@ -6,13 +6,13 @@ on:
       - master
     paths:
       - "src/**"
-      - "test/**"
+      - "test/**/*.yml"
       - "examples/**"
       - ".github/workflows/wokwi_ci.yml"
   pull_request_target:
     paths:
       - "src/**"
-      - "test/**"
+      - "test/**/*.yml"
       - "examples/**"
       - ".github/workflows/wokwi_ci.yml"
 
