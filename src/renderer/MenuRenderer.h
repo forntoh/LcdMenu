@@ -15,8 +15,8 @@
  */
 class MenuRenderer {
   protected:
-    uint8_t maxCols;
-    uint8_t maxRows;
+    const uint8_t maxCols;
+    const uint8_t maxRows;
 
     uint8_t cursorCol;
     uint8_t cursorRow;
