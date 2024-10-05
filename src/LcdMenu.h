@@ -42,7 +42,7 @@
 class LcdMenu {
   private:
     /**
-     * @brief Display Interface.
+     * @brief The renderer used to display the menu on the screen.
      */
     MenuRenderer& renderer;
     /**

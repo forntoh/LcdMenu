@@ -35,19 +35,19 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @param display A pointer to the CharacterDisplayInterface object.
      * @param maxCols The maximum number of columns on the display.
      * @param maxRows The maximum number of rows on the display.
+     * @param cursorIcon A byte representing the cursor icon, default is →, if 0, cursor will not be displayed
+     * @param editCursorIcon A byte representing the edit cursor icon, default is ←, if 0, edit cursor will not be displayed
      * @param upArrow A pointer to an array of bytes representing the up arrow icon, default is →
      * @param downArrow A pointer to an array of bytes representing the down arrow icon, default is ↓
-     * @param cursorIcon A byte representing the cursor icon, default is →
-     * @param editCursorIcon A byte representing the edit cursor icon, default is ←
      */
     CharacterDisplayRenderer(
         CharacterDisplayInterface* display,
         const uint8_t maxCols,
         const uint8_t maxRows,
-        uint8_t* upArrow = new uint8_t[8]{0x04, 0x0E, 0x1F, 0x04, 0x04, 0x04, 0x04, 0x04},
-        uint8_t* downArrow = new uint8_t[8]{0x04, 0x04, 0x04, 0x04, 0x04, 0x1F, 0x0E, 0x04},
         uint8_t cursorIcon = 0x7E,
-        uint8_t editCursorIcon = 0x7F)
+        uint8_t editCursorIcon = 0x7F,
+        uint8_t* upArrow = new uint8_t[8]{0x04, 0x0E, 0x1F, 0x04, 0x04, 0x04, 0x04, 0x04},
+        uint8_t* downArrow = new uint8_t[8]{0x04, 0x04, 0x04, 0x04, 0x04, 0x1F, 0x0E, 0x04})
         : MenuRenderer(display, maxCols, maxRows), upArrow(upArrow), downArrow(downArrow), cursorIcon(cursorIcon), editCursorIcon(editCursorIcon) {}
 
     /**
@@ -56,6 +56,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
     void begin() override {
         MenuRenderer::begin();
         static_cast<CharacterDisplayInterface*>(display)->createChar(0, upArrow);
+        static_cast<CharacterDisplayInterface*>(display)->createChar(1, downArrow);
     }
 
     /**

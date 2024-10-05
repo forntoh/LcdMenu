@@ -75,11 +75,7 @@ class MenuScreen {
     /**
      * Constructor
      */
-    MenuScreen(MenuItem** items) : items(items) {
-        while (items[itemCount] != nullptr) {
-            itemCount++;
-        }
-    }
+    MenuScreen(MenuItem** items);
     /**
      * @brief Set new parent screen.
      */
@@ -109,7 +105,8 @@ class MenuScreen {
      */
     void setCursor(MenuRenderer* renderer, uint8_t position);
     /**
-     * @brief Draw the screen on renderer.
+     * @brief Draw the screen on screen.
+     * @param renderer The renderer to use for drawing.
      */
     void draw(MenuRenderer* renderer);
     /**

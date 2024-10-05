@@ -41,8 +41,8 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
 
 void MenuScreen::draw(MenuRenderer* renderer) {
     renderer->setItemCount(itemCount);
-    renderCursor(renderer);
 
+    renderCursor(renderer);
     for (uint8_t i = 0; i < renderer->getMaxRows(); i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
@@ -50,7 +50,6 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         }
         item->draw(renderer, view + i, i);
     }
-
     renderCursor(renderer);
 }
 
@@ -119,4 +118,10 @@ void MenuScreen::reset(MenuRenderer* renderer) {
     cursor = 0;
     view = 0;
     draw(renderer);
+}
+
+MenuScreen::MenuScreen(MenuItem** items) : items(items) {
+    while (items[itemCount] != nullptr) {
+        itemCount++;
+    }
 }

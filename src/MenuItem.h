@@ -45,7 +45,6 @@ class MenuScreen;
  * ```
  */
 class MenuItem {
-    friend LcdMenu;
     friend MenuScreen;
 
   protected:
@@ -88,16 +87,17 @@ class MenuItem {
         return false;
     };
     /**
-     * @brief Draw this menu item on specified display on current line.
-     * @param display Pointer to the DisplayInterface object used for rendering.
+     * @brief Draw this menu item on specified display on current row.
+     * @param renderer The renderer to use for drawing.
      */
     const void draw(MenuRenderer* renderer) {
         draw(renderer, renderer->getItemIndex(), renderer->getCursorRow());
     };
     /**
-     * @brief Draw this menu item on specified display on specified line.
-     * @param display Pointer to the DisplayInterface object used for rendering.
-     * @param row the number of row to draw on
+     * @brief Draw this menu item on specified display on specified row.
+     * @param renderer The renderer to use for drawing.
+     * @param itemIndex The index of the item in the menu.
+     * @param screenRow The row on the screen where the item should be drawn.
      */
     virtual void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) {
         renderer->drawItem(itemIndex, screenRow, text);
