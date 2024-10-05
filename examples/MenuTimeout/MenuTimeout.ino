@@ -35,6 +35,6 @@ void loop() {
      * IMPORTANT: You must call this function for the timeout to work
      * The default timeout is 10000ms
      */
-    lcdAdapter.updateTimer();
+    renderer.updateTimer();
     keyboard.observe();
 }

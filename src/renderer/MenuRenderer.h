@@ -20,6 +20,8 @@ class MenuRenderer {
 
     bool inEditMode;
 
+    unsigned long startTime = 0;
+
   public:
     DisplayInterface* display;
 
@@ -28,7 +30,10 @@ class MenuRenderer {
         uint8_t maxCols,
         uint8_t maxRows) : maxCols(maxCols), maxRows(maxRows), display(display) {}
 
-    virtual void begin() = 0;
+    virtual void begin() {
+        display->begin();
+        startTime = millis();
+    }
 
     virtual void draw(uint8_t byte) = 0;
 
@@ -59,6 +64,19 @@ class MenuRenderer {
             clearCursor();
             drawCursor();
         }
+    }
+
+    virtual void restartTimer() {
+        this->startTime = millis();
+        display->show();
+    }
+
+    virtual void updateTimer() {
+        if (millis() != startTime + DISPLAY_TIMEOUT) {
+            return;
+        }
+        printLog(F("MenuRenderer::timeout"));
+        display->hide();
     }
 
     bool isInEditMode() const { return inEditMode; }

@@ -11,21 +11,18 @@
  * @class LiquidCrystal_I2CAdapter
  * @brief Adapter class for interfacing with LiquidCrystal_I2C displays.
  *
- * This class provides an interface to control LiquidCrystal_I2C displays,
- * implementing the DisplayInterface. It includes methods for initializing
- * the display, drawing items, handling cursors, and managing backlight and
- * display states.
+ * This class provides an interface to control LiquidCrystal_I2C displays using
+ * the CharacterDisplayInterface. It includes methods for initializing the display,
+ * creating custom characters, setting the backlight, positioning the cursor,
+ * drawing text and characters, and managing a display timer.
  *
- * @note This class assumes that the LiquidCrystal_I2C library is included and available.
+ * @note This class requires the LiquidCrystal_I2C library.
  *
- * @param lcd Pointer to a LiquidCrystal_I2C object.
- * @param maxCols Maximum number of columns on the display.
- * @param maxRows Maximum number of rows on the display.
+ * @param lcd Pointer to a LiquidCrystal_I2C object that this adapter will interact with.
  */
 class LiquidCrystal_I2CAdapter : public CharacterDisplayInterface {
   private:
     LiquidCrystal_I2C* lcd;
-    unsigned long startTime = 0;
 
   public:
     LiquidCrystal_I2CAdapter(LiquidCrystal_I2C* lcd) : CharacterDisplayInterface(), lcd(lcd) {}
@@ -34,7 +31,6 @@ class LiquidCrystal_I2CAdapter : public CharacterDisplayInterface {
         lcd->init();
         lcd->clear();
         lcd->backlight();
-        startTime = millis();
     }
 
     void createChar(uint8_t id, uint8_t* c) override {
@@ -65,20 +61,15 @@ class LiquidCrystal_I2CAdapter : public CharacterDisplayInterface {
         lcd->noBlink();
     }
 
-    void restartTimer() override {
-        this->startTime = millis();
+    void show() override {
         lcd->display();
         lcd->backlight();
     }
 
-    void clear() override { lcd->clear(); }
-
-    void updateTimer() {
-        if (millis() != startTime + DISPLAY_TIMEOUT) {
-            return;
-        }
-        printLog(F("LiquidCrystal_I2CAdapter::timeout"));
+    void hide() override {
         lcd->noDisplay();
         lcd->noBacklight();
     }
+
+    void clear() override { lcd->clear(); }
 };

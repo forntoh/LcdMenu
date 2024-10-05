@@ -116,5 +116,5 @@ void setup() {
 }
 
 void loop() {
-    lcdAdapter.updateTimer();
+    renderer.updateTimer();
 }

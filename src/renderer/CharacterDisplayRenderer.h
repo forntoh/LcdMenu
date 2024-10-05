@@ -22,7 +22,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
         : MenuRenderer(display, maxCols, maxRows), upArrow(upArrow), downArrow(downArrow), cursorIcon(cursorIcon), editCursorIcon(editCursorIcon) {}
 
     void begin() override {
-        display->begin();
+        MenuRenderer::begin();
         static_cast<CharacterDisplayInterface*>(display)->createChar(0, upArrow);
     }
 
