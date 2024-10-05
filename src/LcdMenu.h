@@ -26,7 +26,7 @@
 #pragma once
 
 #include "MenuScreen.h"
-#include "display/DisplayInterface.h"
+#include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <MenuItem.h>
 #include <utils/utils.h>
@@ -37,14 +37,14 @@
  *
  * The LcdMenu class is the main object that manages the menu system. It is
  * responsible for displaying the menu on the screen, processing user input,
- * and updating the display based on the user's actions.
+ * and updating the renderer based on the user's actions.
  */
 class LcdMenu {
   private:
     /**
      * @brief Display Interface.
      */
-    DisplayInterface& display;
+    MenuRenderer& renderer;
     /**
      * @brief Currently visible menu screen.
      */
@@ -52,7 +52,7 @@ class LcdMenu {
     /**
      * @brief Enabled flag of menu.
      * Determines whether the screen should be updated after an action. Set it
-     * to `false` when you want to display any other content on the screen then
+     * to `false` when you want to renderer any other content on the screen then
      * set it back to `true` to show the menu.
      */
     bool enabled = true;
@@ -61,22 +61,22 @@ class LcdMenu {
     /**
      * Construct new instance of `LcdMenu`.
      */
-    LcdMenu(DisplayInterface& display) : display(display) {}
+    LcdMenu(MenuRenderer& renderer) : renderer(renderer) {}
     /**
-     * @brief Get the display.
-     * @return the display
+     * @brief Get the renderer.
+     * @return the renderer
      */
-    DisplayInterface* getDisplay();
+    MenuRenderer* getRenderer();
     /**
-     * @brief Get the screen that currently on display.
+     * @brief Get the screen that currently on renderer.
      * @return currently active screen
      */
     MenuScreen* getScreen();
     /**
-     * @brief Set new screen to display.
+     * @brief Set new screen to renderer.
      * The only place that clears whole screen.
-     * Then it Will `draw` of new screen screen on display.
-     * @param screen the new screen to display
+     * Then it Will `draw` of new screen screen on renderer.
+     * @param screen the new screen to renderer
      */
     void setScreen(MenuScreen* screen);
     /**
@@ -92,8 +92,8 @@ class LcdMenu {
     void reset();
     /**
      * @brief Hide the menu.
-     * When you want to display any other content on the screen then
-     * call this function then display your content, later call
+     * When you want to renderer any other content on the screen then
+     * call this function then renderer your content, later call
      * `show()` to show the menu
      */
     void hide();

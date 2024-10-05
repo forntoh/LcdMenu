@@ -24,56 +24,47 @@ uint8_t MenuScreen::itemsCount() {
     return i;
 }
 
-void MenuScreen::setCursor(DisplayInterface* display, uint8_t position) {
+void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
     uint8_t constrained = constrain(position, 0, itemsCount() - 1);
     if (constrained == cursor) {
         return;
     }
-    uint8_t viewSize = display->getMaxRows();
+    uint8_t viewSize = renderer->getMaxRows();
     if (constrained < view) {
         view = constrained;
     } else if (constrained > (view + (viewSize - 1))) {
         view = constrained - (viewSize - 1);
     }
     cursor = position;
-    draw(display);
+    draw(renderer);
 }
 
-void MenuScreen::draw(DisplayInterface* display) {
-    bool notFullView = false;
-    for (uint8_t i = 0; i < display->getMaxRows(); i++) {
+void MenuScreen::draw(MenuRenderer* renderer) {
+    renderer->setItemCount(itemCount);
+    renderCursor(renderer);
+
+    for (uint8_t i = 0; i < renderer->getMaxRows(); i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
-            notFullView = true;
             break;
         }
-        item->draw(display, i);
+        item->draw(renderer, view + i, i);
     }
-    if (view == 0) {
-        display->clearUpIndicator();
-    } else {
-        display->drawUpIndicator();
-    }
-    if (notFullView || items[view + display->getMaxRows()] == nullptr) {
-        display->clearDownIndicator();
-    } else {
-        display->drawDownIndicator();
-    }
-    display->moveCursor(cursor - view);
-    display->drawCursor();  // In case if currentPosition was not changed between screens
+
+    renderCursor(renderer);
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
-    DisplayInterface* display = menu->getDisplay();
+    MenuRenderer* renderer = menu->getRenderer();
     if (items[cursor]->process(menu, command)) {
         return true;
     }
     switch (command) {
         case UP:
-            up(display);
+            up(renderer);
             return true;
         case DOWN:
-            down(display);
+            down(renderer);
             return true;
         case BACK:
             if (parent != NULL) {
@@ -86,7 +77,7 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     }
 }
 
-void MenuScreen::up(DisplayInterface* display) {
+void MenuScreen::up(MenuRenderer* renderer) {
     if (cursor == 0) {
         printLog(F("MenuScreen:up"), cursor);
         return;
@@ -94,30 +85,38 @@ void MenuScreen::up(DisplayInterface* display) {
     cursor--;
     if (cursor < view) {
         view--;
-        draw(display);
+        draw(renderer);
     } else {
-        display->moveCursor(cursor - view);
+        renderCursor(renderer);
     }
     printLog(F("MenuScreen:up"), cursor);
 }
 
-void MenuScreen::down(DisplayInterface* display) {
+void MenuScreen::down(MenuRenderer* renderer) {
     if (cursor == itemsCount() - 1) {
         printLog(F("MenuScreen:down"), cursor);
         return;
     }
     cursor++;
-    if (cursor > view + display->getMaxRows() - 1) {
+    if (cursor > view + renderer->getMaxRows() - 1) {
         view++;
-        draw(display);
+        draw(renderer);
     } else {
-        display->moveCursor(cursor - view);
+        renderCursor(renderer);
     }
     printLog(F("MenuScreen:down"), cursor);
 }
 
-void MenuScreen::reset(DisplayInterface* display) {
+void MenuScreen::renderCursor(MenuRenderer* renderer) {
+    if (renderer->getCursorRow() != cursor - view) {
+        renderer->clearCursor();
+        renderer->moveCursor(0, cursor - view);
+        renderer->drawCursor();
+    }
+}
+
+void MenuScreen::reset(MenuRenderer* renderer) {
     cursor = 0;
     view = 0;
-    draw(display);
+    draw(renderer);
 }

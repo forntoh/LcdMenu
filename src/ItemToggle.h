@@ -82,16 +82,16 @@ class ItemToggle : public MenuItem {
 
     const char* getTextOff() { return this->textOff; }
 
-    void draw(DisplayInterface* display, uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(enabled ? textOn : textOff, 0, maxCols - strlen(text) - 2, buf);
-        display->drawItem(row, text, ':', buf);
+    void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
+        static char* buf = new char[20];
+        concat(text, ':', buf);
+        concat(buf, enabled ? textOn : textOff, buf);
+        renderer->drawItem(itemIndex, screenRow, buf);
     };
 
   protected:
     bool process(LcdMenu* menu, const unsigned char command) override {
-        DisplayInterface* display = menu->getDisplay();
+        MenuRenderer* display = menu->getRenderer();
         switch (command) {
             case ENTER:
                 toggle(display);
@@ -100,7 +100,7 @@ class ItemToggle : public MenuItem {
                 return false;
         }
     };
-    void toggle(DisplayInterface* display) {
+    void toggle(MenuRenderer* display) {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);

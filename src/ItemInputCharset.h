@@ -16,7 +16,7 @@ class ItemInputCharset : public ItemInput {
     /**
      * @brief Construct a new ItemInputCharset object with an initial value.
      *
-     * @param text The text to display for the item.
+     * @param text The text to renderer for the item.
      * @param value The initial value for the input.
      * @param charset The charset to use for input.
      * @param callback A reference to the callback function to be invoked when
@@ -27,7 +27,7 @@ class ItemInputCharset : public ItemInput {
 
     /**
      * @brief Construct a new ItemInputCharset object with no initial value.
-     * @param text The text to display for the item.
+     * @param text The text to renderer for the item.
      * @param charset The charset to use for input.
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
@@ -37,52 +37,52 @@ class ItemInputCharset : public ItemInput {
 
   protected:
     bool process(LcdMenu* menu, const unsigned char command) override {
-        DisplayInterface* display = menu->getDisplay();
-        if (display->getEditModeEnabled()) {
+        MenuRenderer* renderer = menu->getRenderer();
+        if (renderer->isInEditMode()) {
             switch (command) {
                 case ENTER:
                     if (charEdit) {
-                        commitCharEdit(display);
+                        commitCharEdit(renderer);
                     }
                     return true;
                 case BACK:
                     if (charEdit) {
-                        abortCharEdit(display);
+                        abortCharEdit(renderer);
                     } else {
-                        ItemInput::back(display);
+                        ItemInput::back(renderer);
                     }
                     return true;
                 case UP:
                     if (!charEdit) {
                         initCharEdit();
                     }
-                    showPreviousChar(display);
+                    showPreviousChar(renderer);
                     printLog(F("ItemInputCharset::up"), charset[charsetPosition]);
                     return true;
                 case DOWN:
                     if (!charEdit) {
                         initCharEdit();
                     }
-                    showNextChar(display);
+                    showNextChar(renderer);
                     printLog(F("ItemInputCharset::down"), charset[charsetPosition]);
                     return true;
                 case LEFT:
                     if (charEdit) {
-                        abortCharEdit(display);
+                        abortCharEdit(renderer);
                     }
-                    ItemInput::left(display);
+                    ItemInput::left(renderer);
                     return true;
                 case RIGHT:
                     if (charEdit) {
-                        abortCharEdit(display);
+                        abortCharEdit(renderer);
                     }
-                    ItemInput::right(display);
+                    ItemInput::right(renderer);
                     return true;
                 case BACKSPACE:
-                    ItemInput::backspace(display);
+                    ItemInput::backspace(renderer);
                     return true;
                 case CLEAR:
-                    ItemInput::clear(display);
+                    ItemInput::clear(renderer);
                     return true;
                 default:
                     return false;
@@ -90,7 +90,7 @@ class ItemInputCharset : public ItemInput {
         } else {
             switch (command) {
                 case ENTER:
-                    ItemInput::enter(display);
+                    ItemInput::enter(renderer);
                     return true;
                 default:
                     return false;
@@ -116,12 +116,12 @@ class ItemInputCharset : public ItemInput {
      * @brief Stop `char edit mode` and abort all mde changes.
      * Unset `charEdit` flag and draw actual char from `value`.
      */
-    void abortCharEdit(DisplayInterface* display) {
+    void abortCharEdit(MenuRenderer* renderer) {
         charEdit = false;
         if (cursor < strlen(value)) {
-            display->drawChar(value[cursor]);
+            renderer->draw(value[cursor]);
         } else {
-            display->drawChar(' ');
+            renderer->draw(' ');
         }
         printLog(F("ItemInputCharset::abortCharEdit"));
     }
@@ -129,7 +129,7 @@ class ItemInputCharset : public ItemInput {
      * @brief Commit char edit mode.
      * Replace char at cursor position with selected char from charset.
      */
-    void commitCharEdit(DisplayInterface* display) {
+    void commitCharEdit(MenuRenderer* renderer) {
         uint8_t length = strlen(value);
         if (cursor < length) {
             value[cursor] = charset[charsetPosition];
@@ -138,27 +138,29 @@ class ItemInputCharset : public ItemInput {
             concat(value, charset[charsetPosition], buf);
             value = buf;
         }
-        abortCharEdit(display);
+        abortCharEdit(renderer);
         printLog(F("ItemInputCharset::commitCharEdit"), charset[charsetPosition]);
-        ItemInput::right(display);
+        ItemInput::right(renderer);
     }
     /**
      * @brief Show next char from charset.
      */
-    void showNextChar(DisplayInterface* display) {
+    void showNextChar(MenuRenderer* renderer) {
         if (charset[charsetPosition + 1] == '\0') {
             charsetPosition = 0;
         } else {
             charsetPosition++;
         }
-        display->drawChar(charset[charsetPosition]);
+        renderer->moveCursor(0, renderer->getCursorRow());
+        renderer->draw(charset[charsetPosition]);
+        renderer->moveCursor(0, renderer->getCursorRow());
     }
     /**
      * @brief Show previous char from charset.
      */
-    void showPreviousChar(DisplayInterface* display) {
+    void showPreviousChar(MenuRenderer* renderer) {
         charsetPosition = max(charsetPosition - 1, 0);
-        display->drawChar(charset[charsetPosition]);
+        renderer->draw(charset[charsetPosition]);
     }
 };
 

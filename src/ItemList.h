@@ -24,7 +24,7 @@ class ItemList : public MenuItem {
      * @brief Constructs a new ItemList object.
      *
      * @param key The key of the menu item.
-     * @param items The array of items to display.
+     * @param items The array of items to renderer.
      * @param itemCount The number of items in the array.
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
@@ -85,29 +85,30 @@ class ItemList : public MenuItem {
     }
 
   protected:
-    void draw(DisplayInterface* display, uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
+    void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
+        uint8_t maxCols = renderer->getMaxCols();
         static char* buf = new char[maxCols];
         substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
-        display->drawItem(row, text, ':', buf);
+        concat(text, ':', buf);
+        renderer->drawItem(itemIndex, screenRow, buf);
     }
 
     bool process(LcdMenu* menu, const unsigned char command) override {
-        DisplayInterface* display = menu->getDisplay();
-        if (display->getEditModeEnabled()) {
+        MenuRenderer* renderer = menu->getRenderer();
+        if (renderer->isInEditMode()) {
             switch (command) {
                 case BACK:
-                    display->setEditModeEnabled(false);
+                    renderer->setEditMode(false);
                     if (callback != NULL) {
                         callback(itemIndex);
                     }
                     printLog(F("ItemList::exitEditMode"), getValue());
                     return true;
                 case UP:
-                    selectNext(display);
+                    selectNext(renderer);
                     return true;
                 case DOWN:
-                    selectPrevious(display);
+                    selectPrevious(renderer);
                     return true;
                 default:
                     return false;
@@ -115,7 +116,7 @@ class ItemList : public MenuItem {
         } else {
             switch (command) {
                 case ENTER:
-                    display->setEditModeEnabled(true);
+                    renderer->setEditMode(true);
                     printLog(F("ItemList::enterEditMode"), getValue());
                     return true;
                 default:
@@ -124,20 +125,20 @@ class ItemList : public MenuItem {
         }
     }
 
-    void selectPrevious(DisplayInterface* display) {
+    void selectPrevious(MenuRenderer* renderer) {
         uint8_t previousIndex = itemIndex;
         (int8_t)(itemIndex - 1) < 0 ? itemIndex = itemCount - 1 : itemIndex--;
         if (previousIndex != itemIndex) {
-            MenuItem::draw(display);
+            MenuItem::draw(renderer);
         }
         printLog(F("ItemList::selectPrevious"), getValue());
     };
 
-    void selectNext(DisplayInterface* display) {
+    void selectNext(MenuRenderer* renderer) {
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, itemCount - 1);
         if (previousIndex != itemIndex) {
-            MenuItem::draw(display);
+            MenuItem::draw(renderer);
         }
         printLog(F("ItemList::selectNext"), getValue());
     };
