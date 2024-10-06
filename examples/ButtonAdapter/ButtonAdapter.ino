@@ -25,11 +25,11 @@ LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
 CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
 LcdMenu menu(renderer);
-Button upBtn(2);
+Button upBtn(5);
 ButtonAdapter upBtnA(&menu, &upBtn, UP);
-Button downBtn(3);
+Button downBtn(6);
 ButtonAdapter downBtnA(&menu, &downBtn, DOWN);
-Button enterBtn(4);
+Button enterBtn(7);
 ButtonAdapter enterBtnA(&menu, &enterBtn, ENTER);
 
 void setup() {

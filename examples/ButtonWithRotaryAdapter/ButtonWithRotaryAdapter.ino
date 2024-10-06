@@ -38,7 +38,7 @@ CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
 LcdMenu menu(renderer);
 SimpleRotary encoder(2, 3, 4);
 SimpleRotaryAdapter rotaryInput(&menu, &encoder);  // Rotary input adapter
-Button backspaceBtn(5);
+Button backspaceBtn(11);
 ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);  // Push button for backspace
 
 void setup() {
