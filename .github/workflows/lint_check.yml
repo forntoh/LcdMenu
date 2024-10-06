@@ -25,14 +25,11 @@ jobs:
       - name: Install ClangFormat
         run: sudo apt-get install -y clang-format
 
-      - name: Remove worktree
-        run: git worktree remove /home/runner/work/LcdMenu/LcdMenu
-
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
           clang_format: true
           clang_format_extensions: "c,cc,cpp,h,hpp,m,mm,ino"
-          auto_fix: true
-          commit: true
+          auto_fix: false
+          commit: false
           git_email: "thomasforntoh@gmail.com"
