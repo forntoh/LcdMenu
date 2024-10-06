@@ -140,7 +140,7 @@ class ItemInput : public MenuItem {
         snprintf(buf, maxCols, "%s:%s", text, vbuf);
         renderer->drawItem(itemIndex, screenRow, buf);
 
-        delete[] vbuf; // Free allocated memory
+        delete[] vbuf;  // Free allocated memory
     }
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
