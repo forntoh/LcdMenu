@@ -9,11 +9,14 @@ jobs:
     name: runner / check-pr-size
     runs-on: ubuntu-latest
     steps:
-      - name: Check out Git repository
+      - name: Checkout target branch
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Fetch PR branch
+        run: git fetch origin +refs/pull/${{ github.event.number }}/merge
+
+      - name: Checkout PR branch
+        run: git checkout -qf FETCH_HEAD
 
       - uses: budougumi0617/action-pr-size-checker@v0
         with:
