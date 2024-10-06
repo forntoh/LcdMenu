@@ -25,8 +25,6 @@ class CharacterDisplayRenderer : public MenuRenderer {
     uint8_t* downArrow;
     const uint8_t cursorIcon;
     const uint8_t editCursorIcon;
-    bool upScroll = false;
-    bool downScroll = false;
 
     /**
      * @brief Appends a cursor icon to the given text if the specified screen row is active.
@@ -118,8 +116,4 @@ class CharacterDisplayRenderer : public MenuRenderer {
     void drawBlinker() override;
     void clearBlinker() override;
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override;
-    void markUpScroll() override;
-    void clearUpScroll() override;
-    void markDownScroll() override;
-    void clearDownScroll() override;
 };

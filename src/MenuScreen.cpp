@@ -46,14 +46,14 @@ void MenuScreen::draw(MenuRenderer* renderer) {
 
 void MenuScreen::markScroll(uint8_t i, MenuRenderer* renderer) {
     if (i == 0 && view > 0) {
-        renderer->markUpScroll();
+        renderer->flagHiddenItemsAbove();
     } else {
-        renderer->clearUpScroll();
+        renderer->unsetFlagHiddenItemsAbove();
     }
     if (i == renderer->maxRows - 1 && (view + renderer->maxRows) < itemCount) {
-        renderer->markDownScroll();
+        renderer->flagHiddenItemsBelow();
     } else {
-        renderer->clearDownScroll();
+        renderer->unsetFlagHiddenItemsBelow();
     }
 }
 

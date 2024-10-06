@@ -20,6 +20,15 @@ class MenuRenderer {
     const uint8_t maxCols;
     const uint8_t maxRows;
 
+    /**
+     * @brief Flag indicating that there are hidden items above the current view.
+     */
+    bool hasHiddenItemsAbove = false;
+    /**
+     * @brief Flag indicating that there are hidden items below the current view.
+     */
+    bool hasHiddenItemsBelow = false;
+
     uint8_t cursorCol;
     uint8_t cursorRow;
 
@@ -65,11 +74,6 @@ class MenuRenderer {
      * @param text Text of the item to be drawn.
      */
     virtual void drawItem(uint8_t screenRow, const char* text);
-
-    virtual void markUpScroll() = 0;
-    virtual void clearUpScroll() = 0;
-    virtual void markDownScroll() = 0;
-    virtual void clearDownScroll() = 0;
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -145,6 +149,26 @@ class MenuRenderer {
      * @return the active row.
      */
     uint8_t getActiveRow() const;
+
+    /**
+     * @brief Flags that there are hidden items above the current view.
+     */
+    void flagHiddenItemsAbove();
+
+    /**
+     * @brief Unsets the flag indicating hidden items above the current view.
+     */
+    void unsetFlagHiddenItemsAbove();
+
+    /**
+     * @brief Flags that there are hidden items below the current view.
+     */
+    void flagHiddenItemsBelow();
+
+    /**
+     * @brief Unsets the flag indicating hidden items below the current view.
+     */
+    void unsetFlagHiddenItemsBelow();
 };
 
 #endif  // MENU_RENDERER_H

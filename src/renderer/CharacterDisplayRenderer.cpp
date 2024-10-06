@@ -67,9 +67,9 @@ void CharacterDisplayRenderer::appendCursorToText(uint8_t screenRow, const char*
 
 void CharacterDisplayRenderer::appendIndicatorToText(uint8_t screenRow, const char* text, char* buf) {
     uint8_t indicator = 0;
-    if (upScroll) {
+    if (hasHiddenItemsAbove) {
         indicator = 1;
-    } else if (downScroll) {
+    } else if (hasHiddenItemsBelow) {
         indicator = 2;
     }
 
@@ -94,20 +94,4 @@ void CharacterDisplayRenderer::padText(const char* text, uint8_t itemIndex, char
 
 uint8_t CharacterDisplayRenderer::calculateAvailableLength() {
     return maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0);
-}
-
-void CharacterDisplayRenderer::markUpScroll() {
-    upScroll = true;
-}
-
-void CharacterDisplayRenderer::clearUpScroll() {
-    upScroll = false;
-}
-
-void CharacterDisplayRenderer::markDownScroll() {
-    downScroll = true;
-}
-
-void CharacterDisplayRenderer::clearDownScroll() {
-    downScroll = false;
 }

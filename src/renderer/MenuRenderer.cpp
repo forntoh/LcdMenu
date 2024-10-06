@@ -40,3 +40,11 @@ uint8_t MenuRenderer::getMaxRows() const { return maxRows; }
 uint8_t MenuRenderer::getMaxCols() const { return maxCols; }
 
 uint8_t MenuRenderer::getActiveRow() const { return activeRow; }
+
+void MenuRenderer::flagHiddenItemsAbove() { hasHiddenItemsAbove = true; }
+
+void MenuRenderer::unsetFlagHiddenItemsAbove() { hasHiddenItemsAbove = false; }
+
+void MenuRenderer::flagHiddenItemsBelow() { hasHiddenItemsBelow = true; }
+
+void MenuRenderer::unsetFlagHiddenItemsBelow() { hasHiddenItemsBelow = false; }
