@@ -63,8 +63,8 @@ void CharacterDisplayRenderer::appendCursorToText(uint8_t screenRow, const char*
 }
 
 void CharacterDisplayRenderer::appendIndicatorToText(uint8_t screenRow, const char* text, char* buf) {
-    uint8_t indicator = (hasHiddenItemsAbove) ? 1 : (hasHiddenItemsBelow) ? 2 : 0;
-    if (indicator != 0) {
+    uint8_t indicator = (hasHiddenItemsAbove) ? 1 : ((hasHiddenItemsBelow) ? 2 : 0);
+    if (indicator != 0 && upArrow != NULL && downArrow != NULL) {
         concat(text, indicator, buf);
     } else {
         strcpy(buf, text);
