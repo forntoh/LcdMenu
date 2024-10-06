@@ -110,7 +110,8 @@ class ItemRangeBase : public MenuItem {
     void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
-        snprintf(buf, maxCols, "%s:%s", text, getDisplayValue());
+        concat(text, ':', buf);
+        concat(buf, getDisplayValue(), buf);
         renderer->drawItem(itemIndex, screenRow, buf);
     }
 

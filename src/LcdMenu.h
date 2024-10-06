@@ -52,7 +52,7 @@ class LcdMenu {
     /**
      * @brief Enabled flag of menu.
      * Determines whether the screen should be updated after an action. Set it
-     * to `false` when you want to renderer any other content on the screen then
+     * to `false` when you want to render any other content on the screen then
      * set it back to `true` to show the menu.
      */
     bool enabled = true;
@@ -68,14 +68,14 @@ class LcdMenu {
      */
     MenuRenderer* getRenderer();
     /**
-     * @brief Get the screen that currently on renderer.
+     * @brief Get the screen that currently on display.
      * @return currently active screen
      */
     MenuScreen* getScreen();
     /**
-     * @brief Set new screen to renderer.
+     * @brief Set new screen to display.
      * The only place that clears whole screen.
-     * Then it Will `draw` of new screen screen on renderer.
+     * Then it Will `draw` of new screen screen using the renderer.
      * @param screen the new screen to renderer
      */
     void setScreen(MenuScreen* screen);
@@ -92,8 +92,8 @@ class LcdMenu {
     void reset();
     /**
      * @brief Hide the menu.
-     * When you want to renderer any other content on the screen then
-     * call this function then renderer your content, later call
+     * When you want to display any other content on the screen then
+     * call this function then display your content, later call
      * `show()` to show the menu
      */
     void hide();

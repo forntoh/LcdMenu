@@ -31,7 +31,7 @@ class ItemFloatRange : public ItemRangeBase<float> {
         if (unit == NULL) {
             return buffer;
         }
-        snprintf(buffer, 10, "%s%s", buffer, unit);
+        concat(buffer, unit, buffer);
         return buffer;
     }
 

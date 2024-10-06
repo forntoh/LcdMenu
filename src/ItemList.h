@@ -88,7 +88,8 @@ class ItemList : public MenuItem {
     void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
-        snprintf(buf, maxCols, "%s:%s", text, getValue());
+        concat(text, ':', buf);
+        concat(buf, getValue(), buf);
         renderer->drawItem(itemIndex, screenRow, buf);
     }
 

@@ -137,7 +137,8 @@ class ItemInput : public MenuItem {
 
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
-        snprintf(buf, maxCols, "%s:%s", text, vbuf);
+        concat(text, ':', buf);
+        concat(buf, vbuf, buf);
         renderer->drawItem(itemIndex, screenRow, buf);
 
         delete[] vbuf;  // Free allocated memory
