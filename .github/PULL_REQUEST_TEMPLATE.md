@@ -27,6 +27,7 @@
 - [ ] I have checked that this PR does not introduce any breaking changes unless explicitly stated.
 - [ ] I have checked that changes generate no new warnings.
 - [ ] I have performed a self-review of my own code
+- [ ] I have built and tested **ALL** the examples to ensure that I haven't broken anything.
 
 #### Bug Fix
 
