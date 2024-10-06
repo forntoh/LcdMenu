@@ -26,7 +26,7 @@ class ItemIntRange : public ItemRangeBase<int> {
         if (unit == NULL) {
             return buffer;
         }
-        concat(buffer, unit, buffer);
+        snprintf(buffer, 10, "%s%s", buffer, unit);
         return buffer;
     }
 };
