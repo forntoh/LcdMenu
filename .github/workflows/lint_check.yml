@@ -3,9 +3,9 @@ name: Lint
 on:
   pull_request_target:
     paths:
-      - 'src/**'
-      - 'examples/**'
-      - '.github/workflows/lint_check.yml'
+      - "src/**"
+      - "examples/**"
+      - ".github/workflows/lint_check.yml"
 
 permissions:
   checks: write
@@ -24,6 +24,9 @@ jobs:
 
       - name: Install ClangFormat
         run: sudo apt-get install -y clang-format
+
+      - name: Remove worktree
+        run: git worktree remove /home/runner/work/LcdMenu/LcdMenu
 
       - name: Run linters
         uses: wearerequired/lint-action@v2
