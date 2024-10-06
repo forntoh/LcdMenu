@@ -78,20 +78,6 @@ class ItemInput : public MenuItem {
         return renderer->getMaxCols() - (strlen(text) + 2) - 1;
     };
 
-    uint8_t constrainBlinkerPosition(MenuRenderer* renderer, uint8_t blinkerPosition) {
-        uint8_t maxCols = renderer->getMaxCols();
-        //
-        // calculate lower and upper bound
-        //
-        uint8_t lb = strlen(text) + 2;
-        uint8_t ub = lb + strlen(value);
-        ub = constrain(ub, lb, maxCols - 2);
-        //
-        // set cursor position
-        //
-        return constrain(blinkerPosition, lb, ub);
-    }
-
   public:
     /**
      * Construct a new ItemInput object with an initial value.
@@ -144,12 +130,17 @@ class ItemInput : public MenuItem {
 
   protected:
     void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
-        static char* vbuf = new char[20];
-        substring(value, view, getViewSize(renderer), vbuf);
-        static char* buf = new char[20];
-        concat(text, ':', buf);
-        concat(buf, vbuf, buf);
+        uint8_t viewSize = getViewSize(renderer);
+        char* vbuf = new char[viewSize + 1];
+        substring(value, view, viewSize, vbuf);
+        vbuf[viewSize] = '\0';
+
+        uint8_t maxCols = renderer->getMaxCols();
+        char buf[maxCols];
+        snprintf(buf, maxCols, "%s:%s", text, vbuf);
         renderer->drawItem(itemIndex, screenRow, buf);
+
+        delete[] vbuf; // Free allocated memory
     }
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
@@ -206,7 +197,7 @@ class ItemInput : public MenuItem {
         // Redraw
         renderer->setEditMode(true);
         MenuItem::draw(renderer);
-        renderer->moveCursor(constrainBlinkerPosition(renderer, strlen(text) + 2 + cursor - view), renderer->getCursorRow());
+        renderer->moveCursor(renderer->getCursorCol(), renderer->getActiveRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::enterEditMode"), value);
@@ -233,7 +224,7 @@ class ItemInput : public MenuItem {
             view--;
             MenuItem::draw(renderer);
         }
-        renderer->moveCursor(constrainBlinkerPosition(renderer, renderer->getCursorCol() - 1), renderer->getCursorRow());
+        renderer->moveCursor(renderer->getCursorCol() - 1, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::left"), value);
@@ -251,7 +242,7 @@ class ItemInput : public MenuItem {
             view++;
             MenuItem::draw(renderer);
         }
-        renderer->moveCursor(constrainBlinkerPosition(renderer, renderer->getCursorCol() + 1), renderer->getCursorRow());
+        renderer->moveCursor(renderer->getCursorCol() + 1, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::right"), value);
@@ -268,8 +259,9 @@ class ItemInput : public MenuItem {
         if (cursor < view) {
             view--;
         }
+        uint8_t cursorCol = renderer->getCursorCol();
         MenuItem::draw(renderer);
-        renderer->moveCursor(constrainBlinkerPosition(renderer, renderer->getCursorCol() - 1), renderer->getCursorRow());
+        renderer->moveCursor(cursorCol - 1, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::backspace"), value);
@@ -307,7 +299,6 @@ class ItemInput : public MenuItem {
             view++;
         }
         MenuItem::draw(renderer);
-        renderer->moveCursor(constrainBlinkerPosition(renderer, renderer->getCursorCol() + 1), renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::typeChar"), character);
@@ -318,7 +309,6 @@ class ItemInput : public MenuItem {
     void clear(MenuRenderer* renderer) {
         value = (char*)"";
         MenuItem::draw(renderer);
-        renderer->moveCursor(constrainBlinkerPosition(renderer, strlen(text) + 2), renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::clear"), value);
