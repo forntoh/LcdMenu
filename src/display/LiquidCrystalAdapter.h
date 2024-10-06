@@ -5,7 +5,7 @@
 #include <utils/constants.h>
 #include <utils/utils.h>
 
-#include "DisplayInterface.h"
+#include "CharacterDisplayInterface.h"
 
 /**
  * @class LiquidCrystalAdapter
@@ -22,7 +22,7 @@
  * @param maxCols The maximum number of columns on the display.
  * @param maxRows The maximum number of rows on the display.
  */
-class LiquidCrystalAdapter : public DisplayInterface {
+class LiquidCrystalAdapter : public CharacterDisplayInterface {
   private:
     LiquidCrystal* lcd;
     uint8_t maxCols;
@@ -32,7 +32,7 @@ class LiquidCrystalAdapter : public DisplayInterface {
     LiquidCrystalAdapter(
         LiquidCrystal* lcd,
         uint8_t maxCols,
-        uint8_t maxRows) : DisplayInterface(), lcd(lcd), maxCols(maxCols), maxRows(maxRows) {}
+        uint8_t maxRows) : CharacterDisplayInterface(), lcd(lcd), maxCols(maxCols), maxRows(maxRows) {}
 
     void begin() override {
         lcd->begin(maxCols, maxRows);
