@@ -16,8 +16,8 @@ void CharacterDisplayRenderer::begin() {
     static_cast<CharacterDisplayInterface*>(display)->createChar(2, downArrow);
 }
 
-void CharacterDisplayRenderer::drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) {
-    MenuRenderer::drawItem(itemIndex, screenRow, text);
+void CharacterDisplayRenderer::drawItem(uint8_t screenRow, const char* text) {
+    MenuRenderer::drawItem(screenRow, text);
     char buf[maxCols + 1];
 
     appendCursorToText(screenRow, text, buf);
@@ -25,7 +25,7 @@ void CharacterDisplayRenderer::drawItem(uint8_t itemIndex, uint8_t screenRow, co
     uint8_t cursorCol = strlen(buf);
 
     padText(buf, maxCols, buf);
-    appendIndicatorToText(itemIndex, screenRow, buf, buf);
+    appendIndicatorToText(screenRow, buf, buf);
 
     display->setCursor(0, screenRow);
     display->draw(buf);
@@ -65,11 +65,11 @@ void CharacterDisplayRenderer::appendCursorToText(uint8_t screenRow, const char*
     }
 }
 
-void CharacterDisplayRenderer::appendIndicatorToText(uint8_t itemIndex, uint8_t screenRow, const char* text, char* buf) {
+void CharacterDisplayRenderer::appendIndicatorToText(uint8_t screenRow, const char* text, char* buf) {
     uint8_t indicator = 0;
-    if (screenRow == 0 && itemIndex > 0) {
+    if (upScroll) {
         indicator = 1;
-    } else if (screenRow == maxRows - 1 && itemIndex < itemCount - 1) {
+    } else if (downScroll) {
         indicator = 2;
     }
 
@@ -94,4 +94,20 @@ void CharacterDisplayRenderer::padText(const char* text, uint8_t itemIndex, char
 
 uint8_t CharacterDisplayRenderer::calculateAvailableLength() {
     return maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0);
+}
+
+void CharacterDisplayRenderer::markUpScroll() {
+    upScroll = true;
+}
+
+void CharacterDisplayRenderer::clearUpScroll() {
+    upScroll = false;
+}
+
+void CharacterDisplayRenderer::markDownScroll() {
+    downScroll = true;
+}
+
+void CharacterDisplayRenderer::clearDownScroll() {
+    downScroll = false;
 }

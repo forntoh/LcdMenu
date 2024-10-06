@@ -106,6 +106,10 @@ class MenuScreen {
      */
     void draw(MenuRenderer* renderer);
     /**
+     * @brief Mark scroll indicators.
+     */
+    void markScroll(uint8_t i, MenuRenderer* renderer);
+    /**
      * @brief Process the command.
      * @return `true` if the command was processed, `false` otherwise.
      */

@@ -85,12 +85,12 @@ class ItemList : public MenuItem {
     }
 
   protected:
-    void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
+    void draw(MenuRenderer* renderer, uint8_t screenRow) override {
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
         concat(text, ':', buf);
         concat(buf, getValue(), buf);
-        renderer->drawItem(itemIndex, screenRow, buf);
+        renderer->drawItem(screenRow, buf);
     }
 
     bool process(LcdMenu* menu, const unsigned char command) override {

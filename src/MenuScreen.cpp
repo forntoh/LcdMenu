@@ -39,13 +39,27 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         if (item == nullptr) {
             break;
         }
-        item->draw(renderer, view + i, i);
+        markScroll(i, renderer);
+        item->draw(renderer, i);
+    }
+}
+
+void MenuScreen::markScroll(uint8_t i, MenuRenderer* renderer) {
+    if (i == 0 && view > 0) {
+        renderer->markUpScroll();
+    } else {
+        renderer->clearUpScroll();
+    }
+    if (i == renderer->maxRows - 1 && (view + renderer->maxRows) < itemCount) {
+        renderer->markDownScroll();
+    } else {
+        renderer->clearDownScroll();
     }
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     MenuRenderer* renderer = menu->getRenderer();
-    renderer->itemIndex = cursor;
+    markScroll(cursor - view, renderer);
     if (items[cursor]->process(menu, command)) {
         return true;
     }

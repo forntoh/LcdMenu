@@ -82,12 +82,12 @@ class ItemToggle : public MenuItem {
 
     const char* getTextOff() { return this->textOff; }
 
-    void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
+    void draw(MenuRenderer* renderer, uint8_t screenRow) override {
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
         concat(text, ':', buf);
         concat(buf, enabled ? textOn : textOff, buf);
-        renderer->drawItem(itemIndex, screenRow, buf);
+        renderer->drawItem(screenRow, buf);
     };
 
   protected:

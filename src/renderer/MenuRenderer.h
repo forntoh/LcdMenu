@@ -27,7 +27,6 @@ class MenuRenderer {
 
     uint8_t blinkerPosition;
 
-    uint8_t itemIndex;
     uint8_t itemCount;
 
     bool inEditMode;
@@ -65,7 +64,12 @@ class MenuRenderer {
      * @param screenRow Row on the screen where the item should be drawn.
      * @param text Text of the item to be drawn.
      */
-    virtual void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text);
+    virtual void drawItem(uint8_t screenRow, const char* text);
+
+    virtual void markUpScroll() = 0;
+    virtual void clearUpScroll() = 0;
+    virtual void markDownScroll() = 0;
+    virtual void clearDownScroll() = 0;
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -135,12 +139,6 @@ class MenuRenderer {
      * @return Maximum number of columns.
      */
     uint8_t getMaxCols() const;
-
-    /**
-     * @brief Gets the index of the current item.
-     * @return Index of the current item.
-     */
-    uint8_t getItemIndex() const;
 
     /**
      * @brief Get the active row.
