@@ -151,16 +151,24 @@ class ItemInputCharset : public ItemInput {
         } else {
             charsetPosition++;
         }
-        renderer->moveCursor(0, renderer->getCursorRow());
-        renderer->draw(charset[charsetPosition]);
-        renderer->moveCursor(0, renderer->getCursorRow());
+        drawChar(renderer);
     }
     /**
      * @brief Show previous char from charset.
      */
     void showPreviousChar(MenuRenderer* renderer) {
-        charsetPosition = max(charsetPosition - 1, 0);
+        if (charsetPosition == 0) {
+            charsetPosition = strlen(charset) - 1;
+        } else {
+            charsetPosition--;
+        }
+        drawChar(renderer);
+    }
+
+    void drawChar(MenuRenderer* renderer) {
+        renderer->moveCursor(renderer->getCursorCol(), renderer->getActiveRow());
         renderer->draw(charset[charsetPosition]);
+        renderer->moveCursor(renderer->getCursorCol(), renderer->getActiveRow());
     }
 };
 
