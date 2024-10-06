@@ -50,19 +50,16 @@ void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) 
 }
 
 void CharacterDisplayRenderer::appendCursorToText(uint8_t screenRow, const char* text, char* buf) {
-    uint8_t cursor;
-    if (activeRow == screenRow) {
-        cursor = inEditMode ? editCursorIcon : cursorIcon;
-    } else {
-        cursor = (cursorIcon != 0 || editCursorIcon != 0) ? ' ' : 0;
+    if (cursorIcon == 0 && editCursorIcon == 0) {
+        strncpy(buf, text, maxCols);
+        buf[maxCols] = '\0';
+        return;
     }
 
-    if (cursor != 0) {
-        buf[0] = cursor;
-        strcpy(buf + 1, text);
-    } else {
-        strcpy(buf, text);
-    }
+    uint8_t cursor = (activeRow == screenRow) ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
+    buf[0] = cursor;
+    strncpy(buf + 1, text, maxCols - 1);
+    buf[maxCols] = '\0';
 }
 
 void CharacterDisplayRenderer::appendIndicatorToText(uint8_t screenRow, const char* text, char* buf) {
