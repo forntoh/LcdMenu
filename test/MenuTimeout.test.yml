@@ -3,9 +3,9 @@ version: 1
 author: Thomas Forntoh
 steps:
   - wait-serial: "#LOG# LcdMenu::setScreen"
-  - wait-serial: "#LOG# LiquidCrystal_I2CAdapter::timeout"
+  - wait-serial: "#LOG# MenuRenderer::timeout"
   - simulate: downButton-press
   - wait-serial: "#LOG# MenuScreen:down=1"
   - simulate: downButton-press
   - wait-serial: "#LOG# MenuScreen:down=2"
-  - wait-serial: "#LOG# LiquidCrystal_I2CAdapter::timeout"
+  - wait-serial: "#LOG# MenuRenderer::timeout"
