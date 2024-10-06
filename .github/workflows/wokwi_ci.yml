@@ -20,14 +20,10 @@ jobs:
   provide-examples:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout target branch
+      - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Fetch PR branch
-        run: git fetch origin +refs/pull/${{ github.event.number }}/merge
-
-      - name: Checkout PR branch
-        run: git checkout -qf FETCH_HEAD
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - id: set-matrix
         run: |
