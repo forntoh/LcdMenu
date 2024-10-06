@@ -14,12 +14,16 @@
  * handling edit mode.
  */
 class MenuRenderer {
+    friend class MenuScreen;
+
   protected:
     const uint8_t maxCols;
     const uint8_t maxRows;
 
     uint8_t cursorCol;
     uint8_t cursorRow;
+
+    uint8_t activeRow;
 
     uint8_t blinkerPosition;
 
@@ -71,11 +75,6 @@ class MenuRenderer {
     }
 
     /**
-     * @brief Function to draw the cursor on the display.
-     */
-    virtual void drawCursor() = 0;
-
-    /**
      * @brief Function to clear the blinker from the display.
      */
     virtual void clearBlinker() = 0;
@@ -96,17 +95,6 @@ class MenuRenderer {
     }
 
     /**
-     * @brief Pure virtual function to clear the cursor from the display.
-     */
-    virtual void clearCursor() = 0;
-
-    /**
-     * @brief Sets the total number of items in the menu.
-     * @param itemCount Total number of items.
-     */
-    void setItemCount(uint8_t itemCount) { this->itemCount = itemCount; }
-
-    /**
      * @brief Sets the edit mode for the menu.
      * @param inEditMode Flag indicating whether to enter or exit edit mode.
      */
@@ -114,8 +102,6 @@ class MenuRenderer {
         if (this->inEditMode != inEditMode) {
             this->inEditMode = inEditMode;
             moveCursor(0, cursorRow);
-            clearCursor();
-            drawCursor();
         }
     }
 
@@ -173,6 +159,8 @@ class MenuRenderer {
      * @return Index of the current item.
      */
     uint8_t getItemIndex() const { return itemIndex; }
+
+    uint8_t getActiveRow() const { return activeRow; }
 };
 
 #endif  // MENU_RENDERER_H

@@ -26,6 +26,53 @@ class CharacterDisplayRenderer : public MenuRenderer {
     uint8_t cursorIcon;
     uint8_t editCursorIcon;
 
+    void appendCursorToText(uint8_t screenRow, const char* text, char* buf) {
+        uint8_t cursor;
+        if (activeRow == screenRow) {
+            cursor = inEditMode ? editCursorIcon : cursorIcon;
+        } else {
+            cursor = (cursorIcon != 0 || editCursorIcon != 0) ? ' ' : 0;
+        }
+
+        if (cursor != 0) {
+            buf[0] = cursor;
+            strcpy(buf + 1, text);
+        } else {
+            strcpy(buf, text);
+        }
+    }
+
+    void appendIndicatorToText(uint8_t itemIndex, uint8_t screenRow, const char* text, char* buf) {
+        uint8_t indicator = 0;
+        if (screenRow == 0 && itemIndex > 0) {
+            indicator = 1;
+        } else if (screenRow == maxRows - 1 && itemIndex < itemCount - 1) {
+            indicator = 2;
+        }
+
+        if (indicator != 0) {
+            concat(text, indicator, buf);
+        } else {
+            strcpy(buf, text);
+            if (upArrow != NULL || downArrow != NULL) {
+                strcat(buf, " ");
+            }
+        }
+    }
+
+    void padText(const char* text, uint8_t itemIndex, char* buf) {
+        uint8_t textLength = strlen(text);
+        uint8_t spaces = (textLength > calculateAvailableLength()) ? 0 : calculateAvailableLength() - textLength;
+        spaces = constrain(spaces, 0, maxCols);
+        strcpy(buf, text);
+        memset(buf + textLength, ' ', spaces);
+        buf[textLength + spaces] = '\0';
+    }
+
+    uint8_t calculateAvailableLength() {
+        return maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0);
+    }
+
   public:
     /**
      * @brief Constructor for CharacterDisplayRenderer.
@@ -55,8 +102,8 @@ class CharacterDisplayRenderer : public MenuRenderer {
      */
     void begin() override {
         MenuRenderer::begin();
-        static_cast<CharacterDisplayInterface*>(display)->createChar(0, upArrow);
-        static_cast<CharacterDisplayInterface*>(display)->createChar(1, downArrow);
+        static_cast<CharacterDisplayInterface*>(display)->createChar(1, upArrow);
+        static_cast<CharacterDisplayInterface*>(display)->createChar(2, downArrow);
     }
 
     /**
@@ -67,27 +114,26 @@ class CharacterDisplayRenderer : public MenuRenderer {
      */
     void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) override {
         MenuRenderer::drawItem(itemIndex, screenRow, text);
+        // Create a buffer to hold the final text
+        char buf[maxCols + 1];
+
+        // Append cursor to text
+        appendCursorToText(screenRow, text, buf);
+
         // Truncate text if it's too long
-        static char* buf = new char[maxCols];
-        substring(text, 0, maxCols - (cursorIcon != 0 ? 2 : 1), buf);
-        display->setCursor(cursorIcon != 0 ? 1 : 0, cursorRow);
+        buf[calculateAvailableLength()] = '\0';
+        uint8_t cursorCol = strlen(buf);
+
+        // Pad text with spaces
+        padText(buf, maxCols, buf);
+
+        // Append indicator to text
+        appendIndicatorToText(itemIndex, screenRow, buf, buf);
+
+        // Draw text on display
+        display->setCursor(0, screenRow);
         display->draw(buf);
-
-        uint8_t spaces = constrain(maxCols - (cursorIcon != 0 ? 2 : 1) - strlen(text), 0, maxCols);
-        for (uint8_t i = 0; i < spaces; i++) {
-            display->draw(" ");
-        }
-        if (itemIndex == 0) {
-            clearUpIndicator();
-        } else if (itemIndex == itemCount - 1) {
-            clearDownIndicator();
-        }
-
-        if (screenRow == 0 && itemIndex > 0) {
-            drawUpIndicator();
-        } else if (screenRow == maxRows - 1 && itemIndex < itemCount - 1) {
-            drawDownIndicator();
-        }
+        moveCursor(cursorCol, screenRow);
     }
 
     /**
@@ -96,16 +142,6 @@ class CharacterDisplayRenderer : public MenuRenderer {
      */
     void draw(uint8_t byte) override {
         display->draw(byte);
-    }
-
-    /**
-     * @brief Draws the cursor on the display.
-     */
-    void drawCursor() override {
-        if (cursorIcon != 0) {
-            display->setCursor(cursorCol, cursorRow);
-            display->draw(inEditMode ? editCursorIcon : cursorIcon);
-        }
     }
 
     /**
@@ -130,55 +166,5 @@ class CharacterDisplayRenderer : public MenuRenderer {
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override {
         MenuRenderer::moveCursor(cursorCol, cursorRow);
         display->setCursor(cursorCol, cursorRow);
-    }
-
-    /**
-     * @brief Clears the cursor from the display.
-     */
-    void clearCursor() override {
-        if (cursorIcon != 0) {
-            display->setCursor(cursorCol, cursorRow);
-            display->draw(" ");
-        }
-    }
-
-    /**
-     * @brief Draws the up arrow indicator on the display.
-     */
-    void drawUpIndicator() {
-        if (upArrow != NULL) {
-            display->setCursor(maxCols - 1, 0);
-            display->draw(byte(0));
-        }
-    }
-
-    /**
-     * @brief Clears the up arrow indicator from the display.
-     */
-    void clearUpIndicator() {
-        if (upArrow != NULL) {
-            display->setCursor(maxCols - 1, 0);
-            display->draw(" ");
-        }
-    }
-
-    /**
-     * @brief Draws the down arrow indicator on the display.
-     */
-    void drawDownIndicator() {
-        if (downArrow != NULL) {
-            display->setCursor(maxCols - 1, maxRows - 1);
-            display->draw(byte((1)));
-        }
-    }
-
-    /**
-     * @brief Clears the down arrow indicator from the display.
-     */
-    void clearDownIndicator() {
-        if (downArrow != NULL) {
-            display->setCursor(maxCols - 1, maxRows - 1);
-            display->draw(" ");
-        }
     }
 };
