@@ -6,20 +6,20 @@ steps:
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemInput::enterEditMode=0123456"
   - simulate: upButton-press
-  - wait-serial: "#LOG# ItemInputCharset::up=0"
+  - wait-serial: "#LOG# ItemInputCharset::up=6"
   - simulate: upButton-press
-  - wait-serial: "#LOG# ItemInputCharset::up=0"
+  - wait-serial: "#LOG# ItemInputCharset::up=5"
   - simulate: downButton-press
-  - wait-serial: "#LOG# ItemInputCharset::down=1"
+  - wait-serial: "#LOG# ItemInputCharset::down=6"
   - simulate: downButton-press
-  - wait-serial: "#LOG# ItemInputCharset::down=2"
+  - wait-serial: "#LOG# ItemInputCharset::down=0"
   - simulate: enterButton-press
-  - wait-serial: "#LOG# ItemInputCharset::commitCharEdit=2"
-  - wait-serial: "#LOG# ItemInput::right=01234562"
+  - wait-serial: "#LOG# ItemInputCharset::commitCharEdit=0"
+  - wait-serial: "#LOG# ItemInput::right=01234560"
   - simulate: leftButton-press
-  - wait-serial: "#LOG# ItemInput::left=01234562"
+  - wait-serial: "#LOG# ItemInput::left=01234560"
   - simulate: leftButton-press
-  - wait-serial: "#LOG# ItemInput::left=01234562"
+  - wait-serial: "#LOG# ItemInput::left=01234560"
   - simulate: downButton-press
   - wait-serial: "#LOG# ItemInputCharset::down=7"
   - simulate: upButton-press
@@ -28,17 +28,17 @@ steps:
   - wait-serial: "#LOG# ItemInputCharset::up=5"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemInputCharset::commitCharEdit=5"
-  - wait-serial: "#LOG# ItemInput::right=01234552"
+  - wait-serial: "#LOG# ItemInput::right=01234550"
   - simulate: upButton-press
-  - wait-serial: "#LOG# ItemInputCharset::up=1"
+  - wait-serial: "#LOG# ItemInputCharset::up=9"
   - simulate: leftButton-press
   - wait-serial: "#LOG# ItemInputCharset::abortCharEdit"
-  - wait-serial: "#LOG# ItemInput::left=01234552"
+  - wait-serial: "#LOG# ItemInput::left=01234550"
   - simulate: backspaceButton-press
-  - wait-serial: "#LOG# ItemInput::backspace=0123452"
+  - wait-serial: "#LOG# ItemInput::backspace=0123450"
   - simulate: leftButton-press
-  - wait-serial: "#LOG# ItemInput::left=0123452"
+  - wait-serial: "#LOG# ItemInput::left=0123450"
   - simulate: backspaceButton-press
-  - wait-serial: "#LOG# ItemInput::backspace=012452"
+  - wait-serial: "#LOG# ItemInput::backspace=012450"
   - simulate: backButton-press
-  - wait-serial: "#LOG# ItemInput::exitEditMode=012452"
+  - wait-serial: "#LOG# ItemInput::exitEditMode=012450"
