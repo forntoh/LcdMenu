@@ -109,11 +109,8 @@ class ItemRangeBase : public MenuItem {
   protected:
     void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
         uint8_t maxCols = renderer->getMaxCols();
-        static char* vbuf = new char[maxCols];
-        substring(getDisplayValue(), 0, maxCols - strlen(text) - 2, vbuf);
-        static char* buf = new char[maxCols];
-        concat(text, ':', buf);
-        concat(buf, vbuf, buf);
+        char buf[maxCols];
+        snprintf(buf, maxCols, "%s:%s", text, getDisplayValue());
         renderer->drawItem(itemIndex, screenRow, buf);
     }
 
@@ -123,6 +120,7 @@ class ItemRangeBase : public MenuItem {
             switch (command) {
                 case BACK:
                     renderer->setEditMode(false);
+                    MenuItem::draw(renderer);
                     if (callback != NULL && !commitOnChange) {
                         callback(currentValue);
                     }
@@ -151,6 +149,7 @@ class ItemRangeBase : public MenuItem {
             switch (command) {
                 case ENTER:
                     renderer->setEditMode(true);
+                    MenuItem::draw(renderer);
                     printLog(F("ItemRangeBase::enterEditMode"), currentValue);
                     return true;
                 default:
