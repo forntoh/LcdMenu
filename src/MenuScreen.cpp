@@ -44,6 +44,7 @@ void MenuScreen::draw(MenuRenderer* renderer) {
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     MenuRenderer* renderer = menu->getRenderer();
+    renderer->itemIndex = cursor;
     if (items[cursor]->process(menu, command)) {
         return true;
     }
