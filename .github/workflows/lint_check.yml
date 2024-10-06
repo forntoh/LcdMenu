@@ -19,8 +19,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - name: Install ClangFormat
         run: sudo apt-get install -y clang-format
@@ -30,6 +28,6 @@ jobs:
         with:
           clang_format: true
           clang_format_extensions: "c,cc,cpp,h,hpp,m,mm,ino"
-          auto_fix: false
-          commit: false
+          auto_fix: true
+          commit: true
           git_email: "thomasforntoh@gmail.com"
