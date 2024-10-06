@@ -97,10 +97,6 @@ class MenuScreen {
 
   protected:
     /**
-     * @brief Get the number of items in the menu.
-     */
-    uint8_t itemsCount();
-    /**
      * @brief Move cursor to specified position.
      */
     void setCursor(MenuRenderer* renderer, uint8_t position);

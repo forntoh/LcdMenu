@@ -16,20 +16,12 @@ MenuItem* MenuScreen::operator[](const uint8_t position) {
     return getItemAt(position);
 }
 
-uint8_t MenuScreen::itemsCount() {
-    uint8_t i = 0;
-    while (items[i] != nullptr) {
-        i++;
-    }
-    return i;
-}
-
 void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
-    uint8_t constrained = constrain(position, 0, itemsCount() - 1);
+    uint8_t constrained = constrain(position, 0, itemCount - 1);
     if (constrained == cursor) {
         return;
     }
-    uint8_t viewSize = renderer->getMaxRows();
+    uint8_t viewSize = renderer->maxRows;
     if (constrained < view) {
         view = constrained;
     } else if (constrained > (view + (viewSize - 1))) {
@@ -40,17 +32,14 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
 }
 
 void MenuScreen::draw(MenuRenderer* renderer) {
-    renderer->setItemCount(itemCount);
-
-    renderCursor(renderer);
-    for (uint8_t i = 0; i < renderer->getMaxRows(); i++) {
+    renderer->itemCount = itemCount;
+    for (uint8_t i = 0; i < renderer->maxRows; i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
             break;
         }
         item->draw(renderer, view + i, i);
     }
-    renderCursor(renderer);
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
@@ -92,12 +81,12 @@ void MenuScreen::up(MenuRenderer* renderer) {
 }
 
 void MenuScreen::down(MenuRenderer* renderer) {
-    if (cursor == itemsCount() - 1) {
+    if (cursor == itemCount - 1) {
         printLog(F("MenuScreen:down"), cursor);
         return;
     }
     cursor++;
-    if (cursor > view + renderer->getMaxRows() - 1) {
+    if (cursor > view + renderer->maxRows - 1) {
         view++;
         draw(renderer);
     } else {
@@ -107,10 +96,9 @@ void MenuScreen::down(MenuRenderer* renderer) {
 }
 
 void MenuScreen::renderCursor(MenuRenderer* renderer) {
-    if (renderer->getCursorRow() != cursor - view) {
-        renderer->clearCursor();
-        renderer->moveCursor(0, cursor - view);
-        renderer->drawCursor();
+    if (renderer->activeRow != cursor - view) {
+        renderer->activeRow = cursor - view;
+        draw(renderer);
     }
 }
 
