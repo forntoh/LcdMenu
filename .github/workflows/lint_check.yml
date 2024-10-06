@@ -16,6 +16,12 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
 
+      - name: Fetch PR branch
+        run: git fetch origin +refs/pull/${{ github.event.number }}/merge
+
+      - name: Checkout PR branch
+        run: git checkout -qf FETCH_HEAD
+
       - name: Install ClangFormat
         run: sudo apt-get install -y clang-format
 
