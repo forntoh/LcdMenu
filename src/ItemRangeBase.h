@@ -8,7 +8,7 @@
 template <typename T>
 /**
  * @brief Item that allows user to select a value from a range.
- *        It can be used to renderer all sorts of values that can be incremented or decremented.
+ *        It can be used to display all sorts of values that can be incremented or decremented.
  *        You can additionally pass a unit to be displayed after the value. e.g. "%", "°C", "°F" etc.
  *
  * ```

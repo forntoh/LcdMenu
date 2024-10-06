@@ -82,7 +82,7 @@ class ItemInput : public MenuItem {
     /**
      * Construct a new ItemInput object with an initial value.
      *
-     * @param text The text to renderer for the item.
+     * @param text The text to display for the item.
      * @param value The initial value for the input.
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
@@ -92,7 +92,7 @@ class ItemInput : public MenuItem {
     /**
      * Construct a new ItemInput object with no initial value.
      *
-     * @param text The text to renderer for the item.
+     * @param text The text to display for the item.
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
      */

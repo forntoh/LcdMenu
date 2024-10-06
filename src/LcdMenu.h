@@ -37,7 +37,7 @@
  *
  * The LcdMenu class is the main object that manages the menu system. It is
  * responsible for displaying the menu on the screen, processing user input,
- * and updating the renderer based on the user's actions.
+ * and updating the display based on the user's actions.
  */
 class LcdMenu {
   private:
@@ -52,7 +52,7 @@ class LcdMenu {
     /**
      * @brief Enabled flag of menu.
      * Determines whether the screen should be updated after an action. Set it
-     * to `false` when you want to render any other content on the screen then
+     * to `false` when you want to display any other content on the screen then
      * set it back to `true` to show the menu.
      */
     bool enabled = true;
@@ -76,7 +76,7 @@ class LcdMenu {
      * @brief Set new screen to display.
      * The only place that clears whole screen.
      * Then it Will `draw` of new screen screen using the renderer.
-     * @param screen the new screen to renderer
+     * @param screen the new screen to display
      */
     void setScreen(MenuScreen* screen);
     /**

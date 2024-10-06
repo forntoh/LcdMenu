@@ -24,7 +24,7 @@ class ItemList : public MenuItem {
      * @brief Constructs a new ItemList object.
      *
      * @param key The key of the menu item.
-     * @param items The array of items to renderer.
+     * @param items The array of items to display.
      * @param itemCount The number of items in the array.
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
