@@ -140,14 +140,14 @@ Here is basic example of how to create a custom renderer:
 
     class MyCustomRenderer : public CharacterDisplayRenderer {
     public:
-        MyCustomRenderer(LiquidCrystalAdapter *lcd, uint8_t cols, uint8_t rows)
-            : CharacterDisplayRenderer(lcd, cols, rows) {
+        MyCustomRenderer(CharacterDisplayInterface *display, uint8_t cols, uint8_t rows)
+            : CharacterDisplayRenderer(display, cols, rows) {
         }
 
         void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) override {
             // Custom rendering code here
             // The text parameter contains the menu item text and the value of the item if present
-            // eg. "Item 1" or "Item 1: 42"
+            // eg. "Item 1" or "Item 1:42"
             // 
             // You can append a cursor character to the text if the item is selected etc.
         }
