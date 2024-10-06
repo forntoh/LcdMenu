@@ -46,16 +46,12 @@ class MenuRenderer {
      * @param maxCols Maximum number of columns in the display.
      * @param maxRows Maximum number of rows in the display.
      */
-    MenuRenderer(DisplayInterface* display, uint8_t maxCols, uint8_t maxRows)
-        : maxCols(maxCols), maxRows(maxRows), display(display) {}
+    MenuRenderer(DisplayInterface* display, uint8_t maxCols, uint8_t maxRows);
 
     /**
      * @brief Initializes the display and starts the timer.
      */
-    virtual void begin() {
-        display->begin();
-        startTime = millis();
-    }
+    virtual void begin();
 
     /**
      * @brief Function to draw a byte on the display.
@@ -69,10 +65,7 @@ class MenuRenderer {
      * @param screenRow Row on the screen where the item should be drawn.
      * @param text Text of the item to be drawn.
      */
-    virtual void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) {
-        this->cursorRow = screenRow;
-        this->itemIndex = itemIndex;
-    }
+    virtual void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text);
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -89,29 +82,18 @@ class MenuRenderer {
      * @param cursorCol Column position to move the cursor to.
      * @param cursorRow Row position to move the cursor to.
      */
-    virtual void moveCursor(uint8_t cursorCol, uint8_t cursorRow) {
-        this->cursorCol = cursorCol;
-        this->cursorRow = cursorRow;
-    }
+    virtual void moveCursor(uint8_t cursorCol, uint8_t cursorRow);
 
     /**
      * @brief Sets the edit mode for the menu.
      * @param inEditMode Flag indicating whether to enter or exit edit mode.
      */
-    void setEditMode(bool inEditMode) {
-        if (this->inEditMode != inEditMode) {
-            this->inEditMode = inEditMode;
-            moveCursor(0, cursorRow);
-        }
-    }
+    void setEditMode(bool inEditMode);
 
     /**
      * @brief Restarts the display timer and shows the display.
      */
-    virtual void restartTimer() {
-        this->startTime = millis();
-        display->show();
-    }
+    virtual void restartTimer();
 
     /**
      * @brief Updates the display timer and hides the display if the timeout is reached.
@@ -128,43 +110,43 @@ class MenuRenderer {
      * @brief Checks if the menu is in edit mode.
      * @return True if in edit mode, false otherwise.
      */
-    bool isInEditMode() const { return inEditMode; }
+    bool isInEditMode() const;
 
     /**
      * @brief Gets the current column position of the cursor.
      * @return Current column position of the cursor.
      */
-    uint8_t getCursorCol() const { return cursorCol; }
+    uint8_t getCursorCol() const;
 
     /**
      * @brief Gets the current row position of the cursor.
      * @return Current row position of the cursor.
      */
-    uint8_t getCursorRow() const { return cursorRow; }
+    uint8_t getCursorRow() const;
 
     /**
      * @brief Gets the maximum number of rows in the display.
      * @return Maximum number of rows.
      */
-    uint8_t getMaxRows() const { return maxRows; }
+    uint8_t getMaxRows() const;
 
     /**
      * @brief Gets the maximum number of columns in the display.
      * @return Maximum number of columns.
      */
-    uint8_t getMaxCols() const { return maxCols; }
+    uint8_t getMaxCols() const;
 
     /**
      * @brief Gets the index of the current item.
      * @return Index of the current item.
      */
-    uint8_t getItemIndex() const { return itemIndex; }
+    uint8_t getItemIndex() const;
 
     /**
      * @brief Get the active row.
      * @return the active row.
      */
-    uint8_t getActiveRow() const { return activeRow; }
+    uint8_t getActiveRow() const;
 };
 
 #endif  // MENU_RENDERER_H
