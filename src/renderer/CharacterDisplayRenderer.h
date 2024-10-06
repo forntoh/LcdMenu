@@ -84,7 +84,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @param maxRows The maximum number of rows on the display.
      * @param cursorIcon A byte representing the cursor icon, default is →, if 0, cursor will not be displayed
      * @param editCursorIcon A byte representing the edit cursor icon, default is ←, if 0, edit cursor will not be displayed
-     * @param upArrow A pointer to an array of bytes representing the up arrow icon, default is →, if null, up arrow will not be displayed
+     * @param upArrow A pointer to an array of bytes representing the up arrow icon, default is ↑, if null, up arrow will not be displayed
      * @param downArrow A pointer to an array of bytes representing the down arrow icon, default is ↓, if null, down arrow will not be displayed
      */
     CharacterDisplayRenderer(
