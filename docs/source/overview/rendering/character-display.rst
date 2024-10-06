@@ -75,10 +75,35 @@ The character display renderer provides a number of options for customizing the 
 
 Here is an example of how to customize the renderer:
 
+Use custom cursor characters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can set custom cursor characters to use when rendering the selected menu item.
+
+.. code-block:: cpp
+
+    CharacterDisplayRenderer renderer(
+        new LiquidCrystal_I2CAdapter(&lcd),
+        LCD_COLS,
+        LCD_ROWS,
+        0xA5,  // cursorChar
+        0x5F   // editCursorChar
+    );
+
+.. image:: images/custom-cursor.gif
+    :width: 400px
+    :alt: Custom cursor characters
+
+.. note::
+
+    Please refer to the datasheet of your display to find the character codes for the custom cursor characters.
+
+
 Hide the arrows only
 ^^^^^^^^^^^^^^^^^^^^
 
 You may want to hide the up and down arrows if you don't need them or want more space for rendering the menu items.
+Set the up and down arrow characters to ``NULL`` to hide them.
 
 .. code-block:: cpp
 
@@ -98,6 +123,8 @@ You may want to hide the up and down arrows if you don't need them or want more 
 
 Hide the cursor only
 ^^^^^^^^^^^^^^^^^^^^
+
+Set the cursor characters to ``0`` to hide the cursor.
 
 .. code-block:: cpp
 
