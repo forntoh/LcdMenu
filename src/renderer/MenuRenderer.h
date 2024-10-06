@@ -36,8 +36,6 @@ class MenuRenderer {
 
     uint8_t blinkerPosition;
 
-    uint8_t itemCount;
-
     bool inEditMode;
 
     unsigned long startTime = 0;
