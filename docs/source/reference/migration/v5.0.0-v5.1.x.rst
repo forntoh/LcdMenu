@@ -1,0 +1,50 @@
+Migration from v5.0.0 to v5.1.x
+-------------------------------
+
+This guide details the changes and how to change your code to migrate to |project| v5.1.x
+
+LcdMenu initialization changes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In v5.0.0, the menu was initialized with the display adapter interface.
+In this version, the menu is initialized with a renderer.
+
+Imports
++++++++
+
+The first change you'll need to make is to add the import for the renderer.
+Currently, the only renderer available is the :cpp:class:`CharacterDisplayRenderer`.
+
+.. code-block:: cpp
+   :emphasize-added: 1
+
+   #include <renderer/CharacterDisplayRenderer.h>
+
+Construct the renderer interface
+++++++++++++++++++++++++++++++++
+
+The renderer instance is created and passed to the menu.
+
+.. code-block:: cpp
+   :emphasize-added: 3
+
+    LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
+    LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
+    CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
+    LcdMenu menu(renderer);
+
+Setup changes
+^^^^^^^^^^^^^
+
+The setup function remains the same, but the menu is now initialized with the renderer.
+
+.. code-block:: cpp
+   :emphasize-removed: 2
+   :emphasize-added: 3
+
+    void setup() {
+        lcdAdapter.begin();
+        renderer.begin();
+    }
+
+This change allows for more flexibility in the display interface and the ability to create custom renderers.
