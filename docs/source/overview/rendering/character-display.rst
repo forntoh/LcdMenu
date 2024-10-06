@@ -132,6 +132,27 @@ Hide both the cursor and arrows
     :width: 400px
     :alt: Hide both the cursor and arrows
 
-If these options are not enough for you, you can always create your own custom renderer by subclassing the ``CharacterDisplayRenderer`` class.
+If these options are not enough for you, you can always create your own custom renderer by subclassing the :cpp:class:`CharacterDisplayRenderer` class.
+
+Here is basic example of how to create a custom renderer:
+
+.. code-block:: cpp
+
+    class MyCustomRenderer : public CharacterDisplayRenderer {
+    public:
+        MyCustomRenderer(LiquidCrystalAdapter *lcd, uint8_t cols, uint8_t rows)
+            : CharacterDisplayRenderer(lcd, cols, rows) {
+        }
+
+        void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) override {
+            // Custom rendering code here
+            // The text parameter contains the menu item text and the value of the item if present
+            // eg. "Item 1" or "Item 1: 42"
+            // 
+            // You can append a cursor character to the text if the item is selected etc.
+        }
+    };
+
+    MyCustomRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
 
 Find more information about the character display renderer in the :doc:`API reference </reference/api/renderer/CharacterDisplayRenderer>`.
