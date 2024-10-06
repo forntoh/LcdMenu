@@ -87,9 +87,8 @@ class ItemList : public MenuItem {
   protected:
     void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
         uint8_t maxCols = renderer->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(items[itemIndex].c_str(), 0, maxCols - strlen(text) - 2, buf);
-        concat(text, ':', buf);
+        char buf[maxCols];
+        snprintf(buf, maxCols, "%s:%s", text, getValue());
         renderer->drawItem(itemIndex, screenRow, buf);
     }
 
@@ -99,6 +98,7 @@ class ItemList : public MenuItem {
             switch (command) {
                 case BACK:
                     renderer->setEditMode(false);
+                    MenuItem::draw(renderer);
                     if (callback != NULL) {
                         callback(itemIndex);
                     }
@@ -117,6 +117,7 @@ class ItemList : public MenuItem {
             switch (command) {
                 case ENTER:
                     renderer->setEditMode(true);
+                    MenuItem::draw(renderer);
                     printLog(F("ItemList::enterEditMode"), getValue());
                     return true;
                 default:
