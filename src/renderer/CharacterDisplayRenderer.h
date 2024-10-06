@@ -26,6 +26,13 @@ class CharacterDisplayRenderer : public MenuRenderer {
     uint8_t cursorIcon;
     uint8_t editCursorIcon;
 
+    /**
+     * @brief Appends a cursor icon to the given text if the specified screen row is active.
+     *
+     * @param screenRow The row on the screen to check against the active row.
+     * @param text The original text to which the cursor icon will be appended.
+     * @param buf The buffer where the resulting text with the cursor icon will be stored.
+     */
     void appendCursorToText(uint8_t screenRow, const char* text, char* buf) {
         uint8_t cursor;
         if (activeRow == screenRow) {
@@ -42,6 +49,14 @@ class CharacterDisplayRenderer : public MenuRenderer {
         }
     }
 
+    /**
+     * @brief Appends an indicator to the provided text based on the item index and screen row.
+     *
+     * @param itemIndex The index of the item in the list.
+     * @param screenRow The row on the screen where the text will be displayed.
+     * @param text The original text to which the indicator may be appended.
+     * @param buf The buffer where the resulting text with the indicator will be stored.
+     */
     void appendIndicatorToText(uint8_t itemIndex, uint8_t screenRow, const char* text, char* buf) {
         uint8_t indicator = 0;
         if (screenRow == 0 && itemIndex > 0) {
@@ -60,6 +75,18 @@ class CharacterDisplayRenderer : public MenuRenderer {
         }
     }
 
+    /**
+     * @brief Pads the given text with spaces to fit within the available length.
+     *
+     * This function takes a text string and pads it with spaces so that the total
+     * length of the text fits within the available length of the display. If the
+     * text is longer than the available length, no padding is added.
+     *
+     * @param text The input text to be padded.
+     * @param itemIndex The index of the item (not used in the current implementation).
+     * @param buf The buffer where the padded text will be stored. It should be large
+     *            enough to hold the padded text.
+     */
     void padText(const char* text, uint8_t itemIndex, char* buf) {
         uint8_t textLength = strlen(text);
         uint8_t spaces = (textLength > calculateAvailableLength()) ? 0 : calculateAvailableLength() - textLength;
@@ -69,6 +96,15 @@ class CharacterDisplayRenderer : public MenuRenderer {
         buf[textLength + spaces] = '\0';
     }
 
+    /**
+     * @brief Calculates the available length for display.
+     *
+     * This function computes the number of columns available for displaying content
+     * on the character display. It takes into account the presence of up and down
+     * arrows, which occupy one column if either is present.
+     *
+     * @return The number of columns available for displaying content.
+     */
     uint8_t calculateAvailableLength() {
         return maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0);
     }
@@ -79,13 +115,16 @@ class CharacterDisplayRenderer : public MenuRenderer {
      *        Initializes the renderer with the display, maximum columns, and maximum rows.
      *        Also sets the up and down arrow icons, cursor icons, and edit cursor icons.
      *
+     * @note slots 1 and 2 are reserved for up and down arrow icons.
+     *       The available custom characters slots are 0 and 3 to 7.
+     *
      * @param display A pointer to the CharacterDisplayInterface object.
      * @param maxCols The maximum number of columns on the display.
      * @param maxRows The maximum number of rows on the display.
      * @param cursorIcon A byte representing the cursor icon, default is →, if 0, cursor will not be displayed
      * @param editCursorIcon A byte representing the edit cursor icon, default is ←, if 0, edit cursor will not be displayed
-     * @param upArrow A pointer to an array of bytes representing the up arrow icon, default is →
-     * @param downArrow A pointer to an array of bytes representing the down arrow icon, default is ↓
+     * @param upArrow A pointer to an array of bytes representing the up arrow icon, default is →, if null, up arrow will not be displayed
+     * @param downArrow A pointer to an array of bytes representing the down arrow icon, default is ↓, if null, down arrow will not be displayed
      */
     CharacterDisplayRenderer(
         CharacterDisplayInterface* display,
@@ -107,10 +146,16 @@ class CharacterDisplayRenderer : public MenuRenderer {
     }
 
     /**
-     * @brief Draws a menu item on the display.
+     * @brief Draws a menu item on the character display.
+     *
+     * This function overrides the base class implementation to draw a menu item
+     * on the character display. It handles appending a cursor to the text,
+     * truncating the text if it's too long, padding the text with spaces,
+     * appending an indicator to the text, and finally drawing the text on the display.
+     *
      * @param itemIndex The index of the item in the menu.
      * @param screenRow The row on the screen where the item should be drawn.
-     * @param text The text of the menu item.
+     * @param text The text of the menu item to be drawn.
      */
     void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) override {
         MenuRenderer::drawItem(itemIndex, screenRow, text);

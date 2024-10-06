@@ -160,6 +160,10 @@ class MenuRenderer {
      */
     uint8_t getItemIndex() const { return itemIndex; }
 
+    /**
+     * @brief Get the active row.
+     * @return the active row.
+     */
     uint8_t getActiveRow() const { return activeRow; }
 };
 
