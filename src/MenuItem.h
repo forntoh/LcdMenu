@@ -91,7 +91,7 @@ class MenuItem {
      * @param renderer The renderer to use for drawing.
      */
     const void draw(MenuRenderer* renderer) {
-        draw(renderer, renderer->getItemIndex(), renderer->getCursorRow());
+        draw(renderer, renderer->getItemIndex(), renderer->getActiveRow());
     };
     /**
      * @brief Draw this menu item on specified display on specified row.
