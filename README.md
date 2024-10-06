@@ -60,6 +60,7 @@ To create a menu system with LcdMenu, you need to define a menu structure, a dis
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
+#include <renderer/CharacterDisplayRenderer.h>
 #include <input/KeyboardAdapter.h>
 
 MENU_SCREEN(mainScreen, mainItems,
@@ -69,13 +70,14 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Item 4"));
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-LiquidCrystal_I2CAdapter lcdAdapter(&lcd, 16, 2);
-LcdMenu menu(lcdAdapter);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
+CharacterDisplayRenderer renderer(&lcdAdapter, 16, 2);
+LcdMenu menu(renderer);
 KeyboardAdapter keyboard(&menu, &Serial);
 
 void setup() {
     Serial.begin(9600);
-    lcdAdapter.begin();
+    renderer.begin();
     menu.setScreen(mainScreen);
 }
 
