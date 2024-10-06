@@ -20,7 +20,15 @@ jobs:
   provide-examples:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout target branch
+        uses: actions/checkout@v2
+
+      - name: Fetch PR branch
+        run: git fetch origin +refs/pull/${{ github.event.number }}/merge
+
+      - name: Checkout PR branch
+        run: git checkout -qf FETCH_HEAD
+
       - id: set-matrix
         run: |
           TMP="["
@@ -45,12 +53,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: Checkout target branch
+        uses: actions/checkout@v2
 
+      - name: Fetch PR branch
+        run: git fetch origin +refs/pull/${{ github.event.number }}/merge
+
+      - name: Checkout PR branch
+        run: git checkout -qf FETCH_HEAD
 
       - name: Setup cache
         uses: actions/cache@v4
