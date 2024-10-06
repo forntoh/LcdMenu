@@ -24,7 +24,7 @@ void CharacterDisplayRenderer::drawItem(uint8_t screenRow, const char* text) {
     buf[calculateAvailableLength()] = '\0';
     uint8_t cursorCol = strlen(buf);
 
-    padText(buf, maxCols, buf);
+    padText(buf, buf);
     appendIndicatorToText(screenRow, buf, buf);
 
     display->setCursor(0, screenRow);
@@ -83,7 +83,7 @@ void CharacterDisplayRenderer::appendIndicatorToText(uint8_t screenRow, const ch
     }
 }
 
-void CharacterDisplayRenderer::padText(const char* text, uint8_t itemIndex, char* buf) {
+void CharacterDisplayRenderer::padText(const char* text, char* buf) {
     uint8_t textLength = strlen(text);
     uint8_t spaces = (textLength > calculateAvailableLength()) ? 0 : calculateAvailableLength() - textLength;
     spaces = constrain(spaces, 0, maxCols);

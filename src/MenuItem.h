@@ -96,7 +96,6 @@ class MenuItem {
     /**
      * @brief Draw this menu item on specified display on specified row.
      * @param renderer The renderer to use for drawing.
-     * @param itemIndex The index of the item in the menu.
      * @param screenRow The row on the screen where the item should be drawn.
      */
     virtual void draw(MenuRenderer* renderer, uint8_t screenRow) {

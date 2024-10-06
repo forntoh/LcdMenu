@@ -52,11 +52,10 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * text is longer than the available length, no padding is added.
      *
      * @param text The input text to be padded.
-     * @param itemIndex The index of the item (not used in the current implementation).
      * @param buf The buffer where the padded text will be stored. It should be large
      *            enough to hold the padded text.
      */
-    void padText(const char* text, uint8_t itemIndex, char* buf);
+    void padText(const char* text, char* buf);
 
     /**
      * @brief Calculates the available length for display.
@@ -107,7 +106,6 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * truncating the text if it's too long, padding the text with spaces,
      * appending an indicator to the text, and finally drawing the text on the display.
      *
-     * @param itemIndex The index of the item in the menu.
      * @param screenRow The row on the screen where the item should be drawn.
      * @param text The text of the menu item to be drawn.
      */
