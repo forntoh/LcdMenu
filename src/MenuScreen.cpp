@@ -44,17 +44,9 @@ void MenuScreen::draw(MenuRenderer* renderer) {
     }
 }
 
-void MenuScreen::markScroll(uint8_t i, MenuRenderer* renderer) {
-    if (i == 0 && view > 0) {
-        renderer->flagHiddenItemsAbove();
-    } else {
-        renderer->unsetFlagHiddenItemsAbove();
-    }
-    if (i == renderer->maxRows - 1 && (view + renderer->maxRows) < itemCount) {
-        renderer->flagHiddenItemsBelow();
-    } else {
-        renderer->unsetFlagHiddenItemsBelow();
-    }
+void MenuScreen::markScroll(uint8_t index, MenuRenderer* renderer) {
+    renderer->hasHiddenItemsAbove = index == 0 && view > 0;
+    renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < itemCount;
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {

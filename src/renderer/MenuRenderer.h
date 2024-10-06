@@ -149,26 +149,6 @@ class MenuRenderer {
      * @return the active row.
      */
     uint8_t getActiveRow() const;
-
-    /**
-     * @brief Flags that there are hidden items above the current view.
-     */
-    void flagHiddenItemsAbove();
-
-    /**
-     * @brief Unsets the flag indicating hidden items above the current view.
-     */
-    void unsetFlagHiddenItemsAbove();
-
-    /**
-     * @brief Flags that there are hidden items below the current view.
-     */
-    void flagHiddenItemsBelow();
-
-    /**
-     * @brief Unsets the flag indicating hidden items below the current view.
-     */
-    void unsetFlagHiddenItemsBelow();
 };
 
 #endif  // MENU_RENDERER_H
