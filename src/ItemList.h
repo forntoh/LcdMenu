@@ -85,12 +85,12 @@ class ItemList : public MenuItem {
     }
 
   protected:
-    void draw(MenuRenderer* renderer, uint8_t screenRow) override {
+    void draw(MenuRenderer* renderer) override {
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
         concat(text, ':', buf);
         concat(buf, getValue(), buf);
-        renderer->drawItem(screenRow, buf);
+        renderer->drawItem(buf);
     }
 
     bool process(LcdMenu* menu, const unsigned char command) override {
@@ -99,7 +99,7 @@ class ItemList : public MenuItem {
             switch (command) {
                 case BACK:
                     renderer->setEditMode(false);
-                    MenuItem::draw(renderer);
+                    draw(renderer);
                     if (callback != NULL) {
                         callback(itemIndex);
                     }
@@ -118,7 +118,7 @@ class ItemList : public MenuItem {
             switch (command) {
                 case ENTER:
                     renderer->setEditMode(true);
-                    MenuItem::draw(renderer);
+                    draw(renderer);
                     printLog(F("ItemList::enterEditMode"), getValue());
                     return true;
                 default:
@@ -131,7 +131,7 @@ class ItemList : public MenuItem {
         uint8_t previousIndex = itemIndex;
         (int8_t)(itemIndex - 1) < 0 ? itemIndex = itemCount - 1 : itemIndex--;
         if (previousIndex != itemIndex) {
-            MenuItem::draw(renderer);
+            draw(renderer);
         }
         printLog(F("ItemList::selectPrevious"), getValue());
     };
@@ -140,7 +140,7 @@ class ItemList : public MenuItem {
         uint8_t previousIndex = itemIndex;
         itemIndex = constrain((itemIndex + 1) % itemCount, 0, itemCount - 1);
         if (previousIndex != itemIndex) {
-            MenuItem::draw(renderer);
+            draw(renderer);
         }
         printLog(F("ItemList::selectNext"), getValue());
     };

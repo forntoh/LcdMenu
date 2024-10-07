@@ -82,12 +82,12 @@ class ItemToggle : public MenuItem {
 
     const char* getTextOff() { return this->textOff; }
 
-    void draw(MenuRenderer* renderer, uint8_t screenRow) override {
+    void draw(MenuRenderer* renderer) override {
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
         concat(text, ':', buf);
         concat(buf, enabled ? textOn : textOff, buf);
-        renderer->drawItem(screenRow, buf);
+        renderer->drawItem(buf);
     };
 
   protected:
@@ -101,13 +101,13 @@ class ItemToggle : public MenuItem {
                 return false;
         }
     };
-    void toggle(MenuRenderer* display) {
+    void toggle(MenuRenderer* renderer) {
         enabled = !enabled;
         if (callback != NULL) {
             callback(enabled);
         }
         printLog(F("ItemToggle::toggle"), enabled ? textOn : textOff);
-        MenuItem::draw(display);
+        draw(renderer);
     }
 };
 

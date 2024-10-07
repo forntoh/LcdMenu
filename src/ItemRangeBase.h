@@ -107,12 +107,12 @@ class ItemRangeBase : public MenuItem {
     virtual char* getDisplayValue() = 0;
 
   protected:
-    void draw(MenuRenderer* renderer, uint8_t screenRow) override {
+    void draw(MenuRenderer* renderer) override {
         uint8_t maxCols = renderer->getMaxCols();
         char buf[maxCols];
         concat(text, ':', buf);
         concat(buf, getDisplayValue(), buf);
-        renderer->drawItem(screenRow, buf);
+        renderer->drawItem(buf);
     }
 
     bool process(LcdMenu* menu, const unsigned char command) override {
@@ -121,7 +121,7 @@ class ItemRangeBase : public MenuItem {
             switch (command) {
                 case BACK:
                     renderer->setEditMode(false);
-                    MenuItem::draw(renderer);
+                    draw(renderer);
                     if (callback != NULL && !commitOnChange) {
                         callback(currentValue);
                     }
@@ -129,7 +129,7 @@ class ItemRangeBase : public MenuItem {
                     return true;
                 case UP:
                     if (increment()) {
-                        MenuItem::draw(renderer);
+                        draw(renderer);
                         if (commitOnChange && callback != NULL) {
                             callback(currentValue);
                         }
@@ -137,7 +137,7 @@ class ItemRangeBase : public MenuItem {
                     return true;
                 case DOWN:
                     if (decrement()) {
-                        MenuItem::draw(renderer);
+                        draw(renderer);
                         if (commitOnChange && callback != NULL) {
                             callback(currentValue);
                         }
@@ -150,7 +150,7 @@ class ItemRangeBase : public MenuItem {
             switch (command) {
                 case ENTER:
                     renderer->setEditMode(true);
-                    MenuItem::draw(renderer);
+                    draw(renderer);
                     printLog(F("ItemRangeBase::enterEditMode"), currentValue);
                     return true;
                 default:

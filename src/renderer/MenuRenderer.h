@@ -29,10 +29,13 @@ class MenuRenderer {
      */
     bool hasHiddenItemsBelow = false;
 
+    /**
+     * @brief Flag indicating that the current item has focus.
+     */
+    bool hasFocus = false;
+
     uint8_t cursorCol;
     uint8_t cursorRow;
-
-    uint8_t activeRow;
 
     uint8_t blinkerPosition;
 
@@ -67,11 +70,9 @@ class MenuRenderer {
 
     /**
      * @brief Draws an item on the display.
-     * @param itemIndex Index of the item to be drawn.
-     * @param screenRow Row on the screen where the item should be drawn.
      * @param text Text of the item to be drawn.
      */
-    virtual void drawItem(uint8_t screenRow, const char* text);
+    virtual void drawItem(const char* text) = 0;
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -141,12 +142,6 @@ class MenuRenderer {
      * @return Maximum number of columns.
      */
     uint8_t getMaxCols() const;
-
-    /**
-     * @brief Get the active row.
-     * @return the active row.
-     */
-    uint8_t getActiveRow() const;
 };
 
 #endif  // MENU_RENDERER_H

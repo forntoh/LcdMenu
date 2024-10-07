@@ -171,7 +171,7 @@ Here is basic example of how to create a custom renderer:
             : CharacterDisplayRenderer(display, cols, rows) {
         }
 
-        void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) override {
+        void drawItem(const char* text) override {
             // Custom rendering code here
             // The text parameter contains the menu item text and the value of the item if present
             // eg. "Item 1" or "Item 1:42"
