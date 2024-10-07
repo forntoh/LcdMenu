@@ -18,8 +18,8 @@ The renderer is easy to use and provides a number of options for customizing the
 How to use the character display renderer
 -----------------------------------------
 
-To use the character display renderer, you need to create an instance of the ``CharacterDisplayRenderer`` class and pass it
-to the ``LcdMenu`` class when you create it. Here is an example:
+To use the character display renderer, you need to create an instance of the :cpp:class:`CharacterDisplayRenderer` class and pass it
+to the :cpp:class:`LcdMenu` class when you create it. Here is an example:
 
 .. tab-set::
     :sync-group: display
@@ -180,6 +180,4 @@ Here is basic example of how to create a custom renderer:
         }
     };
 
-    MyCustomRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
-
-Find more information about the character display renderer in the :doc:`API reference </reference/api/renderer/CharacterDisplayRenderer>`.
+Find more information about the character display renderer in the :cpp:class:`API reference <CharacterDisplayRenderer>`.

@@ -18,7 +18,7 @@ Here are some of the built-in controls that you can use to navigate through the 
 The other controls are used in specific scenarios, such as when you need to adjust a value in an input item or delete characters in an input field.
 The back control can be bound to a menu item, allowing you to navigate back to the previous menu screen without having to use a dedicated "Back" button.
 
-You can perform an action on the menu by calling the ``process(cmd)`` method on the menu object, where ``cmd`` is the control command you want to execute.
+You can perform an action on the menu by calling the :cpp:func:`LcdMenu::process` method on the menu object and pass the command you want to execute.
 For example, to move the selection down in the menu, you can call ``menu.process(DOWN)``.
 
 Luckily, you don't have to worry about implementing these controls yourself.

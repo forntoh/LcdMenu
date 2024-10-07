@@ -67,7 +67,7 @@ This is useful when you don't have a dedicated "Back" input button on your setup
 
 When the "Back" menu item is selected, the menu will navigate back to the previous screen.
 
-Find more information about the command menu item :doc:`here </reference/api/ItemCommand>` and the back menu item :doc:`here </reference/api/ItemBack>`.
+Find more information about the command menu item :cpp:class:`here <ItemCommand>` and the back menu item :cpp:class:`here <ItemBack>`.
 
 Toggle menu item
 ~~~~~~~~~~~~~~~~
@@ -84,7 +84,7 @@ A toggle command menu item can be created using the following syntax:
     })
 
 The toggle command menu item takes a lambda function that accepts a boolean parameter representing the current state of the item.
-There are other ways to create a toggle command menu item, check the :doc:`API reference </reference/api/ItemToggle>` for more information.
+There are other ways to create a toggle command menu item, check the :cpp:class:`API reference <ItemToggle>` for more information.
 
 Example
 +++++++

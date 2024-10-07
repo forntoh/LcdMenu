@@ -44,4 +44,4 @@ Finally, you need to observe the KeyboardAdapter object in the loop function:
 
 The ``KeyboardAdapter`` will take care of translating the keyboard inputs into menu controls, allowing you to navigate through the menu system with ease.
 
-For more information about the ``KeyboardAdapter``, check the :doc:`API reference </reference/api/input/KeyboardAdapter>`.
+For more information about the ``KeyboardAdapter``, check the :cpp:class:`API reference <KeyboardAdapter>`.

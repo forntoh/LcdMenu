@@ -19,4 +19,4 @@ This is how a basic menu item is rendered on a 16x2 LCD screen:
     :width: 400px
     :alt: Basic menu item
 
-Find more information about the basic menu item in the :doc:`API reference </reference/api/MenuItem>`.
+Find more information about the basic menu item in the :cpp:class:`API reference <MenuItem>`.

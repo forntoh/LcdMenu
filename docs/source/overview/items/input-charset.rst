@@ -35,4 +35,4 @@ The input value will be restricted to the characters specified in the charset.
 
 You can create multiple charset input items in the same menu screen, each with its own label, default value, and charset.
 
-For more information about the charset input item, check the :doc:`API reference </reference/api/ItemInputCharset>`.
+For more information about the charset input item, check the :cpp:class:`API reference <ItemInputCharset>`.
