@@ -28,7 +28,7 @@ jobs:
         with:
           script: |
             const generateReleaseNotes = require('.scripts/release_notes.js');
-            const releaseNotes = await generateReleaseNotes();
+            const releaseNotes = await generateReleaseNotes(github, context);
             return releaseNotes;
 
       - name: Comment on PR with Release Notes

@@ -1,6 +1,4 @@
-const { context, github } = require("@actions/github");
-
-async function generateReleaseNotes() {
+async function generateReleaseNotes(github, context) {
   const { owner, repo } = context.repo;
   const currentTag = process.env.CURRENT_TAG;
 
