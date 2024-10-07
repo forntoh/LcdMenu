@@ -29,7 +29,7 @@ jobs:
           script: |
             const generateReleaseNotes = require('.scripts/release_notes.js');
             const releaseNotes = await generateReleaseNotes(github, context);
-            return releaseNotes;
+            core.setOutput('release_notes', releaseNotes);
 
       - name: Comment on PR with Release Notes
         if: success()
@@ -38,7 +38,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const releaseNotes = `## Release Notes\n\n${steps.generate_release_notes.outputs.result}`;
+            const releaseNotes = `## Release Notes\n\n${{ steps.generate_release_notes.outputs.release_notes }}`;
             const prNumber = context.payload.pull_request.number;
 
             await github.rest.issues.createComment({
