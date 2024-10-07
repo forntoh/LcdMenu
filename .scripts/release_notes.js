@@ -16,28 +16,33 @@ async function generateReleaseNotes(github, context) {
   const previousTag =
     currentTagIndex < tags.length - 1 ? tags[currentTagIndex + 1].name : null;
 
+  const getCommitDate = async (github, owner, repo, sha) => {
+    const { data: commit } = await github.rest.repos.getCommit({
+      owner,
+      repo,
+      ref: sha,
+    });
+    return new Date(commit.commit.committer.date);
+  };
+
   const previousTagDate = previousTag
-    ? new Date(
-        tags.find((tag) => tag.name === previousTag)?.commit?.committer?.date ||
-          0
+    ? await getCommitDate(
+        github,
+        owner,
+        repo,
+        tags.find((tag) => tag.name === previousTag).commit.sha
       )
     : new Date(0);
-  const currentTagDate = new Date(
-    tags.find((tag) => tag.name === currentTag)?.commit?.committer?.date || 0
+
+  const currentTagDate = await getCommitDate(
+    github,
+    owner,
+    repo,
+    tags.find((tag) => tag.name === currentTag).commit.sha
   );
 
   console.log(`Previous Tag: ${previousTag} (${previousTagDate})`);
-  console.log(
-    `Previous Tag: ${JSON.stringify(
-      tags.find((tag) => tag.name === previousTag)
-    )}`
-  );
   console.log(`Current Tag: ${currentTag} (${currentTagDate})`);
-  console.log(
-    `Current Tag: ${JSON.stringify(
-      tags.find((tag) => tag.name === currentTag)
-    )}`
-  );
 
   // Fetch PRs merged between previousTag and currentTag
   const { data: pulls } = await github.rest.pulls.list({
