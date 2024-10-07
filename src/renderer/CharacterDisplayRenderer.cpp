@@ -16,16 +16,16 @@ void CharacterDisplayRenderer::begin() {
     static_cast<CharacterDisplayInterface*>(display)->createChar(2, downArrow);
 }
 
-void CharacterDisplayRenderer::drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) {
-    MenuRenderer::drawItem(itemIndex, screenRow, text);
+void CharacterDisplayRenderer::drawItem(uint8_t screenRow, const char* text) {
+    MenuRenderer::drawItem(screenRow, text);
     char buf[maxCols + 1];
 
     appendCursorToText(screenRow, text, buf);
     buf[calculateAvailableLength()] = '\0';
     uint8_t cursorCol = strlen(buf);
 
-    padText(buf, maxCols, buf);
-    appendIndicatorToText(itemIndex, screenRow, buf, buf);
+    padText(buf, buf);
+    appendIndicatorToText(screenRow, buf, buf);
 
     display->setCursor(0, screenRow);
     display->draw(buf);
@@ -50,30 +50,21 @@ void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) 
 }
 
 void CharacterDisplayRenderer::appendCursorToText(uint8_t screenRow, const char* text, char* buf) {
-    uint8_t cursor;
-    if (activeRow == screenRow) {
-        cursor = inEditMode ? editCursorIcon : cursorIcon;
-    } else {
-        cursor = (cursorIcon != 0 || editCursorIcon != 0) ? ' ' : 0;
+    if (cursorIcon == 0 && editCursorIcon == 0) {
+        strncpy(buf, text, maxCols);
+        buf[maxCols] = '\0';
+        return;
     }
 
-    if (cursor != 0) {
-        buf[0] = cursor;
-        strcpy(buf + 1, text);
-    } else {
-        strcpy(buf, text);
-    }
+    uint8_t cursor = (activeRow == screenRow) ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
+    buf[0] = cursor;
+    strncpy(buf + 1, text, maxCols - 1);
+    buf[maxCols] = '\0';
 }
 
-void CharacterDisplayRenderer::appendIndicatorToText(uint8_t itemIndex, uint8_t screenRow, const char* text, char* buf) {
-    uint8_t indicator = 0;
-    if (screenRow == 0 && itemIndex > 0) {
-        indicator = 1;
-    } else if (screenRow == maxRows - 1 && itemIndex < itemCount - 1) {
-        indicator = 2;
-    }
-
-    if (indicator != 0) {
+void CharacterDisplayRenderer::appendIndicatorToText(uint8_t screenRow, const char* text, char* buf) {
+    uint8_t indicator = (hasHiddenItemsAbove) ? 1 : ((hasHiddenItemsBelow) ? 2 : 0);
+    if (indicator != 0 && upArrow != NULL && downArrow != NULL) {
         concat(text, indicator, buf);
     } else {
         strcpy(buf, text);
@@ -83,7 +74,7 @@ void CharacterDisplayRenderer::appendIndicatorToText(uint8_t itemIndex, uint8_t 
     }
 }
 
-void CharacterDisplayRenderer::padText(const char* text, uint8_t itemIndex, char* buf) {
+void CharacterDisplayRenderer::padText(const char* text, char* buf) {
     uint8_t textLength = strlen(text);
     uint8_t spaces = (textLength > calculateAvailableLength()) ? 0 : calculateAvailableLength() - textLength;
     spaces = constrain(spaces, 0, maxCols);

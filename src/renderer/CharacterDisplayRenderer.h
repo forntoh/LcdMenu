@@ -38,12 +38,11 @@ class CharacterDisplayRenderer : public MenuRenderer {
     /**
      * @brief Appends an indicator to the provided text based on the item index and screen row.
      *
-     * @param itemIndex The index of the item in the list.
      * @param screenRow The row on the screen where the text will be displayed.
      * @param text The original text to which the indicator may be appended.
      * @param buf The buffer where the resulting text with the indicator will be stored.
      */
-    void appendIndicatorToText(uint8_t itemIndex, uint8_t screenRow, const char* text, char* buf);
+    void appendIndicatorToText(uint8_t screenRow, const char* text, char* buf);
 
     /**
      * @brief Pads the given text with spaces to fit within the available length.
@@ -53,11 +52,10 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * text is longer than the available length, no padding is added.
      *
      * @param text The input text to be padded.
-     * @param itemIndex The index of the item (not used in the current implementation).
      * @param buf The buffer where the padded text will be stored. It should be large
      *            enough to hold the padded text.
      */
-    void padText(const char* text, uint8_t itemIndex, char* buf);
+    void padText(const char* text, char* buf);
 
     /**
      * @brief Calculates the available length for display.
@@ -108,11 +106,10 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * truncating the text if it's too long, padding the text with spaces,
      * appending an indicator to the text, and finally drawing the text on the display.
      *
-     * @param itemIndex The index of the item in the menu.
      * @param screenRow The row on the screen where the item should be drawn.
      * @param text The text of the menu item to be drawn.
      */
-    void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text) override;
+    void drawItem(uint8_t screenRow, const char* text) override;
     void draw(uint8_t byte) override;
     void drawBlinker() override;
     void clearBlinker() override;

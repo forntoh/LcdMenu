@@ -91,16 +91,15 @@ class MenuItem {
      * @param renderer The renderer to use for drawing.
      */
     const void draw(MenuRenderer* renderer) {
-        draw(renderer, renderer->getItemIndex(), renderer->getActiveRow());
+        draw(renderer, renderer->getActiveRow());
     };
     /**
      * @brief Draw this menu item on specified display on specified row.
      * @param renderer The renderer to use for drawing.
-     * @param itemIndex The index of the item in the menu.
      * @param screenRow The row on the screen where the item should be drawn.
      */
-    virtual void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) {
-        renderer->drawItem(itemIndex, screenRow, text);
+    virtual void draw(MenuRenderer* renderer, uint8_t screenRow) {
+        renderer->drawItem(screenRow, text);
     };
 };
 

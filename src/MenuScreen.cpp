@@ -33,19 +33,24 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
 
 void MenuScreen::draw(MenuRenderer* renderer) {
     renderer->restartTimer();
-    renderer->itemCount = itemCount;
     for (uint8_t i = 0; i < renderer->maxRows; i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
             break;
         }
-        item->draw(renderer, view + i, i);
+        updateScrollIndicators(i, renderer);
+        item->draw(renderer, i);
     }
+}
+
+void MenuScreen::updateScrollIndicators(uint8_t index, MenuRenderer* renderer) {
+    renderer->hasHiddenItemsAbove = index == 0 && view > 0;
+    renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < itemCount;
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     MenuRenderer* renderer = menu->getRenderer();
-    renderer->itemIndex = cursor;
+    updateScrollIndicators(cursor - view, renderer);
     if (items[cursor]->process(menu, command)) {
         return true;
     }

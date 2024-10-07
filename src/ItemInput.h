@@ -129,7 +129,7 @@ class ItemInput : public MenuItem {
     fptrStr getCallbackStr() { return callback; }
 
   protected:
-    void draw(MenuRenderer* renderer, uint8_t itemIndex, uint8_t screenRow) override {
+    void draw(MenuRenderer* renderer, uint8_t screenRow) override {
         uint8_t viewSize = getViewSize(renderer);
         char* vbuf = new char[viewSize + 1];
         substring(value, view, viewSize, vbuf);
@@ -139,7 +139,7 @@ class ItemInput : public MenuItem {
         char buf[maxCols];
         concat(text, ':', buf);
         concat(buf, vbuf, buf);
-        renderer->drawItem(itemIndex, screenRow, buf);
+        renderer->drawItem(screenRow, buf);
 
         delete[] vbuf;  // Free allocated memory
     }

@@ -20,15 +20,21 @@ class MenuRenderer {
     const uint8_t maxCols;
     const uint8_t maxRows;
 
+    /**
+     * @brief Flag indicating that there are hidden items above the current view.
+     */
+    bool hasHiddenItemsAbove = false;
+    /**
+     * @brief Flag indicating that there are hidden items below the current view.
+     */
+    bool hasHiddenItemsBelow = false;
+
     uint8_t cursorCol;
     uint8_t cursorRow;
 
     uint8_t activeRow;
 
     uint8_t blinkerPosition;
-
-    uint8_t itemIndex;
-    uint8_t itemCount;
 
     bool inEditMode;
 
@@ -65,7 +71,7 @@ class MenuRenderer {
      * @param screenRow Row on the screen where the item should be drawn.
      * @param text Text of the item to be drawn.
      */
-    virtual void drawItem(uint8_t itemIndex, uint8_t screenRow, const char* text);
+    virtual void drawItem(uint8_t screenRow, const char* text);
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -135,12 +141,6 @@ class MenuRenderer {
      * @return Maximum number of columns.
      */
     uint8_t getMaxCols() const;
-
-    /**
-     * @brief Gets the index of the current item.
-     * @return Index of the current item.
-     */
-    uint8_t getItemIndex() const;
 
     /**
      * @brief Get the active row.
