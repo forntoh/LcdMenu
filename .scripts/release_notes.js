@@ -38,11 +38,13 @@ async function generateReleaseNotes(github, context) {
       const mergedAt = new Date(pr.merged_at);
       const previousTagDate = previousTag
         ? new Date(
-            tags.find((tag) => tag.name === previousTag).commit.committer.date
+            tags.find((tag) => tag.name === previousTag)?.commit?.committer
+              ?.date || 0
           )
         : new Date(0);
       const currentTagDate = new Date(
-        tags.find((tag) => tag.name === currentTag).commit.committer.date
+        tags.find((tag) => tag.name === currentTag)?.commit?.committer?.date ||
+          0
       );
       return mergedAt > previousTagDate && mergedAt <= currentTagDate;
     })
