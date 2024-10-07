@@ -42,7 +42,7 @@ jobs:
             const releaseNotes = `## Release Notes\n\n${steps.generate_release_notes.outputs.result}`;
             const prNumber = context.payload.pull_request.number;
 
-            await github.issues.createComment({
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: prNumber,

@@ -3,7 +3,7 @@ async function generateReleaseNotes(github, context) {
   const currentTag = process.env.CURRENT_TAG;
 
   // Fetch all tags
-  const { data: tags } = await github.repos.listTags({
+  const { data: tags } = await github.rest.repos.listTags({
     owner,
     repo,
     per_page: 100,
@@ -15,7 +15,7 @@ async function generateReleaseNotes(github, context) {
     currentTagIndex > 0 ? tags[currentTagIndex + 1].name : null;
 
   // Fetch PRs merged between previousTag and currentTag
-  const { data: pulls } = await github.pulls.list({
+  const { data: pulls } = await github.rest.pulls.list({
     owner,
     repo,
     state: "closed",
