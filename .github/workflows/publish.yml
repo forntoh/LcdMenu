@@ -41,11 +41,12 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/forntoh/LcdMenu.git
           git add .
           git commit -m "Update version to $UPDATED_VERSION"
-          git push origin master
+          git push origin master --force
 
       - name: Create Tag
         if: ${{ env.UPDATED_VERSION != '' }}
@@ -66,6 +67,25 @@ jobs:
           git tag -d ${{ env.UPDATED_VERSION }}
           git push origin :refs/tags/${{ env.UPDATED_VERSION }}
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install @actions/github
+        run: npm install @actions/github
+
+      - name: Generate Release Notes
+        id: generate_release_notes
+        uses: actions/github-script@v6
+        env:
+          CURRENT_TAG: ${{ env.UPDATED_VERSION }}
+        with:
+          script: |
+            const generateReleaseNotes = require('.scripts/release_notes.js');
+            const releaseNotes = await generateReleaseNotes(github, context);
+            core.setOutput('release_notes', releaseNotes);
+
       - name: Create GitHub Release
         if: success()
         uses: actions/create-release@v1
@@ -74,5 +94,6 @@ jobs:
         with:
           tag_name: ${{ env.UPDATED_VERSION }}
           release_name: LcdMenu v${{ env.UPDATED_VERSION }}
-          draft: true
+          draft: false
           prerelease: false
+          body: ${{ steps.generate_release_notes.outputs.result }}
