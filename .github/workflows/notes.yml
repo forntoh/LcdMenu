@@ -38,7 +38,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const { context, github } = require('@actions/github');
             const releaseNotes = `## Release Notes\n\n${steps.generate_release_notes.outputs.result}`;
             const prNumber = context.payload.pull_request.number;
 
