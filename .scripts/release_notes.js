@@ -1,20 +1,6 @@
 function escapeSpecialChars(str) {
-  return str
-    .replace(/\\/g, "\\\\") // Escape backslashes
-    .replace(/`/g, "\\`") // Escape backticks
-    .replace(/\*/g, "\\*") // Escape asterisks
-    .replace(/_/g, "\\_") // Escape underscores
-    .replace(/{/g, "\\{") // Escape curly braces
-    .replace(/}/g, "\\}") // Escape curly braces
-    .replace(/\[/g, "\\[") // Escape square brackets
-    .replace(/]/g, "\\]") // Escape square brackets
-    .replace(/\(/g, "\\(") // Escape parentheses
-    .replace(/\)/g, "\\)") // Escape parentheses
-    .replace(/#/g, "\\#") // Escape hash symbols
-    .replace(/\+/g, "\\+") // Escape plus signs
-    .replace(/-/g, "\\-") // Escape minus signs
-    .replace(/!/g, "\\!") // Escape exclamation marks
-    .replace(/:/g, "\\:"); // Escape colons
+  const specialChars = /[\\`*_{}\[\]()#+\-!:.]/g;
+  return str.replace(specialChars, '\\$&');
 }
 
 async function generateReleaseNotes(github, context) {
@@ -71,6 +57,14 @@ async function generateReleaseNotes(github, context) {
     per_page: 100,
   });
 
+  const categoryNames = {
+    feature: "New Features",
+    bugfix: "Bug Fixes",
+    documentation: "Documentation Updates",
+    enhancement: "Enhancements",
+    chore: "Chore Updates",
+  };
+
   const categories = {
     feature: [],
     enhancement: [],
@@ -89,7 +83,7 @@ async function generateReleaseNotes(github, context) {
       pr.labels.forEach((label) => {
         if (categories[label.name]) {
           categories[label.name].push(
-            `- ${escapeSpecialChars(pr.title)} by @${pr.user.login} in ${
+            `* ${escapeSpecialChars(pr.title)} by @${pr.user.login} in ${
               pr.html_url
             }`
           );
@@ -104,16 +98,14 @@ async function generateReleaseNotes(github, context) {
     .map(
       ([category, notes]) =>
         `### ${
+          categoryNames[category] ||
           category.charAt(0).toUpperCase() + category.slice(1)
         }\n${notes.join("\n")}`
     )
     .join("\n\n");
 
-  // Get the repository URL from the first pull request
   const repoUrl = pulls.length > 0 ? pulls[0].base.repo.html_url : "";
-
   const fullChangelog = `**Full Changelog**: ${repoUrl}/compare/${previousTag}...${currentTag}`;
-
   return `${releaseNotes}\n\n${fullChangelog}`;
 }
 
