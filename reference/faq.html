@@ -112,6 +112,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
 </ul>
 </li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../overview/rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../overview/rendering/character-display.html">Character display renderer</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -147,6 +151,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/renderer/index.html">renderer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/display/index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/input/index.html">input</a></li>
 </ul>

@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Keyboard Adapter | LcdMenu</title>
-<meta content="Keyboard Adapter | LcdMenu" property="og:title"/>
-<meta content="Keyboard Adapter | LcdMenu" name="twitter:title"/>
+<title>Rendering the menu | LcdMenu</title>
+<meta content="Rendering the menu | LcdMenu" property="og:title"/>
+<meta content="Rendering the menu | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=edd7d3d2" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="button.html" rel="next" title="Button Adapter"/>
-<link href="index.html" rel="prev" title="Controlling the menu"/>
+<link href="character-display.html" rel="next" title="Character display renderer"/>
+<link href="../control/rotary-encoder.html" rel="prev" title="Rotary Encoder Adapter"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -107,14 +107,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../items/input-charset.html">Charset input item</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Controlling the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Keyboard Adapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="button.html">Button Adapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rotary-encoder.html">Rotary Encoder Adapter</a></li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../control/index.html">Controlling the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../control/keyboard.html">Keyboard Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/button.html">Button Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
 </ul>
 </li>
-<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../rendering/character-display.html">Character display renderer</a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="current reference internal expandable" href="#">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="character-display.html">Character display renderer</a></li>
 </ul>
 </li>
 </ul>
@@ -169,7 +169,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/control/keyboard.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/rendering/index.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -210,58 +210,46 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Controlling the menu</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Keyboard Adapter</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Rendering the menu</span>
 </nav>
 <div id="content" role="main">
-<section id="keyboard-adapter">
-<h1>Keyboard Adapter<a class="headerlink" href="#keyboard-adapter" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The keyboard adapter is an input adapter that maps keyboard inputs to menu controls through the serial port.</p>
-<p>The keyboard adapter allows you to interact with the menu system using your computer keyboard.
-This can be useful for debugging or testing the menu system without having to connect physical buttons or rotary encoders.</p>
-<p>The keyboard adapter maps the following keys to menu controls:</p>
-<ul class="simple">
-<li><p><strong>UP/DOWN/LEFT/RIGHT</strong>: Arrow keys.</p></li>
-<li><p><strong>ENTER</strong>: <kbd class="kbd docutils literal notranslate">Enter</kbd> or <kbd class="kbd docutils literal notranslate">return</kbd></p></li>
-<li><p><strong>BACK</strong>: <kbd class="kbd docutils literal notranslate">esc</kbd></p></li>
-<li><p><strong>BACKSPACE</strong>: <kbd class="kbd docutils literal notranslate">backspace</kbd></p></li>
-<li><p><strong>CLEAR</strong>: <kbd class="kbd docutils literal notranslate">delete</kbd></p></li>
+<section id="rendering-the-menu">
+<h1>Rendering the menu<a class="headerlink" href="#rendering-the-menu" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>LcdMenu provides a set of built-in renderers that you can use to display the menu items on different output devices.
+The renderers are responsible for drawing the menu items on the screen. They can be customized to suit your needs.</p>
+<p>There are lots of opportunities to create your own custom renderer. You can create a renderer for any output device that you like.
+For example, you could create a renderer for a TFT display, a touchscreen, or even a 3D printer 😄 (the frame rate would be atrocious)</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">The library comes with the following built-in renderers:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="character-display.html">Character display renderer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="character-display.html#how-to-use-the-character-display-renderer">How to use the character display renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="character-display.html#customizing-the-character-display-renderer">Customizing the character display renderer</a></li>
 </ul>
-<p>To use the keyboard adapter, you need to include the necessary headers:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/KeyboardAdapter.h&gt;</span>
-</span></code></pre></div>
+</li>
+</ul>
 </div>
-<p>Then you need to create a KeyboardAdapter object and pass the menu object to it:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">);</span>
-</span></code></pre></div>
-</div>
-<p>In the setup function, you need to initialize the serial port:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
-</span><span id="line-3"><span class="p">}</span>
-</span></code></pre></div>
-</div>
-<p>Finally, you need to observe the KeyboardAdapter object in the loop function:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="n">keyboard</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
-</span><span id="line-3"><span class="p">}</span>
-</span></code></pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">KeyboardAdapter</span></code> will take care of translating the keyboard inputs into menu controls, allowing you to navigate through the menu system with ease.</p>
-<p>For more information about the <code class="docutils literal notranslate"><span class="pre">KeyboardAdapter</span></code>, check the <a class="reference internal" href="../../reference/api/input/KeyboardAdapter.html"><span class="doc">API reference</span></a>.</p>
+<p>Don’t see a renderer for your favorite output device? Feel free to create a new one and share it with the community!</p>
+<p>Here are some that would be cool to have:</p>
+<ul class="simple">
+<li><p>Serial renderer</p></li>
+<li><p>Web renderer</p></li>
+<li><p>TFT renderer</p></li>
+<li><p>OLED renderer</p></li>
+</ul>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="index.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../control/rotary-encoder.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Controlling the menu
+        Rotary Encoder Adapter
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="button.html">
-        Button Adapter
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="character-display.html">
+        Character display renderer
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>

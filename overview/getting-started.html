@@ -113,6 +113,10 @@
 <li class="toctree-l2"><a class="reference internal" href="control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
 </ul>
 </li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="rendering/character-display.html">Character display renderer</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -148,6 +152,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/api/renderer/index.html">renderer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/display/index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/input/index.html">input</a></li>
 </ul>
@@ -223,7 +228,7 @@ various helpers for handling user input like rotary encoders and buttons.</p>
 <li><p>Add the LcdMenu library to your project by adding the following line to your platformio.ini file:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nv">lib_deps</span><span class="w"> </span><span class="o">=</span>
-</span><span id="line-2"><span class="w">    </span>forntoh/LcdMenu@^5.0.0
+</span><span id="line-2"><span class="w">    </span>forntoh/LcdMenu@^5.1.0
 </span></code></pre></div>
 </div>
 </div></blockquote>
@@ -240,28 +245,30 @@ You can replace these with other display interfaces and input methods as needed 
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;LcdMenu.h&gt;</span>
 </span><span id="line-2"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;MenuScreen.h&gt;</span>
 </span><span id="line-3"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;display/LiquidCrystal_I2CAdapter.h&gt;</span>
-</span><span id="line-4"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/KeyboardAdapter.h&gt;</span>
-</span><span id="line-5">
-</span><span id="line-6"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
-</span><span id="line-7"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 1"</span><span class="p">),</span>
-</span><span id="line-8"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 2"</span><span class="p">),</span>
-</span><span id="line-9"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 3"</span><span class="p">),</span>
-</span><span id="line-10"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 4"</span><span class="p">));</span>
-</span><span id="line-11">
-</span><span id="line-12"><span class="n">LiquidCrystal_I2C</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="mh">0x27</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-</span><span id="line-13"><span class="n">LiquidCrystal_I2CAdapter</span><span class="w"> </span><span class="nf">lcdAdapter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-</span><span id="line-14"><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">lcdAdapter</span><span class="p">);</span>
-</span><span id="line-15"><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Serial</span><span class="p">);</span>
-</span><span id="line-16">
-</span><span id="line-17"><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-18"><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
-</span><span id="line-19"><span class="w">    </span><span class="n">lcdAdapter</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-</span><span id="line-20"><span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="n">setScreen</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">);</span>
-</span><span id="line-21"><span class="p">}</span>
-</span><span id="line-22">
-</span><span id="line-23"><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-24"><span class="w">    </span><span class="n">keyboard</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
-</span><span id="line-25"><span class="p">}</span>
+</span><span id="line-4"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;renderer/CharacterDisplayRenderer.h&gt;</span>
+</span><span id="line-5"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/KeyboardAdapter.h&gt;</span>
+</span><span id="line-6">
+</span><span id="line-7"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
+</span><span id="line-8"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 1"</span><span class="p">),</span>
+</span><span id="line-9"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 2"</span><span class="p">),</span>
+</span><span id="line-10"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 3"</span><span class="p">),</span>
+</span><span id="line-11"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 4"</span><span class="p">));</span>
+</span><span id="line-12">
+</span><span id="line-13"><span class="n">LiquidCrystal_I2C</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="mh">0x27</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</span><span id="line-14"><span class="n">LiquidCrystal_I2CAdapter</span><span class="w"> </span><span class="nf">lcdAdapter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd</span><span class="p">);</span>
+</span><span id="line-15"><span class="n">CharacterDisplayRenderer</span><span class="w"> </span><span class="nf">renderer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdAdapter</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</span><span id="line-16"><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+</span><span id="line-17"><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Serial</span><span class="p">);</span>
+</span><span id="line-18">
+</span><span id="line-19"><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-20"><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+</span><span id="line-21"><span class="w">    </span><span class="n">renderer</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span><span id="line-22"><span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="n">setScreen</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">);</span>
+</span><span id="line-23"><span class="p">}</span>
+</span><span id="line-24">
+</span><span id="line-25"><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-26"><span class="w">    </span><span class="n">keyboard</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-27"><span class="p">}</span>
 </span></code></pre></div>
 </div>
 <p>This example creates a simple menu with four items and displays it on a 16x2 LCD screen.

@@ -148,6 +148,10 @@
 <li class="toctree-l2"><a class="reference internal" href="overview/control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="overview/rendering/index.html">Rendering the menu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview/rendering/character-display.html">Character display renderer</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -183,6 +187,7 @@
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/api/renderer/index.html">renderer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/display/index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/input/index.html">input</a></li>
 </ul>
@@ -287,8 +292,50 @@
 </li>
       <li><a href="reference/api/input/KeyboardAdapter.html#c.C2_CSI_TERMINAL_MIN">C2_CSI_TERMINAL_MIN (C macro)</a>
 </li>
+      <li><a href="reference/api/display/CharacterDisplayInterface.html#_CPPv425CharacterDisplayInterface">CharacterDisplayInterface (C++ class)</a>
+</li>
+      <li><a href="reference/api/display/CharacterDisplayInterface.html#_CPPv4N25CharacterDisplayInterface12clearBlinkerEv">CharacterDisplayInterface::clearBlinker (C++ function)</a>
+</li>
+      <li><a href="reference/api/display/CharacterDisplayInterface.html#_CPPv4N25CharacterDisplayInterface10createCharE7uint8_tP7uint8_t">CharacterDisplayInterface::createChar (C++ function)</a>
+</li>
+      <li><a href="reference/api/display/CharacterDisplayInterface.html#_CPPv4N25CharacterDisplayInterface11drawBlinkerEv">CharacterDisplayInterface::drawBlinker (C++ function)</a>
+</li>
+      <li><a href="reference/api/display/CharacterDisplayInterface.html#_CPPv4N25CharacterDisplayInterfaceD0Ev">CharacterDisplayInterface::~CharacterDisplayInterface (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv424CharacterDisplayRenderer">CharacterDisplayRenderer (C++ class)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer18appendCursorToTextEPKcPc">CharacterDisplayRenderer::appendCursorToText (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer21appendIndicatorToTextEPKcPc">CharacterDisplayRenderer::appendIndicatorToText (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer5beginEv">CharacterDisplayRenderer::begin (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer24calculateAvailableLengthEv">CharacterDisplayRenderer::calculateAvailableLength (C++ function)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer24CharacterDisplayRendererEP25CharacterDisplayInterfaceK7uint8_tK7uint8_tK7uint8_tK7uint8_tP7uint8_tP7uint8_t">CharacterDisplayRenderer::CharacterDisplayRenderer (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer12clearBlinkerEv">CharacterDisplayRenderer::clearBlinker (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer10cursorIconE">CharacterDisplayRenderer::cursorIcon (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer9downArrowE">CharacterDisplayRenderer::downArrow (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer4drawE7uint8_t">CharacterDisplayRenderer::draw (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer11drawBlinkerEv">CharacterDisplayRenderer::drawBlinker (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer8drawItemEPKc">CharacterDisplayRenderer::drawItem (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer14editCursorIconE">CharacterDisplayRenderer::editCursorIcon (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer10moveCursorE7uint8_t7uint8_t">CharacterDisplayRenderer::moveCursor (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer7padTextEPKcPc">CharacterDisplayRenderer::padText (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer7upArrowE">CharacterDisplayRenderer::upArrow (C++ member)</a>
+</li>
       <li><a href="reference/api/input/KeyboardAdapter.html#c.CR">CR (C macro)</a>
 </li>
       <li><a href="reference/api/input/KeyboardAdapter.html#c.CSI_BUFFER_SIZE">CSI_BUFFER_SIZE (C macro)</a>
@@ -306,61 +353,21 @@
 </li>
       <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface5beginEv">DisplayInterface::begin (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface15blinkerPositionE">DisplayInterface::blinkerPosition (C++ member)</a>
-</li>
       <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface5clearEv">DisplayInterface::clear (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface12clearBlinkerEv">DisplayInterface::clearBlinker (C++ function)</a>
+      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface16DisplayInterfaceEv">DisplayInterface::DisplayInterface (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface11clearCursorEv">DisplayInterface::clearCursor (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface18clearDownIndicatorEv">DisplayInterface::clearDownIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface16clearUpIndicatorEv">DisplayInterface::clearUpIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface9cursorRowE">DisplayInterface::cursorRow (C++ member)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface16DisplayInterfaceE7uint8_t7uint8_t">DisplayInterface::DisplayInterface (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface11drawBlinkerEv">DisplayInterface::drawBlinker (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface8drawCharEc">DisplayInterface::drawChar (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface10drawCursorEv">DisplayInterface::drawCursor (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface17drawDownIndicatorEv">DisplayInterface::drawDownIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface8drawItemE7uint8_tPKc">DisplayInterface::drawItem (C++ function)</a>, <a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface8drawItemE7uint8_tPKccPc">[1]</a>
+      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface4drawE7uint8_t">DisplayInterface::draw (C++ function)</a>, <a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface4drawEPKc">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface15drawUpIndicatorEv">DisplayInterface::drawUpIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4NK16DisplayInterface18getBlinkerPositionEv">DisplayInterface::getBlinkerPosition (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4NK16DisplayInterface12getCursorRowEv">DisplayInterface::getCursorRow (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface18getEditModeEnabledEv">DisplayInterface::getEditModeEnabled (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4NK16DisplayInterface10getMaxColsEv">DisplayInterface::getMaxCols (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4NK16DisplayInterface10getMaxRowsEv">DisplayInterface::getMaxRows (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface17isEditModeEnabledE">DisplayInterface::isEditModeEnabled (C++ member)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface7maxColsE">DisplayInterface::maxCols (C++ member)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface7maxRowsE">DisplayInterface::maxRows (C++ member)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface10moveCursorE7uint8_t">DisplayInterface::moveCursor (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface12resetBlinkerE7uint8_t">DisplayInterface::resetBlinker (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface12restartTimerEv">DisplayInterface::restartTimer (C++ function)</a>
+      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface4hideEv">DisplayInterface::hide (C++ function)</a>
 </li>
       <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface12setBacklightEb">DisplayInterface::setBacklight (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface18setEditModeEnabledEb">DisplayInterface::setEditModeEnabled (C++ function)</a>
+      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface9setCursorE7uint8_t7uint8_t">DisplayInterface::setCursor (C++ function)</a>
+</li>
+      <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterface4showEv">DisplayInterface::show (C++ function)</a>
 </li>
       <li><a href="reference/api/display/DisplayInterface.html#_CPPv4N16DisplayInterfaceD0Ev">DisplayInterface::~DisplayInterface (C++ function)</a>
 </li>
@@ -448,39 +455,37 @@
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv49ItemInput">ItemInput (C++ class)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput4backEP16DisplayInterface">ItemInput::back (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput4backEP12MenuRenderer">ItemInput::back (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput9backspaceEP16DisplayInterface">ItemInput::backspace (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput9backspaceEP12MenuRenderer">ItemInput::backspace (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput8callbackE">ItemInput::callback (C++ member)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput5clearEP16DisplayInterface">ItemInput::clear (C++ function)</a>
-</li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput24constrainBlinkerPositionEP16DisplayInterface7uint8_t">ItemInput::constrainBlinkerPosition (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput5clearEP12MenuRenderer">ItemInput::clear (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput6cursorE">ItemInput::cursor (C++ member)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput4drawEP16DisplayInterface7uint8_t">ItemInput::draw (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput4drawEP12MenuRenderer">ItemInput::draw (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput5enterEP16DisplayInterface">ItemInput::enter (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput5enterEP12MenuRenderer">ItemInput::enter (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput14getCallbackStrEv">ItemInput::getCallbackStr (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput8getValueEv">ItemInput::getValue (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput11getViewSizeEP16DisplayInterface">ItemInput::getViewSize (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput11getViewSizeEP12MenuRenderer">ItemInput::getViewSize (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput9ItemInputEPKc7fptrStr">ItemInput::ItemInput (C++ function)</a>, <a href="reference/api/ItemInput.html#_CPPv4N9ItemInput9ItemInputEPKcPc7fptrStr">[1]</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput4leftEP16DisplayInterface">ItemInput::left (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput4leftEP12MenuRenderer">ItemInput::left (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput7processEP7LcdMenuKh">ItemInput::process (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput5rightEP16DisplayInterface">ItemInput::right (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput5rightEP12MenuRenderer">ItemInput::right (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput8setValueEPc">ItemInput::setValue (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput8typeCharEP16DisplayInterfaceKh">ItemInput::typeChar (C++ function)</a>
+      <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput8typeCharEP12MenuRendererKh">ItemInput::typeChar (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInput.html#_CPPv4N9ItemInput5valueE">ItemInput::value (C++ member)</a>
 </li>
@@ -488,7 +493,7 @@
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv416ItemInputCharset">ItemInputCharset (C++ class)</a>
 </li>
-      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset13abortCharEditEP16DisplayInterface">ItemInputCharset::abortCharEdit (C++ function)</a>
+      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset13abortCharEditEP12MenuRenderer">ItemInputCharset::abortCharEdit (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset8charEditE">ItemInputCharset::charEdit (C++ member)</a>
 </li>
@@ -496,7 +501,9 @@
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset15charsetPositionE">ItemInputCharset::charsetPosition (C++ member)</a>
 </li>
-      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset14commitCharEditEP16DisplayInterface">ItemInputCharset::commitCharEdit (C++ function)</a>
+      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset14commitCharEditEP12MenuRenderer">ItemInputCharset::commitCharEdit (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset8drawCharEP12MenuRenderer">ItemInputCharset::drawChar (C++ function)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
@@ -506,9 +513,9 @@
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset7processEP7LcdMenuKh">ItemInputCharset::process (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset12showNextCharEP16DisplayInterface">ItemInputCharset::showNextChar (C++ function)</a>
+      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset12showNextCharEP12MenuRenderer">ItemInputCharset::showNextChar (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset16showPreviousCharEP16DisplayInterface">ItemInputCharset::showPreviousChar (C++ function)</a>
+      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset16showPreviousCharEP12MenuRenderer">ItemInputCharset::showPreviousChar (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemIntRange.html#_CPPv412ItemIntRange">ItemIntRange (C++ class)</a>
 </li>
@@ -520,7 +527,7 @@
 </li>
       <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList8callbackE">ItemList::callback (C++ member)</a>
 </li>
-      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList4drawEP16DisplayInterface7uint8_t">ItemList::draw (C++ function)</a>
+      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList4drawEP12MenuRenderer">ItemList::draw (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList14getCallbackIntEv">ItemList::getCallbackInt (C++ function)</a>
 </li>
@@ -542,9 +549,9 @@
 </li>
       <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList7processEP7LcdMenuKh">ItemList::process (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList10selectNextEP16DisplayInterface">ItemList::selectNext (C++ function)</a>
+      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList10selectNextEP12MenuRenderer">ItemList::selectNext (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList14selectPreviousEP16DisplayInterface">ItemList::selectPrevious (C++ function)</a>
+      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList14selectPreviousEP12MenuRenderer">ItemList::selectPrevious (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList12setItemIndexE7uint8_t">ItemList::setItemIndex (C++ function)</a>
 </li>
@@ -558,7 +565,7 @@
 </li>
       <li><a href="reference/api/ItemRangeBase.html#_CPPv4N13ItemRangeBase9decrementEv">ItemRangeBase::decrement (C++ function)</a>
 </li>
-      <li><a href="reference/api/ItemRangeBase.html#_CPPv4N13ItemRangeBase4drawEP16DisplayInterface7uint8_t">ItemRangeBase::draw (C++ function)</a>
+      <li><a href="reference/api/ItemRangeBase.html#_CPPv4N13ItemRangeBase4drawEP12MenuRenderer">ItemRangeBase::draw (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemRangeBase.html#_CPPv4N13ItemRangeBase15getCurrentValueEv">ItemRangeBase::getCurrentValue (C++ function)</a>
 </li>
@@ -594,7 +601,7 @@
 </li>
       <li><a href="reference/api/ItemToggle.html#_CPPv4N10ItemToggle8callbackE">ItemToggle::callback (C++ member)</a>
 </li>
-      <li><a href="reference/api/ItemToggle.html#_CPPv4N10ItemToggle4drawEP16DisplayInterface7uint8_t">ItemToggle::draw (C++ function)</a>
+      <li><a href="reference/api/ItemToggle.html#_CPPv4N10ItemToggle4drawEP12MenuRenderer">ItemToggle::draw (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemToggle.html#_CPPv4N10ItemToggle7enabledE">ItemToggle::enabled (C++ member)</a>
 </li>
@@ -616,7 +623,7 @@
 </li>
       <li><a href="reference/api/ItemToggle.html#_CPPv4N10ItemToggle6textOnE">ItemToggle::textOn (C++ member)</a>
 </li>
-      <li><a href="reference/api/ItemToggle.html#_CPPv4N10ItemToggle6toggleEP16DisplayInterface">ItemToggle::toggle (C++ function)</a>
+      <li><a href="reference/api/ItemToggle.html#_CPPv4N10ItemToggle6toggleEP12MenuRenderer">ItemToggle::toggle (C++ function)</a>
 </li>
   </ul></td>
   </tr>
@@ -678,25 +685,25 @@
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/LcdMenu.html#_CPPv47LcdMenu">LcdMenu (C++ class)</a>
 </li>
-      <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu7displayE">LcdMenu::display (C++ member)</a>
-</li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu7enabledE">LcdMenu::enabled (C++ member)</a>
 </li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu9getCursorEv">LcdMenu::getCursor (C++ function)</a>
 </li>
-      <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu10getDisplayEv">LcdMenu::getDisplay (C++ function)</a>
-</li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu9getItemAtE7uint8_t">LcdMenu::getItemAt (C++ function)</a>
+</li>
+      <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu11getRendererEv">LcdMenu::getRenderer (C++ function)</a>
 </li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu9getScreenEv">LcdMenu::getScreen (C++ function)</a>
 </li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu4hideEv">LcdMenu::hide (C++ function)</a>
 </li>
-      <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu7LcdMenuER16DisplayInterface">LcdMenu::LcdMenu (C++ function)</a>
+      <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu7LcdMenuER12MenuRenderer">LcdMenu::LcdMenu (C++ function)</a>
 </li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu7processEKh">LcdMenu::process (C++ function)</a>
 </li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu7refreshEv">LcdMenu::refresh (C++ function)</a>
+</li>
+      <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu8rendererE">LcdMenu::renderer (C++ member)</a>
 </li>
       <li><a href="reference/api/LcdMenu.html#_CPPv4N7LcdMenu5resetEv">LcdMenu::reset (C++ function)</a>
 </li>
@@ -718,43 +725,25 @@
 </li>
       <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter12clearBlinkerEv">LiquidCrystal_I2CAdapter::clearBlinker (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter11clearCursorEv">LiquidCrystal_I2CAdapter::clearCursor (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter10createCharE7uint8_tP7uint8_t">LiquidCrystal_I2CAdapter::createChar (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter18clearDownIndicatorEv">LiquidCrystal_I2CAdapter::clearDownIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter16clearUpIndicatorEv">LiquidCrystal_I2CAdapter::clearUpIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter9downArrowE">LiquidCrystal_I2CAdapter::downArrow (C++ member)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter11drawBlinkerEv">LiquidCrystal_I2CAdapter::drawBlinker (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter8drawCharEc">LiquidCrystal_I2CAdapter::drawChar (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter10drawCursorEv">LiquidCrystal_I2CAdapter::drawCursor (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter17drawDownIndicatorEv">LiquidCrystal_I2CAdapter::drawDownIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter8drawItemE7uint8_tPKc">LiquidCrystal_I2CAdapter::drawItem (C++ function)</a>, <a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter8drawItemE7uint8_tPKccPc">[1]</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter15drawUpIndicatorEv">LiquidCrystal_I2CAdapter::drawUpIndicator (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter4drawE7uint8_t">LiquidCrystal_I2CAdapter::draw (C++ function)</a>, <a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter4drawEPKc">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter11drawBlinkerEv">LiquidCrystal_I2CAdapter::drawBlinker (C++ function)</a>
+</li>
+      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter4hideEv">LiquidCrystal_I2CAdapter::hide (C++ function)</a>
+</li>
       <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter3lcdE">LiquidCrystal_I2CAdapter::lcd (C++ member)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter24LiquidCrystal_I2CAdapterEP17LiquidCrystal_I2C7uint8_t7uint8_t">LiquidCrystal_I2CAdapter::LiquidCrystal_I2CAdapter (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter12resetBlinkerE7uint8_t">LiquidCrystal_I2CAdapter::resetBlinker (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter12restartTimerEv">LiquidCrystal_I2CAdapter::restartTimer (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter24LiquidCrystal_I2CAdapterEP17LiquidCrystal_I2C">LiquidCrystal_I2CAdapter::LiquidCrystal_I2CAdapter (C++ function)</a>
 </li>
       <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter12setBacklightEb">LiquidCrystal_I2CAdapter::setBacklight (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter9startTimeE">LiquidCrystal_I2CAdapter::startTime (C++ member)</a>
+      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter9setCursorE7uint8_t7uint8_t">LiquidCrystal_I2CAdapter::setCursor (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter7upArrowE">LiquidCrystal_I2CAdapter::upArrow (C++ member)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter11updateTimerEv">LiquidCrystal_I2CAdapter::updateTimer (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystal_I2CAdapter.html#_CPPv4N24LiquidCrystal_I2CAdapter4showEv">LiquidCrystal_I2CAdapter::show (C++ function)</a>
 </li>
       <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv420LiquidCrystalAdapter">LiquidCrystalAdapter (C++ class)</a>
 </li>
@@ -764,41 +753,27 @@
 </li>
       <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter12clearBlinkerEv">LiquidCrystalAdapter::clearBlinker (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter11clearCursorEv">LiquidCrystalAdapter::clearCursor (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter10createCharE7uint8_tP7uint8_t">LiquidCrystalAdapter::createChar (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter18clearDownIndicatorEv">LiquidCrystalAdapter::clearDownIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter16clearUpIndicatorEv">LiquidCrystalAdapter::clearUpIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter9downArrowE">LiquidCrystalAdapter::downArrow (C++ member)</a>
+      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter4drawE7uint8_t">LiquidCrystalAdapter::draw (C++ function)</a>, <a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter4drawEPKc">[1]</a>
 </li>
       <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter11drawBlinkerEv">LiquidCrystalAdapter::drawBlinker (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter8drawCharEc">LiquidCrystalAdapter::drawChar (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter10drawCursorEv">LiquidCrystalAdapter::drawCursor (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter17drawDownIndicatorEv">LiquidCrystalAdapter::drawDownIndicator (C++ function)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter8drawItemE7uint8_tPKc">LiquidCrystalAdapter::drawItem (C++ function)</a>, <a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter8drawItemE7uint8_tPKccPc">[1]</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter15drawUpIndicatorEv">LiquidCrystalAdapter::drawUpIndicator (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter4hideEv">LiquidCrystalAdapter::hide (C++ function)</a>
 </li>
       <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter3lcdE">LiquidCrystalAdapter::lcd (C++ member)</a>
 </li>
       <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter20LiquidCrystalAdapterEP13LiquidCrystal7uint8_t7uint8_t">LiquidCrystalAdapter::LiquidCrystalAdapter (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter12resetBlinkerE7uint8_t">LiquidCrystalAdapter::resetBlinker (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter7maxColsE">LiquidCrystalAdapter::maxCols (C++ member)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter12restartTimerEv">LiquidCrystalAdapter::restartTimer (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter7maxRowsE">LiquidCrystalAdapter::maxRows (C++ member)</a>
 </li>
       <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter12setBacklightEb">LiquidCrystalAdapter::setBacklight (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter9startTimeE">LiquidCrystalAdapter::startTime (C++ member)</a>
+      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter9setCursorE7uint8_t7uint8_t">LiquidCrystalAdapter::setCursor (C++ function)</a>
 </li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter7upArrowE">LiquidCrystalAdapter::upArrow (C++ member)</a>
-</li>
-      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter11updateTimerEv">LiquidCrystalAdapter::updateTimer (C++ function)</a>
+      <li><a href="reference/api/display/LiquidCrystalAdapter.html#_CPPv4N20LiquidCrystalAdapter4showEv">LiquidCrystalAdapter::show (C++ function)</a>
 </li>
       <li><a href="reference/api/input/SimpleRotaryAdapter.html#c.LONG_PRESS_DURATION">LONG_PRESS_DURATION (C macro)</a>
 </li>
@@ -813,7 +788,7 @@
 </li>
       <li><a href="reference/api/MenuItem.html#_CPPv48MenuItem">MenuItem (C++ class)</a>
 </li>
-      <li><a href="reference/api/MenuItem.html#_CPPv4N8MenuItem4drawEP16DisplayInterface">MenuItem::draw (C++ function)</a>, <a href="reference/api/MenuItem.html#_CPPv4N8MenuItem4drawEP16DisplayInterface7uint8_t">[1]</a>
+      <li><a href="reference/api/MenuItem.html#_CPPv4N8MenuItem4drawEP12MenuRenderer">MenuItem::draw (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuItem.html#_CPPv4N8MenuItem7getTextEv">MenuItem::getText (C++ function)</a>
 </li>
@@ -827,23 +802,77 @@
 </li>
       <li><a href="reference/api/MenuItem.html#_CPPv4N8MenuItemD0Ev">MenuItem::~MenuItem (C++ function)</a>
 </li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv412MenuRenderer">MenuRenderer (C++ class)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer5beginEv">MenuRenderer::begin (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer15blinkerPositionE">MenuRenderer::blinkerPosition (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer12clearBlinkerEv">MenuRenderer::clearBlinker (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer9cursorColE">MenuRenderer::cursorCol (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer9cursorRowE">MenuRenderer::cursorRow (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer7displayE">MenuRenderer::display (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer4drawE7uint8_t">MenuRenderer::draw (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer11drawBlinkerEv">MenuRenderer::drawBlinker (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer8drawItemEPKc">MenuRenderer::drawItem (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer12getCursorColEv">MenuRenderer::getCursorCol (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer12getCursorRowEv">MenuRenderer::getCursorRow (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer10getMaxColsEv">MenuRenderer::getMaxCols (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer10getMaxRowsEv">MenuRenderer::getMaxRows (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer8hasFocusE">MenuRenderer::hasFocus (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer19hasHiddenItemsAboveE">MenuRenderer::hasHiddenItemsAbove (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer19hasHiddenItemsBelowE">MenuRenderer::hasHiddenItemsBelow (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer10inEditModeE">MenuRenderer::inEditMode (C++ member)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer12isInEditModeEv">MenuRenderer::isInEditMode (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer7maxColsE">MenuRenderer::maxCols (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer7maxRowsE">MenuRenderer::maxRows (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer12MenuRendererEP16DisplayInterface7uint8_t7uint8_t">MenuRenderer::MenuRenderer (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer10moveCursorE7uint8_t7uint8_t">MenuRenderer::moveCursor (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer12restartTimerEv">MenuRenderer::restartTimer (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer11setEditModeEb">MenuRenderer::setEditMode (C++ function)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer9startTimeE">MenuRenderer::startTime (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer11updateTimerEv">MenuRenderer::updateTimer (C++ function)</a>
+</li>
       <li><a href="reference/api/MenuScreen.html#_CPPv410MenuScreen">MenuScreen (C++ class)</a>
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen6cursorE">MenuScreen::cursor (C++ member)</a>
 </li>
-      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen4downEP16DisplayInterface">MenuScreen::down (C++ function)</a>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen4downEP12MenuRenderer">MenuScreen::down (C++ function)</a>
 </li>
-      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen4drawEP16DisplayInterface">MenuScreen::draw (C++ function)</a>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen4drawEP12MenuRenderer">MenuScreen::draw (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen9getCursorEv">MenuScreen::getCursor (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen9getItemAtE7uint8_t">MenuScreen::getItemAt (C++ function)</a>
 </li>
-      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen5itemsE">MenuScreen::items (C++ member)</a>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen9itemCountE">MenuScreen::itemCount (C++ member)</a>
 </li>
-      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen10itemsCountEv">MenuScreen::itemsCount (C++ function)</a>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen5itemsE">MenuScreen::items (C++ member)</a>
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen10MenuScreenEPP8MenuItem">MenuScreen::MenuScreen (C++ function)</a>
 </li>
@@ -853,13 +882,15 @@
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen7processEP7LcdMenuKh">MenuScreen::process (C++ function)</a>
 </li>
-      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen5resetEP16DisplayInterface">MenuScreen::reset (C++ function)</a>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen5resetEP12MenuRenderer">MenuScreen::reset (C++ function)</a>
 </li>
-      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen9setCursorEP16DisplayInterface7uint8_t">MenuScreen::setCursor (C++ function)</a>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen9setCursorEP12MenuRenderer7uint8_t">MenuScreen::setCursor (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen9setParentEP10MenuScreen">MenuScreen::setParent (C++ function)</a>
 </li>
-      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen2upEP16DisplayInterface">MenuScreen::up (C++ function)</a>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen14syncIndicatorsE7uint8_tP12MenuRenderer">MenuScreen::syncIndicators (C++ function)</a>
+</li>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen2upEP12MenuRenderer">MenuScreen::up (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen4viewE">MenuScreen::view (C++ member)</a>
 </li>

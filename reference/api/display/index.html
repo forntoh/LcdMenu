@@ -19,7 +19,7 @@
 <link href="../../../search.html" rel="search" title="Search"/>
 <link href="../../../genindex.html" rel="index" title="Index"/>
 <link href="LiquidCrystal_I2CAdapter.html" rel="next" title="LiquidCrystal_I2CAdapter"/>
-<link href="../ItemSubMenu.html" rel="prev" title="ItemSubMenu"/>
+<link href="../renderer/CharacterDisplayRenderer.html" rel="prev" title="CharacterDisplayRenderer"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -113,6 +113,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
 </ul>
 </li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../../overview/rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/rendering/character-display.html">Character display renderer</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -148,6 +152,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../renderer/index.html">renderer</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
 </ul>
@@ -215,6 +220,7 @@
 <p class="caption" role="heading"><span class="caption-text">display</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CharacterDisplayInterface.html">CharacterDisplayInterface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DisplayInterface.html">DisplayInterface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
 </ul>
@@ -222,11 +228,11 @@
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../ItemSubMenu.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../renderer/CharacterDisplayRenderer.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        ItemSubMenu
+        CharacterDisplayRenderer
       </a>
 </div>
 <div class="ml-auto">

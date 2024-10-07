@@ -113,6 +113,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../overview/control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
 </ul>
 </li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../overview/rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../../overview/rendering/character-display.html">Character display renderer</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -148,6 +152,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renderer/index.html">renderer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a></li>
 </ul>
@@ -284,25 +289,12 @@
 </dl>
 </dd></dl>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8MenuItem4drawEP16DisplayInterface">
-<span id="_CPPv3N8MenuItem4drawEP16DisplayInterface"></span><span id="_CPPv2N8MenuItem4drawEP16DisplayInterface"></span><span id="MenuItem::draw__DisplayInterfaceP"></span><span class="target" id="classMenuItem_1ae95caa7651e10ecc72cceec3dcfe88d1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8MenuItem4drawEP16DisplayInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N8MenuItem4drawEP16DisplayInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Draw this menu item on specified display on current line. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N8MenuItem4drawEP12MenuRenderer">
+<span id="_CPPv3N8MenuItem4drawEP12MenuRenderer"></span><span id="_CPPv2N8MenuItem4drawEP12MenuRenderer"></span><span id="MenuItem::draw__MenuRendererP"></span><span class="target" id="classMenuItem_1a2dd0bd9f9380df66919c8d445da072b9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="renderer/MenuRenderer.html#_CPPv412MenuRenderer" title="MenuRenderer"><span class="n"><span class="pre">MenuRenderer</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">renderer</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8MenuItem4drawEP12MenuRenderer" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N8MenuItem4drawEP12MenuRenderer'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><p>Draw this menu item on specified display on current row. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>display</strong> – Pointer to the <a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref">DisplayInterface</span></a> object used for rendering. </p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8MenuItem4drawEP16DisplayInterface7uint8_t">
-<span id="_CPPv3N8MenuItem4drawEP16DisplayInterface7uint8_t"></span><span id="_CPPv2N8MenuItem4drawEP16DisplayInterface7uint8_t"></span><span id="MenuItem::draw__DisplayInterfaceP.uint8_t"></span><span class="target" id="classMenuItem_1a76df3b66fdc9e37e5ba09622e5db0afc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="display/DisplayInterface.html#_CPPv416DisplayInterface" title="DisplayInterface"><span class="n"><span class="pre">DisplayInterface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">display</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">row</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8MenuItem4drawEP16DisplayInterface7uint8_t" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N8MenuItem4drawEP16DisplayInterface7uint8_t'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Draw this menu item on specified display on specified line. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>display</strong> – Pointer to the <a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref">DisplayInterface</span></a> object used for rendering. </p></li>
-<li><p><strong>row</strong> – the number of row to draw on </p></li>
-</ul>
+<dd class="field-odd"><p><strong>renderer</strong> – The renderer to use for drawing. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -316,10 +308,6 @@
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp">
-<span class="target" id="classMenuItem_1af39ec931a74c5318b7a3e14da75d46d3"></span><span class="sig-name descname"><span class="pre">friend</span> <span class="pre">LcdMenu</span></span></dt>
-<dd></dd></dl>
 <dl class="cpp var">
 <dt class="sig sig-object cpp">
 <span class="target" id="classMenuItem_1a9d75511062b20f475077346bac11b58d"></span><span class="sig-name descname"><span class="pre">friend</span> <span class="pre">MenuScreen</span></span></dt>
@@ -353,8 +341,7 @@
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItem7setTextEPKc'" class="reference internal" href="#_CPPv4N8MenuItem7setTextEPKc"><code class="docutils literal notranslate"><span class="pre">MenuItem::setText()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItemD0Ev'" class="reference internal" href="#_CPPv4N8MenuItemD0Ev"><code class="docutils literal notranslate"><span class="pre">MenuItem::~MenuItem()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItem7processEP7LcdMenuKh'" class="reference internal" href="#_CPPv4N8MenuItem7processEP7LcdMenuKh"><code class="docutils literal notranslate"><span class="pre">MenuItem::process()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N8MenuItem4drawEP16DisplayInterface'" class="reference internal" href="#_CPPv4N8MenuItem4drawEP16DisplayInterface"><code class="docutils literal notranslate"><span class="pre">MenuItem::draw()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N8MenuItem4drawEP16DisplayInterface7uint8_t'" class="reference internal" href="#_CPPv4N8MenuItem4drawEP16DisplayInterface7uint8_t"><code class="docutils literal notranslate"><span class="pre">MenuItem::draw()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N8MenuItem4drawEP12MenuRenderer'" class="reference internal" href="#_CPPv4N8MenuItem4drawEP12MenuRenderer"><code class="docutils literal notranslate"><span class="pre">MenuItem::draw()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItem4textE'" class="reference internal" href="#_CPPv4N8MenuItem4textE"><code class="docutils literal notranslate"><span class="pre">MenuItem::text</span></code></a></li>
 </ul>
 </li>

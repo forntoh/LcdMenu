@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>InputInterface | LcdMenu</title>
-<meta content="InputInterface | LcdMenu" property="og:title"/>
-<meta content="InputInterface | LcdMenu" name="twitter:title"/>
+<title>renderer | LcdMenu</title>
+<meta content="renderer | LcdMenu" property="og:title"/>
+<meta content="renderer | LcdMenu" name="twitter:title"/>
 <link href="../../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/theme.css?v=edd7d3d2" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../../_static/favicon.png" rel="icon"/>
 <link href="../../../search.html" rel="search" title="Search"/>
 <link href="../../../genindex.html" rel="index" title="Index"/>
-<link href="../../uml.html" rel="next" title="Class diagram"/>
-<link href="KeyboardAdapter.html" rel="prev" title="KeyboardAdapter"/>
+<link href="MenuRenderer.html" rel="next" title="MenuRenderer"/>
+<link href="../ItemSubMenu.html" rel="prev" title="ItemSubMenu"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -152,9 +152,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../renderer/index.html">renderer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">renderer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../uml.html">Class diagram</a></li>
@@ -169,7 +169,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/input/InputInterface.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/renderer/index.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -211,83 +211,37 @@
 </svg>
 </a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../index.html">API reference</a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">input</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">InputInterface</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">renderer</span>
 </nav>
 <div id="content" role="main">
-<section id="inputinterface">
-<h1>InputInterface<a class="headerlink" href="#inputinterface" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv414InputInterface">
-<span id="_CPPv314InputInterface"></span><span id="_CPPv214InputInterface"></span><span id="InputInterface"></span><span class="target" id="classInputInterface"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InputInterface</span></span></span><a class="headerlink" href="#_CPPv414InputInterface" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv414InputInterface'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><div class="docutils container">
-<em>#include &lt;InputInterface.h&gt;</em></div>
-<p>Abstract base class for input handling in the <a class="reference internal" href="../LcdMenu.html#classLcdMenu"><span class="std std-ref">LcdMenu</span></a> system. </p>
-<p>This class provides an interface for observing input events and interacting with the <a class="reference internal" href="../LcdMenu.html#classLcdMenu"><span class="std std-ref">LcdMenu</span></a>. Derived classes must implement the observe() method to handle specific input mechanisms.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This class is intended to be subclassed and cannot be instantiated directly.</p>
+<section id="renderer">
+<h1>renderer<a class="headerlink" href="#renderer" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">renderer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MenuRenderer.html">MenuRenderer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CharacterDisplayRenderer.html">CharacterDisplayRenderer</a></li>
+</ul>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Param menu<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Pointer to an <a class="reference internal" href="../LcdMenu.html#classLcdMenu"><span class="std std-ref">LcdMenu</span></a> object that this input interface will interact with. </p>
-</dd>
-</dl>
-<p>Subclassed by <a class="reference internal" href="ButtonAdapter.html#classButtonAdapter"><span class="std std-ref">ButtonAdapter</span></a>, <a class="reference internal" href="KeyboardAdapter.html#classKeyboardAdapter"><span class="std std-ref">KeyboardAdapter</span></a>, <a class="reference internal" href="SimpleRotaryAdapter.html#classSimpleRotaryAdapter"><span class="std std-ref">SimpleRotaryAdapter</span></a></p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14InputInterface14InputInterfaceEP7LcdMenu">
-<span id="_CPPv3N14InputInterface14InputInterfaceEP7LcdMenu"></span><span id="_CPPv2N14InputInterface14InputInterfaceEP7LcdMenu"></span><span id="InputInterface::InputInterface__LcdMenuP"></span><span class="target" id="classInputInterface_1aa1ca1eb4d395ee5177eb4c54b41bafe3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InputInterface</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14InputInterface14InputInterfaceEP7LcdMenu" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N14InputInterface14InputInterfaceEP7LcdMenu'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd></dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14InputInterfaceD0Ev">
-<span id="_CPPv3N14InputInterfaceD0Ev"></span><span id="_CPPv2N14InputInterfaceD0Ev"></span><span id="InputInterface::~InputInterface"></span><span class="target" id="classInputInterface_1ae6556ad621b37585df6c6c48a56045be"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~InputInterface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N14InputInterfaceD0Ev" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N14InputInterfaceD0Ev'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd></dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14InputInterface7observeEv">
-<span id="_CPPv3N14InputInterface7observeEv"></span><span id="_CPPv2N14InputInterface7observeEv"></span><span id="InputInterface::observe"></span><span class="target" id="classInputInterface_1ae20e88e99ff3a08c976e434c736319d6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">observe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N14InputInterface7observeEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N14InputInterface7observeEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd></dd></dl>
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N14InputInterface4menuE">
-<span id="_CPPv3N14InputInterface4menuE"></span><span id="_CPPv2N14InputInterface4menuE"></span><span id="InputInterface::menu__LcdMenuP"></span><span class="target" id="classInputInterface_1a1cd2bbae92ea872eacaee719d7143c13"></span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">menu</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NULL</span></span><a class="headerlink" href="#_CPPv4N14InputInterface4menuE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N14InputInterface4menuE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd></dd></dl>
-</div>
-</dd></dl>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="KeyboardAdapter.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../ItemSubMenu.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        KeyboardAdapter
+        ItemSubMenu
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../../uml.html">
-        Class diagram
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="MenuRenderer.html">
+        MenuRenderer
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
 </a>
 </div>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
-<ul>
-<li><a :data-current="activeSection === '#_CPPv414InputInterface'" class="reference internal" href="#_CPPv414InputInterface"><code class="docutils literal notranslate"><span class="pre">InputInterface</span></code></a><ul>
-<li><a :data-current="activeSection === '#_CPPv4N14InputInterface14InputInterfaceEP7LcdMenu'" class="reference internal" href="#_CPPv4N14InputInterface14InputInterfaceEP7LcdMenu"><code class="docutils literal notranslate"><span class="pre">InputInterface::InputInterface()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N14InputInterfaceD0Ev'" class="reference internal" href="#_CPPv4N14InputInterfaceD0Ev"><code class="docutils literal notranslate"><span class="pre">InputInterface::~InputInterface()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N14InputInterface7observeEv'" class="reference internal" href="#_CPPv4N14InputInterface7observeEv"><code class="docutils literal notranslate"><span class="pre">InputInterface::observe()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N14InputInterface4menuE'" class="reference internal" href="#_CPPv4N14InputInterface4menuE"><code class="docutils literal notranslate"><span class="pre">InputInterface::menu</span></code></a></li>
-</ul>
-</li>
-</ul>
-</div>
-</aside>
+</div></div>
 </main>
 </div>
 </div><footer class="py-6 border-t border-border md:py-0">

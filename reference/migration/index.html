@@ -113,6 +113,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../overview/control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
 </ul>
 </li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../overview/rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../../overview/rendering/character-display.html">Character display renderer</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -148,6 +152,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/renderer/index.html">renderer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/display/index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/input/index.html">input</a></li>
 </ul>
@@ -211,17 +216,55 @@
 <section id="migration">
 <h1>Migration<a class="headerlink" href="#migration" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <p class="lead">This guide details the changes and how to change your code between versions of the LcdMenu library.</p>
-<section id="migration-from-v4-x-to-v5-x">
-<h2>Migration from v4.x to v5.x<a class="headerlink" href="#migration-from-v4-x-to-v5-x" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#migration-from-v4-x-to-v5-x'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>This guide details the changes and how to change your code to migrate to LcdMenu v5.x.</p>
+<section id="migration-from-v5-0-0-to-v5-1-x">
+<h2>Migration from v5.0.0 to v5.1.x<a class="headerlink" href="#migration-from-v5-0-0-to-v5-1-x" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#migration-from-v5-0-0-to-v5-1-x'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>This guide details the changes and how to change your code to migrate to LcdMenu v5.1.x</p>
+<section id="lcdmenu-initialization-changes">
+<h3>LcdMenu initialization changes<a class="headerlink" href="#lcdmenu-initialization-changes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-initialization-changes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>In v5.0.0, the menu was initialized with the display adapter interface.
+In this version, the menu is initialized with a renderer.</p>
+<section id="imports">
+<h4>Imports<a class="headerlink" href="#imports" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h4>
+<p>The first change you’ll need to make is to add the import for the renderer.
+Currently, the only renderer available is the <a class="reference internal" href="../api/renderer/CharacterDisplayRenderer.html#_CPPv424CharacterDisplayRenderer" title="CharacterDisplayRenderer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">CharacterDisplayRenderer</span></code></a>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><ins><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;renderer/CharacterDisplayRenderer.h&gt;</span>
+</ins></span></code></pre></div>
+</div>
+</section>
+<section id="construct-the-renderer-interface">
+<h4>Construct the renderer interface<a class="headerlink" href="#construct-the-renderer-interface" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h4>
+<p>The renderer instance is created and passed to the menu.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="w"> </span><span class="n">LiquidCrystal_I2C</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="mh">0x27</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_COLS</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_ROWS</span><span class="p">);</span>
+</span><span id="line-2"><span class="w"> </span><span class="n">LiquidCrystal_I2CAdapter</span><span class="w"> </span><span class="nf">lcdAdapter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd</span><span class="p">);</span>
+</span><span id="line-3"><ins><span class="w"> </span><span class="n">CharacterDisplayRenderer</span><span class="w"> </span><span class="nf">renderer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdAdapter</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_COLS</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_ROWS</span><span class="p">);</span>
+</ins></span><span id="line-4"><span class="w"> </span><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="setup-changes">
+<h3>Setup changes<a class="headerlink" href="#setup-changes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#setup-changes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>The setup function remains the same, but the menu is now initialized with the renderer.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-2"><del><span class="w">     </span><span class="n">lcdAdapter</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</del></span><span id="line-3"><ins><span class="w">     </span><span class="n">renderer</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</ins></span><span id="line-4"><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+</div>
+<p>This change allows for more flexibility in the display interface and the ability to create custom renderers.</p>
+</section>
+</section>
+<section id="migration-from-v4-x-x-to-v5-0-0">
+<h2>Migration from v4.x.x to v5.0.0<a class="headerlink" href="#migration-from-v4-x-x-to-v5-0-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#migration-from-v4-x-x-to-v5-0-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>This guide details the changes and how to change your code to migrate to LcdMenu v5.0.0</p>
 <p>This is a major release with a lot of changes.</p>
 <section id="display-interface-changes">
 <h3>Display interface changes<a class="headerlink" href="#display-interface-changes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#display-interface-changes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <p>In v4.x, the display instance was created and initialised in the display adapter.
 In this version, the display instance is created separately and passed to the display adapter.
 The existing display adapters have been renamed and placed in a new directory to closely match the display they are designed for.</p>
-<section id="imports">
-<h4>Imports<a class="headerlink" href="#imports" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h4>
+<section id="id1">
+<h4>Imports<a class="headerlink" href="#id1" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h4>
 <p>The first change you’ll need to make is to add the import for your desired display interface.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
@@ -344,8 +387,8 @@ seen all the available interfaces <a class="reference internal" href="../api/dis
 </span></code></pre></div>
 </div>
 </section>
-<section id="id1">
-<h3>Construct the display adapter interface<a class="headerlink" href="#id1" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id1'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id2">
+<h3>Construct the display adapter interface<a class="headerlink" href="#id2" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id2'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <p>The second change is to construct the display adapter interface.
 For example, if you are using the LiquidCrystalI2CAdapter, you will need to construct it like this:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">LiquidCrystalI2CAdapter</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="mh">0x27</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
@@ -398,9 +441,18 @@ lcdAdapter not the menu.</p>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#migration-from-v4-x-to-v5-x'" class="reference internal" href="#migration-from-v4-x-to-v5-x">Migration from v4.x to v5.x</a><ul>
-<li><a :data-current="activeSection === '#display-interface-changes'" class="reference internal" href="#display-interface-changes">Display interface changes</a><ul>
+<li><a :data-current="activeSection === '#migration-from-v5-0-0-to-v5-1-x'" class="reference internal" href="#migration-from-v5-0-0-to-v5-1-x">Migration from v5.0.0 to v5.1.x</a><ul>
+<li><a :data-current="activeSection === '#lcdmenu-initialization-changes'" class="reference internal" href="#lcdmenu-initialization-changes">LcdMenu initialization changes</a><ul>
 <li><a :data-current="activeSection === '#imports'" class="reference internal" href="#imports">Imports</a></li>
+<li><a :data-current="activeSection === '#construct-the-renderer-interface'" class="reference internal" href="#construct-the-renderer-interface">Construct the renderer interface</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#setup-changes'" class="reference internal" href="#setup-changes">Setup changes</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#migration-from-v4-x-x-to-v5-0-0'" class="reference internal" href="#migration-from-v4-x-x-to-v5-0-0">Migration from v4.x.x to v5.0.0</a><ul>
+<li><a :data-current="activeSection === '#display-interface-changes'" class="reference internal" href="#display-interface-changes">Display interface changes</a><ul>
+<li><a :data-current="activeSection === '#id1'" class="reference internal" href="#id1">Imports</a></li>
 <li><a :data-current="activeSection === '#construct-the-display-adapter-interface'" class="reference internal" href="#construct-the-display-adapter-interface">Construct the display adapter interface</a></li>
 <li><a :data-current="activeSection === '#initialise-the-menu'" class="reference internal" href="#initialise-the-menu">Initialise the menu</a></li>
 </ul>
@@ -414,7 +466,7 @@ lcdAdapter not the menu.</p>
 </li>
 <li><a :data-current="activeSection === '#migration-from-v3-x-to-v4-x'" class="reference internal" href="#migration-from-v3-x-to-v4-x">Migration from v3.x to v4.x</a><ul>
 <li><a :data-current="activeSection === '#new-imports'" class="reference internal" href="#new-imports">New imports</a></li>
-<li><a :data-current="activeSection === '#id1'" class="reference internal" href="#id1">Construct the display adapter interface</a></li>
+<li><a :data-current="activeSection === '#id2'" class="reference internal" href="#id2">Construct the display adapter interface</a></li>
 <li><a :data-current="activeSection === '#finally-initialise-the-menu'" class="reference internal" href="#finally-initialise-the-menu">Finally, initialise the  menu</a></li>
 <li><a :data-current="activeSection === '#other-changes'" class="reference internal" href="#other-changes">Other changes</a></li>
 </ul>
