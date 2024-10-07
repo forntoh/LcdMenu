@@ -41,19 +41,21 @@ jobs:
 
       - name: Commit changes
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git add .
           git commit -m "Update version to $UPDATED_VERSION"
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git master
+          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git master --force
 
       - name: Create Tag
         if: ${{ env.UPDATED_VERSION != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git tag -a "${{ env.UPDATED_VERSION }}" -m "Tagging version ${{ env.UPDATED_VERSION }}"
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git "${{ env.UPDATED_VERSION }}"
+          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git "${{ env.UPDATED_VERSION }}" --force
 
       - name: Publish to PlatformIO
         id: publish
@@ -63,11 +65,11 @@ jobs:
       - name: Revert push and delete tag if publish fails
         if: failure()
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git reset --hard HEAD~1
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git +HEAD
-          git tag -d ${{ github.ref_name }}
+          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git +HEAD --force
+          git tag -d ${{ env.UPDATED_VERSION }}
 
       - name: Create GitHub Release
         if: success()
