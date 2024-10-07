@@ -109,9 +109,9 @@ async function generateReleaseNotes(github, context) {
     )
     .join("\n\n");
 
-  console.log(`Release Notes: ${releaseNotes}`);
+  const fullChangelog = `**Full Changelog**: ${pr.base.repo.html_url}/compare/${previousTag}...${currentTag}`;
 
-  return releaseNotes;
+  return `${releaseNotes}\n\n${fullChangelog}`;
 }
 
 module.exports = generateReleaseNotes;
