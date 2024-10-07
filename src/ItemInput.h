@@ -200,7 +200,7 @@ class ItemInput : public MenuItem {
         draw(renderer);
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::enterEditMode"), cursor);
+        printLog(F("ItemInput::enterEditMode"), value);
     };
     void back(MenuRenderer* renderer) {
         renderer->clearBlinker();
@@ -213,7 +213,7 @@ class ItemInput : public MenuItem {
             callback(value);
         }
         // Log
-        printLog(F("ItemInput::exitEditMode"), cursor);
+        printLog(F("ItemInput::exitEditMode"), value);
     };
     void left(MenuRenderer* renderer) {
         if (cursor == 0) {
