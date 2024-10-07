@@ -2,17 +2,42 @@ async function generateReleaseNotes(github, context) {
   const { owner, repo } = context.repo;
   const currentTag = process.env.CURRENT_TAG;
 
+  console.log(`Current Tag: ${currentTag}`);
+
   // Fetch all tags
   const { data: tags } = await github.rest.repos.listTags({
     owner,
     repo,
-    per_page: 100,
+    per_page: 10,
   });
 
   // Find the previous tag
   const currentTagIndex = tags.findIndex((tag) => tag.name === currentTag);
   const previousTag =
-    currentTagIndex > 0 ? tags[currentTagIndex + 1].name : null;
+    currentTagIndex < tags.length - 1 ? tags[currentTagIndex + 1].name : null;
+
+  const previousTagDate = previousTag
+    ? new Date(
+        tags.find((tag) => tag.name === previousTag)?.commit?.committer?.date ||
+          0
+      )
+    : new Date(0);
+  const currentTagDate = new Date(
+    tags.find((tag) => tag.name === currentTag)?.commit?.committer?.date || 0
+  );
+
+  console.log(`Previous Tag: ${previousTag} (${previousTagDate})`);
+  console.log(
+    `Previous Tag: ${JSON.stringify(
+      tags.find((tag) => tag.name === previousTag)
+    )}`
+  );
+  console.log(`Current Tag: ${currentTag} (${currentTagDate})`);
+  console.log(
+    `Current Tag: ${JSON.stringify(
+      tags.find((tag) => tag.name === currentTag)
+    )}`
+  );
 
   // Fetch PRs merged between previousTag and currentTag
   const { data: pulls } = await github.rest.pulls.list({
@@ -36,17 +61,12 @@ async function generateReleaseNotes(github, context) {
     .filter((pr) => pr.merged_at)
     .filter((pr) => {
       const mergedAt = new Date(pr.merged_at);
-      const previousTagDate = previousTag
-        ? new Date(
-            tags.find((tag) => tag.name === previousTag)?.commit?.committer
-              ?.date || 0
-          )
-        : new Date(0);
-      const currentTagDate = new Date(
-        tags.find((tag) => tag.name === currentTag)?.commit?.committer?.date ||
-          0
+      const isInRange =
+        mergedAt > previousTagDate && mergedAt <= currentTagDate;
+      console.log(
+        `PR #${pr.number} merged at ${mergedAt} is in range: ${isInRange}`
       );
-      return mergedAt > previousTagDate && mergedAt <= currentTagDate;
+      return isInRange;
     })
     .forEach((pr) => {
       pr.labels.forEach((label) => {
@@ -58,6 +78,8 @@ async function generateReleaseNotes(github, context) {
       });
     });
 
+  console.log(`Categories: ${JSON.stringify(categories, null, 2)}`);
+
   const releaseNotes = Object.entries(categories)
     .filter(([_, notes]) => notes.length > 0)
     .map(
@@ -67,6 +89,8 @@ async function generateReleaseNotes(github, context) {
         }\n${notes.join("\n")}`
     )
     .join("\n\n");
+
+  console.log(`Release Notes: ${releaseNotes}`);
 
   return releaseNotes;
 }
