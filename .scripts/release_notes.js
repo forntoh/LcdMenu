@@ -89,6 +89,7 @@ async function generateReleaseNotes(github, context) {
       pr.labels.forEach((label) => {
         if (label.name === "breaking-change") {
           hasBreakingChanges = true;
+          return;
         }
         if (categories[label.name]) {
           categories[label.name].push(prEntry);
