@@ -85,7 +85,7 @@ class SimpleRotaryAdapter : public InputInterface {
         }
 
         // Check if the doublePressThreshold has elapsed for pending enter action
-        if ((!menu->getDisplay()->getEditModeEnabled() && pendingEnter) || (pendingEnter && (currentTime - lastPressTime >= DOUBLE_PRESS_THRESHOLD))) {
+        if ((!menu->getRenderer()->isInEditMode() && pendingEnter) || (pendingEnter && (currentTime - lastPressTime >= DOUBLE_PRESS_THRESHOLD))) {
             menu->process(ENTER);  // Call ENTER action (short press)
             pendingEnter = false;
         }

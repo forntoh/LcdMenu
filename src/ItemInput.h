@@ -72,25 +72,11 @@ class ItemInput : public MenuItem {
      *        │<── viewSize ─>│
      * ```
      *
-     * Effectively const, but initialized lately when display is injected.
+     * Effectively const, but initialized lately when renderer is injected.
      */
-    inline uint8_t getViewSize(DisplayInterface* display) {
-        return display->getMaxCols() - (strlen(text) + 2) - 1;
+    inline uint8_t getViewSize(MenuRenderer* renderer) {
+        return renderer->getMaxCols() - (strlen(text) + 2) - 1;
     };
-
-    uint8_t constrainBlinkerPosition(DisplayInterface* display, uint8_t blinkerPosition) {
-        uint8_t maxCols = display->getMaxCols();
-        //
-        // calculate lower and upper bound
-        //
-        uint8_t lb = strlen(text) + 2;
-        uint8_t ub = lb + strlen(value);
-        ub = constrain(ub, lb, maxCols - 2);
-        //
-        // set cursor position
-        //
-        return constrain(blinkerPosition, lb, ub);
-    }
 
   public:
     /**
@@ -143,38 +129,49 @@ class ItemInput : public MenuItem {
     fptrStr getCallbackStr() { return callback; }
 
   protected:
-    void draw(DisplayInterface* display, uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(value, view, getViewSize(display), buf);
-        display->drawItem(row, text, ':', buf);
+    void draw(MenuRenderer* renderer) override {
+        uint8_t viewSize = getViewSize(renderer);
+        char* vbuf = new char[viewSize + 1];
+        substring(value, view, viewSize, vbuf);
+        vbuf[viewSize] = '\0';
+
+        uint8_t maxCols = renderer->getMaxCols();
+        char buf[maxCols];
+        concat(text, ':', buf);
+        concat(buf, vbuf, buf);
+        renderer->drawItem(buf);
+
+        delete[] vbuf;  // Free allocated memory
     }
     bool process(LcdMenu* menu, const unsigned char command) override {
-        DisplayInterface* display = menu->getDisplay();
-        if (display->getEditModeEnabled()) {
+        MenuRenderer* renderer = menu->getRenderer();
+        if (renderer->isInEditMode()) {
             if (isprint(command)) {
-                typeChar(display, command);
+                typeChar(renderer, command);
                 return true;
             }
             switch (command) {
+                case ENTER:
+                    enter(renderer);
+                    return true;
                 case BACK:
-                    back(display);
+                    back(renderer);
                     return true;
                 case UP:
                     return true;
                 case DOWN:
                     return true;
                 case LEFT:
-                    left(display);
+                    left(renderer);
                     return true;
                 case RIGHT:
-                    right(display);
+                    right(renderer);
                     return true;
                 case BACKSPACE:
-                    backspace(display);
+                    backspace(renderer);
                     return true;
                 case CLEAR:
-                    clear(display);
+                    clear(renderer);
                     return true;
                 default:
                     return false;
@@ -182,86 +179,92 @@ class ItemInput : public MenuItem {
         } else {
             switch (command) {
                 case ENTER:
-                    enter(display);
+                    enter(renderer);
                     return true;
                 default:
                     return false;
             }
         }
     }
-    void enter(DisplayInterface* display) {
+    void enter(MenuRenderer* renderer) {
         // Move cursor to the latest index
         uint8_t length = strlen(value);
         cursor = length;
         // Move view if needed
-        uint8_t viewSize = getViewSize(display);
+        uint8_t viewSize = getViewSize(renderer);
         if (cursor > viewSize) {
             view = length - (viewSize - 1);
         }
         // Redraw
-        MenuItem::draw(display);
-        display->setEditModeEnabled(true);
-        display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2 + cursor - view));
-        display->drawBlinker();
+        renderer->setEditMode(true);
+        draw(renderer);
+        renderer->drawBlinker();
+        // Log
         printLog(F("ItemInput::enterEditMode"), value);
     };
-    void back(DisplayInterface* display) {
-        display->clearBlinker();
-        display->setEditModeEnabled(false);
+    void back(MenuRenderer* renderer) {
+        renderer->clearBlinker();
+        renderer->setEditMode(false);
         // Move view to 0 and redraw before exit
         cursor = 0;
         view = 0;
-        MenuItem::draw(display);
+        draw(renderer);
         if (callback != NULL) {
             callback(value);
         }
+        // Log
         printLog(F("ItemInput::exitEditMode"), value);
     };
-    void left(DisplayInterface* display) {
+    void left(MenuRenderer* renderer) {
         if (cursor == 0) {
             return;
         }
         cursor--;
         if (cursor < view) {
             view--;
-            MenuItem::draw(display);
+            draw(renderer);
         }
-        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
+        renderer->moveCursor(renderer->getCursorCol() - 1, renderer->getCursorRow());
+        renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::left"), value);
     };
     /**
      * @brief Moves the cursor to the right within the input value.
      */
-    void right(DisplayInterface* display) {
+    void right(MenuRenderer* renderer) {
         if (cursor == strlen(value)) {
             return;
         }
         cursor++;
-        uint8_t viewSize = getViewSize(display);
+        uint8_t viewSize = getViewSize(renderer);
         if (cursor > (view + viewSize - 1)) {
             view++;
-            MenuItem::draw(display);
+            draw(renderer);
         }
-        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
+        renderer->moveCursor(renderer->getCursorCol() + 1, renderer->getCursorRow());
+        renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::right"), value);
     }
     /**
      * @brief Handles the backspace action for the input field.
      */
-    void backspace(DisplayInterface* display) {
+    void backspace(MenuRenderer* renderer) {
         if (strlen(value) == 0 || cursor == 0) {
             return;
         }
         remove(value, cursor - 1, 1);
-        printLog(F("ItemInput::backspace"), value);
         cursor--;
         if (cursor < view) {
             view--;
         }
-        MenuItem::draw(display);
-        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() - 1));
+        uint8_t cursorCol = renderer->getCursorCol();
+        draw(renderer);
+        renderer->moveCursor(cursorCol - 1, renderer->getCursorRow());
+        renderer->drawBlinker();
+        // Log
+        printLog(F("ItemInput::backspace"), value);
     }
     /**
      * @brief Types a character into the current input value at the cursor position.
@@ -270,12 +273,12 @@ class ItemInput : public MenuItem {
      * If the cursor is within the current length of the string, the string is split and the character
      * is inserted in between. If the cursor is at the end of the string, the character is appended.
      * The cursor is then incremented, and the view is adjusted if necessary.
-     * Finally, the display is updated and the blinker position is reset.
+     * Finally, the renderer is updated and the blinker position is reset.
      *
-     * @param display Pointer to the DisplayInterface object used for rendering.
+     * @param renderer Pointer to the MenuRenderer object used for rendering.
      * @param character The character to be typed into the input value.
      */
-    void typeChar(DisplayInterface* display, const unsigned char character) {
+    void typeChar(MenuRenderer* renderer, const unsigned char character) {
         uint8_t length = strlen(value);
         if (cursor < length) {
             char start[length];
@@ -291,23 +294,24 @@ class ItemInput : public MenuItem {
             value = buf;
         }
         cursor++;
-        uint8_t viewSize = getViewSize(display);
+        uint8_t viewSize = getViewSize(renderer);
         if (cursor > (view + viewSize - 1)) {
             view++;
         }
-        MenuItem::draw(display);
-        display->resetBlinker(constrainBlinkerPosition(display, display->getBlinkerPosition() + 1));
+        draw(renderer);
+        renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::typeChar"), character);
     }
     /**
      * @brief Clear the value of the input field
      */
-    void clear(DisplayInterface* display) {
+    void clear(MenuRenderer* renderer) {
         value = (char*)"";
+        draw(renderer);
+        renderer->drawBlinker();
+        // Log
         printLog(F("ItemInput::clear"), value);
-        MenuItem::draw(display);
-        display->resetBlinker(constrainBlinkerPosition(display, strlen(text) + 2));
     }
 };
 

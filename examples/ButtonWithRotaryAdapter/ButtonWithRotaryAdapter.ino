@@ -11,6 +11,7 @@
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/ButtonAdapter.h>
 #include <input/SimpleRotaryAdapter.h>
+#include <renderer/CharacterDisplayRenderer.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -32,16 +33,17 @@ MENU_SCREEN(mainScreen, mainItems,
 // clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
-LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
-LcdMenu menu(lcdAdapter);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
+CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
+LcdMenu menu(renderer);
 SimpleRotary encoder(2, 3, 4);
 SimpleRotaryAdapter rotaryInput(&menu, &encoder);  // Rotary input adapter
-Button backspaceBtn(5);
+Button backspaceBtn(11);
 ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);  // Push button for backspace
 
 void setup() {
     backspaceBtn.begin();
-    lcdAdapter.begin();
+    renderer.begin();
     Serial.begin(9600);
     menu.setScreen(mainScreen);
 }

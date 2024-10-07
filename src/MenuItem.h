@@ -27,7 +27,7 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
-#include "display/DisplayInterface.h"
+#include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <utils/utils.h>
 
@@ -45,7 +45,6 @@ class MenuScreen;
  * ```
  */
 class MenuItem {
-    friend LcdMenu;
     friend MenuScreen;
 
   protected:
@@ -88,22 +87,11 @@ class MenuItem {
         return false;
     };
     /**
-     * @brief Draw this menu item on specified display on current line.
-     * @param display Pointer to the DisplayInterface object used for rendering.
+     * @brief Draw this menu item on specified display on current row.
+     * @param renderer The renderer to use for drawing.
      */
-    const void draw(DisplayInterface* display) {
-        draw(display, display->getCursorRow());
-    };
-    /**
-     * @brief Draw this menu item on specified display on specified line.
-     * @param display Pointer to the DisplayInterface object used for rendering.
-     * @param row the number of row to draw on
-     */
-    virtual void draw(DisplayInterface* display, uint8_t row) {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(text, 0, maxCols - 2, buf);
-        display->drawItem(row, buf);
+    virtual void draw(MenuRenderer* renderer) {
+        renderer->drawItem(text);
     };
 };
 

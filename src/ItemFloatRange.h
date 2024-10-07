@@ -26,7 +26,7 @@ class ItemFloatRange : public ItemRangeBase<float> {
     }
 
     char* getDisplayValue() override {
-        static char buffer[20];
+        static char buffer[10];
         dtostrf(currentValue, calculateWidth(currentValue, decimalPlaces), decimalPlaces, buffer);
         if (unit == NULL) {
             return buffer;

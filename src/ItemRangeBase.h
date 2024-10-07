@@ -107,19 +107,21 @@ class ItemRangeBase : public MenuItem {
     virtual char* getDisplayValue() = 0;
 
   protected:
-    void draw(DisplayInterface* display, uint8_t row) override {
-        uint8_t maxCols = display->getMaxCols();
-        static char* buf = new char[maxCols];
-        substring(getDisplayValue(), 0, maxCols - strlen(text) - 2, buf);
-        display->drawItem(row, text, ':', buf);
+    void draw(MenuRenderer* renderer) override {
+        uint8_t maxCols = renderer->getMaxCols();
+        char buf[maxCols];
+        concat(text, ':', buf);
+        concat(buf, getDisplayValue(), buf);
+        renderer->drawItem(buf);
     }
 
     bool process(LcdMenu* menu, const unsigned char command) override {
-        DisplayInterface* display = menu->getDisplay();
-        if (display->getEditModeEnabled()) {
+        MenuRenderer* renderer = menu->getRenderer();
+        if (renderer->isInEditMode()) {
             switch (command) {
                 case BACK:
-                    display->setEditModeEnabled(false);
+                    renderer->setEditMode(false);
+                    draw(renderer);
                     if (callback != NULL && !commitOnChange) {
                         callback(currentValue);
                     }
@@ -127,7 +129,7 @@ class ItemRangeBase : public MenuItem {
                     return true;
                 case UP:
                     if (increment()) {
-                        MenuItem::draw(display);
+                        draw(renderer);
                         if (commitOnChange && callback != NULL) {
                             callback(currentValue);
                         }
@@ -135,7 +137,7 @@ class ItemRangeBase : public MenuItem {
                     return true;
                 case DOWN:
                     if (decrement()) {
-                        MenuItem::draw(display);
+                        draw(renderer);
                         if (commitOnChange && callback != NULL) {
                             callback(currentValue);
                         }
@@ -147,7 +149,8 @@ class ItemRangeBase : public MenuItem {
         } else {
             switch (command) {
                 case ENTER:
-                    display->setEditModeEnabled(true);
+                    renderer->setEditMode(true);
+                    draw(renderer);
                     printLog(F("ItemRangeBase::enterEditMode"), currentValue);
                     return true;
                 default:

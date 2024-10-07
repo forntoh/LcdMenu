@@ -1,7 +1,7 @@
 #pragma once
 
 #include "LcdMenu.h"
-#include "display/DisplayInterface.h"
+#include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <MenuItem.h>
 #include <utils/utils.h>
@@ -22,7 +22,7 @@ class MenuScreen {
     MenuScreen* parent = NULL;
     /**
      * @brief The menu items to be displayed on screen.
-     * These items will be drawn on display.
+     * These items will be drawn on renderer.
      */
     MenuItem** items = NULL;
     /**
@@ -42,7 +42,7 @@ class MenuScreen {
      * ```
      *
      * When `up` or `down` then this position will be moved over the items accordingly.
-     * Always in range [`view`, `view` + `display.getMaxRows()` - 1].
+     * Always in range [`view`, `view` + `renderer.getMaxRows()` - 1].
      */
     uint8_t cursor = 0;
     /**
@@ -62,16 +62,18 @@ class MenuScreen {
      * ```
      *
      * Is moved when `cursor` crosses the borders of visible area.
-     * When number of items < `display.getMaxRows()` this index should be 0.
-     * The size of the view is always the same and equals to `display.getMaxRows()`.
+     * When number of items < `renderer.getMaxRows()` this index should be 0.
+     * The size of the view is always the same and equals to `renderer.getMaxRows()`.
      */
     uint8_t view = 0;
+
+    uint8_t itemCount = 0;
 
   public:
     /**
      * Constructor
      */
-    MenuScreen(MenuItem** items) : items(items) {}
+    MenuScreen(MenuItem** items);
     /**
      * @brief Set new parent screen.
      */
@@ -93,17 +95,18 @@ class MenuScreen {
 
   protected:
     /**
-     * @brief Get the number of items in the menu.
-     */
-    uint8_t itemsCount();
-    /**
      * @brief Move cursor to specified position.
      */
-    void setCursor(DisplayInterface* display, uint8_t position);
+    void setCursor(MenuRenderer* renderer, uint8_t position);
     /**
-     * @brief Draw the screen on display.
+     * @brief Draw the screen on screen.
+     * @param renderer The renderer to use for drawing.
      */
-    void draw(DisplayInterface* display);
+    void draw(MenuRenderer* renderer);
+    /**
+     * @brief Sync indicators with the renderer.
+     */
+    void syncIndicators(uint8_t index, MenuRenderer* renderer);
     /**
      * @brief Process the command.
      * @return `true` if the command was processed, `false` otherwise.
@@ -112,15 +115,15 @@ class MenuScreen {
     /**
      * @brief Move cursor up.
      */
-    void up(DisplayInterface* display);
+    void up(MenuRenderer* renderer);
     /**
      * @brief Move cursor down.
      */
-    void down(DisplayInterface* display);
+    void down(MenuRenderer* renderer);
     /**
      * @brief Reset the screen to initial state.
      */
-    void reset(DisplayInterface* display);
+    void reset(MenuRenderer* renderer);
 };
 
 #define MENU_SCREEN(screen, items, ...)         \

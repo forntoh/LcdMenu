@@ -1,7 +1,7 @@
 #include "LcdMenu.h"
 
-DisplayInterface* LcdMenu::getDisplay() {
-    return &display;
+MenuRenderer* LcdMenu::getRenderer() {
+    return &renderer;
 }
 
 MenuScreen* LcdMenu::getScreen() {
@@ -11,8 +11,8 @@ MenuScreen* LcdMenu::getScreen() {
 void LcdMenu::setScreen(MenuScreen* screen) {
     printLog(F("LcdMenu::setScreen"));
     this->screen = screen;
-    display.clear();
-    this->screen->draw(&display);
+    renderer.display->clear();
+    this->screen->draw(&renderer);
 }
 
 bool LcdMenu::process(const unsigned char c) {
@@ -23,7 +23,7 @@ bool LcdMenu::process(const unsigned char c) {
 };
 
 void LcdMenu::reset() {
-    this->screen->setCursor(&display, 0);
+    this->screen->setCursor(&renderer, 0);
 }
 
 void LcdMenu::hide() {
@@ -31,7 +31,7 @@ void LcdMenu::hide() {
         return;
     }
     enabled = false;
-    display.clear();
+    renderer.display->clear();
 }
 
 void LcdMenu::show() {
@@ -39,8 +39,8 @@ void LcdMenu::show() {
         return;
     }
     enabled = true;
-    display.clear();
-    screen->draw(&display);
+    renderer.display->clear();
+    screen->draw(&renderer);
 }
 
 uint8_t LcdMenu::getCursor() {
@@ -51,7 +51,7 @@ void LcdMenu::setCursor(uint8_t cursor) {
     if (!enabled) {
         return;
     }
-    screen->setCursor(&display, cursor);
+    screen->setCursor(&renderer, cursor);
 }
 
 MenuItem* LcdMenu::getItemAt(uint8_t position) {
@@ -62,5 +62,5 @@ void LcdMenu::refresh() {
     if (!enabled) {
         return;
     }
-    screen->draw(&display);
+    screen->draw(&renderer);
 }

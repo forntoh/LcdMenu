@@ -6,6 +6,7 @@
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/KeyboardAdapter.h>
+#include <renderer/CharacterDisplayRenderer.h>
 
 // 2x20 LCD Display
 #define LCD_ROWS 4
@@ -33,8 +34,9 @@ void toggleRelay3(bool isOn) {
 }
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
-LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
-LcdMenu menu(lcdAdapter);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
+CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
+LcdMenu menu(renderer);
 KeyboardAdapter keyboard(&menu, &Serial);
 
 extern MenuScreen* relayScreen;
@@ -103,7 +105,7 @@ static void keyPad(void* pvParameters) {
 void setup() {
     Serial.begin(9600);
     // LCD activation
-    lcdAdapter.begin();
+    renderer.begin();
     menu.setScreen(mainScreen);
     // Run RTOS func.
     xTaskCreate(keyPad, "keyPad", 128, NULL, tskIDLE_PRIORITY + 2, NULL);
@@ -114,5 +116,5 @@ void setup() {
 }
 
 void loop() {
-    lcdAdapter.updateTimer();
+    renderer.updateTimer();
 }

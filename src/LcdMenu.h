@@ -26,7 +26,7 @@
 #pragma once
 
 #include "MenuScreen.h"
-#include "display/DisplayInterface.h"
+#include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <MenuItem.h>
 #include <utils/utils.h>
@@ -42,9 +42,9 @@
 class LcdMenu {
   private:
     /**
-     * @brief Display Interface.
+     * @brief The renderer used to display the menu on the screen.
      */
-    DisplayInterface& display;
+    MenuRenderer& renderer;
     /**
      * @brief Currently visible menu screen.
      */
@@ -61,12 +61,12 @@ class LcdMenu {
     /**
      * Construct new instance of `LcdMenu`.
      */
-    LcdMenu(DisplayInterface& display) : display(display) {}
+    LcdMenu(MenuRenderer& renderer) : renderer(renderer) {}
     /**
-     * @brief Get the display.
-     * @return the display
+     * @brief Get the renderer.
+     * @return the renderer
      */
-    DisplayInterface* getDisplay();
+    MenuRenderer* getRenderer();
     /**
      * @brief Get the screen that currently on display.
      * @return currently active screen
@@ -75,7 +75,7 @@ class LcdMenu {
     /**
      * @brief Set new screen to display.
      * The only place that clears whole screen.
-     * Then it Will `draw` of new screen screen on display.
+     * Then it Will `draw` of new screen screen using the renderer.
      * @param screen the new screen to display
      */
     void setScreen(MenuScreen* screen);

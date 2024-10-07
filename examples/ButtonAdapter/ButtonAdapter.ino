@@ -4,6 +4,7 @@
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/ButtonAdapter.h>
+#include <renderer/CharacterDisplayRenderer.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -21,20 +22,21 @@ MENU_SCREEN(mainScreen, mainItems,
 // clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
-LiquidCrystal_I2CAdapter lcdAdapter(&lcd, LCD_COLS, LCD_ROWS);
-LcdMenu menu(lcdAdapter);
-Button upBtn(2);
+LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
+CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
+LcdMenu menu(renderer);
+Button upBtn(5);
 ButtonAdapter upBtnA(&menu, &upBtn, UP);
-Button downBtn(3);
+Button downBtn(6);
 ButtonAdapter downBtnA(&menu, &downBtn, DOWN);
-Button enterBtn(4);
+Button enterBtn(7);
 ButtonAdapter enterBtnA(&menu, &enterBtn, ENTER);
 
 void setup() {
     upBtn.begin();
     downBtn.begin();
     enterBtn.begin();
-    lcdAdapter.begin();
+    renderer.begin();
     Serial.begin(9600);
     menu.setScreen(mainScreen);
 }
