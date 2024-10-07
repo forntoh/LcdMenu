@@ -109,7 +109,10 @@ async function generateReleaseNotes(github, context) {
     )
     .join("\n\n");
 
-  const fullChangelog = `**Full Changelog**: ${pr.base.repo.html_url}/compare/${previousTag}...${currentTag}`;
+  // Get the repository URL from the first pull request
+  const repoUrl = pulls.length > 0 ? pulls[0].base.repo.html_url : "";
+
+  const fullChangelog = `**Full Changelog**: ${repoUrl}/compare/${previousTag}...${currentTag}`;
 
   return `${releaseNotes}\n\n${fullChangelog}`;
 }
