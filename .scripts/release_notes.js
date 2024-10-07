@@ -59,19 +59,21 @@ async function generateReleaseNotes(github, context) {
 
   const categoryNames = {
     feature: "New Features",
-    bugfix: "Bug Fixes",
-    documentation: "Documentation Updates",
     enhancement: "Enhancements",
+    bugfix: "Bug Fixes",
     chore: "Chore Updates",
+    documentation: "Documentation Updates",
   };
 
   const categories = {
     feature: [],
     enhancement: [],
     bugfix: [],
-    documentation: [],
     chore: [],
+    documentation: [],
   };
+
+  let hasBreakingChanges = false;
 
   pulls
     .filter((pr) => pr.merged_at)
@@ -84,13 +86,16 @@ async function generateReleaseNotes(github, context) {
         pr.user.login
       } in ${pr.html_url}`;
 
-      const matchedLabel = pr.labels.find((label) => categories[label.name]);
-
-      if (matchedLabel) {
-        categories[matchedLabel.name].push(prEntry);
-      } else {
-        categories["chore"].push(prEntry);
-      }
+      pr.labels.forEach((label) => {
+        if (label.name === "breaking-change") {
+          hasBreakingChanges = true;
+        }
+        if (categories[label.name]) {
+          categories[label.name].push(prEntry);
+        } else if (!categories[label.name] && label.name === pr.labels[pr.labels.length - 1].name) {
+          categories["chore"].push(prEntry);
+        }
+      });
     });
 
   console.log(`Categories: ${JSON.stringify(categories, null, 2)}`);
@@ -106,9 +111,13 @@ async function generateReleaseNotes(github, context) {
     )
     .join("\n\n");
 
+  const breakingChangesSection = hasBreakingChanges
+    ? `### Breaking Changes\n\n- This release introduces breaking changes. Please review [the migration guide](https://lcdmenu.forntoh.dev/reference/migration/index.html) for details on how to update your code.\n\n`
+    : "";
+
   const repoUrl = pulls.length > 0 ? pulls[0].base.repo.html_url : "";
   const fullChangelog = `**Full Changelog**: ${repoUrl}/compare/${previousTag}...${currentTag}`;
-  return `${releaseNotes}\n\n${fullChangelog}`;
+  return `${releaseNotes}\n\n${breakingChangesSection}\n\n${fullChangelog}`;
 }
 
 module.exports = generateReleaseNotes;
