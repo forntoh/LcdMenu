@@ -230,7 +230,7 @@ The menu system provides a set of built-in controls that you can use to interact
 <p><strong>UP/DOWN</strong> and <strong>ENTER</strong> are the most commonly used controls, as they allow you to navigate through the menu structure and select items.
 The other controls are used in specific scenarios, such as when you need to adjust a value in an input item or delete characters in an input field.
 The back control can be bound to a menu item, allowing you to navigate back to the previous menu screen without having to use a dedicated “Back” button.</p>
-<p>You can perform an action on the menu by calling the <code class="docutils literal notranslate"><span class="pre">process(cmd)</span></code> method on the menu object, where <code class="docutils literal notranslate"><span class="pre">cmd</span></code> is the control command you want to execute.
+<p>You can perform an action on the menu by calling the <a class="reference internal" href="../../reference/api/LcdMenu.html#_CPPv4N7LcdMenu7processEKh" title="LcdMenu::process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">LcdMenu::process()</span></code></a> method on the menu object and pass the command you want to execute.
 For example, to move the selection down in the menu, you can call <code class="docutils literal notranslate"><span class="pre">menu.process(DOWN)</span></code>.</p>
 <p>Luckily, you don’t have to worry about implementing these controls yourself.
 The menu system takes care of handling the controls and updating the menu state accordingly with the help of input adapters.
