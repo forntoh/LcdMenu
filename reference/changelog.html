@@ -221,21 +221,32 @@
 </section>
 <section id="lcdmenu-v4-1-0">
 <h2>LcdMenu v4.1.0<a class="headerlink" href="#lcdmenu-v4-1-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v4-1-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<section id="id27">
+<h3>New Features ⭐️<a class="headerlink" href="#id27" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id27'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p><strong>Menu Command Processor Helper for Rotary Encoder</strong> by @forntoh in #185
 A helper function was added to handle menu navigation using a rotary encoder. This makes it easier for developers to implement rotary-based navigation for their LCD menus, streamlining the interaction process. It allows smoother scrolling through menu items and simplifies input with just a rotary encoder.</p></li>
 </ul>
+</section>
+<section id="id28">
+<h3>Enhancements:<a class="headerlink" href="#id28" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id28'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p><strong>Examples</strong>: Added [basic rotary encoder](examples/SimpleInput/SimpleInput.ino) and [input rotary](examples/InputRotary/InputRotary.ino) examples to demonstrate functionality.</p></li>
 </ul>
+</section>
+<section id="id29">
+<h3>Bug Fixes:<a class="headerlink" href="#id29" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id29'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p><strong>Code Cleanup</strong>: Removed unused print statements to improve code quality.</p></li>
 </ul>
 <p><strong>Full Changelog</strong>: <a class="reference external" href="https://github.com/forntoh/LcdMenu/compare/4.0.0...4.1.0">https://github.com/forntoh/LcdMenu/compare/4.0.0…4.1.0</a></p>
 </section>
+</section>
 <section id="lcdmenu-4-0-0">
 <h2>LcdMenu 4.0.0<a class="headerlink" href="#lcdmenu-4-0-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-4-0-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
 <p>This release introduces a major refactor of the display management system, aimed at making it more modular and flexible. The key change is the introduction of a display interface abstraction that decouples the display logic from the specific hardware, allowing for easier integration of different display types.</p>
+<section id="what-s-changed">
+<h3>What’s Changed<a class="headerlink" href="#what-s-changed" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#what-s-changed'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Display Interface Abstraction:
 * A new <cite>DisplayInterface</cite> class has been introduced to define a common interface for all display types.
@@ -247,23 +258,33 @@ A helper function was added to handle menu navigation using a rotary encoder. Th
 * The menu and cursor handling logic has been adapted to work seamlessly with the new interface, ensuring backward compatibility while providing enhanced flexibility.</p></li>
 <li><p>Debug mode is now turned off by default</p></li>
 </ul>
+</section>
+<section id="bug-fixes-and-improvements">
+<h3>Bug Fixes and Improvements<a class="headerlink" href="#bug-fixes-and-improvements" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#bug-fixes-and-improvements'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Memory Management: Optimized the handling of dynamic memory allocation to prevent memory leaks and improve stability.</p></li>
 <li><p>Code Cleanup: Refactored the codebase for better readability and maintainability. Deprecated functions and variables have been removed or replaced with more efficient alternatives.</p></li>
 <li><p>Documentation: Updated and expanded the documentation to reflect the new architecture and features.</p></li>
 </ul>
+</section>
+<section id="id30">
+<h3>Breaking Changes<a class="headerlink" href="#id30" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id30'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>API Changes: The introduction of the DisplayInterface class and its implementation may require changes to existing projects. Users must update their code to work with the new interface and adapters.</p></li>
 <li><p>Some methods and features directly tied to the LiquidCrystal_I2C library have been refactored or removed. Please review [the migration guide](<a class="reference external" href="https://lcdmenu.forntoh.dev/reference/migration-guide">https://lcdmenu.forntoh.dev/reference/migration-guide</a>) for details on how to update your code.</p></li>
 </ul>
 <p><strong>Full Changelog</strong>: <a class="reference external" href="https://github.com/forntoh/LcdMenu/compare/3.5.6...4.0.0">https://github.com/forntoh/LcdMenu/compare/3.5.6…4.0.0</a></p>
 </section>
+</section>
 <section id="lcdmenu-3-5-6">
 <h2>LcdMenu 3.5.6<a class="headerlink" href="#lcdmenu-3-5-6" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-3-5-6'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<section id="id31">
+<h3>Chore Updates<a class="headerlink" href="#id31" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id31'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Make <cite>isAtTheStart</cite> and <cite>isAtTheEnd</cite> public by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/172">#172</a></p></li>
 </ul>
 <p><strong>Full Changelog</strong>: <a class="reference external" href="https://github.com/forntoh/LcdMenu/compare/3.5.5...3.5.6">https://github.com/forntoh/LcdMenu/compare/3.5.5…3.5.6</a></p>
+</section>
 </section>
 <section id="lcdmenu-3-5-5">
 <h2>LcdMenu 3.5.5<a class="headerlink" href="#lcdmenu-3-5-5" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-3-5-5'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
@@ -473,7 +494,7 @@ No need to call <cite>menu.getItemAt(menu.getCurrentPosition())</cite> before ge
 <ul class="simple">
 <li><p>Fixed CI workflow.</p></li>
 <li><p>Messed up versioning in PlatformIO Library manager 😪 _(now has to start at 2.0.0)_
-_Because I abandoned the feature I was working on in <cite>2.0.0-beta</cite>, it always shows on the top even though it’s not the latest <a href="#id77"><span class="problematic" id="id78">version_</span></a></p></li>
+_Because I abandoned the feature I was working on in <cite>2.0.0-beta</cite>, it always shows on the top even though it’s not the latest <a href="#id82"><span class="problematic" id="id83">version_</span></a></p></li>
 </ul>
 </section>
 <section id="lcdmenu-1-2-0">
@@ -511,9 +532,22 @@ _Because I abandoned the feature I was working on in <cite>2.0.0-beta</cite>, it
 <li><a :data-current="activeSection === '#id24'" class="reference internal" href="#id24">Bug Fixes</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#lcdmenu-v4-1-0'" class="reference internal" href="#lcdmenu-v4-1-0">LcdMenu v4.1.0</a></li>
-<li><a :data-current="activeSection === '#lcdmenu-4-0-0'" class="reference internal" href="#lcdmenu-4-0-0">LcdMenu 4.0.0</a></li>
-<li><a :data-current="activeSection === '#lcdmenu-3-5-6'" class="reference internal" href="#lcdmenu-3-5-6">LcdMenu 3.5.6</a></li>
+<li><a :data-current="activeSection === '#lcdmenu-v4-1-0'" class="reference internal" href="#lcdmenu-v4-1-0">LcdMenu v4.1.0</a><ul>
+<li><a :data-current="activeSection === '#id27'" class="reference internal" href="#id27">New Features ⭐️</a></li>
+<li><a :data-current="activeSection === '#id28'" class="reference internal" href="#id28">Enhancements:</a></li>
+<li><a :data-current="activeSection === '#id29'" class="reference internal" href="#id29">Bug Fixes:</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#lcdmenu-4-0-0'" class="reference internal" href="#lcdmenu-4-0-0">LcdMenu 4.0.0</a><ul>
+<li><a :data-current="activeSection === '#what-s-changed'" class="reference internal" href="#what-s-changed">What’s Changed</a></li>
+<li><a :data-current="activeSection === '#bug-fixes-and-improvements'" class="reference internal" href="#bug-fixes-and-improvements">Bug Fixes and Improvements</a></li>
+<li><a :data-current="activeSection === '#id30'" class="reference internal" href="#id30">Breaking Changes</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#lcdmenu-3-5-6'" class="reference internal" href="#lcdmenu-3-5-6">LcdMenu 3.5.6</a><ul>
+<li><a :data-current="activeSection === '#id31'" class="reference internal" href="#id31">Chore Updates</a></li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#lcdmenu-3-5-5'" class="reference internal" href="#lcdmenu-3-5-5">LcdMenu 3.5.5</a></li>
 <li><a :data-current="activeSection === '#lcdmenu-3-5-4'" class="reference internal" href="#lcdmenu-3-5-4">LcdMenu 3.5.4</a></li>
 <li><a :data-current="activeSection === '#lcdmenu-3-5-3'" class="reference internal" href="#lcdmenu-3-5-3">LcdMenu 3.5.3</a></li>
