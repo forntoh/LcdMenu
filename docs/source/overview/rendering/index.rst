@@ -7,6 +7,10 @@ The renderers are responsible for drawing the menu items on the screen. They can
 There are lots of opportunities to create your own custom renderer. You can create a renderer for any output device that you like.
 For example, you could create a renderer for a TFT display, a touchscreen, or even a 3D printer 😄 (the frame rate would be atrocious)
 
+.. hint::
+
+    Renderers can be helpful when you want to customize the appearance of the menu items, such as changing the font size, color, or layout.
+
 .. toctree::
     :maxdepth: 2
     :caption: The library comes with the following built-in renderers:

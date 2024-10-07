@@ -46,4 +46,4 @@ Finally, you need to observe the SimpleRotaryAdapter object in the loop function
 
 The ``SimpleRotaryAdapter`` will take care of translating the rotary encoder movements into menu controls, allowing you to navigate through the menu system with ease.
 
-For more information about the ``SimpleRotaryAdapter``, check the :doc:`API reference </reference/api/input/SimpleRotaryAdapter>`.
+For more information about the ``SimpleRotaryAdapter``, check the :cpp:class:`API reference <SimpleRotaryAdapter>`.

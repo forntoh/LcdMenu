@@ -85,4 +85,4 @@ When the ``Dist`` menu item is selected, the user can adjust the pressure within
     The default behavior is to commit the value only when the user exits the item.
     Check the API reference for more information on how to configure this behavior.
 
-Find more information about the range menu item in the :doc:`API reference </reference/api/ItemFloatRange>`.
+Find more information about the range menu item in the :cpp:class:`API reference <ItemFloatRange>`.

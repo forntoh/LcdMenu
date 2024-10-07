@@ -34,4 +34,4 @@ When the ``Sub-menu 1`` menu item is selected, the sub-menu screen will be displ
 
 You can create multiple levels of sub-menus by nesting sub-menu items within other sub-menu screens.
 
-Find more information about the sub-menu item in the :doc:`API reference </reference/api/ItemSubMenu>`.
+Find more information about the sub-menu item in the :cpp:class:`API reference <ItemSubMenu>`.

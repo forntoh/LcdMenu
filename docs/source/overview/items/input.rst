@@ -51,4 +51,4 @@ This item can be further extended by creating a new class which inherits from ``
         }
     };
 
-For more information about the input item, check the :doc:`API reference </reference/api/ItemInput>`.
+For more information about the input item, check the :cpp:class:`API reference <ItemInput>`.

@@ -55,4 +55,4 @@ Finally, you need to observe the ButtonAdapter object in the loop function:
 
 The ButtonAdapter will take care of translating the physical button presses into menu controls, allowing you to navigate through the menu system with ease.
 
-For more information about the ButtonAdapter, check the :doc:`API reference </reference/api/input/ButtonAdapter>`.
+For more information about the ButtonAdapter, check the :cpp:class:`API reference <ButtonAdapter>`.

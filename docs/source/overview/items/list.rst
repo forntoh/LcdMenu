@@ -41,4 +41,4 @@ When the ``List 1`` menu item is selected, the list of items will be displayed o
 
 You can create multiple list menu items in the same menu screen, each with its own list of items.
 
-Find more information about the list menu item in the :doc:`API reference </reference/api/ItemList>`.
+Find more information about the list menu item in the :cpp:class:`API reference <ItemList>`.
