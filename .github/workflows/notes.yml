@@ -2,6 +2,11 @@ name: Notes
 
 on:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to generate release notes for"
+        required: true
 
 jobs:
   publish:
@@ -24,7 +29,7 @@ jobs:
         id: generate_release_notes
         uses: actions/github-script@v6
         env:
-          CURRENT_TAG: 5.1.0
+          CURRENT_TAG: ${{ github.event.inputs.part_to_increment || '5.1.0' }}
         with:
           script: |
             const generateReleaseNotes = require('.scripts/release_notes.js');

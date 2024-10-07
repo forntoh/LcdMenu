@@ -1,6 +1,6 @@
 function escapeSpecialChars(str) {
   const specialChars = /[\\`*_{}\[\]()#+\-!:.]/g;
-  return str.replace(specialChars, '\\$&');
+  return str.replace(specialChars, "\\$&");
 }
 
 async function generateReleaseNotes(github, context) {
@@ -80,15 +80,17 @@ async function generateReleaseNotes(github, context) {
       return mergedAt > previousTagDate && mergedAt <= currentTagDate;
     })
     .forEach((pr) => {
-      pr.labels.forEach((label) => {
-        if (categories[label.name]) {
-          categories[label.name].push(
-            `* ${escapeSpecialChars(pr.title)} by @${pr.user.login} in ${
-              pr.html_url
-            }`
-          );
-        }
-      });
+      const prEntry = `* ${escapeSpecialChars(pr.title)} by @${
+        pr.user.login
+      } in ${pr.html_url}`;
+
+      const matchedLabel = pr.labels.find((label) => categories[label.name]);
+
+      if (matchedLabel) {
+        categories[matchedLabel.name].push(prEntry);
+      } else {
+        categories["chore"].push(prEntry);
+      }
     });
 
   console.log(`Categories: ${JSON.stringify(categories, null, 2)}`);
