@@ -1,0 +1,41 @@
+name: Notes
+
+on:
+  pull_request:
+
+jobs:
+  publish:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Generate Release Notes
+        id: generate_release_notes
+        uses: actions/github-script@v6
+        env:
+          CURRENT_TAG: 5.1.0
+        with:
+          script: |
+            const generateReleaseNotes = require('.scripts/release_notes.js');
+            const releaseNotes = await generateReleaseNotes();
+            return releaseNotes;
+
+      - name: Create GitHub Release
+        if: success()
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: test
+          release_name: LcdMenu test
+          draft: true
+          prerelease: false
+          body: ${{ steps.generate_release_notes.outputs.result }}
