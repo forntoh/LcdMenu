@@ -40,22 +40,18 @@ jobs:
           echo "UPDATED_VERSION=$(grep "version=" library.properties | cut -d'=' -f2)" >> $GITHUB_ENV
 
       - name: Commit changes
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git add .
           git commit -m "Update version to $UPDATED_VERSION"
-          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git master --force
+          git push origin master
 
       - name: Create Tag
         if: ${{ env.UPDATED_VERSION != '' }}
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git tag -a "${{ env.UPDATED_VERSION }}" -m "Tagging version ${{ env.UPDATED_VERSION }}"
-          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git "${{ env.UPDATED_VERSION }}" --force
+          git push origin "${{ env.UPDATED_VERSION }}"
 
       - name: Publish to PlatformIO
         id: publish
@@ -64,12 +60,11 @@ jobs:
 
       - name: Revert push and delete tag if publish fails
         if: failure()
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git reset --hard HEAD~1
-          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git +HEAD --force
+          git push origin +HEAD
           git tag -d ${{ env.UPDATED_VERSION }}
+          git push origin :refs/tags/${{ env.UPDATED_VERSION }}
 
       - name: Create GitHub Release
         if: success()
@@ -77,7 +72,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: LcdMenu v${{ github.ref_name }}
+          tag_name: ${{ env.UPDATED_VERSION }}
+          release_name: LcdMenu v${{ env.UPDATED_VERSION }}
           draft: true
           prerelease: false
