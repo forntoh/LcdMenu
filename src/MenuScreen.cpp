@@ -38,22 +38,22 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         if (item == nullptr) {
             break;
         }
-        updateScrollIndicators(i, renderer);
-        item->draw(renderer, i);
+        syncIndicators(i, renderer);
+        item->draw(renderer);
     }
 }
 
-void MenuScreen::updateScrollIndicators(uint8_t index, MenuRenderer* renderer) {
+void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
     renderer->hasHiddenItemsAbove = index == 0 && view > 0;
     renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < itemCount;
+    renderer->hasFocus = cursor == view + index;
+    renderer->cursorRow = index;
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     MenuRenderer* renderer = menu->getRenderer();
-    updateScrollIndicators(cursor - view, renderer);
-    if (items[cursor]->process(menu, command)) {
-        return true;
-    }
+    syncIndicators(cursor - view, renderer);
+    if (items[cursor]->process(menu, command)) return true;
     switch (command) {
         case UP:
             up(renderer);
@@ -78,12 +78,9 @@ void MenuScreen::up(MenuRenderer* renderer) {
         return;
     }
     cursor--;
-    if (cursor < view) {
-        view--;
-        draw(renderer);
-    } else {
-        renderCursor(renderer);
-    }
+    if (cursor < view) view--;
+
+    draw(renderer);
     printLog(F("MenuScreen:up"), cursor);
 }
 
@@ -93,20 +90,10 @@ void MenuScreen::down(MenuRenderer* renderer) {
         return;
     }
     cursor++;
-    if (cursor > view + renderer->maxRows - 1) {
-        view++;
-        draw(renderer);
-    } else {
-        renderCursor(renderer);
-    }
-    printLog(F("MenuScreen:down"), cursor);
-}
+    if (cursor > view + renderer->maxRows - 1) view++;
 
-void MenuScreen::renderCursor(MenuRenderer* renderer) {
-    if (renderer->activeRow != cursor - view) {
-        renderer->activeRow = cursor - view;
-        draw(renderer);
-    }
+    draw(renderer);
+    printLog(F("MenuScreen:down"), cursor);
 }
 
 void MenuScreen::reset(MenuRenderer* renderer) {

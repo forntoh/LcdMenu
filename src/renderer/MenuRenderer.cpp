@@ -8,10 +8,6 @@ void MenuRenderer::begin() {
     startTime = millis();
 }
 
-void MenuRenderer::drawItem(uint8_t screenRow, const char* text) {
-    this->cursorRow = screenRow;
-}
-
 void MenuRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) {
     this->cursorCol = cursorCol;
     this->cursorRow = cursorRow;
@@ -38,5 +34,3 @@ uint8_t MenuRenderer::getCursorRow() const { return cursorRow; }
 uint8_t MenuRenderer::getMaxRows() const { return maxRows; }
 
 uint8_t MenuRenderer::getMaxCols() const { return maxCols; }
-
-uint8_t MenuRenderer::getActiveRow() const { return activeRow; }

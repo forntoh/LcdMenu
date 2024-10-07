@@ -29,20 +29,18 @@ class CharacterDisplayRenderer : public MenuRenderer {
     /**
      * @brief Appends a cursor icon to the given text if the specified screen row is active.
      *
-     * @param screenRow The row on the screen to check against the active row.
      * @param text The original text to which the cursor icon will be appended.
      * @param buf The buffer where the resulting text with the cursor icon will be stored.
      */
-    void appendCursorToText(uint8_t screenRow, const char* text, char* buf);
+    void appendCursorToText(const char* text, char* buf);
 
     /**
      * @brief Appends an indicator to the provided text based on the item index and screen row.
      *
-     * @param screenRow The row on the screen where the text will be displayed.
      * @param text The original text to which the indicator may be appended.
      * @param buf The buffer where the resulting text with the indicator will be stored.
      */
-    void appendIndicatorToText(uint8_t screenRow, const char* text, char* buf);
+    void appendIndicatorToText(const char* text, char* buf);
 
     /**
      * @brief Pads the given text with spaces to fit within the available length.
@@ -106,10 +104,9 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * truncating the text if it's too long, padding the text with spaces,
      * appending an indicator to the text, and finally drawing the text on the display.
      *
-     * @param screenRow The row on the screen where the item should be drawn.
      * @param text The text of the menu item to be drawn.
      */
-    void drawItem(uint8_t screenRow, const char* text) override;
+    void drawItem(const char* text) override;
     void draw(uint8_t byte) override;
     void drawBlinker() override;
     void clearBlinker() override;

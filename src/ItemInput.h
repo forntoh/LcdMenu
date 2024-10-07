@@ -129,7 +129,7 @@ class ItemInput : public MenuItem {
     fptrStr getCallbackStr() { return callback; }
 
   protected:
-    void draw(MenuRenderer* renderer, uint8_t screenRow) override {
+    void draw(MenuRenderer* renderer) override {
         uint8_t viewSize = getViewSize(renderer);
         char* vbuf = new char[viewSize + 1];
         substring(value, view, viewSize, vbuf);
@@ -139,7 +139,7 @@ class ItemInput : public MenuItem {
         char buf[maxCols];
         concat(text, ':', buf);
         concat(buf, vbuf, buf);
-        renderer->drawItem(screenRow, buf);
+        renderer->drawItem(buf);
 
         delete[] vbuf;  // Free allocated memory
     }
@@ -197,11 +197,10 @@ class ItemInput : public MenuItem {
         }
         // Redraw
         renderer->setEditMode(true);
-        MenuItem::draw(renderer);
-        renderer->moveCursor(renderer->getCursorCol(), renderer->getActiveRow());
+        draw(renderer);
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::enterEditMode"), value);
+        printLog(F("ItemInput::enterEditMode"), cursor);
     };
     void back(MenuRenderer* renderer) {
         renderer->clearBlinker();
@@ -209,12 +208,12 @@ class ItemInput : public MenuItem {
         // Move view to 0 and redraw before exit
         cursor = 0;
         view = 0;
-        MenuItem::draw(renderer);
+        draw(renderer);
         if (callback != NULL) {
             callback(value);
         }
         // Log
-        printLog(F("ItemInput::exitEditMode"), value);
+        printLog(F("ItemInput::exitEditMode"), cursor);
     };
     void left(MenuRenderer* renderer) {
         if (cursor == 0) {
@@ -223,7 +222,7 @@ class ItemInput : public MenuItem {
         cursor--;
         if (cursor < view) {
             view--;
-            MenuItem::draw(renderer);
+            draw(renderer);
         }
         renderer->moveCursor(renderer->getCursorCol() - 1, renderer->getCursorRow());
         renderer->drawBlinker();
@@ -241,7 +240,7 @@ class ItemInput : public MenuItem {
         uint8_t viewSize = getViewSize(renderer);
         if (cursor > (view + viewSize - 1)) {
             view++;
-            MenuItem::draw(renderer);
+            draw(renderer);
         }
         renderer->moveCursor(renderer->getCursorCol() + 1, renderer->getCursorRow());
         renderer->drawBlinker();
@@ -261,7 +260,7 @@ class ItemInput : public MenuItem {
             view--;
         }
         uint8_t cursorCol = renderer->getCursorCol();
-        MenuItem::draw(renderer);
+        draw(renderer);
         renderer->moveCursor(cursorCol - 1, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
@@ -299,7 +298,7 @@ class ItemInput : public MenuItem {
         if (cursor > (view + viewSize - 1)) {
             view++;
         }
-        MenuItem::draw(renderer);
+        draw(renderer);
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::typeChar"), character);
@@ -309,7 +308,7 @@ class ItemInput : public MenuItem {
      */
     void clear(MenuRenderer* renderer) {
         value = (char*)"";
-        MenuItem::draw(renderer);
+        draw(renderer);
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::clear"), value);

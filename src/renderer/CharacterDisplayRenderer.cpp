@@ -16,20 +16,19 @@ void CharacterDisplayRenderer::begin() {
     static_cast<CharacterDisplayInterface*>(display)->createChar(2, downArrow);
 }
 
-void CharacterDisplayRenderer::drawItem(uint8_t screenRow, const char* text) {
-    MenuRenderer::drawItem(screenRow, text);
+void CharacterDisplayRenderer::drawItem(const char* text) {
     char buf[maxCols + 1];
 
-    appendCursorToText(screenRow, text, buf);
+    appendCursorToText(text, buf);
     buf[calculateAvailableLength()] = '\0';
     uint8_t cursorCol = strlen(buf);
 
     padText(buf, buf);
-    appendIndicatorToText(screenRow, buf, buf);
+    appendIndicatorToText(buf, buf);
 
-    display->setCursor(0, screenRow);
+    display->setCursor(0, cursorRow);
     display->draw(buf);
-    moveCursor(cursorCol, screenRow);
+    moveCursor(cursorCol, cursorRow);
 }
 
 void CharacterDisplayRenderer::draw(uint8_t byte) {
@@ -49,20 +48,20 @@ void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) 
     display->setCursor(cursorCol, cursorRow);
 }
 
-void CharacterDisplayRenderer::appendCursorToText(uint8_t screenRow, const char* text, char* buf) {
+void CharacterDisplayRenderer::appendCursorToText(const char* text, char* buf) {
     if (cursorIcon == 0 && editCursorIcon == 0) {
         strncpy(buf, text, maxCols);
         buf[maxCols] = '\0';
         return;
     }
 
-    uint8_t cursor = (activeRow == screenRow) ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
+    uint8_t cursor = hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
     buf[0] = cursor;
     strncpy(buf + 1, text, maxCols - 1);
     buf[maxCols] = '\0';
 }
 
-void CharacterDisplayRenderer::appendIndicatorToText(uint8_t screenRow, const char* text, char* buf) {
+void CharacterDisplayRenderer::appendIndicatorToText(const char* text, char* buf) {
     uint8_t indicator = (hasHiddenItemsAbove) ? 1 : ((hasHiddenItemsBelow) ? 2 : 0);
     if (indicator != 0 && upArrow != NULL && downArrow != NULL) {
         concat(text, indicator, buf);

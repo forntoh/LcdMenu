@@ -166,9 +166,9 @@ class ItemInputCharset : public ItemInput {
     }
 
     void drawChar(MenuRenderer* renderer) {
-        renderer->moveCursor(renderer->getCursorCol(), renderer->getActiveRow());
+        renderer->moveCursor(renderer->getCursorCol(), renderer->getCursorRow());
         renderer->draw(charset[charsetPosition]);
-        renderer->moveCursor(renderer->getCursorCol(), renderer->getActiveRow());
+        renderer->moveCursor(renderer->getCursorCol(), renderer->getCursorRow());
     }
 };
 
