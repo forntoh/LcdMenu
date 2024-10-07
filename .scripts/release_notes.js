@@ -117,7 +117,7 @@ async function generateReleaseNotes(github, context) {
 
   const repoUrl = pulls.length > 0 ? pulls[0].base.repo.html_url : "";
   const fullChangelog = `**Full Changelog**: ${repoUrl}/compare/${previousTag}...${currentTag}`;
-  return `${releaseNotes}\n\n${breakingChangesSection}\n\n${fullChangelog}`;
+  return `${releaseNotes}\n\n${breakingChangesSection}\n\n\n${fullChangelog}`;
 }
 
 module.exports = generateReleaseNotes;
