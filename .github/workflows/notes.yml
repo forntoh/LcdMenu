@@ -28,14 +28,20 @@ jobs:
             const releaseNotes = await generateReleaseNotes();
             return releaseNotes;
 
-      - name: Create GitHub Release
+      - name: Comment on PR with Release Notes
         if: success()
-        uses: actions/create-release@v1
+        uses: actions/github-script@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: test
-          release_name: LcdMenu test
-          draft: true
-          prerelease: false
-          body: ${{ steps.generate_release_notes.outputs.result }}
+          script: |
+            const { context, github } = require('@actions/github');
+            const releaseNotes = `## Release Notes\n\n${steps.generate_release_notes.outputs.result}`;
+            const prNumber = context.payload.pull_request.number;
+
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: releaseNotes
+            });
