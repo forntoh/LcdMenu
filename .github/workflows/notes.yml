@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: "14"
 
+      - name: Install @actions/github
+        run: npm install @actions/github
+
       - name: Generate Release Notes
         id: generate_release_notes
         uses: actions/github-script@v6
