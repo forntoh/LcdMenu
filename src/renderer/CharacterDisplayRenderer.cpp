@@ -24,22 +24,24 @@ void CharacterDisplayRenderer::begin() {
 void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
     char* buf = new char[maxCols + viewShift + 1];
 
-    appendCursorToText(text, buf);
-
     if (value != NULL) {
-        concat(buf, ":", buf);
+        concat(text, ":", buf);
         concat(buf, value, buf);
+    } else {
+        strcpy(buf, text);
     }
 
     if (hasFocus && viewShift > 0) {
         memmove(buf, buf + viewShift, availableColumns);
     }
 
+    appendCursorToText(buf);
+
     buf[availableColumns] = '\0';
     uint8_t cursorCol = strlen(buf);
 
     padText(buf, buf);
-    appendIndicatorToText(buf, buf);
+    appendIndicatorToText(buf);
 
     display->setCursor(0, cursorRow);
     display->draw(buf);
@@ -64,28 +66,29 @@ void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) 
     display->setCursor(cursorCol, cursorRow);
 }
 
-void CharacterDisplayRenderer::appendCursorToText(const char* text, char* buf) {
-    bool noCursorIcon = (cursorIcon == 0 && editCursorIcon == 0);
-    if (noCursorIcon) {
-        memcpy(buf, text, maxCols + viewShift);
-        return;
-    }
+void CharacterDisplayRenderer::appendCursorToText(char* text) {
+    if (cursorIcon == 0 && editCursorIcon == 0) return;
 
     uint8_t cursor = hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
-    buf[0] = cursor;
-    memcpy(buf + 1, text, maxCols + viewShift - 1);
+    uint8_t len = strlen(text);
+
+    memmove(text + 1, text, len + 1);
+    text[0] = cursor;
 }
 
-void CharacterDisplayRenderer::appendIndicatorToText(const char* text, char* buf) {
+void CharacterDisplayRenderer::appendIndicatorToText(char* text) {
     uint8_t indicator = (hasHiddenItemsAbove) ? 1 : ((hasHiddenItemsBelow) ? 2 : 0);
-    if (indicator != 0 && upArrow != NULL && downArrow != NULL) {
-        concat(text, indicator, buf);
+    uint8_t len = strlen(text);
+    bool hasArrows = upArrow != NULL && downArrow != NULL;
+
+    if (indicator != 0 && hasArrows) {
+        text[len] = indicator;
+    } else if (hasArrows) {
+        text[len] = ' ';
     } else {
-        strcpy(buf, text);
-        if (upArrow != NULL || downArrow != NULL) {
-            strcat(buf, " ");
-        }
+        return;
     }
+    text[len + 1] = '\0';
 }
 
 void CharacterDisplayRenderer::padText(const char* text, char* buf) {

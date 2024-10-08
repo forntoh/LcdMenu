@@ -33,7 +33,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @param text The original text to which the cursor icon will be appended.
      * @param buf The buffer where the resulting text with the cursor icon will be stored.
      */
-    void appendCursorToText(const char* text, char* buf);
+    void appendCursorToText(char* text);
 
     /**
      * @brief Appends an indicator to the provided text based on the item index and screen row.
@@ -41,7 +41,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @param text The original text to which the indicator may be appended.
      * @param buf The buffer where the resulting text with the indicator will be stored.
      */
-    void appendIndicatorToText(const char* text, char* buf);
+    void appendIndicatorToText(char* text);
 
     /**
      * @brief Pads the given text with spaces to fit within the available length.
