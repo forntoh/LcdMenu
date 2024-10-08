@@ -110,7 +110,6 @@ class ItemInputCharset : public ItemInput {
                 return;
             }
         }
-        charsetPosition = -1;
     }
     /**
      * @brief Stop `char edit mode` and abort all mde changes.
@@ -159,7 +158,7 @@ class ItemInputCharset : public ItemInput {
      * @brief Show previous char from charset.
      */
     void showPreviousChar(MenuRenderer* renderer) {
-        if (charsetPosition == 0) {
+        if (charsetPosition <= 0) {
             charsetPosition = strlen(charset) - 1;
         } else {
             charsetPosition--;
