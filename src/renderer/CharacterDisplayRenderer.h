@@ -106,6 +106,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * appending an indicator to the text, and finally drawing the text on the display.
      *
      * @param text The text of the menu item to be drawn.
+     * @param value The value of the menu item to be drawn.
      */
     void drawItem(const char* text, const char* value) override;
     void draw(uint8_t byte) override;

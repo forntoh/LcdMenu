@@ -71,6 +71,7 @@ class MenuRenderer {
     /**
      * @brief Draws an item on the display.
      * @param text Text of the item to be drawn.
+     * @param value Value of the item to be drawn.
      */
     virtual void drawItem(const char* text, const char* value) = 0;
 
