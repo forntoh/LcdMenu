@@ -64,7 +64,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      *
      * @return The number of columns available for displaying content.
      */
-    uint8_t getEffectiveCols(bool withUpDownIndicators = true) const override;
+    uint8_t getEffectiveCols() const override;
 
   public:
     /**

@@ -26,7 +26,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
         concat(buf, value, buf);
     }
 
-    buf[getEffectiveCols(false)] = '\0';
+    buf[maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0)] = '\0';
     uint8_t cursorCol = strlen(buf);
 
     padText(buf, buf);
@@ -81,7 +81,7 @@ void CharacterDisplayRenderer::appendIndicatorToText(const char* text, char* buf
 
 void CharacterDisplayRenderer::padText(const char* text, char* buf) {
     uint8_t textLength = strlen(text);
-    const uint8_t effectiveCols = getEffectiveCols(false);
+    const uint8_t effectiveCols = maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0);
     uint8_t spaces = (textLength > effectiveCols) ? 0 : effectiveCols - textLength;
     spaces = constrain(spaces, 0, maxCols);
     strcpy(buf, text);
@@ -89,6 +89,6 @@ void CharacterDisplayRenderer::padText(const char* text, char* buf) {
     buf[textLength + spaces] = '\0';
 }
 
-uint8_t CharacterDisplayRenderer::getEffectiveCols(bool withUpDownIndicators) const {
-    return maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0) - (withUpDownIndicators ? (cursorIcon != 0 || editCursorIcon != 0 ? 1 : 0) : 0);
+uint8_t CharacterDisplayRenderer::getEffectiveCols() const {
+    return maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0) - (cursorIcon != 0 || editCursorIcon != 0 ? 1 : 0);
 }

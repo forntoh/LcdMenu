@@ -147,7 +147,7 @@ class MenuRenderer {
      * @brief Calculates the available horizontal space for displaying content.
      * @return The horizontal space available for displaying content.
      */
-    virtual uint8_t getEffectiveCols(bool withUpDownIndicators = true) const = 0;
+    virtual uint8_t getEffectiveCols() const = 0;
 };
 
 #endif  // MENU_RENDERER_H
