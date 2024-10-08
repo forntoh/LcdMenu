@@ -22,13 +22,18 @@ void CharacterDisplayRenderer::begin() {
 }
 
 void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
-    char* buf = new char[maxCols + 1];
+    char* buf = new char[maxCols + viewShift + 1];
 
     appendCursorToText(text, buf);
 
     if (value != NULL) {
         concat(buf, ":", buf);
         concat(buf, value, buf);
+    }
+
+    if (hasFocus && viewShift > 0) {
+        memmove(buf, buf + viewShift, availableColumns);
+        buf[availableColumns] = '\0';
     }
 
     buf[availableColumns] = '\0';
@@ -39,7 +44,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
 
     display->setCursor(0, cursorRow);
     display->draw(buf);
-    moveCursor(cursorCol, cursorRow);
+    if (hasFocus) moveCursor(cursorCol, cursorRow);
     delete[] buf;
 }
 
@@ -62,15 +67,13 @@ void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) 
 
 void CharacterDisplayRenderer::appendCursorToText(const char* text, char* buf) {
     if (cursorIcon == 0 && editCursorIcon == 0) {
-        strncpy(buf, text, maxCols);
-        buf[maxCols] = '\0';
+        strncpy(buf, text, maxCols + viewShift);
         return;
     }
 
     uint8_t cursor = hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
     buf[0] = cursor;
-    strncpy(buf + 1, text, maxCols - 1);
-    buf[maxCols] = '\0';
+    strncpy(buf + 1, text, maxCols + viewShift - 1);
 }
 
 void CharacterDisplayRenderer::appendIndicatorToText(const char* text, char* buf) {

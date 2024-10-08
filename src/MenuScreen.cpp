@@ -56,16 +56,33 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     if (items[cursor]->process(menu, command)) return true;
     switch (command) {
         case UP:
+            renderer->viewShift = 0;
             up(renderer);
             return true;
         case DOWN:
+            renderer->viewShift = 0;
             down(renderer);
             return true;
         case BACK:
+            renderer->viewShift = 0;
             if (parent != NULL) {
                 menu->setScreen(parent);
             }
             printLog(F("MenuScreen::back"));
+            return true;
+        case RIGHT:
+            if (renderer->cursorCol >= renderer->getEffectiveCols() + 1) {
+                renderer->viewShift++;
+                draw(renderer);
+            }
+            printLog(F("MenuScreen::right"), renderer->viewShift);
+            return true;
+        case LEFT:
+            if (renderer->viewShift > 0) {
+                renderer->viewShift--;
+                draw(renderer);
+            }
+            printLog(F("MenuScreen::left"), renderer->viewShift);
             return true;
         default:
             return false;
