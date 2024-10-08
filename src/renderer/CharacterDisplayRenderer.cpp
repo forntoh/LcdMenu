@@ -65,14 +65,15 @@ void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) 
 }
 
 void CharacterDisplayRenderer::appendCursorToText(const char* text, char* buf) {
-    if (cursorIcon == 0 && editCursorIcon == 0) {
-        strncpy(buf, text, maxCols + viewShift);
+    bool noCursorIcon = (cursorIcon == 0 && editCursorIcon == 0);
+    if (noCursorIcon) {
+        memcpy(buf, text, maxCols + viewShift);
         return;
     }
 
     uint8_t cursor = hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
     buf[0] = cursor;
-    strncpy(buf + 1, text, maxCols + viewShift - 1);
+    memcpy(buf + 1, text, maxCols + viewShift - 1);
 }
 
 void CharacterDisplayRenderer::appendIndicatorToText(const char* text, char* buf) {
