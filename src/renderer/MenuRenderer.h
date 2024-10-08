@@ -71,8 +71,9 @@ class MenuRenderer {
     /**
      * @brief Draws an item on the display.
      * @param text Text of the item to be drawn.
+     * @param value Value of the item to be drawn.
      */
-    virtual void drawItem(const char* text) = 0;
+    virtual void drawItem(const char* text, const char* value) = 0;
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -142,6 +143,12 @@ class MenuRenderer {
      * @return Maximum number of columns.
      */
     uint8_t getMaxCols() const;
+
+    /**
+     * @brief Calculates the available horizontal space for displaying content.
+     * @return The horizontal space available for displaying content.
+     */
+    virtual uint8_t getEffectiveCols() const = 0;
 };
 
 #endif  // MENU_RENDERER_H

@@ -91,7 +91,7 @@ class MenuItem {
      * @param renderer The renderer to use for drawing.
      */
     virtual void draw(MenuRenderer* renderer) {
-        renderer->drawItem(text);
+        renderer->drawItem(text, NULL);
     };
 };
 

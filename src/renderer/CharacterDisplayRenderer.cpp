@@ -8,7 +8,12 @@ CharacterDisplayRenderer::CharacterDisplayRenderer(
     const uint8_t editCursorIcon,
     uint8_t* upArrow,
     uint8_t* downArrow)
-    : MenuRenderer(display, maxCols, maxRows), upArrow(upArrow), downArrow(downArrow), cursorIcon(cursorIcon), editCursorIcon(editCursorIcon) {}
+    : MenuRenderer(display, maxCols, maxRows),
+      upArrow(upArrow),
+      downArrow(downArrow),
+      cursorIcon(cursorIcon),
+      editCursorIcon(editCursorIcon),
+      availableColumns(maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0)) {}
 
 void CharacterDisplayRenderer::begin() {
     MenuRenderer::begin();
@@ -16,11 +21,17 @@ void CharacterDisplayRenderer::begin() {
     static_cast<CharacterDisplayInterface*>(display)->createChar(2, downArrow);
 }
 
-void CharacterDisplayRenderer::drawItem(const char* text) {
-    char buf[maxCols + 1];
+void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
+    char* buf = new char[maxCols + 1];
 
     appendCursorToText(text, buf);
-    buf[calculateAvailableLength()] = '\0';
+
+    if (value != NULL) {
+        concat(buf, ":", buf);
+        concat(buf, value, buf);
+    }
+
+    buf[availableColumns] = '\0';
     uint8_t cursorCol = strlen(buf);
 
     padText(buf, buf);
@@ -29,6 +40,7 @@ void CharacterDisplayRenderer::drawItem(const char* text) {
     display->setCursor(0, cursorRow);
     display->draw(buf);
     moveCursor(cursorCol, cursorRow);
+    delete[] buf;
 }
 
 void CharacterDisplayRenderer::draw(uint8_t byte) {
@@ -75,13 +87,13 @@ void CharacterDisplayRenderer::appendIndicatorToText(const char* text, char* buf
 
 void CharacterDisplayRenderer::padText(const char* text, char* buf) {
     uint8_t textLength = strlen(text);
-    uint8_t spaces = (textLength > calculateAvailableLength()) ? 0 : calculateAvailableLength() - textLength;
+    uint8_t spaces = (textLength > availableColumns) ? 0 : availableColumns - textLength;
     spaces = constrain(spaces, 0, maxCols);
     strcpy(buf, text);
     memset(buf + textLength, ' ', spaces);
     buf[textLength + spaces] = '\0';
 }
 
-uint8_t CharacterDisplayRenderer::calculateAvailableLength() {
-    return maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0);
+uint8_t CharacterDisplayRenderer::getEffectiveCols() const {
+    return availableColumns - (cursorIcon != 0 || editCursorIcon != 0 ? 1 : 0);
 }

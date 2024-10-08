@@ -110,7 +110,6 @@ class ItemInputCharset : public ItemInput {
                 return;
             }
         }
-        charsetPosition = -1;
     }
     /**
      * @brief Stop `char edit mode` and abort all mde changes.
@@ -118,11 +117,13 @@ class ItemInputCharset : public ItemInput {
      */
     void abortCharEdit(MenuRenderer* renderer) {
         charEdit = false;
+        uint8_t cursorCol = renderer->getCursorCol();
         if (cursor < strlen(value)) {
             renderer->draw(value[cursor]);
         } else {
             renderer->draw(' ');
         }
+        renderer->moveCursor(cursorCol, renderer->getCursorRow());
         printLog(F("ItemInputCharset::abortCharEdit"));
     }
     /**
@@ -157,7 +158,7 @@ class ItemInputCharset : public ItemInput {
      * @brief Show previous char from charset.
      */
     void showPreviousChar(MenuRenderer* renderer) {
-        if (charsetPosition == 0) {
+        if (charsetPosition <= 0) {
             charsetPosition = strlen(charset) - 1;
         } else {
             charsetPosition--;

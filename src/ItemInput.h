@@ -74,8 +74,8 @@ class ItemInput : public MenuItem {
      *
      * Effectively const, but initialized lately when renderer is injected.
      */
-    inline uint8_t getViewSize(MenuRenderer* renderer) {
-        return renderer->getMaxCols() - (strlen(text) + 2) - 1;
+    inline uint8_t getViewSize(MenuRenderer* renderer) const {
+        return renderer->getEffectiveCols() - strlen(text) - 1;
     };
 
   public:
@@ -130,18 +130,12 @@ class ItemInput : public MenuItem {
 
   protected:
     void draw(MenuRenderer* renderer) override {
-        uint8_t viewSize = getViewSize(renderer);
+        const uint8_t viewSize = getViewSize(renderer);
         char* vbuf = new char[viewSize + 1];
         substring(value, view, viewSize, vbuf);
         vbuf[viewSize] = '\0';
-
-        uint8_t maxCols = renderer->getMaxCols();
-        char buf[maxCols];
-        concat(text, ':', buf);
-        concat(buf, vbuf, buf);
-        renderer->drawItem(buf);
-
-        delete[] vbuf;  // Free allocated memory
+        renderer->drawItem(text, vbuf);
+        delete[] vbuf;
     }
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
@@ -220,11 +214,14 @@ class ItemInput : public MenuItem {
             return;
         }
         cursor--;
-        if (cursor < view) {
+        uint8_t cursorCol = renderer->getCursorCol();
+        if (cursor <= view - 1) {
             view--;
             draw(renderer);
+        } else {
+            cursorCol--;
         }
-        renderer->moveCursor(renderer->getCursorCol() - 1, renderer->getCursorRow());
+        renderer->moveCursor(cursorCol, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::left"), value);
@@ -238,11 +235,14 @@ class ItemInput : public MenuItem {
         }
         cursor++;
         uint8_t viewSize = getViewSize(renderer);
+        uint8_t cursorCol = renderer->getCursorCol();
         if (cursor > (view + viewSize - 1)) {
             view++;
             draw(renderer);
+        } else {
+            cursorCol++;
         }
-        renderer->moveCursor(renderer->getCursorCol() + 1, renderer->getCursorRow());
+        renderer->moveCursor(cursorCol, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::right"), value);
@@ -256,12 +256,14 @@ class ItemInput : public MenuItem {
         }
         remove(value, cursor - 1, 1);
         cursor--;
-        if (cursor < view) {
-            view--;
-        }
         uint8_t cursorCol = renderer->getCursorCol();
+        if (view > 0) {
+            view--;
+        } else {
+            cursorCol--;
+        }
         draw(renderer);
-        renderer->moveCursor(cursorCol - 1, renderer->getCursorRow());
+        renderer->moveCursor(cursorCol, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
         printLog(F("ItemInput::backspace"), value);

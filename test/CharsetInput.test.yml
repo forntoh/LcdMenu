@@ -6,11 +6,11 @@ steps:
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemInput::enterEditMode=0123456"
   - simulate: upButton-press
-  - wait-serial: "#LOG# ItemInputCharset::up=6"
+  - wait-serial: "#LOG# ItemInputCharset::up=9"
   - simulate: upButton-press
-  - wait-serial: "#LOG# ItemInputCharset::up=5"
+  - wait-serial: "#LOG# ItemInputCharset::up=8"
   - simulate: downButton-press
-  - wait-serial: "#LOG# ItemInputCharset::down=6"
+  - wait-serial: "#LOG# ItemInputCharset::down=9"
   - simulate: downButton-press
   - wait-serial: "#LOG# ItemInputCharset::down=0"
   - simulate: enterButton-press
