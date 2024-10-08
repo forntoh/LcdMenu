@@ -108,11 +108,7 @@ class ItemRangeBase : public MenuItem {
 
   protected:
     void draw(MenuRenderer* renderer) override {
-        uint8_t maxCols = renderer->getMaxCols();
-        char buf[maxCols];
-        concat(text, ':', buf);
-        concat(buf, getDisplayValue(), buf);
-        renderer->drawItem(buf);
+        renderer->drawItem(text, getDisplayValue());
     }
 
     bool process(LcdMenu* menu, const unsigned char command) override {

@@ -118,11 +118,13 @@ class ItemInputCharset : public ItemInput {
      */
     void abortCharEdit(MenuRenderer* renderer) {
         charEdit = false;
+        uint8_t cursorCol = renderer->getCursorCol();
         if (cursor < strlen(value)) {
             renderer->draw(value[cursor]);
         } else {
             renderer->draw(' ');
         }
+        renderer->moveCursor(cursorCol, renderer->getCursorRow());
         printLog(F("ItemInputCharset::abortCharEdit"));
     }
     /**

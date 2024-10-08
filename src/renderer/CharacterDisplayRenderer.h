@@ -56,15 +56,15 @@ class CharacterDisplayRenderer : public MenuRenderer {
     void padText(const char* text, char* buf);
 
     /**
-     * @brief Calculates the available length for display.
+     * @brief Calculates the available horizontal space for displaying content.
      *
      * This function computes the number of columns available for displaying content
-     * on the character display. It takes into account the presence of up and down
-     * arrows, which occupy one column if either is present.
+     * on the display. It takes into account the presence of up and down arrows, which
+     * occupy one column if either is present.
      *
      * @return The number of columns available for displaying content.
      */
-    uint8_t calculateAvailableLength();
+    uint8_t getEffectiveCols(bool withUpDownIndicators = true) const override;
 
   public:
     /**
@@ -106,7 +106,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      *
      * @param text The text of the menu item to be drawn.
      */
-    void drawItem(const char* text) override;
+    void drawItem(const char* text, const char* value) override;
     void draw(uint8_t byte) override;
     void drawBlinker() override;
     void clearBlinker() override;
