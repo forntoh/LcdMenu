@@ -25,6 +25,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
     uint8_t* downArrow;
     const uint8_t cursorIcon;
     const uint8_t editCursorIcon;
+    const uint8_t availableColumns;
 
     /**
      * @brief Appends a cursor icon to the given text if the specified screen row is active.
