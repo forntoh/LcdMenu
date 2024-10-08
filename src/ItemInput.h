@@ -131,10 +131,11 @@ class ItemInput : public MenuItem {
   protected:
     void draw(MenuRenderer* renderer) override {
         const uint8_t viewSize = getViewSize(renderer);
-        char vbuf[viewSize + 1];
+        char* vbuf = new char[viewSize + 1];
         substring(value, view, viewSize, vbuf);
         vbuf[viewSize] = '\0';
         renderer->drawItem(text, vbuf);
+        delete[] vbuf;
     }
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();

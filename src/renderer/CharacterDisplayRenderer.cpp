@@ -22,7 +22,7 @@ void CharacterDisplayRenderer::begin() {
 }
 
 void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
-    char buf[maxCols + 1];
+    char* buf = new char[maxCols + 1];
 
     appendCursorToText(text, buf);
 
@@ -40,6 +40,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
     display->setCursor(0, cursorRow);
     display->draw(buf);
     moveCursor(cursorCol, cursorRow);
+    delete[] buf;
 }
 
 void CharacterDisplayRenderer::draw(uint8_t byte) {
