@@ -33,7 +33,6 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
 
     if (hasFocus && viewShift > 0) {
         memmove(buf, buf + viewShift, availableColumns);
-        buf[availableColumns] = '\0';
     }
 
     buf[availableColumns] = '\0';
