@@ -40,7 +40,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
     buf[availableColumns] = '\0';
     uint8_t cursorCol = strlen(buf);
 
-    padText(buf, buf);
+    padText(buf);
     appendIndicatorToText(buf);
 
     display->setCursor(0, cursorRow);
@@ -91,13 +91,12 @@ void CharacterDisplayRenderer::appendIndicatorToText(char* text) {
     text[len + 1] = '\0';
 }
 
-void CharacterDisplayRenderer::padText(const char* text, char* buf) {
+void CharacterDisplayRenderer::padText(char* text) {
     uint8_t textLength = strlen(text);
     uint8_t spaces = (textLength > availableColumns) ? 0 : availableColumns - textLength;
     spaces = constrain(spaces, 0, maxCols);
-    strcpy(buf, text);
-    memset(buf + textLength, ' ', spaces);
-    buf[textLength + spaces] = '\0';
+    memset(text + textLength, ' ', spaces);
+    text[textLength + spaces] = '\0';
 }
 
 uint8_t CharacterDisplayRenderer::getEffectiveCols() const {

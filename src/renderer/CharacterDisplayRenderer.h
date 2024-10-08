@@ -54,7 +54,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @param buf The buffer where the padded text will be stored. It should be large
      *            enough to hold the padded text.
      */
-    void padText(const char* text, char* buf);
+    void padText(char* text);
 
     /**
      * @brief Calculates the available horizontal space for displaying content.
