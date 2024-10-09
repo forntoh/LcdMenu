@@ -75,7 +75,7 @@ class ItemInput : public MenuItem {
      * Effectively const, but initialized lately when renderer is injected.
      */
     inline uint8_t getViewSize(MenuRenderer* renderer) const {
-        return renderer->getEffectiveCols() - strlen(text) - 1;
+        return renderer->getEffectiveCols() - strlen(text) - 1 + renderer->viewShift;
     };
 
   public:

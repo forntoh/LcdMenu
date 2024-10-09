@@ -56,16 +56,33 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     if (items[cursor]->process(menu, command)) return true;
     switch (command) {
         case UP:
+            renderer->viewShift = 0;
             up(renderer);
             return true;
         case DOWN:
+            renderer->viewShift = 0;
             down(renderer);
             return true;
         case BACK:
+            renderer->viewShift = 0;
             if (parent != NULL) {
                 menu->setScreen(parent);
             }
             printLog(F("MenuScreen::back"));
+            return true;
+        case RIGHT:
+            if (renderer->cursorCol >= renderer->getEffectiveCols()) {
+                renderer->viewShift++;
+                draw(renderer);
+            }
+            printLog(F("MenuScreen::right"), renderer->viewShift);
+            return true;
+        case LEFT:
+            if (renderer->viewShift > 0) {
+                renderer->viewShift--;
+                draw(renderer);
+            }
+            printLog(F("MenuScreen::left"), renderer->viewShift);
             return true;
         default:
             return false;
@@ -73,26 +90,18 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
 }
 
 void MenuScreen::up(MenuRenderer* renderer) {
-    if (cursor == 0) {
-        printLog(F("MenuScreen:up"), cursor);
-        return;
+    if (cursor > 0) {
+        if (--cursor < view) view--;
+        draw(renderer);
     }
-    cursor--;
-    if (cursor < view) view--;
-
-    draw(renderer);
     printLog(F("MenuScreen:up"), cursor);
 }
 
 void MenuScreen::down(MenuRenderer* renderer) {
-    if (cursor == itemCount - 1) {
-        printLog(F("MenuScreen:down"), cursor);
-        return;
+    if (cursor < itemCount - 1) {
+        if (++cursor > view + renderer->maxRows - 1) view++;
+        draw(renderer);
     }
-    cursor++;
-    if (cursor > view + renderer->maxRows - 1) view++;
-
-    draw(renderer);
     printLog(F("MenuScreen:down"), cursor);
 }
 

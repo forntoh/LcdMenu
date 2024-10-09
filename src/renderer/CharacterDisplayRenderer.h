@@ -31,17 +31,15 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @brief Appends a cursor icon to the given text if the specified screen row is active.
      *
      * @param text The original text to which the cursor icon will be appended.
-     * @param buf The buffer where the resulting text with the cursor icon will be stored.
      */
-    void appendCursorToText(const char* text, char* buf);
+    void appendCursorToText(char* text);
 
     /**
      * @brief Appends an indicator to the provided text based on the item index and screen row.
      *
      * @param text The original text to which the indicator may be appended.
-     * @param buf The buffer where the resulting text with the indicator will be stored.
      */
-    void appendIndicatorToText(const char* text, char* buf);
+    void appendIndicatorToText(char* text);
 
     /**
      * @brief Pads the given text with spaces to fit within the available length.
@@ -51,10 +49,8 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * text is longer than the available length, no padding is added.
      *
      * @param text The input text to be padded.
-     * @param buf The buffer where the padded text will be stored. It should be large
-     *            enough to hold the padded text.
      */
-    void padText(const char* text, char* buf);
+    void padText(char* text);
 
     /**
      * @brief Calculates the available horizontal space for displaying content.

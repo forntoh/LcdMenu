@@ -37,13 +37,16 @@ class MenuRenderer {
     uint8_t cursorCol;
     uint8_t cursorRow;
 
-    uint8_t blinkerPosition;
-
     bool inEditMode;
 
     unsigned long startTime = 0;
 
   public:
+    /**
+     * @brief Number of columns to shift the current item's view by.
+     */
+    uint8_t viewShift = 0;
+
     /**
      * Pointer to the display interface used for rendering.
      */

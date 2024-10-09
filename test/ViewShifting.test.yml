@@ -1,0 +1,67 @@
+name: View Shifting Test
+version: 1
+author: Thomas Forntoh
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=0"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=0"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=0"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=0"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=1"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=1"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=2"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=3"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=4"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=5"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=2"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=1"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=2"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=3"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=4"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen:down=3"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=1"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=2"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=3"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=4"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=5"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=6"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=6"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# MenuScreen::right=6"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=5"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=4"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=3"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=2"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=1"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=0"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# MenuScreen::left=0"
