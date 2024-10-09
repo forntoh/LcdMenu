@@ -1,5 +1,5 @@
 /**
- * This example demostrates how the view shifting feature works.
+ * This example demonstrates how the view shifting feature works.
  * The view shifting feature allows the user to scroll through an item that is too long to fit on the screen.
  * The user can scroll the view to the left or right to see the entire item.
  */
