@@ -11,7 +11,7 @@ The renderer supports the following features:
 - Highlighting the selected menu item
 - Customizing the cursor character
 - Customizing the up and down arrow characters
-- Disabling the cursor and/arrows arrows
+- Disabling the cursor and/or arrows
 
 The renderer is easy to use and provides a number of options for customizing the display.
 
