@@ -34,3 +34,10 @@ The menu system provides a set of built-in input adapters that you can use out o
     keyboard
     button
     rotary-encoder
+
+.. hint::
+    The left and right controls (if not already mapped by the item) is mapped to scroll through an item that is too long to fit on the screen.
+
+    .. image:: images/view-shift.gif
+        :width: 400px
+        :alt: Scrolling through a long item
