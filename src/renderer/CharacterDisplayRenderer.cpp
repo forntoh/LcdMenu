@@ -24,11 +24,11 @@ void CharacterDisplayRenderer::begin() {
 void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
     char* buf = new char[maxCols + viewShift + 1];
 
+    strcpy(buf, text);
+
     if (value != NULL) {
-        concat(text, ":", buf);
-        concat(buf, value, buf);
-    } else {
-        strcpy(buf, text);
+        strcat(buf, ":");
+        strcat(buf, value);
     }
 
     if (hasFocus && viewShift > 0) {

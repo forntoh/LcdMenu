@@ -90,26 +90,18 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
 }
 
 void MenuScreen::up(MenuRenderer* renderer) {
-    if (cursor == 0) {
-        printLog(F("MenuScreen:up"), cursor);
-        return;
+    if (cursor > 0) {
+        if (--cursor < view) view--;
+        draw(renderer);
     }
-    cursor--;
-    if (cursor < view) view--;
-
-    draw(renderer);
     printLog(F("MenuScreen:up"), cursor);
 }
 
 void MenuScreen::down(MenuRenderer* renderer) {
-    if (cursor == itemCount - 1) {
-        printLog(F("MenuScreen:down"), cursor);
-        return;
+    if (cursor < itemCount - 1) {
+        if (++cursor > view + renderer->maxRows - 1) view++;
+        draw(renderer);
     }
-    cursor++;
-    if (cursor > view + renderer->maxRows - 1) view++;
-
-    draw(renderer);
     printLog(F("MenuScreen:down"), cursor);
 }
 

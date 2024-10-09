@@ -42,6 +42,9 @@ class MenuRenderer {
     unsigned long startTime = 0;
 
   public:
+    /**
+     * @brief Number of columns to shift the current item's view by.
+     */
     uint8_t viewShift = 0;
 
     /**
