@@ -28,6 +28,7 @@ LiquidCrystal_I2CAdapter	KEYWORD1
 MenuItem	KEYWORD1
 MenuRenderer	KEYWORD1
 MenuScreen	KEYWORD1
+SSD1803A_I2CAdapter	KEYWORD1
 SimpleRotaryAdapter	KEYWORD1
 
 #######################################
