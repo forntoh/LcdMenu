@@ -10,6 +10,9 @@ on:
         description: "Version to update if not incrementing"
         required: false
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     name: Prepare Release
@@ -114,14 +117,17 @@ jobs:
 
       - name: Create GitHub Release
         if: steps.check_tag.outputs.tag_exists == 'false'
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.UPDATED_VERSION }}
-          release_name: LcdMenu v${{ env.UPDATED_VERSION }}
+          name: LcdMenu v${{ env.UPDATED_VERSION }}
           draft: false
           prerelease: false
+          generate_release_notes: false
+          make_latest: true
+          token: ${{ secrets.GH_PAT }}
           body: ${{ steps.generate_release_notes.outputs.release_notes }}
 
       - name: Update GitHub Release
