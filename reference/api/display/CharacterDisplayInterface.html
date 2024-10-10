@@ -19,7 +19,7 @@
 <link href="../../../search.html" rel="search" title="Search"/>
 <link href="../../../genindex.html" rel="index" title="Index"/>
 <link href="DisplayInterface.html" rel="next" title="DisplayInterface"/>
-<link href="LiquidCrystal_I2CAdapter.html" rel="prev" title="LiquidCrystal_I2CAdapter"/>
+<link href="LiquidCrystalAdapter.html" rel="prev" title="LiquidCrystalAdapter"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -121,40 +121,42 @@
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../samples/index.html">Code samples<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleRotary.html">SimpleRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/List.html">List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SubMenu.html">SubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/Basic.html">Basic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/Callbacks.html">Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleInput.html">SimpleInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/IntFloatValues.html">IntFloatValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ViewShifting.html">ViewShifting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SubMenu.html">SubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleRotary.html">SimpleRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/IntFloatValues.html">IntFloatValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/Callbacks.html">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/List.html">List</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../ItemIntRange.html">ItemIntRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemRangeBase.html">ItemRangeBase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../MenuScreen.html">MenuScreen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemFloatRange.html">ItemFloatRange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemRangeBase.html">ItemRangeBase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemIntRange.html">ItemIntRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../renderer/index.html">renderer</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">display</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../uml.html">Class diagram</a></li>
@@ -228,7 +230,7 @@
 <p class="admonition-title">Note</p>
 <p>This is an abstract class and cannot be instantiated directly. </p>
 </div>
-<p>Subclassed by <a class="reference internal" href="LiquidCrystalAdapter.html#classLiquidCrystalAdapter"><span class="std std-ref">LiquidCrystalAdapter</span></a>, <a class="reference internal" href="LiquidCrystal_I2CAdapter.html#classLiquidCrystal__I2CAdapter"><span class="std std-ref">LiquidCrystal_I2CAdapter</span></a></p>
+<p>Subclassed by <a class="reference internal" href="LiquidCrystalAdapter.html#classLiquidCrystalAdapter"><span class="std std-ref">LiquidCrystalAdapter</span></a>, <a class="reference internal" href="LiquidCrystal_I2CAdapter.html#classLiquidCrystal__I2CAdapter"><span class="std std-ref">LiquidCrystal_I2CAdapter</span></a>, <a class="reference internal" href="SSD1803A_I2CAdapter.html#classSSD1803A__I2CAdapter"><span class="std std-ref">SSD1803A_I2CAdapter</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -264,11 +266,11 @@
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="LiquidCrystal_I2CAdapter.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="LiquidCrystalAdapter.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        LiquidCrystal_I2CAdapter
+        LiquidCrystalAdapter
       </a>
 </div>
 <div class="ml-auto">
