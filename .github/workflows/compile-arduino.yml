@@ -40,6 +40,7 @@ jobs:
             - name: FreeRTOS
             - name: SimpleRotary
             - name: LiquidCrystal I2C
+            - name: SSD1803A_I2C
 
       - name: Upload sketches reports
         uses: actions/upload-artifact@v4

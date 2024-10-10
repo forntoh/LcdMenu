@@ -30,7 +30,6 @@ to the :cpp:class:`LcdMenu` class when you create it. Here is an example:
          .. code-block:: cpp
 
             #include <LcdMenu.h>
-            #include <LiquidCrystal_I2C.h>
             #include <display/LiquidCrystal_I2CAdapter.h>
             #include <renderer/CharacterDisplayRenderer.h>
 
@@ -45,7 +44,6 @@ to the :cpp:class:`LcdMenu` class when you create it. Here is an example:
          .. code-block:: cpp
 
             #include <LcdMenu.h>
-            #include <LiquidCrystal.h>
             #include <display/LiquidCrystalAdapter.h>
             #include <renderer/CharacterDisplayRenderer.h>
 
@@ -54,15 +52,55 @@ to the :cpp:class:`LcdMenu` class when you create it. Here is an example:
             CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
             LcdMenu menu(renderer);
 
+    .. tab-item:: SSD1803A I2C
+         :sync: ssd1803a_i2c
+
+         .. code-block:: cpp
+
+            #include <LcdMenu.h>
+            #include <display/SSD1803A_I2CAdapter.h>
+            #include <renderer/CharacterDisplayRenderer.h>
+
+            SSD1803A_I2C lcd(0x3D);
+            SSD1803A_I2CAdapter lcdAdapter(&lcd);
+            CharacterDisplayRenderer renderer(&lcdAdapter, 20, 4);
+            LcdMenu menu(renderer);
+
 Don't forget to replace ``LCD_COLS`` and ``LCD_ROWS`` with the number of columns and rows on your display.
 
 After you have created the renderer, you then have to call the ``begin()`` method on the renderer to initialize it.
 
-.. code-block:: cpp
 
-    void setup() {
-        renderer.begin();
-    }
+.. tab-set::
+    :sync-group: display
+
+    .. tab-item:: Liquid Crystal I2C
+         :sync: lcd_i2c
+
+         .. code-block:: cpp
+
+            void setup() {
+                renderer.begin();
+            }
+
+    .. tab-item:: Liquid Crystal
+         :sync: lcd
+
+         .. code-block:: cpp
+
+            void setup() {
+                renderer.begin();
+            }
+
+    .. tab-item:: SSD1803A I2C
+         :sync: ssd1803a_i2c
+
+         .. code-block:: cpp
+
+            void setup() {
+                lcd.begin(DOGM204);
+                renderer.begin();
+            }
 
 Customizing the character display renderer
 ------------------------------------------
