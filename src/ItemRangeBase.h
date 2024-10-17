@@ -3,7 +3,6 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include <utils/printf.h>
 #include <utils/utils.h>
 
 template <typename T>

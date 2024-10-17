@@ -2,6 +2,7 @@
 #define ItemFloatRange_H
 
 #include "ItemRangeBase.h"
+#include <utils/printf.h>
 
 /**
  * @brief Item that allows user to input float information within a range.
