@@ -1,3 +1,5 @@
+// clang-format off
+
 ///////////////////////////////////////////////////////////////////////////////
 // \author (c) Marco Paland (info@paland.com)
 //             2014-2019, PALANDesign Hannover, Germany
@@ -29,8 +31,6 @@
 //        malloc for printf (and may not be thread safe).
 //
 ///////////////////////////////////////////////////////////////////////////////
-
-// clang-format off
 
 #include <stdbool.h>
 #include <stdint.h>

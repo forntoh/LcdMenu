@@ -1,3 +1,5 @@
+// clang-format off
+
 ///////////////////////////////////////////////////////////////////////////////
 // \author (c) Marco Paland (info@paland.com)
 //             2014-2019, PALANDesign Hannover, Germany
@@ -28,8 +30,6 @@
 //        These routines are thread safe and reentrant.
 //
 ///////////////////////////////////////////////////////////////////////////////
-
-// clang-format off
 
 #ifndef _PRINTF_H_
 #define _PRINTF_H_
