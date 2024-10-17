@@ -9,12 +9,13 @@ template <typename T>
 /**
  * @brief Item that allows user to select a value from a range.
  *        It can be used to display all sorts of values that can be incremented or decremented.
- *        You can additionally pass a unit to be displayed after the value. e.g. "%", "°C", "°F" etc.
+ *        You can additionally pass format string to format the value.
+ *        e.g. you can use `%.2f` to display float with 2 decimal places.
  *
  * ```
- * ┌──────────────────────────────────┐
- * │ > T E X T : V A L U E U N I T    │
- * └──────────────────────────────────┘
+ * ┌────────────────────────────────────────┐
+ * │ > T E X T : F O R M A T E D V A L U E  │
+ * └────────────────────────────────────────┘
  * ```
  *
  * Additionally to `text` this item has float `currentValue`.
@@ -26,7 +27,7 @@ class ItemRangeBase : public MenuItem {
     const T maxValue;
     T currentValue;
     void (*callback)(T);
-    const char* unit;
+    const char* format;
     const T step;
     bool commitOnChange;
 
@@ -39,7 +40,7 @@ class ItemRangeBase : public MenuItem {
      * @param max The maximum value.
      * @param startingValue The current value.
      * @param callback A pointer to the callback function to execute when this menu item is selected.
-     * @param unit The unit e.g. "%", "°C", "°F".
+     * @param format The format string to format the value.
      * @param step The step value for increment/decrement.
      * @param commitOnChange If true, the callback will be called every time the value changes.
      */
@@ -49,10 +50,10 @@ class ItemRangeBase : public MenuItem {
         const T max,
         T startingValue,
         void (*callback)(T),
-        const char* unit = NULL,
+        const char* format = "%s",
         T step = 1,
         bool commitOnChange = false)
-        : MenuItem(text), minValue(min), maxValue(max), currentValue(startingValue), callback(callback), unit(unit), step(step), commitOnChange(commitOnChange) {}
+        : MenuItem(text), minValue(min), maxValue(max), currentValue(startingValue), callback(callback), format(format), step(step), commitOnChange(commitOnChange) {}
 
     /**
      * @brief Increments the value.

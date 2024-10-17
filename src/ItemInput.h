@@ -61,22 +61,6 @@ class ItemInput : public MenuItem {
      * First parameter will be a `value` string.
      */
     fptrStr callback;
-    /**
-     * @brief The number of visible characters.
-     *
-     * ```
-     *          visible area
-     *        ┌───────────────┐
-     * X X X X│X X X X █ X X X│X X
-     *        ├───────────────┤
-     *        │<── viewSize ─>│
-     * ```
-     *
-     * Effectively const, but initialized lately when renderer is injected.
-     */
-    inline uint8_t getViewSize(MenuRenderer* renderer) const {
-        return renderer->getEffectiveCols() - strlen(text) - 1 + renderer->viewShift;
-    };
 
   public:
     /**

@@ -15,18 +15,14 @@ class ItemIntRange : public ItemRangeBase<int> {
         const int max,
         int startingValue,
         fptrInt callback,
-        const char* unit = NULL,
+        const char* format = "%d",
         int step = 1,
         bool commitOnChange = false)
-        : ItemRangeBase(text, min, max, startingValue, callback, unit, step, commitOnChange) {}
+        : ItemRangeBase(text, min, max, startingValue, callback, format, step, commitOnChange) {}
 
     char* getDisplayValue() override {
         static char buffer[10];
-        itoa(currentValue, buffer, 10);
-        if (unit == NULL) {
-            return buffer;
-        }
-        concat(buffer, unit, buffer);
+        sprintf(buffer, format, currentValue);
         return buffer;
     }
 };

@@ -73,6 +73,22 @@ class MenuItem {
 
   protected:
     /**
+     * @brief The number of available columns for the potential value of the item.
+     *
+     * ```
+     *          visible area
+     *        ┌───────────────┐
+     * X X X X│X X X X █ X X X│X X
+     *        ├───────────────┤
+     *        │<── viewSize ─>│
+     * ```
+     *
+     * Effectively const, but initialized lately when renderer is injected.
+     */
+    inline uint8_t getViewSize(MenuRenderer* renderer) const {
+        return renderer->getEffectiveCols() - strlen(text) - 1 + renderer->viewShift;
+    };
+    /**
      * @brief Process a command decoded in 1 byte.
      * It can be a printable character or a control command like `ENTER` or `LEFT`.
      * Return value is used to determine operation was successful or ignored.
