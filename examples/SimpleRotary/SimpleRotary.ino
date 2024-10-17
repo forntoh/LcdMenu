@@ -23,7 +23,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Connect to WiFi"),
     ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
     ITEM_BASIC("Blink SOS"),
-    ITEM_INT_RANGE("Dist", 0, 50, 0, callback, (const char*) "m"),
+    ITEM_INT_RANGE("Dist", 0, 50, 0, callback, "%dm"),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Blink random"));
 // clang-format on
