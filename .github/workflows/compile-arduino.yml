@@ -20,8 +20,55 @@ jobs:
     strategy:
       matrix:
         board:
+          - fqbn: esp32:esp32:esp32
+            type: esp32
+            artifact-name-suffix: esp32-esp32-esp32
           - fqbn: arduino:avr:uno
+            type: avr
             artifact-name-suffix: arduino-avr-uno
+          - fqbn: esp8266:esp8266:huzzah
+            type: esp8266
+            artifact-name-suffix: esp8266-esp8266-huzzah
+          - fqbn: ardiono:atmelmegaavr:uno2018
+            type: atmelmegaavr
+            artifact-name-suffix: ardiono-atmelmegaavr-uno2018
+          - fqbn: arduino:samd:mkr1000
+            type: mkr1000
+            artifact-name-suffix: arduino-samd-mkr1000
+          - fqbn: arduino:samd:nano_33_iot
+            type: nina
+            artifact-name-suffix: arduino-samd-nano_33_iot
+          - fqbn: arduino:samd:mkrnb1500
+            type: nb
+            artifact-name-suffix: arduino-samd-mkrnb1500
+          - fqbn: arduino:mbed_portenta:envie_m7
+            type: mbed_portenta
+            artifact-name-suffix: arduino-mbed_portenta-envie_m7
+          - fqbn: arduino:mbed_nano:nanorp2040connect
+            type: nina
+            artifact-name-suffix: arduino-mbed_nano-nanorp2040connect
+          - fqbn: arduino:mbed_nicla:nicla_vision
+            type: mbed_nicla
+            artifact-name-suffix: arduino-mbed_nicla-nicla_vision
+          - fqbn: arduino:mbed_opta:opta
+            type: mbed_opta
+            artifact-name-suffix: arduino-mbed_opta-opta
+          - fqbn: arduino:mbed_giga:giga
+            type: mbed_giga
+            artifact-name-suffix: arduino-mbed_giga-giga
+          - fqbn: arduino:renesas_portenta:portenta_c33
+            type: renesas_portenta
+            artifact-name-suffix: arduino-renesas_portenta-portenta_c33
+          - fqbn: arduino:renesas_uno:unor4wifi
+            type: renesas_uno
+            artifact-name-suffix: arduino-renesas_uno-unor4wifi
+          - fqbn: arduino:esp32:nano_nora
+            type: arduino_esp32
+            artifact-name-suffix: arduino-esp32-nano_nora
+          - fqbn: arduino:mbed_edge:edge_control
+            type: mbed_edge
+            artifact-name-suffix: arduino-mbed_edge-edge_control
+          
 
     steps:
       - name: Checkout
