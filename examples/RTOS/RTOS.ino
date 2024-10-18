@@ -9,10 +9,11 @@
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/KeyboardAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
+#include <utils/printf.h>
 
 // 2x20 LCD Display
-#define LCD_ROWS 4
-#define LCD_COLS 20
+#define LCD_ROWS 2
+#define LCD_COLS 16
 
 float temperature1;
 float temperature2;
@@ -64,7 +65,6 @@ MENU_SCREEN(relayScreen, relayItems,
 // clang-format off
 MENU_SCREEN(tempScreen, tempItems, 
     ITEM_BASIC(""), 
-    ITEM_BASIC(""), 
     ITEM_BASIC(""));
 // clang-format on
 
@@ -75,32 +75,22 @@ static void tempMeas(void* pvParameters) {
         //-------------------BEGIN: TEST WITH RANDOM------------------//
         temperature1 = random(1, 1000) / 100.0;  // Generate random float
         temperature2 = random(1, 2000) / 100.0;  // Generate random float
-        temperature3 = random(1, 3000) / 100.0;  // Generate random float
         //-------------------END: TEST WITH RANDOM--------------------//
 
         char buffer1[8];
-        tempItems[0]->setText(dtostrf(temperature1, 5, 2, buffer1));
+        snprintf(buffer1, sizeof(buffer1), "%.02f mA", temperature1);
+        tempItems[0]->setText(buffer1);
+
+        vTaskDelay(500 / portTICK_PERIOD_MS);  // wait for 200ms
 
         char buffer2[8];
-        tempItems[1]->setText(dtostrf(temperature2, 5, 2, buffer2));
-
-        char buffer3[8];
-        tempItems[2]->setText(dtostrf(temperature3, 5, 2, buffer3));
+        snprintf(buffer2, sizeof(buffer2), "%.02f V", temperature2);
+        tempItems[1]->setText(buffer2);
 
         if (menu.getScreen() == tempScreen) {
             menu.refresh();
         }
-        vTaskDelay(5000 / portTICK_PERIOD_MS);  // wait for five seconds
-    }
-}
-
-// RTOS func to read serial input from keyboard
-static void keyPad(void* pvParameters) {
-    (void)pvParameters;  // Unused parameter
-
-    for (;;) {
-        keyboard.observe();
-        vTaskDelay(1);
+        vTaskDelay(3000 / portTICK_PERIOD_MS);  // wait for three seconds
     }
 }
 
@@ -110,7 +100,6 @@ void setup() {
     renderer.begin();
     menu.setScreen(mainScreen);
     // Run RTOS func.
-    xTaskCreate(keyPad, "keyPad", 128, NULL, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate(tempMeas, "tempMeas", 128, NULL, tskIDLE_PRIORITY + 1, NULL);
     // Setup random seed
     pinMode(A0, INPUT);
@@ -119,4 +108,5 @@ void setup() {
 
 void loop() {
     renderer.updateTimer();
+    keyboard.observe();
 }

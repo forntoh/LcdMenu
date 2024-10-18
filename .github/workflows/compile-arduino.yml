@@ -27,6 +27,7 @@ jobs:
 
       UNIVERSAL_SKETCH_PATHS: |
         - examples/Basic
+        - examples/IntFloatValues
         # - examples/ButtonAdapter
         # - examples/Callbacks
         # - examples/InputRotary
@@ -83,7 +84,8 @@ jobs:
               - name: esp32:esp32
                 source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
             libraries:
-            sketch-paths:
+            sketch-paths: |
+              - examples/RTOS
           # ESP8266 boards
           - board:
               type: esp8266
@@ -100,7 +102,8 @@ jobs:
               # Install STM32 platform via Boards Manager
               - name: STMicroelectronics:stm32
                 source-url: https://raw.githubusercontent.com/stm32duino/BoardManagerFiles/main/package_stmicroelectronics_index.json
-            sketch-paths:
+            sketch-paths: |
+              - examples/RTOS
           # Arduino Mbed Portenta boards
           - board:
               type: mbed_portenta
