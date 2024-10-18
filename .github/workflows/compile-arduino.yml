@@ -57,13 +57,12 @@ jobs:
           - fqbn: STMicroelectronics:stm32:GenF1
             type: stm32
             artifact-name-suffix: STM32-stm32-GenF1
-
           - fqbn: arduino:mbed_portenta:envie_m7
             type: mbed_portenta
             artifact-name-suffix: arduino-mbed_portenta-envie_m7
-          # - fqbn: arduino:mbed_giga:giga
-          #   type: mbed_giga
-          #   artifact-name-suffix: arduino-mbed_giga-giga
+          - fqbn: arduino:mbed_giga:giga
+            type: mbed_giga
+            artifact-name-suffix: arduino-mbed_giga-giga
 
         include:
           # AVR boards
@@ -102,14 +101,20 @@ jobs:
               # Install STM32 platform via Boards Manager
               - name: STMicroelectronics:stm32
                 source-url: https://raw.githubusercontent.com/stm32duino/BoardManagerFiles/main/package_stmicroelectronics_index.json
-            sketch-paths: |
-              - examples/RTOS
+            sketch-paths:
           # Arduino Mbed Portenta boards
           - board:
               type: mbed_portenta
             platforms: |
               # Install Arduino Mbed Portenta platform via Boards Manager
               - name: arduino:mbed_portenta
+            sketch-paths:
+          # Arduino Mbed Giga boards
+          - board:
+              type: mbed_giga
+            platforms: |
+              # Install Arduino Mbed Giga platform via Boards Manager
+              - name: arduino:mbed_giga
             sketch-paths: |
               - examples/RTOS
 
