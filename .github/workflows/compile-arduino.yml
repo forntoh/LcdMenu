@@ -54,9 +54,9 @@ jobs:
           #   type: mkr1000
           #   artifact-name-suffix: arduino-samd-mkr1000
 
-          - fqbn: STM32:stm32:generic
+          - fqbn: STMicroelectronics:stm32:GenF1
             type: stm32
-            artifact-name-suffix: stm32-stm32-generic
+            artifact-name-suffix: STM32-stm32-STM32F1
           # - fqbn: arduino:samd:nano_33_iot
           #   type: nina
           #   artifact-name-suffix: arduino-samd-nano_33_iot
@@ -122,7 +122,7 @@ jobs:
               type: stm32
             platforms: |
               # Install STM32 platform via Boards Manager
-              - name: STM32:stm32
+              - name: STMicroelectronics:stm32
                 source-url: https://raw.githubusercontent.com/stm32duino/BoardManagerFiles/main/package_stmicroelectronics_index.json
 
     steps:
