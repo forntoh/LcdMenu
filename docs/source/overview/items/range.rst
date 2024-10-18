@@ -31,7 +31,7 @@ An integer range item can be created using the following syntax:
 
 When the ``Brightness`` menu item is selected, the user can adjust the brightness level within the range of 0 to 100.
 
-You can also optionally specify a unit string to be displayed next to the value:
+You can also optionally specify formatting for the value by providing a format string argument:
 
 .. code-block:: cpp
 
@@ -40,10 +40,10 @@ You can also optionally specify a unit string to be displayed next to the value:
         // Callback function to handle value change
         // value is the selected value within the range
         // Do something with the selected value
-    }, (const char*) "dB"),
+    }, "%02ddB"), // Print the value with two digits and the unit string "dB" e.g. "50dB", "05dB"
     // ... More menu items
 
-When the ``Volume`` menu item is selected, the user can adjust the volume level within the range of 0 to 100, with the unit string **"dB"** displayed next to the value.
+When the ``Volume`` menu item is selected, the user can adjust the volume level within the range of 0 to 100, and the value will be displayed with the format string ``"%02ddB"``.
 
 .. image:: images/item-int-range.gif
     :width: 400px
@@ -63,15 +63,12 @@ A float range item can be created using the following syntax:
         // Callback function to handle value change
         // value is the selected value within the range
         // Do something with the selected value
-    }, (const char*) " km", 0.5f),
+    }, "%.02f km", 0.5f), // Print the value with two decimal places and the unit string "km" e.g. "5.00 km", "5.50 km"
     // ... More menu items
 
 - The last argument is the step size of the range (the increment or decrement value when changing the value).
-  This argument also determines the number of decimal places to display.
-  For example, a step size of ``0.5`` will display values with one decimal place,
-  while a step size of ``0.01`` will display values with two decimal places.
 
-When the ``Dist`` menu item is selected, the user can adjust the pressure within the range of 0.0 to 100.0, with the unit string **"km"** displayed next to the value.
+When the ``Dist`` menu item is selected, the user can adjust the distance within the range of 0.0 to 100.0
 
 .. image:: images/item-float-range.png
     :width: 400px
