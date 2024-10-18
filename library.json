@@ -16,7 +16,7 @@
     }
   ],
   "license": "MIT",
-  "frameworks": "arduino",
+  "frameworks": "*",
   "platforms": "*",
   "export": {
     "exclude": [
