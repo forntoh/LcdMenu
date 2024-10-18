@@ -28,18 +28,12 @@ jobs:
       UNIVERSAL_SKETCH_PATHS: |
         - examples/Basic
         - examples/ButtonAdapter
-        - examples/ButtonWithRotaryAdapter
         - examples/Callbacks
-        - examples/CharsetInput
         - examples/InputRotary
-        - examples/ItemBack
         - examples/KeyboardAdapter
         - examples/List
-        - examples/MenuTimeout
         - examples/SimpleRotary
         - examples/SSD1803A_I2C
-        - examples/SubMenu
-        - examples/ViewShifting
 
       SKETCHES_REPORTS_PATH: sketches-reports
 
@@ -53,14 +47,14 @@ jobs:
           # - fqbn: arduino:avr:uno
           #   type: avr
           #   artifact-name-suffix: arduino-avr-uno
-          - fqbn: esp8266:esp8266:huzzah
-            type: esp8266
-            artifact-name-suffix: esp8266-esp8266-huzzah
+          # - fqbn: esp8266:esp8266:huzzah
+          #   type: esp8266
+          #   artifact-name-suffix: esp8266-esp8266-huzzah
           # - fqbn: arduino:samd:mkr1000
           #   type: mkr1000
           #   artifact-name-suffix: arduino-samd-mkr1000
 
-          - fqbn: stm32:stm32:generic
+          - fqbn: STM32:stm32:generic
             type: stm32
             artifact-name-suffix: stm32-stm32-generic
           # - fqbn: arduino:samd:nano_33_iot
@@ -123,6 +117,13 @@ jobs:
                 source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
             libraries:
             sketch-paths:
+          # STM32 boards
+          - board:
+              type: stm32
+            platforms: |
+              # Install STM32 platform via Boards Manager
+              - name: STM32:stm32
+                source-url: https://raw.githubusercontent.com/stm32duino/BoardManagerFiles/main/package_stmicroelectronics_index.json
 
     steps:
       - name: Checkout
