@@ -1,5 +1,7 @@
 // Libraries
+#if defined(ARDUINO_ARCH_AVR)
 #include <Arduino_FreeRTOS.h>
+#endif
 #include <ItemSubMenu.h>
 #include <ItemToggle.h>
 #include <LcdMenu.h>

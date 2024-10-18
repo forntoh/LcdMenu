@@ -27,13 +27,13 @@ jobs:
 
       UNIVERSAL_SKETCH_PATHS: |
         - examples/Basic
-        - examples/ButtonAdapter
-        - examples/Callbacks
-        - examples/InputRotary
-        - examples/KeyboardAdapter
-        - examples/List
-        - examples/SimpleRotary
-        - examples/SSD1803A_I2C
+        # - examples/ButtonAdapter
+        # - examples/Callbacks
+        # - examples/InputRotary
+        # - examples/KeyboardAdapter
+        # - examples/List
+        # - examples/SimpleRotary
+        # - examples/SSD1803A_I2C
 
       SKETCHES_REPORTS_PATH: sketches-reports
 
@@ -41,52 +41,28 @@ jobs:
       fail-fast: false
       matrix:
         board:
-          # - fqbn: esp32:esp32:esp32
-          #   type: esp32
-          #   artifact-name-suffix: esp32-esp32-esp32
-          # - fqbn: arduino:avr:uno
-          #   type: avr
-          #   artifact-name-suffix: arduino-avr-uno
-          # - fqbn: esp8266:esp8266:huzzah
-          #   type: esp8266
-          #   artifact-name-suffix: esp8266-esp8266-huzzah
-          # - fqbn: arduino:samd:mkr1000
-          #   type: mkr1000
-          #   artifact-name-suffix: arduino-samd-mkr1000
-
+          - fqbn: esp32:esp32:esp32
+            type: esp32
+            artifact-name-suffix: esp32-esp32-esp32
+          - fqbn: arduino:avr:uno
+            type: avr
+            artifact-name-suffix: arduino-avr-uno
+          - fqbn: esp8266:esp8266:huzzah
+            type: esp8266
+            artifact-name-suffix: esp8266-esp8266-huzzah
+          - fqbn: arduino:samd:mkr1000
+            type: mkr1000
+            artifact-name-suffix: arduino-samd-mkr1000
           - fqbn: STMicroelectronics:stm32:GenF1
             type: stm32
-            artifact-name-suffix: STM32-stm32-STM32F1
-          # - fqbn: arduino:samd:nano_33_iot
-          #   type: nina
-          #   artifact-name-suffix: arduino-samd-nano_33_iot
-          # - fqbn: arduino:samd:mkrnb1500
-          #   type: nb
-          #   artifact-name-suffix: arduino-samd-mkrnb1500
-          # - fqbn: arduino:mbed_portenta:envie_m7
-          #   type: mbed_portenta
-          #   artifact-name-suffix: arduino-mbed_portenta-envie_m7
-          # - fqbn: arduino:mbed_nano:nanorp2040connect
-          #   type: nina
-          #   artifact-name-suffix: arduino-mbed_nano-nanorp2040connect
-          # - fqbn: arduino:mbed_nicla:nicla_vision
-          #   type: mbed_nicla
-          #   artifact-name-suffix: arduino-mbed_nicla-nicla_vision
-          # - fqbn: arduino:mbed_opta:opta
-          #   type: mbed_opta
-          #   artifact-name-suffix: arduino-mbed_opta-opta
+            artifact-name-suffix: STM32-stm32-GenF1
+
+          - fqbn: arduino:mbed_portenta:envie_m7
+            type: mbed_portenta
+            artifact-name-suffix: arduino-mbed_portenta-envie_m7
           # - fqbn: arduino:mbed_giga:giga
           #   type: mbed_giga
           #   artifact-name-suffix: arduino-mbed_giga-giga
-          # - fqbn: arduino:renesas_portenta:portenta_c33
-          #   type: renesas_portenta
-          #   artifact-name-suffix: arduino-renesas_portenta-portenta_c33
-          # - fqbn: arduino:renesas_uno:unor4wifi
-          #   type: renesas_uno
-          #   artifact-name-suffix: arduino-renesas_uno-unor4wifi
-          # - fqbn: arduino:mbed_edge:edge_control
-          #   type: mbed_edge
-          #   artifact-name-suffix: arduino-mbed_edge-edge_control
 
         include:
           # AVR boards
@@ -124,6 +100,15 @@ jobs:
               # Install STM32 platform via Boards Manager
               - name: STMicroelectronics:stm32
                 source-url: https://raw.githubusercontent.com/stm32duino/BoardManagerFiles/main/package_stmicroelectronics_index.json
+            sketch-paths:
+          # Arduino Mbed Portenta boards
+          - board:
+              type: mbed_portenta
+            platforms: |
+              # Install Arduino Mbed Portenta platform via Boards Manager
+              - name: arduino:mbed_portenta
+            sketch-paths: |
+              - examples/RTOS
 
     steps:
       - name: Checkout
@@ -139,8 +124,8 @@ jobs:
             ${{ env.UNIVERSAL_LIBRARIES }}
             ${{ matrix.libraries }}
           sketch-paths: |
-            ${{ env.UNIVERSAL_SKETCH_PATHS }}
             ${{ matrix.sketch-paths }}
+            ${{ env.UNIVERSAL_SKETCH_PATHS }}
           enable-deltas-report: true
           enable-warnings-report: true
 
