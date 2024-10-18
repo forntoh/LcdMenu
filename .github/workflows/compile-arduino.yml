@@ -47,19 +47,19 @@ jobs:
       fail-fast: false
       matrix:
         board:
-          - fqbn: esp32:esp32:esp32
-            type: esp32
-            artifact-name-suffix: esp32-esp32-esp32
-          - fqbn: arduino:avr:uno
-            type: avr
-            artifact-name-suffix: arduino-avr-uno
+          # - fqbn: esp32:esp32:esp32
+          #   type: esp32
+          #   artifact-name-suffix: esp32-esp32-esp32
+          # - fqbn: arduino:avr:uno
+          #   type: avr
+          #   artifact-name-suffix: arduino-avr-uno
+          - fqbn: esp8266:esp8266:huzzah
+            type: esp8266
+            artifact-name-suffix: esp8266-esp8266-huzzah
+          - fqbn: arduino:samd:mkr1000
+            type: mkr1000
+            artifact-name-suffix: arduino-samd-mkr1000
 
-          # - fqbn: esp8266:esp8266:huzzah
-          #   type: esp8266
-          #   artifact-name-suffix: esp8266-esp8266-huzzah
-          # - fqbn: arduino:samd:mkr1000
-          #   type: mkr1000
-          #   artifact-name-suffix: arduino-samd-mkr1000
           # - fqbn: stm32:STM32F1:generic
           #   type: stm32
           #   artifact-name-suffix: stm32-STM32F1-generic
