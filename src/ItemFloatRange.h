@@ -2,7 +2,10 @@
 #define ItemFloatRange_H
 
 #include "ItemRangeBase.h"
-#include <utils/printf.h>
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
+#else
+#include "utils/printf.h"
+#endif
 
 /**
  * @brief Item that allows user to input float information within a range.

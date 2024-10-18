@@ -83,22 +83,23 @@
       "attrs": { "i2cAddress": "0x3c" }
     },
     {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 245.29,
+      "left": -53.03,
+      "attrs": {}
+    },
+    {
       "type": "wokwi-pushbutton",
       "id": "btn7",
       "top": 332.6,
       "left": 403.2,
       "attrs": { "color": "yellow", "label": "BKSP" }
-    },
-    {
-      "type": "wokwi-arduino-uno",
-      "id": "uno",
-      "top": 256.2,
-      "left": -200.2,
-      "rotate": 90,
-      "attrs": {}
     }
   ],
   "connections": [
+    ["esp:TX", "$serialMonitor:RX", "", []],
+    ["esp:RX", "$serialMonitor:TX", "", []],
     ["bb2:2t.a", "encoder1:CLK", "purple", ["h67.2", "v-38.4", "h144"]],
     ["bb2:3t.a", "encoder1:DT", "magenta", ["h76.8", "v-38.4", "h124.8"]],
     ["bb2:4t.a", "encoder1:SW", "cyan", ["h86.4", "v-38.4", "h105.6"]],
@@ -137,6 +138,23 @@
     ["bb2:2t.e", "bb2:2b.f", "purple", ["h0"]],
     ["bb2:3t.e", "bb2:3b.f", "magenta", ["h0"]],
     ["bb2:4t.e", "bb2:4b.f", "cyan", ["h0"]],
+    ["bb2:3b.j", "esp:3", "green", ["h-259.2", "v9.6"]],
+    ["bb2:6b.j", "esp:6", "green", ["h-288", "v96"]],
+    ["bb2:7b.j", "esp:7", "green", ["h-297.6", "v96"]],
+    ["bb2:8b.j", "esp:8", "green", ["h-307.2", "v96"]],
+    ["bb2:9b.j", "esp:9", "green", ["h-316.8", "v115.2", "h174.35"]],
+    ["bb2:10b.j", "esp:10", "green", ["h-326.4", "v96"]],
+    ["bb2:11b.j", "esp:11", "green", ["h-336", "v96"]],
+    ["bb2:21b.h", "esp:20", "green", ["h-134.4", "v57.6"]],
+    ["esp:3V3", "bb2:bp.23", "red", ["h-9.6", "v201.6", "h172.8", "v-30.4"]],
+    [
+      "bb2:bn.24",
+      "esp:GND.1",
+      "black",
+      ["h-37.1", "v30.4", "h-182.4", "v-90.71"]
+    ],
+    ["bb2:22b.h", "esp:22", "blue", ["h-134.4", "v-9.6"]],
+    ["bb2:21b.h", "esp:21", "violet", ["h-144", "v-57.6"]],
     ["btn2:2.l", "bb1:2t.a", "green", ["h-9.6", "v67.4", "h-19.2"]],
     ["btn3:2.l", "bb1:3t.a", "green", ["h-9.6", "v134.6", "h-9.6"]],
     ["btn4:2.l", "bb1:4t.a", "green", ["h-9.6", "v67.4", "h-86.4"]],
@@ -170,23 +188,18 @@
     ["bb1:6t.e", "bb1:6b.f", "green", ["v0"]],
     ["bb1:7t.e", "bb1:7b.f", "green", ["v0"]],
     ["bb1:17b.j", "bb2:tn.25", "black", ["v19.2", "h-278.4"]],
+    ["bb1:5b.j", "esp:16", "green", ["v0", "h-432", "v-172.8"]],
+    ["bb1:6b.j", "esp:17", "green", ["v0", "h-441.6", "v-192"]],
+    ["bb1:7b.j", "esp:5", "green", ["v0", "h-451.2", "v-201.6"]],
+    ["bb1:1b.j", "esp:15", "green", ["v0", "h-393.6", "v-134.4"]],
+    ["esp:2", "bb1:2b.j", "green", ["h9.87", "v148.31"]],
+    ["esp:0", "bb1:3b.j", "green", ["h9.87", "v157.91"]],
+    ["esp:4", "bb1:4b.j", "green", ["h9.87", "v167.51"]],
+    ["esp:CLK", "bb2:25b.j", "purple", ["h48.27", "v-5.29"]],
     ["bb2:2t.d", "bb2:25t.d", "purple", ["h0"]],
     ["bb2:25t.e", "bb2:25b.f", "purple", ["h0"]],
-    ["bb2:25b.j", "uno:2", "purple", ["h-96", "v38.4"]],
-    ["bb2:3b.j", "uno:3", "magenta", ["h0", "v201.6", "h-105.6", "v48"]],
-    ["uno:4", "bb2:23b.g", "cyan", ["h192", "v-34.5"]],
-    ["bb2:4b.g", "bb2:23b.g", "cyan", ["h0"]],
-    ["uno:GND.3", "bb2:bn.25", "black", ["h-19.1", "v109.6", "h326.4", "v-40"]],
-    ["uno:3.3V", "bb2:bp.25", "red", ["h-28.7", "v148.2", "h470.4"]],
-    ["uno:A4", "bb2:21b.h", "violet", ["h-9.5", "v33", "h220.8", "v-115.2"]],
-    ["uno:A5", "bb2:22b.h", "blue", ["h0.1", "v13.9", "h220.8", "v-96"]],
-    ["bb1:1b.f", "uno:5", "green", ["v9.6", "h-403.2", "v-99.8"]],
-    ["uno:6", "bb1:2b.g", "green", ["h19.2", "v118.9", "h412.8"]],
-    ["bb1:3b.g", "uno:7", "green", ["v19.2", "h-422.4", "v-144"]],
-    ["bb1:4b.j", "uno:8", "green", ["v28.8", "h-432", "v-192.4"]],
-    ["uno:9", "bb1:5b.j", "green", ["h19.2", "v192.8", "h0", "v9.6", "h441.6"]],
-    ["bb1:6b.j", "uno:10", "green", ["v28.8", "h-451.2", "v-211.9"]],
-    ["uno:11", "bb1:7b.j", "green", ["h19.2", "v221.4", "h460.8"]]
+    ["esp:18", "bb2:4b.h", "cyan", ["h0"]],
+    ["esp:19", "bb2:3b.i", "magenta", ["h0"]]
   ],
   "dependencies": {}
 }
