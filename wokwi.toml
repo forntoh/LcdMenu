@@ -1,4 +1,10 @@
 [wokwi]
 version=1
+
+# UNO
 firmware='.pio/build/uno/firmware.hex'
 elf='.pio/build/uno/firmware.elf'
+
+# ESP32
+# firmware='.pio/build/esp32/firmware.bin'
+# elf='.pio/build/esp32/firmware.elf'
