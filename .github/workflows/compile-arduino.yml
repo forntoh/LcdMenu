@@ -56,16 +56,13 @@ jobs:
           - fqbn: esp8266:esp8266:huzzah
             type: esp8266
             artifact-name-suffix: esp8266-esp8266-huzzah
-          - fqbn: arduino:samd:mkr1000
-            type: mkr1000
-            artifact-name-suffix: arduino-samd-mkr1000
+          # - fqbn: arduino:samd:mkr1000
+          #   type: mkr1000
+          #   artifact-name-suffix: arduino-samd-mkr1000
 
-          # - fqbn: stm32:STM32F1:generic
-          #   type: stm32
-          #   artifact-name-suffix: stm32-STM32F1-generic
-          # - fqbn: arduino:atmelmegaavr:uno2018
-          #   type: atmelmegaavr
-          #   artifact-name-suffix: arduino-atmelmegaavr-uno2018
+          - fqbn: stm32:stm32:generic
+            type: stm32
+            artifact-name-suffix: stm32-stm32-generic
           # - fqbn: arduino:samd:nano_33_iot
           #   type: nina
           #   artifact-name-suffix: arduino-samd-nano_33_iot
@@ -98,14 +95,34 @@ jobs:
           #   artifact-name-suffix: arduino-mbed_edge-edge_control
 
         include:
+          # AVR boards
           - board:
               type: avr
             platforms: |
+              # Install AVR platform via Boards Manager
               - name: arduino:avr
             libraries: |
               - name: FreeRTOS
             sketch-paths: |
               - examples/RTOS
+          # ESP32 boards
+          - board:
+              type: esp32
+            platforms: |
+              # Install ESP32 platform via Boards Manager
+              - name: esp32:esp32
+                source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+            libraries:
+            sketch-paths:
+          # ESP8266 boards
+          - board:
+              type: esp8266
+            platforms: |
+              # Install ESP8266 platform via Boards Manager
+              - name: esp8266:esp8266
+                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+            libraries:
+            sketch-paths:
 
     steps:
       - name: Checkout
@@ -115,8 +132,7 @@ jobs:
         uses: arduino/compile-sketches@v1
         with:
           fqbn: ${{ matrix.board.fqbn }}
-          enable-deltas-report: true
-          enable-warnings-report: true
+          platforms: ${{ matrix.platforms }}
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
           libraries: |
             ${{ env.UNIVERSAL_LIBRARIES }}
@@ -124,6 +140,8 @@ jobs:
           sketch-paths: |
             ${{ env.UNIVERSAL_SKETCH_PATHS }}
             ${{ matrix.sketch-paths }}
+          enable-deltas-report: true
+          enable-warnings-report: true
 
       - name: Upload sketches reports
         uses: actions/upload-artifact@v4
