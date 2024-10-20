@@ -46,13 +46,9 @@ steps:
   - simulate: rightButton-press
   - wait-serial: "#LOG# MenuScreen::right=5"
   - simulate: rightButton-press
-  - wait-serial: "#LOG# MenuScreen::right=6"
+  - wait-serial: "#LOG# MenuScreen::right=5"
   - simulate: rightButton-press
-  - wait-serial: "#LOG# MenuScreen::right=6"
-  - simulate: rightButton-press
-  - wait-serial: "#LOG# MenuScreen::right=6"
-  - simulate: leftButton-press
-  - wait-serial: "#LOG# MenuScreen::left=5"
+  - wait-serial: "#LOG# MenuScreen::right=5"
   - simulate: leftButton-press
   - wait-serial: "#LOG# MenuScreen::left=4"
   - simulate: leftButton-press
