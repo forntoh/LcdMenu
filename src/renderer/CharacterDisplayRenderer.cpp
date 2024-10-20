@@ -26,7 +26,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
     display->setCursor(cursorCol, cursorRow);
 
     // Draw cursor or empty space based on focus and edit mode
-    if (cursorIcon != 0 && editCursorIcon != 0) {
+    if (cursorIcon != 0 || editCursorIcon != 0) {
         display->draw(hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ');
         cursorCol++;
     }
