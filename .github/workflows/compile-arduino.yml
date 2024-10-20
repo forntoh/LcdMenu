@@ -17,11 +17,85 @@ jobs:
   compile:
     runs-on: ubuntu-latest
 
+    env:
+      UNIVERSAL_LIBRARIES: |
+        - source-path: ./
+        - name: Button
+        - name: SimpleRotary
+        - name: LiquidCrystal I2C
+        - name: SSD1803A_I2C
+
+      UNIVERSAL_SKETCH_PATHS: |
+        - examples/Basic
+        - examples/ButtonAdapter
+        - examples/Callbacks
+        - examples/InputRotary
+        - examples/IntFloatValues
+        - examples/KeyboardAdapter
+        - examples/List
+        - examples/SimpleRotary
+        - examples/SSD1803A_I2C
+
+      SKETCHES_REPORTS_PATH: sketches-reports
+
     strategy:
+      fail-fast: false
       matrix:
         board:
+          - fqbn: esp32:esp32:esp32
+            type: esp32
+            artifact-name-suffix: esp32-esp32-esp32
           - fqbn: arduino:avr:uno
+            type: avr
             artifact-name-suffix: arduino-avr-uno
+          - fqbn: esp8266:esp8266:huzzah
+            type: esp8266
+            artifact-name-suffix: esp8266-esp8266-huzzah
+          - fqbn: arduino:samd:mkr1000
+            type: mkr1000
+            artifact-name-suffix: arduino-samd-mkr1000
+          - fqbn: STMicroelectronics:stm32:GenF1
+            type: stm32
+            artifact-name-suffix: STM32-stm32-GenF1
+
+        include:
+          # AVR boards
+          - board:
+              type: avr
+            platforms: |
+              # Install AVR platform via Boards Manager
+              - name: arduino:avr
+            libraries: |
+              - name: FreeRTOS
+            sketch-paths: |
+              - examples/RTOS
+          # ESP32 boards
+          - board:
+              type: esp32
+            platforms: |
+              # Install ESP32 platform via Boards Manager
+              - name: esp32:esp32
+                source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+            libraries:
+            sketch-paths: |
+              - examples/RTOS
+          # ESP8266 boards
+          - board:
+              type: esp8266
+            platforms: |
+              # Install ESP8266 platform via Boards Manager
+              - name: esp8266:esp8266
+                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+            libraries:
+            sketch-paths:
+          # STM32 boards
+          - board:
+              type: stm32
+            platforms: |
+              # Install STM32 platform via Boards Manager
+              - name: STMicroelectronics:stm32
+                source-url: https://raw.githubusercontent.com/stm32duino/BoardManagerFiles/main/package_stmicroelectronics_index.json
+            sketch-paths:
 
     steps:
       - name: Checkout
@@ -31,19 +105,19 @@ jobs:
         uses: arduino/compile-sketches@v1
         with:
           fqbn: ${{ matrix.board.fqbn }}
+          platforms: ${{ matrix.platforms }}
+          sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          libraries: |
+            ${{ env.UNIVERSAL_LIBRARIES }}
+            ${{ matrix.libraries }}
+          sketch-paths: |
+            ${{ matrix.sketch-paths }}
+            ${{ env.UNIVERSAL_SKETCH_PATHS }}
           enable-deltas-report: true
           enable-warnings-report: true
-          sketches-report-path: sketches-reports
-          libraries: |
-            - source-path: ./
-            - name: Button
-            - name: FreeRTOS
-            - name: SimpleRotary
-            - name: LiquidCrystal I2C
-            - name: SSD1803A_I2C
 
       - name: Upload sketches reports
         uses: actions/upload-artifact@v4
         with:
           name: sketches-report-${{ matrix.board.artifact-name-suffix }}
-          path: sketches-reports
+          path: ${{ env.SKETCHES_REPORTS_PATH }}

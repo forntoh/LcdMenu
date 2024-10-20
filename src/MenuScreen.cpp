@@ -71,7 +71,7 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
             printLog(F("MenuScreen::back"));
             return true;
         case RIGHT:
-            if (renderer->cursorCol >= renderer->getEffectiveCols()) {
+            if (renderer->cursorCol >= renderer->maxCols - 1) {
                 renderer->viewShift++;
                 draw(renderer);
             }
