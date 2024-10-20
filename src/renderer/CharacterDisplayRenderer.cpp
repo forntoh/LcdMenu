@@ -22,30 +22,59 @@ void CharacterDisplayRenderer::begin() {
 }
 
 void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
-    char buf[maxCols + viewShift + 1];
+    uint8_t cursorCol = 0;
+    display->setCursor(cursorCol, cursorRow);
 
-    strcpy(buf, text);
-
-    if (value != NULL) {
-        strcat(buf, ":");
-        strcat(buf, value);
+    // Draw cursor or empty space based on focus and edit mode
+    if (cursorIcon != 0 && editCursorIcon != 0) {
+        display->draw(hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ');
+        cursorCol++;
     }
 
-    if (hasFocus && viewShift > 0) {
-        memmove(buf, buf + viewShift, availableColumns);
+    // Draw text
+    drawText(text, cursorCol, viewShift);
+
+    // Draw colon separator if value is present and within bounds
+    if (value && cursorCol < availableColumns && (!hasFocus || viewShift < strlen(text) + 1)) {
+        display->draw(':');
+        cursorCol++;
     }
 
-    appendCursorToText(buf);
+    // Draw value if present
+    if (value) {
+        uint8_t textLen = strlen(text);
+        uint8_t valueViewShift = (viewShift > textLen) ? viewShift - textLen - 1 : 0;
+        drawText(value, cursorCol, valueViewShift);
+    }
 
-    buf[availableColumns] = '\0';
-    uint8_t cursorCol = strlen(buf);
+    uint8_t cursorColEnd = cursorCol;
 
-    padText(buf);
-    appendIndicatorToText(buf);
+    // Fill remaining space with white spaces
+    for (; cursorCol < availableColumns; cursorCol++) {
+        display->draw(' ');
+    }
 
-    display->setCursor(0, cursorRow);
-    display->draw(buf);
-    if (hasFocus) moveCursor(cursorCol, cursorRow);
+    // Draw up and down arrows if present
+    if (upArrow && downArrow) {
+        uint8_t indicator = hasHiddenItemsAbove ? 1 : (hasHiddenItemsBelow ? 2 : 0);
+        display->setCursor(maxCols - 1, cursorRow);
+        display->draw(indicator);
+    }
+
+    // Move cursor to the end position if focused
+    if (hasFocus) moveCursor(cursorColEnd, cursorRow);
+}
+
+void CharacterDisplayRenderer::drawText(const char* text, uint8_t& col, uint8_t shift) {
+    const char* textPtr = text;
+    if (hasFocus) {
+        uint8_t textLen = strlen(text);
+        textPtr = (shift < textLen) ? textPtr + shift : NULL;
+    }
+    while (col < availableColumns && textPtr && *textPtr) {
+        display->draw(*textPtr++);
+        col++;
+    }
 }
 
 void CharacterDisplayRenderer::draw(uint8_t byte) {
@@ -63,39 +92,6 @@ void CharacterDisplayRenderer::clearBlinker() {
 void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) {
     MenuRenderer::moveCursor(cursorCol, cursorRow);
     display->setCursor(cursorCol, cursorRow);
-}
-
-void CharacterDisplayRenderer::appendCursorToText(char* text) {
-    if (cursorIcon == 0 && editCursorIcon == 0) return;
-
-    uint8_t cursor = hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ';
-    uint8_t len = strlen(text);
-
-    memmove(text + 1, text, len + 1);
-    text[0] = cursor;
-}
-
-void CharacterDisplayRenderer::appendIndicatorToText(char* text) {
-    uint8_t indicator = (hasHiddenItemsAbove) ? 1 : ((hasHiddenItemsBelow) ? 2 : 0);
-    uint8_t len = strlen(text);
-    bool hasArrows = upArrow != NULL && downArrow != NULL;
-
-    if (indicator != 0 && hasArrows) {
-        text[len] = indicator;
-    } else if (hasArrows) {
-        text[len] = ' ';
-    } else {
-        return;
-    }
-    text[len + 1] = '\0';
-}
-
-void CharacterDisplayRenderer::padText(char* text) {
-    uint8_t textLength = strlen(text);
-    uint8_t spaces = (textLength > availableColumns) ? 0 : availableColumns - textLength;
-    spaces = constrain(spaces, 0, maxCols);
-    memset(text + textLength, ' ', spaces);
-    text[textLength + spaces] = '\0';
 }
 
 uint8_t CharacterDisplayRenderer::getEffectiveCols() const {

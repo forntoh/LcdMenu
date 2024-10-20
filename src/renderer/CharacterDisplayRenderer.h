@@ -26,32 +26,6 @@ class CharacterDisplayRenderer : public MenuRenderer {
     const uint8_t cursorIcon;
     const uint8_t editCursorIcon;
     const uint8_t availableColumns;
-
-    /**
-     * @brief Appends a cursor icon to the given text if the specified screen row is active.
-     *
-     * @param text The original text to which the cursor icon will be appended.
-     */
-    void appendCursorToText(char* text);
-
-    /**
-     * @brief Appends an indicator to the provided text based on the item index and screen row.
-     *
-     * @param text The original text to which the indicator may be appended.
-     */
-    void appendIndicatorToText(char* text);
-
-    /**
-     * @brief Pads the given text with spaces to fit within the available length.
-     *
-     * This function takes a text string and pads it with spaces so that the total
-     * length of the text fits within the available length of the display. If the
-     * text is longer than the available length, no padding is added.
-     *
-     * @param text The input text to be padded.
-     */
-    void padText(char* text);
-
     /**
      * @brief Calculates the available horizontal space for displaying content.
      *
@@ -62,6 +36,19 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @return The number of columns available for displaying content.
      */
     uint8_t getEffectiveCols() const override;
+
+    /**
+     * @brief Draws text on the display.
+     *
+     * This function draws text on the display, handling text truncation and shifting.
+     * It takes into account the viewShift parameter to shift the text by a specified
+     * number of columns.
+     *
+     * @param text The text to be drawn on the display.
+     * @param col The column position to start drawing the text.
+     * @param viewShift The number of columns to shift the text by.
+     */
+    inline void drawText(const char* text, uint8_t& col, uint8_t viewShift);
 
   public:
     /**
