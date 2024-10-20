@@ -66,14 +66,20 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
 }
 
 void CharacterDisplayRenderer::drawText(const char* text, uint8_t& col, uint8_t shift) {
+    // Pointer to the current character in the text
     const char* textPtr = text;
+
+    // If the renderer has focus, adjust the text pointer based on the shift value
     if (hasFocus) {
         uint8_t textLen = strlen(text);
+        // Move the text pointer forward by 'shift' characters, if within bounds
         textPtr = (shift < textLen) ? textPtr + shift : NULL;
     }
+
+    // Draw characters from the text until we reach the end of the available columns or the end of the text
     while (col < availableColumns && textPtr && *textPtr) {
-        display->draw(*textPtr++);
-        col++;
+        display->draw(*textPtr++);  // Draw the current character and move to the next
+        col++;                      // Move to the next column
     }
 }
 

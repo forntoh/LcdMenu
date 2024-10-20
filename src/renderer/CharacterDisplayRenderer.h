@@ -45,7 +45,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * number of columns.
      *
      * @param text The text to be drawn on the display.
-     * @param col The column position to start drawing the text.
+     * @param col The column position to start drawing the text. This parameter will be updated to the new column position after drawing the text.
      * @param viewShift The number of columns to shift the text by.
      */
     inline void drawText(const char* text, uint8_t& col, uint8_t viewShift);
