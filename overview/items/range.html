@@ -242,17 +242,17 @@ It is used to create a menu item that presents a range of values to the user, su
 <li><p>The last argument is a callback function that will be called when the value is changed.</p></li>
 </ul>
 <p>When the <code class="docutils literal notranslate"><span class="pre">Brightness</span></code> menu item is selected, the user can adjust the brightness level within the range of 0 to 100.</p>
-<p>You can also optionally specify a unit string to be displayed next to the value:</p>
+<p>You can also optionally specify formatting for the value by providing a format string argument:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// ... More menu items</span>
 </span><span id="line-2"><span class="n">ITEM_INT_RANGE</span><span class="p">(</span><span class="s">"Volume"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="line-3"><span class="w">    </span><span class="c1">// Callback function to handle value change</span>
 </span><span id="line-4"><span class="w">    </span><span class="c1">// value is the selected value within the range</span>
 </span><span id="line-5"><span class="w">    </span><span class="c1">// Do something with the selected value</span>
-</span><span id="line-6"><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s">"dB"</span><span class="p">),</span>
+</span><span id="line-6"><span class="p">},</span><span class="w"> </span><span class="s">"%02ddB"</span><span class="p">),</span><span class="w"> </span><span class="c1">// Print the value with two digits and the unit string "dB" e.g. "50dB", "05dB"</span>
 </span><span id="line-7"><span class="c1">// ... More menu items</span>
 </span></code></pre></div>
 </div>
-<p>When the <code class="docutils literal notranslate"><span class="pre">Volume</span></code> menu item is selected, the user can adjust the volume level within the range of 0 to 100, with the unit string <strong>“dB”</strong> displayed next to the value.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">Volume</span></code> menu item is selected, the user can adjust the volume level within the range of 0 to 100, and the value will be displayed with the format string <code class="docutils literal notranslate"><span class="pre">"%02ddB"</span></code>.</p>
 <a class="reference internal image-reference" href="../../_images/item-int-range.gif"><img alt="Example of an integer range menu item" src="../../_images/item-int-range.gif" style="width: 400px;"/>
 </a>
 <p>Find more information about the range menu item in the <a class="reference internal" href="../../reference/api/ItemIntRange.html"><span class="doc">API reference</span></a>.</p>
@@ -265,17 +265,14 @@ It is used to create a menu item that presents a range of values to the user, su
 </span><span id="line-3"><span class="w">    </span><span class="c1">// Callback function to handle value change</span>
 </span><span id="line-4"><span class="w">    </span><span class="c1">// value is the selected value within the range</span>
 </span><span id="line-5"><span class="w">    </span><span class="c1">// Do something with the selected value</span>
-</span><span id="line-6"><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s">" km"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">),</span>
+</span><span id="line-6"><span class="p">},</span><span class="w"> </span><span class="s">"%.02f km"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">),</span><span class="w"> </span><span class="c1">// Print the value with two decimal places and the unit string "km" e.g. "5.00 km", "5.50 km"</span>
 </span><span id="line-7"><span class="c1">// ... More menu items</span>
 </span></code></pre></div>
 </div>
 <ul class="simple">
-<li><p>The last argument is the step size of the range (the increment or decrement value when changing the value).
-This argument also determines the number of decimal places to display.
-For example, a step size of <code class="docutils literal notranslate"><span class="pre">0.5</span></code> will display values with one decimal place,
-while a step size of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> will display values with two decimal places.</p></li>
+<li><p>The last argument is the step size of the range (the increment or decrement value when changing the value).</p></li>
 </ul>
-<p>When the <code class="docutils literal notranslate"><span class="pre">Dist</span></code> menu item is selected, the user can adjust the pressure within the range of 0.0 to 100.0, with the unit string <strong>“km”</strong> displayed next to the value.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">Dist</span></code> menu item is selected, the user can adjust the distance within the range of 0.0 to 100.0</p>
 <a class="reference internal image-reference" href="../../_images/item-float-range.png"><img alt="Example of a float range menu item" src="../../_images/item-float-range.png" style="width: 400px;"/>
 </a>
 <div class="admonition hint">
@@ -329,7 +326,7 @@ Check the API reference for more information on how to configure this behavior.<
   Back to top
 </button>
 <script src="../../_static/documentation_options.js?v=7f41d439"></script>
-<script src="../../_static/doctools.js?v=9a2dae69"></script>
+<script src="../../_static/doctools.js?v=9bcbadda"></script>
 <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
 <script defer="defer" src="../../_static/theme.js?v=1808ab49"></script>
 <script src="../../_static/design-tabs.js?v=f930bc37"></script>

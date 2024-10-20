@@ -308,19 +308,6 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK9ItemInput11getViewSizeEP12MenuRenderer">
-<span id="_CPPv3NK9ItemInput11getViewSizeEP12MenuRenderer"></span><span id="_CPPv2NK9ItemInput11getViewSizeEP12MenuRenderer"></span><span id="ItemInput::getViewSize__MenuRendererPC"></span><span class="target" id="classItemInput_1aa2fbf793fdaa3f28ad1a2dd7be05d895"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getViewSize</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="renderer/MenuRenderer.html#_CPPv412MenuRenderer" title="MenuRenderer"><span class="n"><span class="pre">MenuRenderer</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">renderer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK9ItemInput11getViewSizeEP12MenuRenderer" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK9ItemInput11getViewSizeEP12MenuRenderer'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>The number of visible characters. </p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">         visible area
-</span><span id="line-2">       ┌───────────────┐
-</span><span id="line-3">X X X X│X X X X █ X X X│X X
-</span><span id="line-4">       ├───────────────┤
-</span><span id="line-5">       │&lt;── viewSize ─&gt;│
-</span></code></pre></div>
-</div>
-<p>Effectively const, but initialized lately when renderer is injected. </p>
-</dd></dl>
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ItemInput4drawEP12MenuRenderer">
 <span id="_CPPv3N9ItemInput4drawEP12MenuRenderer"></span><span id="_CPPv2N9ItemInput4drawEP12MenuRenderer"></span><span id="ItemInput::draw__MenuRendererP"></span><span class="target" id="classItemInput_1a2e2db22c4909d2803ca67e9360bec381"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="renderer/MenuRenderer.html#_CPPv412MenuRenderer" title="MenuRenderer"><span class="n"><span class="pre">MenuRenderer</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">renderer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N9ItemInput4drawEP12MenuRenderer" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemInput4drawEP12MenuRenderer'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Draw this menu item on specified display on current row. </p>
@@ -455,7 +442,6 @@
 <li><a :data-current="activeSection === '#_CPPv4N9ItemInput8getValueEv'" class="reference internal" href="#_CPPv4N9ItemInput8getValueEv"><code class="docutils literal notranslate"><span class="pre">ItemInput::getValue()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N9ItemInput8setValueEPc'" class="reference internal" href="#_CPPv4N9ItemInput8setValueEPc"><code class="docutils literal notranslate"><span class="pre">ItemInput::setValue()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N9ItemInput14getCallbackStrEv'" class="reference internal" href="#_CPPv4N9ItemInput14getCallbackStrEv"><code class="docutils literal notranslate"><span class="pre">ItemInput::getCallbackStr()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4NK9ItemInput11getViewSizeEP12MenuRenderer'" class="reference internal" href="#_CPPv4NK9ItemInput11getViewSizeEP12MenuRenderer"><code class="docutils literal notranslate"><span class="pre">ItemInput::getViewSize()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N9ItemInput4drawEP12MenuRenderer'" class="reference internal" href="#_CPPv4N9ItemInput4drawEP12MenuRenderer"><code class="docutils literal notranslate"><span class="pre">ItemInput::draw()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N9ItemInput7processEP7LcdMenuKh'" class="reference internal" href="#_CPPv4N9ItemInput7processEP7LcdMenuKh"><code class="docutils literal notranslate"><span class="pre">ItemInput::process()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N9ItemInput5enterEP12MenuRenderer'" class="reference internal" href="#_CPPv4N9ItemInput5enterEP12MenuRenderer"><code class="docutils literal notranslate"><span class="pre">ItemInput::enter()</span></code></a></li>
@@ -490,7 +476,7 @@
   Back to top
 </button>
 <script src="../../_static/documentation_options.js?v=7f41d439"></script>
-<script src="../../_static/doctools.js?v=9a2dae69"></script>
+<script src="../../_static/doctools.js?v=9bcbadda"></script>
 <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
 <script defer="defer" src="../../_static/theme.js?v=1808ab49"></script>
 <script src="../../_static/design-tabs.js?v=f930bc37"></script>
