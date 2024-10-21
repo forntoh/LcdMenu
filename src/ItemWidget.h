@@ -43,7 +43,7 @@ class ItemWidget : public BaseItemManyWidgets {
 
     template <size_t... Is>
     void invokeCallback(index_sequence<Is...>) {
-        callback((widgets[Is] != nullptr ? static_cast<BaseWidgetValue<Ts>*>(widgets[Is])->getValue() : Ts{})...);
+        callback(static_cast<BaseWidgetValue<Ts>*>(widgets[Is])->getValue()...);
     }
 
   public:
