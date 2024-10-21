@@ -8,6 +8,16 @@
 template <size_t... Is>
 struct index_sequence {};
 
+/**
+ * @brief Custom implementation of index_sequence and make_index_sequence for C++11 compatibility on Arduino.
+ * 
+ * This template struct generates a compile-time sequence of integers, which is useful for template metaprogramming.
+ * The implementation is necessary because the standard library's std::index_sequence and std::make_index_sequence
+ * are not available in C++11, which is commonly used in Arduino projects.
+ * 
+ * @tparam N The size of the sequence to generate.
+ * @tparam Is The sequence of integers generated so far.
+ */
 template <size_t N, size_t... Is>
 struct make_index_sequence : make_index_sequence<N - 1, N - 1, Is...> {};
 
