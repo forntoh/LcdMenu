@@ -12,8 +12,6 @@ class LcdMenu;
  */
 template <typename T>
 class BaseWidgetValue : public BaseWidget {
-    template <typename T0, typename T1, typename T2>
-    friend class Item;
 
   protected:
     T value;
