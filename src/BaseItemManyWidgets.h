@@ -19,7 +19,7 @@ class BaseItemManyWidgets : public MenuItem {
 
     uint8_t getActiveWidget() const { return activeWidget; }
     void setActiveWidget(const uint8_t activeWidget) {
-        if (activeWidget >= 0 && activeWidget < size) {
+        if (activeWidget < size) {
             this->activeWidget = activeWidget;
         }
     }
