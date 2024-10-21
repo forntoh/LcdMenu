@@ -3,10 +3,10 @@
 #ifndef BASE_WIDGET_H
 #define BASE_WIDGET_H
 
-#include <stdint.h>
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-#else
+#ifndef ARDUINO_ARCH_ESP32
+#ifndef ARDUINO_ARCH_ESP8266
 #include "utils/printf.h"
+#endif
 #endif
 
 #define ITEM_DRAW_BUFFER_SIZE 20
