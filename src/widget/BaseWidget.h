@@ -23,7 +23,7 @@ class BaseWidget {
     friend class BaseItemManyWidgets;
 
   protected:
-    const uint8_t cursorOffset = 0;
+    const uint8_t cursorOffset;
 
     BaseWidget(const uint8_t cursorOffset = 0) : cursorOffset(cursorOffset) {}
 
@@ -45,6 +45,7 @@ class BaseWidget {
      *
      * @param buffer the buffer where widget will be drawn
      * @param start the index where to start drawing in the buffer
+     * @return the number of characters written into the buffer
      */
     virtual uint8_t draw(char* buffer, const uint8_t start = 0) = 0;
 

@@ -6,7 +6,7 @@
 
 /**
  * @class BaseItemZeroWidget
- * @brief A base class for menu items that require a custom or no commit handling.
+ * @brief A base class for menu items that either require custom commit handling or no commit handling.
  *
  * This class extends the MenuItem class and provides a framework for menu items
  * that either need no commit handling or need to handle commit actions in a specific way.
