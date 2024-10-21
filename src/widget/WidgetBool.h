@@ -18,7 +18,7 @@ class Widget<bool> : public BaseWidgetValue<bool> {
 
   public:
     explicit Widget(
-        const boolean value = false,
+        const bool value = false,
         const char* textOn = "ON",
         const char* textOff = "OFF",
         const char* format = "%s",
