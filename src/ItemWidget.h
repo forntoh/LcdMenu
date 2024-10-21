@@ -10,11 +10,11 @@ struct index_sequence {};
 
 /**
  * @brief Custom implementation of index_sequence and make_index_sequence for C++11 compatibility on Arduino.
- * 
+ *
  * This template struct generates a compile-time sequence of integers, which is useful for template metaprogramming.
  * The implementation is necessary because the standard library's std::index_sequence and std::make_index_sequence
  * are not available in C++11, which is commonly used in Arduino projects.
- * 
+ *
  * @tparam N The size of the sequence to generate.
  * @tparam Is The sequence of integers generated so far.
  */
@@ -43,7 +43,7 @@ class ItemWidget : public BaseItemManyWidgets {
 
     template <size_t... Is>
     void invokeCallback(index_sequence<Is...>) {
-        callback(static_cast<BaseWidgetValue<Ts>*>(widgets[Is])->getValue()...);
+        callback((widgets[Is] != nullptr ? static_cast<BaseWidgetValue<Ts>*>(widgets[Is])->getValue() : Ts{})...);
     }
 
   public:
