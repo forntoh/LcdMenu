@@ -2,11 +2,12 @@
 #ifndef WIDGET_RANGE_H
 #define WIDGET_RANGE_H
 
-#include "Widget.h"
+#include "BaseWidgetValue.h"
 
 template <typename T>
-class WidgetRange : public Widget<T> {
+class WidgetRange : public BaseWidgetValue<T> {
   protected:
+    const T step;
     const T minValue;
     const T maxValue;
     const bool cycle;
@@ -21,7 +22,8 @@ class WidgetRange : public Widget<T> {
         const uint8_t cursorOffset = 0,
         const bool cycle = false,
         void (*callback)(T) = nullptr)
-        : Widget<T>(value, step, format, cursorOffset, callback),
+        : BaseWidgetValue<T>(value, format, cursorOffset, callback),
+          step(step),
           minValue(min),
           maxValue(max),
           cycle(cycle) {}
@@ -31,24 +33,50 @@ class WidgetRange : public Widget<T> {
      * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      */
     void setValue(T newValue) override {
-        Widget<T>::setValue(constrain(newValue, minValue, maxValue));
+        BaseWidgetValue<T>::setValue(constrain(newValue, minValue, maxValue));
     }
 
   protected:
+    /**
+     * @brief Process command.
+     *
+     * Handle commands:
+     * - `UP` - increment value and trigger callback;
+     * - `DOWN` - decrement value and trigger callback;
+     */
+    bool process(LcdMenu* menu, const unsigned char command) override {
+        MenuRenderer* renderer = menu->getRenderer();
+        if (renderer->isInEditMode()) {
+            switch (command) {
+                case UP:
+                    if (increment()) {
+                        BaseWidgetValue<T>::handleChange();
+                    }
+                    return true;
+                case DOWN:
+                    if (decrement()) {
+                        BaseWidgetValue<T>::handleChange();
+                    }
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        return false;
+    }
     /**
      * @brief Increments the value.
      * If the value exceeds `maxValue` and cycling is enabled, the value resets to `minValue`.
      * @return true if incremented or reset (in case of cycle)
      */
-    bool increment() override {
-        if (this->value + this->step > maxValue) {
-            if (cycle) {
-                this->value = minValue;
-                return true;
-            }
-            return false;
+    bool increment() {
+        if (this->value + step > maxValue) {
+            this->value = cycle ? minValue : maxValue;
+        } else {
+            this->value += step;
         }
-        return Widget<T>::increment();
+        printLog(F("WidgetRange::increment"), this->value);
+        return true;
     }
 
     /**
@@ -56,15 +84,14 @@ class WidgetRange : public Widget<T> {
      * If the value exceeds `maxValue` and cycling is enabled, the value resets to `minValue`.
      * @return true if decremented or reset (in case of cycle)
      */
-    bool decrement() override {
-        if (this->value - this->step <= minValue) {
-            if (cycle) {
-                this->value = maxValue;
-                return true;
-            }
-            return false;
+    bool decrement() {
+        if (this->value - step < minValue) {
+            this->value = cycle ? maxValue : minValue;
+        } else {
+            this->value -= step;
         }
-        return Widget<T>::decrement();
+        printLog(F("WidgetRange::decrement"), this->value);
+        return true;
     }
 };
 
@@ -80,7 +107,7 @@ class WidgetRange : public Widget<T> {
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
-inline Widget<float>* WIDGET_FLOAT_RANGE(
+inline BaseWidgetValue<float>* WIDGET_FLOAT_RANGE(
     float value,
     float step,
     float min,
@@ -104,7 +131,7 @@ inline Widget<float>* WIDGET_FLOAT_RANGE(
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
-inline Widget<int>* WIDGET_INT_RANGE(
+inline BaseWidgetValue<int>* WIDGET_INT_RANGE(
     int value,
     int step,
     int min,
@@ -128,7 +155,7 @@ inline Widget<int>* WIDGET_INT_RANGE(
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
-inline Widget<uint8_t>* WIDGET_UINT8_RANGE(
+inline BaseWidgetValue<uint8_t>* WIDGET_UINT8_RANGE(
     uint8_t value,
     uint8_t step,
     uint8_t min,
