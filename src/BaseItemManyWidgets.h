@@ -128,9 +128,10 @@ class BaseItemManyWidgets : public MenuItem {
     }
 
     void left(MenuRenderer* renderer) {
-        activeWidget--;
-        if (activeWidget < 0) {
+        if (activeWidget == 0) {
             activeWidget = this->size - 1;
+        } else {
+            activeWidget--;
         }
         draw(renderer);
     }
