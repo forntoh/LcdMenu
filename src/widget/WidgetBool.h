@@ -1,3 +1,4 @@
+// Creator: @ShishkinDmitriy
 #ifndef WIDGET_BOOL_H
 #define WIDGET_BOOL_H
 

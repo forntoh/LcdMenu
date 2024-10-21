@@ -1,3 +1,4 @@
+// Creator: @ShishkinDmitriy
 #ifndef WIDGET_RANGE_H
 #define WIDGET_RANGE_H
 
