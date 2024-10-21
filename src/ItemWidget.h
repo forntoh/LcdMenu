@@ -38,10 +38,7 @@ class ItemWidget : public BaseItemManyWidgets {
         void (*callback)(T0, T1, T2) = nullptr)
         : BaseItemManyWidgets(
               text,
-              new BaseWidget*[3]{
-                  widget0,
-                  widget1,
-                  widget2},
+              new BaseWidget*[3]{widget0, widget1, widget2},
               3),
           callback(callback) {}
 
@@ -80,9 +77,7 @@ class ItemWidget<T0, T1, void> : public BaseItemManyWidgets {
         void (*callback)(T0, T1) = nullptr)
         : BaseItemManyWidgets(
               text,
-              new BaseWidget*[2]{
-                  widget0,
-                  widget1},
+              new BaseWidget*[2]{widget0, widget1},
               2),
           callback(callback) {}
 
