@@ -58,4 +58,4 @@ class BaseWidgetValue : public BaseWidget {
     ~BaseWidgetValue() override = default;
 };
 
-#endif // BASE_WIDGET_VALUE_H
+#endif  // BASE_WIDGET_VALUE_H
