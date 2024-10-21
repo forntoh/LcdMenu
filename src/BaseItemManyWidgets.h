@@ -24,6 +24,12 @@ class BaseItemManyWidgets : public MenuItem {
         }
     }
 
+    virtual ~BaseItemManyWidgets() {
+        for (uint8_t i = 0; i < size; ++i)
+            delete widgets[i];
+        delete[] widgets;
+    }
+
   protected:
     virtual void handleCommit() = 0;
     /**
