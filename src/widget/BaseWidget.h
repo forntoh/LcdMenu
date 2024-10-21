@@ -34,7 +34,7 @@ class BaseWidget {
      * Return value is used to determine operation was successful or ignored.
      * If the parent of item received that handle was ignored it can execute its own action on this command.
      * Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element.
-     * Behaviour is very similar to Even Bubbling in JavaScript.
+     * Behaviour is very similar to Event Bubbling in JavaScript.
      * @param menu the owner menu of the item, can be used to retrieve required object, such as `MenuRenderer` or `MenuScreen`
      * @param command the character command, can be a printable character or a control command
      * @return true if command was successfully handled by item.
