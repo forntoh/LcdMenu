@@ -18,12 +18,12 @@ class Widget<bool> : public BaseWidgetValue<bool> {
 
   public:
     explicit Widget(
-        const bool value = false,
-        const char* textOn = "ON",
-        const char* textOff = "OFF",
-        const char* format = "%s",
-        const uint8_t cursorOffset = 0,
-        void (*callback)(bool) = nullptr)
+        const bool value,
+        const char* textOn,
+        const char* textOff,
+        const char* format,
+        const uint8_t cursorOffset,
+        void (*callback)(bool))
         : BaseWidgetValue(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
     const char* getTextOn() const { return this->textOn; }
@@ -52,7 +52,7 @@ class Widget<bool> : public BaseWidgetValue<bool> {
 };
 
 /**
- * @brief Macro to create a new Widget<bool> object.
+ * @brief Function to create a new Widget<bool> object.
  *
  * @param value The initial enabled value (default is false)
  * @param textOn The display text when value is true (default is "ON")
@@ -61,6 +61,14 @@ class Widget<bool> : public BaseWidgetValue<bool> {
  * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
-#define WIDGET_BOOL(...) (new Widget<bool>(__VA_ARGS__))
+inline Widget<bool>* WIDGET_BOOL(
+    const bool value = false,
+    const char* textOn = "ON",
+    const char* textOff = "OFF",
+    const char* format = "%s",
+    const uint8_t cursorOffset = 0,
+    void (*callback)(bool) = nullptr) {
+    return new Widget<bool>(value, textOn, textOff, format, cursorOffset, callback);
+}
 
 #endif
