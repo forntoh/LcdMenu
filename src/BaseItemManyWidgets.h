@@ -61,12 +61,7 @@ class BaseItemManyWidgets : public MenuItem {
         uint8_t cursorCol = 0;
 
         for (uint8_t i = 0; i < size; i++) {
-            uint8_t drawn = widgets[i]->draw(buf, index);
-            if (index + drawn >= ITEM_DRAW_BUFFER_SIZE) {
-                // Handle buffer overflow (stop drawing remaining widgets)
-                break;
-            }
-            index += drawn;
+            index += widgets[i]->draw(buf, index);
             if (i == activeWidget && renderer->isInEditMode()) {
                 renderer->drawItem(text, buf);
                 cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;

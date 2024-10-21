@@ -46,6 +46,7 @@ class BaseWidgetValue : public BaseWidget {
      * @param start the index where to start drawing in the buffer
      */
     uint8_t draw(char* buffer, const uint8_t start) override {
+        if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
         return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE, format, value);
     }
 
