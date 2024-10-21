@@ -1,4 +1,3 @@
-// Creator: @ShishkinDmitriy
 #ifndef ITEM_WIDGET_H
 #define ITEM_WIDGET_H
 
@@ -38,7 +37,13 @@ class ItemWidget : public BaseItemManyWidgets {
   public:
     // Constructor for one or more widgets
     ItemWidget(const char* text, BaseWidgetValue<Ts>*... widgetPtrs, CallbackType callback = nullptr)
-        : BaseItemManyWidgets(text, new BaseWidget* [sizeof...(Ts)] { widgetPtrs... }, sizeof...(Ts)), callback(callback) {}
+        : BaseItemManyWidgets(
+              text,
+              // clang-format off
+              new BaseWidget* [sizeof...(Ts)] { widgetPtrs... },
+              // clang-format on
+              sizeof...(Ts)),
+          callback(callback) {}
 
     void setValues(Ts... values) {
         setValuesImpl(typename make_index_sequence<sizeof...(Ts)>::type{}, values...);
@@ -47,6 +52,7 @@ class ItemWidget : public BaseItemManyWidgets {
   private:
     template <size_t... Is>
     void setValuesImpl(index_sequence<Is...>, Ts... values) {
+        // Using a dummy array to expand the parameter pack and call setValue on each widget
         int dummy[] = {(static_cast<BaseWidgetValue<Ts>*>(widgets[Is])->setValue(values), 0)...};
         static_cast<void>(dummy);  // Avoid unused variable warning
     }
