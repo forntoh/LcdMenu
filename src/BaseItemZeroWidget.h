@@ -10,7 +10,7 @@
  *
  * This class extends the MenuItem class and provides a framework for menu items
  * that either need no commit handling or need to handle commit actions in a specific way.
- * It requires derived classes to implement the handleCommit for custom commit handling.
+ * It requires derived classes to implement the `handleCommit` method for custom commit handling.
  *
  * @note This class is intended to be used as a base class for other menu items.
  *       It should not be instantiated directly.
