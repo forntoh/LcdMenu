@@ -2,37 +2,36 @@
 #ifndef WIDGET_BOOL_H
 #define WIDGET_BOOL_H
 
-#include "Widget.h"
-#include <utils/utils.h>
+#include "BaseWidgetValue.h"
 
 /**
  * @brief Widget that allows user to toggle between ON/OFF states.
  * Widget has ON/OFF `enabled` state.
  */
-template <>
-class Widget<bool> : public BaseWidgetValue<bool> {
+class WidgetBool : public BaseWidgetValue<bool> {
 
   protected:
     const char* textOn;
     const char* textOff;
 
   public:
-    explicit Widget(
+    WidgetBool(
         const bool value,
         const char* textOn,
         const char* textOff,
         const char* format,
         const uint8_t cursorOffset,
         void (*callback)(bool))
-        : BaseWidgetValue(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
+        : BaseWidgetValue<bool>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
     const char* getTextOn() const { return this->textOn; }
 
     const char* getTextOff() const { return this->textOff; }
 
   protected:
-    uint8_t draw(char* buffer, const uint8_t size) override {
-        return snprintf(buffer, size, format, value ? textOn : textOff);
+    uint8_t draw(char* buffer, const uint8_t start) override {
+        if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE, format, value ? textOn : textOff);
     }
     /**
      * @brief Process command.
@@ -61,14 +60,14 @@ class Widget<bool> : public BaseWidgetValue<bool> {
  * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
-inline Widget<bool>* WIDGET_BOOL(
+inline BaseWidgetValue<bool>* WIDGET_BOOL(
     const bool value = false,
     const char* textOn = "ON",
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     void (*callback)(bool) = nullptr) {
-    return new Widget<bool>(value, textOn, textOff, format, cursorOffset, callback);
+    return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
 }
 
 #endif
