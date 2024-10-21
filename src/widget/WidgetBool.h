@@ -32,7 +32,7 @@ class Widget<bool> : public BaseWidgetValue<bool> {
 
   protected:
     uint8_t draw(char* buffer, const uint8_t size) override {
-        return snprintf(buffer, size, format, value ? textOn : textOff);
+        return snprintf_P(buffer, size, format, value ? textOn : textOff);
     }
     /**
      * @brief Process command.
