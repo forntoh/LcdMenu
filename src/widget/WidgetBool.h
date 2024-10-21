@@ -13,8 +13,8 @@ template <>
 class Widget<bool> : public BaseWidgetValue<bool> {
 
   protected:
-    const char* textOn = nullptr;
-    const char* textOff = nullptr;
+    const char* textOn;
+    const char* textOff;
 
   public:
     explicit Widget(
