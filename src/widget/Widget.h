@@ -3,7 +3,7 @@
 
 #include "BaseWidgetValue.h"
 
-template <typename T = void>
+template <typename T>
 class Widget : public BaseWidgetValue<T> {
 
   protected:
