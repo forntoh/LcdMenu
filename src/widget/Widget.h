@@ -11,8 +11,8 @@ class Widget : public BaseWidgetValue<T> {
 
   public:
     Widget(
-        T value,
-        const T step,
+        const T& value,
+        const T& step,
         const char* format,
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
