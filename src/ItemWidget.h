@@ -19,8 +19,10 @@ struct make_index_sequence<0, Is...> {
 // Updated ItemWidget class supporting zero or more widgets
 template <typename... Ts>
 class ItemWidget : public BaseItemManyWidgets {
-  protected:
+  public:
     using CallbackType = void (*)(Ts...);
+
+  protected:
     CallbackType callback = nullptr;
 
     void handleCommit() override {
@@ -58,17 +60,16 @@ class ItemWidget : public BaseItemManyWidgets {
     }
 };
 
-// ############################################################################
-// # Shortcuts for creating new ItemWidget instances
-// ############################################################################
-
-#define ITEM_3_WIDGET(text, widget0, widget1, widget2, callback, type0, type1, type2) \
-    new ItemWidget<type0, type1, type2>(text, widget0, widget1, widget2, callback)
-
-#define ITEM_2_WIDGET(text, widget0, widget1, callback, type0, type1) \
-    new ItemWidget<type0, type1>(text, widget0, widget1, callback)
-
-#define ITEM_1_WIDGET(text, widget, callback, type) \
-    new ItemWidget<type>(text, widget, callback)
+template <typename... Ts>
+/**
+ * @brief Create an ItemWidget object
+ *
+ * @param text the text of the item
+ * @param callback reference to callback function to call when the value of the item is changed
+ * @param widgetPtrs pointers to the widgets associated with this item
+ */
+MenuItem* ITEM_WIDGET(const char* text, typename ItemWidget<Ts...>::CallbackType callback, BaseWidgetValue<Ts>*... widgetPtrs) {
+    return new ItemWidget<Ts...>(text, widgetPtrs..., callback);
+}
 
 #endif  // ITEM_WIDGET_H
