@@ -38,7 +38,9 @@ class ItemWidget : public BaseItemManyWidgets {
         void (*callback)(T0, T1, T2) = nullptr)
         : BaseItemManyWidgets(
               text,
+              // clang-format off
               new BaseWidget*[3]{widget0, widget1, widget2},
+              // clang-format on
               3),
           callback(callback) {}
 
@@ -77,7 +79,9 @@ class ItemWidget<T0, T1, void> : public BaseItemManyWidgets {
         void (*callback)(T0, T1) = nullptr)
         : BaseItemManyWidgets(
               text,
+              // clang-format off
               new BaseWidget*[2]{widget0, widget1},
+              // clang-format on
               2),
           callback(callback) {}
 
