@@ -37,8 +37,7 @@ class WidgetRange : public Widget<T> {
   protected:
     /**
      * @brief Increments the value.
-     * If value is out of range and `cycle` then `minValue` will be used.
-     * If value is out of range and not `cycle` then do nothing.
+     * If the value exceeds `maxValue` and cycling is enabled, the value resets to `minValue`.
      * @return true if incremented or reset (in case of cycle)
      */
     bool increment() override {
@@ -54,8 +53,7 @@ class WidgetRange : public Widget<T> {
 
     /**
      * @brief Decrements the value.
-     * If value is out of range and `cycle` then `maxValue` will be used.
-     * If value is out of range and not `cycle` then do nothing.
+     * If the value exceeds `maxValue` and cycling is enabled, the value resets to `minValue`.
      * @return true if decremented or reset (in case of cycle)
      */
     bool decrement() override {
