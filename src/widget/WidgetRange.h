@@ -42,7 +42,7 @@ class WidgetRange : public Widget<T> {
      * @return true if incremented or reset (in case of cycle)
      */
     bool increment() override {
-        if (this->value + this->step >= maxValue) {
+        if (this->value + this->step > maxValue) {
             if (cycle) {
                 this->value = minValue;
                 return true;
