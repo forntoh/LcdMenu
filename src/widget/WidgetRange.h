@@ -81,7 +81,7 @@ class WidgetRange : public BaseWidgetValue<T> {
 
     /**
      * @brief Decrements the value.
-     * If the value exceeds `maxValue` and cycling is enabled, the value resets to `minValue`.
+     * If the value falls below `minValue` and cycling is enabled, the value resets to `maxValue`.
      * @return true if decremented or reset (in case of cycle)
      */
     bool decrement() {
