@@ -32,8 +32,10 @@ class BaseWidgetValue : public BaseWidget {
      * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      */
     virtual void setValue(const T newValue) {
-        value = newValue;
-        handleChange();
+        if (value != newValue) {
+            value = newValue;
+            handleChange();
+        }
     }
 
   protected:
