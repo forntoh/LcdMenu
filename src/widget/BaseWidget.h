@@ -30,13 +30,14 @@ class BaseWidget {
     /**
      * @brief Process a command decoded in 1 byte.
      * It can be a printable character or a control command like `ENTER` or `LEFT`.
-     * Return value is used to determine operation was successful or ignored.
+     * Return value is used to determine if the operation was successful or ignored.
      * If the item's handler ignores the command, the parent can execute its own action on this command.
      * Thus, the item always has priority in processing; if it ignores a command, the command is delegated to the parent element.
-     * Behaviour is very similar to Event Bubbling in JavaScript.
-     * @param menu the owner menu of the item, can be used to retrieve required object, such as `MenuRenderer` or `MenuScreen`
+     * This behavior is similar to event delegation, where an event is handled by the most specific handler first,
+     * and if not handled, it is passed up to more general handlers.
+     * @param menu the owner menu of the item, can be used to retrieve required objects, such as `MenuRenderer` or `MenuScreen`
      * @param command the character command, can be a printable character or a control command
-     * @return true if command was successfully handled by item.
+     * @return true if the command was successfully handled by the item.
      */
     virtual bool process(LcdMenu* menu, unsigned char command) = 0;
     /**
