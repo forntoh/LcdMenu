@@ -50,8 +50,10 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
     uint8_t cursorColEnd = cursorCol;
 
     // Fill remaining space with white spaces
-    for (; cursorCol < availableColumns; cursorCol++) {
-        display->draw(' ');
+    if (!inEditMode) {
+        for (; cursorCol < availableColumns; cursorCol++) {
+            display->draw(' ');
+        }
     }
 
     // Draw up and down arrows if present

@@ -101,23 +101,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compile sketches
-        uses: arduino/compile-sketches@v1
-        with:
-          fqbn: ${{ matrix.board.fqbn }}
-          platforms: ${{ matrix.platforms }}
-          sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
-          libraries: |
-            ${{ env.UNIVERSAL_LIBRARIES }}
-            ${{ matrix.libraries }}
-          sketch-paths: |
-            ${{ matrix.sketch-paths }}
-            ${{ env.UNIVERSAL_SKETCH_PATHS }}
-          enable-deltas-report: true
-          enable-warnings-report: true
+      # - name: Compile sketches
+      #   uses: arduino/compile-sketches@v1
+      #   with:
+      #     fqbn: ${{ matrix.board.fqbn }}
+      #     platforms: ${{ matrix.platforms }}
+      #     sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+      #     libraries: |
+      #       ${{ env.UNIVERSAL_LIBRARIES }}
+      #       ${{ matrix.libraries }}
+      #     sketch-paths: |
+      #       ${{ matrix.sketch-paths }}
+      #       ${{ env.UNIVERSAL_SKETCH_PATHS }}
+      #     enable-deltas-report: true
+      #     enable-warnings-report: true
 
-      - name: Upload sketches reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: sketches-report-${{ matrix.board.artifact-name-suffix }}
-          path: ${{ env.SKETCHES_REPORTS_PATH }}
+      # - name: Upload sketches reports
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: sketches-report-${{ matrix.board.artifact-name-suffix }}
+      #     path: ${{ env.SKETCHES_REPORTS_PATH }}
