@@ -9,7 +9,7 @@ class WidgetRange : public Widget<T> {
   protected:
     const T minValue;
     const T maxValue;
-    const bool cycle = false;
+    const bool cycle;
 
   public:
     WidgetRange(
