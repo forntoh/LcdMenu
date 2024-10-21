@@ -32,8 +32,8 @@ class BaseWidget {
      * @brief Process a command decoded in 1 byte.
      * It can be a printable character or a control command like `ENTER` or `LEFT`.
      * Return value is used to determine operation was successful or ignored.
-     * If the parent of item received that handle was ignored it can execute its own action on this command.
-     * Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element.
+     * If the item's handler ignores the command, the parent can execute its own action on this command.
+     * Thus, the item always has priority in processing; if it ignores a command, the command is delegated to the parent element.
      * Behaviour is very similar to Event Bubbling in JavaScript.
      * @param menu the owner menu of the item, can be used to retrieve required object, such as `MenuRenderer` or `MenuScreen`
      * @param command the character command, can be a printable character or a control command
