@@ -1,5 +1,5 @@
-#ifndef WIDGET_VALUE_H
-#define WIDGET_VALUE_H
+#ifndef WIDGET_H
+#define WIDGET_H
 
 #include "BaseWidgetValue.h"
 
@@ -64,4 +64,4 @@ class Widget : public BaseWidgetValue<T> {
     }
 };
 
-#endif
+#endif  // WIDGET_H
