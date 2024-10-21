@@ -31,7 +31,7 @@ class WidgetBool : public BaseWidgetValue<bool> {
   protected:
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE, format, value ? textOn : textOff);
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, value ? textOn : textOff);
     }
     /**
      * @brief Process command.

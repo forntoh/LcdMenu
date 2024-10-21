@@ -47,7 +47,7 @@ class BaseWidgetValue : public BaseWidget {
      */
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE, format, value);
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, value);
     }
 
     bool process(LcdMenu* menu, unsigned char command) override = 0;
