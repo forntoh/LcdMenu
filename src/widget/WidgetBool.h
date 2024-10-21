@@ -22,9 +22,9 @@ class Widget<bool> : public BaseWidgetValue<bool> {
         const char* textOn = "ON",
         const char* textOff = "OFF",
         const char* format = "%s",
-        const uint8_t blinkerOffset = 0,
+        const uint8_t cursorOffset = 0,
         void (*callback)(bool) = nullptr)
-        : BaseWidgetValue(value, format, blinkerOffset, callback), textOn(textOn), textOff(textOff) {}
+        : BaseWidgetValue(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
     const char* getTextOn() const { return this->textOn; }
 
@@ -58,7 +58,7 @@ class Widget<bool> : public BaseWidgetValue<bool> {
  * @param textOn The display text when value is true (default is "ON")
  * @param textOff The display text when value is false (default is "OFF")
  * @param format The format to display the value (default is "%s")
- * @param blinkerOffset The offset of the blinker (default is 0)
+ * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
 #define WIDGET_BOOL(...) (new Widget<bool>(__VA_ARGS__))

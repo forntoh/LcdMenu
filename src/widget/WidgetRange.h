@@ -18,10 +18,10 @@ class WidgetRange : public Widget<T> {
         const T min,
         const T max,
         const char* format,
-        const uint8_t blinkerOffset = 0,
+        const uint8_t cursorOffset = 0,
         const bool cycle = false,
         void (*callback)(T) = nullptr)
-        : Widget<T>(value, step, format, blinkerOffset, callback),
+        : Widget<T>(value, step, format, cursorOffset, callback),
           minValue(min),
           maxValue(max),
           cycle(cycle) {}
@@ -78,7 +78,7 @@ class WidgetRange : public Widget<T> {
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.
  * @param format The format string for displaying the value.
- * @param blinkerOffset The offset for the blinker (default is 0).
+ * @param cursorOffset The offset for the cursor (default is 0).
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
@@ -92,7 +92,7 @@ class WidgetRange : public Widget<T> {
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.
  * @param format The format string for displaying the value.
- * @param blinkerOffset The offset for the blinker (default is 0).
+ * @param cursorOffset The offset for the cursor (default is 0).
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
@@ -106,11 +106,9 @@ class WidgetRange : public Widget<T> {
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.
  * @param format The format string for displaying the value.
- * @param blinkerOffset The offset for the blinker (default is 0).
+ * @param cursorOffset The offset for the cursor (default is 0).
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
- *
- * @return A pointer to the newly created WidgetRange<uint8_t> instance.
  */
 #define WIDGET_UINT8_RANGE(...) (new WidgetRange<uint8_t>(__VA_ARGS__))
 

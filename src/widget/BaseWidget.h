@@ -24,9 +24,9 @@ class BaseWidget {
     friend class BaseItemSingleWidget;
 
   protected:
-    const uint8_t blinkerOffset = 0;
+    const uint8_t cursorOffset = 0;
 
-    BaseWidget(const uint8_t blinkerOffset = 0) : blinkerOffset(blinkerOffset) {}
+    BaseWidget(const uint8_t cursorOffset = 0) : cursorOffset(cursorOffset) {}
 
     /**
      * @brief Process a command decoded in 1 byte.

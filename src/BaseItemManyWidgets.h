@@ -54,7 +54,7 @@ class BaseItemManyWidgets : public MenuItem {
             index += widgets[i]->draw(buf, index);
             if (i == activeWidget && renderer->isInEditMode()) {
                 renderer->drawItem(text, buf);
-                cursorCol = renderer->getCursorCol() - 1 - widgets[i]->blinkerOffset;
+                cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
         renderer->drawItem(text, buf);

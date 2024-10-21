@@ -21,8 +21,8 @@ class BaseWidgetValue : public BaseWidget {
     void (*callback)(T) = nullptr;
 
   public:
-    BaseWidgetValue(T value, const char* format, const uint8_t blinkerOffset = 0, void (*callback)(T) = nullptr)
-        : BaseWidget(blinkerOffset), value(value), format(format), callback(callback) {}
+    BaseWidgetValue(T value, const char* format, const uint8_t cursorOffset = 0, void (*callback)(T) = nullptr)
+        : BaseWidget(cursorOffset), value(value), format(format), callback(callback) {}
     /**
      * @brief Retrieve current value.
      */

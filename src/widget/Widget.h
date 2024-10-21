@@ -14,9 +14,9 @@ class Widget : public BaseWidgetValue<T> {
         T value,
         const T step,
         const char* format,
-        const uint8_t blinkerOffset = 0,
+        const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
-        : BaseWidgetValue<T>(value, format, blinkerOffset, callback), step(step) {}
+        : BaseWidgetValue<T>(value, format, cursorOffset, callback), step(step) {}
 
   protected:
     /**

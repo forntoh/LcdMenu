@@ -44,7 +44,7 @@ class BaseItemSingleWidget : public MenuItem {
      * 1. A buffer of size `ITEM_DRAW_BUFFER_SIZE` is created to hold the widget's drawn content.
      * 2. The widget's `draw` method is called to fill the buffer with its content.
      * 3. The renderer's `drawItem` method is called with the item text and the buffer content to render the item.
-     * 4. If the renderer is in edit mode, the cursor position is adjusted by moving it to the left by the widget's `blinkerOffset` and an additional position.
+     * 4. If the renderer is in edit mode, the cursor position is adjusted by moving it to the left by the widget's `cursorOffset` and an additional position.
      */
     void draw(MenuRenderer* renderer) override {
         char buf[ITEM_DRAW_BUFFER_SIZE];
@@ -52,7 +52,7 @@ class BaseItemSingleWidget : public MenuItem {
         renderer->drawItem(text, buf);
 
         if (renderer->isInEditMode()) {
-            renderer->moveCursor(renderer->getCursorCol() - widget->blinkerOffset - 1, renderer->getCursorRow());
+            renderer->moveCursor(renderer->getCursorCol() - widget->cursorOffset - 1, renderer->getCursorRow());
         }
     }
 
