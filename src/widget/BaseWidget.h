@@ -18,10 +18,9 @@ class LcdMenu;
  * @brief Base class for widget.
  */
 class BaseWidget {
-    template <typename T0, typename T1, typename T2>
+    template <typename... Ts>
     friend class ItemWidget;
     friend class BaseItemManyWidgets;
-    friend class BaseItemSingleWidget;
 
   protected:
     const uint8_t cursorOffset = 0;
