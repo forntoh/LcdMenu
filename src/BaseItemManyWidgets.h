@@ -4,7 +4,7 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include "widget/Widget.h"
+#include "widget/BaseWidget.h"
 #include <utils/utils.h>
 
 class BaseItemManyWidgets : public MenuItem {

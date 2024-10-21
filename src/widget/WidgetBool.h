@@ -6,7 +6,7 @@
 
 /**
  * @brief Widget that allows user to toggle between ON/OFF states.
- * Manages a boolean value, allowing toggling between 'ON' and 'OFF' states
+ * Manages a boolean value, allowing toggling between 'ON' and 'OFF' states.
  */
 class WidgetBool : public BaseWidgetValue<bool> {
 

@@ -17,6 +17,7 @@
  */
 class BaseItemZeroWidget : public MenuItem {
   public:
+    virtual ~BaseItemZeroWidget() = default;
     /**
      * @brief Construct a new BaseItemZeroWidget object.
      *
