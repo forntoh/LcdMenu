@@ -18,7 +18,11 @@ class BaseItemManyWidgets : public MenuItem {
         : MenuItem(text), widgets(widgets), size(size), activeWidget(activeWidget) {}
 
     uint8_t getActiveWidget() const { return activeWidget; }
-    void setCurrent(const uint8_t newCurrent) { activeWidget = newCurrent; }
+    void setActiveWidget(const uint8_t activeWidget) {
+        if (activeWidget >= 0 && activeWidget < size) {
+            this->activeWidget = activeWidget;
+        }
+    }
 
   protected:
     virtual void handleCommit() = 0;
