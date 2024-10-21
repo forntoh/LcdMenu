@@ -36,7 +36,14 @@ class ItemWidget : public BaseItemManyWidgets {
         BaseWidgetValue<T1>* widget1,
         BaseWidgetValue<T2>* widget2,
         void (*callback)(T0, T1, T2) = nullptr)
-        : BaseItemManyWidgets(text, new BaseWidget*[3]{widget0, widget1, widget2}, 3), callback(callback) {}
+        : BaseItemManyWidgets(
+              text,
+              new BaseWidget*[3]{
+                  widget0,
+                  widget1,
+                  widget2},
+              3),
+          callback(callback) {}
 
     void setValues(T0 value0, T1 value1, T2 value2) {
         static_cast<BaseWidgetValue<T0>*>(widgets[0])->setValue(value0);
@@ -71,7 +78,13 @@ class ItemWidget<T0, T1, void> : public BaseItemManyWidgets {
         BaseWidgetValue<T0>* widget0,
         BaseWidgetValue<T1>* widget1,
         void (*callback)(T0, T1) = nullptr)
-        : BaseItemManyWidgets(text, new BaseWidget*[2]{widget0, widget1}, 2), callback(callback) {}
+        : BaseItemManyWidgets(
+              text,
+              new BaseWidget*[2]{
+                  widget0,
+                  widget1},
+              2),
+          callback(callback) {}
 
     void setValues(T0 value0, T1 value1) {
         static_cast<BaseWidgetValue<T0>*>(widgets[0])->setValue(value0);
