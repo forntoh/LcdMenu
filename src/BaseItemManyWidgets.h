@@ -140,11 +140,13 @@ class BaseItemManyWidgets : public MenuItem {
             activeWidget--;
         }
         draw(renderer);
+        printLog(F("ItemWidget::left"), activeWidget);
     }
 
     void right(MenuRenderer* renderer) {
         activeWidget = (activeWidget + 1) % this->size;
         draw(renderer);
+        printLog(F("ItemWidget::right"), activeWidget);
     }
 
     void back(MenuRenderer* renderer) {
