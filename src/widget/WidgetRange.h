@@ -51,13 +51,15 @@ class WidgetRange : public BaseWidgetValue<T> {
                 case UP:
                     if (increment()) {
                         BaseWidgetValue<T>::handleChange();
+                        return true;
                     }
-                    return true;
+                    return false;
                 case DOWN:
                     if (decrement()) {
                         BaseWidgetValue<T>::handleChange();
+                        return true;
                     }
-                    return true;
+                    return false;
                 default:
                     return false;
             }
@@ -70,13 +72,13 @@ class WidgetRange : public BaseWidgetValue<T> {
      * @return true if incremented or reset (in case of cycle)
      */
     bool increment() {
-        if (this->value + step > maxValue) {
-            this->value = cycle ? minValue : maxValue;
-        } else {
-            this->value += step;
+        T newValue = (this->value + step > maxValue) ? (cycle ? minValue : maxValue) : (this->value + step);
+        if (newValue != this->value) {
+            this->value = newValue;
+            printLog(F("WidgetRange::increment"), this->value);
+            return true;
         }
-        printLog(F("WidgetRange::increment"), this->value);
-        return true;
+        return false;
     }
 
     /**
@@ -85,13 +87,13 @@ class WidgetRange : public BaseWidgetValue<T> {
      * @return true if decremented or reset (in case of cycle)
      */
     bool decrement() {
-        if (this->value - step < minValue) {
-            this->value = cycle ? maxValue : minValue;
-        } else {
-            this->value -= step;
+        T newValue = (this->value - step < minValue) ? (cycle ? maxValue : minValue) : (this->value - step);
+        if (newValue != this->value) {
+            this->value = newValue;
+            printLog(F("WidgetRange::decrement"), this->value);
+            return true;
         }
-        printLog(F("WidgetRange::decrement"), this->value);
-        return true;
+        return false;
     }
 };
 
