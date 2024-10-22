@@ -4,6 +4,11 @@
 
 #include "BaseWidgetValue.h"
 
+/**
+ * @class WidgetRange
+ * @brief Widget that allows user to select a value from a range.
+ * Manages a value within a specified range, allowing incrementing and decrementing.
+ */
 template <typename T>
 class WidgetRange : public BaseWidgetValue<T> {
   protected:
@@ -49,17 +54,11 @@ class WidgetRange : public BaseWidgetValue<T> {
         if (renderer->isInEditMode()) {
             switch (command) {
                 case UP:
-                    if (increment()) {
-                        BaseWidgetValue<T>::handleChange();
-                        return true;
-                    }
-                    return false;
+                    if (increment()) BaseWidgetValue<T>::handleChange();
+                    return true;
                 case DOWN:
-                    if (decrement()) {
-                        BaseWidgetValue<T>::handleChange();
-                        return true;
-                    }
-                    return false;
+                    if (decrement()) BaseWidgetValue<T>::handleChange();
+                    return true;
                 default:
                     return false;
             }
