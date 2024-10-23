@@ -1,4 +1,3 @@
-// Creator: @ShishkinDmitriy
 #pragma once
 
 #include "BaseWidgetValue.h"
