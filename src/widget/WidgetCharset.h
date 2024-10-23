@@ -46,22 +46,17 @@ class WidgetCharset : public BaseWidgetValue<char> {
             switch (command) {
                 case UP:
                     if (nextChar()) {
-                        value = charset[charsetPosition];
-                        BaseWidgetValue<char>::handleChange();
-                        printLog(F("WidgetCharset::nextChar"), value);
+                        updateValue(F("WidgetCharset::nextChar"));
                     }
                     return true;
                 case DOWN:
                     if (previousChar()) {
-                        value = charset[charsetPosition];
-                        BaseWidgetValue<char>::handleChange();
-                        printLog(F("WidgetCharset::previousChar"), value);
+                        updateValue(F("WidgetCharset::previousChar"));
                     }
                     return true;
                 case BACKSPACE:
                     if (backspace()) {
-                        printLog(F("WidgetCharset::backspace"));
-                        BaseWidgetValue<char>::handleChange();
+                        updateValue(F("WidgetCharset::backspace"));
                     }
                     return true;
                 default:
@@ -69,6 +64,12 @@ class WidgetCharset : public BaseWidgetValue<char> {
             }
         }
         return false;
+    }
+
+    void updateValue(const __FlashStringHelper* action) {
+        value = charset[charsetPosition];
+        BaseWidgetValue<char>::handleChange();
+        printLog(action, value);
     }
 
     bool backspace() {
