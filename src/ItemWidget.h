@@ -26,7 +26,6 @@ struct make_index_sequence<0, Is...> {
     using type = index_sequence<Is...>;
 };
 
-// Updated ItemWidget class supporting zero or more widgets
 template <typename... Ts>
 class ItemWidget : public BaseItemManyWidgets {
   public:
