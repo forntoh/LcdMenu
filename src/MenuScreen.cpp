@@ -68,21 +68,21 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
             if (parent != NULL) {
                 menu->setScreen(parent);
             }
-            printLog(F("MenuScreen::back"));
+            LOG(F("MenuScreen::back"));
             return true;
         case RIGHT:
             if (renderer->cursorCol >= renderer->maxCols - 1) {
                 renderer->viewShift++;
                 draw(renderer);
             }
-            printLog(F("MenuScreen::right"), renderer->viewShift);
+            LOG(F("MenuScreen::right"), renderer->viewShift);
             return true;
         case LEFT:
             if (renderer->viewShift > 0) {
                 renderer->viewShift--;
                 draw(renderer);
             }
-            printLog(F("MenuScreen::left"), renderer->viewShift);
+            LOG(F("MenuScreen::left"), renderer->viewShift);
             return true;
         default:
             return false;
@@ -94,7 +94,7 @@ void MenuScreen::up(MenuRenderer* renderer) {
         if (--cursor < view) view--;
         draw(renderer);
     }
-    printLog(F("MenuScreen:up"), cursor);
+    LOG(F("MenuScreen:up"), cursor);
 }
 
 void MenuScreen::down(MenuRenderer* renderer) {
@@ -102,7 +102,7 @@ void MenuScreen::down(MenuRenderer* renderer) {
         if (++cursor > view + renderer->maxRows - 1) view++;
         draw(renderer);
     }
-    printLog(F("MenuScreen:down"), cursor);
+    LOG(F("MenuScreen:down"), cursor);
 }
 
 void MenuScreen::reset(MenuRenderer* renderer) {

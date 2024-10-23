@@ -57,14 +57,14 @@ class ItemInputCharset : public ItemInput {
                         initCharEdit();
                     }
                     showPreviousChar(renderer);
-                    printLog(F("ItemInputCharset::up"), charset[charsetPosition]);
+                    LOG(F("ItemInputCharset::up"), charset[charsetPosition]);
                     return true;
                 case DOWN:
                     if (!charEdit) {
                         initCharEdit();
                     }
                     showNextChar(renderer);
-                    printLog(F("ItemInputCharset::down"), charset[charsetPosition]);
+                    LOG(F("ItemInputCharset::down"), charset[charsetPosition]);
                     return true;
                 case LEFT:
                     if (charEdit) {
@@ -124,7 +124,7 @@ class ItemInputCharset : public ItemInput {
             renderer->draw(' ');
         }
         renderer->moveCursor(cursorCol, renderer->getCursorRow());
-        printLog(F("ItemInputCharset::abortCharEdit"));
+        LOG(F("ItemInputCharset::abortCharEdit"));
     }
     /**
      * @brief Commit char edit mode.
@@ -140,7 +140,7 @@ class ItemInputCharset : public ItemInput {
             value = buf;
         }
         abortCharEdit(renderer);
-        printLog(F("ItemInputCharset::commitCharEdit"), charset[charsetPosition]);
+        LOG(F("ItemInputCharset::commitCharEdit"), charset[charsetPosition]);
         ItemInput::right(renderer);
     }
     /**

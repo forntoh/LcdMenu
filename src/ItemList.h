@@ -99,7 +99,7 @@ class ItemList : public MenuItem {
                     if (callback != NULL) {
                         callback(itemIndex);
                     }
-                    printLog(F("ItemList::exitEditMode"), getValue());
+                    LOG(F("ItemList::exitEditMode"), getValue());
                     return true;
                 case UP:
                     selectNext(renderer);
@@ -115,7 +115,7 @@ class ItemList : public MenuItem {
                 case ENTER:
                     renderer->setEditMode(true);
                     draw(renderer);
-                    printLog(F("ItemList::enterEditMode"), getValue());
+                    LOG(F("ItemList::enterEditMode"), getValue());
                     return true;
                 default:
                     return false;
@@ -129,7 +129,7 @@ class ItemList : public MenuItem {
         if (previousIndex != itemIndex) {
             draw(renderer);
         }
-        printLog(F("ItemList::selectPrevious"), getValue());
+        LOG(F("ItemList::selectPrevious"), getValue());
     };
 
     void selectNext(MenuRenderer* renderer) {
@@ -138,7 +138,7 @@ class ItemList : public MenuItem {
         if (previousIndex != itemIndex) {
             draw(renderer);
         }
-        printLog(F("ItemList::selectNext"), getValue());
+        LOG(F("ItemList::selectNext"), getValue());
     };
 };
 
