@@ -97,75 +97,29 @@ class WidgetRange : public BaseWidgetValue<T> {
 };
 
 /**
- * @brief Function to create a new WidgetRange<float> instance.
+ * @brief Function to create a new WidgetRange<T> instance.
+ * @tparam T The type of the value.
  *
  * @param value The initial value of the widget.
  * @param step The step value for incrementing/decrementing.
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.
- * @param format The format string for displaying the value (default is "%2.1f").
+ * @param format The format string for displaying the value.
  * @param cursorOffset The offset for the cursor (default is 0).
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
-inline BaseWidgetValue<float>* WIDGET_FLOAT_RANGE(
-    float value,
-    float step,
-    float min,
-    float max,
-    const char* format = "%2.1f",
+template <typename T>
+inline BaseWidgetValue<T>* WIDGET_RANGE(
+    T value,
+    T step,
+    T min,
+    T max,
+    const char* format,
     uint8_t cursorOffset = 0,
     bool cycle = false,
-    void (*callback)(const float&) = nullptr) {
-    return new WidgetRange<float>(value, step, min, max, format, cursorOffset, cycle, callback);
-}
-
-/**
- * @brief Function to create a new WidgetRange<int> instance.
- *
- * @param value The initial value of the widget.
- * @param step The step value for incrementing/decrementing.
- * @param min The minimum value of the range.
- * @param max The maximum value of the range.
- * @param format The format string for displaying the value (default is "%d").
- * @param cursorOffset The offset for the cursor (default is 0).
- * @param cycle Whether the value should cycle when out of range (default is false).
- * @param callback The callback function to call when the value changes (default is nullptr).
- */
-inline BaseWidgetValue<int>* WIDGET_INT_RANGE(
-    int value,
-    int step,
-    int min,
-    int max,
-    const char* format = "%d",
-    uint8_t cursorOffset = 0,
-    bool cycle = false,
-    void (*callback)(const int&) = nullptr) {
-    return new WidgetRange<int>(value, step, min, max, format, cursorOffset, cycle, callback);
-}
-
-/**
- * @brief Function to create a new WidgetRange<uint8_t> instance.
- *
- * @param value The initial value of the widget.
- * @param step The step value for incrementing/decrementing.
- * @param min The minimum value of the range.
- * @param max The maximum value of the range.
- * @param format The format string for displaying the value (default is "%d").
- * @param cursorOffset The offset for the cursor (default is 0).
- * @param cycle Whether the value should cycle when out of range (default is false).
- * @param callback The callback function to call when the value changes (default is nullptr).
- */
-inline BaseWidgetValue<uint8_t>* WIDGET_UINT8_RANGE(
-    uint8_t value,
-    uint8_t step,
-    uint8_t min,
-    uint8_t max,
-    const char* format = "%d",
-    uint8_t cursorOffset = 0,
-    bool cycle = false,
-    void (*callback)(const uint8_t&) = nullptr) {
-    return new WidgetRange<uint8_t>(value, step, min, max, format, cursorOffset, cycle, callback);
+    void (*callback)(const T&) = nullptr) {
+    return new WidgetRange<T>(value, step, min, max, format, cursorOffset, cycle, callback);
 }
 
 #endif
