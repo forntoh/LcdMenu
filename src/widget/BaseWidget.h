@@ -23,6 +23,12 @@ class BaseWidget {
     friend class BaseItemManyWidgets;
 
   protected:
+    /**
+     * @brief This member variable specifies the position where the cursor should be placed
+     * within the widget's text. For example, if the text format is "%dms" (20ms) and the
+     * user wants the cursor to be placed at the position of "%d", they would set
+     * cursorOffset to 2. By default, the cursor is placed at the end of the resulting text.
+     */
     const uint8_t cursorOffset;
 
     BaseWidget(const uint8_t cursorOffset = 0) : cursorOffset(cursorOffset) {}
