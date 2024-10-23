@@ -77,7 +77,7 @@ template <typename... Ts>
  * @param callback reference to callback function to call when the value of the item is changed
  * @param widgetPtrs pointers to the widgets associated with this item
  */
-MenuItem* ITEM_WIDGET(const char* text, typename ItemWidget<Ts...>::CallbackType callback, BaseWidgetValue<Ts>*... widgetPtrs) {
+inline MenuItem* ITEM_WIDGET(const char* text, typename ItemWidget<Ts...>::CallbackType callback, BaseWidgetValue<Ts>*... widgetPtrs) {
     return new ItemWidget<Ts...>(text, widgetPtrs..., callback);
 }
 
