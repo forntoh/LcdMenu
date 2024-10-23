@@ -72,16 +72,4 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
     return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
 }
 
-/**
- * @brief Function to create a new Widget<bool> object.
- *
- * @param value The initial enabled value (default is false)
- * @param callback The callback function to execute when value changes (default is nullptr)
- */
-inline BaseWidgetValue<bool>* WIDGET_BOOL(
-    const bool value = false,
-    void (*callback)(const bool&) = nullptr) {
-    return new WidgetBool(value, "ON", "OFF", "%s", 0, callback);
-}
-
 #endif
