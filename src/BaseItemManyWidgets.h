@@ -63,7 +63,7 @@ class BaseItemManyWidgets : public MenuItem {
         for (uint8_t i = 0; i < size; i++) {
             index += widgets[i]->draw(buf, index);
             if (i == activeWidget && renderer->isInEditMode()) {
-                renderer->drawItem(text, buf);
+                renderer->drawItem(text, buf, i == size - 1);
                 cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
