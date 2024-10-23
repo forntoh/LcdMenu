@@ -30,7 +30,7 @@ class BaseWidgetValue : public BaseWidget {
     /**
      * @brief Retrieve current value.
      */
-    T getValue() const { return value; }
+    const T& getValue() const { return value; }
     /**
      * @brief Sets the value.
      *
