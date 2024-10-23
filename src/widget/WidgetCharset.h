@@ -13,17 +13,22 @@ class WidgetCharset : public BaseWidgetValue<char> {
   protected:
     const char*& charset;
     const bool cycle;
-    uint8_t charsetPosition = 0;
+    int8_t charsetPosition = 0;
 
   public:
     WidgetCharset(
-        const char value,
+        int8_t charsetPosition,
         const char*& charset,
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
-        void (*callback)(char))
-        : BaseWidgetValue<char>(value, format, cursorOffset, callback), charset(charset), cycle(cycle) {}
+        void (*callback)(const char&))
+        : BaseWidgetValue<char>(
+              charsetPosition == -1 ? '\0' : charset[charsetPosition],
+              format,
+              cursorOffset,
+              callback),
+          charset(charset), cycle(cycle) {}
 
   protected:
     uint8_t draw(char* buffer, const uint8_t start) override {
@@ -74,7 +79,7 @@ class WidgetCharset : public BaseWidgetValue<char> {
     bool backspace() {
         if (value != '\0') {
             value = '\0';
-            charsetPosition = 0;
+            charsetPosition = -1;
             return true;
         }
         return false;
@@ -104,3 +109,23 @@ class WidgetCharset : public BaseWidgetValue<char> {
         return false;
     }
 };
+
+/**
+ * @brief Function to create a new WidgetCharset object.
+ *
+ * @param charset The charset to use for the widget.
+ * @param charsetPosition The initial position in the charset (default is -1 for no initial value).
+ * @param format The format to display the value (default is "%c").
+ * @param cursorOffset The offset for the cursor (default is 0).
+ * @param cycle Whether the value should cycle when out of range (default is false).
+ * @param callback The callback function to execute when value changes (default is nullptr).
+ */
+inline BaseWidgetValue<char>* WIDGET_CHARSET(
+    const char*& charset,
+    int8_t charsetPosition = -1,
+    const char* format = "%c",
+    uint8_t cursorOffset = 0,
+    bool cycle = false,
+    void (*callback)(const char&) = nullptr) {
+    return new WidgetCharset(charsetPosition, charset, format, cursorOffset, cycle, callback);
+}

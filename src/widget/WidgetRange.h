@@ -19,14 +19,14 @@ class WidgetRange : public BaseWidgetValue<T> {
 
   public:
     WidgetRange(
-        T value,
+        const T& value,
         const T step,
         const T min,
         const T max,
         const char* format,
         const uint8_t cursorOffset = 0,
         const bool cycle = false,
-        void (*callback)(T) = nullptr)
+        void (*callback)(const T&) = nullptr)
         : BaseWidgetValue<T>(value, format, cursorOffset, callback),
           step(step),
           minValue(min),
@@ -37,7 +37,7 @@ class WidgetRange : public BaseWidgetValue<T> {
      * @param newValue The value to set.
      * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      */
-    void setValue(T newValue) override {
+    void setValue(const T& newValue) override {
         BaseWidgetValue<T>::setValue(constrain(newValue, minValue, maxValue));
     }
 
@@ -116,7 +116,7 @@ inline BaseWidgetValue<float>* WIDGET_FLOAT_RANGE(
     const char* format = "%2.1f",
     uint8_t cursorOffset = 0,
     bool cycle = false,
-    void (*callback)(float) = nullptr) {
+    void (*callback)(const float&) = nullptr) {
     return new WidgetRange<float>(value, step, min, max, format, cursorOffset, cycle, callback);
 }
 
@@ -140,7 +140,7 @@ inline BaseWidgetValue<int>* WIDGET_INT_RANGE(
     const char* format = "%d",
     uint8_t cursorOffset = 0,
     bool cycle = false,
-    void (*callback)(int) = nullptr) {
+    void (*callback)(const int&) = nullptr) {
     return new WidgetRange<int>(value, step, min, max, format, cursorOffset, cycle, callback);
 }
 
@@ -164,7 +164,7 @@ inline BaseWidgetValue<uint8_t>* WIDGET_UINT8_RANGE(
     const char* format = "%d",
     uint8_t cursorOffset = 0,
     bool cycle = false,
-    void (*callback)(uint8_t) = nullptr) {
+    void (*callback)(const uint8_t&) = nullptr) {
     return new WidgetRange<uint8_t>(value, step, min, max, format, cursorOffset, cycle, callback);
 }
 

@@ -15,7 +15,7 @@ class LcdMenu;
 
 /**
  * @class BaseWidget
- * @brief Base class for widget.
+ * @brief Base class for widgets.
  */
 class BaseWidget {
     template <typename... Ts>
