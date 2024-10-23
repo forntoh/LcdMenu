@@ -49,7 +49,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value, boo
 
     uint8_t cursorColEnd = cursorCol;
 
-    // Fill remaining space with whitespace only when not in edit mode
+    // Fill remaining space with whitespace only when paddWithBlanks is true
     if (paddWithBlanks) {
         for (; cursorCol < availableColumns; cursorCol++) {
             display->draw(' ');
