@@ -92,7 +92,7 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @param value The value of the menu item to be drawn.
      * @param paddWithBlanks A flag indicating whether to pad the text with spaces.
      */
-    void drawItem(const char* text, const char* value, bool paddWithBlanks = true) override;
+    void drawItem(const char* text, const char* value, bool paddWithBlanks) override;
     void draw(uint8_t byte) override;
     void drawBlinker() override;
     void clearBlinker() override;
