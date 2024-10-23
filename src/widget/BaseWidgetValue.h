@@ -1,6 +1,5 @@
 // Creator: @ShishkinDmitriy
-#ifndef BASE_WIDGET_VALUE_H
-#define BASE_WIDGET_VALUE_H
+#pragma once
 
 #include "BaseWidget.h"
 
@@ -73,5 +72,3 @@ class BaseWidgetValue : public BaseWidget {
   public:
     ~BaseWidgetValue() override = default;
 };
-
-#endif  // BASE_WIDGET_VALUE_H

@@ -1,6 +1,5 @@
 // Creator: @ShishkinDmitriy
-#ifndef WIDGET_RANGE_H
-#define WIDGET_RANGE_H
+#pragma once
 
 #include "BaseWidgetValue.h"
 
@@ -121,5 +120,3 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
     void (*callback)(const T&) = nullptr) {
     return new WidgetRange<T>(value, step, min, max, format, cursorOffset, cycle, callback);
 }
-
-#endif

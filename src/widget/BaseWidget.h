@@ -1,7 +1,5 @@
 // Creator: @ShishkinDmitriy
-
-#ifndef BASE_WIDGET_H
-#define BASE_WIDGET_H
+#pragma once
 
 #ifndef ARDUINO_ARCH_ESP32
 #ifndef ARDUINO_ARCH_ESP8266
@@ -58,5 +56,3 @@ class BaseWidget {
   public:
     virtual ~BaseWidget() = default;
 };
-
-#endif

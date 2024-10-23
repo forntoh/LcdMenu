@@ -1,5 +1,4 @@
-#ifndef ITEM_WIDGET_H
-#define ITEM_WIDGET_H
+#pragma once
 
 #include "BaseItemManyWidgets.h"
 #include "widget/BaseWidgetValue.h"
@@ -77,8 +76,9 @@ template <typename... Ts>
  * @param callback reference to callback function to call when the value of the item is changed
  * @param widgetPtrs pointers to the widgets associated with this item
  */
-inline MenuItem* ITEM_WIDGET(const char* text, typename ItemWidget<Ts...>::CallbackType callback, BaseWidgetValue<Ts>*... widgetPtrs) {
+inline MenuItem* ITEM_WIDGET(
+    const char* text,
+    typename ItemWidget<Ts...>::CallbackType callback,
+    BaseWidgetValue<Ts>*... widgetPtrs) {
     return new ItemWidget<Ts...>(text, widgetPtrs..., callback);
 }
-
-#endif  // ITEM_WIDGET_H

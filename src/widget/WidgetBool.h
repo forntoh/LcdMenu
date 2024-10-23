@@ -1,6 +1,5 @@
 // Creator: @ShishkinDmitriy
-#ifndef WIDGET_BOOL_H
-#define WIDGET_BOOL_H
+#pragma once
 
 #include "BaseWidgetValue.h"
 
@@ -71,5 +70,3 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
     void (*callback)(const bool&) = nullptr) {
     return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
 }
-
-#endif
