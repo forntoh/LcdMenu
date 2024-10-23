@@ -5,11 +5,10 @@
 
 /**
  * @class WidgetCharset
- * @brief Widget that allows user to select a character from a charset.
+ * @brief Widget that allows a user to select a character from a charset.
  * Manages a character value within a specified charset, allowing cycling through characters.
  */
 class WidgetCharset : public BaseWidgetValue<char> {
-    friend class ItemCharsetWidgets;
 
   protected:
     const char*& charset;

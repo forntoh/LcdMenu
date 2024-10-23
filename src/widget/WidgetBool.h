@@ -38,6 +38,8 @@ class WidgetBool : public BaseWidgetValue<bool> {
      *
      * Handle commands:
      * - `ENTER` - toggle value and trigger callback;
+     *
+     * @return true if command was handled, false otherwise
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
         if (command == ENTER) {
