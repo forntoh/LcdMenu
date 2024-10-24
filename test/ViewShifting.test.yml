@@ -12,7 +12,7 @@ steps:
   - simulate: leftButton-press
   - wait-serial: "#LOG# MenuScreen::left=0"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=1"
+  - wait-serial: "#LOG# MenuScreen::down=1"
   - simulate: rightButton-press
   - wait-serial: "#LOG# MenuScreen::right=1"
   - simulate: rightButton-press
@@ -24,7 +24,7 @@ steps:
   - simulate: rightButton-press
   - wait-serial: "#LOG# MenuScreen::right=5"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=2"
+  - wait-serial: "#LOG# MenuScreen::down=2"
   - simulate: rightButton-press
   - wait-serial: "#LOG# MenuScreen::right=1"
   - simulate: rightButton-press
@@ -34,7 +34,7 @@ steps:
   - simulate: rightButton-press
   - wait-serial: "#LOG# MenuScreen::right=4"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=3"
+  - wait-serial: "#LOG# MenuScreen::down=3"
   - simulate: rightButton-press
   - wait-serial: "#LOG# MenuScreen::right=1"
   - simulate: rightButton-press
