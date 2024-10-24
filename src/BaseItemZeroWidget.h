@@ -35,7 +35,7 @@ class BaseItemZeroWidget : public MenuItem {
     bool process(LcdMenu* menu, const unsigned char command) override {
         if (command == ENTER) {
             handleCommit(menu);
-            printLog(F("ItemWidget::enter"), text);
+            LOG(F("ItemWidget::enter"), text);
             return true;
         }
         return false;

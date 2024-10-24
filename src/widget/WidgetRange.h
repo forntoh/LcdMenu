@@ -73,7 +73,7 @@ class WidgetRange : public BaseWidgetValue<T> {
         T newValue = (this->value + step > maxValue) ? (cycle ? minValue : maxValue) : (this->value + step);
         if (newValue != this->value) {
             this->value = newValue;
-            printLog(F("WidgetRange::increment"), this->value);
+            LOG(F("WidgetRange::increment"), this->value);
             return true;
         }
         return false;
@@ -88,7 +88,7 @@ class WidgetRange : public BaseWidgetValue<T> {
         T newValue = (this->value - step < minValue) ? (cycle ? maxValue : minValue) : (this->value - step);
         if (newValue != this->value) {
             this->value = newValue;
-            printLog(F("WidgetRange::decrement"), this->value);
+            LOG(F("WidgetRange::decrement"), this->value);
             return true;
         }
         return false;

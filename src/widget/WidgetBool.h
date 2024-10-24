@@ -43,7 +43,7 @@ class WidgetBool : public BaseWidgetValue<bool> {
     bool process(LcdMenu* menu, const unsigned char command) override {
         if (command == ENTER) {
             value = !value;
-            printLog(F("WidgetToggle::toggle"), value);
+            LOG(F("WidgetToggle::toggle"), value);
             handleChange();
             return true;
         }

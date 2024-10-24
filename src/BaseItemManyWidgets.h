@@ -127,7 +127,7 @@ class BaseItemManyWidgets : public MenuItem {
             renderer->setEditMode(true);
             draw(renderer);
             renderer->drawBlinker();
-            printLog(F("ItemWidget::enterEditMode"), this->text);
+            LOG(F("ItemWidget::enterEditMode"), this->text);
             return true;
         }
         return false;
@@ -140,13 +140,13 @@ class BaseItemManyWidgets : public MenuItem {
             activeWidget--;
         }
         draw(renderer);
-        printLog(F("ItemWidget::left"), activeWidget);
+        LOG(F("ItemWidget::left"), activeWidget);
     }
 
     void right(MenuRenderer* renderer) {
         activeWidget = (activeWidget + 1) % this->size;
         draw(renderer);
-        printLog(F("ItemWidget::right"), activeWidget);
+        LOG(F("ItemWidget::right"), activeWidget);
     }
 
     void back(MenuRenderer* renderer) {
@@ -155,7 +155,7 @@ class BaseItemManyWidgets : public MenuItem {
         handleCommit();
         renderer->clearBlinker();
         draw(renderer);
-        printLog(F("ItemWidget::exitEditMode"), this->text);
+        LOG(F("ItemWidget::exitEditMode"), this->text);
     }
 };
 

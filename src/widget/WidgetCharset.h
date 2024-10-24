@@ -72,7 +72,7 @@ class WidgetCharset : public BaseWidgetValue<char> {
     void updateValue(const __FlashStringHelper* action) {
         value = charset[charsetPosition];
         BaseWidgetValue<char>::handleChange();
-        printLog(action, value);
+        LOG(action, value);
     }
 
     bool backspace() {
