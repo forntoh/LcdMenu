@@ -100,7 +100,7 @@ class ItemInput : public MenuItem {
     bool setValue(char* value) {
         if (this->value != value) {
             this->value = value;
-            printLog(F("ItemInput::setValue"), value);
+            LOG(F("ItemInput::setValue"), value);
             return true;
         }
         return false;
@@ -178,7 +178,7 @@ class ItemInput : public MenuItem {
         draw(renderer);
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::enterEditMode"), value);
+        LOG(F("ItemInput::enterEditMode"), value);
     };
     void back(MenuRenderer* renderer) {
         renderer->clearBlinker();
@@ -191,7 +191,7 @@ class ItemInput : public MenuItem {
             callback(value);
         }
         // Log
-        printLog(F("ItemInput::exitEditMode"), value);
+        LOG(F("ItemInput::exitEditMode"), value);
     };
     void left(MenuRenderer* renderer) {
         if (cursor == 0) {
@@ -208,7 +208,7 @@ class ItemInput : public MenuItem {
         renderer->moveCursor(cursorCol, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::left"), value);
+        LOG(F("ItemInput::left"), value);
     };
     /**
      * @brief Moves the cursor to the right within the input value.
@@ -229,7 +229,7 @@ class ItemInput : public MenuItem {
         renderer->moveCursor(cursorCol, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::right"), value);
+        LOG(F("ItemInput::right"), value);
     }
     /**
      * @brief Handles the backspace action for the input field.
@@ -250,7 +250,7 @@ class ItemInput : public MenuItem {
         renderer->moveCursor(cursorCol, renderer->getCursorRow());
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::backspace"), value);
+        LOG(F("ItemInput::backspace"), value);
     }
     /**
      * @brief Types a character into the current input value at the cursor position.
@@ -287,7 +287,7 @@ class ItemInput : public MenuItem {
         draw(renderer);
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::typeChar"), character);
+        LOG(F("ItemInput::typeChar"), character);
     }
     /**
      * @brief Clear the value of the input field
@@ -297,7 +297,7 @@ class ItemInput : public MenuItem {
         draw(renderer);
         renderer->drawBlinker();
         // Log
-        printLog(F("ItemInput::clear"), value);
+        LOG(F("ItemInput::clear"), value);
     }
 };
 

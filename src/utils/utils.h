@@ -39,56 +39,22 @@ inline void remove(char* str, uint8_t index, uint8_t count) {
     memmove(str + index, str + index + count, len - count - index + 1);
 }
 
-inline void printLog(const __FlashStringHelper* command) {
 #ifdef DEBUG
+#define LOG(...) log(__VA_ARGS__)
+inline void log(const __FlashStringHelper* command) {
     Serial.print(F("#LOG# "));
     Serial.println(command);
-#endif
 }
 
-inline void printLog(const __FlashStringHelper* command, const char value) {
-#ifdef DEBUG
+template <typename T>
+inline void log(const __FlashStringHelper* command, T value) {
     Serial.print(F("#LOG# "));
     Serial.print(command);
     Serial.print(F("="));
     Serial.println(value);
-#endif
 }
-
-inline void printLog(const __FlashStringHelper* command, const uint8_t value) {
-#ifdef DEBUG
-    Serial.print(F("#LOG# "));
-    Serial.print(command);
-    Serial.print(F("="));
-    Serial.println(value, DEC);
+#else
+#define LOG(...)  // No-op
 #endif
-}
 
-inline void printLog(const __FlashStringHelper* command, const char* value) {
-#ifdef DEBUG
-    Serial.print(F("#LOG# "));
-    Serial.print(command);
-    Serial.print(F("="));
-    Serial.println(value);
-#endif
-}
-
-inline void printLog(const __FlashStringHelper* command, float value) {
-#ifdef DEBUG
-    Serial.print(F("#LOG# "));
-    Serial.print(command);
-    Serial.print(F("="));
-    Serial.println(value);
-#endif
-}
-
-inline void printLog(const __FlashStringHelper* command, int value) {
-#ifdef DEBUG
-    Serial.print(F("#LOG# "));
-    Serial.print(command);
-    Serial.print(F("="));
-    Serial.println(value);
-#endif
-}
-
-#endif
+#endif  // MenuUtils_H

@@ -57,7 +57,7 @@ class ItemCommand : public MenuItem {
         if (callback != NULL) {
             callback();
         }
-        printLog(F("ItemCommand::enter"), text);
+        LOG(F("ItemCommand::enter"), text);
     }
 };
 

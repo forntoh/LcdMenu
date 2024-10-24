@@ -4,22 +4,22 @@ author: Thomas Forntoh
 steps:
   - wait-serial: "#LOG# LcdMenu::setScreen"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=1"
+  - wait-serial: "#LOG# MenuScreen::down=1"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=2"
+  - wait-serial: "#LOG# MenuScreen::down=2"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=3"
+  - wait-serial: "#LOG# MenuScreen::down=3"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=4"
+  - wait-serial: "#LOG# MenuScreen::down=4"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=4"
+  - wait-serial: "#LOG# MenuScreen::down=4"
   - simulate: upButton-press
-  - wait-serial: "#LOG# MenuScreen:up=3"
+  - wait-serial: "#LOG# MenuScreen::up=3"
   - simulate: upButton-press
-  - wait-serial: "#LOG# MenuScreen:up=2"
+  - wait-serial: "#LOG# MenuScreen::up=2"
   - simulate: upButton-press
-  - wait-serial: "#LOG# MenuScreen:up=1"
+  - wait-serial: "#LOG# MenuScreen::up=1"
   - simulate: upButton-press
-  - wait-serial: "#LOG# MenuScreen:up=0"
+  - wait-serial: "#LOG# MenuScreen::up=0"
   - simulate: upButton-press
-  - wait-serial: "#LOG# MenuScreen:up=0"
+  - wait-serial: "#LOG# MenuScreen::up=0"

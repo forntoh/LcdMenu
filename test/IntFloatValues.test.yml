@@ -4,7 +4,7 @@ author: Thomas Forntoh
 steps:
   - wait-serial: "#LOG# LcdMenu::setScreen"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=1"
+  - wait-serial: "#LOG# MenuScreen::down=1"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemRangeBase::enterEditMode=100"
   - simulate: upButton-press
@@ -20,7 +20,7 @@ steps:
   - simulate: backButton-press
   - wait-serial: "#LOG# ItemRangeBase::exitEditMode=101"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=2"
+  - wait-serial: "#LOG# MenuScreen::down=2"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemRangeBase::enterEditMode=-1.00"
   - simulate: upButton-press
@@ -38,4 +38,4 @@ steps:
   - simulate: backButton-press
   - wait-serial: "#LOG# ItemRangeBase::exitEditMode=-0.98"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=3"
+  - wait-serial: "#LOG# MenuScreen::down=3"
