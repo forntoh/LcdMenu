@@ -21,7 +21,7 @@ void CharacterDisplayRenderer::begin() {
     static_cast<CharacterDisplayInterface*>(display)->createChar(2, downArrow);
 }
 
-void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
+void CharacterDisplayRenderer::drawItem(const char* text, const char* value, bool paddWithBlanks) {
     uint8_t cursorCol = 0;
     display->setCursor(cursorCol, cursorRow);
 
@@ -49,9 +49,11 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
 
     uint8_t cursorColEnd = cursorCol;
 
-    // Fill remaining space with white spaces
-    for (; cursorCol < availableColumns; cursorCol++) {
-        display->draw(' ');
+    // Fill remaining space with whitespace only when paddWithBlanks is true
+    if (paddWithBlanks) {
+        for (; cursorCol < availableColumns; cursorCol++) {
+            display->draw(' ');
+        }
     }
 
     // Draw up and down arrows if present
