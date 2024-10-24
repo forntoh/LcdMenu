@@ -94,7 +94,7 @@ void MenuScreen::up(MenuRenderer* renderer) {
         if (--cursor < view) view--;
         draw(renderer);
     }
-    LOG(F("MenuScreen:up"), cursor);
+    LOG(F("MenuScreen::up"), cursor);
 }
 
 void MenuScreen::down(MenuRenderer* renderer) {
@@ -102,7 +102,7 @@ void MenuScreen::down(MenuRenderer* renderer) {
         if (++cursor > view + renderer->maxRows - 1) view++;
         draw(renderer);
     }
-    LOG(F("MenuScreen:down"), cursor);
+    LOG(F("MenuScreen::down"), cursor);
 }
 
 void MenuScreen::reset(MenuRenderer* renderer) {
