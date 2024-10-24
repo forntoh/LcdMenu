@@ -9,7 +9,7 @@ MenuScreen* LcdMenu::getScreen() {
 }
 
 void LcdMenu::setScreen(MenuScreen* screen) {
-    printLog(F("LcdMenu::setScreen"));
+    LOG(F("LcdMenu::setScreen"));
     this->screen = screen;
     renderer.display->clear();
     this->screen->draw(&renderer);

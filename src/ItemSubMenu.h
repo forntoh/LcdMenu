@@ -32,7 +32,7 @@ class ItemSubMenu : public MenuItem {
         }
     }
     void changeScreen(LcdMenu* menu) {
-        printLog(F("ItemSubMenu::changeScreen"), text);
+        LOG(F("ItemSubMenu::changeScreen"), text);
         screen->setParent(menu->getScreen());
         menu->setScreen(screen);
     }

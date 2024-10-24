@@ -102,7 +102,7 @@ class ItemToggle : public MenuItem {
         if (callback != NULL) {
             callback(enabled);
         }
-        printLog(F("ItemToggle::toggle"), enabled ? textOn : textOff);
+        LOG(F("ItemToggle::toggle"), enabled ? textOn : textOff);
         draw(renderer);
     }
 };

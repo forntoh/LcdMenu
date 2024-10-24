@@ -4,7 +4,7 @@ author: Thomas Forntoh
 steps:  
   - wait-serial: "#LOG# LcdMenu::setScreen"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=1"
+  - wait-serial: "#LOG# MenuScreen::down=1"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemList::enterEditMode=Red"
   - simulate: upButton-press
@@ -16,7 +16,7 @@ steps:
   - simulate: backButton-press
   - wait-serial: "#LOG# ItemList::exitEditMode=Orange"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=2"
+  - wait-serial: "#LOG# MenuScreen::down=2"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemList::enterEditMode=5"
   - simulate: downButton-press

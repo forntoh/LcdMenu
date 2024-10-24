@@ -5,7 +5,7 @@ steps:
   - wait-serial: "#LOG# LcdMenu::setScreen"
   - wait-serial: "#LOG# MenuRenderer::timeout"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=1"
+  - wait-serial: "#LOG# MenuScreen::down=1"
   - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen:down=2"
+  - wait-serial: "#LOG# MenuScreen::down=2"
   - wait-serial: "#LOG# MenuRenderer::timeout"

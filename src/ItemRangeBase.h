@@ -63,7 +63,7 @@ class ItemRangeBase : public MenuItem {
             return false;
         }
         currentValue += step;
-        printLog(F("ItemRangeBase::increment"), currentValue);
+        LOG(F("ItemRangeBase::increment"), currentValue);
         return true;
     }
 
@@ -75,7 +75,7 @@ class ItemRangeBase : public MenuItem {
             return false;
         }
         currentValue -= step;
-        printLog(F("ItemRangeBase::decrement"), currentValue);
+        LOG(F("ItemRangeBase::decrement"), currentValue);
         return true;
     }
 
@@ -122,7 +122,7 @@ class ItemRangeBase : public MenuItem {
                     if (callback != NULL && !commitOnChange) {
                         callback(currentValue);
                     }
-                    printLog(F("ItemRangeBase::exitEditMode"), currentValue);
+                    LOG(F("ItemRangeBase::exitEditMode"), currentValue);
                     return true;
                 case UP:
                     if (increment()) {
@@ -148,7 +148,7 @@ class ItemRangeBase : public MenuItem {
                 case ENTER:
                     renderer->setEditMode(true);
                     draw(renderer);
-                    printLog(F("ItemRangeBase::enterEditMode"), currentValue);
+                    LOG(F("ItemRangeBase::enterEditMode"), currentValue);
                     return true;
                 default:
                     return false;

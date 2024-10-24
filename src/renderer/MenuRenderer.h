@@ -114,7 +114,7 @@ class MenuRenderer {
         if (millis() != startTime + DISPLAY_TIMEOUT) {
             return;
         }
-        printLog(F("MenuRenderer::timeout"));
+        LOG(F("MenuRenderer::timeout"));
         display->hide();
     }
 
