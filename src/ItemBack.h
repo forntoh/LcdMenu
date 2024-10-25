@@ -12,7 +12,7 @@
  *
  * @details
  * This class inherits from the BaseItemZeroWidget class and overrides the
- * handleCommit method to handle the ENTER command by changing the screen.
+ * handleCommit method to handle the ENTER command by navigating back to the previous screen.
  */
 class ItemBack : public BaseItemZeroWidget {
   public:
