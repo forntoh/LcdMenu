@@ -1,14 +1,37 @@
 #pragma once
 
-#include "ItemWidget.h"
+#include "BaseItemZeroWidget.h"
+
+/**
+ * @brief A menu item that executes a callback function when selected.
+ *
+ * This class extends the BaseItemZeroWidget class and provides a menu item
+ * that executes a callback function when selected. The callback function is
+ * provided as a function pointer during construction.
+ */
+class ItemCommand : public BaseItemZeroWidget {
+  private:
+    void (*callback)();
+
+  public:
+    ItemCommand(const char* text, void (*callback)()) : BaseItemZeroWidget(text), callback(callback) {};
+
+  protected:
+    void handleCommit(LcdMenu* menu) override {
+        if (callback) callback();
+    }
+};
 
 /**
  * @brief Create a new command item.
  *
  * @param text The text to display for the item.
  * @param callback The function to call when the item is selected.
- * @return MenuItem* The created item.
+ * @return MenuItem* The created item. Caller takes ownership of the returned pointer.
+ *
+ * @example
+ *   auto item = ITEM_COMMAND("Save", []() { save_data(); });
  */
 inline MenuItem* ITEM_COMMAND(const char* text, void (*callback)()) {
-    return new ItemWidget<>(text, callback);
+    return new ItemCommand(text, callback);
 }
