@@ -1,8 +1,7 @@
-#ifndef ItemBack_H
-#define ItemBack_H
+#pragma once
 
+#include "BaseItemZeroWidget.h"
 #include "LcdMenu.h"
-#include "MenuItem.h"
 
 /**
  * @class ItemBack
@@ -12,34 +11,30 @@
  * navigates back to the previous screen in the menu system.
  *
  * @details
- * This class inherits from the MenuItem class and overrides the
- * process method to handle the ENTER command by changing the screen.
- *
- * @note The default text for this item is "..".
+ * This class inherits from the BaseItemZeroWidget class and overrides the
+ * handleCommit method to handle the ENTER command by navigating back to the previous screen.
  */
-class ItemBack : public MenuItem {
+class ItemBack : public BaseItemZeroWidget {
   public:
     /**
      * Construct a new ItemBack object.
      * @param text The text of the item.
      */
-    ItemBack(const char* text = "..") : MenuItem(text) {}
+    ItemBack(const char* text) : BaseItemZeroWidget(text) {}
 
   protected:
-    bool process(LcdMenu* menu, const unsigned char command) override {
-        switch (command) {
-            case ENTER:
-                changeScreen(menu);
-                return true;
-            default:
-                return false;
-        }
-    }
-    void changeScreen(LcdMenu* menu) {
+    void handleCommit(LcdMenu* menu) override {
         menu->process(BACK);
     }
 };
 
-#define ITEM_BACK(...) (new ItemBack(__VA_ARGS__))
-
-#endif
+/**
+ * @brief Create a new back item.
+ *
+ * @param text The text to display for the item (default is "..").
+ * @return MenuItem* The created item. Caller takes ownership of the returned pointer.
+ *
+ * @example
+ *   auto item = ITEM_BACK("Back");
+ */
+inline MenuItem* ITEM_BACK(const char* text = "..") { return new ItemBack(text); }

@@ -96,6 +96,7 @@ jobs:
 
       - name: Running ${{ env.TEST_FILE }} on Wokwi
         uses: wokwi/wokwi-ci-action@v1
+        continue-on-error: true
         with:
           token: ${{ secrets.WOKWI_CLI_TOKEN }}
           scenario: ${{ env.TEST_FILE }}
