@@ -56,8 +56,8 @@ class CharacterDisplayRenderer : public MenuRenderer {
      *        Initializes the renderer with the display, maximum columns, and maximum rows.
      *        Also sets the up and down arrow icons, cursor icons, and edit cursor icons.
      *
-     * @note slots 1 and 2 are reserved for up and down arrow icons.
-     *       The available custom characters slots are 0 and 3 to 7.
+     * @note slots 0 and 1 are reserved for up and down arrow icons.
+     *       The available custom characters slots are 2 to 7.
      *
      * @param display A pointer to the CharacterDisplayInterface object.
      * @param maxCols The maximum number of columns on the display.
