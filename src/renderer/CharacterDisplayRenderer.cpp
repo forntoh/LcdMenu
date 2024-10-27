@@ -17,8 +17,8 @@ CharacterDisplayRenderer::CharacterDisplayRenderer(
 
 void CharacterDisplayRenderer::begin() {
     MenuRenderer::begin();
-    static_cast<CharacterDisplayInterface*>(display)->createChar(1, upArrow);
-    static_cast<CharacterDisplayInterface*>(display)->createChar(2, downArrow);
+    static_cast<CharacterDisplayInterface*>(display)->createChar(0, upArrow);
+    static_cast<CharacterDisplayInterface*>(display)->createChar(1, downArrow);
 }
 
 void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
@@ -56,7 +56,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value) {
 
     // Draw up and down arrows if present
     if (upArrow && downArrow) {
-        uint8_t indicator = hasHiddenItemsAbove ? 1 : (hasHiddenItemsBelow ? 2 : 0);
+        uint8_t indicator = hasHiddenItemsAbove ? 0 : (hasHiddenItemsBelow ? 1 : ' ');
         display->setCursor(maxCols - 1, cursorRow);
         display->draw(indicator);
     }
