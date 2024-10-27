@@ -1,7 +1,8 @@
-#ifndef ItemSubMenu_H
-#define ItemSubMenu_H
+#pragma once
+
+#include "BaseItemZeroWidget.h"
 #include "LcdMenu.h"
-#include "MenuItem.h"
+#include "MenuScreen.h"
 
 /**
  * @class ItemSubMenu
@@ -10,7 +11,7 @@
  * This class extends the MenuItem class and provides functionality to navigate
  * to a different screen when the item is selected.
  */
-class ItemSubMenu : public MenuItem {
+class ItemSubMenu : public BaseItemZeroWidget {
   private:
     MenuScreen*& screen;
 
@@ -19,25 +20,26 @@ class ItemSubMenu : public MenuItem {
      * @param text text to display for the item
      * @param screen the next screen to show
      */
-    ItemSubMenu(const char* text, MenuScreen*& screen) : MenuItem(text), screen(screen) {}
+    ItemSubMenu(const char* text, MenuScreen*& screen) : BaseItemZeroWidget(text), screen(screen) {}
 
   protected:
-    bool process(LcdMenu* menu, const unsigned char command) {
-        switch (command) {
-            case ENTER:
-                changeScreen(menu);
-                return true;
-            default:
-                return false;
-        }
-    }
-    void changeScreen(LcdMenu* menu) {
+    void handleCommit(LcdMenu* menu) override {
         LOG(F("ItemSubMenu::changeScreen"), text);
         screen->setParent(menu->getScreen());
         menu->setScreen(screen);
     }
 };
 
-#define ITEM_SUBMENU(...) (new ItemSubMenu(__VA_ARGS__))
-
-#endif
+/**
+ * @brief Create a new submenu item.
+ *
+ * @param text The text to display for the item.
+ * @param screen The screen to navigate to when the item is selected.
+ * @return MenuItem* The created item. Caller takes ownership of the returned pointer.
+ *
+ * @example
+ *   auto item = ITEM_SUBMENU("Settings", settingsScreen);
+ */
+inline MenuItem* ITEM_SUBMENU(const char* text, MenuScreen*& screen) {
+    return new ItemSubMenu(text, screen);
+}
