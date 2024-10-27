@@ -23,32 +23,17 @@ async function generateReleaseNotes(github, context) {
   console.log(`Current Tag: ${currentTag}`);
   console.log(`Previous Tag: ${previousTag}`);
 
-  const getCommitDate = async (github, owner, repo, sha) => {
-    const { data: commit } = await github.rest.repos.getCommit({
-      owner,
-      repo,
-      ref: sha,
-    });
-    return new Date(commit.commit.committer.date);
-  };
-
-  const previousTagDate = previousTag
-    ? await getCommitDate(
-        github,
-        owner,
-        repo,
-        tags.find((tag) => tag.name === previousTag).commit.sha
-      )
-    : new Date(0);
-
-  const currentTagDate = await getCommitDate(
-    github,
+  // Fetch commits between previousTag and currentTag
+  const { data: commits } = await github.rest.repos.compareCommits({
     owner,
     repo,
-    tags.find((tag) => tag.name === currentTag).commit.sha
-  );
+    base: previousTag,
+    head: currentTag,
+  });
 
-  // Fetch PRs merged between previousTag and currentTag
+  const commitShas = commits.commits.map((commit) => commit.sha);
+
+  // Fetch PRs merged into the branch
   const { data: pulls } = await github.rest.pulls.list({
     owner,
     repo,
@@ -79,10 +64,7 @@ async function generateReleaseNotes(github, context) {
 
   pulls
     .filter((pr) => pr.merged_at)
-    .filter((pr) => {
-      const mergedAt = new Date(pr.merged_at);
-      return mergedAt > previousTagDate && mergedAt <= currentTagDate;
-    })
+    .filter((pr) => commitShas.includes(pr.merge_commit_sha))
     .forEach((pr) => {
       const prEntry = `* ${escapeSpecialChars(pr.title)} by @${
         pr.user.login
@@ -95,7 +77,10 @@ async function generateReleaseNotes(github, context) {
         }
         if (categories[label.name]) {
           categories[label.name].push(prEntry);
-        } else if (!categories[label.name] && label.name === pr.labels[pr.labels.length - 1].name) {
+        } else if (
+          !categories[label.name] &&
+          label.name === pr.labels[pr.labels.length - 1].name
+        ) {
           categories["chore"].push(prEntry);
         }
       });
