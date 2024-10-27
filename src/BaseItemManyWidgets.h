@@ -63,7 +63,13 @@ class BaseItemManyWidgets : public MenuItem {
         for (uint8_t i = 0; i < size; i++) {
             index += widgets[i]->draw(buf, index);
             if (i == activeWidget && renderer->isInEditMode()) {
+                // Calculate the available space for the widgets after the text
+                size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
+                // Adjust the view shift to ensure the active widget is visible
+                renderer->viewShift = index > v_size ? index - v_size : 0;
+                // Draw the item with the renderer, indicating if it's the last widget
                 renderer->drawItem(text, buf, i == size - 1);
+                // Calculate the cursor column position for the active widget
                 cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
@@ -151,6 +157,7 @@ class BaseItemManyWidgets : public MenuItem {
 
     void back(MenuRenderer* renderer) {
         renderer->setEditMode(false);
+        renderer->viewShift = 0;
         reset();
         handleCommit();
         renderer->clearBlinker();
