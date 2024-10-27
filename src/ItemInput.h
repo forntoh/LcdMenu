@@ -266,19 +266,17 @@ class ItemInput : public MenuItem {
      */
     void typeChar(MenuRenderer* renderer, const unsigned char character) {
         uint8_t length = strlen(value);
+        char buf[length + 2];
         if (cursor < length) {
             char start[length];
             char end[length];
-            char* joined = new char[length + 2];
             substring(value, 0, cursor, start);
             substring(value, cursor, length - cursor, end);
-            concat(start, character, end, joined);
-            value = joined;
+            concat(start, character, end, buf);
         } else {
-            char* buf = new char[length + 2];
             concat(value, character, buf);
-            value = buf;
         }
+        value = buf;
         cursor++;
         uint8_t viewSize = getViewSize(renderer);
         if (cursor > (view + viewSize - 1)) {
@@ -293,7 +291,7 @@ class ItemInput : public MenuItem {
      * @brief Clear the value of the input field
      */
     void clear(MenuRenderer* renderer) {
-        value = (char*)"";
+        value[0] = '\0';
         draw(renderer);
         renderer->drawBlinker();
         // Log
