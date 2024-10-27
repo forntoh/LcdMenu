@@ -1,6 +1,8 @@
 #pragma once
 
 #include "BaseItemZeroWidget.h"
+#include "LcdMenu.h"
+#include "MenuScreen.h"
 
 /**
  * @class ItemSubMenu
