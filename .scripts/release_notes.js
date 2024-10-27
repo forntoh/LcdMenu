@@ -6,6 +6,7 @@ function escapeSpecialChars(str) {
 async function generateReleaseNotes(github, context) {
   const { owner, repo } = context.repo;
   const currentTag = process.env.CURRENT_TAG;
+  const branchRef = process.env.BRANCH_REF;
 
   // Fetch all tags
   const { data: tags } = await github.rest.repos.listTags({
@@ -55,6 +56,7 @@ async function generateReleaseNotes(github, context) {
     sort: "updated",
     direction: "desc",
     per_page: 100,
+    base: branchRef,
   });
 
   const categoryNames = {

@@ -111,6 +111,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           CURRENT_TAG: ${{ env.UPDATED_VERSION }}
+          BRANCH_REF: ${{ github.ref }}
         with:
           script: |
             const generateReleaseNotes = require('.scripts/release_notes.js');
