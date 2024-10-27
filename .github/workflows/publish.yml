@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -62,13 +64,13 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/forntoh/LcdMenu.git
           git add .
           git commit -m "Update version to $UPDATED_VERSION"
-          git push origin master --force
+          git push origin ${{ github.ref }}
 
       - name: Create Tag
         if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
           git tag -a "${{ env.UPDATED_VERSION }}" -m "Tagging version ${{ env.UPDATED_VERSION }}"
-          git push origin "${{ env.UPDATED_VERSION }}"
+          git push origin "${{ env.UPDATED_VERSION }}" --force
 
       - name: Install dependencies
         if: steps.check_tag.outputs.tag_exists == 'false'
@@ -127,6 +129,7 @@ jobs:
           prerelease: false
           generate_release_notes: false
           make_latest: true
+          target_commitish: ${{ github.sha }}
           token: ${{ secrets.GH_PAT }}
           body: ${{ steps.generate_release_notes.outputs.release_notes }}
 
