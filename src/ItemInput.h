@@ -266,7 +266,7 @@ class ItemInput : public MenuItem {
      */
     void typeChar(MenuRenderer* renderer, const unsigned char character) {
         uint8_t length = strlen(value);
-        char buf[length + 2];
+        char* buf = new char[length + 2];
         if (cursor < length) {
             char start[length];
             char end[length];
@@ -276,6 +276,7 @@ class ItemInput : public MenuItem {
         } else {
             concat(value, character, buf);
         }
+        delete[] value;
         value = buf;
         cursor++;
         uint8_t viewSize = getViewSize(renderer);
