@@ -17,8 +17,8 @@
 void callback(int pos);
 void toggleBacklight(bool isOn);
 
-const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
-const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
+static const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
+static const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,

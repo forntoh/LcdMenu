@@ -9,11 +9,11 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
-const char* nums[] = {"5", "7", "9", "12", "32"};
+static const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
+static const char* nums[] = {"5", "7", "9", "12", "32"};
 
-const uint8_t NUMS_COUNT = sizeof(nums) / sizeof(nums[0]);
-const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
+static const uint8_t NUMS_COUNT = sizeof(nums) / sizeof(nums[0]);
+static const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
 
 // Initialize the main menu items
 // clang-format off
