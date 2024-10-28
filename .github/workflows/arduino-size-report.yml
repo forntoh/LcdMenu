@@ -2,6 +2,7 @@ name: Arduino Size Report
 on:
   schedule:
     - cron: "*/10 * * * *"
+  workflow_dispatch:
 
 jobs:
   report:
