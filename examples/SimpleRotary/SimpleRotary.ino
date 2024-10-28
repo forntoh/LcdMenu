@@ -18,6 +18,7 @@ void callback(int pos);
 void toggleBacklight(bool isOn);
 
 const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
+const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
@@ -25,7 +26,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_WIDGET(
         "Color",
         [](const char* color) { Serial.println(color); },
-        WIDGET_LIST(colors, 8, 0, "%s")),
+        WIDGET_LIST(colors, COLORS_COUNT, 0, "%s")),
     ITEM_BASIC("Blink SOS"),
     ITEM_INT_RANGE("Dist", 0, 50, 0, callback, "%dm"),
     ITEM_TOGGLE("Backlight", toggleBacklight),
