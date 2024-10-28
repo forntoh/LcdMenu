@@ -1,27 +1,31 @@
 #include <ItemIntRange.h>
 #include <ItemList.h>
 #include <ItemToggle.h>
+#include <ItemWidget.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <SimpleRotary.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/SimpleRotaryAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
+#include <widget/WidgetList.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
 // Declare the callbacks
 void callback(int pos);
-void colorsCallback(uint8_t pos);
 void toggleBacklight(bool isOn);
 
-String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
+const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Connect to WiFi"),
-    ITEM_STRING_LIST("Color", colors, 8, colorsCallback),
+    ITEM_WIDGET(
+        "Color",
+        [](const char* color) { Serial.println(color); },
+        WIDGET_LIST(colors, 8, 0, "%s")),
     ITEM_BASIC("Blink SOS"),
     ITEM_INT_RANGE("Dist", 0, 50, 0, callback, "%dm"),
     ITEM_TOGGLE("Backlight", toggleBacklight),
@@ -50,8 +54,4 @@ void toggleBacklight(bool isOn) {
 
 void callback(int pos) {
     Serial.println(pos);
-}
-
-void colorsCallback(uint8_t pos) {
-    Serial.println(colors[pos]);
 }
