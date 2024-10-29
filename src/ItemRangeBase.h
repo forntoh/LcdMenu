@@ -21,7 +21,7 @@ template <typename T>
  * Additionally to `text` this item has float `currentValue`.
  * Has internal `edit` state.
  */
-class [[deprecated("ItemRangeBase is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_RANGE")]] ItemRangeBase : public MenuItem {
+class ItemRangeBase : public MenuItem {
   protected:
     const T minValue;
     const T maxValue;
@@ -44,6 +44,7 @@ class [[deprecated("ItemRangeBase is deprecated and will be removed in future ve
      * @param step The step value for increment/decrement.
      * @param commitOnChange If true, the callback will be called every time the value changes.
      */
+    [[deprecated("ItemRangeBase is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_RANGE")]]
     ItemRangeBase(
         const char* text,
         const T min,

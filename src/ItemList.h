@@ -12,7 +12,7 @@
  * navigation through the items and executing a callback function when an item
  * is selected.
  */
-class [[deprecated("ItemList is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_LIST")]] ItemList : public MenuItem {
+class ItemList : public MenuItem {
   private:
     fptruInt callback = NULL;
     String* items = NULL;
@@ -29,6 +29,7 @@ class [[deprecated("ItemList is deprecated and will be removed in future version
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
      */
+    [[deprecated("ItemList is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_LIST")]]
     ItemList(const char* key, String* items, const uint8_t itemCount, fptruInt callback)
         : MenuItem(key), callback(callback), items(items), itemCount(itemCount) {}
 
