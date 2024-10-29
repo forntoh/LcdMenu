@@ -5,6 +5,8 @@
 #include "MenuItem.h"
 #include <utils/utils.h>
 
+// clang-format off
+
 template <typename T>
 /**
  * @brief Item that allows user to select a value from a range.

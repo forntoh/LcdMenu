@@ -3,6 +3,8 @@
 #include "LcdMenu.h"
 #include "MenuItem.h"
 
+// clang-format off
+
 /**
  * @class ItemList
  * @brief A class representing a list of items in a menu.
