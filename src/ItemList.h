@@ -12,7 +12,7 @@
  * navigation through the items and executing a callback function when an item
  * is selected.
  */
-class ItemList : public MenuItem {
+class [[deprecated("ItemList is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_LIST")]] ItemList : public MenuItem {
   private:
     fptruInt callback = NULL;
     String* items = NULL;

@@ -21,7 +21,7 @@ template <typename T>
  * Additionally to `text` this item has float `currentValue`.
  * Has internal `edit` state.
  */
-class ItemRangeBase : public MenuItem {
+class [[deprecated("ItemRangeBase is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_RANGE")]] ItemRangeBase : public MenuItem {
   protected:
     const T minValue;
     const T maxValue;
