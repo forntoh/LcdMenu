@@ -1,0 +1,166 @@
+name: Widgets Test
+version: 1
+author: Thomas Forntoh
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Auto"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=Sell"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=Buy"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=Sell"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=Buy"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# ItemWidget::right=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetToggle::toggle=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetToggle::toggle=0"
+  - simulate: enterButton-press
+  - wait-serial: "Buy"
+  - wait-serial: "0"
+  - wait-serial: "#LOG# ItemWidget::exitEditMode=Auto"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen::down=1"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Price"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=15"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=20"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=25"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=30"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=35"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=40"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetRange::decrement=35"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetRange::decrement=30"
+  - simulate: enterButton-press
+  - wait-serial: "30"
+  - wait-serial: "#LOG# ItemWidget::exitEditMode=Price"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen::down=2"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Quantity"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1.10"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1.20"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1.30"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1.40"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# ItemWidget::right=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=11"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=12"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=13"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetRange::decrement=12"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetRange::decrement=11"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetRange::decrement=10"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetRange::decrement=9"
+  - simulate: leftButton-press
+  - wait-serial: "#LOG# ItemWidget::left=0"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1.50"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1.60"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1.70"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# ItemWidget::right=1"
+  - simulate: enterButton-press
+  - wait-serial: "1.70"
+  - wait-serial: "9"
+  - wait-serial: "#LOG# ItemWidget::exitEditMode=Quantity"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen::down=3"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Freq"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=2"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=3"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# ItemWidget::right=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=2"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=3"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=4"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=5"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# ItemWidget::right=2"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=Tue"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=Wed"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=Thu"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=Fri"
+  - simulate: enterButton-press
+  - wait-serial: "3"
+  - wait-serial: "5"
+  - wait-serial: "Fri"
+  - wait-serial: "#LOG# ItemWidget::exitEditMode=Freq"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen::down=4"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# MenuScreen::down=5"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Pin"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=4"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=5"
+  - simulate: rightButton-press
+  - wait-serial: "#LOG# ItemWidget::right=1"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=6"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=5"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=4"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::right=2"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=C"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=D"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::right=3"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=2"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=1"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=F"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=E"
+  - simulate: enterButton-press
+  - wait-serial: "54DE"
+  - wait-serial: "#LOG# ItemWidget::exitEditMode=Pin"
