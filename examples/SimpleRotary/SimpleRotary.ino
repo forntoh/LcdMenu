@@ -1,4 +1,3 @@
-#include <ItemIntRange.h>
 #include <ItemList.h>
 #include <ItemToggle.h>
 #include <ItemWidget.h>
@@ -9,6 +8,7 @@
 #include <input/SimpleRotaryAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
 #include <widget/WidgetList.h>
+#include <widget/WidgetRange.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -28,7 +28,10 @@ MENU_SCREEN(mainScreen, mainItems,
         [](const char* color) { Serial.println(color); },
         WIDGET_LIST(colors, COLORS_COUNT, 0, "%s")),
     ITEM_BASIC("Blink SOS"),
-    ITEM_INT_RANGE("Dist", 0, 50, 0, callback, "%dm"),
+    ITEM_WIDGET(
+        "Dist",
+        callback,
+        WIDGET_RANGE(0, 1, 0, 50, "%dm", 0, true)),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Blink random"));
 // clang-format on
