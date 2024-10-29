@@ -3,6 +3,8 @@
 #include "LcdMenu.h"
 #include "MenuItem.h"
 
+// clang-format off
+
 /**
  * @class ItemList
  * @brief A class representing a list of items in a menu.
@@ -29,6 +31,7 @@ class ItemList : public MenuItem {
      * @param callback A pointer to the callback function to execute when
      * this menu item is selected.
      */
+    [[deprecated("ItemList is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_LIST")]]
     ItemList(const char* key, String* items, const uint8_t itemCount, fptruInt callback)
         : MenuItem(key), callback(callback), items(items), itemCount(itemCount) {}
 

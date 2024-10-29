@@ -1,33 +1,32 @@
-#include <ItemList.h>
+#include <ItemWidget.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/KeyboardAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
+#include <widget/WidgetList.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
-// Declare the callbacks
-void colorsCallback(uint8_t pos);
-void numsCallback(uint8_t pos);
+static const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
+static const uint8_t nums[] = {5, 7, 9, 12, 32};
 
-// Declare the array
-extern String colors[];
-// Initialize the array
-String colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
-
-// Declare the array
-extern String nums[];
-// Initialize the array
-String nums[] = {"5", "7", "9", "12", "32"};
+static const uint8_t NUMS_COUNT = sizeof(nums) / sizeof(nums[0]);
+static const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
 
 // Initialize the main menu items
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("List demo"),
-    ITEM_STRING_LIST("Col", colors, 8, colorsCallback),
-    ITEM_STRING_LIST("Num", nums, 5, numsCallback),
+    ITEM_WIDGET(
+        "Color",
+        [](const char* color) { Serial.println(color); },
+        WIDGET_LIST(colors, COLORS_COUNT, 0, "%s", 0, true)),
+    ITEM_WIDGET(
+        "Num",
+        [](const uint8_t num) { Serial.println(num); },
+        WIDGET_LIST(nums, NUMS_COUNT, 0, "%d", 0, true)),
     ITEM_BASIC("Example"));
 // clang-format on
 
@@ -45,15 +44,4 @@ void setup() {
 
 void loop() {
     keyboard.observe();
-}
-
-// Define the callbacks
-void colorsCallback(uint8_t pos) {
-    // do something with the index
-    Serial.println(colors[pos]);
-}
-
-void numsCallback(uint8_t pos) {
-    // do something with the index
-    Serial.println(nums[pos]);
 }

@@ -5,6 +5,8 @@
 #include "MenuItem.h"
 #include <utils/utils.h>
 
+// clang-format off
+
 template <typename T>
 /**
  * @brief Item that allows user to select a value from a range.
@@ -44,6 +46,7 @@ class ItemRangeBase : public MenuItem {
      * @param step The step value for increment/decrement.
      * @param commitOnChange If true, the callback will be called every time the value changes.
      */
+    [[deprecated("ItemRangeBase is deprecated and will be removed in future versions. Please use ITEM_WIDGET with WIDGET_RANGE")]]
     ItemRangeBase(
         const char* text,
         const T min,

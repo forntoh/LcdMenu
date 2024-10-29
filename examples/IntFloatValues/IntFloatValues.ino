@@ -1,10 +1,10 @@
-#include <ItemFloatRange.h>
-#include <ItemIntRange.h>
+#include <ItemWidget.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/KeyboardAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
+#include <widget/WidgetRange.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -17,8 +17,14 @@ void callbackFloat(float value);
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Con"),
-    ITEM_INT_RANGE("Dist", 100, 200, 100, callbackInt, "%02dm"),
-    ITEM_FLOAT_RANGE("Curr", -1.0f, 1.0f, -1.0f, callbackFloat, "%.2fmA", 0.01f),
+    ITEM_WIDGET(
+        "Dist",
+        callbackInt,
+        WIDGET_RANGE(100, 1, 100, 200, "%dm", 1)),
+    ITEM_WIDGET(
+        "Curr",
+        callbackFloat,
+        WIDGET_RANGE(-1.0f, 0.01f, -1.0f, 1.0f, "%.2fmA", 2)),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
 // clang-format on
