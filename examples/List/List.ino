@@ -10,7 +10,7 @@
 #define LCD_COLS 16
 
 static const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
-static const char* nums[] = {"5", "7", "9", "12", "32"};
+static const uint8_t nums[] = {5, 7, 9, 12, 32};
 
 static const uint8_t NUMS_COUNT = sizeof(nums) / sizeof(nums[0]);
 static const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
@@ -25,8 +25,8 @@ MENU_SCREEN(mainScreen, mainItems,
         WIDGET_LIST(colors, COLORS_COUNT, 0, "%s", 0, true)),
     ITEM_WIDGET(
         "Num",
-        [](const char* num) { Serial.println(num); },
-        WIDGET_LIST(nums, NUMS_COUNT, 0, "%s", 0, true)),
+        [](const uint8_t num) { Serial.println(num); },
+        WIDGET_LIST(nums, NUMS_COUNT, 0, "%d", 0, true)),
     ITEM_BASIC("Example"));
 // clang-format on
 
