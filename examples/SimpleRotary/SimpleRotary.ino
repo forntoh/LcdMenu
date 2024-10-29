@@ -31,7 +31,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_WIDGET(
         "Dist",
         callback,
-        WIDGET_RANGE(0, 1, 0, 50, "%dm", 0, true)),
+        WIDGET_RANGE(0, 1, 0, 50, "%dm", 1, true)),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Blink random"));
 // clang-format on
