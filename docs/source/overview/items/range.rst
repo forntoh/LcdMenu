@@ -1,6 +1,10 @@
 Range item
 ----------
 
+.. deprecated:: 5.4.0
+
+   Please use :doc:`widget item </overview/items/item-widget>` instead.
+
 The range item is a menu item that allows the user to select a value within a specified range.
 It is used to create a menu item that presents a range of values to the user, such as a brightness level or a volume setting.
 
