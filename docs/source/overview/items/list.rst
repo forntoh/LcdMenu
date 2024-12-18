@@ -3,7 +3,6 @@ List menu item
 
  .. deprecated:: 5.4.0
  
-    Please use :doc:`widget item </overview/items/item-widget>` instead.
     This menu item type is deprecated and will be removed in versions after 5.4.0.
     Please use :doc:`widget item </overview/items/item-widget>` with WidgetList instead.
     
@@ -15,7 +14,7 @@ List menu item
         ITEM_LIST("List 1", listItems, 4, callback)
         
         // New approach
-        ITEM_WIDGET("List 1", WIDGET_LIST(listItems, 4), callback)
+        ITEM_WIDGET("List 1", callback, WIDGET_LIST(listItems, 4))
 
 The list menu item is a menu item that displays a list of string items on the screen.
 It is used to present a list of options to the user, allowing them to select one of the items.

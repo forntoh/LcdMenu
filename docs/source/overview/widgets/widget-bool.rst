@@ -13,7 +13,7 @@ The WidgetBool widget has the following properties:
 
 The following is an example of how to create a WidgetBool widget:
 
-+The WIDGET_BOOL macro provides a convenient way to create a WidgetBool instance. The macro takes the following arguments in order: initial value, text for true state, text for false state, format string, and cursor offset.
+The WIDGET_BOOL macro provides a convenient way to create a WidgetBool instance. The macro takes the following arguments in order: initial value, text for true state, text for false state, format string, and cursor offset.
 
 .. code-block:: c++
 
@@ -31,4 +31,6 @@ Widget Interaction
 
 The WidgetBool widget can be toggled using the following controls:
 - Press LEFT/RIGHT to toggle between true and false states
-- Press ENTER to confirm the current value and exit or move to the next widget
+- Press ENTER to confirm the current value and:
+  - Move to the next widget if available
+  - Exit focus mode if no next widget exists
