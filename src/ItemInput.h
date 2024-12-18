@@ -293,6 +293,7 @@ class ItemInput : public MenuItem {
      */
     void clear(MenuRenderer* renderer) {
         value[0] = '\0';
+        view = 0;
         draw(renderer);
         renderer->drawBlinker();
         // Log
