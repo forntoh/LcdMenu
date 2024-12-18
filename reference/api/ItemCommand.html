@@ -11,15 +11,15 @@
 <meta content="ItemCommand | LcdMenu" property="og:title"/>
 <meta content="ItemCommand | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
-<link href="../../_static/theme.css?v=edd7d3d2" rel="stylesheet" type="text/css"/>
+<link href="../../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
 <link href="../../_static/custom.css" rel="stylesheet" type="text/css"/>
-<link href="../../_static/awesome-sphinx-design.css?v=a54cf077" rel="stylesheet" type="text/css"/>
+<link href="../../_static/awesome-sphinx-design.css?v=15e0fffa" rel="stylesheet" type="text/css"/>
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="ItemInput.html" rel="next" title="ItemInput"/>
-<link href="MenuItem.html" rel="prev" title="MenuItem"/>
+<link href="MenuItem.html" rel="next" title="MenuItem"/>
+<link href="MenuScreen.html" rel="prev" title="MenuScreen"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -107,6 +107,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/input-charset.html">Charset input item</a></li>
 </ul>
 </li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../overview/widgets/index.html">Widget overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../../overview/widgets/widget-bool.html">WidgetBool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/widgets/widget-list.html">WidgetList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/widgets/widget-range.html">WidgetRange</a></li>
+</ul>
+</li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../overview/control/index.html">Controlling the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../overview/control/keyboard.html">Keyboard Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/control/button.html">Button Adapter</a></li>
@@ -121,42 +127,47 @@
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../samples/index.html">Code samples<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../samples/ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/SimpleInput.html">SimpleInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/MenuTimeout.html">MenuTimeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/CharsetInput.html">CharsetInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/InputRotary.html">InputRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/RTOS.html">RTOS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/ViewShifting.html">ViewShifting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/SubMenu.html">SubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/SimpleRotary.html">SimpleRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/ButtonAdapter.html">ButtonAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/SubMenu.html">SubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/IntFloatValues.html">IntFloatValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../samples/Callbacks.html">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/Widgets.html">Widgets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/List.html">List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/ViewShifting.html">ViewShifting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/RTOS.html">RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/CharsetInput.html">CharsetInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/SimpleRotary.html">SimpleRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/SimpleInput.html">SimpleInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/Callbacks.html">Callbacks</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MenuScreen.html">MenuScreen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemWidget.html">ItemWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="renderer/index.html">renderer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemFloatRange.html">ItemFloatRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MenuScreen.html">MenuScreen</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ItemCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="display/index.html">display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renderer/index.html">renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="widget/index.html">widget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input/index.html">input</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../uml.html">Class diagram</a></li>
@@ -219,103 +230,55 @@
 <section id="itemcommand">
 <h1>ItemCommand<a class="headerlink" href="#itemcommand" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.ITEM_COMMAND">
-<span class="target" id="ItemCommand_8h_1a7a3fc884242cd5c3017d620ee6ec2e61"></span><span class="sig-name descname"><span class="n"><span class="pre">ITEM_COMMAND</span></span></span><span class="sig-paren">(</span><span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ITEM_COMMAND" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c.ITEM_COMMAND'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412ITEM_COMMANDPKcPFvvE">
+<span id="_CPPv312ITEM_COMMANDPKcPFvvE"></span><span id="_CPPv212ITEM_COMMANDPKcPFvvE"></span><span class="target" id="ItemCommand_8h_1af2e3ebac8c687bfaea789372db4d320a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ITEM_COMMAND</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412ITEM_COMMANDPKcPFvvE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv412ITEM_COMMANDPKcPFvvE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv411ItemCommand">
-<span id="_CPPv311ItemCommand"></span><span id="_CPPv211ItemCommand"></span><span id="ItemCommand"></span><span class="target" id="classItemCommand"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemCommand</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><a class="headerlink" href="#_CPPv411ItemCommand" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv411ItemCommand'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<span id="_CPPv311ItemCommand"></span><span id="_CPPv211ItemCommand"></span><span id="ItemCommand"></span><span class="target" id="classItemCommand"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemCommand</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="BaseItemZeroWidget.html#_CPPv418BaseItemZeroWidget" title="BaseItemZeroWidget"><span class="n"><span class="pre">BaseItemZeroWidget</span></span></a><a class="headerlink" href="#_CPPv411ItemCommand" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv411ItemCommand'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><div class="docutils container">
 <em>#include &lt;ItemCommand.h&gt;</em></div>
-<p>Represents a menu item that executes a command when selected. </p>
-<p>The <a class="reference internal" href="#classItemCommand"><span class="std std-ref">ItemCommand</span></a> class inherits from <a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref">MenuItem</span></a> and allows for the execution of a callback function when the item is entered. This is useful for creating interactive menu items in an LCD menu system.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The callback function should match the signature defined by the fptr type. </p>
-</div>
+<p>A menu item that executes a callback function when selected. </p>
+<p>This class extends the <a class="reference internal" href="BaseItemZeroWidget.html#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a> class and provides a menu item that executes a callback function when selected. The callback function is provided as a function pointer during construction.</p>
+<p>As a <a class="reference internal" href="BaseItemZeroWidget.html#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a>, this item responds to selection events in the menu system. When the user confirms the selection, handleCommit is triggered, which executes the provided callback. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand11ItemCommandEPKc4fptr">
-<span id="_CPPv3N11ItemCommand11ItemCommandEPKc4fptr"></span><span id="_CPPv2N11ItemCommand11ItemCommandEPKc4fptr"></span><span id="ItemCommand::ItemCommand__cCP.fptr"></span><span class="target" id="classItemCommand_1ae76b25d0dab025fc4c97e1e891b46653"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemCommand</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="n"><span class="pre">fptr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ItemCommand11ItemCommandEPKc4fptr" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand11ItemCommandEPKc4fptr'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Construct a new <a class="reference internal" href="#classItemCommand"><span class="std std-ref">ItemCommand</span></a> object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> – The text of the item. </p></li>
-<li><p><strong>callback</strong> – A reference to the callback function to be invoked when the item is entered. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand11getCallbackEv">
-<span id="_CPPv3N11ItemCommand11getCallbackEv"></span><span id="_CPPv2N11ItemCommand11getCallbackEv"></span><span id="ItemCommand::getCallback"></span><span class="target" id="classItemCommand_1a78397040e447319539cf27d12f242cff"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">fptr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCallback</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ItemCommand11getCallbackEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand11getCallbackEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Get the callback function for this item.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The function pointer to the callback function. </p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand11setCallBackE4fptr">
-<span id="_CPPv3N11ItemCommand11setCallBackE4fptr"></span><span id="_CPPv2N11ItemCommand11setCallBackE4fptr"></span><span id="ItemCommand::setCallBack__fptr"></span><span class="target" id="classItemCommand_1aaf240d2a9752dff14ffbd0eeca1f127f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setCallBack</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">fptr</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ItemCommand11setCallBackE4fptr" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand11setCallBackE4fptr'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Set the callback function for this item.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – A reference to the new callback function to be invoked when the item is entered. </p>
-</dd>
-</dl>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand11ItemCommandEPKcPFvvE">
+<span id="_CPPv3N11ItemCommand11ItemCommandEPKcPFvvE"></span><span id="_CPPv2N11ItemCommand11ItemCommandEPKcPFvvE"></span><span class="target" id="classItemCommand_1aca8ca1826ba6f62110a42361d728ff14"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemCommand</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ItemCommand11ItemCommandEPKcPFvvE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand11ItemCommandEPKcPFvvE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand7processEP7LcdMenuKh">
-<span id="_CPPv3N11ItemCommand7processEP7LcdMenuKh"></span><span id="_CPPv2N11ItemCommand7processEP7LcdMenuKh"></span><span id="ItemCommand::process__LcdMenuP.unsigned-cC"></span><span class="target" id="classItemCommand_1afd885239486d52eed3ff2a9e91a55225"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N11ItemCommand7processEP7LcdMenuKh" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand7processEP7LcdMenuKh'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Process a command decoded in 1 byte. It can be a printable character or a control command like <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> or <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>. Return value is used to determine operation was successful or ignored. If the parent of item received that handle was ignored it can execute it’s own action on this command. Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element. Behaviour is very similar to Even Bubbling in JavaScript. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>menu</strong> – the owner menu of the item, can be used to retrieve required object, such as <code class="docutils literal notranslate"><a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref"><span class="pre">DisplayInterface</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="MenuScreen.html#classMenuScreen"><span class="std std-ref"><span class="pre">MenuScreen</span></span></a></code></p></li>
-<li><p><strong>command</strong> – the character command, can be a printable character or a control command </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>true if command was successfully handled by item. </p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand14executeCommandEv">
-<span id="_CPPv3N11ItemCommand14executeCommandEv"></span><span id="_CPPv2N11ItemCommand14executeCommandEv"></span><span id="ItemCommand::executeCommand"></span><span class="target" id="classItemCommand_1a8675b45dec3e35389f8168d23ffaec1b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">executeCommand</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ItemCommand14executeCommandEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand14executeCommandEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand12handleCommitEP7LcdMenu">
+<span id="_CPPv3N11ItemCommand12handleCommitEP7LcdMenu"></span><span id="_CPPv2N11ItemCommand12handleCommitEP7LcdMenu"></span><span id="ItemCommand::handleCommit__LcdMenuP"></span><span class="target" id="classItemCommand_1a183ba9b7486aff9dd8c4fc974413887b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleCommit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N11ItemCommand12handleCommitEP7LcdMenu" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand12handleCommitEP7LcdMenu'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N11ItemCommand8callbackE">
-<span id="_CPPv3N11ItemCommand8callbackE"></span><span id="_CPPv2N11ItemCommand8callbackE"></span><span id="ItemCommand::callback__fptr"></span><span class="target" id="classItemCommand_1a3bbc049108308f158251f1975dabc777"></span><span class="n"><span class="pre">fptr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><a class="headerlink" href="#_CPPv4N11ItemCommand8callbackE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand8callbackE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<span id="_CPPv3N11ItemCommand8callbackE"></span><span id="_CPPv2N11ItemCommand8callbackE"></span><span class="target" id="classItemCommand_1a81407c59d9db7e6ea1a487b9e2a60f48"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N11ItemCommand8callbackE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11ItemCommand8callbackE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 </dd></dl>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="MenuItem.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="MenuScreen.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        MenuItem
+        MenuScreen
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ItemInput.html">
-        ItemInput
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="MenuItem.html">
+        MenuItem
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -324,12 +287,10 @@
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
+<li><a :data-current="activeSection === '#_CPPv412ITEM_COMMANDPKcPFvvE'" class="reference internal" href="#_CPPv412ITEM_COMMANDPKcPFvvE"><code class="docutils literal notranslate"><span class="pre">ITEM_COMMAND()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv411ItemCommand'" class="reference internal" href="#_CPPv411ItemCommand"><code class="docutils literal notranslate"><span class="pre">ItemCommand</span></code></a><ul>
-<li><a :data-current="activeSection === '#_CPPv4N11ItemCommand11ItemCommandEPKc4fptr'" class="reference internal" href="#_CPPv4N11ItemCommand11ItemCommandEPKc4fptr"><code class="docutils literal notranslate"><span class="pre">ItemCommand::ItemCommand()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N11ItemCommand11getCallbackEv'" class="reference internal" href="#_CPPv4N11ItemCommand11getCallbackEv"><code class="docutils literal notranslate"><span class="pre">ItemCommand::getCallback()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N11ItemCommand11setCallBackE4fptr'" class="reference internal" href="#_CPPv4N11ItemCommand11setCallBackE4fptr"><code class="docutils literal notranslate"><span class="pre">ItemCommand::setCallBack()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N11ItemCommand7processEP7LcdMenuKh'" class="reference internal" href="#_CPPv4N11ItemCommand7processEP7LcdMenuKh"><code class="docutils literal notranslate"><span class="pre">ItemCommand::process()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N11ItemCommand14executeCommandEv'" class="reference internal" href="#_CPPv4N11ItemCommand14executeCommandEv"><code class="docutils literal notranslate"><span class="pre">ItemCommand::executeCommand()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11ItemCommand11ItemCommandEPKcPFvvE'" class="reference internal" href="#_CPPv4N11ItemCommand11ItemCommandEPKcPFvvE"><code class="docutils literal notranslate"><span class="pre">ItemCommand::ItemCommand()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11ItemCommand12handleCommitEP7LcdMenu'" class="reference internal" href="#_CPPv4N11ItemCommand12handleCommitEP7LcdMenu"><code class="docutils literal notranslate"><span class="pre">ItemCommand::handleCommit()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N11ItemCommand8callbackE'" class="reference internal" href="#_CPPv4N11ItemCommand8callbackE"><code class="docutils literal notranslate"><span class="pre">ItemCommand::callback</span></code></a></li>
 </ul>
 </li>
@@ -354,7 +315,7 @@
 <script src="../../_static/documentation_options.js?v=7f41d439"></script>
 <script src="../../_static/doctools.js?v=9bcbadda"></script>
 <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-<script defer="defer" src="../../_static/theme.js?v=1808ab49"></script>
+<script defer="defer" src="../../_static/theme.js?v=073f68d9"></script>
 <script src="../../_static/design-tabs.js?v=f930bc37"></script>
 </body>
 </html>

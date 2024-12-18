@@ -11,15 +11,15 @@
 <meta content="MenuRenderer | LcdMenu" property="og:title"/>
 <meta content="MenuRenderer | LcdMenu" name="twitter:title"/>
 <link href="../../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
-<link href="../../../_static/theme.css?v=edd7d3d2" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/custom.css" rel="stylesheet" type="text/css"/>
-<link href="../../../_static/awesome-sphinx-design.css?v=a54cf077" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/awesome-sphinx-design.css?v=15e0fffa" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/favicon.png" rel="icon"/>
 <link href="../../../search.html" rel="search" title="Search"/>
 <link href="../../../genindex.html" rel="index" title="Index"/>
-<link href="../input/index.html" rel="next" title="input"/>
-<link href="CharacterDisplayRenderer.html" rel="prev" title="CharacterDisplayRenderer"/>
+<link href="CharacterDisplayRenderer.html" rel="next" title="CharacterDisplayRenderer"/>
+<link href="index.html" rel="prev" title="renderer"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -107,6 +107,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/input-charset.html">Charset input item</a></li>
 </ul>
 </li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../../overview/widgets/index.html">Widget overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/widgets/widget-bool.html">WidgetBool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/widgets/widget-list.html">WidgetList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/widgets/widget-range.html">WidgetRange</a></li>
+</ul>
+</li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../../overview/control/index.html">Controlling the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/control/keyboard.html">Keyboard Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/control/button.html">Button Adapter</a></li>
@@ -121,42 +127,47 @@
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../samples/index.html">Code samples<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleInput.html">SimpleInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ViewShifting.html">ViewShifting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SubMenu.html">SubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleRotary.html">SimpleRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SubMenu.html">SubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/IntFloatValues.html">IntFloatValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/Callbacks.html">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/Widgets.html">Widgets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/List.html">List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ViewShifting.html">ViewShifting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleRotary.html">SimpleRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleInput.html">SimpleInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/Callbacks.html">Callbacks</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../MenuScreen.html">MenuScreen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemFloatRange.html">ItemFloatRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemRangeBase.html">ItemRangeBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemWidget.html">ItemWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemIntRange.html">ItemIntRange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">renderer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemFloatRange.html">ItemFloatRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MenuScreen.html">MenuScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widget/index.html">widget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../uml.html">Class diagram</a></li>
@@ -259,14 +270,15 @@
 </dl>
 </dd></dl>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N12MenuRenderer8drawItemEPKcPKc">
-<span id="_CPPv3N12MenuRenderer8drawItemEPKcPKc"></span><span id="_CPPv2N12MenuRenderer8drawItemEPKcPKc"></span><span id="MenuRenderer::drawItem__cCP.cCP"></span><span class="target" id="classMenuRenderer_1a8b16888758c62117f2cb809643745097"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">drawItem</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N12MenuRenderer8drawItemEPKcPKc" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N12MenuRenderer8drawItemEPKcPKc'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N12MenuRenderer8drawItemEPKcPKcb">
+<span id="_CPPv3N12MenuRenderer8drawItemEPKcPKcb"></span><span id="_CPPv2N12MenuRenderer8drawItemEPKcPKcb"></span><span id="MenuRenderer::drawItem__cCP.cCP.b"></span><span class="target" id="classMenuRenderer_1aad4e0badf280aa1a8f27d3f679b2f5bf"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">drawItem</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">paddWithBlanks</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N12MenuRenderer8drawItemEPKcPKcb" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N12MenuRenderer8drawItemEPKcPKcb'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Draws an item on the display. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> – Text of the item to be drawn. </p></li>
 <li><p><strong>value</strong> – Value of the item to be drawn. </p></li>
+<li><p><strong>paddWithBlanks</strong> – Flag indicating whether to pad the text with spaces. </p></li>
 </ul>
 </dd>
 </dl>
@@ -441,16 +453,16 @@
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="CharacterDisplayRenderer.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="index.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        CharacterDisplayRenderer
+        renderer
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../input/index.html">
-        input
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="CharacterDisplayRenderer.html">
+        CharacterDisplayRenderer
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -463,7 +475,7 @@
 <li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer12MenuRendererEP16DisplayInterface7uint8_t7uint8_t'" class="reference internal" href="#_CPPv4N12MenuRenderer12MenuRendererEP16DisplayInterface7uint8_t7uint8_t"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::MenuRenderer()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer5beginEv'" class="reference internal" href="#_CPPv4N12MenuRenderer5beginEv"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::begin()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer4drawE7uint8_t'" class="reference internal" href="#_CPPv4N12MenuRenderer4drawE7uint8_t"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::draw()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer8drawItemEPKcPKc'" class="reference internal" href="#_CPPv4N12MenuRenderer8drawItemEPKcPKc"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::drawItem()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer8drawItemEPKcPKcb'" class="reference internal" href="#_CPPv4N12MenuRenderer8drawItemEPKcPKcb"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::drawItem()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer12clearBlinkerEv'" class="reference internal" href="#_CPPv4N12MenuRenderer12clearBlinkerEv"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::clearBlinker()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer11drawBlinkerEv'" class="reference internal" href="#_CPPv4N12MenuRenderer11drawBlinkerEv"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::drawBlinker()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N12MenuRenderer10moveCursorE7uint8_t7uint8_t'" class="reference internal" href="#_CPPv4N12MenuRenderer10moveCursorE7uint8_t7uint8_t"><code class="docutils literal notranslate"><span class="pre">MenuRenderer::moveCursor()</span></code></a></li>
@@ -510,7 +522,7 @@
 <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
 <script src="../../../_static/doctools.js?v=9bcbadda"></script>
 <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-<script defer="defer" src="../../../_static/theme.js?v=1808ab49"></script>
+<script defer="defer" src="../../../_static/theme.js?v=073f68d9"></script>
 <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
 </body>
 </html>
