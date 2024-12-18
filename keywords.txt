@@ -6,6 +6,10 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+BaseItemManyWidgets	KEYWORD1
+BaseItemZeroWidget	KEYWORD1
+BaseWidget	KEYWORD1
+BaseWidgetValue	KEYWORD1
 ButtonAdapter	KEYWORD1
 CharacterDisplayInterface	KEYWORD1
 CharacterDisplayRenderer	KEYWORD1
@@ -21,6 +25,7 @@ ItemList	KEYWORD1
 ItemRangeBase	KEYWORD1
 ItemSubMenu	KEYWORD1
 ItemToggle	KEYWORD1
+ItemWidget	KEYWORD1
 KeyboardAdapter	KEYWORD1
 LcdMenu	KEYWORD1
 LiquidCrystalAdapter	KEYWORD1
@@ -30,6 +35,9 @@ MenuRenderer	KEYWORD1
 MenuScreen	KEYWORD1
 SSD1803A_I2CAdapter	KEYWORD1
 SimpleRotaryAdapter	KEYWORD1
+WidgetBool	KEYWORD1
+WidgetList	KEYWORD1
+WidgetRange	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -39,7 +47,6 @@ abortCharEdit	KEYWORD2
 back	KEYWORD2
 backspace	KEYWORD2
 begin	KEYWORD2
-changeScreen	KEYWORD2
 clear	KEYWORD2
 clearBlinker	KEYWORD2
 commitCharEdit	KEYWORD2
@@ -50,8 +57,7 @@ draw	KEYWORD2
 drawBlinker	KEYWORD2
 drawChar	KEYWORD2
 enter	KEYWORD2
-executeCommand	KEYWORD2
-getCallback	KEYWORD2
+getActiveWidget	KEYWORD2
 getCallbackInt	KEYWORD2
 getCallbackStr	KEYWORD2
 getCurrentValue	KEYWORD2
@@ -63,16 +69,21 @@ getTextOff	KEYWORD2
 getTextOn	KEYWORD2
 getValue	KEYWORD2
 getViewSize	KEYWORD2
+handleChange	KEYWORD2
+handleCommit	KEYWORD2
 handleIdle	KEYWORD2
 handleReceived	KEYWORD2
 hasLastChar	KEYWORD2
 hide	KEYWORD2
 increment	KEYWORD2
 initCharEdit	KEYWORD2
+invokeCallback	KEYWORD2
 isOn	KEYWORD2
 left	KEYWORD2
+log	KEYWORD2
+nextValue	KEYWORD2
 observe	KEYWORD2
-printLog	KEYWORD2
+previousValue	KEYWORD2
 process	KEYWORD2
 remove	KEYWORD2
 reset	KEYWORD2
@@ -80,6 +91,7 @@ right	KEYWORD2
 saveLastChar	KEYWORD2
 selectNext	KEYWORD2
 selectPrevious	KEYWORD2
+setActiveWidget	KEYWORD2
 setBacklight	KEYWORD2
 setCurrentValue	KEYWORD2
 setCursor	KEYWORD2
@@ -87,17 +99,22 @@ setIsOn	KEYWORD2
 setItemIndex	KEYWORD2
 setText	KEYWORD2
 setValue	KEYWORD2
+setValues	KEYWORD2
+setValuesImpl	KEYWORD2
 show	KEYWORD2
 showNextChar	KEYWORD2
 showPreviousChar	KEYWORD2
 substring	KEYWORD2
 toggle	KEYWORD2
 typeChar	KEYWORD2
+updateValue	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
+ARDUINO_ARCH_ESP32	LITERAL1
+ARDUINO_ARCH_ESP8266	LITERAL1
 BACK	LITERAL1
 BACKSPACE	LITERAL1
 BS	LITERAL1
@@ -123,18 +140,17 @@ FLAGS_SHORT	LITERAL1
 FLAGS_SPACE	LITERAL1
 FLAGS_UPPERCASE	LITERAL1
 FLAGS_ZEROPAD	LITERAL1
-ITEM_BACK	LITERAL1
 ITEM_BASIC	LITERAL1
-ITEM_COMMAND	LITERAL1
+ITEM_DRAW_BUFFER_SIZE	LITERAL1
 ITEM_FLOAT_RANGE	LITERAL1
 ITEM_INPUT	LITERAL1
 ITEM_INPUT_CHARSET	LITERAL1
 ITEM_INT_RANGE	LITERAL1
 ITEM_STRING_LIST	LITERAL1
-ITEM_SUBMENU	LITERAL1
 ITEM_TOGGLE	LITERAL1
 LEFT	LITERAL1
 LF	LITERAL1
+LOG	LITERAL1
 LONG_PRESS_DURATION	LITERAL1
 MENU_SCREEN	LITERAL1
 PRINTF_DEFAULT_FLOAT_PRECISION	LITERAL1
