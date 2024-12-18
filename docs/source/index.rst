@@ -72,6 +72,7 @@ including LCD displays and OLED displays *(coming soon)*.
 
     overview/getting-started
     overview/items/index
+    overview/widgets/index
     overview/control/index
     overview/rendering/index
 
