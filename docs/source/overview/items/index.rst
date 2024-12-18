@@ -19,4 +19,4 @@ Each menu item can contain zero or more widgets and can be interacted with by th
     input
     input-charset
 
-You can also create your own custom menu items and widgets by extending the base menu item class or any of the existing menu items.
+You can also create your own custom menu items and widgets by extending the base menu item class or any of the existing menu items. See the :doc:`../widgets/index` section for more information about available widgets and their usage.
