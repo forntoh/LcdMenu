@@ -14,6 +14,7 @@ Each menu item can contain zero or more widgets and can be interacted with by th
     basic
     command
     submenu
+    item-widget
     list
     range
     input
