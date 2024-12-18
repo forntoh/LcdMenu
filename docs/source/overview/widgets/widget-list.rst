@@ -1,10 +1,10 @@
 WidgetList
 ==========
 
-The WidgetList widget is a widget that allows the user to select an item from a list of options.
+The WidgetList widget enables users to select an item from a list of options.
 The list of options can be defined by the user and can contain up to 255 items.
 
-Using the WidgetList widget, you can create a menu item that presents a numbers, text, or other settings to the user, allowing them to select one of the items.
+Using the WidgetList widget, you can create menu items that present numbers, text, or other settings as selectable options to users.
 
 The WidgetList accepts any type of data as the list items, as long as it can be converted to a string.
 
