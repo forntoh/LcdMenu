@@ -2,13 +2,9 @@ Range item
 ----------
 
 .. deprecated:: 5.4.0
-
-   Please use :doc:`widget item </overview/items/item-widget>` instead.
-
- .. deprecated:: 5.4.0
  
     This menu item type is deprecated and will be removed in versions after 5.4.0.
-    Please use :doc:`widget item </overview/items/item-widget>` with WidgetList instead.
+    Please use :doc:`widget item </overview/items/item-widget>` with WidgetRange instead.
     
     Migration example:
     
@@ -19,8 +15,8 @@ Range item
         ITEM_FLOAT_RANGE("Dist", 0.0f, 100.0f, 5.0f, callback)
 
         // New approach
-        ITEM_WIDGET("Brightness", callback, WIDGET_INT_RANGE(0, 100, 50))
-        ITEM_WIDGET("Dist", callback, WIDGET_FLOAT_RANGE(0.0f, 100.0f, 5.0f))
+        ITEM_WIDGET("Brightness", callback, WIDGET_RANGE(50, 1, 0, 100, "%d", 0, false))
+        ITEM_WIDGET("Dist", callback, WIDGET_RANGE(5.0f, 0.1f, 0.0f, 100.0f, "%.1f", 0, false))
 
 The range item is a menu item that allows the user to select a value within a specified range.
 It is used to create a menu item that presents a range of values to the user, such as a brightness level or a volume setting.

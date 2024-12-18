@@ -1,7 +1,7 @@
 List menu item
 --------------
 
- .. deprecated:: 5.4.0
+.. deprecated:: 5.4.0
  
     This menu item type is deprecated and will be removed in versions after 5.4.0.
     Please use :doc:`widget item </overview/items/item-widget>` with WidgetList instead.
