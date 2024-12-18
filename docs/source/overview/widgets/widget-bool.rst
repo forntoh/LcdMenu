@@ -24,3 +24,10 @@ In the above example, the WidgetBool widget is created with the following proper
 - The text to display when the value is false is "No".
 - The format to use when displaying the value is "%s sir" (the value will be displayed as "Yes sir" or "No sir").
 - The cursor offset is 5 (the cursor will be 5 characters from the end of the widget ie. on the 's' in "Yes" or on the 'o' in "No").
+
+Widget Interaction
+------------------
+
+The WidgetBool widget can be toggled using the following controls:
+- Press LEFT/RIGHT to toggle between true and false states
+- Press ENTER to confirm the current value and exit or move to the next widget
