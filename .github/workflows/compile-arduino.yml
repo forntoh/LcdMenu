@@ -35,6 +35,7 @@ jobs:
         - examples/List
         - examples/SimpleRotary
         - examples/SSD1803A_I2C
+        - examples/Widgets
 
       SKETCHES_REPORTS_PATH: sketches-reports
 
