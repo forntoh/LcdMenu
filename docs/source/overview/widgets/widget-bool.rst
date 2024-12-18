@@ -18,7 +18,6 @@ The following is an example of how to create a WidgetBool widget:
 .. code-block:: c++
 
     WIDGET_BOOL(false, "Yes", "No", "%s sir", 5)
-
 In the above example, the WidgetBool widget is created with the following properties:
 
 - The initial value is false.

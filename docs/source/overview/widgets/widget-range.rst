@@ -1,7 +1,7 @@
 WidgetRange
 ===========
 
-The WidgetRange widget is a widget that allows the user to select a value within a range of valuesby either
+The WidgetRange widget is a widget that allows the user to select a value within a range of values by either
 incrementing or decrementing the value.
 
 Some use cases for the WidgetRange widget include volume control, brightness control, time selection, temperature control, etc.
