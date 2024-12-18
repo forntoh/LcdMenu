@@ -13,6 +13,8 @@ The WidgetBool widget has the following properties:
 
 The following is an example of how to create a WidgetBool widget:
 
++The WIDGET_BOOL macro provides a convenient way to create a WidgetBool instance. The macro takes the following arguments in order: initial value, text for true state, text for false state, format string, and cursor offset.
+
 .. code-block:: c++
 
     WIDGET_BOOL(false, "Yes", "No", "%s sir", 5)
