@@ -7,7 +7,7 @@
 #endif
 #endif
 
-#define ITEM_DRAW_BUFFER_SIZE 20
+#define ITEM_DRAW_BUFFER_SIZE 25
 
 class LcdMenu;
 
