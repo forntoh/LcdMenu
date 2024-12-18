@@ -1,7 +1,7 @@
 WidgetBool
 ==========
 
-The WidgetBool widget is acts as a toggle switch that can be used to change a boolean value.
+The WidgetBool widget acts as a toggle switch that can be used to change a boolean value.
 
 The WidgetBool widget has the following properties:
 
