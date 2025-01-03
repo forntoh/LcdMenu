@@ -36,7 +36,7 @@ class SSD1803A_I2CAdapter : public CharacterDisplayInterface {
     }
 
     void setCursor(uint8_t col, uint8_t row) override {
-        lcd->locate(col, row);
+        lcd->locate(row, col);
     }
 
     void draw(const char* text) override {
