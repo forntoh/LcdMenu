@@ -247,7 +247,7 @@
 </span><span id="line-15"><span class="linenos">15</span>
 </span><span id="line-16"><span class="linenos">16</span><span class="n">SSD1803A_I2C</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="mh">0x3D</span><span class="p">);</span>
 </span><span id="line-17"><span class="linenos">17</span><span class="n">SSD1803A_I2CAdapter</span><span class="w"> </span><span class="nf">lcdAdapter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd</span><span class="p">);</span>
-</span><span id="line-18"><span class="linenos">18</span><span class="n">CharacterDisplayRenderer</span><span class="w"> </span><span class="nf">renderer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdAdapter</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+</span><span id="line-18"><span class="linenos">18</span><span class="n">CharacterDisplayRenderer</span><span class="w"> </span><span class="nf">renderer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdAdapter</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mh">0xDF</span><span class="p">,</span><span class="w"> </span><span class="mh">0xE1</span><span class="p">);</span>
 </span><span id="line-19"><span class="linenos">19</span><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
 </span><span id="line-20"><span class="linenos">20</span><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Serial</span><span class="p">);</span>
 </span><span id="line-21"><span class="linenos">21</span>
@@ -289,7 +289,7 @@
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, Thomas Forntoh </p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2025, Thomas Forntoh </p>
 </div>
 </div>
 </footer>
