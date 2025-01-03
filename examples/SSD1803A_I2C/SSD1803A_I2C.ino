@@ -15,7 +15,7 @@ MENU_SCREEN(mainScreen, mainItems,
 
 SSD1803A_I2C lcd(0x3D);
 SSD1803A_I2CAdapter lcdAdapter(&lcd);
-CharacterDisplayRenderer renderer(&lcdAdapter, 20, 4);
+CharacterDisplayRenderer renderer(&lcdAdapter, 20, 4, 0xDF, 0xE1);
 LcdMenu menu(renderer);
 KeyboardAdapter keyboard(&menu, &Serial);
 
