@@ -18,7 +18,7 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="LcdMenu.html" rel="next" title="LcdMenu"/>
+<link href="ItemValue.html" rel="next" title="ItemValue"/>
 <link href="../samples/Callbacks.html" rel="prev" title="Callbacks"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -99,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/getting-started.html">Getting started</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../overview/items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-widget.html">Item Widget</a></li>
@@ -131,6 +132,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../samples/ButtonAdapter.html">ButtonAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/Basic.html">Basic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/SubMenu.html">SubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/IntFloatValues.html">IntFloatValues</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/Widgets.html">Widgets</a></li>
@@ -149,6 +151,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="current reference internal expandable" href="#">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
@@ -235,6 +238,7 @@ Here you will find detailed descriptions of all the classes, their methods, and 
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="ItemValue.html">ItemValue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
@@ -268,8 +272,8 @@ Here you will find detailed descriptions of all the classes, their methods, and 
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="LcdMenu.html">
-        LcdMenu
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ItemValue.html">
+        ItemValue
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>

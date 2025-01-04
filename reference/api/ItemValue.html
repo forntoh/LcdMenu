@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>BaseItemZeroWidget | LcdMenu</title>
-<meta content="BaseItemZeroWidget | LcdMenu" property="og:title"/>
-<meta content="BaseItemZeroWidget | LcdMenu" name="twitter:title"/>
+<title>ItemValue | LcdMenu</title>
+<meta content="ItemValue | LcdMenu" property="og:title"/>
+<meta content="ItemValue | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=63e1294f" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="ItemWidget.html" rel="next" title="ItemWidget"/>
-<link href="BaseItemManyWidgets.html" rel="prev" title="BaseItemManyWidgets"/>
+<link href="LcdMenu.html" rel="next" title="LcdMenu"/>
+<link href="index.html" rel="prev" title="API reference"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -151,11 +151,11 @@
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="ItemValue.html">ItemValue</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemRangeBase.html">ItemRangeBase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">BaseItemZeroWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemWidget.html">ItemWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemIntRange.html">ItemIntRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a></li>
@@ -186,7 +186,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/BaseItemZeroWidget.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/ItemValue.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -228,49 +228,41 @@
 </svg>
 </a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">API reference</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">BaseItemZeroWidget</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">ItemValue</span>
 </nav>
 <div id="content" role="main">
-<section id="baseitemzerowidget">
-<h1>BaseItemZeroWidget<a class="headerlink" href="#baseitemzerowidget" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv418BaseItemZeroWidget">
-<span id="_CPPv318BaseItemZeroWidget"></span><span id="_CPPv218BaseItemZeroWidget"></span><span id="BaseItemZeroWidget"></span><span class="target" id="classBaseItemZeroWidget"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BaseItemZeroWidget</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><a class="headerlink" href="#_CPPv418BaseItemZeroWidget" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv418BaseItemZeroWidget'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><div class="docutils container">
-<em>#include &lt;BaseItemZeroWidget.h&gt;</em></div>
-<p>A base class for menu items that either require custom commit handling or no commit handling. </p>
-<p>This class extends the <a class="reference internal" href="MenuItem.html#classMenuItem"><span class="std std-ref">MenuItem</span></a> class and provides a framework for menu items that either need no commit handling or need to handle commit actions in a specific way. It requires derived classes to implement the <code class="docutils literal notranslate"><span class="pre">handleCommit</span></code> method for custom commit handling.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This class is intended to be used as a base class for other menu items. It should not be instantiated directly. </p>
+<section id="itemvalue">
+<h1>ItemValue<a class="headerlink" href="#itemvalue" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0E10ITEM_VALUEP8MenuItemPKcR1TPKc">
+<span id="_CPPv3I0E10ITEM_VALUEPKcR1TPKc"></span><span id="_CPPv2I0E10ITEM_VALUEPKcR1TPKc"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br/><span class="target" id="ItemValue_8h_1a2032da691b4fcb2cc371d9ad3906b0d1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="MenuItem.html#_CPPv48MenuItem" title="MenuItem"><span class="n"><span class="pre">MenuItem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ITEM_VALUE</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <a class="reference internal" href="#_CPPv4I0E10ITEM_VALUEP8MenuItemPKcR1TPKc" title="ITEM_VALUE::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">format</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">"%s"</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0E10ITEM_VALUEP8MenuItemPKcR1TPKc" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4I0E10ITEM_VALUEP8MenuItemPKcR1TPKc'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 </div>
-<p>Subclassed by <a class="reference internal" href="ItemBack.html#classItemBack"><span class="std std-ref">ItemBack</span></a>, <a class="reference internal" href="ItemCommand.html#classItemCommand"><span class="std std-ref">ItemCommand</span></a>, <a class="reference internal" href="ItemSubMenu.html#classItemSubMenu"><span class="std std-ref">ItemSubMenu</span></a>, <a class="reference internal" href="ItemValue.html#classItemValue"><span class="std std-ref">ItemValue&lt; T &gt;</span></a></p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0E9ItemValue">
+<span id="_CPPv3I0E9ItemValue"></span><span id="_CPPv2I0E9ItemValue"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br/><span class="target" id="classItemValue"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemValue</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="BaseItemZeroWidget.html#_CPPv418BaseItemZeroWidget" title="BaseItemZeroWidget"><span class="n"><span class="pre">BaseItemZeroWidget</span></span></a><a class="headerlink" href="#_CPPv4I0E9ItemValue" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4I0E9ItemValue'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ItemValue.h&gt;</em></div>
+<p>A menu item that displays a value. </p>
+<p>This class extends the <a class="reference internal" href="BaseItemZeroWidget.html#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a> class and provides a menu item that displays a value. The value is provided as a reference during construction and is displayed using the provided format string. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N18BaseItemZeroWidgetD0Ev">
-<span id="_CPPv3N18BaseItemZeroWidgetD0Ev"></span><span id="_CPPv2N18BaseItemZeroWidgetD0Ev"></span><span id="BaseItemZeroWidget::~BaseItemZeroWidget"></span><span class="target" id="classBaseItemZeroWidget_1a8558d0cb85635954dfb5a21e7f8c01e3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~BaseItemZeroWidget</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N18BaseItemZeroWidgetD0Ev" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N18BaseItemZeroWidgetD0Ev'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N9ItemValue9ItemValueEPKcR1TPKc">
+<span id="_CPPv3N9ItemValue9ItemValueEPKcR1TPKc"></span><span id="_CPPv2N9ItemValue9ItemValueEPKcR1TPKc"></span><span id="ItemValue::ItemValue__cCP.TR.cCP"></span><span class="target" id="classItemValue_1a7b92e4aa22f7f5f5d2aaeb2bc18f6345"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemValue</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span>, <a class="reference internal" href="#_CPPv4I0E9ItemValue" title="ItemValue::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">format</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ItemValue9ItemValueEPKcR1TPKc" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemValue9ItemValueEPKcR1TPKc'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N18BaseItemZeroWidget18BaseItemZeroWidgetEPKc">
-<span id="_CPPv3N18BaseItemZeroWidget18BaseItemZeroWidgetEPKc"></span><span id="_CPPv2N18BaseItemZeroWidget18BaseItemZeroWidgetEPKc"></span><span id="BaseItemZeroWidget::BaseItemZeroWidget__cCP"></span><span class="target" id="classBaseItemZeroWidget_1aeff507ee970461c395c3d86312c99856"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BaseItemZeroWidget</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">text</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N18BaseItemZeroWidget18BaseItemZeroWidgetEPKc" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N18BaseItemZeroWidget18BaseItemZeroWidgetEPKc'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Construct a new <a class="reference internal" href="#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a> object. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> – The text to display for the menu item. </p>
-</dd>
-</dl>
-</dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N18BaseItemZeroWidget12handleCommitEP7LcdMenu">
-<span id="_CPPv3N18BaseItemZeroWidget12handleCommitEP7LcdMenu"></span><span id="_CPPv2N18BaseItemZeroWidget12handleCommitEP7LcdMenu"></span><span id="BaseItemZeroWidget::handleCommit__LcdMenuP"></span><span class="target" id="classBaseItemZeroWidget_1ad188b0d63d31d7d829ca998739e691ec"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleCommit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N18BaseItemZeroWidget12handleCommitEP7LcdMenu" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N18BaseItemZeroWidget12handleCommitEP7LcdMenu'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N9ItemValue12handleCommitEP7LcdMenu">
+<span id="_CPPv3N9ItemValue12handleCommitEP7LcdMenu"></span><span id="_CPPv2N9ItemValue12handleCommitEP7LcdMenu"></span><span id="ItemValue::handleCommit__LcdMenuP"></span><span class="target" id="classItemValue_1a7d42071b3a19a2de2813fd19a32b63a1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleCommit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N9ItemValue12handleCommitEP7LcdMenu" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemValue12handleCommitEP7LcdMenu'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N18BaseItemZeroWidget4drawEP12MenuRenderer">
-<span id="_CPPv3N18BaseItemZeroWidget4drawEP12MenuRenderer"></span><span id="_CPPv2N18BaseItemZeroWidget4drawEP12MenuRenderer"></span><span id="BaseItemZeroWidget::draw__MenuRendererP"></span><span class="target" id="classBaseItemZeroWidget_1a486c24c707bac96a15be16c6045debc3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="renderer/MenuRenderer.html#_CPPv412MenuRenderer" title="MenuRenderer"><span class="n"><span class="pre">MenuRenderer</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">renderer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N18BaseItemZeroWidget4drawEP12MenuRenderer" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N18BaseItemZeroWidget4drawEP12MenuRenderer'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N9ItemValue4drawEP12MenuRenderer">
+<span id="_CPPv3N9ItemValue4drawEP12MenuRenderer"></span><span id="_CPPv2N9ItemValue4drawEP12MenuRenderer"></span><span id="ItemValue::draw__MenuRendererP"></span><span class="target" id="classItemValue_1a69684d7ddf3ae616daf49fb30859daa4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="renderer/MenuRenderer.html#_CPPv412MenuRenderer" title="MenuRenderer"><span class="n"><span class="pre">MenuRenderer</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">renderer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N9ItemValue4drawEP12MenuRenderer" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemValue4drawEP12MenuRenderer'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd><p>Draw this menu item on specified display on current row. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -278,37 +270,32 @@
 </dd>
 </dl>
 </dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N18BaseItemZeroWidget7processEP7LcdMenuKh">
-<span id="_CPPv3N18BaseItemZeroWidget7processEP7LcdMenuKh"></span><span id="_CPPv2N18BaseItemZeroWidget7processEP7LcdMenuKh"></span><span id="BaseItemZeroWidget::process__LcdMenuP.unsigned-cC"></span><span class="target" id="classBaseItemZeroWidget_1a4b5061e4bc9925028d15abd1b21411fd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N18BaseItemZeroWidget7processEP7LcdMenuKh" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N18BaseItemZeroWidget7processEP7LcdMenuKh'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Process a command decoded in 1 byte. It can be a printable character or a control command like <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> or <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>. Return value is used to determine operation was successful or ignored. If the parent of item received that handle was ignored it can execute it’s own action on this command. Thus, the item always has priority in processing; if it is ignored, it is delegated to the parent element. Behaviour is very similar to Even Bubbling in JavaScript. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>menu</strong> – the owner menu of the item, can be used to retrieve required object, such as <code class="docutils literal notranslate"><a class="reference internal" href="display/DisplayInterface.html#classDisplayInterface"><span class="std std-ref"><span class="pre">DisplayInterface</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="MenuScreen.html#classMenuScreen"><span class="std std-ref"><span class="pre">MenuScreen</span></span></a></code></p></li>
-<li><p><strong>command</strong> – the character command, can be a printable character or a control command </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>true if command was successfully handled by item. </p>
-</dd>
-</dl>
-</dd></dl>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9ItemValue5valueE">
+<span id="_CPPv3N9ItemValue5valueE"></span><span id="_CPPv2N9ItemValue5valueE"></span><span id="ItemValue::value__TR"></span><span class="target" id="classItemValue_1a5a7e2462288f2e9dddf6208f2dcc7147"></span><a class="reference internal" href="#_CPPv4I0E9ItemValue" title="ItemValue::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N9ItemValue5valueE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemValue5valueE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9ItemValue6formatE">
+<span id="_CPPv3N9ItemValue6formatE"></span><span id="_CPPv2N9ItemValue6formatE"></span><span id="ItemValue::format__cCP"></span><span class="target" id="classItemValue_1a4cd3a78ddaab7ee21da33f57d6d3543c"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">format</span></span></span><a class="headerlink" href="#_CPPv4N9ItemValue6formatE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N9ItemValue6formatE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 </div>
 </dd></dl>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="BaseItemManyWidgets.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="index.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        BaseItemManyWidgets
+        API reference
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ItemWidget.html">
-        ItemWidget
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="LcdMenu.html">
+        LcdMenu
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -317,12 +304,13 @@
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#_CPPv418BaseItemZeroWidget'" class="reference internal" href="#_CPPv418BaseItemZeroWidget"><code class="docutils literal notranslate"><span class="pre">BaseItemZeroWidget</span></code></a><ul>
-<li><a :data-current="activeSection === '#_CPPv4N18BaseItemZeroWidgetD0Ev'" class="reference internal" href="#_CPPv4N18BaseItemZeroWidgetD0Ev"><code class="docutils literal notranslate"><span class="pre">BaseItemZeroWidget::~BaseItemZeroWidget()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N18BaseItemZeroWidget18BaseItemZeroWidgetEPKc'" class="reference internal" href="#_CPPv4N18BaseItemZeroWidget18BaseItemZeroWidgetEPKc"><code class="docutils literal notranslate"><span class="pre">BaseItemZeroWidget::BaseItemZeroWidget()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N18BaseItemZeroWidget12handleCommitEP7LcdMenu'" class="reference internal" href="#_CPPv4N18BaseItemZeroWidget12handleCommitEP7LcdMenu"><code class="docutils literal notranslate"><span class="pre">BaseItemZeroWidget::handleCommit()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N18BaseItemZeroWidget4drawEP12MenuRenderer'" class="reference internal" href="#_CPPv4N18BaseItemZeroWidget4drawEP12MenuRenderer"><code class="docutils literal notranslate"><span class="pre">BaseItemZeroWidget::draw()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N18BaseItemZeroWidget7processEP7LcdMenuKh'" class="reference internal" href="#_CPPv4N18BaseItemZeroWidget7processEP7LcdMenuKh"><code class="docutils literal notranslate"><span class="pre">BaseItemZeroWidget::process()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4I0E10ITEM_VALUEP8MenuItemPKcR1TPKc'" class="reference internal" href="#_CPPv4I0E10ITEM_VALUEP8MenuItemPKcR1TPKc"><code class="docutils literal notranslate"><span class="pre">ITEM_VALUE()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4I0E9ItemValue'" class="reference internal" href="#_CPPv4I0E9ItemValue"><code class="docutils literal notranslate"><span class="pre">ItemValue</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N9ItemValue9ItemValueEPKcR1TPKc'" class="reference internal" href="#_CPPv4N9ItemValue9ItemValueEPKcR1TPKc"><code class="docutils literal notranslate"><span class="pre">ItemValue::ItemValue()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N9ItemValue12handleCommitEP7LcdMenu'" class="reference internal" href="#_CPPv4N9ItemValue12handleCommitEP7LcdMenu"><code class="docutils literal notranslate"><span class="pre">ItemValue::handleCommit()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N9ItemValue4drawEP12MenuRenderer'" class="reference internal" href="#_CPPv4N9ItemValue4drawEP12MenuRenderer"><code class="docutils literal notranslate"><span class="pre">ItemValue::draw()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N9ItemValue5valueE'" class="reference internal" href="#_CPPv4N9ItemValue5valueE"><code class="docutils literal notranslate"><span class="pre">ItemValue::value</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N9ItemValue6formatE'" class="reference internal" href="#_CPPv4N9ItemValue6formatE"><code class="docutils literal notranslate"><span class="pre">ItemValue::format</span></code></a></li>
 </ul>
 </li>
 </ul>
