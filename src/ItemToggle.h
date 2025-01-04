@@ -99,11 +99,11 @@ class ItemToggle : public MenuItem {
     };
     void toggle(MenuRenderer* renderer) {
         enabled = !enabled;
+        LOG(F("ItemToggle::toggle"), enabled ? textOn : textOff);
+        draw(renderer);
         if (callback != NULL) {
             callback(enabled);
         }
-        LOG(F("ItemToggle::toggle"), enabled ? textOn : textOff);
-        draw(renderer);
     }
 };
 
