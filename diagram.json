@@ -96,6 +96,14 @@
       "left": -200.2,
       "rotate": 90,
       "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": 552,
+      "left": -75.3,
+      "rotate": 270,
+      "attrs": {}
     }
   ],
   "connections": [
@@ -186,7 +194,10 @@
     ["bb1:4b.j", "uno:8", "green", ["v28.8", "h-432", "v-192.4"]],
     ["uno:9", "bb1:5b.j", "green", ["h19.2", "v192.8", "h0", "v9.6", "h441.6"]],
     ["bb1:6b.j", "uno:10", "green", ["v28.8", "h-451.2", "v-211.9"]],
-    ["uno:11", "bb1:7b.j", "green", ["h19.2", "v221.4", "h460.8"]]
+    ["uno:11", "bb1:7b.j", "green", ["h19.2", "v221.4", "h460.8"]],
+    ["dht1:GND", "bb2:bn.23", "black", ["h105.6", "v-164.8"]],
+    ["dht1:VCC", "bb2:bp.23", "red", ["h115.2", "v-192"]],
+    ["dht1:SDA", "uno:12", "gold", ["h67.2", "v-0.1"]]
   ],
   "dependencies": {}
 }
