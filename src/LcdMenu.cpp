@@ -64,3 +64,10 @@ void LcdMenu::refresh() {
     }
     screen->draw(&renderer);
 }
+
+void LcdMenu::poll(uint16_t pollInterval) {
+    if (!enabled || pollInterval == 0) {
+        return;
+    }
+    screen->poll(&renderer, pollInterval < 100 ? 100 : pollInterval);
+}
