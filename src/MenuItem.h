@@ -27,6 +27,8 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
+#define ITEM_DRAW_BUFFER_SIZE 25
+
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <utils/utils.h>
@@ -49,6 +51,7 @@ class MenuItem {
 
   protected:
     const char* text = NULL;
+    bool polling = false;
 
   public:
     MenuItem(const char* text) : text(text) {}

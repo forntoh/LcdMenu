@@ -12,6 +12,7 @@ Each menu item can contain zero or more widgets and can be interacted with by th
     :caption: Here are some of the built-in menu items:
 
     basic
+    item-value
     command
     submenu
     item-widget

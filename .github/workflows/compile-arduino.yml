@@ -24,6 +24,8 @@ jobs:
         - name: SimpleRotary
         - name: LiquidCrystal I2C
         - name: SSD1803A_I2C
+        - name: DHT sensor library
+        - name: Adafruit Unified Sensor
 
       UNIVERSAL_SKETCH_PATHS: |
         - examples/Basic

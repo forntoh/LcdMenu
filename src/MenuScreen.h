@@ -124,6 +124,12 @@ class MenuScreen {
      * @brief Reset the screen to initial state.
      */
     void reset(MenuRenderer* renderer);
+    /**
+     * @brief Poll the screen for changes.
+     * @param renderer The renderer to use for drawing.
+     * @param pollInterval The interval to poll the screen.
+     */
+    void poll(MenuRenderer* renderer, uint16_t pollInterval);
 };
 
 #define MENU_SCREEN(screen, items, ...)         \
