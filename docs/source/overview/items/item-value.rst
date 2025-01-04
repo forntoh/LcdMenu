@@ -31,8 +31,21 @@ You can also call the :cpp:func:`LcdMenu::update` function to manually update th
 
 The :cpp:func:`LcdMenu::poll` has an optional parameter that specifies the maximum polling interval in milliseconds. The default interval is 1000 milliseconds.
 
+Performance considerations
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When choosing an appropriate polling interval, consider the following factors:
+
+- **Performance impact of frequent updates**: Polling the menu too frequently can lead to increased CPU usage, which may affect the performance of other tasks running on the microcontroller. Choose a polling interval that balances the need for timely updates with the overall performance of your application.
+
+- **Memory usage considerations**: Frequent polling can increase memory usage, especially if the menu system maintains a history of updates or if there are many menu items to update. Ensure that your microcontroller has sufficient memory to handle the chosen polling interval without running into memory constraints.
+
+- **Power consumption implications for battery-powered devices**: For battery-powered devices, frequent polling can lead to higher power consumption, reducing battery life. Choose a polling interval that minimizes power consumption while still providing acceptable update rates for your application.
+
+By carefully selecting the polling interval, you can optimize the performance, memory usage, and power consumption of your application.
+
 Example
-+++++++
+~~~~~~~
 
 Let's take a look at an example of a value display item that shows the current temperature on an LCD screen:
 
