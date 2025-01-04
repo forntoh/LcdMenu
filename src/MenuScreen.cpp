@@ -122,7 +122,7 @@ void MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
     if (millis() - lastPollTime >= pollInterval) {
         for (uint8_t i = 0; i < renderer->maxRows; i++) {
             MenuItem* item = this->items[view + i];
-            if (item == nullptr || !item->polling) break;
+            if (item == nullptr || !item->polling) continue;
             syncIndicators(i, renderer);
             item->draw(renderer);
         }
