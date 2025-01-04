@@ -120,4 +120,13 @@ class LcdMenu {
      * @brief Refresh the current screen.
      */
     void refresh();
+    /**
+     * @brief Poll the menu for changes.
+     *        This method is used to update the menu at regular intervals,
+     *        for example, when a value bound to an item changes, the menu needs to be updated.
+     *        This method should be called in the `loop` function of the sketch.
+     *
+     * @param pollInterval the interval to update the menu in milliseconds (default is 1000)
+     */
+    void poll(uint16_t pollInterval = 1000);
 };
