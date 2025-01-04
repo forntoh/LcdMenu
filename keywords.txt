@@ -25,6 +25,7 @@ ItemList	KEYWORD1
 ItemRangeBase	KEYWORD1
 ItemSubMenu	KEYWORD1
 ItemToggle	KEYWORD1
+ItemValue	KEYWORD1
 ItemWidget	KEYWORD1
 KeyboardAdapter	KEYWORD1
 LcdMenu	KEYWORD1
@@ -51,6 +52,7 @@ clear	KEYWORD2
 clearBlinker	KEYWORD2
 commitCharEdit	KEYWORD2
 concat	KEYWORD2
+const	KEYWORD2
 createChar	KEYWORD2
 decrement	KEYWORD2
 draw	KEYWORD2
