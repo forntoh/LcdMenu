@@ -27,7 +27,7 @@ Polling the menu
 
 The menu system relies on regular polling to update the screen and show the updated values of the variables bound to the menu items.
 The :cpp:func:`LcdMenu::poll` function should be called in the main loop of the sketch to update the menu and handle user input.
-You can also call the :cpp:func:`LcdMenu::update` function to manually update the menu without waiting for the next poll cycle.
+You can also call the :cpp:func:`LcdMenu::refresh` function to manually update the menu without waiting for the next poll cycle.
 
 The :cpp:func:`LcdMenu::poll` has an optional parameter that specifies the maximum polling interval in milliseconds. The default interval is 1000 milliseconds.
 
