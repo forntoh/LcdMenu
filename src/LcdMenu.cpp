@@ -19,6 +19,7 @@ bool LcdMenu::process(const unsigned char c) {
     if (!enabled) {
         return false;
     }
+    renderer.restartTimer();
     return screen->process(this, c);
 };
 
