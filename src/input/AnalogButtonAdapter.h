@@ -16,7 +16,7 @@
  * the button is pressed.
  *
  * @param menu Pointer to the LcdMenu object that this adapter will interact with.
- * @param pinNumer is analog pin where is connected the array of buttons
+ * @param pinNumber is analog pin where is connected the array of buttons
  */
 
 //Center value for each button
