@@ -21,9 +21,9 @@
 
 class ButtonConfig {
   public:
-	static constexpr int16_t DEFAULT_VALUE = 1000;
-	static constexpr unsigned long PRESS_TIME_MS = 300;
-	static constexpr uint16_t DEFAULT_MARGIN = 20;
+    static constexpr int16_t DEFAULT_VALUE = 1000;
+    static constexpr unsigned long PRESS_TIME_MS = 300;
+    static constexpr uint16_t DEFAULT_MARGIN = 20;
 };
 
 class AnalogButtonAdapter : public InputInterface {
@@ -33,35 +33,35 @@ class AnalogButtonAdapter : public InputInterface {
     uint16_t margin;
     byte command;
     unsigned long lastPressTime = 0;  // Last time the button was pressed
-    
+
   public:
     AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, uint16_t margin, byte command)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(margin), command(command){
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(margin), command(command) {
     }
     AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, byte command)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(ButtonConfig::DEFAULT_MARGIN), command(command){
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(ButtonConfig::DEFAULT_MARGIN), command(command) {
     }
 
     void observe() override {
-	// Read analog value from pin
-        int16_t analogValue = analogRead(pinNumber);	//Read value from pin
-        
+        // Read analog value from pin
+        int16_t analogValue = analogRead(pinNumber);  // Read value from pin
+
         // Ignore readings above default value (no button pressed)
-    	if (analogValue >= ButtonConfig::DEFAULT_VALUE) {
-        	return;
-     	}
-     	
+        if (analogValue >= ButtonConfig::DEFAULT_VALUE) {
+            return;
+        }
+
         // Apply debouncing
         unsigned long currentTime = millis();
-        if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS){
-        	return;
+        if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS) {
+            return;
         }
-        
+
         // Process button press
         lastPressTime = currentTime;
-        
-        if (analogValue < (triggerValue+margin) && analogValue > (triggerValue-margin)){
-        	menu->process(command);
+
+        if (analogValue < (triggerValue + margin) && analogValue > (triggerValue - margin)) {
+            menu->process(command);
         }
     }
 };
