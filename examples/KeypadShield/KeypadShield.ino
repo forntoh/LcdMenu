@@ -18,7 +18,7 @@ static const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
 // Initialize the main menu items
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
-    ITEM_BASIC("List demo"),
+    ITEM_BASIC("Keypad demo"),
     ITEM_WIDGET(
         "Color",
         [](const char* color) { Serial.println(color); },
@@ -34,7 +34,12 @@ MENU_SCREEN(mainScreen, mainItems,
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 CharacterDisplayRenderer renderer(new LiquidCrystalAdapter(&lcd, LCD_COLS, LCD_ROWS), LCD_COLS, LCD_ROWS);
 LcdMenu menu(renderer);
-AnalogButtonAdapter Abutton(&menu, A0);
+
+AnalogButtonAdapter ButtonBackSpace(&menu, A0, 20, BACKSPACE);
+AnalogButtonAdapter ButtonUp(&menu, A0, 100, 20, UP);
+AnalogButtonAdapter ButtonDown(&menu, A0, 250, 20, DOWN);
+AnalogButtonAdapter ButtonBack(&menu, A0, 400, 20, BACK);
+AnalogButtonAdapter ButtonEnter(&menu, A0, 640, 20, ENTER);
 
 void setup() {
   Serial.begin(9600);
@@ -43,5 +48,9 @@ void setup() {
 }
 
 void loop() {
-  Abutton.observe();
+  ButtonBackSpace.observe();
+  ButtonUp.observe();
+  ButtonDown.observe();
+  ButtonBack.observe();
+  ButtonEnter.observe();
 }
