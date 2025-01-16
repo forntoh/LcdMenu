@@ -6,11 +6,13 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+AnalogButtonAdapter	KEYWORD1
 BaseItemManyWidgets	KEYWORD1
 BaseItemZeroWidget	KEYWORD1
 BaseWidget	KEYWORD1
 BaseWidgetValue	KEYWORD1
 ButtonAdapter	KEYWORD1
+ButtonConfig	KEYWORD1
 CharacterDisplayInterface	KEYWORD1
 CharacterDisplayRenderer	KEYWORD1
 DisplayInterface	KEYWORD1
@@ -45,6 +47,7 @@ WidgetRange	KEYWORD1
 #######################################
 
 abortCharEdit	KEYWORD2
+analogValue	KEYWORD2
 back	KEYWORD2
 backspace	KEYWORD2
 begin	KEYWORD2
