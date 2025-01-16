@@ -26,51 +26,49 @@
  */
 
 class ButtonConfig {
-public:
-  static constexpr int16_t MAX_VALUE = 1023; // (0-1023 for 10-bit ADC)
-  static constexpr unsigned long PRESS_TIME_MS = 300;
-  static constexpr uint16_t DEFAULT_MARGIN = 20;
+  public:
+    static constexpr int16_t MAX_VALUE = 1023;  // (0-1023 for 10-bit ADC)
+    static constexpr unsigned long PRESS_TIME_MS = 300;
+    static constexpr uint16_t DEFAULT_MARGIN = 20;
 };
 
 class AnalogButtonAdapter : public InputInterface {
-private:
-  uint8_t pinNumber;
-  uint16_t triggerValue;
-  uint16_t margin;
-  byte command;
-  unsigned long lastPressTime = 0; // Last time the button was pressed
+  private:
+    uint8_t pinNumber;
+    uint16_t triggerValue;
+    uint16_t margin;
+    byte command;
+    unsigned long lastPressTime = 0;  // Last time the button was pressed
 
-public:
-  AnalogButtonAdapter(LcdMenu *menu, uint8_t pinNumber, uint16_t triggerValue,
-                      uint16_t margin, byte command)
-      : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-        margin(margin), command(command) {}
-  AnalogButtonAdapter(LcdMenu *menu, uint8_t pinNumber, uint16_t triggerValue,
-                      byte command)
-      : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-        margin(ButtonConfig::DEFAULT_MARGIN), command(command) {}
+  public:
+    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, uint16_t margin, byte command)
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
+          margin(margin), command(command) {}
+    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, byte command)
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
+          margin(ButtonConfig::DEFAULT_MARGIN), command(command) {}
 
-  void observe() override {
-    // Read analog value from pin
-    int16_t analogValue = analogRead(pinNumber); // Read value from pin
+    void observe() override {
+        // Read analog value from pin
+        int16_t analogValue = analogRead(pinNumber);  // Read value from pin
 
-    // Ignore readings above the maximum possible value (no button pressed)
-    if (analogValue >= ButtonConfig::MAX_VALUE) {
-      return;
+        // Ignore readings above the maximum possible value (no button pressed)
+        if (analogValue >= ButtonConfig::MAX_VALUE) {
+            return;
+        }
+
+        // Apply debouncing
+        unsigned long currentTime = millis();
+        if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS) {
+            return;
+        }
+
+        // Process button press
+        lastPressTime = currentTime;
+
+        if (analogValue <= (triggerValue + margin) &&
+            analogValue >= (triggerValue - margin)) {
+            menu->process(command);
+        }
     }
-
-    // Apply debouncing
-    unsigned long currentTime = millis();
-    if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS) {
-      return;
-    }
-
-    // Process button press
-    lastPressTime = currentTime;
-
-    if (analogValue <= (triggerValue + margin) &&
-        analogValue >= (triggerValue - margin)) {
-      menu->process(command);
-    }
-  }
 };
