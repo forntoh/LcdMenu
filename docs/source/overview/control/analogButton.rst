@@ -13,13 +13,26 @@ To use the analog button adapter, you need to include the necessary header:
 
 Next, you need to create a AnalogButtonAdapter object and pass the analog Pin, value of valid press, otional margin (default: 20) and the menu object:
 
-.. code-block:: cpp
-        
-        AnalogButtonAdapter ButtonBackSpace(&menu, A0, 20, 20, BACKSPACE);
-        AnalogButtonAdapter ButtonUp(&menu, A0, 100, 20, UP);
-        AnalogButtonAdapter ButtonDown(&menu, A0, 250, 20, DOWN);
-        AnalogButtonAdapter ButtonBack(&menu, A0, 400, 20, BACK);
-        AnalogButtonAdapter ButtonEnter(&menu, A0, 640, 20, ENTER);
+.. tab-set::
+    .. tab-item:: With default margin
+
+         .. code-block:: cpp
+
+            AnalogButtonAdapter ButtonBackSpace(&menu, A0, 20, BACKSPACE);
+            AnalogButtonAdapter ButtonUp(&menu, A0, 100, UP);
+            AnalogButtonAdapter ButtonDown(&menu, A0, 250, DOWN);
+            AnalogButtonAdapter ButtonBack(&menu, A0, 400, BACK);
+            AnalogButtonAdapter ButtonEnter(&menu, A0, 640, ENTER);
+
+    .. tab-item:: With custom margin
+    
+         .. code-block:: cpp
+
+            AnalogButtonAdapter ButtonBackSpace(&menu, A0, 20, 50, BACKSPACE);
+            AnalogButtonAdapter ButtonUp(&menu, A0, 100, 50, UP);
+            AnalogButtonAdapter ButtonDown(&menu, A0, 250, 50, DOWN);
+            AnalogButtonAdapter ButtonBack(&menu, A0, 400, 50, BACK);
+            AnalogButtonAdapter ButtonEnter(&menu, A0, 640, 50, ENTER);
 
 
 Finally, you need to observe the AnalogButtonAdapter object in the loop function:
