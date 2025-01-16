@@ -46,8 +46,8 @@ class AnalogButtonAdapter : public InputInterface {
         // Read analog value from pin
         int16_t analogValue = analogRead(pinNumber);  // Read value from pin
 
-        // Ignore readings above default value (no button pressed)
-        if (analogValue >= ButtonConfig::DEFAULT_VALUE) {
+        // Ignore readings above the maximum possible value (no button pressed)
+        if (analogValue >= ButtonConfig::MAX_VALUE) {
             return;
         }
 
