@@ -22,7 +22,7 @@ To use the analog button adapter, you need to include the necessary header:
     #include <input/AnalogButtonAdapter.h>
 
 
-Next, you need to create a AnalogButtonAdapter object and pass the analog Pin, value of valid press, otional margin (default: 20) and the menu object:
+Next, you need to create a AnalogButtonAdapter object and pass the analog Pin, value of valid press, optional margin (default: 20) and the menu object:
 
 .. tab-set::
     .. tab-item:: With default margin
