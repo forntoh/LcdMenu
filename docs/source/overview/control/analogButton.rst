@@ -3,7 +3,7 @@ Analog Button Adapter
 
 The button adapter is a simple input adapter that maps physical buttons connected to analog pins to menu controls.
 
-.. image:: images/Keypad_shield.png
+.. image:: images/Keypad_shield.jpeg
      :width: 400px
      :alt: Keypad shield
      
