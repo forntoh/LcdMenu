@@ -18,7 +18,7 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="../rendering/index.html" rel="next" title="Rendering the menu"/>
+<link href="analogButton.html" rel="next" title="Analog Button Adapter"/>
 <link href="button.html" rel="prev" title="Button Adapter"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="keyboard.html">Keyboard Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="button.html">Button Adapter</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Rotary Encoder Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analogButton.html">Analog Button Adapter</a></li>
 </ul>
 </li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
@@ -139,6 +140,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/List.html">List</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ViewShifting.html">ViewShifting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeypadShield.html">KeypadShield</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
@@ -278,8 +280,8 @@ a dedicated button. See this <a class="reference internal" href="../../reference
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../rendering/index.html">
-        Rendering the menu
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="analogButton.html">
+        Analog Button Adapter
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>

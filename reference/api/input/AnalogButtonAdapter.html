@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>BaseWidgetValue | LcdMenu</title>
-<meta content="BaseWidgetValue | LcdMenu" property="og:title"/>
-<meta content="BaseWidgetValue | LcdMenu" name="twitter:title"/>
+<title>AnalogButtonAdapter | LcdMenu</title>
+<meta content="AnalogButtonAdapter | LcdMenu" property="og:title"/>
+<meta content="AnalogButtonAdapter | LcdMenu" name="twitter:title"/>
 <link href="../../../_static/pygments.css?v=2c5fd357" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../../_static/favicon.png" rel="icon"/>
 <link href="../../../search.html" rel="search" title="Search"/>
 <link href="../../../genindex.html" rel="index" title="Index"/>
-<link href="../input/index.html" rel="next" title="input"/>
-<link href="WidgetBool.html" rel="prev" title="WidgetBool"/>
+<link href="SimpleRotaryAdapter.html" rel="next" title="SimpleRotaryAdapter"/>
+<link href="ButtonAdapter.html" rel="prev" title="ButtonAdapter"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -172,8 +172,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../renderer/index.html">renderer</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">widget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widget/index.html">widget</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">input</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../uml.html">Class diagram</a></li>
@@ -188,7 +188,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/widget/BaseWidgetValue.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/input/AnalogButtonAdapter.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -230,124 +230,109 @@
 </svg>
 </a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../index.html">API reference</a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">widget</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">BaseWidgetValue</span>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">input</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">AnalogButtonAdapter</span>
 </nav>
 <div id="content" role="main">
-<section id="basewidgetvalue">
-<h1>BaseWidgetValue<a class="headerlink" href="#basewidgetvalue" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<section id="analogbuttonadapter">
+<h1>AnalogButtonAdapter<a class="headerlink" href="#analogbuttonadapter" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4I0E15BaseWidgetValue">
-<span id="_CPPv3I0E15BaseWidgetValue"></span><span id="_CPPv2I0E15BaseWidgetValue"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br/><span class="target" id="classBaseWidgetValue"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BaseWidgetValue</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="BaseWidget.html#_CPPv410BaseWidget" title="BaseWidget"><span class="n"><span class="pre">BaseWidget</span></span></a><a class="headerlink" href="#_CPPv4I0E15BaseWidgetValue" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4I0E15BaseWidgetValue'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><div class="docutils container">
-<em>#include &lt;BaseWidgetValue.h&gt;</em></div>
-<p>Base class for widget holding some value. </p>
-<p><div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="BaseWidget.html#classBaseWidget"><span class="std std-ref">BaseWidget</span></a></p>
+<dt class="sig sig-object cpp" id="_CPPv412ButtonConfig">
+<span id="_CPPv312ButtonConfig"></span><span id="_CPPv212ButtonConfig"></span><span id="ButtonConfig"></span><span class="target" id="classButtonConfig"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ButtonConfig</span></span></span><a class="headerlink" href="#_CPPv412ButtonConfig" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv412ButtonConfig'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N12ButtonConfig9MAX_VALUEE">
+<span id="_CPPv3N12ButtonConfig9MAX_VALUEE"></span><span id="_CPPv2N12ButtonConfig9MAX_VALUEE"></span><span id="ButtonConfig::MAX_VALUE__int16_t"></span><span class="target" id="classButtonConfig_1aa041e4c7547552484f5a95b56b17e03d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">int16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MAX_VALUE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1023</span></span><a class="headerlink" href="#_CPPv4N12ButtonConfig9MAX_VALUEE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N12ButtonConfig9MAX_VALUEE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N12ButtonConfig13PRESS_TIME_MSE">
+<span id="_CPPv3N12ButtonConfig13PRESS_TIME_MSE"></span><span id="_CPPv2N12ButtonConfig13PRESS_TIME_MSE"></span><span id="ButtonConfig::PRESS_TIME_MS__unsigned-l"></span><span class="target" id="classButtonConfig_1a79dbbc8ceb50a9969c6de3d112c07045"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PRESS_TIME_MS</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">300</span></span><a class="headerlink" href="#_CPPv4N12ButtonConfig13PRESS_TIME_MSE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N12ButtonConfig13PRESS_TIME_MSE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N12ButtonConfig14DEFAULT_MARGINE">
+<span id="_CPPv3N12ButtonConfig14DEFAULT_MARGINE"></span><span id="_CPPv2N12ButtonConfig14DEFAULT_MARGINE"></span><span id="ButtonConfig::DEFAULT_MARGIN__uint16_t"></span><span class="target" id="classButtonConfig_1ab9150f18d67ba86e9fd22e370e098c04"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DEFAULT_MARGIN</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">20</span></span><a class="headerlink" href="#_CPPv4N12ButtonConfig14DEFAULT_MARGINE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N12ButtonConfig14DEFAULT_MARGINE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 </div>
-</p>
+</dd></dl>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv419AnalogButtonAdapter">
+<span id="_CPPv319AnalogButtonAdapter"></span><span id="_CPPv219AnalogButtonAdapter"></span><span id="AnalogButtonAdapter"></span><span class="target" id="classAnalogButtonAdapter"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AnalogButtonAdapter</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="InputInterface.html#_CPPv414InputInterface" title="InputInterface"><span class="n"><span class="pre">InputInterface</span></span></a><a class="headerlink" href="#_CPPv419AnalogButtonAdapter" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv419AnalogButtonAdapter'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><div class="docutils container">
+<em>#include &lt;AnalogButtonAdapter.h&gt;</em></div>
+<p>Adapter class to handle analog button array as input for an LCD menu. </p>
+<p>Wiring example <a class="reference external" href="https://www.instructables.com/How-to-Multiple-Buttons-on-1-Analog-Pin-Arduino-Tu/">https://www.instructables.com/How-to-Multiple-Buttons-on-1-Analog-Pin-Arduino-Tu/</a></p>
+<p>This class implements the <a class="reference internal" href="InputInterface.html#classInputInterface"><span class="std std-ref">InputInterface</span></a> to provide button input handling for an LCD menu. It observes analog button presses and processes commands accordingly. Made for LCD 1602 LCD Keypad Shield</p>
+<p>It initializes the button and observes its state to trigger menu commands when the button is pressed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>T</strong> – The type of value this widget holds </p>
+<dt class="field-odd">Param menu<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pointer to the <a class="reference internal" href="../LcdMenu.html#classLcdMenu"><span class="std std-ref">LcdMenu</span></a> object that this adapter will interact with. </p>
+</dd>
+<dt class="field-even">Param pinNumber<span class="colon">:</span></dt>
+<dd class="field-even"><p>is analog pin where is connected the array of buttons </p>
+</dd>
+<dt class="field-odd">Param triggerValue<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Value of input pin, when button press is registered </p>
+</dd>
+<dt class="field-even">Param margin<span class="colon">:</span></dt>
+<dd class="field-even"><p>How much input value can change to be still valid button press </p>
+</dd>
+<dt class="field-odd">Param command<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The command byte that will be sent to the menu when the button is pressed. </p>
 </dd>
 </dl>
-<p>Subclassed by <a class="reference internal" href="WidgetList.html#classWidgetList"><span class="std std-ref">WidgetList&lt; T &gt;</span></a>, <a class="reference internal" href="WidgetRange.html#classWidgetRange"><span class="std std-ref">WidgetRange&lt; T &gt;</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE">
-<span id="_CPPv3N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE"></span><span id="_CPPv2N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE"></span><span class="target" id="classBaseWidgetValue_1a65ca4b78c2ec2d9839b6b3e785878f10"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BaseWidgetValue</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">format</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cursorOffset</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte">
+<span id="_CPPv3N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte"></span><span id="_CPPv2N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte"></span><span id="AnalogButtonAdapter::AnalogButtonAdapter__LcdMenuP.uint8_t.uint16_t.uint16_t.byte"></span><span class="target" id="classAnalogButtonAdapter_1a6a4e87bfa553d396597e363df1a49895"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AnalogButtonAdapter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pinNumber</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">triggerValue</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">margin</span></span>, <span class="n"><span class="pre">byte</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK15BaseWidgetValue8getValueEv">
-<span id="_CPPv3NK15BaseWidgetValue8getValueEv"></span><span id="_CPPv2NK15BaseWidgetValue8getValueEv"></span><span id="BaseWidgetValue::getValueC"></span><span class="target" id="classBaseWidgetValue_1a2c01e4b0f3b9585406f02c688bc964e9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">getValue</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15BaseWidgetValue8getValueEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK15BaseWidgetValue8getValueEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Retrieve current value. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte">
+<span id="_CPPv3N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte"></span><span id="_CPPv2N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte"></span><span id="AnalogButtonAdapter::AnalogButtonAdapter__LcdMenuP.uint8_t.uint16_t.byte"></span><span class="target" id="classAnalogButtonAdapter_1a54441dd88fb5990345c87bc457bc2678"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AnalogButtonAdapter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pinNumber</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">triggerValue</span></span>, <span class="n"><span class="pre">byte</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue8setValueERK1T">
-<span id="_CPPv3N15BaseWidgetValue8setValueERK1T"></span><span id="_CPPv2N15BaseWidgetValue8setValueERK1T"></span><span id="BaseWidgetValue::setValue__TCR"></span><span class="target" id="classBaseWidgetValue_1a31c95350e32772250dd5389c2589db13"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setValue</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">newValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue8setValueERK1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue8setValueERK1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Sets the value. </p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You need to call <code class="docutils literal notranslate"><a class="reference internal" href="../LcdMenu.html#classLcdMenu_1a356d4a6e14fdbe51d53d8e86b7217077"><span class="std std-ref"><span class="pre">LcdMenu::refresh</span></span></a></code> after this method to see the changes. </p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>newValue</strong> – The value to set. </p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValueD0Ev">
-<span id="_CPPv3N15BaseWidgetValueD0Ev"></span><span id="_CPPv2N15BaseWidgetValueD0Ev"></span><span id="BaseWidgetValue::~BaseWidgetValue"></span><span class="target" id="classBaseWidgetValue_1a801b6096d80e7ae45147f1e3192ff870"></span><span class="sig-name descname"><span class="n"><span class="pre">~BaseWidgetValue</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N15BaseWidgetValueD0Ev" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValueD0Ev'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter7observeEv">
+<span id="_CPPv3N19AnalogButtonAdapter7observeEv"></span><span id="_CPPv2N19AnalogButtonAdapter7observeEv"></span><span id="AnalogButtonAdapter::observe"></span><span class="target" id="classAnalogButtonAdapter_1ae6a69b78e0e23b1c4583f8e3f0459c89"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">observe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter7observeEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter7observeEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t">
-<span id="_CPPv3N15BaseWidgetValue4drawEPcK7uint8_t"></span><span id="_CPPv2N15BaseWidgetValue4drawEPcK7uint8_t"></span><span id="BaseWidgetValue::draw__cP.uint8_tC"></span><span class="target" id="classBaseWidgetValue_1a28affbece66ba658f3e650db7cd11353"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">start</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Draw the widget into specified buffer. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>buffer</strong> – the buffer where widget will be drawn </p></li>
-<li><p><strong>start</strong> – the index where to start drawing in the buffer </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue7processEP7LcdMenuh">
-<span id="_CPPv3N15BaseWidgetValue7processEP7LcdMenuh"></span><span id="_CPPv2N15BaseWidgetValue7processEP7LcdMenuh"></span><span id="BaseWidgetValue::process__LcdMenuP.unsigned-c"></span><span class="target" id="classBaseWidgetValue_1a2fc5e8afdc44fdeda0a121240faad095"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><p>Process a command for this widget. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>menu</strong> – Pointer to the menu instance </p></li>
-<li><p><strong>command</strong> – The command to process </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>true if the command was handled, false otherwise </p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue12handleChangeEv">
-<span id="_CPPv3N15BaseWidgetValue12handleChangeEv"></span><span id="_CPPv2N15BaseWidgetValue12handleChangeEv"></span><span id="BaseWidgetValue::handleChange"></span><span class="target" id="classBaseWidgetValue_1a6978016d5423499a85ae53798e05f7af"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handleChange</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue12handleChangeEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue12handleChangeEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd></dd></dl>
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue5valueE">
-<span id="_CPPv3N15BaseWidgetValue5valueE"></span><span id="_CPPv2N15BaseWidgetValue5valueE"></span><span id="BaseWidgetValue::value__T"></span><span class="target" id="classBaseWidgetValue_1a9ac3c719e1cfbc5146a34a03a762a0a5"></span><a class="reference internal" href="#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue5valueE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue5valueE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter9pinNumberE">
+<span id="_CPPv3N19AnalogButtonAdapter9pinNumberE"></span><span id="_CPPv2N19AnalogButtonAdapter9pinNumberE"></span><span id="AnalogButtonAdapter::pinNumber__uint8_t"></span><span class="target" id="classAnalogButtonAdapter_1a3ca75f51e07e3c68a5c019f7cb22cd42"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pinNumber</span></span></span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter9pinNumberE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter9pinNumberE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue6formatE">
-<span id="_CPPv3N15BaseWidgetValue6formatE"></span><span id="_CPPv2N15BaseWidgetValue6formatE"></span><span id="BaseWidgetValue::format__cCP"></span><span class="target" id="classBaseWidgetValue_1a46c33418ca7f074bd6d2f3e7d4e7bc67"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">format</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue6formatE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue6formatE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter12triggerValueE">
+<span id="_CPPv3N19AnalogButtonAdapter12triggerValueE"></span><span id="_CPPv2N19AnalogButtonAdapter12triggerValueE"></span><span id="AnalogButtonAdapter::triggerValue__uint16_t"></span><span class="target" id="classAnalogButtonAdapter_1abbb09a1208269957f3e925d8399c1bb2"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">triggerValue</span></span></span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter12triggerValueE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter12triggerValueE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N15BaseWidgetValue8callbackE">
-<span id="_CPPv3N15BaseWidgetValue8callbackE"></span><span id="_CPPv2N15BaseWidgetValue8callbackE"></span><span class="target" id="classBaseWidgetValue_1ad72402495909b208659b7434f1ac01b1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><a class="headerlink" href="#_CPPv4N15BaseWidgetValue8callbackE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N15BaseWidgetValue8callbackE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter6marginE">
+<span id="_CPPv3N19AnalogButtonAdapter6marginE"></span><span id="_CPPv2N19AnalogButtonAdapter6marginE"></span><span id="AnalogButtonAdapter::margin__uint16_t"></span><span class="target" id="classAnalogButtonAdapter_1ae1083b7ef996476bf05d9211d4541c4e"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">margin</span></span></span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter6marginE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter6marginE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter7commandE">
+<span id="_CPPv3N19AnalogButtonAdapter7commandE"></span><span id="_CPPv2N19AnalogButtonAdapter7commandE"></span><span id="AnalogButtonAdapter::command__byte"></span><span class="target" id="classAnalogButtonAdapter_1a6a3b25f231997ac70f1c8cf0eb5de5bb"></span><span class="n"><span class="pre">byte</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">command</span></span></span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter7commandE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter7commandE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19AnalogButtonAdapter13lastPressTimeE">
+<span id="_CPPv3N19AnalogButtonAdapter13lastPressTimeE"></span><span id="_CPPv2N19AnalogButtonAdapter13lastPressTimeE"></span><span id="AnalogButtonAdapter::lastPressTime__unsigned-l"></span><span class="target" id="classAnalogButtonAdapter_1a2fbf8d244010a858cd038ae32ffcc5fa"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastPressTime</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N19AnalogButtonAdapter13lastPressTimeE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N19AnalogButtonAdapter13lastPressTimeE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 </dd></dl>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="WidgetBool.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ButtonAdapter.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        WidgetBool
+        ButtonAdapter
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../input/index.html">
-        input
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="SimpleRotaryAdapter.html">
+        SimpleRotaryAdapter
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -356,17 +341,21 @@
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#_CPPv4I0E15BaseWidgetValue'" class="reference internal" href="#_CPPv4I0E15BaseWidgetValue"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue</span></code></a><ul>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::BaseWidgetValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4NK15BaseWidgetValue8getValueEv'" class="reference internal" href="#_CPPv4NK15BaseWidgetValue8getValueEv"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::getValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue8setValueERK1T'" class="reference internal" href="#_CPPv4N15BaseWidgetValue8setValueERK1T"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::setValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValueD0Ev'" class="reference internal" href="#_CPPv4N15BaseWidgetValueD0Ev"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::~BaseWidgetValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t'" class="reference internal" href="#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::draw()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh'" class="reference internal" href="#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::process()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue12handleChangeEv'" class="reference internal" href="#_CPPv4N15BaseWidgetValue12handleChangeEv"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::handleChange()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue5valueE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue5valueE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::value</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue6formatE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue6formatE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::format</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue8callbackE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue8callbackE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::callback</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv412ButtonConfig'" class="reference internal" href="#_CPPv412ButtonConfig"><code class="docutils literal notranslate"><span class="pre">ButtonConfig</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N12ButtonConfig9MAX_VALUEE'" class="reference internal" href="#_CPPv4N12ButtonConfig9MAX_VALUEE"><code class="docutils literal notranslate"><span class="pre">ButtonConfig::MAX_VALUE</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N12ButtonConfig13PRESS_TIME_MSE'" class="reference internal" href="#_CPPv4N12ButtonConfig13PRESS_TIME_MSE"><code class="docutils literal notranslate"><span class="pre">ButtonConfig::PRESS_TIME_MS</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N12ButtonConfig14DEFAULT_MARGINE'" class="reference internal" href="#_CPPv4N12ButtonConfig14DEFAULT_MARGINE"><code class="docutils literal notranslate"><span class="pre">ButtonConfig::DEFAULT_MARGIN</span></code></a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#_CPPv419AnalogButtonAdapter'" class="reference internal" href="#_CPPv419AnalogButtonAdapter"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::AnalogButtonAdapter()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::AnalogButtonAdapter()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter7observeEv'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter7observeEv"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::observe()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter9pinNumberE'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter9pinNumberE"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::pinNumber</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter12triggerValueE'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter12triggerValueE"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::triggerValue</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter6marginE'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter6marginE"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::margin</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter7commandE'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter7commandE"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::command</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N19AnalogButtonAdapter13lastPressTimeE'" class="reference internal" href="#_CPPv4N19AnalogButtonAdapter13lastPressTimeE"><code class="docutils literal notranslate"><span class="pre">AnalogButtonAdapter::lastPressTime</span></code></a></li>
 </ul>
 </li>
 </ul>

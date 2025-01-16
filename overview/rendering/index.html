@@ -19,7 +19,7 @@
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
 <link href="character-display.html" rel="next" title="Character display renderer"/>
-<link href="../control/rotary-encoder.html" rel="prev" title="Rotary Encoder Adapter"/>
+<link href="../control/analogButton.html" rel="prev" title="Analog Button Adapter"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../control/keyboard.html">Keyboard Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../control/button.html">Button Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../control/rotary-encoder.html">Rotary Encoder Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/analogButton.html">Analog Button Adapter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="current reference internal expandable" href="#">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
@@ -139,6 +140,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/List.html">List</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ViewShifting.html">ViewShifting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeypadShield.html">KeypadShield</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
@@ -261,11 +263,11 @@ For example, you could create a renderer for a TFT display, a touchscreen, or ev
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../control/rotary-encoder.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../control/analogButton.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Rotary Encoder Adapter
+        Analog Button Adapter
       </a>
 </div>
 <div class="ml-auto">

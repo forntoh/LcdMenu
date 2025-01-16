@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Keyboard Adapter | LcdMenu</title>
-<meta content="Keyboard Adapter | LcdMenu" property="og:title"/>
-<meta content="Keyboard Adapter | LcdMenu" name="twitter:title"/>
+<title>Analog Button Adapter | LcdMenu</title>
+<meta content="Analog Button Adapter | LcdMenu" property="og:title"/>
+<meta content="Analog Button Adapter | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=2c5fd357" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="button.html" rel="next" title="Button Adapter"/>
-<link href="index.html" rel="prev" title="Controlling the menu"/>
+<link href="../rendering/index.html" rel="next" title="Rendering the menu"/>
+<link href="rotary-encoder.html" rel="prev" title="Rotary Encoder Adapter"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -116,10 +116,10 @@
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Controlling the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Keyboard Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keyboard.html">Keyboard Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="button.html">Button Adapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rotary-encoder.html">Rotary Encoder Adapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analogButton.html">Analog Button Adapter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Analog Button Adapter</a></li>
 </ul>
 </li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
@@ -188,7 +188,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/control/keyboard.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/control/analogButton.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -230,57 +230,71 @@
 </svg>
 </a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Controlling the menu</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Keyboard Adapter</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Analog Button Adapter</span>
 </nav>
 <div id="content" role="main">
-<section id="keyboard-adapter">
-<h1>Keyboard Adapter<a class="headerlink" href="#keyboard-adapter" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The keyboard adapter is an input adapter that maps keyboard inputs to menu controls through the serial port.</p>
-<p>The keyboard adapter allows you to interact with the menu system using your computer keyboard.
-This can be useful for debugging or testing the menu system without having to connect physical buttons or rotary encoders.</p>
-<p>The keyboard adapter maps the following keys to menu controls:</p>
-<ul class="simple">
-<li><p><strong>UP/DOWN/LEFT/RIGHT</strong>: Arrow keys.</p></li>
-<li><p><strong>ENTER</strong>: <kbd class="kbd docutils literal notranslate">Enter</kbd> or <kbd class="kbd docutils literal notranslate">return</kbd></p></li>
-<li><p><strong>BACK</strong>: <kbd class="kbd docutils literal notranslate">esc</kbd></p></li>
-<li><p><strong>BACKSPACE</strong>: <kbd class="kbd docutils literal notranslate">backspace</kbd></p></li>
-<li><p><strong>CLEAR</strong>: <kbd class="kbd docutils literal notranslate">delete</kbd></p></li>
-</ul>
-<p>To use the keyboard adapter, you need to include the necessary headers:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/KeyboardAdapter.h&gt;</span>
+<section id="analog-button-adapter">
+<h1>Analog Button Adapter<a class="headerlink" href="#analog-button-adapter" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>The button adapter is a simple input adapter that maps physical buttons connected to analog pins to menu controls.</p>
+<a class="reference internal image-reference" href="../../_images/Keypad_shield.jpeg"><img alt="Keypad shield" src="../../_images/Keypad_shield.jpeg" style="width: 400px;"/>
+</a>
+<p>Example schemtic that is used in this <a class="reference external" href="https://www.keyestudio.com/products/keyestudio-1602lcd-keypad-shield-for-arduino-lcd-display-atmega2560-for-raspberry-pi-uno-blue-screen-blacklight-module">LCD Keypad Shield</a></p>
+<a class="reference internal image-reference" href="../../_images/analog_buttons_example_schematic.png"><img alt="Example schematic" src="../../_images/analog_buttons_example_schematic.png" style="width: 400px;"/>
+</a>
+<p>To use the analog button adapter, you need to include the necessary header:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/AnalogButtonAdapter.h&gt;</span>
 </span></code></pre></div>
 </div>
-<p>Then you need to create a KeyboardAdapter object and pass the menu object to it:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">);</span>
+<p>Next, you need to create a AnalogButtonAdapter object and pass the analog Pin, value of valid press, optional margin (default: 20) and the menu object:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-0">
+With default margin</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonBackSpace</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">BACKSPACE</span><span class="p">);</span>
+</span><span id="line-2"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonUp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">);</span>
+</span><span id="line-3"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonDown</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">);</span>
+</span><span id="line-4"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonBack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="n">BACK</span><span class="p">);</span>
+</span><span id="line-5"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonEnter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w"> </span><span class="n">ENTER</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
-<p>In the setup function, you need to initialize the serial port:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
-</span><span id="line-3"><span class="p">}</span>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-1">
+With custom margin</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonBackSpace</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">BACKSPACE</span><span class="p">);</span>
+</span><span id="line-2"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonUp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">);</span>
+</span><span id="line-3"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonDown</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">);</span>
+</span><span id="line-4"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonBack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">BACK</span><span class="p">);</span>
+</span><span id="line-5"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonEnter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">ENTER</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
-<p>Finally, you need to observe the KeyboardAdapter object in the loop function:</p>
+</div>
+</div>
+<p>Finally, you need to observe the AnalogButtonAdapter object in the loop function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="n">keyboard</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
-</span><span id="line-3"><span class="p">}</span>
+</span><span id="line-2"><span class="w">      </span><span class="n">ButtonBackSpace</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-3"><span class="w">      </span><span class="n">ButtonUp</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-4"><span class="w">      </span><span class="n">ButtonDown</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-5"><span class="w">      </span><span class="n">ButtonBack</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-6"><span class="w">      </span><span class="n">ButtonEnter</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-7"><span class="p">}</span>
 </span></code></pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">KeyboardAdapter</span></code> will take care of translating the keyboard inputs into menu controls, allowing you to navigate through the menu system with ease.</p>
-<p>For more information about the <code class="docutils literal notranslate"><span class="pre">KeyboardAdapter</span></code>, check the <a class="reference internal" href="../../reference/api/input/KeyboardAdapter.html#_CPPv415KeyboardAdapter" title="KeyboardAdapter"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">API</span> <span class="pre">reference</span></code></a>.</p>
+<p>The AnalogButtonAdapter will take care of translating the physical button presses into menu controls, allowing you to navigate through the menu system with ease.</p>
+<p>For more information about the AnalogButtonAdapter, check the <a class="reference internal" href="../../reference/api/input/AnalogButtonAdapter.html#_CPPv419AnalogButtonAdapter" title="AnalogButtonAdapter"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">API</span> <span class="pre">reference</span></code></a>.</p>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="index.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="rotary-encoder.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Controlling the menu
+        Rotary Encoder Adapter
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="button.html">
-        Button Adapter
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../rendering/index.html">
+        Rendering the menu
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
