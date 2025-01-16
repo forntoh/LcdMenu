@@ -3,7 +3,18 @@ Analog Button Adapter
 
 The button adapter is a simple input adapter that maps physical buttons connected to analog pins to menu controls.
 
+.. image:: images/Keypad_shield.png
+     :width: 400px
+     :alt: Keypad shield
+     
+Example schemtic that is used in this `LCD Keypad Shield <https://www.keyestudio.com/products/keyestudio-1602lcd-keypad-shield-for-arduino-lcd-display-atmega2560-for-raspberry-pi-uno-blue-screen-blacklight-module>`_
 
+.. image:: images/analog_buttons_example_schematic.png
+     :width: 400px
+     :alt: Example schematic
+     
+
+     
 To use the analog button adapter, you need to include the necessary header:
 
 .. code-block:: cpp
