@@ -28,7 +28,7 @@ class ButtonConfig {
 
 class AnalogButtonAdapter : public InputInterface {
   private:
-    uint16_t pinNumber;
+    uint8_t pinNumber;
     uint16_t triggerValue;
     uint16_t margin;
     byte command;
