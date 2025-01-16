@@ -21,7 +21,7 @@
 
 class ButtonConfig {
   public:
-    static constexpr int16_t DEFAULT_VALUE = 1000;
+    static constexpr int16_t MAX_VALUE = 1023; // (0-1023 for 10-bit ADC)
     static constexpr unsigned long PRESS_TIME_MS = 300;
     static constexpr uint16_t DEFAULT_MARGIN = 20;
 };
