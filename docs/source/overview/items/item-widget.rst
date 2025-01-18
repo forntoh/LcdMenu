@@ -29,7 +29,7 @@ The following are examples of how to create ItemWidget widgets:
 
     ITEM_WIDGET(
         "Auto",
-        [](const char* option, bool isAuto) { Serial.println(option); Serial.println(isAuto); },
+        [](const uint8_t option, bool isAuto) { Serial.println(option); Serial.println(isAuto); },
         WIDGET_LIST(options, sizeof(options) / sizeof(options[0]), 0, "%s", 0, true),
         WIDGET_BOOL(false, "Yes", "No", ",%s")),
 
@@ -64,7 +64,7 @@ The user is able to select the quantity and tolerance for a particular trade.
 
     ITEM_WIDGET(
         "Freq",
-        [](int hour, int minute, const char* day) { Serial.println(hour); Serial.println(minute); Serial.println(day); },
+        [](int hour, int minute, const uint8_t day) { Serial.println(hour); Serial.println(minute); Serial.println(day); },
         WIDGET_RANGE(0, 1, 0, 23, "%02d", 0, false),
         WIDGET_RANGE(0, 1, 0, 59, ":%02d", 0, false),
         WIDGET_LIST(days, sizeof(days) / sizeof(days[0]), 0, " on %s", 0, true)),
@@ -100,7 +100,7 @@ The selected date will be displayed as **"01/01/2021"**, **"01/02/2021"**, **"01
 
     ITEM_WIDGET(
         "Pin",
-        [](char d1, char d2, char d3, char d4) { Serial.print(d1); Serial.print(d2); Serial.print(d3); Serial.println(d4); },
+        [](const uint8_t d1, const uint8_t d2, const uint8_t d3, const uint8_t d4) { Serial.print(d1); Serial.print(d2); Serial.print(d3); Serial.println(d4); },
         WIDGET_LIST(pinChars, strlen(pinChars), 2, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 6, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 10, "%c", 0, true),
