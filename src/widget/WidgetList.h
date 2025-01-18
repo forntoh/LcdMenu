@@ -8,10 +8,9 @@
  * Manages a value within a specified list, allowing cycling through values.
  */
 template <typename T>
-class WidgetList : public BaseWidgetValue<T> {
+class WidgetList : public BaseWidgetValue<uint8_t> {
   protected:
     const uint8_t size;
-    uint8_t activePosition;
     const bool cycle;
     const T* values;
 
@@ -19,14 +18,13 @@ class WidgetList : public BaseWidgetValue<T> {
     WidgetList(
         const T values[],
         const uint8_t size,
-        const int8_t activePosition,
+        const int8_t value,
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
-        void (*callback)(const T&))
-        : BaseWidgetValue<T>(values[activePosition], format, cursorOffset, callback),
+        void (*callback)(const uint8_t&))
+        : BaseWidgetValue<uint8_t>(value, format, cursorOffset, callback),
           size(size),
-          activePosition(activePosition),
           cycle(cycle),
           values(values) {}
 
@@ -59,28 +57,37 @@ class WidgetList : public BaseWidgetValue<T> {
         return false;
     }
     void updateValue(const __FlashStringHelper* action) {
-        this->value = values[activePosition];
-        BaseWidgetValue<T>::handleChange();
+        BaseWidgetValue<uint8_t>::handleChange();
         LOG(action, this->value);
     }
+    /**
+     * @brief Draw the widget into specified buffer.
+     *
+     * @param buffer the buffer where widget will be drawn
+     * @param start the index where to start drawing in the buffer
+     */
+    uint8_t draw(char* buffer, const uint8_t start) override {
+        if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, values[value]);
+    }
     bool nextValue() {
-        if (activePosition + 1 < size) {
-            activePosition++;
+        if (value + 1 < size) {
+            value++;
             return true;
         }
         if (cycle) {
-            activePosition = 0;
+            value = 0;
             return true;
         }
         return false;
     }
     bool previousValue() {
-        if (activePosition > 0) {
-            activePosition--;
+        if (value > 0) {
+            value--;
             return true;
         }
         if (cycle) {
-            activePosition = size - 1;
+            value = size - 1;
             return true;
         }
         return false;
@@ -93,20 +100,20 @@ class WidgetList : public BaseWidgetValue<T> {
  *
  * @param values The list of values to choose from.
  * @param size The size of the list.
- * @param activePosition The initial active position in the list (default: 0).
+ * @param value The initial active position in the list (default: 0).
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
  * @param cycle Whether to cycle through the list (default: false).
  * @param callback The callback function to call when the value changes (default: nullptr).
  */
 template <typename T>
-inline BaseWidgetValue<T>* WIDGET_LIST(
+inline WidgetList<T>* WIDGET_LIST(
     const T values[],
     const uint8_t size,
-    const uint8_t activePosition = 0,
+    const uint8_t value = 0,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(const T&) = nullptr) {
-    return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
+    void (*callback)(const uint8_t&) = nullptr) {
+    return new WidgetList<T>(values, size, value, format, cursorOffset, cycle, callback);
 }
