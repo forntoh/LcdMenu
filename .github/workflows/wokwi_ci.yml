@@ -1,20 +1,11 @@
 name: Wokwi CI
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "src/**"
-      - "test/**/*.yml"
-      - "examples/**"
-      - ".github/workflows/wokwi_ci.yml"
   pull_request_target:
     paths:
       - "src/**"
       - "test/**/*.yml"
-      - "examples/**"
-      - ".github/workflows/wokwi_ci.yml"
+      - "platformio.ini"
     types: [ready_for_review]
 
 jobs:
