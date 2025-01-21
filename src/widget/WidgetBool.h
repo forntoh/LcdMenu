@@ -41,11 +41,14 @@ class WidgetBool : public BaseWidgetValue<bool> {
      * @return true if command was handled, false otherwise
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
-        if (command == UP || command == DOWN) {
-            value = !value;
-            LOG(F("WidgetToggle::toggle"), value);
-            handleChange();
-            return true;
+        MenuRenderer* renderer = menu->getRenderer();
+        if (renderer->isInEditMode()) {
+            if (command == UP || command == DOWN) {
+                value = !value;
+                LOG(F("WidgetToggle::toggle"), value);
+                handleChange();
+                return true;
+            }
         }
         return false;
     }
