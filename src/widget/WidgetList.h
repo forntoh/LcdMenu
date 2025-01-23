@@ -8,8 +8,8 @@
  * Manages a value within a specified list, allowing cycling through values.
  *
  * NOTE: Despite the fact that the class has template type <T> the base
- * Widget will have type <uint8_t>. It reflects that the value of this widget 
- * is index in the specified list, not value itself. Also be aware that 
+ * Widget will have type <uint8_t>. It reflects that the value of this widget
+ * is index in the specified list, not value itself. Also be aware that
  * the ItemWidget's callback should have correct type <uint8_t>, not <T>.
  */
 template <typename T>
