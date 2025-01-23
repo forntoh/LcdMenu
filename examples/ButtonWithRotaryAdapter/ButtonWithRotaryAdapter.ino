@@ -29,7 +29,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_INPUT_CHARSET("User", (const char*)"ABCDEFGHIJKLMNOPQRSTUVWXYZ", inputCallback),
     ITEM_WIDGET(
         "Color",
-        [](const uint8_t color) { Serial.println(color); },
+        [](const uint8_t color) { Serial.println(colors[color]); },
         WIDGET_LIST(colors, COLORS_COUNT, 0, "%s")),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Placeholder 1"),

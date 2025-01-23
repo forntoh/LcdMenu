@@ -21,7 +21,7 @@ ItemWidget has the following properties:
 ItemWidget can host one or more widgets.
 The widgets can be of different types and can be used to display different types of data.
 
-The following are examples of how to create ItemWidget widgets:
+The following are examples of how to create ItemWidget widgets.
 
 .. code-block:: c++
 
@@ -37,8 +37,10 @@ The following are examples of how to create ItemWidget widgets:
     :width: 400px
     :alt: Example of an item widget with a list and a boolean widget
 
+Note: The callback receives the index of the selected option (0-based), not the actual string value. 
+
 In the above example, the ItemWidget allows the user to select an option from "Buy" or "Sell" and also toggle between "Yes" and "No".
-The user is able to select if the option (Buy or Sell) is carried out automatically or not.
+The user is able to select if the option (Buy or Sell) is carried out automatically or not. 
 
 .. code-block:: c++
 
@@ -73,6 +75,8 @@ The user is able to select the quantity and tolerance for a particular trade.
     :width: 400px
     :alt: Example of an item widget with two range widgets and a list widget
 
+Note: The callback receives the index of the selected option (0-based), not the actual string value. 
+
 In the above example, the ItemWidget allows the user to select a frequency for a particular task.
 The user is able to select the hour, minute, and day of the week for the task.
 The selected frequency will be displayed as **"00:00 on Mon"**, **"00:01 on Tue"**, **"00:02 on Wed"**, etc.
@@ -105,6 +109,8 @@ The selected date will be displayed as **"01/01/2021"**, **"01/02/2021"**, **"01
         WIDGET_LIST(pinChars, strlen(pinChars), 6, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 10, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 14, "%c", 0, true))
+
+Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
 In the above example, the ItemWidget allows the user to select a 4-digit pin.
 The user is able to select each digit of the pin from the list of characters "123456789ABCDEF".
