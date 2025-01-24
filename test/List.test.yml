@@ -28,6 +28,6 @@ steps:
   - simulate: upButton-press
   - wait-serial: "#LOG# WidgetList::nextValue=0"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=2"
+  - wait-serial: "#LOG# WidgetList::nextValue=1"
   - simulate: backButton-press
   - wait-serial: "#LOG# ItemWidget::exitEditMode=Num"
