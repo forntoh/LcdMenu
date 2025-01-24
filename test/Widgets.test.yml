@@ -6,13 +6,13 @@ steps:
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::enterEditMode=Auto"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=Sell"
+  - wait-serial: "#LOG# WidgetList::nextValue=1"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=Buy"
+  - wait-serial: "#LOG# WidgetList::nextValue=0"
   - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=Sell"
+  - wait-serial: "#LOG# WidgetList::previousValue=1"
   - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=Buy"
+  - wait-serial: "#LOG# WidgetList::previousValue=0"
   - simulate: rightButton-press
   - wait-serial: "#LOG# ItemWidget::right=1"
   - simulate: upButton-press
@@ -113,13 +113,13 @@ steps:
   - simulate: rightButton-press
   - wait-serial: "#LOG# ItemWidget::right=2"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=Tue"
+  - wait-serial: "#LOG# WidgetList::nextValue=1"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=Wed"
+  - wait-serial: "#LOG# WidgetList::nextValue=2"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=Thu"
+  - wait-serial: "#LOG# WidgetList::nextValue=3"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=Fri"
+  - wait-serial: "#LOG# WidgetList::nextValue=4"
   - simulate: enterButton-press
   - wait-serial: "3"
   - wait-serial: "5"
@@ -132,35 +132,35 @@ steps:
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::enterEditMode=Pin"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=4"
+  - wait-serial: "#LOG# WidgetList::nextValue=3"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=5"
+  - wait-serial: "#LOG# WidgetList::nextValue=4"
   - simulate: rightButton-press
   - wait-serial: "#LOG# ItemWidget::right=1"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=6"
   - simulate: downButton-press
   - wait-serial: "#LOG# WidgetList::previousValue=5"
   - simulate: downButton-press
   - wait-serial: "#LOG# WidgetList::previousValue=4"
+  - simulate: downButton-press
+  - wait-serial: "#LOG# WidgetList::previousValue=3"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::right=2"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=C"
+  - wait-serial: "#LOG# WidgetList::nextValue=11"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=D"
+  - wait-serial: "#LOG# WidgetList::nextValue=12"
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::right=3"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=1"
+  - wait-serial: "#LOG# WidgetList::nextValue=0"
   - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=2"
+  - wait-serial: "#LOG# WidgetList::nextValue=1"
   - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=1"
+  - wait-serial: "#LOG# WidgetList::previousValue=0"
   - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=F"
+  - wait-serial: "#LOG# WidgetList::previousValue=14"
   - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=E"
+  - wait-serial: "#LOG# WidgetList::previousValue=13"
   - simulate: enterButton-press
   - wait-serial: "54DE"
   - wait-serial: "#LOG# ItemWidget::exitEditMode=Pin"
