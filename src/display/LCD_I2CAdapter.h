@@ -17,7 +17,7 @@
  * drawing text and characters, and managing a display timer.
  *
  * Library Used: https://github.com/blackhack/LCD_I2C/
- * May this Adapter may have issues as it was not written by the original author
+ * This adapter may have issues, as it was not written by the original author
  * 
  * @note This class requires the LCD_I2C library.
  *
