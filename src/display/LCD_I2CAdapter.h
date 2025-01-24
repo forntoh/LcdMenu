@@ -42,6 +42,11 @@ class LCD_I2CAdapter : public CharacterDisplayInterface {
 
     void setBacklight(bool enabled) override {
         lcd->backlight();
+        if (enabled) {
+        lcd->backlight();
+        } else {
+        lcd->noBacklight();
+        }
     }
 
     void setCursor(uint8_t col, uint8_t row) override {
