@@ -21,7 +21,7 @@ ItemWidget has the following properties:
 ItemWidget can host one or more widgets.
 The widgets can be of different types and can be used to display different types of data.
 
-The following are examples of how to create ItemWidget widgets:
+The following are examples of how to create ItemWidget widgets.
 
 .. code-block:: c++
 
@@ -29,7 +29,7 @@ The following are examples of how to create ItemWidget widgets:
 
     ITEM_WIDGET(
         "Auto",
-        [](const char* option, bool isAuto) { Serial.println(option); Serial.println(isAuto); },
+        [](const uint8_t option, bool isAuto) { Serial.println(option); Serial.println(isAuto); },
         WIDGET_LIST(options, sizeof(options) / sizeof(options[0]), 0, "%s", 0, true),
         WIDGET_BOOL(false, "Yes", "No", ",%s")),
 
@@ -37,8 +37,10 @@ The following are examples of how to create ItemWidget widgets:
     :width: 400px
     :alt: Example of an item widget with a list and a boolean widget
 
+Note: The callback receives the index of the selected option (0-based), not the actual string value. 
+
 In the above example, the ItemWidget allows the user to select an option from "Buy" or "Sell" and also toggle between "Yes" and "No".
-The user is able to select if the option (Buy or Sell) is carried out automatically or not.
+The user is able to select if the option (Buy or Sell) is carried out automatically or not. 
 
 .. code-block:: c++
 
@@ -64,7 +66,7 @@ The user is able to select the quantity and tolerance for a particular trade.
 
     ITEM_WIDGET(
         "Freq",
-        [](int hour, int minute, const char* day) { Serial.println(hour); Serial.println(minute); Serial.println(day); },
+        [](int hour, int minute, const uint8_t day) { Serial.println(hour); Serial.println(minute); Serial.println(day); },
         WIDGET_RANGE(0, 1, 0, 23, "%02d", 0, false),
         WIDGET_RANGE(0, 1, 0, 59, ":%02d", 0, false),
         WIDGET_LIST(days, sizeof(days) / sizeof(days[0]), 0, " on %s", 0, true)),
@@ -72,6 +74,8 @@ The user is able to select the quantity and tolerance for a particular trade.
 .. image:: images/item-widget-freq.gif
     :width: 400px
     :alt: Example of an item widget with two range widgets and a list widget
+
+Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
 In the above example, the ItemWidget allows the user to select a frequency for a particular task.
 The user is able to select the hour, minute, and day of the week for the task.
@@ -100,11 +104,13 @@ The selected date will be displayed as **"01/01/2021"**, **"01/02/2021"**, **"01
 
     ITEM_WIDGET(
         "Pin",
-        [](char d1, char d2, char d3, char d4) { Serial.print(d1); Serial.print(d2); Serial.print(d3); Serial.println(d4); },
+        [](const uint8_t d1, const uint8_t d2, const uint8_t d3, const uint8_t d4) { Serial.print(d1); Serial.print(d2); Serial.print(d3); Serial.println(d4); },
         WIDGET_LIST(pinChars, strlen(pinChars), 2, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 6, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 10, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 14, "%c", 0, true))
+
+Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
 In the above example, the ItemWidget allows the user to select a 4-digit pin.
 The user is able to select each digit of the pin from the list of characters "123456789ABCDEF".

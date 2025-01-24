@@ -21,7 +21,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Keypad demo"),
     ITEM_WIDGET(
         "Color",
-        [](const char* color) { Serial.println(color); },
+        [](const uint8_t color) { Serial.println(colors[color]); },
         WIDGET_LIST(colors, COLORS_COUNT, 0, "%s", 0, true)),
     ITEM_WIDGET(
         "Num",
