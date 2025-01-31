@@ -27,6 +27,7 @@ Changes that are cosmetic in nature and do not add anything substantial to the s
 * **Must include** an example project using the new feature.
   * All examples should be saved like `examples/[myexample]/[myexample].ino`
   * **Why? This project contains workflows that run automatically when a pull request is opened, the workflow compiles the project and checks for compatibility issues, you don't need the owner of the repo to run checks.**
+* **DO NOT CREATE A PR FROM THE MASTER BRANCH OF YOUR FORK, ALWAYS USE A SEPARATE BRANCH**
 
 ### **Do you have questions about the source code?**
 
