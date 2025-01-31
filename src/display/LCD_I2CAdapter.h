@@ -18,7 +18,7 @@
  *
  * Library Used: https://github.com/blackhack/LCD_I2C/
  * This adapter may have issues, as it was not written by the original author
- * 
+ *
  * @note This class requires the LCD_I2C library.
  *
  * @param lcd Pointer to a LCD_I2C object that this adapter will interact with.
@@ -42,9 +42,9 @@ class LCD_I2CAdapter : public CharacterDisplayInterface {
 
     void setBacklight(bool enabled) override {
         if (enabled) {
-        lcd->backlight();
+            lcd->backlight();
         } else {
-        lcd->noBacklight();
+            lcd->noBacklight();
         }
     }
 
