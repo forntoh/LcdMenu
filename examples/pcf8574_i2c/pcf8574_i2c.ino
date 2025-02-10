@@ -8,7 +8,7 @@
 // PCF8574T I2C Screen
 //
 //
-#define I2C_ADDR 0x27 // I2C Address for the PCF8574T
+#define I2C_ADDR 0x27  // I2C Address for the PCF8574T
 #define LCD_COLS 16
 #define LCD_ROWS 2
 
