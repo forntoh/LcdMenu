@@ -27,6 +27,7 @@ ItemToggle	KEYWORD1
 ItemValue	KEYWORD1
 ItemWidget	KEYWORD1
 KeyboardAdapter	KEYWORD1
+LCD_I2CAdapter	KEYWORD1
 LcdMenu	KEYWORD1
 LiquidCrystalAdapter	KEYWORD1
 LiquidCrystal_I2CAdapter	KEYWORD1
