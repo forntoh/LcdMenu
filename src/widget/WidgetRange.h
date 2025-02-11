@@ -85,7 +85,7 @@ class WidgetRange : public BaseWidgetValue<T> {
      * @return true if decremented or reset (in case of cycle)
      */
     bool decrement() {
-        T newValue = (this->value - step < minValue) ? (cycle ? maxValue : minValue) : (this->value - step);
+        T newValue = (this->value < minValue + step) ? (cycle ? maxValue : minValue) : (this->value - step);
         if (newValue != this->value) {
             this->value = newValue;
             LOG(F("WidgetRange::decrement"), this->value);
