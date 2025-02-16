@@ -23,12 +23,12 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
     WidgetList(
         const T values[],
         const uint8_t size,
-        const int8_t value,
+        uint8_t& activePosition,
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
-        void (*callback)(const uint8_t&))
-        : BaseWidgetValue<uint8_t>(value, format, cursorOffset, callback),
+        void (*callback)(uint8_t&))
+        : BaseWidgetValue<uint8_t>(activePosition, format, cursorOffset, callback),
           size(size),
           cycle(cycle),
           values(values) {}
@@ -105,7 +105,7 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
  *
  * @param values The list of values to choose from.
  * @param size The size of the list.
- * @param value The initial active position in the list (default: 0).
+ * @param activeIndex The initial active position in the list.
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
  * @param cycle Whether to cycle through the list (default: false).
@@ -115,10 +115,34 @@ template <typename T>
 inline WidgetList<T>* WIDGET_LIST(
     const T values[],
     const uint8_t size,
-    const uint8_t value = 0,
+    uint8_t activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(const uint8_t&) = nullptr) {
-    return new WidgetList<T>(values, size, value, format, cursorOffset, cycle, callback);
+    void (*callback)(uint8_t&) = nullptr) {
+    return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
+}
+
+/**
+ * @brief Function to create a new WidgetList<T> instance.
+ * @tparam T The type of the value.
+ *
+ * @param values The list of values to choose from. (this value is passed by reference, so it can be updated externally)
+ * @param size The size of the list.
+ * @param activePosition The initial active position in the list.
+ * @param format The format of the value (default: "%s").
+ * @param cursorOffset The cursor offset (default: 0).
+ * @param cycle Whether to cycle through the list (default: false).
+ * @param callback The callback function to call when the value changes (default: nullptr).
+ */
+template <typename T>
+inline WidgetList<T>* WIDGET_LIST(
+    const T values[],
+    const uint8_t size,
+    uint8_t& activePosition,
+    const char* format = "%s",
+    const uint8_t cursorOffset = 0,
+    const bool cycle = false,
+    void (*callback)(uint8_t&) = nullptr) {
+    return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }
