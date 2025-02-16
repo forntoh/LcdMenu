@@ -15,16 +15,16 @@ template <typename T>
 class BaseWidgetValue : public BaseWidget {
 
   protected:
-    T value;
+    T& value;
     const char* format = nullptr;
-    void (*callback)(const T&) = nullptr;
+    void (*callback)(T&) = nullptr;
 
   public:
     BaseWidgetValue(
-        const T& value,
+        T& value,
         const char* format,
         const uint8_t cursorOffset = 0,
-        void (*callback)(const T&) = nullptr)
+        void (*callback)(T&) = nullptr)
         : BaseWidget(cursorOffset), value(value), format(format), callback(callback) {}
     /**
      * @brief Retrieve current value.
