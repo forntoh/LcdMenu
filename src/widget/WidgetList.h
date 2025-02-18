@@ -27,7 +27,7 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
-        void (*callback)(uint8_t))
+        void (*callback)(const uint8_t))
         : BaseWidgetValue<uint8_t>(activePosition, format, cursorOffset, callback),
           size(size),
           cycle(cycle),
@@ -119,7 +119,7 @@ inline WidgetList<T>* WIDGET_LIST(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(uint8_t) = nullptr) {
+    void (*callback)(const uint8_t) = nullptr) {
     return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }
 
@@ -127,9 +127,9 @@ inline WidgetList<T>* WIDGET_LIST(
  * @brief Function to create a new WidgetList<T> instance.
  * @tparam T The type of the value.
  *
- * @param values The list of values to choose from. (this value is passed by reference, so it can be updated externally)
+ * @param values The list of values to choose from.
  * @param size The size of the list.
- * @param activePosition The initial active position in the list.
+ * @param activePosition Reference to the active position in the list, which can be updated externally.
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
  * @param cycle Whether to cycle through the list (default: false).
@@ -143,6 +143,6 @@ inline WidgetList<T>* WIDGET_LIST(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(uint8_t) = nullptr) {
+    void (*callback)(const uint8_t) = nullptr) {
     return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }
