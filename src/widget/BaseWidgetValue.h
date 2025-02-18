@@ -17,19 +17,19 @@ class BaseWidgetValue : public BaseWidget {
   protected:
     T& value;
     const char* format = nullptr;
-    void (*callback)(const T) = nullptr;
+    void (*callback)(T) = nullptr;
 
   public:
     BaseWidgetValue(
         T& value,
         const char* format,
         const uint8_t cursorOffset = 0,
-        void (*callback)(const T) = nullptr)
+        void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset), value(value), format(format), callback(callback) {}
     /**
      * @brief Retrieve current value.
      */
-    const T& getValue() const { return value; }
+    T& getValue() const { return value; }
     /**
      * @brief Sets the value.
      *
@@ -70,5 +70,7 @@ class BaseWidgetValue : public BaseWidget {
     }
 
   public:
-    ~BaseWidgetValue() override = default;
+    ~BaseWidgetValue() override {
+        delete &value;
+    }
 };

@@ -119,7 +119,7 @@ inline WidgetList<T>* WIDGET_LIST(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(const uint8_t) = nullptr) {
+    void (*callback)(uint8_t) = nullptr) {
     uint8_t* activePositionPtr = new uint8_t(activePosition);
     return new WidgetList<T>(values, size, *activePositionPtr, format, cursorOffset, cycle, callback);
 }
@@ -144,6 +144,6 @@ inline WidgetList<T>* WIDGET_LIST(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(const uint8_t) = nullptr) {
+    void (*callback)(uint8_t) = nullptr) {
     return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }

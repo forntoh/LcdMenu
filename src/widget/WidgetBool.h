@@ -20,7 +20,7 @@ class WidgetBool : public BaseWidgetValue<bool> {
         const char* textOff,
         const char* format,
         const uint8_t cursorOffset,
-        void (*callback)(const bool))
+        void (*callback)(bool))
         : BaseWidgetValue<bool>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
     const char* getTextOn() const { return this->textOn; }
@@ -70,7 +70,7 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
-    void (*callback)(const bool) = nullptr) {
+    void (*callback)(bool) = nullptr) {
     bool* valuePtr = new bool(value);
     return new WidgetBool(*valuePtr, textOn, textOff, format, cursorOffset, callback);
 }
@@ -91,6 +91,6 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
-    void (*callback)(const bool) = nullptr) {
+    void (*callback)(bool) = nullptr) {
     return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
 }
