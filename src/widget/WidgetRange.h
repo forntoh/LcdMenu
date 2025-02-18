@@ -25,7 +25,7 @@ class WidgetRange : public BaseWidgetValue<T> {
         const char* format,
         const uint8_t cursorOffset = 0,
         const bool cycle = false,
-        void (*callback)(T&) = nullptr)
+        void (*callback)(T) = nullptr)
         : BaseWidgetValue<T>(value, format, cursorOffset, callback),
           step(step),
           minValue(min),
@@ -117,6 +117,6 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
     const char* format,
     uint8_t cursorOffset = 0,
     bool cycle = false,
-    void (*callback)(T&) = nullptr) {
+    void (*callback)(T) = nullptr) {
     return new WidgetRange<T>(value, step, min, max, format, cursorOffset, cycle, callback);
 }

@@ -27,7 +27,7 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
-        void (*callback)(uint8_t&))
+        void (*callback)(uint8_t))
         : BaseWidgetValue<uint8_t>(activePosition, format, cursorOffset, callback),
           size(size),
           cycle(cycle),
@@ -119,7 +119,7 @@ inline WidgetList<T>* WIDGET_LIST(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(uint8_t&) = nullptr) {
+    void (*callback)(uint8_t) = nullptr) {
     return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }
 
@@ -143,6 +143,6 @@ inline WidgetList<T>* WIDGET_LIST(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(uint8_t&) = nullptr) {
+    void (*callback)(uint8_t) = nullptr) {
     return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }
