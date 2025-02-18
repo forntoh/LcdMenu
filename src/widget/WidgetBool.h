@@ -15,7 +15,7 @@ class WidgetBool : public BaseWidgetValue<bool> {
 
   public:
     WidgetBool(
-        bool value,
+        bool& value,
         const char* textOn,
         const char* textOff,
         const char* format,
@@ -71,7 +71,8 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     void (*callback)(const bool) = nullptr) {
-    return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
+    bool* valuePtr = new bool(value);
+    return new WidgetBool(*valuePtr, textOn, textOff, format, cursorOffset, callback);
 }
 
 /**

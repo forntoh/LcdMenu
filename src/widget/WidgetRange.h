@@ -118,5 +118,6 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
     uint8_t cursorOffset = 0,
     bool cycle = false,
     void (*callback)(const T) = nullptr) {
-    return new WidgetRange<T>(value, step, min, max, format, cursorOffset, cycle, callback);
+    T* valuePtr = new T(value);
+    return new WidgetRange<T>(*valuePtr, step, min, max, format, cursorOffset, cycle, callback);
 }

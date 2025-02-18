@@ -17,14 +17,14 @@ class BaseWidgetValue : public BaseWidget {
   protected:
     T& value;
     const char* format = nullptr;
-    void (*callback)(T) = nullptr;
+    void (*callback)(const T) = nullptr;
 
   public:
     BaseWidgetValue(
         T& value,
         const char* format,
         const uint8_t cursorOffset = 0,
-        void (*callback)(T) = nullptr)
+        void (*callback)(const T) = nullptr)
         : BaseWidget(cursorOffset), value(value), format(format), callback(callback) {}
     /**
      * @brief Retrieve current value.

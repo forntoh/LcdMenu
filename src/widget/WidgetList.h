@@ -105,7 +105,7 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
  *
  * @param values The list of values to choose from.
  * @param size The size of the list.
- * @param activeIndex The initial active position in the list.
+ * @param activePosition The initial active position in the list.
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
  * @param cycle Whether to cycle through the list (default: false).
@@ -120,7 +120,8 @@ inline WidgetList<T>* WIDGET_LIST(
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
     void (*callback)(const uint8_t) = nullptr) {
-    return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
+    uint8_t* activePositionPtr = new uint8_t(activePosition);
+    return new WidgetList<T>(values, size, *activePositionPtr, format, cursorOffset, cycle, callback);
 }
 
 /**
