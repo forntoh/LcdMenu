@@ -15,21 +15,38 @@ template <typename T>
 class BaseWidgetValue : public BaseWidget {
 
   protected:
-    T& value;
+    T* valuePtr;
     const char* format = nullptr;
     void (*callback)(T) = nullptr;
 
   public:
     BaseWidgetValue(
-        T& value,
+        T value,
         const char* format,
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
-        : BaseWidget(cursorOffset), value(value), format(format), callback(callback) {}
+        : BaseWidget(cursorOffset),
+          valuePtr(new T(value)),
+          format(format),
+          callback(callback) {}
+
+    BaseWidgetValue(
+        T* ptr,
+        const char* format,
+        const uint8_t cursorOffset = 0,
+        void (*callback)(T) = nullptr)
+        : BaseWidget(cursorOffset),
+          valuePtr(ptr),
+          format(format),
+          callback(callback) {}
+
+    ~BaseWidgetValue() override {
+        delete valuePtr;
+    }
     /**
      * @brief Retrieve current value.
      */
-    T& getValue() const { return value; }
+    T& getValue() const { return *valuePtr; }
     /**
      * @brief Sets the value.
      *
@@ -37,8 +54,8 @@ class BaseWidgetValue : public BaseWidget {
      * @note You need to call `LcdMenu::refresh` after this method to see the changes.
      */
     virtual void setValue(const T& newValue) {
-        if (value != newValue) {
-            value = newValue;
+        if (*valuePtr != newValue) {
+            *valuePtr = newValue;
             handleChange();
         }
     }
@@ -52,7 +69,7 @@ class BaseWidgetValue : public BaseWidget {
      */
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, value);
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, *valuePtr);
     }
 
     /**
@@ -65,12 +82,7 @@ class BaseWidgetValue : public BaseWidget {
 
     void handleChange() {
         if (callback != nullptr) {
-            callback(value);
+            callback(*valuePtr);
         }
-    }
-
-  public:
-    ~BaseWidgetValue() override {
-        delete &value;
     }
 };

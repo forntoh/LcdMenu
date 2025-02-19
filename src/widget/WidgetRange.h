@@ -18,7 +18,7 @@ class WidgetRange : public BaseWidgetValue<T> {
 
   public:
     WidgetRange(
-        T& value,
+        T value,
         const T step,
         const T min,
         const T max,
@@ -70,10 +70,10 @@ class WidgetRange : public BaseWidgetValue<T> {
      * @return true if incremented or reset (in case of cycle)
      */
     bool increment() {
-        T newValue = (this->value + step > maxValue) ? (cycle ? minValue : maxValue) : (this->value + step);
-        if (newValue != this->value) {
-            this->value = newValue;
-            LOG(F("WidgetRange::increment"), this->value);
+        T newValue = (*(this->valuePtr) + step > maxValue) ? (cycle ? minValue : maxValue) : (*(this->valuePtr) + step);
+        if (newValue != *(this->valuePtr)) {
+            *(this->valuePtr) = newValue;
+            LOG(F("WidgetRange::increment"), *(this->valuePtr));
             return true;
         }
         return false;
@@ -85,10 +85,10 @@ class WidgetRange : public BaseWidgetValue<T> {
      * @return true if decremented or reset (in case of cycle)
      */
     bool decrement() {
-        T newValue = (this->value < minValue + step) ? (cycle ? maxValue : minValue) : (this->value - step);
-        if (newValue != this->value) {
-            this->value = newValue;
-            LOG(F("WidgetRange::decrement"), this->value);
+        T newValue = (*(this->valuePtr) < minValue + step) ? (cycle ? maxValue : minValue) : (*(this->valuePtr) - step);
+        if (newValue != *(this->valuePtr)) {
+            *(this->valuePtr) = newValue;
+            LOG(F("WidgetRange::decrement"), *(this->valuePtr));
             return true;
         }
         return false;
@@ -118,6 +118,5 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
     uint8_t cursorOffset = 0,
     bool cycle = false,
     void (*callback)(T) = nullptr) {
-    T* valuePtr = new T(value);
-    return new WidgetRange<T>(*valuePtr, step, min, max, format, cursorOffset, cycle, callback);
+    return new WidgetRange<T>(value, step, min, max, format, cursorOffset, cycle, callback);
 }

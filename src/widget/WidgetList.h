@@ -23,7 +23,20 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
     WidgetList(
         const T values[],
         const uint8_t size,
-        uint8_t& activePosition,
+        uint8_t activePosition,
+        const char* format,
+        const uint8_t cursorOffset,
+        const bool cycle,
+        void (*callback)(const uint8_t))
+        : BaseWidgetValue<uint8_t>(activePosition, format, cursorOffset, callback),
+          size(size),
+          cycle(cycle),
+          values(values) {}
+
+    WidgetList(
+        const T values[],
+        const uint8_t size,
+        uint8_t* activePosition,
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
@@ -63,7 +76,7 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
     }
     void updateValue(const __FlashStringHelper* action) {
         BaseWidgetValue<uint8_t>::handleChange();
-        LOG(action, this->value);
+        LOG(action, *valuePtr);
     }
     /**
      * @brief Draw the widget into specified buffer.
@@ -73,26 +86,26 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
      */
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, values[value]);
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, values[*valuePtr]);
     }
     bool nextValue() {
-        if (value + 1 < size) {
-            value++;
+        if (*valuePtr + 1 < size) {
+            (*valuePtr)++;
             return true;
         }
         if (cycle) {
-            value = 0;
+            *valuePtr = 0;
             return true;
         }
         return false;
     }
     bool previousValue() {
-        if (value > 0) {
-            value--;
+        if (*valuePtr > 0) {
+            (*valuePtr)--;
             return true;
         }
         if (cycle) {
-            value = size - 1;
+            *valuePtr = size - 1;
             return true;
         }
         return false;
@@ -115,13 +128,12 @@ template <typename T>
 inline WidgetList<T>* WIDGET_LIST(
     const T values[],
     const uint8_t size,
-    uint8_t activePosition,
+    const uint8_t activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
     void (*callback)(uint8_t) = nullptr) {
-    uint8_t* activePositionPtr = new uint8_t(activePosition);
-    return new WidgetList<T>(values, size, *activePositionPtr, format, cursorOffset, cycle, callback);
+    return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }
 
 /**
@@ -137,7 +149,7 @@ inline WidgetList<T>* WIDGET_LIST(
  * @param callback The callback function to call when the value changes (default: nullptr).
  */
 template <typename T>
-inline WidgetList<T>* WIDGET_LIST(
+inline WidgetList<T>* WIDGET_LIST_REF(
     const T values[],
     const uint8_t size,
     uint8_t& activePosition,
@@ -145,5 +157,5 @@ inline WidgetList<T>* WIDGET_LIST(
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
     void (*callback)(uint8_t) = nullptr) {
-    return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
+    return new WidgetList<T>(values, size, &activePosition, format, cursorOffset, cycle, callback);
 }

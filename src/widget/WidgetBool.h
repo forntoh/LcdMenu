@@ -15,7 +15,16 @@ class WidgetBool : public BaseWidgetValue<bool> {
 
   public:
     WidgetBool(
-        bool& value,
+        bool value,
+        const char* textOn,
+        const char* textOff,
+        const char* format,
+        const uint8_t cursorOffset,
+        void (*callback)(bool))
+        : BaseWidgetValue<bool>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
+
+    WidgetBool(
+        bool* value,
         const char* textOn,
         const char* textOff,
         const char* format,
@@ -30,7 +39,7 @@ class WidgetBool : public BaseWidgetValue<bool> {
   protected:
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, value ? textOn : textOff);
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, *valuePtr ? textOn : textOff);
     }
     /**
      * @brief Process command.
@@ -44,8 +53,8 @@ class WidgetBool : public BaseWidgetValue<bool> {
         MenuRenderer* renderer = menu->getRenderer();
         if (renderer->isInEditMode()) {
             if (command == UP || command == DOWN) {
-                value = !value;
-                LOG(F("WidgetToggle::toggle"), value);
+                *valuePtr = !*valuePtr;
+                LOG(F("WidgetToggle::toggle"), *valuePtr);
                 handleChange();
                 return true;
             }
@@ -65,14 +74,13 @@ class WidgetBool : public BaseWidgetValue<bool> {
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
 inline BaseWidgetValue<bool>* WIDGET_BOOL(
-    bool value,
+    const bool value,
     const char* textOn = "ON",
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     void (*callback)(bool) = nullptr) {
-    bool* valuePtr = new bool(value);
-    return new WidgetBool(*valuePtr, textOn, textOff, format, cursorOffset, callback);
+    return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
 }
 
 /**
@@ -85,12 +93,12 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
  * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
-inline BaseWidgetValue<bool>* WIDGET_BOOL(
+inline BaseWidgetValue<bool>* WIDGET_BOOL_REF(
     bool& value,
     const char* textOn = "ON",
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     void (*callback)(bool) = nullptr) {
-    return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
+    return new WidgetBool(&value, textOn, textOff, format, cursorOffset, callback);
 }
