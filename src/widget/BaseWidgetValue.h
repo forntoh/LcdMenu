@@ -15,33 +15,47 @@ template <typename T>
 class BaseWidgetValue : public BaseWidget {
 
   protected:
-    T* valuePtr;
-    const char* format = nullptr;
-    void (*callback)(T) = nullptr;
-    bool ownsMemory = false;
+    T* valuePtr;                    ///< Pointer to the value held by the widget
+    const char* format = nullptr;   ///< Format string for displaying the value
+    void (*callback)(T) = nullptr;  ///< Callback function to call when the value changes
+    bool ownsMemory = false;        ///< Flag indicating whether this instance owns the memory for valuePtr
 
   public:
+    /**
+     * @brief Constructor that takes a value and creates a new internal value.
+     * @param value The initial value to set.
+     * @param format The format string for displaying the value.
+     * @param cursorOffset The cursor offset for the widget.
+     * @param callback The callback function to call when the value changes.
+     */
     BaseWidgetValue(
         T value,
         const char* format,
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
-          valuePtr(new T(value)),
+          valuePtr(new T(value)),  ///< Allocate memory for the value
           format(format),
           callback(callback),
-          ownsMemory(true) {}
+          ownsMemory(true) {}  ///< This instance owns the allocated memory
 
+    /**
+     * @brief Constructor that takes a pointer to an external value.
+     * @param ptr Pointer to the external value.
+     * @param format The format string for displaying the value.
+     * @param cursorOffset The cursor offset for the widget.
+     * @param callback The callback function to call when the value changes.
+     */
     BaseWidgetValue(
         T* ptr,
         const char* format,
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
-          valuePtr(ptr),
+          valuePtr(ptr),  ///< Use the external pointer
           format(format),
           callback(callback),
-          ownsMemory(false) {}
+          ownsMemory(false) {}  ///< This instance does not own the memory
 
     ~BaseWidgetValue() override {
         if (ownsMemory) {
