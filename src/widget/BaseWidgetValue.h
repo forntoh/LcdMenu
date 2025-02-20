@@ -18,11 +18,13 @@ class LcdMenu;
 template <typename T>
 class BaseWidgetValue : public BaseWidget {
 
+  private:
+    bool ownsMemory = false;  ///< Flag indicating whether this instance owns the memory for valuePtr
+
   protected:
     T* valuePtr;                    ///< Pointer to the value held by the widget
     const char* format = nullptr;   ///< Format string for displaying the value
     void (*callback)(T) = nullptr;  ///< Callback function to call when the value changes
-    bool ownsMemory = false;        ///< Flag indicating whether this instance owns the memory for valuePtr
 
   public:
     /**
@@ -42,10 +44,10 @@ class BaseWidgetValue : public BaseWidget {
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
+          ownsMemory(true),        ///< This instance owns the allocated memory
           valuePtr(new T(value)),  ///< Allocate memory for the value
           format(format),
-          callback(callback),
-          ownsMemory(true) {}  ///< This instance owns the allocated memory
+          callback(callback) {}
 
     /**
      * @brief Constructor that takes a pointer to an external value.
@@ -64,10 +66,10 @@ class BaseWidgetValue : public BaseWidget {
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
-          valuePtr(ptr),  ///< Use the external pointer
+          ownsMemory(false),  ///< This instance does not own the memory
+          valuePtr(ptr),      ///< Use the external pointer
           format(format),
-          callback(callback),
-          ownsMemory(false) {}  ///< This instance does not own the memory
+          callback(callback) {}
 
     /**
      * @brief Destructor that cleans up allocated memory if owned.
