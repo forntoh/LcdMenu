@@ -18,6 +18,7 @@ class BaseWidgetValue : public BaseWidget {
     T* valuePtr;
     const char* format = nullptr;
     void (*callback)(T) = nullptr;
+    bool ownsMemory = false;
 
   public:
     BaseWidgetValue(
@@ -28,7 +29,8 @@ class BaseWidgetValue : public BaseWidget {
         : BaseWidget(cursorOffset),
           valuePtr(new T(value)),
           format(format),
-          callback(callback) {}
+          callback(callback),
+          ownsMemory(true) {}
 
     BaseWidgetValue(
         T* ptr,
@@ -38,15 +40,18 @@ class BaseWidgetValue : public BaseWidget {
         : BaseWidget(cursorOffset),
           valuePtr(ptr),
           format(format),
-          callback(callback) {}
+          callback(callback),
+          ownsMemory(false) {}
 
     ~BaseWidgetValue() override {
-        delete valuePtr;
+        if (ownsMemory) {
+            delete valuePtr;
+        }
     }
     /**
      * @brief Retrieve current value.
      */
-    T& getValue() const { return *valuePtr; }
+    const T& getValue() const { return *valuePtr; }
     /**
      * @brief Sets the value.
      *
