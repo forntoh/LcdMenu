@@ -14,6 +14,15 @@ class WidgetBool : public BaseWidgetValue<bool> {
     const char* textOff;
 
   public:
+    /**
+     * @brief Constructor that takes a value and creates a new internal value.
+     * @param value The initial value to set.
+     * @param textOn The display text when value is true.
+     * @param textOff The display text when value is false.
+     * @param format The format string for displaying the value.
+     * @param cursorOffset The cursor offset for the widget.
+     * @param callback The callback function to call when the value changes.
+     */
     WidgetBool(
         bool value,
         const char* textOn,
@@ -23,6 +32,15 @@ class WidgetBool : public BaseWidgetValue<bool> {
         void (*callback)(bool))
         : BaseWidgetValue<bool>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
+    /**
+     * @brief Constructor that takes a pointer to an external value.
+     * @param value The initial value to set.
+     * @param textOn The display text when value is true.
+     * @param textOff The display text when value is false.
+     * @param format The format string for displaying the value.
+     * @param cursorOffset The cursor offset for the widget.
+     * @param callback The callback function to call when the value changes.
+     */
     WidgetBool(
         bool* value,
         const char* textOn,
