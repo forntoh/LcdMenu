@@ -37,7 +37,6 @@ jobs:
         - examples/List
         - examples/SimpleRotary
         - examples/SSD1803A_I2C
-        - examples/Widgets
 
       SKETCHES_REPORTS_PATH: sketches-reports
 
@@ -72,6 +71,7 @@ jobs:
               - name: FreeRTOS
             sketch-paths: |
               - examples/RTOS
+              - examples/Widgets
           # ESP32 boards
           - board:
               type: esp32
@@ -82,6 +82,7 @@ jobs:
             libraries:
             sketch-paths: |
               - examples/RTOS
+              - examples/Widgets
           # ESP8266 boards
           - board:
               type: esp8266
@@ -90,7 +91,8 @@ jobs:
               - name: esp8266:esp8266
                 source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
             libraries:
-            sketch-paths:
+            sketch-paths: |
+              - examples/Widgets
           # STM32 boards
           - board:
               type: stm32
