@@ -59,14 +59,10 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
         if (renderer->isInEditMode()) {
             switch (command) {
                 case UP:
-                    if (nextValue()) {
-                        updateValue(F("WidgetList::nextValue"));
-                    }
+                    nextValue();
                     return true;
                 case DOWN:
-                    if (previousValue()) {
-                        updateValue(F("WidgetList::previousValue"));
-                    }
+                    previousValue();
                     return true;
                 default:
                     return false;
@@ -74,10 +70,7 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
         }
         return false;
     }
-    void updateValue(const __FlashStringHelper* action) {
-        BaseWidgetValue<uint8_t>::handleChange();
-        LOG(action, *valuePtr);
-    }
+
     /**
      * @brief Draw the widget into specified buffer.
      *
@@ -88,27 +81,29 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
         if (start >= ITEM_DRAW_BUFFER_SIZE || valuePtr == nullptr) return 0;
         return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, values[*valuePtr]);
     }
-    bool nextValue() {
-        if (*valuePtr + 1 < size) {
-            (*valuePtr)++;
-            return true;
+
+    void nextValue() {
+        if (getValue() + 1 < size) {
+            setValue(getValue() + 1);
+            LOG(F("WidgetList::nextValue"), getValue());
+            return;
         }
         if (cycle) {
-            *valuePtr = 0;
-            return true;
+            setValue(0);
+            LOG(F("WidgetList::nextValue"), getValue());
         }
-        return false;
     }
-    bool previousValue() {
-        if (*valuePtr > 0) {
-            (*valuePtr)--;
-            return true;
+
+    void previousValue() {
+        if (getValue() > 0) {
+            setValue(getValue() - 1);
+            LOG(F("WidgetList::previousValue"), getValue());
+            return;
         }
         if (cycle) {
-            *valuePtr = size - 1;
-            return true;
+            setValue(size - 1);
+            LOG(F("WidgetList::previousValue"), getValue());
         }
-        return false;
     }
 };
 
