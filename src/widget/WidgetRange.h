@@ -10,7 +10,7 @@
  */
 template <typename T>
 class WidgetRange : public BaseWidgetValue<T> {
-  protected:
+  private:
     const T step;
     const T minValue;
     const T maxValue;
@@ -53,10 +53,10 @@ class WidgetRange : public BaseWidgetValue<T> {
         if (renderer->isInEditMode()) {
             switch (command) {
                 case UP:
-                    if (increment()) BaseWidgetValue<T>::handleChange();
+                    increment();
                     return true;
                 case DOWN:
-                    if (decrement()) BaseWidgetValue<T>::handleChange();
+                    decrement();
                     return true;
                 default:
                     return false;
@@ -64,34 +64,30 @@ class WidgetRange : public BaseWidgetValue<T> {
         }
         return false;
     }
+
+  private:
     /**
      * @brief Increments the value.
      * If the value exceeds `maxValue` and cycling is enabled, the value resets to `minValue`.
-     * @return true if incremented or reset (in case of cycle)
      */
-    bool increment() {
-        T newValue = (*(this->valuePtr) + step > maxValue) ? (cycle ? minValue : maxValue) : (*(this->valuePtr) + step);
-        if (newValue != *(this->valuePtr)) {
-            *(this->valuePtr) = newValue;
-            LOG(F("WidgetRange::increment"), *(this->valuePtr));
-            return true;
+    void increment() {
+        T newValue = (this->getValue() + step > maxValue) ? (cycle ? minValue : maxValue) : (this->getValue() + step);
+        if (newValue != this->getValue()) {
+            this->setValue(newValue);
+            LOG(F("WidgetRange::increment"), this->getValue());
         }
-        return false;
     }
 
     /**
      * @brief Decrements the value.
      * If the value falls below `minValue` and cycling is enabled, the value resets to `maxValue`.
-     * @return true if decremented or reset (in case of cycle)
      */
-    bool decrement() {
-        T newValue = (*(this->valuePtr) < minValue + step) ? (cycle ? maxValue : minValue) : (*(this->valuePtr) - step);
-        if (newValue != *(this->valuePtr)) {
-            *(this->valuePtr) = newValue;
-            LOG(F("WidgetRange::decrement"), *(this->valuePtr));
-            return true;
+    void decrement() {
+        T newValue = (this->getValue() < minValue + step) ? (cycle ? maxValue : minValue) : (this->getValue() - step);
+        if (newValue != this->getValue()) {
+            this->setValue(newValue);
+            LOG(F("WidgetRange::decrement"), this->getValue());
         }
-        return false;
     }
 };
 
