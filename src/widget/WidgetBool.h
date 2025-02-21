@@ -71,9 +71,8 @@ class WidgetBool : public BaseWidgetValue<bool> {
         MenuRenderer* renderer = menu->getRenderer();
         if (renderer->isInEditMode()) {
             if (command == UP || command == DOWN) {
-                *valuePtr = !*valuePtr;
-                LOG(F("WidgetToggle::toggle"), *valuePtr);
-                handleChange();
+                this->setValue(!this->getValue());
+                LOG(F("WidgetToggle::toggle"), this->getValue());
                 return true;
             }
         }
