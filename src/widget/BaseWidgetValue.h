@@ -15,6 +15,10 @@ struct Ref {
     bool operator <(T const& other) const { return value < other; }
     bool operator >=(T const& other) const { return value >= other; }
     bool operator <=(T const& other) const { return value <= other; }
+    Ref<T> operator ++(int) { this->value++; return *this; }
+    Ref<T> operator --(int) { this->value--; return *this; }
+    Ref<T> operator +(T other) { this->value = this->value + other; return *this; }
+    Ref<T> operator -(T other) { this->value = this->value - other; return *this; }
     Ref<T>& operator =(T other) { this->value = other; return *this; }
     Ref<T>& operator =(Ref<T> other) { this->value = other.value; return *this; }
     operator T () const { return value; } // Cast to T
