@@ -96,8 +96,9 @@ class BaseWidgetValue : public BaseWidget {
      * @param newValue The new value to set.
      */
     virtual void setValue(const T& newValue) {
-        if (value != newValue) {
-            value = newValue;
+        T* targetValue = refValue ? refValue : (ptrValue ? ptrValue : &value);
+        if (*targetValue != newValue) {
+            *targetValue = newValue;
             handleChange();
         }
     }
