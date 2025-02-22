@@ -5,6 +5,21 @@
 
 class LcdMenu;
 
+template <typename T>
+struct Ref {
+    T& value;
+    Ref(T& value) : value(value) {}
+    bool operator ==(T const& other) const { return value == other; }
+    bool operator !=(T const& other) const { return value != other; }
+    bool operator >(T const& other) const { return value > other; }
+    bool operator <(T const& other) const { return value < other; }
+    bool operator >=(T const& other) const { return value >= other; }
+    bool operator <=(T const& other) const { return value <= other; }
+    Ref<T>& operator =(T other) { this->value = other; return *this; }
+    Ref<T>& operator =(Ref<T> other) { this->value = other.value; return *this; }
+    operator T () const { return value; } // Cast to T
+};
+
 /**
  * @class BaseWidgetValue
  * @brief Base class for widget holding some value.
