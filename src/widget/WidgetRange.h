@@ -7,6 +7,9 @@
  * @class WidgetRange
  * @brief Widget that allows user to select a value from a range.
  * Manages a value within a specified range, allowing incrementing and decrementing.
+ * @tparam T the type of value
+ * @tparam V the type of stored value, the type should be fully compatible with `T` type, meaning
+ * all arifmetic operations, cast, assigment whould be supported for type `V`. For example, T = int, V = Ref<int>.
  */
 template <typename T, typename V = T>
 class WidgetRange : public BaseWidgetValue<V> {

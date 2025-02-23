@@ -4,8 +4,11 @@
 #include "BaseWidgetValue.h"
 
 /**
+ * @class WidgetBool
  * @brief Widget that allows user to toggle between ON/OFF states.
  * Manages a boolean value, allowing toggling between 'ON' and 'OFF' states.
+ * @tparam V the type of stored value, the type should be fully compatible with `bool` type, meaning
+ * all arifmetic operations, cast, assigment whould be supported for type `V`. For example, V = Ref<bool>.
  */
 template <typename V = bool>
 class WidgetBool : public BaseWidgetValue<V> {
