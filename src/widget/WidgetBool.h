@@ -7,7 +7,8 @@
  * @brief Widget that allows user to toggle between ON/OFF states.
  * Manages a boolean value, allowing toggling between 'ON' and 'OFF' states.
  */
-class WidgetBool : public BaseWidgetValue<bool> {
+template <typename V = bool>
+class WidgetBool : public BaseWidgetValue<V> {
 
   protected:
     const char* textOn;
@@ -15,13 +16,13 @@ class WidgetBool : public BaseWidgetValue<bool> {
 
   public:
     WidgetBool(
-        const bool value,
+        V value,
         const char* textOn,
         const char* textOff,
         const char* format,
         const uint8_t cursorOffset,
-        void (*callback)(const bool&))
-        : BaseWidgetValue<bool>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
+        void (*callback)(const V&) = nullptr)
+        : BaseWidgetValue<V>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
     const char* getTextOn() const { return this->textOn; }
 
@@ -30,7 +31,7 @@ class WidgetBool : public BaseWidgetValue<bool> {
   protected:
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, value ? textOn : textOff);
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, static_cast<bool>(this->value) ? textOn : textOff);
     }
     /**
      * @brief Process command.
@@ -44,9 +45,10 @@ class WidgetBool : public BaseWidgetValue<bool> {
         MenuRenderer* renderer = menu->getRenderer();
         if (renderer->isInEditMode()) {
             if (command == UP || command == DOWN) {
-                value = !value;
+                bool current = static_cast<bool>(this->value);
+                this->value = !current;
                 LOG(F("WidgetToggle::toggle"), value);
-                handleChange();
+                this->handleChange();
                 return true;
             }
         }
@@ -65,11 +67,21 @@ class WidgetBool : public BaseWidgetValue<bool> {
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
 inline BaseWidgetValue<bool>* WIDGET_BOOL(
-    const bool value = false,
+    const bool value,
     const char* textOn = "ON",
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     void (*callback)(const bool&) = nullptr) {
-    return new WidgetBool(value, textOn, textOff, format, cursorOffset, callback);
+    return new WidgetBool<bool>(value, textOn, textOff, format, cursorOffset, callback);
+}
+
+inline BaseWidgetValue<Ref<bool>>* WIDGET_BOOL_REF(
+    bool& value,
+    const char* textOn = "ON",
+    const char* textOff = "OFF",
+    const char* format = "%s",
+    const uint8_t cursorOffset = 0,
+    void (*callback)(const Ref<bool>&) = nullptr) {
+    return new WidgetBool<Ref<bool>>(Ref<bool>(value), textOn, textOff, format, cursorOffset, callback);
 }
