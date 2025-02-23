@@ -76,6 +76,16 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
     return new WidgetBool<bool>(value, textOn, textOff, format, cursorOffset, callback);
 }
 
+/**
+ * @brief Function to create a new Widget<bool> object.
+ *
+ * @param value The reference value of this widget, the value will be used by reference
+ * @param textOn The display text when value is true (default is "ON")
+ * @param textOff The display text when value is false (default is "OFF")
+ * @param format The format to display the value (default is "%s")
+ * @param cursorOffset The offset for the cursor (default is 0)
+ * @param callback The callback function to execute when value changes (default is nullptr), parameter of callback will be `Ref<bool>`
+ */
 inline BaseWidgetValue<Ref<bool>>* WIDGET_BOOL_REF(
     bool& value,
     const char* textOn = "ON",

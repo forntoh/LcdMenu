@@ -119,15 +119,41 @@ class WidgetRange : public BaseWidgetValue<V> {
  * @param cycle Whether the value should cycle when out of range (default is false).
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
-template <typename T, typename V = T>
-inline BaseWidgetValue<V>* WIDGET_RANGE(
-    V value,
-    T step,
-    T min,
-    T max,
+template <typename T>
+inline WidgetRange<T, T>* WIDGET_RANGE(
+    const T value,
+    const T step,
+    const T min,
+    const T max,
     const char* format,
-    uint8_t cursorOffset = 0,
-    bool cycle = false,
+    const uint8_t cursorOffset = 0,
+    const bool cycle = false,
     void (*callback)(const T&) = nullptr) {
-    return new WidgetRange<T, V>(value, step, min, max, format, cursorOffset, cycle, callback);
+    return new WidgetRange<T, T>(value, step, min, max, format, cursorOffset, cycle, callback);
+}
+
+/**
+ * @brief Function to create a new WidgetRange<T> instance.
+ * @tparam T The type of the value.
+ *
+ * @param value The reference value of this widget, the value will be used by reference
+ * @param step The step value for incrementing/decrementing.
+ * @param min The minimum value of the range.
+ * @param max The maximum value of the range.
+ * @param format The format string for displaying the value.
+ * @param cursorOffset The offset for the cursor (default is 0).
+ * @param cycle Whether the value should cycle when out of range (default is false).
+ * @param callback The callback function to call when the value changes (default is nullptr), parameter of callback will be `Ref<T>`
+ */
+template <typename T>
+inline WidgetRange<T, Ref<T>>* WIDGET_RANGE_REF(
+    T& value,
+    const T step,
+    const T min,
+    const T max,
+    const char* format,
+    const uint8_t cursorOffset = 0,
+    const bool cycle = false,
+    void (*callback)(const Ref<T>&) = nullptr) {
+    return new WidgetRange<T, Ref<T>>(Ref<T>(value), step, min, max, format, cursorOffset, cycle, callback);
 }

@@ -111,14 +111,38 @@ class WidgetList : public BaseWidgetValue<V> {
  * @param cycle Whether to cycle through the list (default: false).
  * @param callback The callback function to call when the value changes (default: nullptr).
  */
-template <typename T, typename V = size_t>
-inline WidgetList<T, V>* WIDGET_LIST(
+template <typename T>
+inline WidgetList<T, size_t>* WIDGET_LIST(
     const T values[],
     const size_t size,
-    const V value,
+    const size_t value,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    void (*callback)(const V&) = nullptr) {
-    return new WidgetList<T, V>(values, size, value, format, cursorOffset, cycle, callback);
+    void (*callback)(const size_t&) = nullptr) {
+    return new WidgetList<T, size_t>(values, size, value, format, cursorOffset, cycle, callback);
+}
+
+/**
+ * @brief Function to create a new WidgetList<T> instance.
+ * @tparam T The type of the value.
+ *
+ * @param values The list of values to choose from.
+ * @param size The size of the list.
+ * @param value The reference value of this widget, the value will be used by reference
+ * @param format The format of the value (default: "%s").
+ * @param cursorOffset The cursor offset (default: 0).
+ * @param cycle Whether to cycle through the list (default: false).
+ * @param callback The callback function to call when the value changes (default: nullptr), parameter of callback will be `Ref<size_t>`
+ */
+template <typename T>
+inline WidgetList<T, Ref<size_t>>* WIDGET_LIST_REF(
+    const T values[],
+    const size_t size,
+    size_t& value,
+    const char* format = "%s",
+    const uint8_t cursorOffset = 0,
+    const bool cycle = false,
+    void (*callback)(const Ref<size_t>&) = nullptr) {
+    return new WidgetList<T, Ref<size_t>>(values, size, Ref<size_t>(value), format, cursorOffset, cycle, callback);
 }
