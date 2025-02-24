@@ -35,7 +35,7 @@ MENU_SCREEN(
         WIDGET_LIST(days, 7, day, "%s", 0, true)),
     ITEM_WIDGET(
         "List ref",
-        [](const Ref<size_t> value) {Serial.println(days[value.value]); },
+        [](const Ref<size_t> value) { Serial.println(days[value.value]); },
         WIDGET_LIST_REF(days, 7, day, "%s", 0, true)),
     ITEM_WIDGET(
         "Bool val",
@@ -44,8 +44,7 @@ MENU_SCREEN(
     ITEM_WIDGET(
         "Bool ref",
         [](const Ref<bool> value) { Serial.println(value.value); },
-        WIDGET_BOOL_REF(toggle, "Yes", "No", "%s"))
-    );
+        WIDGET_BOOL_REF(toggle, "Yes", "No", "%s")));
 
 LiquidCrystal_I2C lcd(LCD_ADDR, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd);

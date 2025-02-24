@@ -66,7 +66,7 @@ class WidgetList : public BaseWidgetValue<V> {
     }
     void updateValue(const __FlashStringHelper* action) {
         BaseWidgetValue<V>::handleChange();
-        LOG(action, (size_t) this->value);
+        LOG(action, (size_t)this->value);
     }
     /**
      * @brief Draw the widget into specified buffer.
@@ -76,7 +76,7 @@ class WidgetList : public BaseWidgetValue<V> {
      */
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, values[(size_t) this->value]);
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, values[(size_t)this->value]);
     }
     bool nextValue() {
         if (this->value + 1 < size) {
