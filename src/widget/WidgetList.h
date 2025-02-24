@@ -8,7 +8,7 @@
  * Manages a value within a specified list, allowing cycling through values.
  * @tparam T the type of value
  * @tparam V the type of stored value, the type should be fully compatible with `size_t` type, meaning
- * all arifmetic operations, cast, assigment whould be supported for type `V`. For example, T = char*, V = Ref<size_t>.
+ * all arifmetic operations, cast, assignment should be supported for type `V`. For example, T = char*, V = Ref<size_t>.
  *
  * NOTE: Despite the fact that the class has template type <T> the base
  * Widget will have type <size_t>. It reflects that the value of this widget
