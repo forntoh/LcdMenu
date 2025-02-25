@@ -83,9 +83,12 @@ class BaseWidgetValue : public BaseWidget {
           callback(callback) {}
 
     const T& getValue() const {
-        if (refValue) return *refValue;
-        if (ptrValue) return *ptrValue;
-        return value;
+        if (refValue != nullptr)
+            return *refValue;
+        else if (ptrValue != nullptr)
+            return *ptrValue;
+        else
+            return value;
     }
 
     /**
