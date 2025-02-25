@@ -22,7 +22,6 @@ class BaseWidgetValue : public BaseWidget {
   protected:
     T value;                        ///< The value of the widget.
     T* refValue = nullptr;          ///< Pointer to the reference value.
-    T* ptrValue = nullptr;          ///< Pointer to the pointer value.
     const char* format = nullptr;   ///< Format string for displaying the value.
     void (*callback)(T) = nullptr;  ///< Callback function to execute when value changes.
 
@@ -63,30 +62,9 @@ class BaseWidgetValue : public BaseWidget {
           format(format),
           callback(callback) {}
 
-    /**
-     * @brief Constructor to initialize the widget with a pointer to a value.
-     *
-     * @param ptr A pointer to the value.
-     * @param format The format string for displaying the value.
-     * @param cursorOffset The cursor offset for the widget.
-     * @param callback The callback function to execute when the value changes.
-     */
-
-    BaseWidgetValue(
-        Ptr<T> ptr,
-        const char* format,
-        const uint8_t cursorOffset = 0,
-        void (*callback)(T) = nullptr)
-        : BaseWidget(cursorOffset),
-          ptrValue(ptr.value),
-          format(format),
-          callback(callback) {}
-
     const T& getValue() const {
         if (refValue != nullptr)
             return *refValue;
-        else if (ptrValue != nullptr)
-            return *ptrValue;
         else
             return value;
     }
@@ -99,7 +77,7 @@ class BaseWidgetValue : public BaseWidget {
      * @param newValue The new value to set.
      */
     virtual void setValue(const T& newValue) {
-        T* targetValue = refValue ? refValue : (ptrValue ? ptrValue : &value);
+        T* targetValue = refValue ? refValue : &value;
         if (*targetValue != newValue) {
             *targetValue = newValue;
             handleChange();

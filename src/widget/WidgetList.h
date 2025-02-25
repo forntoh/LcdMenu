@@ -73,30 +73,6 @@ class WidgetList : public BaseWidgetValue<uint8_t> {
           values(values) {}
 
     /**
-     * @brief Constructor for WidgetList with Ptr<uint8_t> activePosition.
-     *
-     * @param values An array of values of type T.
-     * @param size The number of elements in the values array.
-     * @param activePosition A pointer to the initial active position in the list.
-     * @param format The format string for displaying the value.
-     * @param cursorOffset The offset for the cursor position.
-     * @param cycle A boolean indicating whether the list should cycle.
-     * @param callback A callback function to be called when the value changes.
-     */
-    WidgetList(
-        const T values[],
-        const uint8_t size,
-        Ptr<uint8_t> activePosition,
-        const char* format,
-        const uint8_t cursorOffset,
-        const bool cycle,
-        void (*callback)(const uint8_t))
-        : BaseWidgetValue<uint8_t>(activePosition, format, cursorOffset, callback),
-          size(size),
-          cycle(cycle),
-          values(values) {}
-
-    /**
      * @brief Increment the active value in the list.
      *
      * If the active value is less than the size of the list, it increments the value.
@@ -211,31 +187,6 @@ inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
     const T values[],
     const uint8_t size,
     Ref<uint8_t> activePosition,
-    const char* format = "%s",
-    const uint8_t cursorOffset = 0,
-    const bool cycle = false,
-    void (*callback)(const uint8_t) = nullptr) {
-    return new WidgetList<T>(values, size, activePosition, format, cursorOffset, cycle, callback);
-}
-
-/**
- * @brief Creates a new WidgetList object.
- *
- * @tparam T The type of the values in the list.
- * @param values An array of values to be displayed in the widget list.
- * @param size The number of elements in the values array.
- * @param activePosition Initial active position in the list (this value is passed by pointer, so it can be updated externally).
- * @param format A format string for displaying the values (default is "%s").
- * @param cursorOffset The offset for the cursor position (default is 0).
- * @param cycle A boolean indicating whether the list should cycle (default is false).
- * @param callback A callback function to be called when the active position changes (default is nullptr).
- * @return A pointer to a BaseWidgetValue object containing the widget list.
- */
-template <typename T>
-inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
-    const T values[],
-    const uint8_t size,
-    Ptr<uint8_t> activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
