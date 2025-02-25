@@ -2,41 +2,38 @@
 #pragma once
 
 #include "BaseWidget.h"
+#include "data/ValueWrappers.h"
 
 class LcdMenu;
 
 /**
  * @class BaseWidgetValue
- * @brief Template class for a widget that holds a value.
+ * @brief A template class that represents a widget with a value.
  *
- * This class provides functionality to manage and display a value within a widget.
- * It supports both owning and non-owning semantics for the value's memory.
+ * This class extends the BaseWidget class and adds functionality to handle a value of type T.
+ * It provides methods to get and set the value, draw the widget, and process commands.
+ * It also supports a callback function that is invoked when the value changes.
  *
- * @tparam T The type of the value held by the widget.
- * @see BaseWidget
+ * @tparam T The type of the value.
  */
 template <typename T>
 class BaseWidgetValue : public BaseWidget {
 
-  private:
-    bool ownsMemory = false;  ///< Flag indicating whether this instance owns the memory for valuePtr
-
   protected:
-    T* valuePtr;                    ///< Pointer to the value held by the widget
-    const char* format = nullptr;   ///< Format string for displaying the value
-    void (*callback)(T) = nullptr;  ///< Callback function to call when the value changes
+    T value;                        ///< The value of the widget.
+    T* refValue = nullptr;          ///< Pointer to the reference value.
+    T* ptrValue = nullptr;          ///< Pointer to the pointer value.
+    const char* format = nullptr;   ///< Format string for displaying the value.
+    void (*callback)(T) = nullptr;  ///< Callback function to execute when value changes.
 
   public:
     /**
-     * @brief Constructor that takes a value and creates a new internal value.
+     * @brief Constructor to initialize the widget with a value.
      *
-     * This constructor allocates memory for the value and sets the `ownsMemory` flag to true,
-     * indicating that this instance exclusively owns the allocated memory.
-     *
-     * @param value The initial value to set.
+     * @param value The initial value of the widget.
      * @param format The format string for displaying the value.
      * @param cursorOffset The cursor offset for the widget.
-     * @param callback The callback function to call when the value changes.
+     * @param callback The callback function to execute when the value changes.
      */
     BaseWidgetValue(
         T value,
@@ -44,80 +41,90 @@ class BaseWidgetValue : public BaseWidget {
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
-          ownsMemory(true),        ///< This instance owns the allocated memory
-          valuePtr(new T(value)),  ///< Allocate memory for the value
+          value(value),
           format(format),
           callback(callback) {}
 
     /**
-     * @brief Constructor that takes a pointer to an external value.
+     * @brief Constructor to initialize the widget with a reference to a value.
      *
-     * This constructor uses the provided pointer to an external value and sets the `ownsMemory` flag to false,
-     * indicating that this instance does not own the memory for the value.
-     *
-     * @param ptr Pointer to the external value.
+     * @param ref A reference to the value.
      * @param format The format string for displaying the value.
      * @param cursorOffset The cursor offset for the widget.
-     * @param callback The callback function to call when the value changes.
+     * @param callback The callback function to execute when the value changes.
      */
     BaseWidgetValue(
-        T* ptr,
+        Ref<T> ref,
         const char* format,
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
-          ownsMemory(false),  ///< This instance does not own the memory
-          valuePtr(ptr),      ///< Use the external pointer
+          refValue(&ref.value),
           format(format),
           callback(callback) {}
 
     /**
-     * @brief Destructor that cleans up allocated memory if owned.
+     * @brief Constructor to initialize the widget with a pointer to a value.
      *
-     * If this instance owns the memory for the value (i.e., `ownsMemory` is true),
-     * the destructor will delete the allocated memory.
+     * @param ptr A pointer to the value.
+     * @param format The format string for displaying the value.
+     * @param cursorOffset The cursor offset for the widget.
+     * @param callback The callback function to execute when the value changes.
      */
-    ~BaseWidgetValue() override {
-        if (ownsMemory) {
-            delete valuePtr;
-        }
+
+    BaseWidgetValue(
+        Ptr<T> ptr,
+        const char* format,
+        const uint8_t cursorOffset = 0,
+        void (*callback)(T) = nullptr)
+        : BaseWidget(cursorOffset),
+          ptrValue(ptr.value),
+          format(format),
+          callback(callback) {}
+
+    const T& getValue() const {
+        if (refValue != nullptr)
+            return *refValue;
+        else if (ptrValue != nullptr)
+            return *ptrValue;
+        else
+            return value;
     }
+
     /**
-     * @brief Retrieve current value.
+     * @brief Set a new value for the widget.
      *
-     * @return The current value held by the widget.
-     */
-    const T& getValue() const { return *valuePtr; }
-    /**
-     * @brief Sets the value.
+     * If the new value is different from the current value, the value is updated and the handleChange method is called.
      *
-     * If the new value is different from the current value, the value is updated and the callback is invoked.
-     *
-     * @param newValue The value to set.
-     * @note You need to call `LcdMenu::refresh` after this method to see the changes.
+     * @param newValue The new value to set.
      */
     virtual void setValue(const T& newValue) {
-        if (*valuePtr != newValue) {
-            *valuePtr = newValue;
+        T* targetValue = refValue ? refValue : (ptrValue ? ptrValue : &value);
+        if (*targetValue != newValue) {
+            *targetValue = newValue;
             handleChange();
         }
     }
 
   protected:
     /**
-     * @brief Draw the widget into specified buffer.
+     * @brief Draw the widget into the specified buffer.
+     *
+     * This method is used to draw the widget's value into a buffer starting at a specified index.
      *
      * @param buffer The buffer where the widget will be drawn.
      * @param start The index where to start drawing in the buffer.
      * @return The number of characters written to the buffer.
      */
     uint8_t draw(char* buffer, const uint8_t start) override {
-        if (start >= ITEM_DRAW_BUFFER_SIZE || valuePtr == nullptr) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, *valuePtr);
+        if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, getValue());
     }
 
     /**
      * @brief Process a command for this widget.
+     *
+     * This is a pure virtual method that must be implemented by derived classes to handle specific commands.
      *
      * @param menu Pointer to the menu instance.
      * @param command The command to process.
@@ -127,10 +134,12 @@ class BaseWidgetValue : public BaseWidget {
 
     /**
      * @brief Handle value change and invoke the callback if set.
+     *
+     * This method is called when the value of the widget changes. If a callback function is set, it is invoked with the new value.
      */
     void handleChange() {
         if (callback != nullptr) {
-            callback(*valuePtr);
+            callback(getValue());
         }
     }
 };

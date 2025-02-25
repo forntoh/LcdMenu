@@ -26,6 +26,10 @@ class BaseItemManyWidgets : public MenuItem {
         }
     }
 
+    BaseWidget* getWidgetAt(const uint8_t index) const {
+        return index < size ? widgets[index] : nullptr;
+    }
+
     virtual ~BaseItemManyWidgets() {
         for (uint8_t i = 0; i < size; ++i)
             delete widgets[i];
