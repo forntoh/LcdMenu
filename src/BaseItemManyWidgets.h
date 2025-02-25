@@ -15,13 +15,19 @@ class BaseItemManyWidgets : public MenuItem {
 
   public:
     BaseItemManyWidgets(const char* text, BaseWidget** widgets, const uint8_t size, uint8_t activeWidget = 0)
-        : MenuItem(text), widgets(widgets), size(size), activeWidget(constrain(activeWidget, 0, size)) {}
+        : MenuItem(text), widgets(widgets), size(size), activeWidget(constrain(activeWidget, 0, size)) {
+        this->polling = true;
+    }
 
     uint8_t getActiveWidget() const { return activeWidget; }
     void setActiveWidget(const uint8_t activeWidget) {
         if (activeWidget < size) {
             this->activeWidget = activeWidget;
         }
+    }
+
+    BaseWidget* getWidgetAt(const uint8_t index) const {
+        return index < size ? widgets[index] : nullptr;
     }
 
     virtual ~BaseItemManyWidgets() {

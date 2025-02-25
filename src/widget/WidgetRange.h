@@ -10,7 +10,7 @@
  */
 template <typename T>
 class WidgetRange : public BaseWidgetValue<T> {
-  protected:
+  private:
     const T step;
     const T minValue;
     const T maxValue;
@@ -18,14 +18,14 @@ class WidgetRange : public BaseWidgetValue<T> {
 
   public:
     WidgetRange(
-        const T& value,
+        T value,
         const T step,
         const T min,
         const T max,
         const char* format,
         const uint8_t cursorOffset = 0,
         const bool cycle = false,
-        void (*callback)(const T&) = nullptr)
+        void (*callback)(T) = nullptr)
         : BaseWidgetValue<T>(value, format, cursorOffset, callback),
           step(step),
           minValue(min),
@@ -53,10 +53,10 @@ class WidgetRange : public BaseWidgetValue<T> {
         if (renderer->isInEditMode()) {
             switch (command) {
                 case UP:
-                    if (increment()) BaseWidgetValue<T>::handleChange();
+                    increment();
                     return true;
                 case DOWN:
-                    if (decrement()) BaseWidgetValue<T>::handleChange();
+                    decrement();
                     return true;
                 default:
                     return false;
@@ -64,34 +64,30 @@ class WidgetRange : public BaseWidgetValue<T> {
         }
         return false;
     }
+
+  private:
     /**
      * @brief Increments the value.
      * If the value exceeds `maxValue` and cycling is enabled, the value resets to `minValue`.
-     * @return true if incremented or reset (in case of cycle)
      */
-    bool increment() {
-        T newValue = (this->value + step > maxValue) ? (cycle ? minValue : maxValue) : (this->value + step);
-        if (newValue != this->value) {
-            this->value = newValue;
-            LOG(F("WidgetRange::increment"), this->value);
-            return true;
+    void increment() {
+        T newValue = (this->getValue() + step > maxValue) ? (cycle ? minValue : maxValue) : (this->getValue() + step);
+        if (newValue != this->getValue()) {
+            this->setValue(newValue);
+            LOG(F("WidgetRange::increment"), this->getValue());
         }
-        return false;
     }
 
     /**
      * @brief Decrements the value.
      * If the value falls below `minValue` and cycling is enabled, the value resets to `maxValue`.
-     * @return true if decremented or reset (in case of cycle)
      */
-    bool decrement() {
-        T newValue = (this->value < minValue + step) ? (cycle ? maxValue : minValue) : (this->value - step);
-        if (newValue != this->value) {
-            this->value = newValue;
-            LOG(F("WidgetRange::decrement"), this->value);
-            return true;
+    void decrement() {
+        T newValue = (this->getValue() < minValue + step) ? (cycle ? maxValue : minValue) : (this->getValue() - step);
+        if (newValue != this->getValue()) {
+            this->setValue(newValue);
+            LOG(F("WidgetRange::decrement"), this->getValue());
         }
-        return false;
     }
 };
 
@@ -117,6 +113,6 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
     const char* format,
     uint8_t cursorOffset = 0,
     bool cycle = false,
-    void (*callback)(const T&) = nullptr) {
+    void (*callback)(T) = nullptr) {
     return new WidgetRange<T>(value, step, min, max, format, cursorOffset, cycle, callback);
 }
