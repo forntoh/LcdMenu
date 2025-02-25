@@ -3,10 +3,10 @@ version: 1
 author: Thomas Forntoh
 steps:
   - wait-serial: "#LOG# LcdMenu::setScreen"
-  - wait-serial: "Day: Tue, Toggle: Yes [0]"
-  - wait-serial: "Day: Wed, Toggle: No  [1222]"
-  - wait-serial: "Day: Thu, Toggle: Yes [2278]"
-  - wait-serial: "Day: Fri, Toggle: No  [3335]"
-  - wait-serial: "Day: Sat, Toggle: Yes [4391]"
-  - wait-serial: "Day: Sun, Toggle: No  [5447]"
-  - wait-serial: "Day: Mon, Toggle: Yes [6503]"
+  - wait-serial: "Day: Tue, Toggle: Yes"
+  - wait-serial: "Day: Wed, Toggle: No"
+  - wait-serial: "Day: Thu, Toggle: Yes"
+  - wait-serial: "Day: Fri, Toggle: No"
+  - wait-serial: "Day: Sat, Toggle: Yes"
+  - wait-serial: "Day: Sun, Toggle: No"
+  - wait-serial: "Day: Mon, Toggle: Yes"

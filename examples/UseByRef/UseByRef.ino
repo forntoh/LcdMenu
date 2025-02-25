@@ -71,10 +71,7 @@ void logger() {
     Serial.print("Day: ");
     Serial.print(days[localDay]);
     Serial.print(", Toggle: ");
-    Serial.print(localToggle ? "Yes" : "No ");
-    Serial.print(" [");
-    Serial.print(last);
-    Serial.println("]");
+    Serial.println(localToggle ? "Yes" : "No");
 }
 
 void loop() {
