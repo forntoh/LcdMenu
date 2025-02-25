@@ -20,8 +20,7 @@ template <typename T>
 class BaseWidgetValue : public BaseWidget {
 
   protected:
-    T value;                        ///< The value of the widget.
-    T* refValue = nullptr;          ///< Pointer to the reference value.
+    T* value;                       ///< The value of the widget.
     const char* format = nullptr;   ///< Format string for displaying the value.
     void (*callback)(T) = nullptr;  ///< Callback function to execute when value changes.
 
@@ -40,7 +39,7 @@ class BaseWidgetValue : public BaseWidget {
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
-          value(value),
+          value(new T(value)),
           format(format),
           callback(callback) {}
 
@@ -58,16 +57,13 @@ class BaseWidgetValue : public BaseWidget {
         const uint8_t cursorOffset = 0,
         void (*callback)(T) = nullptr)
         : BaseWidget(cursorOffset),
-          refValue(&ref.value),
+          value(&ref.value),
           format(format),
           callback(callback) {}
 
-    const T& getValue() const {
-        if (refValue != nullptr)
-            return *refValue;
-        else
-            return value;
-    }
+    ~BaseWidgetValue() override { delete value; }
+
+    const T& getValue() const { return *value; }
 
     /**
      * @brief Set a new value for the widget.
@@ -77,9 +73,8 @@ class BaseWidgetValue : public BaseWidget {
      * @param newValue The new value to set.
      */
     virtual void setValue(const T& newValue) {
-        T* targetValue = refValue ? refValue : &value;
-        if (*targetValue != newValue) {
-            *targetValue = newValue;
+        if (*value != newValue) {
+            *value = newValue;
             handleChange();
         }
     }
