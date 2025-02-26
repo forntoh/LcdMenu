@@ -7,10 +7,10 @@ class LcdMenu;
 
 /**
  * @brief A wrapper for reference values that provides value semantics.
- * 
+ *
  * This struct allows widgets to work with references while maintaining
  * a consistent interface with value types.
- * 
+ *
  * @tparam T The type being referenced (must be a non-reference type)
  */
 template <typename T>
