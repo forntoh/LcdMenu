@@ -8,7 +8,7 @@
  * @brief Widget that allows user to toggle between ON/OFF states.
  * Manages a boolean value, allowing toggling between 'ON' and 'OFF' states.
  * @tparam V the type of stored value, the type should be fully compatible with `bool` type, meaning
- * all arifmetic operations, cast, assignment should be supported for type `V`. For example, V = Ref<bool>.
+ * cast, assignment should be supported for type `V`. For example, V = Ref<bool>.
  */
 template <typename V = bool>
 class WidgetBool : public BaseWidgetValue<V> {
@@ -69,7 +69,7 @@ class WidgetBool : public BaseWidgetValue<V> {
  * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
-inline BaseWidgetValue<bool>* WIDGET_BOOL(
+inline WidgetBool<bool>* WIDGET_BOOL(
     const bool value,
     const char* textOn = "ON",
     const char* textOff = "OFF",
@@ -80,7 +80,8 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
 }
 
 /**
- * @brief Function to create a new Widget<bool> object.
+ * @brief Function to create a new Widget<Ref<bool>> object.
+ * NOTE: Make sure that value reference is not deallocated earlier than this widget.
  *
  * @param value The reference value of this widget, the value will be used by reference
  * @param textOn The display text when value is true (default is "ON")
@@ -89,7 +90,7 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
  * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr), parameter of callback will be `Ref<bool>`
  */
-inline BaseWidgetValue<Ref<bool>>* WIDGET_BOOL_REF(
+inline WidgetBool<Ref<bool>>* WIDGET_BOOL_REF(
     bool& value,
     const char* textOn = "ON",
     const char* textOff = "OFF",

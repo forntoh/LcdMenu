@@ -9,7 +9,7 @@
  * Manages a value within a specified range, allowing incrementing and decrementing.
  * @tparam T the type of value
  * @tparam V the type of stored value, the type should be fully compatible with `T` type, meaning
- * all arifmetic operations, cast, assignment should be supported for type `V`. For example, T = int, V = Ref<int>.
+ * all arithmetic operations, cast, assignment should be supported for type `V`. For example, T = int, V = Ref<int>.
  */
 template <typename T, typename V = T>
 class WidgetRange : public BaseWidgetValue<V> {
@@ -137,6 +137,7 @@ inline WidgetRange<T, T>* WIDGET_RANGE(
 
 /**
  * @brief Function to create a new WidgetRange<T> instance.
+ * NOTE: Make sure that value reference is not deallocated earlier than this widget.
  * @tparam T The type of the value.
  *
  * @param value The reference value of this widget, the value will be used by reference
