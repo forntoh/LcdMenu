@@ -15,7 +15,7 @@
 const char* days[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
 int hour = 0;
-size_t day = 0;
+uint8_t day = 0;
 bool toggle = false;
 
 MENU_SCREEN(
@@ -31,11 +31,11 @@ MENU_SCREEN(
         WIDGET_RANGE_REF(hour, 1, 0, 23, "%02d", 0, false)),
     ITEM_WIDGET(
         "List val",
-        [](const size_t value) { day = value; },
+        [](const uint8_t value) { day = value; },
         WIDGET_LIST(days, 7, day, "%s", 0, true)),
     ITEM_WIDGET(
         "List ref",
-        [](const Ref<size_t> value) { Serial.println(days[value.value]); },
+        [](const Ref<uint8_t> value) { Serial.println(days[value.value]); },
         WIDGET_LIST_REF(days, 7, day, "%s", 0, true)),
     ITEM_WIDGET(
         "Bool val",

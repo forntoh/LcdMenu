@@ -21,11 +21,11 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("List demo"),
     ITEM_WIDGET(
         "Color",
-        [](const size_t color) { Serial.println(colors[color]); },
+        [](const uint8_t color) { Serial.println(colors[color]); },
         WIDGET_LIST(colors, COLORS_COUNT, 0, "%s", 0, true)),
     ITEM_WIDGET(
         "Num",
-        [](const size_t num) { Serial.println(nums[num]); },
+        [](const uint8_t num) { Serial.println(nums[num]); },
         WIDGET_LIST(nums, NUMS_COUNT, 0, "%d", 0, true)),
     ITEM_BASIC("Example"));
 // clang-format on

@@ -25,7 +25,7 @@ MENU_SCREEN(
     mainItems,
     ITEM_WIDGET(
         "Auto",
-        [](const size_t option, bool isAuto) { Serial.println(options[option]); Serial.println(isAuto); },
+        [](const uint8_t option, bool isAuto) { Serial.println(options[option]); Serial.println(isAuto); },
         WIDGET_LIST(options, sizeof(options) / sizeof(options[0]), 0, "%s", 0, true),
         WIDGET_BOOL(false, "Yes", "No", ",%s")),
     ITEM_WIDGET(
@@ -39,7 +39,7 @@ MENU_SCREEN(
         WIDGET_RANGE(10, 1, 0, 100, "\002%d%%", 1)),
     ITEM_WIDGET(
         "Freq",
-        [](int hour, int minute, const size_t day) { Serial.println(hour); Serial.println(minute); Serial.println(days[day]); },
+        [](int hour, int minute, const uint8_t day) { Serial.println(hour); Serial.println(minute); Serial.println(days[day]); },
         WIDGET_RANGE(0, 1, 0, 23, "%02d", 0, false),
         WIDGET_RANGE(0, 1, 0, 59, ":%02d", 0, false),
         WIDGET_LIST(days, sizeof(days) / sizeof(days[0]), 0, " on %s", 0, true)),
@@ -51,7 +51,7 @@ MENU_SCREEN(
         WIDGET_RANGE(2021, 1, 2020, 2050, "/%04d", 0, true)),
     ITEM_WIDGET(
         "Pin",
-        [](const size_t d1, const size_t d2, const size_t d3, const size_t d4) { Serial.print(pinChars[d1]); Serial.print(pinChars[d2]); Serial.print(pinChars[d3]); Serial.println(pinChars[d4]); },
+        [](const uint8_t d1, const uint8_t d2, const uint8_t d3, const uint8_t d4) { Serial.print(pinChars[d1]); Serial.print(pinChars[d2]); Serial.print(pinChars[d3]); Serial.println(pinChars[d4]); },
         WIDGET_LIST(pinChars, strlen(pinChars), 2, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 6, "%c", 0, true),
         WIDGET_LIST(pinChars, strlen(pinChars), 10, "%c", 0, true),
