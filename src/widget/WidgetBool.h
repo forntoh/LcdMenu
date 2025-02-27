@@ -50,7 +50,7 @@ class WidgetBool : public BaseWidgetValue<V> {
             if (command == UP || command == DOWN) {
                 bool current = static_cast<bool>(this->value);
                 this->value = !current;
-                LOG(F("WidgetToggle::toggle"), value);
+                LOG(F("WidgetToggle::toggle"), static_cast<bool>(this->value));
                 this->handleChange();
                 return true;
             }
