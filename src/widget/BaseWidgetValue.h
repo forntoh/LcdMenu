@@ -6,6 +6,51 @@
 class LcdMenu;
 
 /**
+ * @brief A wrapper for reference values that provides value semantics.
+ *
+ * This struct allows widgets to work with references while maintaining
+ * a consistent interface with value types.
+ *
+ * @tparam T The type being referenced (must be a non-reference type)
+ */
+template <typename T>
+struct Ref {
+    T& value;
+    Ref(T& value) : value(value) {}
+    bool operator==(T const& other) const noexcept { return value == other; }
+    bool operator!=(T const& other) const noexcept { return value != other; }
+    bool operator>(T const& other) const noexcept { return value > other; }
+    bool operator<(T const& other) const noexcept { return value < other; }
+    bool operator>=(T const& other) const noexcept { return value >= other; }
+    bool operator<=(T const& other) const noexcept { return value <= other; }
+    Ref<T> operator++(int) noexcept {
+        this->value++;
+        return *this;
+    }
+    Ref<T> operator--(int) noexcept {
+        this->value--;
+        return *this;
+    }
+    Ref<T> operator+(T other) noexcept {
+        this->value += other;
+        return *this;
+    }
+    Ref<T> operator-(T other) noexcept {
+        this->value -= other;
+        return *this;
+    }
+    Ref<T>& operator=(T other) noexcept {
+        this->value = other;
+        return *this;
+    }
+    Ref<T>& operator=(Ref<T> other) noexcept {
+        this->value = other.value;
+        return *this;
+    }
+    operator T() const noexcept { return value; }  // Cast to T
+};
+
+/**
  * @class BaseWidgetValue
  * @brief Base class for widget holding some value.
  * @tparam T The type of value this widget holds
