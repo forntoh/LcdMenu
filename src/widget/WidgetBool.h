@@ -69,7 +69,7 @@ class WidgetBool : public BaseWidgetValue<V> {
  * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
-inline WidgetBool<bool>* WIDGET_BOOL(
+inline BaseWidgetValue<bool>* WIDGET_BOOL(
     const bool value,
     const char* textOn = "ON",
     const char* textOff = "OFF",
@@ -90,7 +90,7 @@ inline WidgetBool<bool>* WIDGET_BOOL(
  * @param cursorOffset The offset for the cursor (default is 0)
  * @param callback The callback function to execute when value changes (default is nullptr), parameter of callback will be `Ref<bool>`
  */
-inline WidgetBool<Ref<bool>>* WIDGET_BOOL_REF(
+inline BaseWidgetValue<Ref<bool>>* WIDGET_BOOL_REF(
     bool& value,
     const char* textOn = "ON",
     const char* textOff = "OFF",

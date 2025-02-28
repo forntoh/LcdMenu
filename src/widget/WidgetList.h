@@ -115,7 +115,7 @@ class WidgetList : public BaseWidgetValue<V> {
  * @param callback The callback function to call when the value changes (default: nullptr).
  */
 template <typename T>
-inline WidgetList<T, uint8_t>* WIDGET_LIST(
+inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
     const T values[],
     const uint8_t size,
     const uint8_t value,
@@ -140,7 +140,7 @@ inline WidgetList<T, uint8_t>* WIDGET_LIST(
  * @param callback The callback function to call when the value changes (default: nullptr), parameter of callback will be `Ref<uint8_t>`
  */
 template <typename T>
-inline WidgetList<T, Ref<uint8_t>>* WIDGET_LIST_REF(
+inline BaseWidgetValue<Ref<uint8_t>>* WIDGET_LIST_REF(
     const T values[],
     const uint8_t size,
     uint8_t& value,

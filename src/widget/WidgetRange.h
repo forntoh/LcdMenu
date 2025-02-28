@@ -123,7 +123,7 @@ class WidgetRange : public BaseWidgetValue<V> {
  * @param callback The callback function to call when the value changes (default is nullptr).
  */
 template <typename T>
-inline WidgetRange<T, T>* WIDGET_RANGE(
+inline BaseWidgetValue<T>* WIDGET_RANGE(
     const T value,
     const T step,
     const T min,
@@ -150,7 +150,7 @@ inline WidgetRange<T, T>* WIDGET_RANGE(
  * @param callback The callback function to call when the value changes (default is nullptr), parameter of callback will be `Ref<T>`
  */
 template <typename T>
-inline WidgetRange<T, Ref<T>>* WIDGET_RANGE_REF(
+inline BaseWidgetValue<Ref<T>>* WIDGET_RANGE_REF(
     T& value,
     const T step,
     const T min,
