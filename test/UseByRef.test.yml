@@ -12,3 +12,4 @@ steps:
   - wait-serial: "Hour: 7, Day: Mon, Toggle: Yes"
   - wait-serial: "Hour: 8, Day: Tue, Toggle: No"
   - wait-serial: "Hour: 9, Day: Wed, Toggle: Yes"
+    
