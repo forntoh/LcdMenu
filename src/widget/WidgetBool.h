@@ -27,10 +27,6 @@ class WidgetBool : public BaseWidgetValue<V> {
         void (*callback)(const V&) = nullptr)
         : BaseWidgetValue<V>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
-    const char* getTextOn() const { return this->textOn; }
-
-    const char* getTextOff() const { return this->textOff; }
-
   protected:
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
