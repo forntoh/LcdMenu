@@ -118,7 +118,7 @@ template <typename T>
 inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
     const T values[],
     const uint8_t size,
-    const uint8_t activePosition,
+    const uint8_t activePosition = 0,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,

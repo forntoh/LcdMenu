@@ -137,7 +137,7 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
 
 /**
  * @brief Function to create a new WidgetRange<T> instance.
- * NOTE: Make sure that value reference is not deallocated earlier than this widget.
+ * @note Make sure that value reference is not deallocated earlier than this widget.
  * @tparam T The type of the value.
  *
  * @param value The reference value of this widget (this value is passed by reference, so it can be updated externally).
