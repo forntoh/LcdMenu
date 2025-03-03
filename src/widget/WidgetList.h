@@ -79,7 +79,7 @@ class WidgetList : public BaseWidgetValue<V> {
         return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, values[(uint8_t)this->value]);
     }
     bool nextValue() {
-        if (this->value + 1 < size) {
+        if (static_cast<int>(this->value) + 1 < size) {
             this->value++;
             return true;
         }
@@ -90,7 +90,7 @@ class WidgetList : public BaseWidgetValue<V> {
         return false;
     }
     bool previousValue() {
-        if (this->value > 0) {
+        if (static_cast<int>(this->value) > 0) {
             this->value--;
             return true;
         }
