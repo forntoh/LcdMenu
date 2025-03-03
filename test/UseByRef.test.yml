@@ -1,0 +1,14 @@
+name: Widget Ref Test
+version: 1
+author: Thomas Forntoh
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - wait-serial: "Hour: 1, Day: Tue, Toggle: Yes"
+  - wait-serial: "Hour: 2, Day: Wed, Toggle: No"
+  - wait-serial: "Hour: 3, Day: Thu, Toggle: Yes"
+  - wait-serial: "Hour: 4, Day: Fri, Toggle: No"
+  - wait-serial: "Hour: 5, Day: Sat, Toggle: Yes"
+  - wait-serial: "Hour: 6, Day: Sun, Toggle: No"
+  - wait-serial: "Hour: 7, Day: Mon, Toggle: Yes"
+  - wait-serial: "Hour: 8, Day: Tue, Toggle: No"
+  - wait-serial: "Hour: 9, Day: Wed, Toggle: Yes"

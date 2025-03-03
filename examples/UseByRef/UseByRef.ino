@@ -53,24 +53,50 @@ LcdMenu menu(renderer);
 KeyboardAdapter keyboard(&menu, &Serial);
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     renderer.begin();
     menu.setScreen(mainScreen);
 }
 
 unsigned long last = 0;
 
+/**
+ * This function is used to validate the values of the day and toggle status
+ * which are ref values in the menu items. It prints the current day and toggle.
+ *
+ * localDay and localToggle are used here instead of directly using the values defined above
+ * to ensure that the ref values are correctly updated in the menu items.
+ *
+ * Success Scenario:
+ * - The day and toggle status printed to the Serial monitor change every second.
+ *
+ * Failure Scenario:
+ * - The day and toggle status printed to the Serial monitor do not change every second.
+ */
+void logger() {
+    int localHour = static_cast<WidgetRange<int, Ref<int>>*>(static_cast<ItemWidget<int>*>(mainItems[1])->getWidgetAt(0))->getValue();
+    uint8_t localDay = static_cast<WidgetList<char*, Ref<uint8_t>>*>(static_cast<ItemWidget<uint8_t>*>(mainItems[3])->getWidgetAt(0))->getValue();
+    bool localToggle = static_cast<WidgetBool<Ref<bool>>*>(static_cast<ItemWidget<bool>*>(mainItems[5])->getWidgetAt(0))->getValue();
+    Serial.print("Hour: ");
+    Serial.print(localHour);
+    Serial.print(", Day: ");
+    Serial.print(days[localDay]);
+    Serial.print(", Toggle: ");
+    Serial.println(localToggle ? "Yes" : "No");
+}
+
 void loop() {
     keyboard.observe();
+    menu.poll();
     unsigned long now = millis();
     if (now - last > 1000) {
         if (!menu.getRenderer()->isInEditMode()) {
             hour++;
-            hour %= 23;
+            hour %= 24;
             day++;
             day %= 7;
             toggle = !toggle;
-            menu.refresh();
+            logger();
         }
         last = now;
     }
