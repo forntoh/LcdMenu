@@ -140,7 +140,7 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
  * NOTE: Make sure that value reference is not deallocated earlier than this widget.
  * @tparam T The type of the value.
  *
- * @param value The reference value of this widget, the value will be used by reference
+ * @param value The reference value of this widget (this value is passed by reference, so it can be updated externally).
  * @param step The step value for incrementing/decrementing.
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.

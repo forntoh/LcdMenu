@@ -26,12 +26,12 @@ class WidgetList : public BaseWidgetValue<V> {
     WidgetList(
         const T values[],
         const uint8_t size,
-        const V value,
+        const V activePosition,
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
         void (*callback)(const V&))
-        : BaseWidgetValue<V>(value, format, cursorOffset, callback),
+        : BaseWidgetValue<V>(activePosition, format, cursorOffset, callback),
           size(size),
           cycle(cycle),
           values(values) {}
@@ -108,7 +108,7 @@ class WidgetList : public BaseWidgetValue<V> {
  *
  * @param values The list of values to choose from.
  * @param size The size of the list.
- * @param value The initial active position in the list (default: 0).
+ * @param activePosition The initial active position in the list (default: 0).
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
  * @param cycle Whether to cycle through the list (default: false).
@@ -118,22 +118,22 @@ template <typename T>
 inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
     const T values[],
     const uint8_t size,
-    const uint8_t value,
+    const uint8_t activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
     void (*callback)(const uint8_t&) = nullptr) {
-    return new WidgetList<T, uint8_t>(values, size, value, format, cursorOffset, cycle, callback);
+    return new WidgetList<T, uint8_t>(values, size, activePosition, format, cursorOffset, cycle, callback);
 }
 
 /**
  * @brief Function to create a new WidgetList<T> instance.
- * NOTE: Make sure that value reference is not deallocated earlier than this widget.
+ * @note Make sure that value reference is not deallocated earlier than this widget.
  * @tparam T The type of the value.
  *
  * @param values The list of values to choose from.
  * @param size The size of the list.
- * @param value The reference value of this widget, the value will be used by reference
+ * @param activePosition Initial active position in the list (this value is passed by reference, so it can be updated externally).
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
  * @param cycle Whether to cycle through the list (default: false).
@@ -143,10 +143,10 @@ template <typename T>
 inline BaseWidgetValue<Ref<uint8_t>>* WIDGET_LIST_REF(
     const T values[],
     const uint8_t size,
-    uint8_t& value,
+    uint8_t& activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
     void (*callback)(const Ref<uint8_t>&) = nullptr) {
-    return new WidgetList<T, Ref<uint8_t>>(values, size, Ref<uint8_t>(value), format, cursorOffset, cycle, callback);
+    return new WidgetList<T, Ref<uint8_t>>(values, size, Ref<uint8_t>(activePosition), format, cursorOffset, cycle, callback);
 }

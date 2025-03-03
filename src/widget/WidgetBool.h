@@ -79,7 +79,7 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
  * @brief Function to create a new Widget<Ref<bool>> object.
  * NOTE: Make sure that value reference is not deallocated earlier than this widget.
  *
- * @param value The reference value of this widget, the value will be used by reference
+ * @param value The reference value of this widget (this value is passed by reference, so it can be updated externally).
  * @param textOn The display text when value is true (default is "ON")
  * @param textOff The display text when value is false (default is "OFF")
  * @param format The format to display the value (default is "%s")
