@@ -66,7 +66,7 @@ class WidgetBool : public BaseWidgetValue<V> {
  * @param callback The callback function to execute when value changes (default is nullptr)
  */
 inline BaseWidgetValue<bool>* WIDGET_BOOL(
-    const bool value,
+    const bool value = false,
     const char* textOn = "ON",
     const char* textOff = "OFF",
     const char* format = "%s",
