@@ -17,8 +17,10 @@ CharacterDisplayRenderer::CharacterDisplayRenderer(
 
 void CharacterDisplayRenderer::begin() {
     MenuRenderer::begin();
-    static_cast<CharacterDisplayInterface*>(display)->createChar(0, upArrow);
-    static_cast<CharacterDisplayInterface*>(display)->createChar(1, downArrow);
+    if (upArrow != NULL && downArrow != NULL) {
+        static_cast<CharacterDisplayInterface*>(display)->createChar(0, upArrow);
+        static_cast<CharacterDisplayInterface*>(display)->createChar(1, downArrow);
+    }
 }
 
 void CharacterDisplayRenderer::drawItem(const char* text, const char* value, bool paddWithBlanks) {
