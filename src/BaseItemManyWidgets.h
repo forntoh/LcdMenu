@@ -40,6 +40,36 @@ class BaseItemManyWidgets : public MenuItem {
         return index < widgets.size() ? widgets[index] : nullptr;
     }
 
+    /**
+     * @brief Add a widget to the item.
+     *
+     * @param widget The widget to be added.
+     */
+    void addWidget(BaseWidget* widget) {
+        widgets.push_back(widget);
+    }
+
+    /**
+     * @brief Remove a widget from the item.
+     *
+     * This function removes a widget from the item at the specified index.
+     * If the item has only one widget, it will not be removed.
+     *
+     * @param index The index of the widget to be removed.
+     * @param deleteWidget If `true`, the widget will be deleted from memory. Default is `true`.
+     */
+    void removeWidget(uint8_t index, bool deleteWidget = true) {
+        if (widgets.size() > 1 && index < widgets.size()) {
+            widgets.erase(widgets.begin() + index);
+            if (deleteWidget) {
+                delete widgets[index];
+            }
+            if (activeWidget >= widgets.size()) {
+                activeWidget = widgets.size() - 1;
+            }
+        }
+    }
+
     virtual ~BaseItemManyWidgets() {
         for (auto widget : widgets) {
             delete widget;
