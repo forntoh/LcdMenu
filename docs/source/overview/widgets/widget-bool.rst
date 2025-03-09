@@ -26,12 +26,12 @@ In the above example, the WidgetBool widget is created with the following proper
 - The format to use when displaying the value is "%s sir" (the value will be displayed as "Yes sir" or "No sir").
 - The cursor offset is 5 (the cursor will be 5 characters from the end of the widget ie. on the 's' in "Yes" or on the 'o' in "No").
 
-There's also a `WIDGET_BOOL_REF` macro that can be used to create a WidgetBool instance with a reference to a boolean value.
+There's also a ``WIDGET_BOOL_REF`` macro that can be used to create a WidgetBool instance with a reference to a boolean value.
 The boolean value can be updated by changing the value of the referenced variable.
 After the value is updated, the WidgetBool will automatically update the its value on the next polling cycle (if :cpp:func:`polling <LcdMenu::poll>` is enabled) or
 immediately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
 
-For a complete example of using `WIDGET_BOOL_REF`, see the :doc:`use by ref example </reference/samples/UseByRef>`.
+For a complete example of using ``WIDGET_BOOL_REF``, see the :doc:`use by ref example </reference/samples/UseByRef>`.
 
 Widget Interaction
 ------------------
