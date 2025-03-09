@@ -2,6 +2,7 @@
 
 #include "BaseItemManyWidgets.h"
 #include "widget/BaseWidgetValue.h"
+#include <vector>
 
 // Custom index_sequence implementation for C++11
 template <size_t... Is>
@@ -47,13 +48,7 @@ class ItemWidget : public BaseItemManyWidgets {
   public:
     // Constructor for one or more widgets
     ItemWidget(const char* text, BaseWidgetValue<Ts>*... widgetPtrs, CallbackType callback = nullptr)
-        : BaseItemManyWidgets(
-              text,
-              // clang-format off
-              new BaseWidget* [sizeof...(Ts)] { widgetPtrs... },
-              // clang-format on
-              sizeof...(Ts)),
-          callback(callback) {}
+        : BaseItemManyWidgets(text, std::vector<BaseWidget*>{widgetPtrs...}), callback(callback) {}
 
     void setValues(Ts... values) {
         setValuesImpl(typename make_index_sequence<sizeof...(Ts)>::type{}, values...);
