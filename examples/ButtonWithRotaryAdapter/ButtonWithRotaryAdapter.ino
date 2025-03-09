@@ -21,8 +21,7 @@
 void toggleBacklight(bool isOn);
 void inputCallback(char* value);
 
-static const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
-static const uint8_t COLORS_COUNT = sizeof(colors) / sizeof(colors[0]);
+std::vector<const char*> colors = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
@@ -30,7 +29,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_WIDGET(
         "Color",
         [](const uint8_t color) { Serial.println(colors[color]); },
-        WIDGET_LIST(colors, COLORS_COUNT, 0, "%s")),
+        WIDGET_LIST(colors, 0, "%s")),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Placeholder 1"),
     ITEM_BASIC("Placeholder 2"));

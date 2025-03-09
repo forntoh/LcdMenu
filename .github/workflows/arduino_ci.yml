@@ -7,12 +7,12 @@ on:
     paths:
       - "src/**"
       - "test/**/*.cpp"
-      - '.github/workflows/arduino_ci.yml'
+      - ".github/workflows/arduino_ci.yml"
   pull_request:
     paths:
-      - 'src/**'
+      - "src/**"
       - "test/**/*.cpp"
-      - '.github/workflows/arduino_ci.yml'
+      - ".github/workflows/arduino_ci.yml"
 
 jobs:
   arduino-unit-tests:
@@ -36,7 +36,8 @@ jobs:
 
           git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
           git clone https://github.com/arduino-libraries/LiquidCrystal.git
+          git clone https://github.com/maniacbug/StandardCplusplus.git
 
-          mv LiquidCrystal_I2C LiquidCrystal $(bundle exec arduino_library_location.rb)
+          mv LiquidCrystal_I2C LiquidCrystal StandardCplusplus $(bundle exec arduino_library_location.rb)
 
           bundle exec arduino_ci.rb --skip-examples-compilation

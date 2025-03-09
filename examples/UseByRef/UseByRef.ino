@@ -12,7 +12,7 @@
 #define LCD_COLS 16
 #define LCD_ADDR 0x27
 
-const char* days[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+std::vector<const char*> days = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
 int hour = 0;
 uint8_t day = 0;
@@ -32,11 +32,11 @@ MENU_SCREEN(
     ITEM_WIDGET(
         "List val",
         [](const uint8_t value) { day = value; },
-        WIDGET_LIST(days, 7, day, "%s", 0, true)),
+        WIDGET_LIST(days, day, "%s", 0, true)),
     ITEM_WIDGET(
         "List ref",
         [](const Ref<uint8_t> value) { Serial.println(days[value.value]); },
-        WIDGET_LIST_REF(days, 7, day, "%s", 0, true)),
+        WIDGET_LIST_REF(days, day, "%s", 0, true)),
     ITEM_WIDGET(
         "Bool val",
         [](const bool value) { toggle = value; },
@@ -94,7 +94,7 @@ void loop() {
             hour++;
             hour %= 24;
             day++;
-            day %= 7;
+            day %= days.size();
             toggle = !toggle;
             logger();
         }

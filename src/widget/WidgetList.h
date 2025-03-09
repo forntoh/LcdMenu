@@ -1,6 +1,17 @@
 #pragma once
 
+#ifndef ARDUINO_ARCH_ESP32
+#ifndef ARDUINO_ARCH_ESP8266
+#ifndef ARDUINO_ARCH_STM32
+#ifndef ARDUINO_ARCH_SAMD
+#include <StandardCplusplus.h>
+#endif  // ARDUINO_ARCH_SAMD
+#endif  // ARDUINO_ARCH_STM32
+#endif  // ARDUINO_ARCH_ESP8266
+#endif  // ARDUINO_ARCH_ESP32
+
 #include "BaseWidgetValue.h"
+#include <vector>
 
 /**
  * @class WidgetList
@@ -18,21 +29,18 @@
 template <typename T, typename V = uint8_t>
 class WidgetList : public BaseWidgetValue<V> {
   protected:
-    const uint8_t size;
     const bool cycle;
-    const T* values;
+    const std::vector<T>& values;
 
   public:
     WidgetList(
-        const T values[],
-        const uint8_t size,
+        const std::vector<T>& values,
         const V activePosition,
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
         void (*callback)(const V&))
         : BaseWidgetValue<V>(activePosition, format, cursorOffset, callback),
-          size(size),
           cycle(cycle),
           values(values) {}
 
@@ -79,7 +87,7 @@ class WidgetList : public BaseWidgetValue<V> {
         return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, values[(uint8_t)this->value]);
     }
     bool nextValue() {
-        if (static_cast<int>(this->value) + 1 < size) {
+        if (static_cast<int>(this->value) + 1 < static_cast<int>(values.size())) {
             this->value++;
             return true;
         }
@@ -95,7 +103,7 @@ class WidgetList : public BaseWidgetValue<V> {
             return true;
         }
         if (cycle) {
-            this->value = size - 1;
+            this->value = values.size() - 1;
             return true;
         }
         return false;
@@ -107,7 +115,6 @@ class WidgetList : public BaseWidgetValue<V> {
  * @tparam T The type of the value.
  *
  * @param values The list of values to choose from.
- * @param size The size of the list.
  * @param activePosition The initial active position in the list (default: 0).
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
@@ -116,14 +123,13 @@ class WidgetList : public BaseWidgetValue<V> {
  */
 template <typename T>
 inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
-    const T values[],
-    const uint8_t size,
+    const std::vector<T>& values,
     const uint8_t activePosition = 0,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
     void (*callback)(const uint8_t&) = nullptr) {
-    return new WidgetList<T, uint8_t>(values, size, activePosition, format, cursorOffset, cycle, callback);
+    return new WidgetList<T, uint8_t>(values, activePosition, format, cursorOffset, cycle, callback);
 }
 
 /**
@@ -132,7 +138,6 @@ inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
  * @tparam T The type of the value.
  *
  * @param values The list of values to choose from.
- * @param size The size of the list.
  * @param activePosition Initial active position in the list (this value is passed by reference, so it can be updated externally).
  * @param format The format of the value (default: "%s").
  * @param cursorOffset The cursor offset (default: 0).
@@ -141,12 +146,11 @@ inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
  */
 template <typename T>
 inline BaseWidgetValue<Ref<uint8_t>>* WIDGET_LIST_REF(
-    const T values[],
-    const uint8_t size,
+    const std::vector<T>& values,
     uint8_t& activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
     void (*callback)(const Ref<uint8_t>&) = nullptr) {
-    return new WidgetList<T, Ref<uint8_t>>(values, size, Ref<uint8_t>(activePosition), format, cursorOffset, cycle, callback);
+    return new WidgetList<T, Ref<uint8_t>>(values, Ref<uint8_t>(activePosition), format, cursorOffset, cycle, callback);
 }
