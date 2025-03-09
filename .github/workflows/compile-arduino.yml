@@ -71,6 +71,7 @@ jobs:
             platforms: |
               # Install AVR platform via Boards Manager
               - name: arduino:avr
+                version: 1.8.8
             libraries: |
               - name: FreeRTOS
             sketch-paths: |
