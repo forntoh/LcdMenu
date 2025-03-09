@@ -74,4 +74,8 @@ The selected month value can be updated by changing the value of the **selectedM
 After the value is updated, the WidgetList will automatically update the selected item on the next polling cycle (if :cpp:func:`polling <LcdMenu::poll>` is enabled) or
 immediately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
 
+.. note::
+
+    The referenced variable (``selectedMonth``) must remain valid for the widget’s lifetime to ensure proper and predictable updates.
+
 For a complete example of using ``WIDGET_LIST_REF``, see the :doc:`use by ref example </reference/samples/UseByRef>`.

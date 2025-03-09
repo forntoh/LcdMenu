@@ -71,4 +71,8 @@ The selected temperature value can be updated by changing the value of the **sel
 After the value is updated, the WidgetRange will automatically update the selected temperature on the next polling cycle (if :cpp:func:`polling <LcdMenu::poll>` is enabled) or
 immediately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
 
+.. note::
+
+    The referenced variable (``selectedTemperature``) must remain valid for the widget’s lifetime to ensure proper and predictable updates.
+
 For a complete example of using ``WIDGET_RANGE_REF``, see the :doc:`use by ref example </reference/samples/UseByRef>`.
