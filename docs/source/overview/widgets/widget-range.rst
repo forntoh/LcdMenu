@@ -69,6 +69,6 @@ Temperature picker (with reference value)
 In the above example the WidgetRange allows the user to select a temperature between 0°C and 40°C.
 The selected temperature value can be updated by changing the value of the **selectedTemperature** variable.
 After the value is updated, the WidgetRange will automatically update the selected temperature on the next polling cycle (if :cpp:func:`polling <LcdMenu::poll>` is enabled) or
-immidiately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
+immediately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
 
 For a complete example of using `WIDGET_RANGE_REF`, see the :doc:`use by ref example </reference/samples/UseByRef>`.

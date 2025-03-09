@@ -72,6 +72,6 @@ Month picker (with reference value)
 In the above example the WidgetList allows the user to select a month.
 The selected month value can be updated by changing the value of the **selectedMonth** variable.
 After the value is updated, the WidgetList will automatically update the selected item on the next polling cycle (if :cpp:func:`polling <LcdMenu::poll>` is enabled) or
-immidiately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
+immediately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
 
 For a complete example of using `WIDGET_LIST_REF`, see the :doc:`use by ref example </reference/samples/UseByRef>`.
