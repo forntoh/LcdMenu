@@ -19,7 +19,7 @@
 <link href="../../../search.html" rel="search" title="Search"/>
 <link href="../../../genindex.html" rel="index" title="Index"/>
 <link href="WidgetRange.html" rel="next" title="WidgetRange"/>
-<link href="index.html" rel="prev" title="widget"/>
+<link href="BaseWidget.html" rel="prev" title="BaseWidget"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -130,47 +130,48 @@
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../samples/index.html">Code samples<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/pcf8574_i2c.html">pcf8574_i2c</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/Widgets.html">Widgets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/Basic.html">Basic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleInput.html">SimpleInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ViewShifting.html">ViewShifting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemValue.html">ItemValue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/List.html">List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/Callbacks.html">Callbacks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/IntFloatValues.html">IntFloatValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/SubMenu.html">SubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/KeypadShield.html">KeypadShield</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleRotary.html">SimpleRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/IntFloatValues.html">IntFloatValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SimpleInput.html">SimpleInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/pcf8574_i2c.html">pcf8574_i2c</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemValue.html">ItemValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ViewShifting.html">ViewShifting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/UseByRef.html">UseByRef</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/List.html">List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/Widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/Callbacks.html">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemWidget.html">ItemWidget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../MenuScreen.html">MenuScreen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInput.html">ItemInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemToggle.html">ItemToggle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemValue.html">ItemValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemWidget.html">ItemWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemList.html">ItemList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../renderer/index.html">renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">widget</a></li>
 </ul>
 </li>
@@ -234,6 +235,85 @@
 <div id="content" role="main">
 <section id="basewidgetvalue">
 <h1>BaseWidgetValue<a class="headerlink" href="#basewidgetvalue" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4I0E3Ref">
+<span id="_CPPv3I0E3Ref"></span><span id="_CPPv2I0E3Ref"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br/><span class="target" id="structRef"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Ref</span></span></span><a class="headerlink" href="#_CPPv4I0E3Ref" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4I0E3Ref'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><div class="docutils container">
+<em>#include &lt;BaseWidgetValue.h&gt;</em></div>
+<p>A wrapper for reference values that provides value semantics. </p>
+<p>This struct allows widgets to work with references while maintaining a consistent interface with value types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type being referenced (must be a non-reference type) </p>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3Ref3RefER1T">
+<span id="_CPPv3N3Ref3RefER1T"></span><span id="_CPPv2N3Ref3RefER1T"></span><span id="Ref::Ref__TR"></span><span class="target" id="structRef_1ab8638f7a93dac3691560ea4ab0f08f3e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Ref</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ref3RefER1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3Ref3RefER1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3RefeqERK1T">
+<span id="_CPPv3NK3RefeqERK1T"></span><span id="_CPPv2NK3RefeqERK1T"></span><span id="Ref::eq-operator__TCRC"></span><span class="target" id="structRef_1ab66a45a46aaaa1413392b3ea55477a67"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3RefeqERK1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK3RefeqERK1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3RefneERK1T">
+<span id="_CPPv3NK3RefneERK1T"></span><span id="_CPPv2NK3RefneERK1T"></span><span id="Ref::neq-operator__TCRC"></span><span class="target" id="structRef_1a4654c898197b458b74b77a24d92644bf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3RefneERK1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK3RefneERK1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3RefgtERK1T">
+<span id="_CPPv3NK3RefgtERK1T"></span><span id="_CPPv2NK3RefgtERK1T"></span><span id="Ref::gt-operator__TCRC"></span><span class="target" id="structRef_1a49dbc166cce0fd2f509cd31d81ca6d99"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&gt;</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3RefgtERK1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK3RefgtERK1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3RefltERK1T">
+<span id="_CPPv3NK3RefltERK1T"></span><span id="_CPPv2NK3RefltERK1T"></span><span id="Ref::lt-operator__TCRC"></span><span class="target" id="structRef_1adc5a93890ece3a1bdafa7d1848bd2bce"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3RefltERK1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK3RefltERK1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3RefgeERK1T">
+<span id="_CPPv3NK3RefgeERK1T"></span><span id="_CPPv2NK3RefgeERK1T"></span><span id="Ref::gte-operator__TCRC"></span><span class="target" id="structRef_1a8713287fa9fc94c50beb41ec7d0b1e55"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&gt;=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3RefgeERK1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK3RefgeERK1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3RefleERK1T">
+<span id="_CPPv3NK3RefleERK1T"></span><span id="_CPPv2NK3RefleERK1T"></span><span id="Ref::lte-operator__TCRC"></span><span class="target" id="structRef_1a043232f62c0df4eb94643e0df9d629ba"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3RefleERK1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK3RefleERK1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RefppEi">
+<span id="_CPPv3N3RefppEi"></span><span id="_CPPv2N3RefppEi"></span><span id="Ref::inc-operator__i"></span><span class="target" id="structRef_1abe87866080f98fc6121c447c4a6fae64"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref"><span class="n"><span class="pre">Ref</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">++</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3RefppEi" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3RefppEi'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RefmmEi">
+<span id="_CPPv3N3RefmmEi"></span><span id="_CPPv2N3RefmmEi"></span><span id="Ref::dec-operator__i"></span><span class="target" id="structRef_1aed205905358085aff7800a784c947857"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref"><span class="n"><span class="pre">Ref</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">--</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3RefmmEi" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3RefmmEi'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RefplE1T">
+<span id="_CPPv3N3RefplE1T"></span><span id="_CPPv2N3RefplE1T"></span><span id="Ref::add-operator__T"></span><span class="target" id="structRef_1a74841812f192b320b80b11f20b6ecce8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref"><span class="n"><span class="pre">Ref</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3RefplE1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3RefplE1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RefmiE1T">
+<span id="_CPPv3N3RefmiE1T"></span><span id="_CPPv2N3RefmiE1T"></span><span id="Ref::sub-operator__T"></span><span class="target" id="structRef_1a84ca58a073b45d44911c20a94c28002d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref"><span class="n"><span class="pre">Ref</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3RefmiE1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3RefmiE1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RefaSE1T">
+<span id="_CPPv3N3RefaSE1T"></span><span id="_CPPv2N3RefaSE1T"></span><span id="Ref::assign-operator__T"></span><span class="target" id="structRef_1a746a28cecc3d29598da3adba29be2c7d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref"><span class="n"><span class="pre">Ref</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3RefaSE1T" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3RefaSE1T'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RefaSE3RefI1TE">
+<span id="_CPPv3N3RefaSE3RefI1TE"></span><span id="_CPPv2N3RefaSE3RefI1TE"></span><span id="Ref::assign-operator__Ref:T:"></span><span class="target" id="structRef_1af9f608227d18ef51c2b900285b3a1cd1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref"><span class="n"><span class="pre">Ref</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref"><span class="n"><span class="pre">Ref</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3RefaSE3RefI1TE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3RefaSE3RefI1TE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3Refcv1TEv">
+<span id="_CPPv3NK3Refcv1TEv"></span><span id="_CPPv2NK3Refcv1TEv"></span><span id="Ref::castto-T-operatorC"></span><span class="target" id="structRef_1a99a7e3b6024f5910dd696e125ae92a12"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3Refcv1TEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK3Refcv1TEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3Ref5valueE">
+<span id="_CPPv3N3Ref5valueE"></span><span id="_CPPv2N3Ref5valueE"></span><span id="Ref::value__TR"></span><span class="target" id="structRef_1ac797c3d3e311c4991de7ce058e98f26f"></span><a class="reference internal" href="#_CPPv4I0E3Ref" title="Ref::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#_CPPv4N3Ref5valueE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N3Ref5valueE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+</div>
+</dd></dl>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4I0E15BaseWidgetValue">
 <span id="_CPPv3I0E15BaseWidgetValue"></span><span id="_CPPv2I0E15BaseWidgetValue"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br/><span class="target" id="classBaseWidgetValue"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BaseWidgetValue</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="BaseWidget.html#_CPPv410BaseWidget" title="BaseWidget"><span class="n"><span class="pre">BaseWidget</span></span></a><a class="headerlink" href="#_CPPv4I0E15BaseWidgetValue" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4I0E15BaseWidgetValue'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
@@ -250,7 +330,7 @@
 <dd class="field-odd"><p><strong>T</strong> – The type of value this widget holds </p>
 </dd>
 </dl>
-<p>Subclassed by <a class="reference internal" href="WidgetRange.html#classWidgetRange"><span class="std std-ref">WidgetRange&lt; T &gt;</span></a></p>
+<p>Subclassed by <a class="reference internal" href="WidgetBool.html#classWidgetBool"><span class="std std-ref">WidgetBool&lt; V &gt;</span></a>, <a class="reference internal" href="WidgetList.html#classWidgetList"><span class="std std-ref">WidgetList&lt; T, V &gt;</span></a>, <a class="reference internal" href="WidgetRange.html#classWidgetRange"><span class="std std-ref">WidgetRange&lt; T, V &gt;</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -336,11 +416,11 @@
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="index.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="BaseWidget.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        widget
+        BaseWidget
       </a>
 </div>
 <div class="ml-auto">
@@ -354,17 +434,35 @@
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
+<li><a :data-current="activeSection === '#_CPPv4I0E3Ref'" class="reference internal" href="#_CPPv4I0E3Ref"><code class="docutils literal notranslate"><span class="pre">Ref</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N3Ref3RefER1T'" class="reference internal" href="#_CPPv4N3Ref3RefER1T"><code class="docutils literal notranslate"><span class="pre">Ref()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK3RefeqERK1T'" class="reference internal" href="#_CPPv4NK3RefeqERK1T"><code class="docutils literal notranslate"><span class="pre">operator==()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK3RefneERK1T'" class="reference internal" href="#_CPPv4NK3RefneERK1T"><code class="docutils literal notranslate"><span class="pre">operator!=()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK3RefgtERK1T'" class="reference internal" href="#_CPPv4NK3RefgtERK1T"><code class="docutils literal notranslate"><span class="pre">operator&gt;()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK3RefltERK1T'" class="reference internal" href="#_CPPv4NK3RefltERK1T"><code class="docutils literal notranslate"><span class="pre">operator&lt;()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK3RefgeERK1T'" class="reference internal" href="#_CPPv4NK3RefgeERK1T"><code class="docutils literal notranslate"><span class="pre">operator&gt;=()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK3RefleERK1T'" class="reference internal" href="#_CPPv4NK3RefleERK1T"><code class="docutils literal notranslate"><span class="pre">operator&lt;=()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N3RefppEi'" class="reference internal" href="#_CPPv4N3RefppEi"><code class="docutils literal notranslate"><span class="pre">operator++()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N3RefmmEi'" class="reference internal" href="#_CPPv4N3RefmmEi"><code class="docutils literal notranslate"><span class="pre">operator--()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N3RefplE1T'" class="reference internal" href="#_CPPv4N3RefplE1T"><code class="docutils literal notranslate"><span class="pre">operator+()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N3RefmiE1T'" class="reference internal" href="#_CPPv4N3RefmiE1T"><code class="docutils literal notranslate"><span class="pre">operator-()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N3RefaSE1T'" class="reference internal" href="#_CPPv4N3RefaSE1T"><code class="docutils literal notranslate"><span class="pre">operator=()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N3RefaSE3RefI1TE'" class="reference internal" href="#_CPPv4N3RefaSE3RefI1TE"><code class="docutils literal notranslate"><span class="pre">operator=()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK3Refcv1TEv'" class="reference internal" href="#_CPPv4NK3Refcv1TEv"><code class="docutils literal notranslate"><span class="pre">operator</span> <span class="pre">T()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N3Ref5valueE'" class="reference internal" href="#_CPPv4N3Ref5valueE"><code class="docutils literal notranslate"><span class="pre">value</span></code></a></li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#_CPPv4I0E15BaseWidgetValue'" class="reference internal" href="#_CPPv4I0E15BaseWidgetValue"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue</span></code></a><ul>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::BaseWidgetValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4NK15BaseWidgetValue8getValueEv'" class="reference internal" href="#_CPPv4NK15BaseWidgetValue8getValueEv"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::getValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue8setValueERK1T'" class="reference internal" href="#_CPPv4N15BaseWidgetValue8setValueERK1T"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::setValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValueD0Ev'" class="reference internal" href="#_CPPv4N15BaseWidgetValueD0Ev"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::~BaseWidgetValue()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t'" class="reference internal" href="#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::draw()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh'" class="reference internal" href="#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::process()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue12handleChangeEv'" class="reference internal" href="#_CPPv4N15BaseWidgetValue12handleChangeEv"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::handleChange()</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue5valueE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue5valueE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::value</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue6formatE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue6formatE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::format</span></code></a></li>
-<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue8callbackE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue8callbackE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue::callback</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue15BaseWidgetValueERK1TPKcK7uint8_tPFvRK1TE"><code class="docutils literal notranslate"><span class="pre">BaseWidgetValue()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK15BaseWidgetValue8getValueEv'" class="reference internal" href="#_CPPv4NK15BaseWidgetValue8getValueEv"><code class="docutils literal notranslate"><span class="pre">getValue()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue8setValueERK1T'" class="reference internal" href="#_CPPv4N15BaseWidgetValue8setValueERK1T"><code class="docutils literal notranslate"><span class="pre">setValue()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValueD0Ev'" class="reference internal" href="#_CPPv4N15BaseWidgetValueD0Ev"><code class="docutils literal notranslate"><span class="pre">~BaseWidgetValue()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t'" class="reference internal" href="#_CPPv4N15BaseWidgetValue4drawEPcK7uint8_t"><code class="docutils literal notranslate"><span class="pre">draw()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh'" class="reference internal" href="#_CPPv4N15BaseWidgetValue7processEP7LcdMenuh"><code class="docutils literal notranslate"><span class="pre">process()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue12handleChangeEv'" class="reference internal" href="#_CPPv4N15BaseWidgetValue12handleChangeEv"><code class="docutils literal notranslate"><span class="pre">handleChange()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue5valueE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue5valueE"><code class="docutils literal notranslate"><span class="pre">value</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue6formatE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue6formatE"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N15BaseWidgetValue8callbackE'" class="reference internal" href="#_CPPv4N15BaseWidgetValue8callbackE"><code class="docutils literal notranslate"><span class="pre">callback</span></code></a></li>
 </ul>
 </li>
 </ul>
