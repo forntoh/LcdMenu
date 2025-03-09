@@ -4,9 +4,7 @@
 #ifndef ARDUINO_ARCH_ESP8266
 #ifndef ARDUINO_ARCH_STM32
 #ifndef ARDUINO_ARCH_SAMD
-#if ARDUINO < 10803  // Arduino 1.8.3 or older
 #include <StandardCplusplus.h>
-#endif  // !defined(ARDUINO_AVR) || ARDUINO < 10803
 #endif  // ARDUINO_ARCH_SAMD
 #endif  // ARDUINO_ARCH_STM32
 #endif  // ARDUINO_ARCH_ESP8266

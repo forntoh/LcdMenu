@@ -51,9 +51,6 @@ jobs:
           - fqbn: arduino:avr:uno
             type: avr
             artifact-name-suffix: arduino-avr-uno
-          - fqbn: arduino:avr:uno
-            type: avr10802
-            artifact-name-suffix: arduino-avr-uno-10802
           - fqbn: esp8266:esp8266:huzzah
             type: esp8266
             artifact-name-suffix: esp8266-esp8266-huzzah
@@ -65,21 +62,9 @@ jobs:
             artifact-name-suffix: STM32-stm32-GenF1
 
         include:
-          # AVR boards (Latest)
+          # AVR boards
           - board:
               type: avr
-            platforms: |
-              # Install AVR platform via Boards Manager
-              - name: arduino:avr
-                version: 1.8.8
-            libraries: |
-              - name: FreeRTOS
-            sketch-paths: |
-              - examples/RTOS
-              - examples/Widgets
-          # AVR boards (1.8.2)
-          - board:
-              type: avr10802
             platforms: |
               - name: arduino:avr
                 version: 1.8.2
