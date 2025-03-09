@@ -1,10 +1,17 @@
 #pragma once
 
+#ifndef ARDUINO_ARCH_ESP32
+#ifndef ARDUINO_ARCH_ESP8266
+#include <StandardCplusplus.h>
+#endif
+#endif
+
 #include "LcdMenu.h"
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <MenuItem.h>
 #include <utils/utils.h>
+#include <vector>
 
 /**
  * @class MenuScreen
@@ -24,7 +31,7 @@ class MenuScreen {
      * @brief The menu items to be displayed on screen.
      * These items will be drawn on renderer.
      */
-    MenuItem** items = NULL;
+    std::vector<MenuItem*> items;
     /**
      * @brief Cursor position.
      *
@@ -67,13 +74,11 @@ class MenuScreen {
      */
     uint8_t view = 0;
 
-    uint8_t itemCount = 0;
-
   public:
     /**
      * Constructor
      */
-    MenuScreen(MenuItem** items);
+    MenuScreen(std::vector<MenuItem*> items);
     /**
      * @brief Set new parent screen.
      */
@@ -92,6 +97,14 @@ class MenuScreen {
      * @return `MenuItem` - item at `position`
      */
     MenuItem* operator[](const uint8_t position);
+    /**
+     * @brief Add a new item to the menu.
+     */
+    void addItem(MenuItem* item);
+    /**
+     * @brief Remove an item from the menu.
+     */
+    void removeItem(uint8_t position);
 
   protected:
     /**
@@ -132,8 +145,8 @@ class MenuScreen {
     void poll(MenuRenderer* renderer, uint16_t pollInterval);
 };
 
-#define MENU_SCREEN(screen, items, ...)         \
-    extern MenuItem* items[];                   \
-    extern MenuScreen* screen;                  \
-    MenuItem* items[] = {__VA_ARGS__, nullptr}; \
+#define MENU_SCREEN(screen, items, ...)           \
+    extern std::vector<MenuItem*> items;          \
+    extern MenuScreen* screen;                    \
+    std::vector<MenuItem*> items = {__VA_ARGS__}; \
     MenuScreen* screen = new MenuScreen(items)
