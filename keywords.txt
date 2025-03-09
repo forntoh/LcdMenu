@@ -70,6 +70,7 @@ getTextOff	KEYWORD2
 getTextOn	KEYWORD2
 getValue	KEYWORD2
 getViewSize	KEYWORD2
+getWidgetAt	KEYWORD2
 handleChange	KEYWORD2
 handleCommit	KEYWORD2
 handleIdle	KEYWORD2
