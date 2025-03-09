@@ -33,7 +33,9 @@ immediately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
 
 .. note::
 
-    The referenced variable must remain valid for the widget’s lifetime to ensure proper and predictable updates.
+  The referenced variable must remain valid for the widget’s lifetime to ensure proper and predictable updates.
+  Invalidating the referenced variable (e.g., by going out of scope or being deleted) can lead to undefined behavior.
+  Ensure that the variable's lifetime exceeds or matches the widget's lifetime to avoid such issues.
 
 For a complete example of using ``WIDGET_BOOL_REF``, see the :doc:`use by ref example </reference/samples/UseByRef>`.
 
