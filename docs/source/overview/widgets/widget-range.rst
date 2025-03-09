@@ -56,3 +56,19 @@ Date picker
 
 In the above example the WidgetRange allows the user to select a date between 01/01/2021 and 31/12/2025.
 The selected date will be displayed as **"01/01/2021"**, **"01/02/2021"**, **"01/03/2021"**, etc with the cursor placed at the end of the value ie. on the last digit.
+
+Temperature picker (with reference value)
+-----------------------------------------
+
+.. code-block:: c++
+
+    int8_t selectedTemperature = 20;
+
+    WIDGET_RANGE_REF(selectedTemperature, 1, 0, 40, "%d°C", 0, false)
+
+In the above example the WidgetRange allows the user to select a temperature between 0°C and 40°C.
+The selected temperature value can be updated by changing the value of the **selectedTemperature** variable.
+After the value is updated, the WidgetRange will automatically update the selected temperature on the next polling cycle (if :cpp:func:`polling <LcdMenu::poll>` is enabled) or
+immidiately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
+
+For a complete example of using `WIDGET_RANGE_REF`, see the :doc:`use by ref example </reference/samples/UseByRef>`.

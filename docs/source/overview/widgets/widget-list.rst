@@ -21,6 +21,9 @@ WidgetList has the following properties:
 
 The following are examples of how to create WidgetList widgets:
 
+Simple list
+-----------
+
 .. code-block:: c++
 
     const char* listItems[] = { "Item 1", "Item 2", "Item 3", "Item 4" };
@@ -31,6 +34,9 @@ The following are examples of how to create WidgetList widgets:
 
 In the above example the WidgetList allows the user to select an item from "Item 1", "Item 2", "Item 3", or "Item 4".
 
+Number picker
+-------------
+
 .. code-block:: c++
 
     uint8_t listItems[] = { 7, 2, 9, 4 };
@@ -40,6 +46,9 @@ In the above example the WidgetList allows the user to select an item from "Item
 In the above example the WidgetList allows the user to select an item from 7, 2, 9, or 4 only.
 This is useful when you want to limit the user to a specific set of values.
 
+Day picker
+----------
+
 .. code-block:: c++
 
     const char* days[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
@@ -48,3 +57,21 @@ This is useful when you want to limit the user to a specific set of values.
 
 In the above example the WidgetList allows the user to select a day of the week.
 The selected day will be displayed as **" on Mon"**, **" on Tue"**, **" on Wed"**, etc.
+
+Month picker (with reference value)
+-----------------------------------
+
+.. code-block:: c++
+
+    uint8_t selectedMonth = 0;
+
+    const char* months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
+    WIDGET_LIST_REF(months, sizeof(months) / sizeof(months[0]), selectedMonth, "%s", 0, true)
+
+In the above example the WidgetList allows the user to select a month.
+The selected month value can be updated by changing the value of the **selectedMonth** variable.
+After the value is updated, the WidgetList will automatically update the selected item on the next polling cycle (if :cpp:func:`polling <LcdMenu::poll>` is enabled) or
+immidiately if you call the :cpp:func:`refresh <LcdMenu::refresh>` function.
+
+For a complete example of using `WIDGET_LIST_REF`, see the :doc:`use by ref example </reference/samples/UseByRef>`.
