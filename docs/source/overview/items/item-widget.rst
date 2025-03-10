@@ -25,12 +25,12 @@ The following are examples of how to create ItemWidget widgets.
 
 .. code-block:: c++
 
-    const char* options[] = { "Buy", "Sell" };
+    std::vector<const char*> options = { "Buy", "Sell" };
 
     ITEM_WIDGET(
         "Auto",
         [](const uint8_t option, bool isAuto) { Serial.println(option); Serial.println(isAuto); },
-        WIDGET_LIST(options, sizeof(options) / sizeof(options[0]), 0, "%s", 0, true),
+        WIDGET_LIST(options, 0, "%s", 0, true),
         WIDGET_BOOL(false, "Yes", "No", ",%s")),
 
 .. image:: images/item-widget-auto.gif
@@ -62,14 +62,14 @@ The user is able to select the quantity and tolerance for a particular trade.
 
 .. code-block:: c++
 
-    const char* days[] = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+    std::vector<const char*> days = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
 
     ITEM_WIDGET(
         "Freq",
         [](int hour, int minute, const uint8_t day) { Serial.println(hour); Serial.println(minute); Serial.println(day); },
         WIDGET_RANGE(0, 1, 0, 23, "%02d", 0, false),
         WIDGET_RANGE(0, 1, 0, 59, ":%02d", 0, false),
-        WIDGET_LIST(days, sizeof(days) / sizeof(days[0]), 0, " on %s", 0, true)),
+        WIDGET_LIST(days, 0, " on %s", 0, true)),
 
 .. image:: images/item-widget-freq.gif
     :width: 400px
@@ -100,15 +100,15 @@ The selected date will be displayed as **"01/01/2021"**, **"01/02/2021"**, **"01
 
 .. code-block:: c++
 
-    const char pinChars[] = "123456789ABCDEF";
+    std::vector<char> pinChars = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     ITEM_WIDGET(
         "Pin",
         [](const uint8_t d1, const uint8_t d2, const uint8_t d3, const uint8_t d4) { Serial.print(d1); Serial.print(d2); Serial.print(d3); Serial.println(d4); },
-        WIDGET_LIST(pinChars, strlen(pinChars), 2, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 6, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 10, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 14, "%c", 0, true))
+        WIDGET_LIST(pinChars, 2, "%c", 0, true),
+        WIDGET_LIST(pinChars, 6, "%c", 0, true),
+        WIDGET_LIST(pinChars, 10, "%c", 0, true),
+        WIDGET_LIST(pinChars, 14, "%c", 0, true))
 
 Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
