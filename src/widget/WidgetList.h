@@ -1,16 +1,7 @@
 #pragma once
 
-#ifndef ARDUINO_ARCH_ESP32
-#ifndef ARDUINO_ARCH_ESP8266
-#ifndef ARDUINO_ARCH_STM32
-#ifndef ARDUINO_ARCH_SAMD
-#include <StandardCplusplus.h>
-#endif  // ARDUINO_ARCH_SAMD
-#endif  // ARDUINO_ARCH_STM32
-#endif  // ARDUINO_ARCH_ESP8266
-#endif  // ARDUINO_ARCH_ESP32
-
 #include "BaseWidgetValue.h"
+#include "utils/std.h"
 #include <vector>
 
 /**

@@ -1,20 +1,11 @@
 #pragma once
 
-#ifndef ARDUINO_ARCH_ESP32
-#ifndef ARDUINO_ARCH_ESP8266
-#ifndef ARDUINO_ARCH_STM32
-#ifndef ARDUINO_ARCH_SAMD
-#include <StandardCplusplus.h>
-#endif  // ARDUINO_ARCH_SAMD
-#endif  // ARDUINO_ARCH_STM32
-#endif  // ARDUINO_ARCH_ESP8266
-#endif  // ARDUINO_ARCH_ESP32
-
 #include "LcdMenu.h"
+#include "MenuItem.h"
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
-#include <MenuItem.h>
-#include <utils/utils.h>
+#include "utils/std.h"
+#include "utils/utils.h"
 #include <vector>
 
 /**
