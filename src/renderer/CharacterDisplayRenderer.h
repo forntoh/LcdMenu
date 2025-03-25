@@ -97,4 +97,6 @@ class CharacterDisplayRenderer : public MenuRenderer {
     void drawBlinker() override;
     void clearBlinker() override;
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override;
+    bool isBlinkerOn() override;
+    void resetBlinkerOn() override;
 };

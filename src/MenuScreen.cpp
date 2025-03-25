@@ -150,6 +150,9 @@ void MenuScreen::clear() {
 
 void MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
     static unsigned long lastPollTime = 0;
+    if(renderer->isInEditMode()){
+        pollInterval = 100; // faster polling when in edit mode
+    }
     if (millis() - lastPollTime >= pollInterval) {
         for (uint8_t i = 0; i < renderer->maxRows; i++) {
             MenuItem* item = this->items[view + i];

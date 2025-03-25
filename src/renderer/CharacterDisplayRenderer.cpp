@@ -92,11 +92,29 @@ void CharacterDisplayRenderer::draw(uint8_t byte) {
 }
 
 void CharacterDisplayRenderer::drawBlinker() {
-    static_cast<CharacterDisplayInterface*>(display)->drawBlinker();
+//    static_cast<CharacterDisplayInterface*>(display)->drawBlinker();
 }
 
 void CharacterDisplayRenderer::clearBlinker() {
-    static_cast<CharacterDisplayInterface*>(display)->clearBlinker();
+//    static_cast<CharacterDisplayInterface*>(display)->clearBlinker();
+}
+
+bool CharacterDisplayRenderer::isBlinkerOn() {
+    uint32_t currentMillis = millis();
+    if(blinkerOn && (currentMillis - blinkerLastTime > 600)){
+        blinkerLastTime = currentMillis;
+        blinkerOn = !blinkerOn;
+        }
+    else if(!blinkerOn && (currentMillis - blinkerLastTime > 200)){
+        blinkerLastTime = currentMillis;
+        blinkerOn = !blinkerOn;
+    }
+    return blinkerOn;
+}
+
+void CharacterDisplayRenderer::resetBlinkerOn() {
+    blinkerOn = true;
+    blinkerLastTime = millis();
 }
 
 void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) {
