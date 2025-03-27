@@ -10,17 +10,17 @@
 class BaseItemManyWidgets : public MenuItem {
   protected:
     BaseWidget** widgets = nullptr;
-    const uint8_t size = 0;
-    uint8_t activeWidget = 0;
+    const int8_t size = 0;
+    int8_t activeWidget = 0;//-1 means no active widget
 
   public:
-    BaseItemManyWidgets(const char* text, BaseWidget** widgets, const uint8_t size, uint8_t activeWidget = 0)
-        : MenuItem(text), widgets(widgets), size(size), activeWidget(constrain(activeWidget, 0, size)) {
+    BaseItemManyWidgets(const char* text, BaseWidget** widgets, const uint8_t size, int8_t activeWidget = -1)
+        : MenuItem(text), widgets(widgets), size(size), activeWidget(constrain(activeWidget, -1, size - 1)) {
         this->polling = true;
     }
 
-    uint8_t getActiveWidget() const { return activeWidget; }
-    void setActiveWidget(const uint8_t activeWidget) {
+    int8_t getActiveWidget() const { return activeWidget; }
+    void setActiveWidget(const int8_t activeWidget) {
         if (activeWidget < size) {
             this->activeWidget = activeWidget;
         }
@@ -39,9 +39,9 @@ class BaseItemManyWidgets : public MenuItem {
   protected:
     virtual void handleCommit() = 0;
     /**
-     * @brief Reset the active widget to the first widget.
+     * @brief Reset the active widget to no active widget.
      */
-    void reset() { activeWidget = 0; }
+    void reset() { activeWidget = -1; }
 
     /**
      * @brief Draws the menu item using the provided renderer.
@@ -66,9 +66,17 @@ class BaseItemManyWidgets : public MenuItem {
         uint8_t index = 0;
         uint8_t cursorCol = 0;
 
-        for (uint8_t i = 0; i < size; i++) {
-            index += widgets[i]->draw(buf, index);
+        for (int8_t i = 0; i < size; i++) {
+            uint8_t widgetLength = widgets[i]->draw(buf, index);
+            index += widgetLength;  // keep the widget
             if (i == activeWidget && renderer->isInEditMode()) {
+                if (!renderer->isBlinkerOn()) {
+                    index -= widgetLength;
+                    for (uint8_t j = 0; j < widgetLength; j++) {
+                        buf[index] = ' ';  // clear the widget
+                        index++;
+                    }
+                }
                 // Calculate the available space for the widgets after the text
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
                 // Adjust the view shift to ensure the active widget is visible
@@ -109,11 +117,13 @@ class BaseItemManyWidgets : public MenuItem {
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
-        if (widgets[activeWidget]->process(menu, command)) {
+        if (activeWidget >= 0 && widgets[activeWidget]->process(menu, command)) {
+            renderer->resetBlinkerOn();
             draw(renderer);
             return true;
         }
         if (renderer->isInEditMode()) {
+            renderer->resetBlinkerOn();
             switch (command) {
                 case ENTER:
                     if (activeWidget < this->size - 1) {
@@ -137,6 +147,7 @@ class BaseItemManyWidgets : public MenuItem {
         }
         if (command == ENTER) {
             renderer->setEditMode(true);
+            if (activeWidget < 0) activeWidget = 0;  // activate first widget
             draw(renderer);
             renderer->drawBlinker();
             LOG(F("ItemWidget::enterEditMode"), this->text);
@@ -147,8 +158,8 @@ class BaseItemManyWidgets : public MenuItem {
 
     void left(MenuRenderer* renderer) {
         if (activeWidget == 0) {
-            activeWidget = this->size - 1;
-        } else {
+            activeWidget = this->size - 1;  // wrap around
+        } else if (activeWidget > 0) {
             activeWidget--;
         }
         draw(renderer);
@@ -156,7 +167,8 @@ class BaseItemManyWidgets : public MenuItem {
     }
 
     void right(MenuRenderer* renderer) {
-        activeWidget = (activeWidget + 1) % this->size;
+        activeWidget = (activeWidget + 1) % this->size;  // wrap around
+        // activeWidget = (constrain((activeWidget+1), 0, size-1));  // do not wrap around
         draw(renderer);
         LOG(F("ItemWidget::right"), activeWidget);
     }
