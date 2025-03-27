@@ -17,6 +17,7 @@ class BaseItemManyWidgets : public MenuItem {
   public:
     BaseItemManyWidgets(const char* text, std::vector<BaseWidget*> widgets, uint8_t activeWidget = 0)
         : MenuItem(text), widgets(widgets), activeWidget(constrain(activeWidget, 0, widgets.size())) {
+)
         this->polling = true;
     }
 
@@ -112,10 +113,9 @@ class BaseItemManyWidgets : public MenuItem {
                 if (!renderer->isBlinkerOn()) {
                     index -= widgetLength;
                     for (uint8_t j = 0; j < widgetLength; j++) {
-                        buf[index] = ' ';  //clear the widget for blinking
+                        buf[index] = ' ';  // clear the widget
                         index++;
                     }
-                } else {
                 }
                 // Calculate the available space for the widgets after the text
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
@@ -187,7 +187,7 @@ class BaseItemManyWidgets : public MenuItem {
         }
         if (command == ENTER) {
             renderer->setEditMode(true);
-            if (activeWidget < 0) activeWidget = 0;  //activate first widget
+            if (activeWidget < 0) activeWidget = 0;  // activate first widget
             draw(renderer);
             renderer->drawBlinker();
             LOG(F("ItemWidget::enterEditMode"), this->text);
@@ -198,8 +198,8 @@ class BaseItemManyWidgets : public MenuItem {
 
     void left(MenuRenderer* renderer) {
         if (activeWidget == 0) {
-            activeWidget = widgets.size() - 1;
-        } else {
+            activeWidget = widgets.size() - 1;  // wrap around
+        } else if (activeWidget > 0) {
             activeWidget--;
         }
         draw(renderer);
