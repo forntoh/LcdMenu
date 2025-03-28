@@ -34,7 +34,7 @@ When the ``Sub-menu 1`` menu item is selected, the sub-menu screen will be displ
 
 You can create multiple levels of sub-menus by nesting sub-menu items within other sub-menu screens.
 
-After a sub-menu screen is created, you can add items to it using :cpp:func:`MenuScreen::addItem` or remove items using :cpp:func:`MenuScreen::removeItem` on runtime.
+After a sub-menu screen is created, you can add items to it using :cpp:func:`MenuScreen::addItem` or remove items using :cpp:func:`MenuScreen::removeItem`, :cpp:func:`MenuScreen::removeLastItem` on runtime.
 This allows you to dynamically update the sub-menu items based on user input or other conditions, an example of this can be a settings menu where the user can choose a
 WiFi network to connect to, and the list of available networks is updated based on the scan results. See the :doc:`dynamic menu example </reference/samples/DynamicMenu>` for more information.
 
