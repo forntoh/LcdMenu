@@ -116,10 +116,23 @@ void MenuScreen::addItem(MenuItem* item) {
     items.push_back(item);
 }
 
+void MenuScreen::addItem(uint8_t position, MenuItem* item) {
+    if (position < items.size()) {
+        items.insert(items.begin() + position, item);
+    }
+}
+
 void MenuScreen::removeItem(uint8_t position, bool deleteItem) {
     if (position < items.size()) {
         items.erase(items.begin() + position);
         if (deleteItem) delete items[position];
+    }
+}
+
+void MenuScreen::removeLastItem(bool deleteItem) {
+    if (items.size() > 0) {
+        items.pop_back();
+        if (deleteItem) delete items.back();
     }
 }
 
