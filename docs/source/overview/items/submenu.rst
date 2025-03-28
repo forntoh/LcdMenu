@@ -38,4 +38,6 @@ After a sub-menu screen is created, you can add items to it using :cpp:func:`Men
 This allows you to dynamically update the sub-menu items based on user input or other conditions, an example of this can be a settings menu where the user can choose a
 WiFi network to connect to, and the list of available networks is updated based on the scan results. See the :doc:`dynamic menu example </reference/samples/DynamicMenu>` for more information.
 
+You can also update the screen that is displayed when the sub-menu item is selected by using the :cpp:func:`ItemSubMenu::setScreen` function on runtime.
+
 Find more information about the sub-menu item in the :cpp:class:`API reference <ItemSubMenu>`.
