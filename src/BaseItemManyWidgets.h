@@ -41,6 +41,18 @@ class BaseItemManyWidgets : public MenuItem {
     }
 
     /**
+     * @brief Add a widget to the item at the specified index.
+     *
+     * @param index The index at which to add the widget.
+     * @param widget The widget to be added.
+     */
+    void addWidgetAt(uint8_t index, BaseWidget* widget) {
+        if (index < widgets.size()) {
+            widgets.insert(widgets.begin() + index, widget);
+        }
+    }
+
+    /**
      * @brief Remove a widget from the item.
      *
      * This function removes a widget from the item at the specified index.
