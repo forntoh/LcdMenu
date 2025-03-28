@@ -59,14 +59,10 @@ class BaseItemManyWidgets : public MenuItem {
      * If the item has only one widget, it will not be removed.
      *
      * @param index The index of the widget to be removed.
-     * @param deleteWidget If `true`, the widget will be deleted from memory. Default is `true`.
      */
-    void removeWidget(uint8_t index, bool deleteWidget = true) {
+    void removeWidget(uint8_t index) {
         if (widgets.size() > 1 && index < widgets.size()) {
             widgets.erase(widgets.begin() + index);
-            if (deleteWidget) {
-                delete widgets[index];
-            }
             if (activeWidget >= widgets.size()) {
                 activeWidget = widgets.size() - 1;
             }

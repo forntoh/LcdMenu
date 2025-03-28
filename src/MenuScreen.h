@@ -105,14 +105,12 @@ class MenuScreen {
     /**
      * @brief Remove an item from the menu at the specified position and optionally delete it.
      * @param position The position of the item to remove.
-     * @param deleteItem If `true` then the item will be deleted from memory. Default is `true`.
      */
-    void removeItem(uint8_t position, bool deleteItem = true);
+    void removeItem(uint8_t position);
     /**
      * @brief Remove the last item from the menu and optionally delete it.
-     * @param deleteItem If `true` then the item will be deleted from memory. Default is `true`.
      */
-    void removeLastItem(bool deleteItem = true);
+    void removeLastItem();
 
     /**
      * @brief Get the number of items in the menu.
