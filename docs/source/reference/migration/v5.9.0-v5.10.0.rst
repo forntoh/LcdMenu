@@ -1,0 +1,68 @@
+Migration from v5.9.0 to v5.10.0
+--------------------------------
+
+This guide details the changes and how to update your code to migrate to |project| v5.10.0.
+
+Vector Usage for Menu Items
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In v5.10.0, ``std::vector`` is now used for menu items instead of static arrays. This change provides more flexibility and modernizes the codebase.
+
+.. code-block:: cpp
+   :emphasize-removed: 2-3
+   :emphasize-added: 6-7
+
+    // Previous implementation
+    static const char* colors[] = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
+    static const uint8_t nums[] = {5, 7, 9, 12, 32};
+
+    // Updated implementation
+    std::vector<const char*> colors = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
+    std::vector<uint8_t> nums = {5, 7, 9, 12, 32};
+
+Menu Widget Updates
++++++++++++++++++++
+
+The ``WIDGET_LIST`` macro no longer requires the count parameter for vectors. This simplifies the widget definition.
+
+.. code-block:: cpp
+   :emphasize-removed: 4,10
+   :emphasize-added: 5,11
+
+    ITEM_WIDGET(
+        "Color",
+        [](const uint8_t color) { Serial.println(colors[color]); },
+        WIDGET_LIST(colors, COLORS_COUNT, "%s", 0, true)),
+        WIDGET_LIST(colors, 0, "%s", 0, true)),
+
+    ITEM_WIDGET(
+        "Num",
+        [](const uint8_t num) { Serial.println(num); },
+        WIDGET_LIST(nums, NUMS_COUNT, "%d", 0, true)),
+        WIDGET_LIST(nums, 0, "%d", 0, true)),
+
+This change removes the need to manually calculate and pass the count of items, making the code cleaner and less error-prone.
+
+Microcontroller Compatibility (Important)
++++++++++++++++++++++++++++++++++++++++++
+
+If your microcontroller does not support standard C++ (e.g., Arduino Uno), you **must** install the `maniacbug/StandardCplusplus` library to use `std::vector`. Without this library, your code will not compile.
+
+You can install the library via the Arduino Library Manager or download it directly from its `GitHub repository <https://github.com/maniacbug/StandardCplusplus>`_.
+
+.. warning::
+
+    Using `std::vector` may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.
+
+.. note::
+
+    For microcontrollers that already support standard C++ (e.g., ESP32, STM32), no additional libraries are required.
+
+Summary
++++++++
+
+- Replaced static arrays with ``std::vector`` for menu items.
+- Updated ``WIDGET_LIST`` macro to remove the count parameter for vectors.
+- **Important:** Install the `maniacbug/StandardCplusplus <https://github.com/maniacbug/StandardCplusplus>`_ library for microcontrollers that do not support standard C++.
+
+Follow these steps to update your code and take advantage of the improvements in v5.10.0.
