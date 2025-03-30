@@ -16,13 +16,13 @@ ItemWidget has the following properties:
 
 - **text**: The text to display for the menu item.
 - **callback**: A callback function that will be called when the menu item is selected (default: nullptr).
-- **widgets**: An array of widgets that will be displayed.
+- **widgets**: A collection of widgets (``std::vector<BaseWidget*>``) that will be displayed.
 
 ItemWidget can host one or more widgets.
 The widgets can be of different types and can be used to display different types of data.
 
 You can add widget items dynamically to the ItemWidget using :cpp:func:`BaseItemManyWidgets::addWidget`, :cpp:func:`BaseItemManyWidgets::addWidgetAt` functions or
-remove them using the :cpp:func:`BaseItemManyWidgets::removeWidget` function on runtime to update the widgets based on user input or other conditions.
+remove them using the :cpp:func:`BaseItemManyWidgets::removeWidget` function at runtime to update the widgets based on user input or other conditions.
 
 The following are examples of how to create ItemWidget widgets.
 
