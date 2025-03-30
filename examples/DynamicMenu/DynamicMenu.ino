@@ -1,4 +1,3 @@
-#include "utils/custom_printf.h"
 #include <ItemCommand.h>
 #include <ItemSubMenu.h>
 #include <LcdMenu.h>
