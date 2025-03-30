@@ -73,7 +73,7 @@ class MenuScreen {
     /**
      * Constructor
      */
-    MenuScreen(std::vector<MenuItem*> items);
+    MenuScreen(std::vector<MenuItem*> items = std::vector<MenuItem*>());
     /**
      * @brief Set new parent screen.
      */
