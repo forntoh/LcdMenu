@@ -17,6 +17,11 @@ MenuItem* MenuScreen::operator[](const uint8_t position) {
 }
 
 void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
+    if (items.empty()) {
+        cursor = 0;
+        draw(renderer);
+        return;
+    }
     uint8_t constrained = constrain(position, 0, items.size() - 1);
     if (constrained == cursor) {
         return;
@@ -97,6 +102,11 @@ void MenuScreen::up(MenuRenderer* renderer) {
 }
 
 void MenuScreen::down(MenuRenderer* renderer) {
+    if (items.empty()) {
+        cursor = 0;
+        draw(renderer);
+        return;
+    }
     if (cursor < items.size() - 1) {
         if (++cursor > view + renderer->maxRows - 1) view++;
         draw(renderer);
