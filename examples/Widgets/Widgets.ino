@@ -16,9 +16,9 @@
 byte plusMinus[8] = {B00000, B00100, B01110, B00100, B00000, B01110, B00000, B00000};  // ±
 byte euro[8] = {B00111, B01000, B11110, B01000, B11110, B01000, B00111, B00000};       // €
 
-const char* options[] = {"Buy", "Sell"};
-const char* days[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-const char pinChars[] = "123456789ABCDEF";
+std::vector<const char*> options = {"Buy", "Sell"};
+std::vector<const char*> days = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+std::vector<char> pinChars = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
 MENU_SCREEN(
     mainScreen,
@@ -26,7 +26,7 @@ MENU_SCREEN(
     ITEM_WIDGET(
         "Auto",
         [](const uint8_t option, bool isAuto) { Serial.println(options[option]); Serial.println(isAuto); },
-        WIDGET_LIST(options, sizeof(options) / sizeof(options[0]), 0, "%s", 0, true),
+        WIDGET_LIST(options, 0, "%s", 0, true),
         WIDGET_BOOL(false, "Yes", "No", ",%s")),
     ITEM_WIDGET(
         "Price",
@@ -42,7 +42,7 @@ MENU_SCREEN(
         [](int hour, int minute, const uint8_t day) { Serial.println(hour); Serial.println(minute); Serial.println(days[day]); },
         WIDGET_RANGE(0, 1, 0, 23, "%02d", 0, false),
         WIDGET_RANGE(0, 1, 0, 59, ":%02d", 0, false),
-        WIDGET_LIST(days, sizeof(days) / sizeof(days[0]), 0, " on %s", 0, true)),
+        WIDGET_LIST(days, 0, " on %s", 0, true)),
     ITEM_WIDGET(
         "Start",
         [](int day, int month, int year) { Serial.println(day); Serial.println(month); Serial.println(year); },
@@ -52,10 +52,10 @@ MENU_SCREEN(
     ITEM_WIDGET(
         "Pin",
         [](const uint8_t d1, const uint8_t d2, const uint8_t d3, const uint8_t d4) { Serial.print(pinChars[d1]); Serial.print(pinChars[d2]); Serial.print(pinChars[d3]); Serial.println(pinChars[d4]); },
-        WIDGET_LIST(pinChars, strlen(pinChars), 2, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 6, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 10, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 14, "%c", 0, true)));
+        WIDGET_LIST(pinChars, 2, "%c", 0, true),
+        WIDGET_LIST(pinChars, 6, "%c", 0, true),
+        WIDGET_LIST(pinChars, 10, "%c", 0, true),
+        WIDGET_LIST(pinChars, 14, "%c", 0, true)));
 
 LiquidCrystal_I2C lcd(LCD_ADDR, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd);

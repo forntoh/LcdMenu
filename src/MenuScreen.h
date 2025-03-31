@@ -1,10 +1,12 @@
 #pragma once
 
 #include "LcdMenu.h"
+#include "MenuItem.h"
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
-#include <MenuItem.h>
-#include <utils/utils.h>
+#include "utils/std.h"
+#include "utils/utils.h"
+#include <vector>
 
 /**
  * @class MenuScreen
@@ -24,7 +26,7 @@ class MenuScreen {
      * @brief The menu items to be displayed on screen.
      * These items will be drawn on renderer.
      */
-    MenuItem** items = NULL;
+    std::vector<MenuItem*> items;
     /**
      * @brief Cursor position.
      *
@@ -67,13 +69,11 @@ class MenuScreen {
      */
     uint8_t view = 0;
 
-    uint8_t itemCount = 0;
-
   public:
     /**
      * Constructor
      */
-    MenuScreen(MenuItem** items);
+    MenuScreen(const std::vector<MenuItem*>& items = std::vector<MenuItem*>());
     /**
      * @brief Set new parent screen.
      */
@@ -92,6 +92,30 @@ class MenuScreen {
      * @return `MenuItem` - item at `position`
      */
     MenuItem* operator[](const uint8_t position);
+    /**
+     * @brief Add a new item to the menu.
+     */
+    void addItem(MenuItem* item);
+    /**
+     * @brief Add a new item to the menu at the specified position.
+     * @param position The position to add the item.
+     * @param item The item to add.
+     */
+    void addItemAt(uint8_t position, MenuItem* item);
+    /**
+     * @brief Remove an item from the menu at the specified position.
+     * @param position The position of the item to remove.
+     */
+    void removeItemAt(uint8_t position);
+    /**
+     * @brief Remove the last item from the menu.
+     */
+    void removeLastItem();
+
+    /**
+     * @brief Get the number of items in the menu.
+     */
+    const size_t size() { return items.size(); }
 
   protected:
     /**
@@ -132,8 +156,8 @@ class MenuScreen {
     void poll(MenuRenderer* renderer, uint16_t pollInterval);
 };
 
-#define MENU_SCREEN(screen, items, ...)         \
-    extern MenuItem* items[];                   \
-    extern MenuScreen* screen;                  \
-    MenuItem* items[] = {__VA_ARGS__, nullptr}; \
+#define MENU_SCREEN(screen, items, ...)           \
+    extern std::vector<MenuItem*> items;          \
+    extern MenuScreen* screen;                    \
+    std::vector<MenuItem*> items = {__VA_ARGS__}; \
     MenuScreen* screen = new MenuScreen(items)

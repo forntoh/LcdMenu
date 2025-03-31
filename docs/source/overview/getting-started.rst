@@ -5,7 +5,7 @@ Getting started
 
     A quick guide to get you started with |project|.
 
-|project| is a simple but powerful library for creating menus systems on embedded devices.
+|project| is a simple but powerful library for creating menu systems on embedded devices.
 It is designed to be easy to use and to work with a wide range of display interfaces and provide
 various helpers for handling user input like rotary encoders and buttons.
 
@@ -29,10 +29,27 @@ Follow `this guide <https://www.ardu-badge.com/LcdMenu>`_ to install the library
 
 5. Build and upload your project to your device.
 
+.. important::
+
+    If your microcontroller does not support standard C++ (e.g., Arduino Uno), you **must** install the `mike-matera/ArduinoSTL <https://github.com/mike-matera/ArduinoSTL>`_ library to use features like ``std::vector``. Without this library, your code will not compile.
+
+    You can install the library via the Arduino Library Manager, download it directly from `mike-matera/ArduinoSTL <https://github.com/mike-matera/ArduinoSTL>`_, or add it to your PlatformIO project by including the following line in your ``platformio.ini`` file:
+
+    .. code-block:: bash
+
+        lib_deps =
+            mike-matera/ArduinoSTL@^1.3.3
+
+.. warning::
+
+    Using ``std::vector`` may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.
+
+    For microcontrollers that already support standard C++ (e.g., ESP32, STM32), no additional libraries are required.
+
 Usage
 -----
 
-To create a menu system with |project|, you need to define a menu structure and a display interface and an input method to interact with the menu.
+To create a menu system with |project|, you need to define a menu structure, a display interface, and an input method to interact with the menu.
 For this example, we will use the ``LiquidCrystal_I2C`` display interface and ``KeyboardAdapter`` for user input to read from the serial monitor.
 You can replace these with other display interfaces and input methods as needed or create your own.
 

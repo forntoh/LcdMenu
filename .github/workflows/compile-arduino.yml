@@ -37,8 +37,9 @@ jobs:
         - examples/List
         - examples/SimpleRotary
         - examples/SSD1803A_I2C
-        - examples/Widgets
         - examples/UseByRef
+        - examples/DynamicMenu
+        - examples/Widgets
 
       SKETCHES_REPORTS_PATH: sketches-reports
 
@@ -67,10 +68,11 @@ jobs:
           - board:
               type: avr
             platforms: |
-              # Install AVR platform via Boards Manager
               - name: arduino:avr
+                version: 1.8.2
             libraries: |
               - name: FreeRTOS
+              - name: ArduinoSTL
             sketch-paths: |
               - examples/RTOS
           # ESP32 boards
@@ -91,6 +93,13 @@ jobs:
               - name: esp8266:esp8266
                 source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
             libraries:
+            sketch-paths:
+          # SAMD boards
+          - board:
+              type: mkr1000
+            platforms: |
+              # Install SAMD platform via Boards Manager
+              - name: arduino:samd
             sketch-paths:
           # STM32 boards
           - board:

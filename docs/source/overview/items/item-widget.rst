@@ -16,21 +16,27 @@ ItemWidget has the following properties:
 
 - **text**: The text to display for the menu item.
 - **callback**: A callback function that will be called when the menu item is selected (default: nullptr).
-- **widgets**: An array of widgets that will be displayed.
+- **widgets**: A collection of widgets (``std::vector<BaseWidget*>``) that will be displayed.
 
 ItemWidget can host one or more widgets.
 The widgets can be of different types and can be used to display different types of data.
+
+You can add widget items dynamically to the ItemWidget using :cpp:func:`BaseItemManyWidgets::addWidget`, :cpp:func:`BaseItemManyWidgets::addWidgetAt` functions or
+remove them using the :cpp:func:`BaseItemManyWidgets::removeWidget` function at runtime to update the widgets based on user input or other conditions.
+
+When dynamically adding or removing widgets, ensure proper memory management. Each widget is allocated dynamically, and failing to release unused widgets can lead to memory leaks,
+especially in long-running applications. Always delete or reuse widgets appropriately to maintain optimal memory usage.
 
 The following are examples of how to create ItemWidget widgets.
 
 .. code-block:: c++
 
-    const char* options[] = { "Buy", "Sell" };
+    std::vector<const char*> options = { "Buy", "Sell" };
 
     ITEM_WIDGET(
         "Auto",
         [](const uint8_t option, bool isAuto) { Serial.println(option); Serial.println(isAuto); },
-        WIDGET_LIST(options, sizeof(options) / sizeof(options[0]), 0, "%s", 0, true),
+        WIDGET_LIST(options, 0, "%s", 0, true),
         WIDGET_BOOL(false, "Yes", "No", ",%s")),
 
 .. image:: images/item-widget-auto.gif
@@ -62,14 +68,14 @@ The user is able to select the quantity and tolerance for a particular trade.
 
 .. code-block:: c++
 
-    const char* days[] = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+    std::vector<const char*> days = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
 
     ITEM_WIDGET(
         "Freq",
         [](int hour, int minute, const uint8_t day) { Serial.println(hour); Serial.println(minute); Serial.println(day); },
         WIDGET_RANGE(0, 1, 0, 23, "%02d", 0, false),
         WIDGET_RANGE(0, 1, 0, 59, ":%02d", 0, false),
-        WIDGET_LIST(days, sizeof(days) / sizeof(days[0]), 0, " on %s", 0, true)),
+        WIDGET_LIST(days, 0, " on %s", 0, true)),
 
 .. image:: images/item-widget-freq.gif
     :width: 400px
@@ -100,15 +106,15 @@ The selected date will be displayed as **"01/01/2021"**, **"01/02/2021"**, **"01
 
 .. code-block:: c++
 
-    const char pinChars[] = "123456789ABCDEF";
+    std::vector<char> pinChars = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     ITEM_WIDGET(
         "Pin",
         [](const uint8_t d1, const uint8_t d2, const uint8_t d3, const uint8_t d4) { Serial.print(d1); Serial.print(d2); Serial.print(d3); Serial.println(d4); },
-        WIDGET_LIST(pinChars, strlen(pinChars), 2, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 6, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 10, "%c", 0, true),
-        WIDGET_LIST(pinChars, strlen(pinChars), 14, "%c", 0, true))
+        WIDGET_LIST(pinChars, 2, "%c", 0, true),
+        WIDGET_LIST(pinChars, 6, "%c", 0, true),
+        WIDGET_LIST(pinChars, 10, "%c", 0, true),
+        WIDGET_LIST(pinChars, 14, "%c", 0, true))
 
 Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 

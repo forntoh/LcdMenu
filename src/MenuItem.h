@@ -72,7 +72,7 @@ class MenuItem {
     };
 
     // Destructor
-    ~MenuItem() noexcept = default;
+    virtual ~MenuItem() noexcept = default;
 
   protected:
     /**

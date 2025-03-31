@@ -22,6 +22,17 @@ class ItemSubMenu : public BaseItemZeroWidget {
      */
     ItemSubMenu(const char* text, MenuScreen*& screen) : BaseItemZeroWidget(text), screen(screen) {}
 
+    /**
+     * @brief Set the screen to navigate to when the item is selected.
+     *        This method can be used to change the screen dynamically at runtime.
+     *        This is useful when the screen to navigate to is not known at compile time.
+     *
+     * @param screen the screen to navigate to
+     */
+    void setScreen(MenuScreen*& screen) {
+        this->screen = screen;
+    }
+
   protected:
     void handleCommit(LcdMenu* menu) override {
         LOG(F("ItemSubMenu::changeScreen"), text);

@@ -17,7 +17,12 @@ MenuItem* MenuScreen::operator[](const uint8_t position) {
 }
 
 void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
-    uint8_t constrained = constrain(position, 0, itemCount - 1);
+    if (items.empty()) {
+        cursor = 0;
+        draw(renderer);
+        return;
+    }
+    uint8_t constrained = constrain(position, 0, items.size() - 1);
     if (constrained == cursor) {
         return;
     }
@@ -44,7 +49,7 @@ void MenuScreen::draw(MenuRenderer* renderer) {
 
 void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
     renderer->hasHiddenItemsAbove = index == 0 && view > 0;
-    renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < itemCount;
+    renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < items.size();
     renderer->hasFocus = cursor == view + index;
     renderer->cursorRow = index;
 }
@@ -97,7 +102,12 @@ void MenuScreen::up(MenuRenderer* renderer) {
 }
 
 void MenuScreen::down(MenuRenderer* renderer) {
-    if (cursor < itemCount - 1) {
+    if (items.empty()) {
+        cursor = 0;
+        draw(renderer);
+        return;
+    }
+    if (cursor < items.size() - 1) {
         if (++cursor > view + renderer->maxRows - 1) view++;
         draw(renderer);
     }
@@ -110,9 +120,27 @@ void MenuScreen::reset(MenuRenderer* renderer) {
     draw(renderer);
 }
 
-MenuScreen::MenuScreen(MenuItem** items) : items(items) {
-    while (items[itemCount] != nullptr) {
-        itemCount++;
+MenuScreen::MenuScreen(const std::vector<MenuItem*>& items) : items(items) {}
+
+void MenuScreen::addItem(MenuItem* item) {
+    items.push_back(item);
+}
+
+void MenuScreen::addItemAt(uint8_t position, MenuItem* item) {
+    if (position <= items.size()) {
+        items.insert(items.begin() + position, item);
+    }
+}
+
+void MenuScreen::removeItemAt(uint8_t position) {
+    if (position < items.size()) {
+        items.erase(items.begin() + position);
+    }
+}
+
+void MenuScreen::removeLastItem() {
+    if (items.size() > 0) {
+        items.pop_back();
     }
 }
 

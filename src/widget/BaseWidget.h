@@ -1,11 +1,7 @@
 // Creator: @ShishkinDmitriy
 #pragma once
 
-#ifndef ARDUINO_ARCH_ESP32
-#ifndef ARDUINO_ARCH_ESP8266
-#include "utils/printf.h"
-#endif
-#endif
+#include "utils/custom_printf.h"
 
 class LcdMenu;
 
