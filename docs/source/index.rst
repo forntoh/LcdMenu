@@ -71,6 +71,7 @@ including LCD displays and OLED displays *(coming soon)*.
     :hidden:
 
     overview/getting-started
+    overview/menu-screen
     overview/items/index
     overview/widgets/index
     overview/control/index
