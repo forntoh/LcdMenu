@@ -53,6 +53,9 @@ jobs:
           - fqbn: arduino:avr:uno
             type: avr
             artifact-name-suffix: arduino-avr-uno
+          - fqbn: arduino:avr:uno
+            type: avr-old
+            artifact-name-suffix: arduino-avr-uno-old
           - fqbn: esp8266:esp8266:huzzah
             type: esp8266
             artifact-name-suffix: esp8266-esp8266-huzzah
@@ -66,12 +69,22 @@ jobs:
         include:
           # AVR boards
           - board:
+              type: avr-old
+            platforms: |
+              - name: arduino:avr
+                version: 1.8.2
+            libraries: |
+              - name: FreeRTOS
+              - name: ArduinoSTL
+            sketch-paths: |
+              - examples/RTOS
+          # AVR boards (Latest)
+          - board:
               type: avr
             platforms: |
               - name: arduino:avr
             libraries: |
               - name: FreeRTOS
-              - name: ArduinoSTL
             sketch-paths: |
               - examples/RTOS
           # ESP32 boards
