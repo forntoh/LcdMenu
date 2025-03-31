@@ -53,9 +53,6 @@ jobs:
           - fqbn: arduino:avr:uno
             type: avr
             artifact-name-suffix: arduino-avr-uno
-          - fqbn: arduino:avr:uno
-            type: avr-old
-            artifact-name-suffix: arduino-avr-uno-old
           - fqbn: esp8266:esp8266:huzzah
             type: esp8266
             artifact-name-suffix: esp8266-esp8266-huzzah
@@ -69,22 +66,12 @@ jobs:
         include:
           # AVR boards
           - board:
-              type: avr-old
-            platforms: |
-              - name: arduino:avr
-                version: 1.8.2
-            libraries: |
-              - name: FreeRTOS
-              - name: ArduinoSTL
-            sketch-paths: |
-              - examples/RTOS
-          # AVR boards (Latest)
-          - board:
               type: avr
             platforms: |
               - name: arduino:avr
             libraries: |
               - name: FreeRTOS
+              - name: ArduinoSTL
             sketch-paths: |
               - examples/RTOS
           # ESP32 boards
@@ -125,6 +112,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Patch ArduinoSTL for Uno
+        if: matrix.board.type == 'uno'
+        run: |
+          sed -i 's/const std::nothrow_t std::nothrow = { };//g' libraries/ArduinoSTL/src/new_handler.cpp
 
       - name: Compile sketches
         uses: arduino/compile-sketches@v1
