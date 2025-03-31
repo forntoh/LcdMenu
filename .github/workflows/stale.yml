@@ -20,3 +20,4 @@ jobs:
           days-before-close: 10
           exempt-all-milestones: true
           exempt-all-assignees: true
+          exempt-issue-labels: feature-request, bug
