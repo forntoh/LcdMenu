@@ -69,10 +69,10 @@ jobs:
               type: avr
             platforms: |
               - name: arduino:avr
-              - version: 1.8.2
+                version: 1.8.2
             libraries: |
               - name: FreeRTOS
-              - source-url: https://github.com/mike-matera/ArduinoSTL.git 
+              - name: ArduinoSTL
             sketch-paths: |
               - examples/RTOS
           # ESP32 boards
