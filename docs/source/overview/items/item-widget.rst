@@ -24,6 +24,9 @@ The widgets can be of different types and can be used to display different types
 You can add widget items dynamically to the ItemWidget using :cpp:func:`BaseItemManyWidgets::addWidget`, :cpp:func:`BaseItemManyWidgets::addWidgetAt` functions or
 remove them using the :cpp:func:`BaseItemManyWidgets::removeWidget` function at runtime to update the widgets based on user input or other conditions.
 
+When dynamically adding or removing widgets, ensure proper memory management. Each widget is allocated dynamically, and failing to release unused widgets can lead to memory leaks,
+especially in long-running applications. Always delete or reuse widgets appropriately to maintain optimal memory usage.
+
 The following are examples of how to create ItemWidget widgets.
 
 .. code-block:: c++
