@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Getting started | LcdMenu</title>
-<meta content="Getting started | LcdMenu" property="og:title"/>
-<meta content="Getting started | LcdMenu" name="twitter:title"/>
+<title>Menu Screen | LcdMenu</title>
+<meta content="Menu Screen | LcdMenu" property="og:title"/>
+<meta content="Menu Screen | LcdMenu" name="twitter:title"/>
 <link href="../_static/pygments.css?v=2c5fd357" rel="stylesheet" type="text/css"/>
 <link href="../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../_static/favicon.png" rel="icon"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
-<link href="menu-screen.html" rel="next" title="Menu Screen"/>
-<link href="../index.html" rel="prev" title="Welcome to the LcdMenu Docs!"/>
+<link href="items/index.html" rel="next" title="Item overview"/>
+<link href="getting-started.html" rel="prev" title="Getting started"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -96,8 +96,8 @@
 </nav><nav class="table w-full min-w-full my-6 lg:my-8">
 <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="menu-screen.html">Menu Screen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="items/basic.html">Basic menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="items/item-value.html">Value display item</a></li>
@@ -186,7 +186,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/getting-started.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/menu-screen.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -227,99 +227,117 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Getting started</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Menu Screen</span>
 </nav>
 <div id="content" role="main">
-<section id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p class="lead">A quick guide to get you started with LcdMenu.</p>
-<p>LcdMenu is a simple but powerful library for creating menu systems on embedded devices.
-It is designed to be easy to use and to work with a wide range of display interfaces and provide
-various helpers for handling user input like rotary encoders and buttons.</p>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#installation'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>Follow <a class="reference external" href="https://www.ardu-badge.com/LcdMenu">this guide</a> to install the library with <strong>Arduino Library Manager</strong> or install it with <strong>PlatformIO</strong> using the steps below:</p>
-<ol class="arabic">
-<li><p>Open the PlatformIO IDE or VSCode with PlatformIO extension installed.</p></li>
-<li><p>Create a new project or open an existing one.</p></li>
-<li><p>Add the LcdMenu library to your project by adding the following line to your platformio.ini file:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nv">lib_deps</span><span class="w"> </span><span class="o">=</span>
-</span><span id="line-2"><span class="w">    </span>forntoh/LcdMenu@^5.10.0
-</span></code></pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p>Save the changes to the platformio.ini file.</p></li>
-<li><p>Build and upload your project to your device.</p></li>
+<section id="menu-screen">
+<h1>Menu Screen<a class="headerlink" href="#menu-screen" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>The <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> class is the foundation of the LcdMenu library’s menu system. It represents a single screen in the menu hierarchy and
+is responsible for managing a collection of menu items (<a class="reference internal" href="../reference/api/MenuItem.html#_CPPv48MenuItem" title="MenuItem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuItem</span></code></a>), handling navigation, and rendering the menu on the display.</p>
+<p>With <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a>, you can create dynamic, hierarchical menus that allow users to interact with your embedded application in an intuitive way.
+Whether you’re building a simple menu or a complex multi-level menu system, <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> provides the tools you need.</p>
+<section id="why-use-menuscreen">
+<h2>Why Use MenuScreen?<a class="headerlink" href="#why-use-menuscreen" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#why-use-menuscreen'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>The <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> class simplifies the process of creating and managing menus in embedded systems. It provides:</p>
+<ol class="arabic simple">
+<li><p><strong>Dynamic Menu Management</strong>:
+- Add, remove, or update menu items at runtime.
+- Create menus that adapt to user input or application state.</p></li>
+<li><p><strong>Hierarchical Navigation</strong>:
+- Easily create submenus and navigate between them using the <code class="docutils literal notranslate"><span class="pre">BACK</span></code> and <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code> commands.
+- Set parent screens for seamless navigation.</p></li>
+<li><p><strong>Cursor and View Management</strong>:
+- Automatically handles cursor movement and ensures only the visible portion of the menu is displayed.</p></li>
+<li><p><strong>Integration with Renderers</strong>:
+- Works seamlessly with <a class="reference internal" href="../reference/api/renderer/MenuRenderer.html#_CPPv412MenuRenderer" title="MenuRenderer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuRenderer</span></code></a> to display menus on various types of displays.</p></li>
+<li><p><strong>Polling for Updates</strong>:
+- Supports periodic updates for menu items that require dynamic behavior, such as real-time data or animations.</p></li>
 </ol>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>If your microcontroller does not support standard C++ (e.g., Arduino Uno), you <strong>must</strong> install the <a class="reference external" href="https://github.com/mike-matera/ArduinoSTL">mike-matera/ArduinoSTL</a> library to use features like <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>. Without this library, your code will not compile.</p>
-<p>You can install the library via the Arduino Library Manager, download it directly from <a class="reference external" href="https://github.com/mike-matera/ArduinoSTL">mike-matera/ArduinoSTL</a>, or add it to your PlatformIO project by including the following line in your <code class="docutils literal notranslate"><span class="pre">platformio.ini</span></code> file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nv">lib_deps</span><span class="w"> </span><span class="o">=</span>
-</span><span id="line-2"><span class="w">    </span>mike-matera/ArduinoSTL@^1.3.3
-</span></code></pre></div>
-</div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.</p>
-<p>For microcontrollers that already support standard C++ (e.g., ESP32, STM32), no additional libraries are required.</p>
-</div>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#usage'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>To create a menu system with LcdMenu, you need to define a menu structure, a display interface, and an input method to interact with the menu.
-For this example, we will use the <code class="docutils literal notranslate"><span class="pre">LiquidCrystal_I2C</span></code> display interface and <code class="docutils literal notranslate"><span class="pre">KeyboardAdapter</span></code> for user input to read from the serial monitor.
-You can replace these with other display interfaces and input methods as needed or create your own.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;LcdMenu.h&gt;</span>
-</span><span id="line-2"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;MenuScreen.h&gt;</span>
-</span><span id="line-3"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;display/LiquidCrystal_I2CAdapter.h&gt;</span>
-</span><span id="line-4"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;renderer/CharacterDisplayRenderer.h&gt;</span>
-</span><span id="line-5"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/KeyboardAdapter.h&gt;</span>
-</span><span id="line-6">
-</span><span id="line-7"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
-</span><span id="line-8"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 1"</span><span class="p">),</span>
-</span><span id="line-9"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 2"</span><span class="p">),</span>
-</span><span id="line-10"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 3"</span><span class="p">),</span>
-</span><span id="line-11"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Item 4"</span><span class="p">));</span>
-</span><span id="line-12">
-</span><span id="line-13"><span class="n">LiquidCrystal_I2C</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="mh">0x27</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-</span><span id="line-14"><span class="n">LiquidCrystal_I2CAdapter</span><span class="w"> </span><span class="nf">lcdAdapter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd</span><span class="p">);</span>
-</span><span id="line-15"><span class="n">CharacterDisplayRenderer</span><span class="w"> </span><span class="nf">renderer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdAdapter</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-</span><span id="line-16"><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
-</span><span id="line-17"><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Serial</span><span class="p">);</span>
-</span><span id="line-18">
-</span><span id="line-19"><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-20"><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
-</span><span id="line-21"><span class="w">    </span><span class="n">renderer</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-</span><span id="line-22"><span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="n">setScreen</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">);</span>
-</span><span id="line-23"><span class="p">}</span>
-</span><span id="line-24">
-</span><span id="line-25"><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-26"><span class="w">    </span><span class="n">keyboard</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
-</span><span id="line-27"><span class="p">}</span>
+<section id="how-to-use-menuscreen">
+<h2>How to Use MenuScreen<a class="headerlink" href="#how-to-use-menuscreen" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#how-to-use-menuscreen'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<section id="creating-a-menuscreen">
+<h3>Creating a MenuScreen<a class="headerlink" href="#creating-a-menuscreen" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#creating-a-menuscreen'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>To create a <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a>, you define a list of <a class="reference internal" href="../reference/api/MenuItem.html#_CPPv48MenuItem" title="MenuItem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuItem</span></code></a> objects and pass them to the <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> constructor.
+The <code class="docutils literal notranslate"><span class="pre">MENU_SCREEN</span></code> macro simplifies this process.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
+</span><span id="line-2"><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MenuItem</span><span class="p">(</span><span class="s">"Option 1"</span><span class="p">),</span>
+</span><span id="line-3"><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MenuItem</span><span class="p">(</span><span class="s">"Option 2"</span><span class="p">),</span>
+</span><span id="line-4"><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MenuItem</span><span class="p">(</span><span class="s">"Option 3"</span><span class="p">)</span>
+</span><span id="line-5"><span class="p">);</span>
 </span></code></pre></div>
 </div>
-<p>This example creates a simple menu with four items and displays it on a 16x2 LCD screen.
-The menu is controlled using the serial monitor, where you can navigate through the items using the arrow keys.</p>
-<p>For detailed information on how to use LcdMenu, check out the <a class="reference internal" href="../reference/api/index.html"><span class="doc">API Reference</span></a>.</p>
-<p>In the next chapters, we will go through the different components of the library and how to use them to create more complex menu systems.</p>
+<p>In this example:
+- A <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> named <code class="docutils literal notranslate"><span class="pre">mainScreen</span></code> is created.
+- It contains three menu items: “Option 1”, “Option 2”, and “Option 3”.</p>
+</section>
+<section id="navigating-between-screens">
+<h3>Navigating Between Screens<a class="headerlink" href="#navigating-between-screens" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#navigating-between-screens'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>You can create hierarchical menus by linking screens together. For example, you can set a parent screen for a submenu:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">subScreen</span><span class="p">,</span><span class="w"> </span><span class="n">subItems</span><span class="p">,</span>
+</span><span id="line-2"><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MenuItem</span><span class="p">(</span><span class="s">"Sub Option 1"</span><span class="p">),</span>
+</span><span id="line-3"><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">MenuItem</span><span class="p">(</span><span class="s">"Sub Option 2"</span><span class="p">)</span>
+</span><span id="line-4"><span class="p">);</span>
+</span><span id="line-5">
+</span><span id="line-6"><span class="n">subScreen</span><span class="o">-&gt;</span><span class="n">setParent</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<p>When the user navigates back from <code class="docutils literal notranslate"><span class="pre">subScreen</span></code>, they will return to <code class="docutils literal notranslate"><span class="pre">mainScreen</span></code>.</p>
+</section>
+<section id="adding-and-removing-items-dynamically">
+<h3>Adding and Removing Items Dynamically<a class="headerlink" href="#adding-and-removing-items-dynamically" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#adding-and-removing-items-dynamically'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>You can modify the menu at runtime by adding or removing items:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">mainScreen</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MenuItem</span><span class="p">(</span><span class="s">"New Option"</span><span class="p">));</span>
+</span><span id="line-2"><span class="n">mainScreen</span><span class="o">-&gt;</span><span class="n">removeItemAt</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="c1">// Removes the second item</span>
+</span></code></pre></div>
+</div>
+<p>This is useful for creating menus that adapt to the application’s state or user input.</p>
+</section>
+<section id="polling-for-updates">
+<h3>Polling for Updates<a class="headerlink" href="#polling-for-updates" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#polling-for-updates'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>If your menu items require periodic updates (e.g., displaying real-time data), you can use the <a class="reference internal" href="../reference/api/LcdMenu.html#_CPPv4N7LcdMenu4pollE8uint16_t" title="LcdMenu::poll"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">poll</span></code></a> method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">lcd</span><span class="o">-&gt;</span><span class="n">poll</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w">  </span><span class="c1">// Poll every 1000ms</span>
+</span></code></pre></div>
+</div>
+<p>This ensures that the menu is updated at regular intervals.</p>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#examples'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>For complete examples of using <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a>, see the following:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/samples/DynamicMenu.html"><span class="doc">Dynamic Menu Example</span></a>: Demonstrates how to dynamically add, remove, and update menu items at runtime.</p></li>
+<li><p><a class="reference internal" href="../reference/samples/SubMenu.html"><span class="doc">Submenu Example</span></a>: Shows how to create hierarchical menus with parent-child relationships.</p></li>
+<li><p><a class="reference internal" href="../reference/samples/UseByRef.html"><span class="doc">Polling Example</span></a> and <a class="reference internal" href="../reference/samples/ItemValue.html"><span class="doc">Polling Example</span></a>: Explains how to use the <cite>poll</cite> method for dynamic updates.</p></li>
+</ul>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#notes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<ul class="simple">
+<li><p>Ensure that the <a class="reference internal" href="../reference/api/MenuItem.html#_CPPv48MenuItem" title="MenuItem"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuItem</span></code></a> objects passed to a <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> remain valid for the lifetime of the screen.</p></li>
+<li><p>Use the <cite>poll</cite> method for menu items that require dynamic updates, such as real-time data or animations.</p></li>
+<li><p>The <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> class is designed to work seamlessly with the <a class="reference internal" href="../reference/api/LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">LcdMenu</span></code></a> and <a class="reference internal" href="../reference/api/renderer/MenuRenderer.html#_CPPv412MenuRenderer" title="MenuRenderer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuRenderer</span></code></a> classes for rendering and input handling.</p></li>
+</ul>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#summary'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>The <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> class is a powerful tool for creating dynamic, hierarchical menus in embedded systems.
+By combining <a class="reference internal" href="../reference/api/MenuScreen.html#_CPPv410MenuScreen" title="MenuScreen"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">MenuScreen</span></code></a> with other components of the LcdMenu library, you can build intuitive and flexible user interfaces for your applications.</p>
+<p>For more details, refer to the <a class="reference internal" href="../reference/api/MenuScreen.html"><span class="doc">API Reference</span></a> or explore the examples linked above.</p>
 </section>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../index.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="getting-started.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Welcome to the LcdMenu Docs!
+        Getting started
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="menu-screen.html">
-        Menu Screen
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="items/index.html">
+        Item overview
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -328,8 +346,17 @@ The menu is controlled using the serial monitor, where you can navigate through 
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#installation'" class="reference internal" href="#installation">Installation</a></li>
-<li><a :data-current="activeSection === '#usage'" class="reference internal" href="#usage">Usage</a></li>
+<li><a :data-current="activeSection === '#why-use-menuscreen'" class="reference internal" href="#why-use-menuscreen">Why Use MenuScreen?</a></li>
+<li><a :data-current="activeSection === '#how-to-use-menuscreen'" class="reference internal" href="#how-to-use-menuscreen">How to Use MenuScreen</a><ul>
+<li><a :data-current="activeSection === '#creating-a-menuscreen'" class="reference internal" href="#creating-a-menuscreen">Creating a MenuScreen</a></li>
+<li><a :data-current="activeSection === '#navigating-between-screens'" class="reference internal" href="#navigating-between-screens">Navigating Between Screens</a></li>
+<li><a :data-current="activeSection === '#adding-and-removing-items-dynamically'" class="reference internal" href="#adding-and-removing-items-dynamically">Adding and Removing Items Dynamically</a></li>
+<li><a :data-current="activeSection === '#polling-for-updates'" class="reference internal" href="#polling-for-updates">Polling for Updates</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#examples'" class="reference internal" href="#examples">Examples</a></li>
+<li><a :data-current="activeSection === '#notes'" class="reference internal" href="#notes">Notes</a></li>
+<li><a :data-current="activeSection === '#summary'" class="reference internal" href="#summary">Summary</a></li>
 </ul>
 </div>
 </aside>
