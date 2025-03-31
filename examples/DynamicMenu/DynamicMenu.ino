@@ -33,7 +33,7 @@ MENU_SCREEN(settingsScreen, settingsItems,
     }),
     ITEM_COMMAND("Add between", []() {
         // Dynamically add items to the screen at a specific position
-        settingsScreen->addItem(1, ITEM_BASIC("Network Between"));
+        settingsScreen->addItemAt(1, ITEM_BASIC("Network Between"));
         menu.refresh();
     }),
     ITEM_COMMAND("Remove last", []() {
@@ -43,7 +43,7 @@ MENU_SCREEN(settingsScreen, settingsItems,
     }),
     ITEM_COMMAND("Remove between", []() {
         // Dynamically remove an item from the screen at a specific position
-        settingsScreen->removeItem(1);
+        settingsScreen->removeItemAt(1);
         menu.refresh();
     }));
 // clang-format on

@@ -101,14 +101,14 @@ class MenuScreen {
      * @param position The position to add the item.
      * @param item The item to add.
      */
-    void addItem(uint8_t position, MenuItem* item);
+    void addItemAt(uint8_t position, MenuItem* item);
     /**
-     * @brief Remove an item from the menu at the specified position and optionally delete it.
+     * @brief Remove an item from the menu at the specified position.
      * @param position The position of the item to remove.
      */
-    void removeItem(uint8_t position);
+    void removeItemAt(uint8_t position);
     /**
-     * @brief Remove the last item from the menu and optionally delete it.
+     * @brief Remove the last item from the menu.
      */
     void removeLastItem();
 

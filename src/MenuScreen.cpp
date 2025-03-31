@@ -116,13 +116,13 @@ void MenuScreen::addItem(MenuItem* item) {
     items.push_back(item);
 }
 
-void MenuScreen::addItem(uint8_t position, MenuItem* item) {
-    if (position < items.size()) {
+void MenuScreen::addItemAt(uint8_t position, MenuItem* item) {
+    if (position <= items.size()) {
         items.insert(items.begin() + position, item);
     }
 }
 
-void MenuScreen::removeItem(uint8_t position) {
+void MenuScreen::removeItemAt(uint8_t position) {
     if (position < items.size()) {
         items.erase(items.begin() + position);
     }
