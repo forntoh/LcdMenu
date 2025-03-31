@@ -103,8 +103,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-widget.html">Item Widget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../overview/items/list.html">List menu item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../overview/items/range.html">Range item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/input.html">Input item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/input-charset.html">Charset input item</a></li>
 </ul>
@@ -142,6 +140,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../samples/KeypadShield.html">KeypadShield</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/ViewShifting.html">ViewShifting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/DynamicMenu.html">DynamicMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/UseByRef.html">UseByRef</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/List.html">List</a></li>
@@ -165,7 +164,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemWidget.html">ItemWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
@@ -234,6 +232,63 @@
 <section id="migration">
 <h1>Migration<a class="headerlink" href="#migration" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <p class="lead">This guide details the changes and how to change your code between versions of the LcdMenu library.</p>
+<section id="migration-from-v5-9-0-to-v5-10-0">
+<h2>Migration from v5.9.0 to v5.10.0<a class="headerlink" href="#migration-from-v5-9-0-to-v5-10-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#migration-from-v5-9-0-to-v5-10-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>This guide details the changes and how to update your code to migrate to LcdMenu v5.10.0.</p>
+<section id="vector-usage-for-menu-items">
+<h3>Vector Usage for Menu Items<a class="headerlink" href="#vector-usage-for-menu-items" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#vector-usage-for-menu-items'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>In v5.10.0, <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> is now used for menu items instead of static arrays. This change provides more flexibility and modernizes the codebase.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="w"> </span><span class="c1">// Previous implementation</span>
+</span><span id="line-2"><del><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">colors</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">"Red"</span><span class="p">,</span><span class="w"> </span><span class="s">"Green"</span><span class="p">,</span><span class="w"> </span><span class="s">"Blue"</span><span class="p">,</span><span class="w"> </span><span class="s">"Orange"</span><span class="p">,</span><span class="w"> </span><span class="s">"Aqua"</span><span class="p">,</span><span class="w"> </span><span class="s">"Yellow"</span><span class="p">,</span><span class="w"> </span><span class="s">"Purple"</span><span class="p">,</span><span class="w"> </span><span class="s">"Pink"</span><span class="p">};</span>
+</del></span><span id="line-3"><del><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">nums</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">};</span>
+</del></span><span id="line-4">
+</span><span id="line-5"><span class="w"> </span><span class="c1">// Updated implementation</span>
+</span><span id="line-6"><ins><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">"Red"</span><span class="p">,</span><span class="w"> </span><span class="s">"Green"</span><span class="p">,</span><span class="w"> </span><span class="s">"Blue"</span><span class="p">,</span><span class="w"> </span><span class="s">"Orange"</span><span class="p">,</span><span class="w"> </span><span class="s">"Aqua"</span><span class="p">,</span><span class="w"> </span><span class="s">"Yellow"</span><span class="p">,</span><span class="w"> </span><span class="s">"Purple"</span><span class="p">,</span><span class="w"> </span><span class="s">"Pink"</span><span class="p">};</span>
+</ins></span><span id="line-7"><ins><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">};</span>
+</ins></span></code></pre></div>
+</div>
+<section id="menu-widget-updates">
+<h4>Menu Widget Updates<a class="headerlink" href="#menu-widget-updates" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">WIDGET_LIST</span></code> macro no longer requires the count parameter for vectors. This simplifies the widget definition.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="w"> </span><span class="n">ITEM_WIDGET</span><span class="p">(</span>
+</span><span id="line-2"><span class="w">     </span><span class="s">"Color"</span><span class="p">,</span>
+</span><span id="line-3"><span class="w">     </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="n">color</span><span class="p">]);</span><span class="w"> </span><span class="p">},</span>
+</span><span id="line-4"><del><span class="w">     </span><span class="n">WIDGET_LIST</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span><span class="w"> </span><span class="n">COLORS_COUNT</span><span class="p">,</span><span class="w"> </span><span class="s">"%s"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)),</span>
+</del></span><span id="line-5"><ins><span class="w">     </span><span class="n">WIDGET_LIST</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">"%s"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)),</span>
+</ins></span><span id="line-6">
+</span><span id="line-7"><span class="w"> </span><span class="n">ITEM_WIDGET</span><span class="p">(</span>
+</span><span id="line-8"><span class="w">     </span><span class="s">"Num"</span><span class="p">,</span>
+</span><span id="line-9"><span class="w">     </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">num</span><span class="p">);</span><span class="w"> </span><span class="p">},</span>
+</span><span id="line-10"><del><span class="w">     </span><span class="n">WIDGET_LIST</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="w"> </span><span class="n">NUMS_COUNT</span><span class="p">,</span><span class="w"> </span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)),</span>
+</del></span><span id="line-11"><ins><span class="w">     </span><span class="n">WIDGET_LIST</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)),</span>
+</ins></span></code></pre></div>
+</div>
+<p>This change removes the need to manually calculate and pass the count of items, making the code cleaner and less error-prone.</p>
+</section>
+<section id="microcontroller-compatibility-important">
+<h4>Microcontroller Compatibility (Important)<a class="headerlink" href="#microcontroller-compatibility-important" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h4>
+<p>If your microcontroller does not support standard C++ (e.g., Arduino Uno), you <strong>must</strong> install the <strong>ArduinoSTL</strong> library to use features like <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>. Without this library, your code will not compile.</p>
+<p>To install the <strong>ArduinoSTL</strong> library, checkout the <a class="reference internal" href="../../overview/getting-started.html"><span class="doc">Getting started</span></a> guide for detailed instructions.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For microcontrollers that already support standard C++ (e.g., ESP32, STM32), no additional libraries are required.</p>
+</div>
+</section>
+<section id="summary">
+<h4>Summary<a class="headerlink" href="#summary" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h4>
+<ul class="simple">
+<li><p>Replaced static arrays with <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> for menu items.</p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">WIDGET_LIST</span></code> macro to remove the count parameter for vectors.</p></li>
+<li><p>Requires <cite>mike-matera/ArduinoSTL</cite> for microcontrollers that do not support standard C++.</p></li>
+</ul>
+<p>Follow these steps to update your code and take advantage of the improvements in v5.10.0.</p>
+</section>
+</section>
+</section>
 <section id="migration-from-v5-0-0-to-v5-1-x">
 <h2>Migration from v5.0.0 to v5.1.x<a class="headerlink" href="#migration-from-v5-0-0-to-v5-1-x" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#migration-from-v5-0-0-to-v5-1-x'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
 <p>This guide details the changes and how to change your code to migrate to LcdMenu v5.1.x</p>
@@ -459,6 +514,15 @@ lcdAdapter not the menu.</p>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
+<li><a :data-current="activeSection === '#migration-from-v5-9-0-to-v5-10-0'" class="reference internal" href="#migration-from-v5-9-0-to-v5-10-0">Migration from v5.9.0 to v5.10.0</a><ul>
+<li><a :data-current="activeSection === '#vector-usage-for-menu-items'" class="reference internal" href="#vector-usage-for-menu-items">Vector Usage for Menu Items</a><ul>
+<li><a :data-current="activeSection === '#menu-widget-updates'" class="reference internal" href="#menu-widget-updates">Menu Widget Updates</a></li>
+<li><a :data-current="activeSection === '#microcontroller-compatibility-important'" class="reference internal" href="#microcontroller-compatibility-important">Microcontroller Compatibility (Important)</a></li>
+<li><a :data-current="activeSection === '#summary'" class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#migration-from-v5-0-0-to-v5-1-x'" class="reference internal" href="#migration-from-v5-0-0-to-v5-1-x">Migration from v5.0.0 to v5.1.x</a><ul>
 <li><a :data-current="activeSection === '#lcdmenu-initialization-changes'" class="reference internal" href="#lcdmenu-initialization-changes">LcdMenu initialization changes</a><ul>
 <li><a :data-current="activeSection === '#imports'" class="reference internal" href="#imports">Imports</a></li>

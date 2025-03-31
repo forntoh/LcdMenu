@@ -103,8 +103,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-widget.html">Item Widget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../overview/items/list.html">List menu item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../overview/items/range.html">Range item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/input.html">Input item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/input-charset.html">Charset input item</a></li>
 </ul>
@@ -142,6 +140,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../samples/KeypadShield.html">KeypadShield</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/ViewShifting.html">ViewShifting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/DynamicMenu.html">DynamicMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/UseByRef.html">UseByRef</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/List.html">List</a></li>
@@ -165,7 +164,6 @@
 <li class="toctree-l2"><a class="reference internal" href="ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemWidget.html">ItemWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
@@ -256,7 +254,7 @@
 </span><span id="line-3">└────────────────────────────┘
 </span></code></pre></div>
 </div>
-<p>Subclassed by <a class="reference internal" href="BaseItemManyWidgets.html#classBaseItemManyWidgets"><span class="std std-ref">BaseItemManyWidgets</span></a>, <a class="reference internal" href="BaseItemZeroWidget.html#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a>, <a class="reference internal" href="ItemInput.html#classItemInput"><span class="std std-ref">ItemInput</span></a>, <a class="reference internal" href="ItemList.html#classItemList"><span class="std std-ref">ItemList</span></a>, <a class="reference internal" href="ItemToggle.html#classItemToggle"><span class="std std-ref">ItemToggle</span></a></p>
+<p>Subclassed by <a class="reference internal" href="BaseItemManyWidgets.html#classBaseItemManyWidgets"><span class="std std-ref">BaseItemManyWidgets</span></a>, <a class="reference internal" href="BaseItemZeroWidget.html#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a>, <a class="reference internal" href="ItemInput.html#classItemInput"><span class="std std-ref">ItemInput</span></a>, <a class="reference internal" href="ItemToggle.html#classItemToggle"><span class="std std-ref">ItemToggle</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -289,7 +287,7 @@
 </dd></dl>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8MenuItemD0Ev">
-<span id="_CPPv3N8MenuItemD0Ev"></span><span id="_CPPv2N8MenuItemD0Ev"></span><span id="MenuItem::~MenuItem"></span><span class="target" id="classMenuItem_1ab4de3475a0ff2f4037bae088b4883112"></span><span class="sig-name descname"><span class="n"><span class="pre">~MenuItem</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8MenuItemD0Ev" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N8MenuItemD0Ev'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<span id="_CPPv3N8MenuItemD0Ev"></span><span id="_CPPv2N8MenuItemD0Ev"></span><span id="MenuItem::~MenuItem"></span><span class="target" id="classMenuItem_1adfaf02b281169b8bc9b3d3725ef74a3d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~MenuItem</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N8MenuItemD0Ev" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N8MenuItemD0Ev'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">

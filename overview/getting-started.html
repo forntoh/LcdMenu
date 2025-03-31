@@ -103,8 +103,6 @@
 <li class="toctree-l2"><a class="reference internal" href="items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="items/submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="items/item-widget.html">Item Widget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="items/list.html">List menu item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="items/range.html">Range item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="items/input.html">Input item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="items/input-charset.html">Charset input item</a></li>
 </ul>
@@ -142,6 +140,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/samples/KeypadShield.html">KeypadShield</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/samples/ViewShifting.html">ViewShifting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/samples/DynamicMenu.html">DynamicMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/samples/UseByRef.html">UseByRef</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/samples/List.html">List</a></li>
@@ -165,7 +164,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/ItemWidget.html">ItemWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/api/ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
@@ -234,7 +232,7 @@
 <section id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <p class="lead">A quick guide to get you started with LcdMenu.</p>
-<p>LcdMenu is a simple but powerful library for creating menus systems on embedded devices.
+<p>LcdMenu is a simple but powerful library for creating menu systems on embedded devices.
 It is designed to be easy to use and to work with a wide range of display interfaces and provide
 various helpers for handling user input like rotary encoders and buttons.</p>
 <section id="installation">
@@ -246,7 +244,7 @@ various helpers for handling user input like rotary encoders and buttons.</p>
 <li><p>Add the LcdMenu library to your project by adding the following line to your platformio.ini file:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nv">lib_deps</span><span class="w"> </span><span class="o">=</span>
-</span><span id="line-2"><span class="w">    </span>forntoh/LcdMenu@^5.9.0
+</span><span id="line-2"><span class="w">    </span>forntoh/LcdMenu@^5.10.0
 </span></code></pre></div>
 </div>
 </div></blockquote>
@@ -254,10 +252,24 @@ various helpers for handling user input like rotary encoders and buttons.</p>
 <li><p>Save the changes to the platformio.ini file.</p></li>
 <li><p>Build and upload your project to your device.</p></li>
 </ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If your microcontroller does not support standard C++ (e.g., Arduino Uno), you <strong>must</strong> install the <a class="reference external" href="https://github.com/mike-matera/ArduinoSTL">mike-matera/ArduinoSTL</a> library to use features like <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>. Without this library, your code will not compile.</p>
+<p>You can install the library via the Arduino Library Manager, download it directly from <a class="reference external" href="https://github.com/mike-matera/ArduinoSTL">mike-matera/ArduinoSTL</a>, or add it to your PlatformIO project by including the following line in your <code class="docutils literal notranslate"><span class="pre">platformio.ini</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nv">lib_deps</span><span class="w"> </span><span class="o">=</span>
+</span><span id="line-2"><span class="w">    </span>mike-matera/ArduinoSTL@^1.3.3
+</span></code></pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.</p>
+<p>For microcontrollers that already support standard C++ (e.g., ESP32, STM32), no additional libraries are required.</p>
+</div>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#usage'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>To create a menu system with LcdMenu, you need to define a menu structure and a display interface and an input method to interact with the menu.
+<p>To create a menu system with LcdMenu, you need to define a menu structure, a display interface, and an input method to interact with the menu.
 For this example, we will use the <code class="docutils literal notranslate"><span class="pre">LiquidCrystal_I2C</span></code> display interface and <code class="docutils literal notranslate"><span class="pre">KeyboardAdapter</span></code> for user input to read from the serial monitor.
 You can replace these with other display interfaces and input methods as needed or create your own.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;LcdMenu.h&gt;</span>

@@ -134,28 +134,84 @@
 <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
 <p class="lead">This is the changelog of LcdMenu library. It contains information about the changes between versions.</p>
-<section id="lcdmenu-v5-9-0">
-<h2>LcdMenu v5.9.0<a class="headerlink" href="#lcdmenu-v5-9-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-9-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<section id="lcdmenu-v5-10-0">
+<h2>LcdMenu v5.10.0<a class="headerlink" href="#lcdmenu-v5-10-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-10-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
 <section id="new-features">
-<h3>New Features<a class="headerlink" href="#new-features" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#new-features'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<h3>🚀 New Features<a class="headerlink" href="#new-features" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#new-features'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
-<li><p>Allow dynamic assignment (use of reference values) to WIDGETS by @ShishkinDmitriy in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/315">#315</a></p></li>
+<li><p><strong>Dynamic Menu Updates</strong>: Added support for dynamically adding, removing, and updating menu items at runtime using new methods in [<cite>MenuScreen</cite>](src/MenuScreen.h). See the [Dynamic Menu example](<a class="reference external" href="https://lcdmenu.forntoh.dev/reference/samples/DynamicMenu.html">https://lcdmenu.forntoh.dev/reference/samples/DynamicMenu.html</a>) for usage.</p></li>
+<li><p><strong>Submenu Screen Updates</strong>: Introduced [<cite>ItemSubMenu::setScreen</cite>](<a class="reference external" href="https://lcdmenu.forntoh.dev/reference/api/ItemSubMenu.html#_CPPv4N11ItemSubMenu9setScreenERP10MenuScreen">https://lcdmenu.forntoh.dev/reference/api/ItemSubMenu.html#_CPPv4N11ItemSubMenu9setScreenERP10MenuScreen</a>) to dynamically update the submenu screen at runtime.</p></li>
 </ul>
 </section>
 <section id="enhancements">
-<h3>Enhancements<a class="headerlink" href="#enhancements" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#enhancements'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<h3>🛠 Enhancements<a class="headerlink" href="#enhancements" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#enhancements'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<ul class="simple">
+<li><p><strong>`std::vector` Adoption</strong>: Replaced static arrays with <cite>std::vector</cite> for menu items and widgets, improving flexibility and modernizing the codebase. See [<cite>BaseItemManyWidgets</cite>](<a class="reference external" href="https://github.com/forntoh/LcdMenu/src/BaseItemManyWidgets.h">https://github.com/forntoh/LcdMenu/src/BaseItemManyWidgets.h</a>) and [<cite>WidgetList</cite>](<a class="reference external" href="https://github.com/forntoh/LcdMenu/src/widget/WidgetList.h">https://github.com/forntoh/LcdMenu/src/widget/WidgetList.h</a>).</p></li>
+<li><p><strong>Simplified `WIDGET_LIST` Macro</strong>: Removed the need to pass the size parameter for <cite>std::vector</cite>-based lists, reducing boilerplate code.</p></li>
+<li><p><strong>Improved Memory Management</strong>: Added methods to manage widgets dynamically in [<cite>BaseItemManyWidgets</cite>](<a class="reference external" href="https://github.com/forntoh/LcdMenu/src/BaseItemManyWidgets.h">https://github.com/forntoh/LcdMenu/src/BaseItemManyWidgets.h</a>), including <cite>addWidget</cite>, <cite>addWidgetAt</cite>, and <cite>removeWidget</cite>.</p></li>
+</ul>
+</section>
+<section id="breaking-changes">
+<h3>⚠️ Breaking Changes<a class="headerlink" href="#breaking-changes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#breaking-changes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<ul>
+<li><p><strong>Static Arrays Deprecated</strong>: Static arrays for menu items and widgets have been replaced with <cite>std::vector</cite>. Update your code accordingly:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>cpp
+// Old
+static const char* colors[] = {“Red”, “Green”, “Blue”};
+WIDGET_LIST(colors, sizeof(colors) / sizeof(colors[0]), 0, “%s”);</p>
+<p>// New
+std::vector&lt;const char*&gt; colors = {“Red”, “Green”, “Blue”};
+WIDGET_LIST(colors, 0, “%s”);
+<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+</li>
+<li><p><strong>Removed Deprecated Classes</strong>: <cite>ItemList</cite>, <cite>ItemIntRange</cite>, <cite>ItemFloatRange</cite></p></li>
+<li><p><strong>Updated `MenuScreen` Constructor</strong>: The <cite>MenuScreen</cite> constructor now accepts a <cite>std::vector&lt;MenuItem*&gt;</cite> instead of a raw pointer array.</p></li>
+</ul>
+</section>
+<section id="compatibility">
+<h3>🧰 Compatibility<a class="headerlink" href="#compatibility" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#compatibility'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<ul class="simple">
+<li><p><strong>ArduinoSTL Requirement</strong>: For microcontrollers without native C++ support (e.g., Arduino Uno), install the <cite>ArduinoSTL</cite> library to use <cite>std::vector</cite>. See the [Getting Started Guide](<a class="reference external" href="https://lcdmenu.forntoh.dev/overview/getting-started.html#installation">https://lcdmenu.forntoh.dev/overview/getting-started.html#installation</a>) for details.</p></li>
+</ul>
+</section>
+<section id="documentation-updates">
+<h3>📝 Documentation Updates<a class="headerlink" href="#documentation-updates" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#documentation-updates'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<ul class="simple">
+<li><p>Updated migration guides:
+- [Migration from v5.9.0 to v5.10.0](<a class="reference external" href="https://lcdmenu.forntoh.dev/reference/migration/index.html#migration-from-v5-9-0-to-v5-10-0">https://lcdmenu.forntoh.dev/reference/migration/index.html#migration-from-v5-9-0-to-v5-10-0</a>)</p></li>
+<li><p>Added new examples:
+- [Dynamic Menu](<a class="reference external" href="https://github.com/forntoh/LcdMenu/examples/DynamicMenu/DynamicMenu.ino">https://github.com/forntoh/LcdMenu/examples/DynamicMenu/DynamicMenu.ino</a>)</p></li>
+</ul>
+</section>
+<section id="bug-fixes">
+<h3>🐛 Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#bug-fixes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<ul class="simple">
+<li><p>Fixed cursor handling in empty menus in [<cite>MenuScreen</cite>](<a class="reference external" href="https://github.com/forntoh/LcdMenu/src/MenuScreen.cpp">https://github.com/forntoh/LcdMenu/src/MenuScreen.cpp</a>).</p></li>
+<li><p>Improved compatibility for platforms without full <cite>printf</cite> support by introducing [<cite>custom_printf</cite>](<a class="reference external" href="https://github.com/forntoh/LcdMenu/src/utils/custom_printf.h">https://github.com/forntoh/LcdMenu/src/utils/custom_printf.h</a>).</p></li>
+</ul>
+</section>
+<section id="summary">
+<h3>📚 Summary<a class="headerlink" href="#summary" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#summary'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<p>This release introduces significant improvements to flexibility and usability, with a focus on modernizing the codebase. While there are breaking changes, they simplify the API and improve maintainability. Be sure to review the migration guide to update your code.</p>
+<p><strong>Full Changelog</strong>: <a class="reference external" href="https://github.com/forntoh/LcdMenu/compare/5.9.0...5.10.0">https://github.com/forntoh/LcdMenu/compare/5.9.0…5.10.0</a></p>
+</section>
+</section>
+<section id="lcdmenu-v5-9-0">
+<h2>LcdMenu v5.9.0<a class="headerlink" href="#lcdmenu-v5-9-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-9-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<section id="new-features-enhancements">
+<h3>New Features/Enhancements<a class="headerlink" href="#new-features-enhancements" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#new-features-enhancements'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Allow dynamic assignment (use of reference values) to WIDGETS by @ShishkinDmitriy in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/315">#315</a></p></li>
 </ul>
 </section>
-<section id="bug-fixes">
-<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#bug-fixes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id10">
+<h3>Bug Fixes<a class="headerlink" href="#id10" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id10'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Fixes crash on ESP when deactivating arrows by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/319">#319</a></p></li>
 </ul>
 </section>
-<section id="documentation-updates">
-<h3>Documentation Updates<a class="headerlink" href="#documentation-updates" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#documentation-updates'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id12">
+<h3>Documentation Updates<a class="headerlink" href="#id12" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id12'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Added usage documentation for reference values feature by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/323">#323</a></p></li>
 </ul>
@@ -164,14 +220,14 @@
 </section>
 <section id="lcdmenu-v5-8-0">
 <h2>LcdMenu v5.8.0<a class="headerlink" href="#lcdmenu-v5-8-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-8-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id5">
-<h3>New Features<a class="headerlink" href="#id5" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id5'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id14">
+<h3>New Features<a class="headerlink" href="#id14" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id14'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Add LCD_I2C Library support by @Badn1nja in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/303">#303</a></p></li>
 </ul>
 </section>
-<section id="id7">
-<h3>Bug Fixes<a class="headerlink" href="#id7" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id7'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id16">
+<h3>Bug Fixes<a class="headerlink" href="#id16" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id16'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Fix unsigned integers may underflow in RangeWidget by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/308">#308</a></p></li>
 </ul>
@@ -180,14 +236,14 @@
 </section>
 <section id="lcdmenu-v5-7-0">
 <h2>LcdMenu v5.7.0<a class="headerlink" href="#lcdmenu-v5-7-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-7-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id9">
-<h3>Enhancements<a class="headerlink" href="#id9" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id9'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id18">
+<h3>Enhancements<a class="headerlink" href="#id18" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id18'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Feauture/use index for widget list by @ShishkinDmitriy in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/297">#297</a></p></li>
 </ul>
 </section>
-<section id="id11">
-<h3>Bug Fixes<a class="headerlink" href="#id11" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id11'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id20">
+<h3>Bug Fixes<a class="headerlink" href="#id20" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id20'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Update WidgetBool process method to restrict value changes to edit mode by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/299">#299</a></p></li>
 </ul>
@@ -202,8 +258,8 @@
 </section>
 <section id="lcdmenu-v5-6-0">
 <h2>LcdMenu v5.6.0<a class="headerlink" href="#lcdmenu-v5-6-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-6-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id14">
-<h3>New Features<a class="headerlink" href="#id14" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id14'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id23">
+<h3>New Features<a class="headerlink" href="#id23" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id23'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Support for analog button array by @matej2005 in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/296">#296</a></p></li>
 </ul>
@@ -212,8 +268,8 @@
 </section>
 <section id="lcdmenu-v5-5-1">
 <h2>LcdMenu v5.5.1<a class="headerlink" href="#lcdmenu-v5-5-1" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-5-1'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id16">
-<h3>Bug Fixes<a class="headerlink" href="#id16" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id16'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id25">
+<h3>Bug Fixes<a class="headerlink" href="#id25" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id25'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Display timeout works only when a draw operation happens by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/290">#290</a></p></li>
 </ul>
@@ -222,14 +278,14 @@
 </section>
 <section id="lcdmenu-v5-5-0">
 <h2>LcdMenu v5.5.0<a class="headerlink" href="#lcdmenu-v5-5-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-5-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id18">
-<h3>New Features<a class="headerlink" href="#id18" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id18'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id27">
+<h3>New Features<a class="headerlink" href="#id27" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id27'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Add ItemValue template class and polling support for menu items by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/285">#285</a></p></li>
 </ul>
 </section>
-<section id="id20">
-<h3>Bug Fixes<a class="headerlink" href="#id20" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id20'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id29">
+<h3>Bug Fixes<a class="headerlink" href="#id29" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id29'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Fix ItemToggle Duplicate Item When Refreshing Menu in Callback by @mriveralee in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/286">#286</a></p></li>
 </ul>
@@ -238,8 +294,8 @@
 </section>
 <section id="lcdmenu-v5-4-1">
 <h2>LcdMenu v5.4.1<a class="headerlink" href="#lcdmenu-v5-4-1" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-4-1'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id22">
-<h3>Bug Fixes<a class="headerlink" href="#id22" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id22'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id31">
+<h3>Bug Fixes<a class="headerlink" href="#id31" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id31'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Fix SSD1803A I2C LCD adapter cursor positioning and renderer by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/284">#284</a></p></li>
 <li><p>Reset view index in ItemInput clear method for consistent state by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/277">#277</a></p></li>
@@ -249,16 +305,16 @@
 </section>
 <section id="lcdmenu-v5-4-0">
 <h2>LcdMenu v5.4.0<a class="headerlink" href="#lcdmenu-v5-4-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-4-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id25">
-<h3>New Features<a class="headerlink" href="#id25" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id25'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id34">
+<h3>New Features<a class="headerlink" href="#id34" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id34'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Add Widgets Example Sketch by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/262">#262</a></p></li>
 <li><p>Remove WidgetCharset class and introduce templated WidgetList class by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/255">#255</a></p></li>
 <li><p>Add widget functionality into the library by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/248">#248</a></p></li>
 </ul>
 </section>
-<section id="id29">
-<h3>Enhancements<a class="headerlink" href="#id29" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id29'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id38">
+<h3>Enhancements<a class="headerlink" href="#id38" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id38'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Update Examples to use Widgets by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/260">#260</a></p></li>
 <li><p>Refactor ItemSubMenu class to inherit from BaseItemZeroWidget and update methods by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/259">#259</a></p></li>
@@ -270,14 +326,14 @@
 <li><p>Update logging mechanism with LOG macro in multiple classes by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/250">#250</a></p></li>
 </ul>
 </section>
-<section id="id38">
-<h3>Bug Fixes<a class="headerlink" href="#id38" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id38'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id47">
+<h3>Bug Fixes<a class="headerlink" href="#id47" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id47'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Bugfix: 4 bars appear when no indicators are being shown by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/257">#257</a></p></li>
 </ul>
 </section>
-<section id="id40">
-<h3>Documentation Updates<a class="headerlink" href="#id40" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id40'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id49">
+<h3>Documentation Updates<a class="headerlink" href="#id49" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id49'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Comprehensive Documentation Update for Widgets and Menu Items by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/275">#275</a></p></li>
 </ul>
@@ -286,8 +342,8 @@
 </section>
 <section id="lcdmenu-v5-3-1">
 <h2>LcdMenu v5.3.1<a class="headerlink" href="#lcdmenu-v5-3-1" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-3-1'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id42">
-<h3>Bug Fixes<a class="headerlink" href="#id42" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id42'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id51">
+<h3>Bug Fixes<a class="headerlink" href="#id51" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id51'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Bugfix: 4 bars appear when no indicators are being shown by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/257">#257</a></p></li>
 </ul>
@@ -296,15 +352,15 @@
 </section>
 <section id="lcdmenu-v5-3-0">
 <h2>LcdMenu v5.3.0<a class="headerlink" href="#lcdmenu-v5-3-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-3-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id44">
-<h3>New Features<a class="headerlink" href="#id44" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id44'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id53">
+<h3>New Features<a class="headerlink" href="#id53" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id53'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Add support for additional board types by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/246">#246</a>
 Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 etc) in the Arduino compilation workflow.</p></li>
 </ul>
 </section>
-<section id="id46">
-<h3>Enhancements<a class="headerlink" href="#id46" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id46'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id55">
+<h3>Enhancements<a class="headerlink" href="#id55" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id55'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Integrate Fast and Efficient String Formatting Library by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/244">#244</a></p></li>
 <li><p>Enhanced the LCD display configuration and temperature measurement logic in the RTOS example by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/246">#246</a></p></li>
@@ -315,28 +371,28 @@ Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 et
 </section>
 <section id="lcdmenu-v5-2-0">
 <h2>LcdMenu v5.2.0<a class="headerlink" href="#lcdmenu-v5-2-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-2-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id50">
-<h3>New Features<a class="headerlink" href="#id50" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id50'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id59">
+<h3>New Features<a class="headerlink" href="#id59" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id59'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Add Support for LCDs using SSD1803 controller by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/243">#243</a></p></li>
 <li><p>Add View Shifting to MenuRenderer for Handling Long Text by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/241">#241</a></p></li>
 </ul>
 </section>
-<section id="id53">
-<h3>Enhancements<a class="headerlink" href="#id53" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id53'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id62">
+<h3>Enhancements<a class="headerlink" href="#id62" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id62'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Delegate Rendering of Separator and Value to Renderer by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/240">#240</a></p></li>
 </ul>
 </section>
-<section id="id55">
-<h3>Chore Updates<a class="headerlink" href="#id55" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id55'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id64">
+<h3>Chore Updates<a class="headerlink" href="#id64" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id64'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Add release notes generation  by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/239">#239</a></p></li>
 <li><p>Add tagging options for PR types and update checklist. by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/238">#238</a></p></li>
 </ul>
 </section>
-<section id="id58">
-<h3>Documentation Updates<a class="headerlink" href="#id58" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id58'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id67">
+<h3>Documentation Updates<a class="headerlink" href="#id67" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id67'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Fix typo in character-display.rst by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/242">#242</a></p></li>
 <li><p>Update API references to use C++ syntax for better clarity and consistency by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/237">#237</a></p></li>
@@ -346,14 +402,14 @@ Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 et
 </section>
 <section id="lcdmenu-v5-1-0">
 <h2>LcdMenu v5.1.0<a class="headerlink" href="#lcdmenu-v5-1-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-1-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id61">
-<h3>New Features<a class="headerlink" href="#id61" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id61'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id70">
+<h3>New Features<a class="headerlink" href="#id70" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id70'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>[Feat] Add Menu Renderer by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/233">#233</a></p></li>
 </ul>
 </section>
-<section id="id63">
-<h3>Enhancements<a class="headerlink" href="#id63" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id63'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id72">
+<h3>Enhancements<a class="headerlink" href="#id72" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id72'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Patch/remove screen row dependency in renderer by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/235">#235</a></p></li>
 <li><p>Remove <cite>itemIndex</cite> dependency from renderer by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/234">#234</a></p></li>
@@ -363,8 +419,8 @@ Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 et
 </section>
 <section id="lcdmenu-v5-0-0">
 <h2>LcdMenu v5.0.0<a class="headerlink" href="#lcdmenu-v5-0-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v5-0-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id66">
-<h3>New Features<a class="headerlink" href="#id66" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id66'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id75">
+<h3>New Features<a class="headerlink" href="#id75" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id75'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Feature/move control to items by @ShishkinDmitriy in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/199">#199</a></p></li>
 <li><p>Feature/eliminate types by @ShishkinDmitriy in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/213">#213</a></p></li>
@@ -374,8 +430,8 @@ Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 et
 <li><p>[feat] Replace ItemProgress with Item[type]Range by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/228">#228</a></p></li>
 </ul>
 </section>
-<section id="id73">
-<h3>Enhancements<a class="headerlink" href="#id73" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id73'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id82">
+<h3>Enhancements<a class="headerlink" href="#id82" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id82'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Replace SimpleNavConfig with KeyboardAdapter by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/218">#218</a></p></li>
 <li><p>Replace DigitalInputAdapter with ButtonAdapter by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/223">#223</a></p></li>
@@ -384,27 +440,27 @@ Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 et
 <li><p>Isolate constants by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/227">#227</a></p></li>
 </ul>
 </section>
-<section id="id79">
-<h3>Bug Fixes<a class="headerlink" href="#id79" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id79'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id88">
+<h3>Bug Fixes<a class="headerlink" href="#id88" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id88'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Bugfix/stuck on submenu enter by @ShishkinDmitriy in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/219">#219</a></p></li>
 </ul>
 </section>
-<section id="id81">
-<h3>Chore Updates<a class="headerlink" href="#id81" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id81'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id90">
+<h3>Chore Updates<a class="headerlink" href="#id90" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id90'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>[chore] Improved Debug Logging by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/220">#220</a></p></li>
 </ul>
 </section>
-<section id="id83">
-<h3>Documentation Updates<a class="headerlink" href="#id83" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id83'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id92">
+<h3>Documentation Updates<a class="headerlink" href="#id92" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id92'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>LcdMenu 5.0.0 Documentation by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/230">#230</a></p></li>
 <li><p>Update Code Documentation by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/224">#224</a></p></li>
 </ul>
 </section>
-<section id="breaking-changes">
-<h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#breaking-changes'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id95">
+<h3>Breaking Changes<a class="headerlink" href="#id95" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id95'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>This release introduces breaking changes. Please review [the migration guide](<a class="reference external" href="https://lcdmenu.forntoh.dev/reference/migration/index.html">https://lcdmenu.forntoh.dev/reference/migration/index.html</a>) for details on how to update your code.</p></li>
 </ul>
@@ -413,15 +469,15 @@ Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 et
 </section>
 <section id="lcdmenu-v4-2-0">
 <h2>LcdMenu v4.2.0<a class="headerlink" href="#lcdmenu-v4-2-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v4-2-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id86">
-<h3>New Features<a class="headerlink" href="#id86" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id86'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id96">
+<h3>New Features<a class="headerlink" href="#id96" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id96'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Replace <cite>RotaryNavConfig</cite> with <cite>RotaryInputAdapter</cite> by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/206">#206</a></p></li>
 <li><p>Add <cite>SimpleNavConfig</cite> and deprecate <cite>processMenuCommand</cite> by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/189">#189</a></p></li>
 </ul>
 </section>
-<section id="id89">
-<h3>Bug Fixes<a class="headerlink" href="#id89" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id89'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id99">
+<h3>Bug Fixes<a class="headerlink" href="#id99" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id99'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Remove dependencies [fix for #203] by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/215">#215</a></p></li>
 <li><p>Make global util functions inline by @ShishkinDmitriy in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/192">#192</a></p></li>
@@ -431,21 +487,21 @@ Introduced support for additional board types (ESP32, ESP8266, STM32, MKR1000 et
 </section>
 <section id="lcdmenu-v4-1-0">
 <h2>LcdMenu v4.1.0<a class="headerlink" href="#lcdmenu-v4-1-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-v4-1-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id92">
-<h3>New Features ⭐️<a class="headerlink" href="#id92" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id92'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id102">
+<h3>New Features ⭐️<a class="headerlink" href="#id102" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id102'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p><strong>Menu Command Processor Helper for Rotary Encoder</strong> by @forntoh in #185
 A helper function was added to handle menu navigation using a rotary encoder. This makes it easier for developers to implement rotary-based navigation for their LCD menus, streamlining the interaction process. It allows smoother scrolling through menu items and simplifies input with just a rotary encoder.</p></li>
 </ul>
 </section>
-<section id="id93">
-<h3>Enhancements:<a class="headerlink" href="#id93" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id93'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id103">
+<h3>Enhancements:<a class="headerlink" href="#id103" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id103'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p><strong>Examples</strong>: Added [basic rotary encoder](examples/SimpleInput/SimpleInput.ino) and [input rotary](examples/InputRotary/InputRotary.ino) examples to demonstrate functionality.</p></li>
 </ul>
 </section>
-<section id="id94">
-<h3>Bug Fixes:<a class="headerlink" href="#id94" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id94'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id104">
+<h3>Bug Fixes:<a class="headerlink" href="#id104" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id104'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p><strong>Code Cleanup</strong>: Removed unused print statements to improve code quality.</p></li>
 </ul>
@@ -477,8 +533,8 @@ A helper function was added to handle menu navigation using a rotary encoder. Th
 <li><p>Documentation: Updated and expanded the documentation to reflect the new architecture and features.</p></li>
 </ul>
 </section>
-<section id="id95">
-<h3>Breaking Changes<a class="headerlink" href="#id95" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id95'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id105">
+<h3>Breaking Changes<a class="headerlink" href="#id105" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id105'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>API Changes: The introduction of the DisplayInterface class and its implementation may require changes to existing projects. Users must update their code to work with the new interface and adapters.</p></li>
 <li><p>Some methods and features directly tied to the LiquidCrystal_I2C library have been refactored or removed. Please review [the migration guide](<a class="reference external" href="https://lcdmenu.forntoh.dev/reference/migration-guide">https://lcdmenu.forntoh.dev/reference/migration-guide</a>) for details on how to update your code.</p></li>
@@ -488,8 +544,8 @@ A helper function was added to handle menu navigation using a rotary encoder. Th
 </section>
 <section id="lcdmenu-3-5-6">
 <h2>LcdMenu 3.5.6<a class="headerlink" href="#lcdmenu-3-5-6" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-3-5-6'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<section id="id96">
-<h3>Chore Updates<a class="headerlink" href="#id96" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id96'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
+<section id="id106">
+<h3>Chore Updates<a class="headerlink" href="#id106" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id106'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
 <ul class="simple">
 <li><p>Make <cite>isAtTheStart</cite> and <cite>isAtTheEnd</cite> public by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/172">#172</a></p></li>
 </ul>
@@ -599,113 +655,111 @@ As of today, you no longer need to manage navigation commands on the menu yourse
 </ul>
 <p><strong>Full Changelog</strong>: <a class="reference external" href="https://github.com/forntoh/LcdMenu/compare/3.2.0...3.3.0">https://github.com/forntoh/LcdMenu/compare/3.2.0…3.3.0</a></p>
 </section>
-<section id="lcdmenu-3-2-0">
-<h2>LcdMenu 3.2.0<a class="headerlink" href="#lcdmenu-3-2-0" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lcdmenu-3-2-0'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<ul class="simple">
-<li><p>Update bug_report.yml by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/103">#103</a></p></li>
-<li><p>Fixed ItemSubMenu text not displayed by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/102">#102</a></p></li>
-<li><p>Added LCD Timeout by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/104">#104</a></p></li>
-<li><p>Fixed Can’t cycle through items in ItemList by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/107">#107</a></p></li>
-<li><p>Update version in bug report template automation by @forntoh in <a class="reference external" href="https://github.com/forntoh/LcdMenu/pull/108">#108</a></p></li>
-</ul>
-<p><strong>Full Changelog</strong>: <a class="reference external" href="https://github.com/forntoh/LcdMenu/compare/3.1.1...3.2.0">https://github.com/forntoh/LcdMenu/compare/3.1.1…3.2.0</a></p>
-</section>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
+<li><a :data-current="activeSection === '#lcdmenu-v5-10-0'" class="reference internal" href="#lcdmenu-v5-10-0">LcdMenu v5.10.0</a><ul>
+<li><a :data-current="activeSection === '#new-features'" class="reference internal" href="#new-features">🚀 New Features</a></li>
+<li><a :data-current="activeSection === '#enhancements'" class="reference internal" href="#enhancements">🛠 Enhancements</a></li>
+<li><a :data-current="activeSection === '#breaking-changes'" class="reference internal" href="#breaking-changes">⚠️ Breaking Changes</a></li>
+<li><a :data-current="activeSection === '#compatibility'" class="reference internal" href="#compatibility">🧰 Compatibility</a></li>
+<li><a :data-current="activeSection === '#documentation-updates'" class="reference internal" href="#documentation-updates">📝 Documentation Updates</a></li>
+<li><a :data-current="activeSection === '#bug-fixes'" class="reference internal" href="#bug-fixes">🐛 Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#summary'" class="reference internal" href="#summary">📚 Summary</a></li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-9-0'" class="reference internal" href="#lcdmenu-v5-9-0">LcdMenu v5.9.0</a><ul>
-<li><a :data-current="activeSection === '#new-features'" class="reference internal" href="#new-features">New Features</a></li>
-<li><a :data-current="activeSection === '#enhancements'" class="reference internal" href="#enhancements">Enhancements</a></li>
-<li><a :data-current="activeSection === '#bug-fixes'" class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
-<li><a :data-current="activeSection === '#documentation-updates'" class="reference internal" href="#documentation-updates">Documentation Updates</a></li>
+<li><a :data-current="activeSection === '#new-features-enhancements'" class="reference internal" href="#new-features-enhancements">New Features/Enhancements</a></li>
+<li><a :data-current="activeSection === '#id10'" class="reference internal" href="#id10">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id12'" class="reference internal" href="#id12">Documentation Updates</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-8-0'" class="reference internal" href="#lcdmenu-v5-8-0">LcdMenu v5.8.0</a><ul>
-<li><a :data-current="activeSection === '#id5'" class="reference internal" href="#id5">New Features</a></li>
-<li><a :data-current="activeSection === '#id7'" class="reference internal" href="#id7">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id14'" class="reference internal" href="#id14">New Features</a></li>
+<li><a :data-current="activeSection === '#id16'" class="reference internal" href="#id16">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-7-0'" class="reference internal" href="#lcdmenu-v5-7-0">LcdMenu v5.7.0</a><ul>
-<li><a :data-current="activeSection === '#id9'" class="reference internal" href="#id9">Enhancements</a></li>
-<li><a :data-current="activeSection === '#id11'" class="reference internal" href="#id11">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id18'" class="reference internal" href="#id18">Enhancements</a></li>
+<li><a :data-current="activeSection === '#id20'" class="reference internal" href="#id20">Bug Fixes</a></li>
 <li><a :data-current="activeSection === '#chore-updates'" class="reference internal" href="#chore-updates">Chore Updates</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-6-0'" class="reference internal" href="#lcdmenu-v5-6-0">LcdMenu v5.6.0</a><ul>
-<li><a :data-current="activeSection === '#id14'" class="reference internal" href="#id14">New Features</a></li>
+<li><a :data-current="activeSection === '#id23'" class="reference internal" href="#id23">New Features</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-5-1'" class="reference internal" href="#lcdmenu-v5-5-1">LcdMenu v5.5.1</a><ul>
-<li><a :data-current="activeSection === '#id16'" class="reference internal" href="#id16">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id25'" class="reference internal" href="#id25">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-5-0'" class="reference internal" href="#lcdmenu-v5-5-0">LcdMenu v5.5.0</a><ul>
-<li><a :data-current="activeSection === '#id18'" class="reference internal" href="#id18">New Features</a></li>
-<li><a :data-current="activeSection === '#id20'" class="reference internal" href="#id20">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id27'" class="reference internal" href="#id27">New Features</a></li>
+<li><a :data-current="activeSection === '#id29'" class="reference internal" href="#id29">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-4-1'" class="reference internal" href="#lcdmenu-v5-4-1">LcdMenu v5.4.1</a><ul>
-<li><a :data-current="activeSection === '#id22'" class="reference internal" href="#id22">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id31'" class="reference internal" href="#id31">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-4-0'" class="reference internal" href="#lcdmenu-v5-4-0">LcdMenu v5.4.0</a><ul>
-<li><a :data-current="activeSection === '#id25'" class="reference internal" href="#id25">New Features</a></li>
-<li><a :data-current="activeSection === '#id29'" class="reference internal" href="#id29">Enhancements</a></li>
-<li><a :data-current="activeSection === '#id38'" class="reference internal" href="#id38">Bug Fixes</a></li>
-<li><a :data-current="activeSection === '#id40'" class="reference internal" href="#id40">Documentation Updates</a></li>
+<li><a :data-current="activeSection === '#id34'" class="reference internal" href="#id34">New Features</a></li>
+<li><a :data-current="activeSection === '#id38'" class="reference internal" href="#id38">Enhancements</a></li>
+<li><a :data-current="activeSection === '#id47'" class="reference internal" href="#id47">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id49'" class="reference internal" href="#id49">Documentation Updates</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-3-1'" class="reference internal" href="#lcdmenu-v5-3-1">LcdMenu v5.3.1</a><ul>
-<li><a :data-current="activeSection === '#id42'" class="reference internal" href="#id42">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id51'" class="reference internal" href="#id51">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-3-0'" class="reference internal" href="#lcdmenu-v5-3-0">LcdMenu v5.3.0</a><ul>
-<li><a :data-current="activeSection === '#id44'" class="reference internal" href="#id44">New Features</a></li>
-<li><a :data-current="activeSection === '#id46'" class="reference internal" href="#id46">Enhancements</a></li>
+<li><a :data-current="activeSection === '#id53'" class="reference internal" href="#id53">New Features</a></li>
+<li><a :data-current="activeSection === '#id55'" class="reference internal" href="#id55">Enhancements</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-2-0'" class="reference internal" href="#lcdmenu-v5-2-0">LcdMenu v5.2.0</a><ul>
-<li><a :data-current="activeSection === '#id50'" class="reference internal" href="#id50">New Features</a></li>
-<li><a :data-current="activeSection === '#id53'" class="reference internal" href="#id53">Enhancements</a></li>
-<li><a :data-current="activeSection === '#id55'" class="reference internal" href="#id55">Chore Updates</a></li>
-<li><a :data-current="activeSection === '#id58'" class="reference internal" href="#id58">Documentation Updates</a></li>
+<li><a :data-current="activeSection === '#id59'" class="reference internal" href="#id59">New Features</a></li>
+<li><a :data-current="activeSection === '#id62'" class="reference internal" href="#id62">Enhancements</a></li>
+<li><a :data-current="activeSection === '#id64'" class="reference internal" href="#id64">Chore Updates</a></li>
+<li><a :data-current="activeSection === '#id67'" class="reference internal" href="#id67">Documentation Updates</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-1-0'" class="reference internal" href="#lcdmenu-v5-1-0">LcdMenu v5.1.0</a><ul>
-<li><a :data-current="activeSection === '#id61'" class="reference internal" href="#id61">New Features</a></li>
-<li><a :data-current="activeSection === '#id63'" class="reference internal" href="#id63">Enhancements</a></li>
+<li><a :data-current="activeSection === '#id70'" class="reference internal" href="#id70">New Features</a></li>
+<li><a :data-current="activeSection === '#id72'" class="reference internal" href="#id72">Enhancements</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v5-0-0'" class="reference internal" href="#lcdmenu-v5-0-0">LcdMenu v5.0.0</a><ul>
-<li><a :data-current="activeSection === '#id66'" class="reference internal" href="#id66">New Features</a></li>
-<li><a :data-current="activeSection === '#id73'" class="reference internal" href="#id73">Enhancements</a></li>
-<li><a :data-current="activeSection === '#id79'" class="reference internal" href="#id79">Bug Fixes</a></li>
-<li><a :data-current="activeSection === '#id81'" class="reference internal" href="#id81">Chore Updates</a></li>
-<li><a :data-current="activeSection === '#id83'" class="reference internal" href="#id83">Documentation Updates</a></li>
-<li><a :data-current="activeSection === '#breaking-changes'" class="reference internal" href="#breaking-changes">Breaking Changes</a></li>
+<li><a :data-current="activeSection === '#id75'" class="reference internal" href="#id75">New Features</a></li>
+<li><a :data-current="activeSection === '#id82'" class="reference internal" href="#id82">Enhancements</a></li>
+<li><a :data-current="activeSection === '#id88'" class="reference internal" href="#id88">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id90'" class="reference internal" href="#id90">Chore Updates</a></li>
+<li><a :data-current="activeSection === '#id92'" class="reference internal" href="#id92">Documentation Updates</a></li>
+<li><a :data-current="activeSection === '#id95'" class="reference internal" href="#id95">Breaking Changes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v4-2-0'" class="reference internal" href="#lcdmenu-v4-2-0">LcdMenu v4.2.0</a><ul>
-<li><a :data-current="activeSection === '#id86'" class="reference internal" href="#id86">New Features</a></li>
-<li><a :data-current="activeSection === '#id89'" class="reference internal" href="#id89">Bug Fixes</a></li>
+<li><a :data-current="activeSection === '#id96'" class="reference internal" href="#id96">New Features</a></li>
+<li><a :data-current="activeSection === '#id99'" class="reference internal" href="#id99">Bug Fixes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-v4-1-0'" class="reference internal" href="#lcdmenu-v4-1-0">LcdMenu v4.1.0</a><ul>
-<li><a :data-current="activeSection === '#id92'" class="reference internal" href="#id92">New Features ⭐️</a></li>
-<li><a :data-current="activeSection === '#id93'" class="reference internal" href="#id93">Enhancements:</a></li>
-<li><a :data-current="activeSection === '#id94'" class="reference internal" href="#id94">Bug Fixes:</a></li>
+<li><a :data-current="activeSection === '#id102'" class="reference internal" href="#id102">New Features ⭐️</a></li>
+<li><a :data-current="activeSection === '#id103'" class="reference internal" href="#id103">Enhancements:</a></li>
+<li><a :data-current="activeSection === '#id104'" class="reference internal" href="#id104">Bug Fixes:</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-4-0-0'" class="reference internal" href="#lcdmenu-4-0-0">LcdMenu 4.0.0</a><ul>
 <li><a :data-current="activeSection === '#what-s-changed'" class="reference internal" href="#what-s-changed">What’s Changed</a></li>
 <li><a :data-current="activeSection === '#bug-fixes-and-improvements'" class="reference internal" href="#bug-fixes-and-improvements">Bug Fixes and Improvements</a></li>
-<li><a :data-current="activeSection === '#id95'" class="reference internal" href="#id95">Breaking Changes</a></li>
+<li><a :data-current="activeSection === '#id105'" class="reference internal" href="#id105">Breaking Changes</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-3-5-6'" class="reference internal" href="#lcdmenu-3-5-6">LcdMenu 3.5.6</a><ul>
-<li><a :data-current="activeSection === '#id96'" class="reference internal" href="#id96">Chore Updates</a></li>
+<li><a :data-current="activeSection === '#id106'" class="reference internal" href="#id106">Chore Updates</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#lcdmenu-3-5-5'" class="reference internal" href="#lcdmenu-3-5-5">LcdMenu 3.5.5</a></li>
@@ -720,7 +774,6 @@ As of today, you no longer need to manage navigation commands on the menu yourse
 <li><a :data-current="activeSection === '#lcdmenu-3-3-2'" class="reference internal" href="#lcdmenu-3-3-2">LcdMenu 3.3.2</a></li>
 <li><a :data-current="activeSection === '#lcdmenu-3-3-1'" class="reference internal" href="#lcdmenu-3-3-1">LcdMenu 3.3.1</a></li>
 <li><a :data-current="activeSection === '#lcdmenu-3-3-0'" class="reference internal" href="#lcdmenu-3-3-0">LcdMenu 3.3.0</a></li>
-<li><a :data-current="activeSection === '#lcdmenu-3-2-0'" class="reference internal" href="#lcdmenu-3-2-0">LcdMenu 3.2.0</a></li>
 </ul>
 </div>
 </aside>
