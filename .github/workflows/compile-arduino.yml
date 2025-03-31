@@ -113,17 +113,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Debug File Structure
+      - name: Compile sketches (avr)
         if: matrix.board.type == 'avr'
-        run: |
-          echo "Listing files in the repository:"
-          find . -type f
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn: ${{ matrix.board.fqbn }}
+          platforms: ${{ matrix.platforms }}
+          sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          libraries: |
+            ${{ env.UNIVERSAL_LIBRARIES }}
+            ${{ matrix.libraries }}
+          sketch-paths: |
+            ${{ matrix.sketch-paths }}
 
       - name: Patch ArduinoSTL for Uno
         if: matrix.board.type == 'avr'
         run: |
           # Locate the new_handler.cpp file dynamically
-          STL_FILE=$(find . -name new_handler.cpp)
+          STL_FILE=$(find /home/runner/.arduino15 -name new_handler.cpp)
           echo "Patching file: $STL_FILE"
           sed -i 's/const std::nothrow_t std::nothrow = { };//g' "$STL_FILE"
 
