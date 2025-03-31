@@ -72,7 +72,7 @@ jobs:
               - version: 1.8.2
             libraries: |
               - name: FreeRTOS
-              - name: ArduinoSTL
+              - source-url: https://github.com/mike-matera/ArduinoSTL.git 
             sketch-paths: |
               - examples/RTOS
           # ESP32 boards
