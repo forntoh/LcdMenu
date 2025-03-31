@@ -69,7 +69,7 @@ jobs:
               type: avr
             platforms: |
               - name: arduino:avr
-              - version: 1.8.3
+              - version: 1.8.2
             libraries: |
               - name: FreeRTOS
               - name: ArduinoSTL
