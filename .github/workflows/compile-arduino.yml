@@ -113,10 +113,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Debug File Structure
+        if: matrix.board.type == 'uno'
+        run: |
+          echo "Listing files in the repository:"
+          find . -type f
+
       - name: Patch ArduinoSTL for Uno
         if: matrix.board.type == 'uno'
         run: |
-          sed -i 's/const std::nothrow_t std::nothrow = { };//g' libraries/ArduinoSTL/src/new_handler.cpp
+          # Locate the new_handler.cpp file dynamically
+          STL_FILE=$(find . -name new_handler.cpp)
+          echo "Patching file: $STL_FILE"
+          sed -i 's/const std::nothrow_t std::nothrow = { };//g' "$STL_FILE"
 
       - name: Compile sketches
         uses: arduino/compile-sketches@v1
