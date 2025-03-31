@@ -120,7 +120,7 @@ void MenuScreen::reset(MenuRenderer* renderer) {
     draw(renderer);
 }
 
-MenuScreen::MenuScreen(std::vector<MenuItem*> items) : items(items) {}
+MenuScreen::MenuScreen(const std::vector<MenuItem*>& items) : items(items) {}
 
 void MenuScreen::addItem(MenuItem* item) {
     items.push_back(item);
