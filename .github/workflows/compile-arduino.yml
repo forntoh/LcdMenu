@@ -114,13 +114,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Debug File Structure
-        if: matrix.board.type == 'uno'
+        if: matrix.board.type == 'avr'
         run: |
           echo "Listing files in the repository:"
           find . -type f
 
       - name: Patch ArduinoSTL for Uno
-        if: matrix.board.type == 'uno'
+        if: matrix.board.type == 'avr'
         run: |
           # Locate the new_handler.cpp file dynamically
           STL_FILE=$(find . -name new_handler.cpp)
