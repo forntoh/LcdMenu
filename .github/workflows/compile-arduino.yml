@@ -69,10 +69,9 @@ jobs:
               type: avr
             platforms: |
               - name: arduino:avr
-                version: 1.8.2
             libraries: |
               - name: FreeRTOS
-              - source-url: https://github.com/maniacbug/StandardCplusplus.git
+              - name: ArduinoSTL
             sketch-paths: |
               - examples/RTOS
           # ESP32 boards
