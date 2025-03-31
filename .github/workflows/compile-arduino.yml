@@ -69,6 +69,7 @@ jobs:
               type: avr
             platforms: |
               - name: arduino:avr
+              - version: 1.8.3
             libraries: |
               - name: FreeRTOS
               - name: ArduinoSTL
@@ -127,8 +128,6 @@ jobs:
             ${{ env.UNIVERSAL_SKETCH_PATHS }}
           enable-deltas-report: true
           enable-warnings-report: true
-          cli-compile-flags: >
-            --build-property "compiler.cpp.extra_flags=-fcommon"
 
       - name: Upload sketches reports
         uses: actions/upload-artifact@v4
