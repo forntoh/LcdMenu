@@ -31,18 +31,18 @@ Follow `this guide <https://www.ardu-badge.com/LcdMenu>`_ to install the library
 
 .. important::
 
-    If your microcontroller does not support standard C++ (e.g., Arduino Uno), you **must** install the `maniacbug/StandardCplusplus <https://github.com/maniacbug/StandardCplusplus>`_ library to use features like ``std::vector``. Without this library, your code will not compile.
+    If your microcontroller does not support standard C++ (e.g., Arduino Uno), you **must** install the `mike-matera/ArduinoSTL <https://github.com/mike-matera/ArduinoSTL>`_ library to use features like ``std::vector``. Without this library, your code will not compile.
 
-    You can install the library via the Arduino Library Manager, download it directly from `maniacbug/StandardCplusplus <https://github.com/maniacbug/StandardCplusplus>`_, or add it to your PlatformIO project by including the following line in your ``platformio.ini`` file:
+    You can install the library via the Arduino Library Manager, download it directly from `mike-matera/ArduinoSTL <https://github.com/mike-matera/ArduinoSTL>`_, or add it to your PlatformIO project by including the following line in your ``platformio.ini`` file:
 
     .. code-block:: bash
 
         lib_deps =
-            maniacbug/StandardCplusplus@^1.0.0
+            mike-matera/ArduinoSTL@^1.3.3
 
-    .. warning::
+.. warning::
 
-        Using ``std::vector`` may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.
+    Using ``std::vector`` may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.
 
     For microcontrollers that already support standard C++ (e.g., ESP32, STM32), no additional libraries are required.
 

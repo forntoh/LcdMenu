@@ -46,13 +46,13 @@ This change removes the need to manually calculate and pass the count of items, 
 Microcontroller Compatibility (Important)
 +++++++++++++++++++++++++++++++++++++++++
 
-If your microcontroller does not support standard C++ (e.g., Arduino Uno), you **must** install the `maniacbug/StandardCplusplus` library to use `std::vector`. Without this library, your code will not compile.
+If your microcontroller does not support standard C++ (e.g., Arduino Uno), you **must** install the **ArduinoSTL** library to use features like ``std::vector``. Without this library, your code will not compile.
 
-You can install the library via the Arduino Library Manager or download it directly from its `GitHub repository <https://github.com/maniacbug/StandardCplusplus>`_.
+To install the **ArduinoSTL** library, checkout the :doc:`../../overview/getting-started` guide for detailed instructions.
 
 .. warning::
 
-    Using `std::vector` may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.
+    Using ``std::vector`` may increase memory usage. Ensure your microcontroller has sufficient resources to handle this change. Low-memory devices like the Arduino Uno may face limitations.
 
 .. note::
 
@@ -63,6 +63,6 @@ Summary
 
 - Replaced static arrays with ``std::vector`` for menu items.
 - Updated ``WIDGET_LIST`` macro to remove the count parameter for vectors.
-- **Important:** Install the `maniacbug/StandardCplusplus <https://github.com/maniacbug/StandardCplusplus>`_ library for microcontrollers that do not support standard C++.
+- Requires `mike-matera/ArduinoSTL` for microcontrollers that do not support standard C++.
 
 Follow these steps to update your code and take advantage of the improvements in v5.10.0.
