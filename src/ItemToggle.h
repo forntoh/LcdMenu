@@ -3,7 +3,7 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include <utils/utils.h>
+#include <functional>
 
 /**
  * @brief Item that allows user to toggle between ON/OFF states.
@@ -21,7 +21,7 @@ class ItemToggle : public MenuItem {
     bool enabled = false;
     const char* textOn = NULL;
     const char* textOff = NULL;
-    fptrBool callback = NULL;
+    std::function<void(bool)> callback = NULL;
 
   public:
     /**
@@ -30,7 +30,7 @@ class ItemToggle : public MenuItem {
      * @param key key of the item
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, fptrBool callback)
+    ItemToggle(const char* key, std::function<void(bool)> callback)
         : ItemToggle(key, false, callback) {}
 
     /**
@@ -41,7 +41,7 @@ class ItemToggle : public MenuItem {
      * @param enabled
      * @param callback
      */
-    ItemToggle(const char* text, boolean enabled, fptrBool callback)
+    ItemToggle(const char* text, boolean enabled, std::function<void(bool)> callback)
         : ItemToggle(text, "ON", "OFF", callback) {
         this->enabled = enabled;
     }
@@ -53,7 +53,7 @@ class ItemToggle : public MenuItem {
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* text, const char* textOn, const char* textOff, fptrBool callback)
+    ItemToggle(const char* text, const char* textOn, const char* textOff, std::function<void(bool)> callback)
         : MenuItem(text),
           textOn(textOn),
           textOff(textOff),
@@ -63,7 +63,7 @@ class ItemToggle : public MenuItem {
      * @brief Get the integer callback function of this item.
      * @return the integer callback function
      */
-    fptrBool getCallbackInt() { return callback; }
+    std::function<void(bool)> getCallbackInt() { return callback; }
 
     /**
      * @brief Get the current state of this toggle item.

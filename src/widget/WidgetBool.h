@@ -24,7 +24,7 @@ class WidgetBool : public BaseWidgetValue<V> {
         const char* textOff,
         const char* format,
         const uint8_t cursorOffset,
-        void (*callback)(const V&) = nullptr)
+        std::function<void(const V&)> callback)
         : BaseWidgetValue<V>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
 
   protected:
@@ -71,7 +71,7 @@ inline BaseWidgetValue<bool>* WIDGET_BOOL(
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
-    void (*callback)(const bool&) = nullptr) {
+    std::function<void(const bool&)> callback = nullptr) {
     return new WidgetBool<bool>(value, textOn, textOff, format, cursorOffset, callback);
 }
 
@@ -92,6 +92,6 @@ inline BaseWidgetValue<Ref<bool>>* WIDGET_BOOL_REF(
     const char* textOff = "OFF",
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
-    void (*callback)(const Ref<bool>&) = nullptr) {
+    std::function<void(const Ref<bool>&)> callback = nullptr) {
     return new WidgetBool<Ref<bool>>(Ref<bool>(value), textOn, textOff, format, cursorOffset, callback);
 }

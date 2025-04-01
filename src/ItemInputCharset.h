@@ -3,7 +3,6 @@
 
 #include "ItemInput.h"
 #include "LcdMenu.h"
-#include <utils/utils.h>
 
 class ItemInputCharset : public ItemInput {
   private:
@@ -22,7 +21,7 @@ class ItemInputCharset : public ItemInput {
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
      */
-    ItemInputCharset(const char* text, char* value, const char* charset, fptrStr callback)
+    ItemInputCharset(const char* text, char* value, const char* charset, std::function<void(const char*)> callback)
         : ItemInput(text, value, callback), charset(charset) {}
 
     /**
@@ -32,7 +31,7 @@ class ItemInputCharset : public ItemInput {
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
      */
-    ItemInputCharset(const char* text, const char* charset, fptrStr callback)
+    ItemInputCharset(const char* text, const char* charset, std::function<void(const char*)> callback)
         : ItemInputCharset(text, (char*)"", charset, callback) {}
 
   protected:

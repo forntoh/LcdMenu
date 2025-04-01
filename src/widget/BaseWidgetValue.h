@@ -2,6 +2,8 @@
 #pragma once
 
 #include "BaseWidget.h"
+#include "utils/std.h"
+#include <functional>
 
 class LcdMenu;
 
@@ -58,18 +60,20 @@ struct Ref {
  */
 template <typename T>
 class BaseWidgetValue : public BaseWidget {
+  public:
+    using CallbackType = std::function<void(const T&)>;
 
   protected:
     T value;
     const char* format = nullptr;
-    void (*callback)(const T&) = nullptr;
+    CallbackType callback = nullptr;
 
   public:
     BaseWidgetValue(
         const T& value,
         const char* format,
         const uint8_t cursorOffset = 0,
-        void (*callback)(const T&) = nullptr)
+        CallbackType callback = nullptr)
         : BaseWidget(cursorOffset), value(value), format(format), callback(callback) {}
     /**
      * @brief Retrieve current value.
