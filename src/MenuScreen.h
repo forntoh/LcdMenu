@@ -111,6 +111,10 @@ class MenuScreen {
      * @brief Remove the last item from the menu.
      */
     void removeLastItem();
+    /**
+     * @brief Clear all items from the menu.
+     */
+    void clear();
 
     /**
      * @brief Get the number of items in the menu.

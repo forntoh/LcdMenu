@@ -144,6 +144,10 @@ void MenuScreen::removeLastItem() {
     }
 }
 
+void MenuScreen::clear() {
+    items.clear();
+}
+
 void MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
     static unsigned long lastPollTime = 0;
     if (millis() - lastPollTime >= pollInterval) {
