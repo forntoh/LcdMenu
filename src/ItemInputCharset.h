@@ -172,6 +172,34 @@ class ItemInputCharset : public ItemInput {
     }
 };
 
-#define ITEM_INPUT_CHARSET(...) (new ItemInputCharset(__VA_ARGS__))
+/**
+ * @brief Inline function to create a new ItemInputCharset object.
+ *
+ * @param text The text to renderer for the item.
+ * @param value The initial value for the input.
+ * @param charset The charset to use for input.
+ * @return ItemInputCharset* Pointer to the newly created object.
+ */
+inline ItemInputCharset* ITEM_INPUT_CHARSET(
+    const char* text,
+    char* value,
+    const char* charset,
+    std::function<void(const char*)> callback) {
+    return new ItemInputCharset(text, value, charset, callback);
+}
+
+/**
+ * @brief Inline function to create a new ItemInputCharset object.
+ *
+ * @param text The text to renderer for the item.
+ * @param charset The charset to use for input.
+ * @return ItemInputCharset* Pointer to the newly created object.
+ */
+inline ItemInputCharset* ITEM_INPUT_CHARSET(
+    const char* text,
+    const char* charset,
+    std::function<void(const char*)> callback) {
+    return new ItemInputCharset(text, charset, callback);
+}
 
 #endif
