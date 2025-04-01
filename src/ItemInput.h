@@ -301,6 +301,32 @@ class ItemInput : public MenuItem {
     }
 };
 
-#define ITEM_INPUT(...) (new ItemInput(__VA_ARGS__))
+/**
+ * @brief Function to create a new ItemInput object.
+ *
+ * @param text The text to display for the item.
+ * @param value The initial value for the input.
+ * @param callback A reference to the callback function to be invoked when
+ * the input is submitted.
+ */
+inline MenuItem* ITEM_INPUT(
+    const char* text,
+    char* value,
+    std::function<void(const char*)> callback) {
+    return new ItemInput(text, value, callback);
+}
+
+/**
+ * @brief Function to create a new ItemInput object with no initial value.
+ *
+ * @param text The text to display for the item.
+ * @param callback A reference to the callback function to be invoked when
+ * the input is submitted.
+ */
+inline MenuItem* ITEM_INPUT(
+    const char* text,
+    std::function<void(const char*)> callback) {
+    return new ItemInput(text, callback);
+}
 
 #endif  // ITEM_INPUT_H
