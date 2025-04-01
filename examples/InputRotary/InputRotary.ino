@@ -16,7 +16,7 @@
 const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // Declare the call back functions
-void inputCallback(char* value);
+void inputCallback(const char* value);
 void clearInput();
 
 extern MenuScreen* userScreen;
@@ -48,7 +48,7 @@ void setup() {
 void loop() { rotaryInput.observe(); }
 
 // Define the callbacks
-void inputCallback(char* value) {
+void inputCallback(const char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);

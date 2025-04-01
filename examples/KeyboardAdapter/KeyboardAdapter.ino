@@ -12,7 +12,7 @@
 const char* charset = "0123456789";
 
 // Declare the call back function
-void inputCallback(char* value);
+void inputCallback(const char* value);
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
@@ -39,7 +39,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(char* value) {
+void inputCallback(const char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);

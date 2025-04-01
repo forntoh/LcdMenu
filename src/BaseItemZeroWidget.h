@@ -3,6 +3,7 @@
 #define BASE_ITEM_ZERO_WIDGET_H
 
 #include "MenuItem.h"
+#include <functional>
 
 /**
  * @class BaseItemZeroWidget
