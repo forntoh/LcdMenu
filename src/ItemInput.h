@@ -3,6 +3,7 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
+#include "utils/std.h"
 #include <functional>
 
 /**
