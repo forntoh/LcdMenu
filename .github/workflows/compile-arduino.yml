@@ -85,6 +85,7 @@ jobs:
             libraries:
             sketch-paths: |
               - examples/RTOS
+              - examples/ESP32WiFi
           # ESP8266 boards
           - board:
               type: esp8266
