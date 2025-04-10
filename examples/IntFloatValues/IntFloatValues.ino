@@ -9,7 +9,7 @@
 #define LCD_COLS 16
 
 // Declare the callbacks
-void callbackInt(int value);
+void callbackInt(const int value);
 void callbackFloat(const float value);
 
 // Initialize the main menu items
@@ -39,12 +39,12 @@ void loop() {
     keyboard.observe();
 }
 
-void callbackInt(int value) {
+void callbackInt(const int value) {
     // do something with the integer value
     Serial.println(value);
 }
 
-void callbackFloat(const float& value) {
+void callbackFloat(const float value) {
     // do something with the float value
     Serial.println(value);
 }
