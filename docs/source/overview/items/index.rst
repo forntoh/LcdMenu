@@ -14,8 +14,9 @@ A menu item is a basic building block of a menu screen in |project|. Each menu i
     command
     submenu
     item-widget
-    list
-    range
+    item-list
+    item-range
+    item-bool
     input
     input-charset
 

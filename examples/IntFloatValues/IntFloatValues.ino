@@ -1,30 +1,23 @@
-#include <ItemWidget.h>
+#include <ItemRange.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/KeyboardAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
-#include <widget/WidgetRange.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
 // Declare the callbacks
-void callbackInt(int value);
-void callbackFloat(float value);
+void callbackInt(const int value);
+void callbackFloat(const float value);
 
 // Initialize the main menu items
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Con"),
-    ITEM_WIDGET(
-        "Dist",
-        callbackInt,
-        WIDGET_RANGE(100, 1, 100, 200, "%dm", 1)),
-    ITEM_WIDGET(
-        "Curr",
-        callbackFloat,
-        WIDGET_RANGE(-1.0f, 0.01f, -1.0f, 1.0f, "%.2fmA", 2)),
+    ITEM_RANGE("Dist", 100, 1, 100, 200, callbackInt, "%dm", 1, true),
+    ITEM_RANGE("Curr", -1.0f, 0.01f, -1.0f, 1.0f, callbackFloat, "%.2fmA", 2),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
 // clang-format on
@@ -46,12 +39,12 @@ void loop() {
     keyboard.observe();
 }
 
-void callbackInt(int value) {
+void callbackInt(const int value) {
     // do something with the integer value
     Serial.println(value);
 }
 
-void callbackFloat(float value) {
+void callbackFloat(const float value) {
     // do something with the float value
     Serial.println(value);
 }

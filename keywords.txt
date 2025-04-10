@@ -18,9 +18,12 @@ CharacterDisplayRenderer	KEYWORD1
 DisplayInterface	KEYWORD1
 InputInterface	KEYWORD1
 ItemBack	KEYWORD1
+ItemBool	KEYWORD1
 ItemCommand	KEYWORD1
 ItemInput	KEYWORD1
 ItemInputCharset	KEYWORD1
+ItemList	KEYWORD1
+ItemRange	KEYWORD1
 ItemSubMenu	KEYWORD1
 ItemToggle	KEYWORD1
 ItemValue	KEYWORD1

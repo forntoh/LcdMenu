@@ -114,7 +114,7 @@ The character display renderer provides a number of options for customizing the 
 Here is an example of how to customize the renderer:
 
 Use custom cursor characters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can set custom cursor characters to use when rendering the selected menu item.
 

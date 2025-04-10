@@ -84,10 +84,6 @@ including LCD displays and OLED displays *(coming soon)*.
 
     reference/samples/index
     reference/api/index
-    reference/uml
     reference/migration/index
     reference/faq
-    reference/acknowledgements
-    reference/feedback
-    reference/limitations
 

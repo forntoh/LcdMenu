@@ -54,6 +54,8 @@ class ItemWidget : public BaseItemManyWidgets {
         setValuesImpl(typename make_index_sequence<sizeof...(Ts)>::type{}, values...);
     }
 
+    virtual ~ItemWidget() = default;
+
   private:
     template <size_t... Is>
     void setValuesImpl(index_sequence<Is...>, Ts... values) {
