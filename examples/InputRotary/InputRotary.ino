@@ -16,7 +16,7 @@
 const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // Declare the call back functions
-void inputCallback(char* value);
+void inputCallback(const char* value);
 void clearInput();
 
 extern MenuScreen* userScreen;
@@ -29,8 +29,8 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("And more Settings"));
 
 MENU_SCREEN(userScreen, userItems,
-    ITEM_INPUT_CHARSET("User", charset, inputCallback),
-    ITEM_COMMAND("Clear", clearInput));
+    ITEM_INPUT_CHARSET("User", charset, [](const char* value) { inputCallback(value); }),
+    ITEM_COMMAND("Clear", []() { clearInput(); }));
 // clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
@@ -48,7 +48,7 @@ void setup() {
 void loop() { rotaryInput.observe(); }
 
 // Define the callbacks
-void inputCallback(char* value) {
+void inputCallback(const char* value) {
     // Do stuff with value
     Serial.print(F("# "));
     Serial.println(value);

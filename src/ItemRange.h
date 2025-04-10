@@ -30,7 +30,7 @@ class ItemRange : public ItemWidget<V> {
         const uint8_t cursorOffset,
         const bool cycle,
         typename ItemWidget<V>::CallbackType callback) : ItemWidget<V>(text,
-                                                                       new WidgetRange<T, V>(value, step, min, max, format, cursorOffset, cycle),
+                                                                       new WidgetRange<T, V>(value, step, min, max, format, cursorOffset, cycle, {}),
                                                                        callback) {}
 };
 
@@ -57,7 +57,7 @@ inline ItemRange<T, T>* ITEM_RANGE(
     const T step,
     const T min,
     const T max,
-    void (*callback)(const T),
+    std::function<void(const T)> callback,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false) {
@@ -87,7 +87,7 @@ inline ItemRange<T, Ref<T>>* ITEM_RANGE_REF(
     const T step,
     const T min,
     const T max,
-    void (*callback)(const Ref<T>),
+    std::function<void(const Ref<T>)> callback,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false) {

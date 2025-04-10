@@ -31,6 +31,8 @@
 
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
+#include <ArxTypeTraits.h>
+#include <utils/std.h>
 #include <utils/utils.h>
 
 class LcdMenu;
