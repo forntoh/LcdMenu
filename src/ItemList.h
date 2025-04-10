@@ -26,9 +26,9 @@ class ItemList : public ItemWidget<V> {
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
-        void (*callback)(const V&)) : ItemWidget<V>(text,
-                                                    {WidgetList<T, V>(values, activePosition, format, cursorOffset, cycle)},
-                                                    callback) {}
+        typename ItemWidget<V>::CallbackType callback) : ItemWidget<V>(text,
+                                                                       new WidgetList<T, V>(values, activePosition, format, cursorOffset, cycle, nullptr),
+                                                                       callback) {}
 };
 
 /**
@@ -46,15 +46,15 @@ class ItemList : public ItemWidget<V> {
  * @param cycle whether to cycle through the list when reaching the end
  */
 template <typename T>
-inline ItemList<T>* ITEM_LIST(
+inline ItemList<T, uint8_t>* ITEM_LIST(
     const char* text,
     const std::vector<T>& values,
-    void (*callback)(const uint8_t&),
+    void (*callback)(const uint8_t),
     const uint8_t activePosition = 0,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false) {
-    return new ItemList<T>(text, values, activePosition, format, cursorOffset, cycle, callback);
+    return new ItemList<T, uint8_t>(text, values, activePosition, format, cursorOffset, cycle, callback);
 }
 
 /**
@@ -73,13 +73,13 @@ inline ItemList<T>* ITEM_LIST(
  * @param cycle whether to cycle through the list when reaching the end
  */
 template <typename T>
-inline ItemList<T>* ITEM_LIST_REF(
+inline ItemList<T, Ref<uint8_t>>* ITEM_LIST_REF(
     const char* text,
     const std::vector<T>& values,
-    void (*callback)(const uint8_t&),
+    void (*callback)(const Ref<uint8_t>),
     uint8_t& activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false) {
-    return new ItemList<T>(text, values, Ref<uint8_t>(activePosition), format, cursorOffset, cycle, callback);
+    return new ItemList<T, Ref<uint8_t>>(text, values, Ref<uint8_t>(activePosition), format, cursorOffset, cycle, callback);
 }
