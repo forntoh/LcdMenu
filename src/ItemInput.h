@@ -4,7 +4,6 @@
 #include "LcdMenu.h"
 #include "MenuItem.h"
 #include "utils/std.h"
-#include <functional>
 
 /**
  * @brief Item that allows user to input string information.

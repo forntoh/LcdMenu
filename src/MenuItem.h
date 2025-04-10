@@ -29,6 +29,7 @@
 
 #define ITEM_DRAW_BUFFER_SIZE 25
 
+#include "ArxTypeTraits.h"
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <utils/std.h>

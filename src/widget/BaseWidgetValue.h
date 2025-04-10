@@ -1,6 +1,7 @@
 // Creator: @ShishkinDmitriy
 #pragma once
 
+#include "ArxTypeTraits.h"
 #include "BaseWidget.h"
 #include "utils/std.h"
 #include <functional>

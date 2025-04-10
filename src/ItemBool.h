@@ -47,7 +47,7 @@ inline ItemBool<bool>* ITEM_BOOL(
     const bool value,
     const char* textOn,
     const char* textOff,
-    void (*callback)(const bool),
+    std::function<void(const bool)> callback,
     const char* format = "%s",
     const uint8_t cursorOffset = 0) {
     return new ItemBool<bool>(text, value, textOn, textOff, format, cursorOffset, callback);
@@ -72,7 +72,7 @@ inline ItemBool<Ref<bool>>* ITEM_BOOL_REF(
     bool& value,
     const char* textOn,
     const char* textOff,
-    void (*callback)(const Ref<bool>),
+    std::function<void(const Ref<bool>)> callback,
     const char* format = "%s",
     const uint8_t cursorOffset = 0) {
     return new ItemBool<Ref<bool>>(text, Ref<bool>(value), textOn, textOff, format, cursorOffset, callback);

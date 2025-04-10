@@ -3,7 +3,6 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include <functional>
 
 /**
  * @brief Item that allows user to toggle between ON/OFF states.
@@ -21,7 +20,7 @@ class ItemToggle : public MenuItem {
     bool enabled = false;
     const char* textOn = NULL;
     const char* textOff = NULL;
-    std::function<void(bool)> callback = NULL;
+    std::function<void(bool)> callback = {};
 
   public:
     /**

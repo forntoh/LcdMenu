@@ -119,7 +119,7 @@ inline BaseWidgetValue<uint8_t>* WIDGET_LIST(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    std::function<void(const uint8_t&)> callback = nullptr) {
+    std::function<void(const uint8_t&)> callback = {}) {
     return new WidgetList<T, uint8_t>(values, activePosition, format, cursorOffset, cycle, callback);
 }
 
@@ -142,6 +142,6 @@ inline BaseWidgetValue<Ref<uint8_t>>* WIDGET_LIST_REF(
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    std::function<void(const Ref<uint8_t>&)> callback = nullptr) {
+    std::function<void(const Ref<uint8_t>&)> callback = {}) {
     return new WidgetList<T, Ref<uint8_t>>(values, Ref<uint8_t>(activePosition), format, cursorOffset, cycle, callback);
 }

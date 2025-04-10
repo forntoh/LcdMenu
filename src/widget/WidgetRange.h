@@ -2,7 +2,6 @@
 #pragma once
 
 #include "BaseWidgetValue.h"
-#include <functional>
 
 /**
  * @class WidgetRange
@@ -27,9 +26,9 @@ class WidgetRange : public BaseWidgetValue<V> {
         const T min,
         const T max,
         const char* format,
-        const uint8_t cursorOffset = 0,
+        const uint8_t cursorOffset,
         const bool cycle = false,
-        std::function<void(const V&)> callback = nullptr)
+        std::function<void(const V&)> callback)
         : BaseWidgetValue<V>(value, format, cursorOffset, callback),
           step(step),
           minValue(min),
@@ -132,7 +131,7 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
     const char* format,
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    std::function<void(const T&)> callback = nullptr) {
+    std::function<void(const T&)> callback = {}) {
     return new WidgetRange<T, T>(value, step, min, max, format, cursorOffset, cycle, callback);
 }
 
@@ -159,6 +158,6 @@ inline BaseWidgetValue<Ref<T>>* WIDGET_RANGE_REF(
     const char* format,
     const uint8_t cursorOffset = 0,
     const bool cycle = false,
-    std::function<void(const Ref<T>&)> callback = nullptr) {
+    std::function<void(const Ref<T>&)> callback = {}) {
     return new WidgetRange<T, Ref<T>>(Ref<T>(value), step, min, max, format, cursorOffset, cycle, callback);
 }
