@@ -19,6 +19,8 @@ template <typename T, typename V = uint8_t>
 class ItemList : public ItemWidget<V> {
 
   public:
+    virtual ~ItemList() = default;
+
     ItemList(
         const char* text,
         const std::vector<T>& values,

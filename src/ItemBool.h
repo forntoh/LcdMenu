@@ -16,6 +16,8 @@
 template <typename V = bool>
 class ItemBool : public ItemWidget<V> {
   public:
+    virtual ~ItemBool() = default;
+
     ItemBool(
         const char* text,
         V value,

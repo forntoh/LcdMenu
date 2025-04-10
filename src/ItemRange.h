@@ -18,6 +18,8 @@ template <typename T, typename V = T>
 class ItemRange : public ItemWidget<V> {
 
   public:
+    virtual ~ItemRange() = default;
+
     ItemRange(
         const char* text,
         const V value,
