@@ -1,7 +1,7 @@
 #pragma once
 
 #if defined(__has_include)
-#if !__has_include(<vector>) || !__has_include(<functional>)
+#if !__has_include(<vector>)
 #include <ArduinoSTL.h>
 #endif
 #else
