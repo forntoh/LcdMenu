@@ -18,7 +18,7 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="BaseItemManyWidgets.html" rel="next" title="BaseItemManyWidgets"/>
+<link href="ItemRange.html" rel="next" title="ItemRange"/>
 <link href="ItemValue.html" rel="prev" title="ItemValue"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -104,6 +104,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-widget.html">Item Widget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-list.html">Item List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-range.html">Item Range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-bool.html">Item Bool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-bool.html#scenarios">Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-bool.html#best-practices">Best Practices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/input.html">Input item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/input-charset.html">Charset input item</a></li>
 </ul>
@@ -158,13 +163,16 @@
 <li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MenuScreen.html">MenuScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemBool.html">ItemBool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemInput.html">ItemInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemToggle.html">ItemToggle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemInputCharset.html">ItemInputCharset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ItemWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemRange.html">ItemRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
@@ -174,7 +182,6 @@
 <li class="toctree-l2"><a class="reference internal" href="widget/index.html">widget</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../uml.html">Class diagram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../migration/index.html">Migration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 </ul>
@@ -284,7 +291,8 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4IDpE10ItemWidget">
 <span id="_CPPv3IDpE10ItemWidget"></span><span id="_CPPv2IDpE10ItemWidget"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Ts</span></span></span><span class="p"><span class="pre">&gt;</span></span><br/><span class="target" id="classItemWidget"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ItemWidget</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="BaseItemManyWidgets.html#_CPPv419BaseItemManyWidgets" title="BaseItemManyWidgets"><span class="n"><span class="pre">BaseItemManyWidgets</span></span></a><a class="headerlink" href="#_CPPv4IDpE10ItemWidget" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4IDpE10ItemWidget'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Subclassed by <a class="reference internal" href="ItemBool.html#classItemBool"><span class="std std-ref">ItemBool&lt; V &gt;</span></a>, <a class="reference internal" href="ItemList.html#classItemList"><span class="std std-ref">ItemList&lt; T, V &gt;</span></a>, <a class="reference internal" href="ItemRange.html#classItemRange"><span class="std std-ref">ItemRange&lt; T, V &gt;</span></a></p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv4N10ItemWidget12CallbackTypeE">
@@ -300,6 +308,10 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10ItemWidget9setValuesEDp2Ts">
 <span id="_CPPv3N10ItemWidget9setValuesEDp2Ts"></span><span id="_CPPv2N10ItemWidget9setValuesEDp2Ts"></span><span id="ItemWidget::setValues__TsDp"></span><span class="target" id="classItemWidget_1a71473d78015af94c071a98bb812675a2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setValues</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpE10ItemWidget" title="ItemWidget::Ts"><span class="n"><span class="pre">Ts</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">values</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ItemWidget9setValuesEDp2Ts" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10ItemWidget9setValuesEDp2Ts'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ItemWidgetD0Ev">
+<span id="_CPPv3N10ItemWidgetD0Ev"></span><span id="_CPPv2N10ItemWidgetD0Ev"></span><span id="ItemWidget::~ItemWidget"></span><span class="target" id="classItemWidget_1a3f7a5bcece40a5a6f584622d9d785483"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~ItemWidget</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N10ItemWidgetD0Ev" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10ItemWidgetD0Ev'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
@@ -339,8 +351,8 @@
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="BaseItemManyWidgets.html">
-        BaseItemManyWidgets
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="ItemRange.html">
+        ItemRange
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -360,6 +372,7 @@
 <li><a :data-current="activeSection === '#_CPPv4N10ItemWidget12CallbackTypeE'" class="reference internal" href="#_CPPv4N10ItemWidget12CallbackTypeE"><code class="docutils literal notranslate"><span class="pre">CallbackType</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10ItemWidget10ItemWidgetEPKcDpP15BaseWidgetValueI2TsE12CallbackType'" class="reference internal" href="#_CPPv4N10ItemWidget10ItemWidgetEPKcDpP15BaseWidgetValueI2TsE12CallbackType"><code class="docutils literal notranslate"><span class="pre">ItemWidget()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10ItemWidget9setValuesEDp2Ts'" class="reference internal" href="#_CPPv4N10ItemWidget9setValuesEDp2Ts"><code class="docutils literal notranslate"><span class="pre">setValues()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10ItemWidgetD0Ev'" class="reference internal" href="#_CPPv4N10ItemWidgetD0Ev"><code class="docutils literal notranslate"><span class="pre">~ItemWidget()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10ItemWidget12handleCommitEv'" class="reference internal" href="#_CPPv4N10ItemWidget12handleCommitEv"><code class="docutils literal notranslate"><span class="pre">handleCommit()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4I_Dp6size_tEN10ItemWidget14invokeCallbackEv14index_sequenceIDp2IsE'" class="reference internal" href="#_CPPv4I_Dp6size_tEN10ItemWidget14invokeCallbackEv14index_sequenceIDp2IsE"><code class="docutils literal notranslate"><span class="pre">invokeCallback()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10ItemWidget8callbackE'" class="reference internal" href="#_CPPv4N10ItemWidget8callbackE"><code class="docutils literal notranslate"><span class="pre">callback</span></code></a></li>

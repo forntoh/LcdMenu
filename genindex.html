@@ -139,6 +139,11 @@
 <li class="toctree-l2"><a class="reference internal" href="overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/item-widget.html">Item Widget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/items/item-list.html">Item List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/items/item-range.html">Item Range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/items/item-bool.html">Item Bool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/items/item-bool.html#scenarios">Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/items/item-bool.html#best-practices">Best Practices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/input.html">Input item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/input-charset.html">Charset input item</a></li>
 </ul>
@@ -193,13 +198,16 @@
 <li class="toctree-l2"><a class="reference internal" href="reference/api/MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/MenuScreen.html">MenuScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/api/ItemBool.html">ItemBool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemInput.html">ItemInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemToggle.html">ItemToggle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemInputCharset.html">ItemInputCharset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemWidget.html">ItemWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/api/ItemRange.html">ItemRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/api/ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
@@ -209,7 +217,6 @@
 <li class="toctree-l2"><a class="reference internal" href="reference/api/widget/index.html">widget</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference/uml.html">Class diagram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/migration/index.html">Migration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/faq.html">FAQ</a></li>
 </ul>
@@ -535,6 +542,10 @@
 </li>
       <li><a href="reference/api/MenuItem.html#c.ITEM_BASIC">ITEM_BASIC (C macro)</a>
 </li>
+      <li><a href="reference/api/ItemBool.html#_CPPv49ITEM_BOOLPKcKbPKcPKcPFvKbEPKcK7uint8_t">ITEM_BOOL (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemBool.html#_CPPv413ITEM_BOOL_REFPKcRbPKcPKcPFvK3RefIbEEPKcK7uint8_t">ITEM_BOOL_REF (C++ function)</a>
+</li>
       <li><a href="reference/api/ItemCommand.html#_CPPv412ITEM_COMMANDPKcPFvvE">ITEM_COMMAND (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuItem.html#c.ITEM_DRAW_BUFFER_SIZE">ITEM_DRAW_BUFFER_SIZE (C macro)</a>
@@ -542,6 +553,14 @@
       <li><a href="reference/api/ItemInput.html#c.ITEM_INPUT">ITEM_INPUT (C macro)</a>
 </li>
       <li><a href="reference/api/ItemInputCharset.html#c.ITEM_INPUT_CHARSET">ITEM_INPUT_CHARSET (C macro)</a>
+</li>
+      <li><a href="reference/api/ItemList.html#_CPPv4I0E9ITEM_LISTP8ItemListI1T7uint8_tEPKcRKNSt6vectorI1TEEPFvK7uint8_tEK7uint8_tPKcK7uint8_tKb">ITEM_LIST (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemList.html#_CPPv4I0E13ITEM_LIST_REFP8ItemListI1T3RefI7uint8_tEEPKcRKNSt6vectorI1TEEPFvK3RefI7uint8_tEER7uint8_tPKcK7uint8_tKb">ITEM_LIST_REF (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemRange.html#_CPPv4I0E10ITEM_RANGEP9ItemRangeI1T1TEPKcK1TK1TK1TK1TPFvK1TEPKcK7uint8_tKb">ITEM_RANGE (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemRange.html#_CPPv4I0E14ITEM_RANGE_REFP9ItemRangeI1T3RefI1TEEPKcR1TK1TK1TK1TPFvK3RefI1TEEPKcK7uint8_tKb">ITEM_RANGE_REF (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemSubMenu.html#_CPPv412ITEM_SUBMENUPKcRP10MenuScreen">ITEM_SUBMENU (C++ function)</a>
 </li>
@@ -556,6 +575,12 @@
       <li><a href="reference/api/ItemBack.html#_CPPv4N8ItemBack12handleCommitEP7LcdMenu">ItemBack::handleCommit (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemBack.html#_CPPv4N8ItemBack8ItemBackEPKc">ItemBack::ItemBack (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemBool.html#_CPPv4I0E8ItemBool">ItemBool (C++ class)</a>
+</li>
+      <li><a href="reference/api/ItemBool.html#_CPPv4N8ItemBool8ItemBoolEPKc1VPKcPKcPKcK7uint8_tN10ItemWidgetI1VE12CallbackTypeE">ItemBool::ItemBool (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemBool.html#_CPPv4N8ItemBoolD0Ev">ItemBool::~ItemBool (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemCommand.html#_CPPv411ItemCommand">ItemCommand (C++ class)</a>
 </li>
@@ -603,10 +628,10 @@
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv416ItemInputCharset">ItemInputCharset (C++ class)</a>
 </li>
-      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset13abortCharEditEP12MenuRenderer">ItemInputCharset::abortCharEdit (C++ function)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset13abortCharEditEP12MenuRenderer">ItemInputCharset::abortCharEdit (C++ function)</a>
+</li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset8charEditE">ItemInputCharset::charEdit (C++ member)</a>
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset7charsetE">ItemInputCharset::charset (C++ member)</a>
@@ -626,6 +651,18 @@
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset12showNextCharEP12MenuRenderer">ItemInputCharset::showNextChar (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset16showPreviousCharEP12MenuRenderer">ItemInputCharset::showPreviousChar (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemList.html#_CPPv4I00E8ItemList">ItemList (C++ class)</a>
+</li>
+      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemList8ItemListEPKcRKNSt6vectorI1TEEK1VPKcK7uint8_tKbN10ItemWidgetI1VE12CallbackTypeE">ItemList::ItemList (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemList.html#_CPPv4N8ItemListD0Ev">ItemList::~ItemList (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemRange.html#_CPPv4I00E9ItemRange">ItemRange (C++ class)</a>
+</li>
+      <li><a href="reference/api/ItemRange.html#_CPPv4N9ItemRange9ItemRangeEPKcK1VK1TK1TK1TPKcK7uint8_tKbN10ItemWidgetI1VE12CallbackTypeE">ItemRange::ItemRange (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemRange.html#_CPPv4N9ItemRangeD0Ev">ItemRange::~ItemRange (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemSubMenu.html#_CPPv411ItemSubMenu">ItemSubMenu (C++ class)</a>
 </li>
@@ -692,6 +729,8 @@
       <li><a href="reference/api/ItemWidget.html#_CPPv4N10ItemWidget9setValuesEDp2Ts">ItemWidget::setValues (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemWidget.html#_CPPv4I_Dp6size_tEN10ItemWidget13setValuesImplEv14index_sequenceIDp2IsEDp2Ts">ItemWidget::setValuesImpl (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemWidget.html#_CPPv4N10ItemWidgetD0Ev">ItemWidget::~ItemWidget (C++ function)</a>
 </li>
   </ul></td>
   </tr>
@@ -944,10 +983,10 @@
 </li>
       <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer10inEditModeE">MenuRenderer::inEditMode (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer12isInEditModeEv">MenuRenderer::isInEditMode (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer7maxColsE">MenuRenderer::maxCols (C++ member)</a>
 </li>
       <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer7maxRowsE">MenuRenderer::maxRows (C++ member)</a>
@@ -971,6 +1010,8 @@
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen7addItemEP8MenuItem">MenuScreen::addItem (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen9addItemAtE7uint8_tP8MenuItem">MenuScreen::addItemAt (C++ function)</a>
+</li>
+      <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen5clearEv">MenuScreen::clear (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuScreen.html#_CPPv4N10MenuScreen6cursorE">MenuScreen::cursor (C++ member)</a>
 </li>

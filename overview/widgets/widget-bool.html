@@ -104,6 +104,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../items/item-widget.html">Item Widget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../items/item-list.html">Item List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../items/item-range.html">Item Range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../items/item-bool.html">Item Bool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../items/item-bool.html#scenarios">Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../items/item-bool.html#best-practices">Best Practices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/input.html">Input item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/input-charset.html">Charset input item</a></li>
 </ul>
@@ -158,13 +163,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/MenuScreen.html">MenuScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBool.html">ItemBool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemInput.html">ItemInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemToggle.html">ItemToggle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemInputCharset.html">ItemInputCharset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemWidget.html">ItemWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemRange.html">ItemRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemList.html">ItemList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
@@ -174,7 +182,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/widget/index.html">widget</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../reference/uml.html">Class diagram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/migration/index.html">Migration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/faq.html">FAQ</a></li>
 </ul>
@@ -271,13 +278,9 @@ Ensure that the variable’s lifetime exceeds or matches the widget’s lifetime
 <h2>Widget Interaction<a class="headerlink" href="#widget-interaction" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#widget-interaction'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
 <p>The WidgetBool widget can be toggled using the following controls:
 - Press LEFT/RIGHT to toggle between true and false states
-- Press ENTER to confirm the current value and:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Move to the next widget if available</p></li>
-<li><p>Exit focus mode if no next widget exists</p></li>
-</ul>
-</div></blockquote>
+- Press ENTER to confirm the current value and:
+- Move to the next widget if available
+- Exit focus mode if no next widget exists</p>
 </section>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
