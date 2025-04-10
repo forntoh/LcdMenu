@@ -28,8 +28,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r docs/requirements.txt
-          sudo apt-get update
-          sudo apt-get install -y doxygen graphviz default-jre plantuml
 
       - name: Pre-build
         run: |
