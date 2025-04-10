@@ -26,7 +26,7 @@ class ItemBool : public ItemWidget<V> {
         const char* format,
         const uint8_t cursorOffset,
         typename ItemWidget<V>::CallbackType callback)
-        : ItemWidget<V>(text, new WidgetBool<V>(value, textOn, textOff, format, cursorOffset), callback) {}
+        : ItemWidget<V>(text, new WidgetBool<V>(value, textOn, textOff, format, cursorOffset, {}), callback) {}
 };
 
 /**

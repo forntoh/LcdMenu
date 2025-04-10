@@ -16,8 +16,8 @@ void callbackFloat(const float value);
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Con"),
-    ITEM_RANGE("Dist", 100, 1, 100, 200, callbackInt, "%dm", 1, true),
-    ITEM_RANGE("Curr", -1.0f, 0.01f, -1.0f, 1.0f, callbackFloat, "%.2fmA", 2),
+    ITEM_RANGE<int>("Dist", 100, 1, 100, 200, callbackInt, "%dm", 1, true),
+    ITEM_RANGE<float>("Curr", -1.0f, 0.01f, -1.0f, 1.0f, callbackFloat, "%.2fmA", 2),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
 // clang-format on
