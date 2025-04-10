@@ -27,7 +27,7 @@ class WidgetRange : public BaseWidgetValue<V> {
         const T max,
         const char* format,
         const uint8_t cursorOffset,
-        const bool cycle = false,
+        const bool cycle,
         std::function<void(const V&)> callback)
         : BaseWidgetValue<V>(value, format, cursorOffset, callback),
           step(step),
