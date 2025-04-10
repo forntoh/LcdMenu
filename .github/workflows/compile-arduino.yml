@@ -26,6 +26,7 @@ jobs:
         - name: SSD1803A_I2C
         - name: DHT sensor library
         - name: Adafruit Unified Sensor
+        - name: ArxTypeTraits
 
       UNIVERSAL_SKETCH_PATHS: |
         - examples/Basic
