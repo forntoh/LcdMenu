@@ -1,12 +1,11 @@
+#include <ItemBool.h>
 #include <ItemList.h>
 #include <ItemRange.h>
-#include <ItemWidget.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/KeyboardAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
-#include <widget/WidgetBool.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -25,8 +24,8 @@ MENU_SCREEN(
     ITEM_RANGE_REF<int>("Range ref", hour, 1, 0, 23, [](const Ref<int> value) { Serial.println(value.value); }, "%02d"),
     ITEM_LIST("List val", days, [](const uint8_t value) { day = value; }),
     ITEM_LIST_REF("List ref", days, [](const Ref<uint8_t> value) { Serial.println(value.value); }, day),
-    ITEM_WIDGET("Bool val", [](const bool value) { toggle = value; }, WIDGET_BOOL(toggle, "Yes", "No", "%s")),
-    ITEM_WIDGET("Bool ref", [](const Ref<bool> value) { Serial.println(value.value); }, WIDGET_BOOL_REF(toggle, "Yes", "No", "%s")));
+    ITEM_BOOL("Bool val", false, "Yes", "No", [](const bool value) { toggle = value; }, "%s"),
+    ITEM_BOOL_REF("Bool ref", toggle, "Yes", "No", [](const Ref<bool> value) { Serial.println(value.value); }, "%s"), );
 
 LiquidCrystal_I2C lcd(LCD_ADDR, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
