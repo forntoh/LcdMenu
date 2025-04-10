@@ -45,5 +45,5 @@ Widget Interaction
 The WidgetBool widget can be toggled using the following controls:
 - Press LEFT/RIGHT to toggle between true and false states
 - Press ENTER to confirm the current value and:
-  - Move to the next widget if available
-  - Exit focus mode if no next widget exists
+- Move to the next widget if available
+- Exit focus mode if no next widget exists
