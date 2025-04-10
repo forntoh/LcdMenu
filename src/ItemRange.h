@@ -27,9 +27,9 @@ class ItemRange : public ItemWidget<V> {
         const char* format,
         const uint8_t cursorOffset,
         const bool cycle,
-        void (*callback)(const V&)) : ItemWidget<V>(text,
-                                                    {WidgetRange<T, V>(value, step, min, max, format, cursorOffset, cycle)},
-                                                    callback) {}
+        typename ItemWidget<V>::CallbackType callback) : ItemWidget<V>(text,
+                                                                       new WidgetRange<T, V>(value, step, min, max, format, cursorOffset, cycle),
+                                                                       callback) {}
 };
 
 /**
@@ -49,17 +49,17 @@ class ItemRange : public ItemWidget<V> {
  * @param cycle whether to cycle through the range when reaching the end
  */
 template <typename T>
-inline ItemRange<T>* ITEM_RANGE(
+inline ItemRange<T, T>* ITEM_RANGE(
     const char* text,
     const T value,
     const T step,
     const T min,
     const T max,
-    void (*callback)(const T&),
+    void (*callback)(const T),
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false) {
-    return new ItemRange<T>(text, value, step, min, max, format, cursorOffset, cycle, callback);
+    return new ItemRange<T, T>(text, value, step, min, max, format, cursorOffset, cycle, callback);
 }
 
 /**
@@ -79,15 +79,15 @@ inline ItemRange<T>* ITEM_RANGE(
  * @param cycle whether to cycle through the range when reaching the end
  */
 template <typename T>
-inline ItemRange<T>* ITEM_RANGE_REF(
+inline ItemRange<T, Ref<T>>* ITEM_RANGE_REF(
     const char* text,
     T& value,
     const T step,
     const T min,
     const T max,
-    void (*callback)(const Ref<T>&),
+    void (*callback)(const Ref<T>),
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
     const bool cycle = false) {
-    return new ItemRange<T>(text, Ref<T>(value), step, min, max, format, cursorOffset, cycle, callback);
+    return new ItemRange<T, Ref<T>>(text, Ref<T>(value), step, min, max, format, cursorOffset, cycle, callback);
 }
