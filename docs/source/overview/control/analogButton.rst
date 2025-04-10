@@ -1,5 +1,5 @@
 Analog Button Adapter
---------------
+---------------------
 
 The button adapter is a simple input adapter that maps physical buttons connected to analog pins to menu controls.
 
