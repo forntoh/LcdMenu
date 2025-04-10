@@ -44,7 +44,7 @@ Example: Toggle with Reference
 In this example, the :cpp:class:`ItemBool` uses a reference to track the current state of the backlight. This is useful when the state needs to be updated externally.
 
 Scenarios
----------
+~~~~~~~~~
 
 The :cpp:class:`ItemBool` is ideal for scenarios where you need to:
 
@@ -53,7 +53,7 @@ The :cpp:class:`ItemBool` is ideal for scenarios where you need to:
 - Dynamically update the state using a reference.
 
 Best Practices
---------------
+~~~~~~~~~~~~~~
 
 When using :cpp:class:`ItemBool`, consider the following best practices:
 
