@@ -1,12 +1,12 @@
 Item Range
-==========
+----------
 
 The :cpp:class:`ItemRange` class is a wrapper around the :cpp:class:`ItemWidget` class that simplifies the creation of menu items with a single :cpp:class:`WidgetRange`. It reduces boilerplate code when you want to create an item with only one widget, making your code cleaner and easier to maintain.
 
 This widget is particularly useful when you need to allow the user to select a value within a specific range, such as volume, brightness, or temperature.
 
 Usage
------
+~~~~~
 
 The :cpp:class:`ItemRange` class allows you to create a menu item that displays a range of values. It provides two main functions:
 
@@ -27,7 +27,8 @@ Both functions are wrappers around the :cpp:class:`ItemWidget` class with a :cpp
 
 In this example, the :cpp:class:`ItemRange` allows the user to select a volume level between 0% and 100% in steps of 5%. The selected value is printed to the serial monitor.
 
-### Example: Range with Reference
+Example: Range with Reference
+#############################
 
 .. code-block:: c++
 
@@ -42,7 +43,7 @@ In this example, the :cpp:class:`ItemRange` allows the user to select a volume l
 In this example, the :cpp:class:`ItemRange` uses a reference to track the currently selected temperature. This is useful when the selected value needs to be updated externally.
 
 Scenarios
----------
+~~~~~~~~~
 
 The :cpp:class:`ItemRange` is ideal for scenarios where you need to:
 
