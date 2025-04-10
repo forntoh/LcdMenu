@@ -1,13 +1,12 @@
+#include <ItemList.h>
+#include <ItemRange.h>
 #include <ItemToggle.h>
-#include <ItemWidget.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <SimpleRotary.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/SimpleRotaryAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
-#include <widget/WidgetList.h>
-#include <widget/WidgetRange.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -21,15 +20,9 @@ std::vector<const char*> colors = {"Red", "Green", "Blue", "Orange", "Aqua", "Ye
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Connect to WiFi"),
-    ITEM_WIDGET(
-        "Color",
-        [](const uint8_t color) { Serial.println(colors[color]); },
-        WIDGET_LIST(colors, 0, "%s")),
+    ITEM_LIST("Color", colors, [](const uint8_t color) { Serial.println(colors[color]); }),
     ITEM_BASIC("Blink SOS"),
-    ITEM_WIDGET(
-        "Dist",
-        callback,
-        WIDGET_RANGE(0, 1, 0, 50, "%dm", 1, true)),
+    ITEM_RANGE("Dist", 0, 1, 0, 50, callback, "%dm", 1, true),
     ITEM_TOGGLE("Backlight", toggleBacklight),
     ITEM_BASIC("Blink random"));
 // clang-format on
