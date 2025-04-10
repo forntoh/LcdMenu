@@ -16,7 +16,7 @@ void inputCallback(const char* value);
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
-    ITEM_INPUT_CHARSET("Con", "0123456", charset, inputCallback),
+    ITEM_INPUT_CHARSET("Con", "0123456", charset, [](const char* value) { inputCallback(value); }),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));

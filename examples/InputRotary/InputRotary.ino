@@ -29,7 +29,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("And more Settings"));
 
 MENU_SCREEN(userScreen, userItems,
-    ITEM_INPUT_CHARSET("User", charset, inputCallback),
+    ITEM_INPUT_CHARSET("User", charset, [](const char* value) { inputCallback(value); }),
     ITEM_COMMAND("Clear", clearInput));
 // clang-format on
 

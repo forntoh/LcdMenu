@@ -16,7 +16,7 @@ void toggleBacklight(bool isOn);
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Start service"),
     ITEM_BASIC("Connect to WiFi"),
-    ITEM_TOGGLE("Backlight", toggleBacklight),
+    ITEM_TOGGLE("Backlight", [](const bool isOn) { toggleBacklight(isOn); }),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
 // clang-format on

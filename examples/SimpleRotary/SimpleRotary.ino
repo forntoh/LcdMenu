@@ -22,8 +22,8 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Connect to WiFi"),
     ITEM_LIST("Color", colors, [](const uint8_t color) { Serial.println(colors[color]); }),
     ITEM_BASIC("Blink SOS"),
-    ITEM_RANGE<int>("Dist", 0, 1, 0, 50, callback, "%dm", 1, true),
-    ITEM_TOGGLE("Backlight", toggleBacklight),
+    ITEM_RANGE<int>("Dist", 0, 1, 0, 50, [](const int value) { callback(value); }, "%dm", 1, true),
+    ITEM_TOGGLE("Backlight", [](const bool isOn) { toggleBacklight(isOn); }),
     ITEM_BASIC("Blink random"));
 // clang-format on
 
