@@ -39,6 +39,6 @@ jobs:
           git clone https://github.com/maniacbug/StandardCplusplus.git
           git clone https://github.com/hideakitai/ArxTypeTraits.git
 
-          mv LiquidCrystal_I2C LiquidCrystal StandardCplusplus ArxTypeTraits $(bundle exec arduino_library_location.rb)
+          mv LiquidCrystal_I2C LiquidCrystal StandardCplusplus ArxTypeTraits -t $(bundle exec arduino_library_location.rb)
 
           bundle exec arduino_ci.rb --skip-examples-compilation
