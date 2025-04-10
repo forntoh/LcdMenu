@@ -45,11 +45,11 @@ async function generateReleaseNotes(github, context) {
   });
 
   const categoryNames = {
-    feature: "New Features",
-    enhancement: "Enhancements",
-    bugfix: "Bug Fixes",
-    chore: "Chore Updates",
-    documentation: "Documentation Updates",
+    feature: "🚀 New Features",
+    enhancement: "🛠 Enhancements",
+    bugfix: "🐛 Bug Fixes",
+    chore: "🔨 Chore Updates",
+    documentation: "📚 Documentation Updates",
   };
 
   const categories = {
