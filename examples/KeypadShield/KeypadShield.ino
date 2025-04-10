@@ -1,10 +1,9 @@
-#include <ItemWidget.h>
+#include <ItemList.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystalAdapter.h>
 #include <input/AnalogButtonAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
-#include <widget/WidgetList.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -16,14 +15,8 @@ std::vector<uint8_t> nums = {5, 7, 9, 12, 32};
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Keypad demo"),
-    ITEM_WIDGET(
-        "Color",
-        [](const uint8_t color) { Serial.println(colors[color]); },
-        WIDGET_LIST(colors, 0, "%s", 0, true)),
-    ITEM_WIDGET(
-        "Num",
-        [](const uint8_t num) { Serial.println(nums[num]); },
-        WIDGET_LIST(nums, 0, "%d", 0, true)),
+    ITEM_LIST("Color", colors, [](const uint8_t color) { Serial.println(colors[color]); }),
+    ITEM_LIST("Num", nums, [](const uint8_t num) { Serial.println(nums[num]); }, 0, "%d", 0, true),
     ITEM_BASIC("Example"));
 // clang-format on
 
