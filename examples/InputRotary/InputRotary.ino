@@ -30,7 +30,7 @@ MENU_SCREEN(mainScreen, mainItems,
 
 MENU_SCREEN(userScreen, userItems,
     ITEM_INPUT_CHARSET("User", charset, [](const char* value) { inputCallback(value); }),
-    ITEM_COMMAND("Clear", clearInput));
+    ITEM_COMMAND("Clear", []() { clearInput(); }));
 // clang-format on
 
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
