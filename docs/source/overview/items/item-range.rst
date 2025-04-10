@@ -51,4 +51,13 @@ The :cpp:class:`ItemRange` is ideal for scenarios where you need to:
 - Reduce boilerplate code when creating items with a single :cpp:class:`WidgetRange`.
 - Dynamically update the selected value using a reference.
 
+Best Practices
+~~~~~~~~~~~~~~~
+
+When using :cpp:class:`ItemRange`, consider the following best practices:
+
+- Ensure the step size divides evenly into the range to avoid unexpected behavior at range boundaries.  
+- For performance-critical applications, use simple numeric types (int, float) rather than complex types.  
+- When using :cpp:func:`ITEM_RANGE_REF`, be aware that external changes to the referenced value will be reflected in the menu display.  
+
 For more details, refer to the :cpp:class:`WidgetRange` documentation: :doc:`../widgets/widget-range`.

@@ -52,4 +52,12 @@ The :cpp:class:`ItemBool` is ideal for scenarios where you need to:
 - Reduce boilerplate code when creating items with a single :cpp:class:`WidgetBool`.
 - Dynamically update the state using a reference.
 
+Best Practices
+--------------
+
+When using :cpp:class:`ItemBool`, consider the following best practices:
+
+- Use meaningful labels for the toggle states (e.g., "On" and "Off") to improve user experience.
+- When using :cpp:class:`ITEM_BOOL_REF`, be aware that external changes to the referenced value will be reflected in the menu display. 
+
 For more details, refer to the :doc:`../widgets/widget-bool` documentation.

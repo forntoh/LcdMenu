@@ -55,4 +55,15 @@ The :cpp:class:`ItemList` is ideal for scenarios where you need to:
 - Reduce boilerplate code when creating items with a single :cpp:class:`WidgetList`.
 - Dynamically update the selected value using a reference.
 
+Best Practices
+~~~~~~~~~~~~~~~
+
+When using :cpp:class:`ItemList`, consider the following best practices:
+
+- Ensure the list of options is not too long to avoid overwhelming the user.
+- Use meaningful labels for the options to make it easier for the user to understand their choices.
+- For performance-critical applications, use simple types (e.g., ``uint8_t``, ``char *``) for the list items rather than complex types.
+- The list values are stored in memory, so ensure that the list is not too large to avoid memory issues.
+- When using :cpp:func:`ITEM_LIST_REF`, be aware that external changes to the referenced value will be reflected in the menu display. 
+
 For more details, refer to the :cpp:class:`WidgetList` documentation: :doc:`../widgets/widget-list`.
