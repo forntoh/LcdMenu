@@ -30,7 +30,7 @@ class WidgetRange : public BaseWidgetValue<V> {
         const bool cycle = false,
         void (*callback)(const V&) = nullptr)
         : BaseWidgetValue<V>(value, format, cursorOffset, callback),
-          step(step),
+          step(step < 0 ? -step : step),
           minValue(min),
           maxValue(max),
           cycle(cycle) {}
