@@ -30,7 +30,7 @@ class WidgetRange : public BaseWidgetValue<V> {
         const bool cycle = false,
         void (*callback)(const V&) = nullptr)
         : BaseWidgetValue<V>(value, format, cursorOffset, callback),
-          step(step < 0 ? -step : step),
+          step(step),
           minValue(min),
           maxValue(max),
           cycle(cycle) {}
@@ -61,10 +61,10 @@ class WidgetRange : public BaseWidgetValue<V> {
         if (renderer->isInEditMode()) {
             switch (command) {
                 case UP:
-                    if (increment()) BaseWidgetValue<V>::handleChange();
+                    if (step < 0 ? decrement() : increment()) BaseWidgetValue<V>::handleChange();
                     return true;
                 case DOWN:
-                    if (decrement()) BaseWidgetValue<V>::handleChange();
+                    if (step < 0 ? increment() : decrement()) BaseWidgetValue<V>::handleChange();
                     return true;
                 default:
                     return false;
@@ -79,7 +79,8 @@ class WidgetRange : public BaseWidgetValue<V> {
      */
     bool increment() {
         T current = static_cast<T>(this->value);
-        T newValue = (current + step > maxValue) ? (cycle ? minValue : maxValue) : (current + step);
+        T absStep = (step < 0) ? -step : step;
+        T newValue = (current + absStep > maxValue) ? (cycle ? minValue : maxValue) : (current + absStep);
         if (newValue != current) {
             this->value = newValue;
             LOG(F("WidgetRange::increment"), newValue);
@@ -95,7 +96,8 @@ class WidgetRange : public BaseWidgetValue<V> {
      */
     bool decrement() {
         T current = static_cast<T>(this->value);
-        T newValue = (current < minValue + step) ? (cycle ? maxValue : minValue) : (current - step);
+        T absStep = (step < 0) ? -step : step;
+        T newValue = (current < minValue + absStep) ? (cycle ? maxValue : minValue) : (current - absStep);
         if (newValue != current) {
             this->value = newValue;
             LOG(F("WidgetRange::decrement"), newValue);
@@ -114,7 +116,7 @@ class WidgetRange : public BaseWidgetValue<V> {
  * @tparam T The type of the value.
  *
  * @param value The initial value of the widget.
- * @param step The step value for incrementing/decrementing.
+ * @param step The step value for incrementing/decrementing (use negative value to invert the range).
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.
  * @param format The format string for displaying the value.
@@ -141,7 +143,7 @@ inline BaseWidgetValue<T>* WIDGET_RANGE(
  * @tparam T The type of the value.
  *
  * @param value The reference value of this widget (this value is passed by reference, so it can be updated externally).
- * @param step The step value for incrementing/decrementing.
+ * @param step The step value for incrementing/decrementing (use negative value to invert the range).
  * @param min The minimum value of the range.
  * @param max The maximum value of the range.
  * @param format The format string for displaying the value.
