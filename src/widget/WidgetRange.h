@@ -79,7 +79,8 @@ class WidgetRange : public BaseWidgetValue<V> {
      */
     bool increment() {
         T current = static_cast<T>(this->value);
-        T newValue = (current + step > maxValue) ? (cycle ? minValue : maxValue) : (current + step);
+        T absStep = (step < 0) ? -step : step;
+        T newValue = (current + absStep > maxValue) ? (cycle ? minValue : maxValue) : (current + absStep);
         if (newValue != current) {
             this->value = newValue;
             LOG(F("WidgetRange::increment"), newValue);
@@ -95,7 +96,8 @@ class WidgetRange : public BaseWidgetValue<V> {
      */
     bool decrement() {
         T current = static_cast<T>(this->value);
-        T newValue = (current < minValue + step) ? (cycle ? maxValue : minValue) : (current - step);
+        T absStep = (step < 0) ? -step : step;
+        T newValue = (current < minValue + absStep) ? (cycle ? maxValue : minValue) : (current - absStep);
         if (newValue != current) {
             this->value = newValue;
             LOG(F("WidgetRange::decrement"), newValue);
