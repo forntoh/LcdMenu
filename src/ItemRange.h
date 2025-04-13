@@ -42,7 +42,7 @@ class ItemRange : public ItemWidget<V> {
  * @tparam T the type of the values in the range
  * @param text the text to display for the item
  * @param value the initial value to display
- * @param step the step size for incrementing/decrementing the value
+ * @param step the step size for incrementing/decrementing the value (use negative value to invert the range)
  * @param min the minimum value in the range
  * @param max the maximum value in the range
  * @param callback the callback function to call when the value changes
@@ -72,7 +72,7 @@ inline ItemRange<T, T>* ITEM_RANGE(
  * @tparam T the type of the values in the range
  * @param text the text to display for the item
  * @param value the reference value to display (this value is passed by reference, so it can be updated externally)
- * @param step the step size for incrementing/decrementing the value
+ * @param step the step size for incrementing/decrementing the value (use negative value to invert the range)
  * @param min the minimum value in the range
  * @param max the maximum value in the range
  * @param callback the callback function to call when the value changes
