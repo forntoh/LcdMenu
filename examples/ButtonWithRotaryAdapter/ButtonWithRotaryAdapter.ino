@@ -18,7 +18,7 @@
 
 // Declare the callbacks
 void toggleBacklight(bool isOn);
-void inputCallback(char* value);
+void inputCallback(const char* value);
 
 std::vector<const char*> colors = {"Red", "Green", "Blue", "Orange", "Aqua", "Yellow", "Purple", "Pink"};
 
@@ -57,6 +57,6 @@ void toggleBacklight(bool isOn) {
     lcdAdapter.setBacklight(isOn);
 }
 
-void inputCallback(char* value) {
+void inputCallback(const char* value) {
     Serial.println(value);
 }

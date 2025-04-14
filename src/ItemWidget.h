@@ -29,7 +29,7 @@ struct make_index_sequence<0, Is...> {
 template <typename... Ts>
 class ItemWidget : public BaseItemManyWidgets {
   public:
-    using CallbackType = void (*)(Ts...);
+    using CallbackType = std::function<void(Ts...)>;
 
   protected:
     CallbackType callback = nullptr;

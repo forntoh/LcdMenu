@@ -26,6 +26,7 @@ jobs:
         - name: SSD1803A_I2C
         - name: DHT sensor library
         - name: Adafruit Unified Sensor
+        - name: ArxTypeTraits
 
       UNIVERSAL_SKETCH_PATHS: |
         - examples/Basic
@@ -39,7 +40,6 @@ jobs:
         - examples/SSD1803A_I2C
         - examples/UseByRef
         - examples/DynamicMenu
-        - examples/Widgets
 
       SKETCHES_REPORTS_PATH: sketches-reports
 
@@ -75,6 +75,7 @@ jobs:
               - name: ArduinoSTL
             sketch-paths: |
               - examples/RTOS
+              - examples/Widgets
           # ESP32 boards
           - board:
               type: esp32
@@ -85,6 +86,8 @@ jobs:
             libraries:
             sketch-paths: |
               - examples/RTOS
+              - examples/Widgets
+              - examples/ESP32WiFi
           # ESP8266 boards
           - board:
               type: esp8266
@@ -93,14 +96,16 @@ jobs:
               - name: esp8266:esp8266
                 source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
             libraries:
-            sketch-paths:
+            sketch-paths: |
+              - examples/Widgets
           # SAMD boards
           - board:
               type: mkr1000
             platforms: |
               # Install SAMD platform via Boards Manager
               - name: arduino:samd
-            sketch-paths:
+            sketch-paths: |
+              - examples/Widgets
           # STM32 boards
           - board:
               type: stm32

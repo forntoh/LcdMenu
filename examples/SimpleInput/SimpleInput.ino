@@ -9,7 +9,7 @@
 #define LCD_COLS 16
 
 // Declare the call back function
-void inputCallback(char* value);
+void inputCallback(const char* value);
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
@@ -37,7 +37,7 @@ void loop() {
 /**
  * Define callback
  */
-void inputCallback(char* value) {
+void inputCallback(const char* value) {
     // do something with the input value
     Serial.println(value);
 }
