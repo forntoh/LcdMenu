@@ -148,11 +148,11 @@ class BaseItemManyWidgets : public MenuItem {
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
-        if (widgets[activeWidget]->process(menu, command)) {
-            draw(renderer);
-            return true;
-        }
         if (renderer->isInEditMode()) {
+            if (widgets[activeWidget]->process(menu, command)) {
+                draw(renderer);
+                return true;
+            }
             switch (command) {
                 case ENTER:
                     if (activeWidget < widgets.size() - 1) {
