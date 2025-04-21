@@ -44,24 +44,20 @@ class WidgetList : public BaseWidgetValue<V> {
      * - `DOWN` - decrement value and trigger callback;
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
-        MenuRenderer* renderer = menu->getRenderer();
-        if (renderer->isInEditMode()) {
-            switch (command) {
-                case UP:
-                    if (nextValue()) {
-                        updateValue(F("WidgetList::nextValue"));
-                    }
-                    return true;
-                case DOWN:
-                    if (previousValue()) {
-                        updateValue(F("WidgetList::previousValue"));
-                    }
-                    return true;
-                default:
-                    return false;
-            }
+        switch (command) {
+            case UP:
+                if (nextValue()) {
+                    updateValue(F("WidgetList::nextValue"));
+                }
+                return true;
+            case DOWN:
+                if (previousValue()) {
+                    updateValue(F("WidgetList::previousValue"));
+                }
+                return true;
+            default:
+                return false;
         }
-        return false;
     }
     void updateValue(const __FlashStringHelper* action) {
         BaseWidgetValue<V>::handleChange();
