@@ -80,19 +80,19 @@ void checkWifiScan() {
                 int rssi = WiFi.RSSI(i);                                    // Get signal strength
                 bool isSecured = WiFi.encryptionType(i) != WIFI_AUTH_OPEN;  // Check if secured
                 String itemName = networkName + " (" + (isSecured ? "Secured" : "Open") + ")";
-                char* itemText = strdup(itemName.c_str());  // Copy network name for menu item
+                auto itemText = std::make_shared<std::string>(itemName.c_str());
 
                 // Create a submenu for secured networks
                 static MenuScreen* securedNetworkMenu = new MenuScreen();  // Submenu for secured networks
                 securedNetworkMenu->setParent(wifiMenu);                   // Set parent menu
                 securedNetworkMenu->clear();                               // Clear the submenu
 
-                char* password = new char[32];  // Buffer for the password
+                auto password = std::make_shared<std::string>(32, '\0');
 
                 // Add an input field for the password
                 ItemInput* passwordItem = ITEM_INPUT_CHARSET("Pwd", charset, [password, itemName](const char* value) {
-                    strncpy(password, value, 32);  // Store the entered password
-                    password[31] = '\0';           // Ensure null termination
+                    strncpy(const_cast<char*>(password->data()), value, 32);  // Store the entered password
+                    (*password)[31] = '\0';                                   // Ensure null termination
                     Serial.printf("Password set for %s: %s\n", itemName.c_str(), password);
                 });
                 securedNetworkMenu->addItem(passwordItem);
@@ -109,7 +109,7 @@ void checkWifiScan() {
                     if (isSecured) {
                         // Connect to secured network
                         Serial.printf("Connecting to %s with password %s...\n", networkName.c_str(), password);
-                        WiFi.begin(networkName.c_str(), password);
+                        WiFi.begin(networkName.c_str(), password->c_str());
                     } else {
                         // Connect to open network
                         Serial.printf("Connecting to %s...\n", networkName.c_str());
@@ -164,12 +164,9 @@ void checkWifiScan() {
                 }));
 
                 // Add the submenu to the main WiFi menu
-                wifiMenu->addItem(ITEM_SUBMENU(itemText, securedNetworkMenu));
+                wifiMenu->addItem(ITEM_SUBMENU(itemText->c_str(), securedNetworkMenu));
 
                 Serial.printf("%d: %s (%d dBm)\n", i + 1, networkName.c_str(), rssi);
-
-                free(itemText);     // Free the memory used for the item text
-                delete[] password;  // Free the memory used for the password
             }
         }
 
