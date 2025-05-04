@@ -57,20 +57,16 @@ class WidgetRange : public BaseWidgetValue<V> {
      * - `DOWN` - decrement value and trigger callback;
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
-        MenuRenderer* renderer = menu->getRenderer();
-        if (renderer->isInEditMode()) {
-            switch (command) {
-                case UP:
-                    if (step < 0 ? decrement() : increment()) BaseWidgetValue<V>::handleChange();
-                    return true;
-                case DOWN:
-                    if (step < 0 ? increment() : decrement()) BaseWidgetValue<V>::handleChange();
-                    return true;
-                default:
-                    return false;
-            }
+        switch (command) {
+            case UP:
+                if (step < 0 ? decrement() : increment()) BaseWidgetValue<V>::handleChange();
+                return true;
+            case DOWN:
+                if (step < 0 ? increment() : decrement()) BaseWidgetValue<V>::handleChange();
+                return true;
+            default:
+                return false;
         }
-        return false;
     }
     /**
      * @brief Increments the value.
