@@ -12,12 +12,12 @@
 // Create your charset
 const char* charset = "0123456789";
 
-// Declare the call back function
-void inputCallback(const char* value);
-
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
-    ITEM_INPUT_CHARSET("Con", "0123456", charset, inputCallback),
+    ITEM_INPUT_CHARSET("Con", (char*)"0123456", charset, [](const char* value) {
+        Serial.print("# ");
+        Serial.println(value);
+    }),
     ITEM_BASIC("Connect to WiFi"),
     ITEM_BASIC("Blink SOS"),
     ITEM_BASIC("Blink random"));
@@ -36,12 +36,4 @@ void setup() {
 
 void loop() {
     keyboard.observe();
-}
-/**
- * Define callback
- */
-void inputCallback(const char* value) {
-    // Do stuff with value
-    Serial.print(F("# "));
-    Serial.println(value);
 }
