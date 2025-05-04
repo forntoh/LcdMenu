@@ -39,9 +39,9 @@ MENU_SCREEN(mainScreen, mainItems,
 // Sub Menu 1: Relays
 // clang-format off
 MENU_SCREEN(relayScreen, relayItems, 
-    ITEM_TOGGLE("Relay 1", [](bool isOn) { relay1State = isOn; }), 
-    ITEM_TOGGLE("Relay 2", [](bool isOn) { relay2State = isOn; }), 
-    ITEM_TOGGLE("Relay 3", [](bool isOn) { relay3State = isOn; }));
+    ITEM_TOGGLE("Relay 1", [&](bool isOn) { relay1State = isOn; }), 
+    ITEM_TOGGLE("Relay 2", [&](bool isOn) { relay2State = isOn; }), 
+    ITEM_TOGGLE("Relay 3", [&](bool isOn) { relay3State = isOn; }));
 // clang-format on
 
 // Sub Menu 2: Temperature Values
