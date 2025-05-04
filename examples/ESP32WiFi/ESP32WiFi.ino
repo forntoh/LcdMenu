@@ -167,6 +167,9 @@ void checkWifiScan() {
                 wifiMenu->addItem(ITEM_SUBMENU(itemText, securedNetworkMenu));
 
                 Serial.printf("%d: %s (%d dBm)\n", i + 1, networkName.c_str(), rssi);
+
+                free(itemText);     // Free the memory used for the item text
+                delete[] password;  // Free the memory used for the password
             }
         }
 
