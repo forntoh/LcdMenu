@@ -7,7 +7,7 @@
  *
  * This class extends the BaseItemZeroWidget class and provides a menu item
  * that executes a callback function when selected. The callback function is
- * provided as a function pointer during construction.
+ * provided as a std::function during construction.
  *
  * As a BaseItemZeroWidget, this item responds to selection events in the menu
  * system. When the user confirms the selection, handleCommit is triggered,
