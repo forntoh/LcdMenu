@@ -17,7 +17,6 @@ class BaseItemManyWidgets : public MenuItem {
   public:
     BaseItemManyWidgets(const char* text, std::vector<BaseWidget*> widgets, uint8_t activeWidget = 0)
         : MenuItem(text), widgets(widgets), activeWidget(constrain(activeWidget, 0, widgets.size())) {
-)
         this->polling = true;
     }
 

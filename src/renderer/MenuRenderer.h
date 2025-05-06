@@ -98,12 +98,12 @@ class MenuRenderer {
      * @brief Timer. Checks if the blinking portion of the text is currently on.
      * @return True if the blinker is on, false otherwise.
      */
-    virtual bool isBlinkerOn()=0;
-    
+    virtual bool isBlinkerOn() = 0;
+
     /**
      * @brief Resets the blinking portion to the "ON" state. Intended for bringing the text back immediately when button is pressed.
      */
-    virtual void resetBlinkerOn()=0;
+    virtual void resetBlinkerOn() = 0;
 
     /**
      * @brief Moves the cursor to a specified position.
