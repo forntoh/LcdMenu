@@ -105,7 +105,7 @@ class BaseItemManyWidgets : public MenuItem {
         uint8_t index = 0;
         uint8_t cursorCol = 0;
 
-        for (int8_t i = 0; i < widgets.size(); i++) {
+        for (size_t i = 0; i < widgets.size(); i++) {
             uint8_t widgetLength = widgets[i]->draw(buf, index);
             index += widgetLength;
             if (i == activeWidget && renderer->isInEditMode()) {
