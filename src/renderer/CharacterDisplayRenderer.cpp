@@ -99,12 +99,15 @@ void CharacterDisplayRenderer::clearBlinker() {
     //    static_cast<CharacterDisplayInterface*>(display)->clearBlinker();
 }
 
+constexpr uint32_t BLINK_ON_MS  = 600;
+constexpr uint32_t BLINK_OFF_MS = 200;
+
 bool CharacterDisplayRenderer::isBlinkerOn() {
     uint32_t currentMillis = millis();
-    if (blinkerOn && (currentMillis - blinkerLastTime > 600)) {
+    if (blinkerOn && (currentMillis - blinkerLastTime > BLINK_ON_MS)) {
         blinkerLastTime = currentMillis;
         blinkerOn = !blinkerOn;
-    } else if (!blinkerOn && (currentMillis - blinkerLastTime > 200)) {
+    } else if (!blinkerOn && (currentMillis - blinkerLastTime > BLINK_OFF_MS)) {
         blinkerLastTime = currentMillis;
         blinkerOn = !blinkerOn;
     }
