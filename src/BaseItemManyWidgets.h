@@ -12,7 +12,7 @@
 class BaseItemManyWidgets : public MenuItem {
   protected:
     std::vector<BaseWidget*> widgets;
-    int8_t activeWidget = -1;  // -1 means no active widget
+    uint8_t activeWidget = 0;
 
   public:
     BaseItemManyWidgets(const char* text, std::vector<BaseWidget*> widgets, uint8_t activeWidget = 0)
@@ -20,8 +20,8 @@ class BaseItemManyWidgets : public MenuItem {
         this->polling = true;
     }
 
-    int8_t getActiveWidget() const { return activeWidget; }
-    void setActiveWidget(const int8_t activeWidget) {
+    uint8_t getActiveWidget() const { return activeWidget; }
+    void setActiveWidget(const uint8_t activeWidget) {
         if (activeWidget < widgets.size()) {
             this->activeWidget = activeWidget;
         }
@@ -78,9 +78,9 @@ class BaseItemManyWidgets : public MenuItem {
   protected:
     virtual void handleCommit() = 0;
     /**
-     * @brief Reset the active widget to no active widget.
+     * @brief Reset the active widget to the first widget.
      */
-    void reset() { activeWidget = -1; }
+    void reset() { activeWidget = 0; }
 
     /**
      * @brief Draws the menu item using the provided renderer.
@@ -109,7 +109,7 @@ class BaseItemManyWidgets : public MenuItem {
             uint8_t widgetLength = widgets[i]->draw(buf, index);
             index += widgetLength;
             if (i == activeWidget && renderer->isInEditMode()) {
-                if (!renderer->isBlinkerOn()) {
+                if (renderer->isBlinkerOn() == false && renderer->hasFocus) {
                     index -= widgetLength;
                     for (uint8_t j = 0; j < widgetLength; j++) {
                         buf[index] = ' ';  // clear the widget
@@ -159,7 +159,7 @@ class BaseItemManyWidgets : public MenuItem {
 
         if (renderer->isInEditMode()) {
             renderer->resetBlinkerOn();
-            if (activeWidget >= 0 && widgets[activeWidget]->process(menu, command)) {
+            if (widgets[activeWidget]->process(menu, command)) {
                 draw(renderer);
                 return true;
             }
@@ -186,7 +186,6 @@ class BaseItemManyWidgets : public MenuItem {
         }
         if (command == ENTER) {
             renderer->setEditMode(true);
-            if (activeWidget < 0) activeWidget = 0;  // activate first widget
             draw(renderer);
             renderer->drawBlinker();
             LOG(F("ItemWidget::enterEditMode"), this->text);
@@ -198,7 +197,7 @@ class BaseItemManyWidgets : public MenuItem {
     void left(MenuRenderer* renderer) {
         if (activeWidget == 0) {
             activeWidget = widgets.size() - 1;  // wrap around
-        } else if (activeWidget > 0) {
+        } else {
             activeWidget--;
         }
         draw(renderer);
@@ -216,7 +215,7 @@ class BaseItemManyWidgets : public MenuItem {
         renderer->viewShift = 0;
         reset();
         handleCommit();
-        renderer->clearBlinker();
+        //renderer->clearBlinker();
         draw(renderer);
         LOG(F("ItemWidget::exitEditMode"), this->text);
     }

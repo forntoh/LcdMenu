@@ -29,11 +29,6 @@ class MenuRenderer {
      */
     bool hasHiddenItemsBelow = false;
 
-    /**
-     * @brief Flag indicating that the current item has focus.
-     */
-    bool hasFocus = false;
-
     uint8_t cursorCol;
     uint8_t cursorRow;
 
@@ -47,6 +42,10 @@ class MenuRenderer {
     bool blinkerOn = true;
 
   public:
+    /**
+     * @brief Flag indicating that the current item has focus.
+     */
+    bool hasFocus = false;
     /**
      * @brief Number of columns to shift the current item's view by.
      */
