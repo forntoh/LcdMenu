@@ -61,7 +61,7 @@ jobs:
             artifact-name-suffix: arduino-samd-mkr1000
           - fqbn: STMicroelectronics:stm32:genericSTM32F103C8
             type: stm32
-            artifact-name-suffix: STM32-stm32-GenF1
+            artifact-name-suffix: stm32-stm32-genericstm32f103c8
 
         include:
           # AVR boards
