@@ -59,7 +59,7 @@ jobs:
           - fqbn: arduino:samd:mkr1000
             type: mkr1000
             artifact-name-suffix: arduino-samd-mkr1000
-          - fqbn: STMicroelectronics:stm32:GenF1
+          - fqbn: STMicroelectronics:stm32:GenF1:pnum=BLUEPILL_F103C8
             type: stm32
             artifact-name-suffix: STM32-stm32-GenF1
 
