@@ -31,5 +31,8 @@
       "docs/",
       ".diagrams/"
     ]
+  },
+  "dependencies": {
+    "hideakitai/ArxTypeTraits": "^0.3.1"
   }
 }

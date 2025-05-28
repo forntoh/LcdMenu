@@ -7,7 +7,7 @@
  *
  * This class extends the BaseItemZeroWidget class and provides a menu item
  * that executes a callback function when selected. The callback function is
- * provided as a function pointer during construction.
+ * provided as a std::function during construction.
  *
  * As a BaseItemZeroWidget, this item responds to selection events in the menu
  * system. When the user confirms the selection, handleCommit is triggered,
@@ -15,10 +15,10 @@
  */
 class ItemCommand : public BaseItemZeroWidget {
   private:
-    void (*callback)();
+    std::function<void()> callback;
 
   public:
-    ItemCommand(const char* text, void (*callback)()) : BaseItemZeroWidget(text), callback(callback) {}
+    ItemCommand(const char* text, std::function<void()> callback) : BaseItemZeroWidget(text), callback(callback) {}
 
   protected:
     void handleCommit(LcdMenu* menu) override {
@@ -36,6 +36,6 @@ class ItemCommand : public BaseItemZeroWidget {
  * @example
  *   auto item = ITEM_COMMAND("Save", []() { save_data(); });
  */
-inline MenuItem* ITEM_COMMAND(const char* text, void (*callback)()) {
+inline MenuItem* ITEM_COMMAND(const char* text, std::function<void()> callback) {
     return new ItemCommand(text, callback);
 }
