@@ -2,7 +2,11 @@
 #include <ItemCommand.h>
 #include <ItemInput.h>
 #include <ItemToggle.h>
+#define protected public
 #include <MenuScreen.h>
+#undef protected
+#include <display/DisplayInterface.h>
+#include <renderer/MenuRenderer.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -15,6 +19,30 @@
 
 void commandCallback() {}
 void toggleCallback(bool) {}
+
+class StubDisplay : public DisplayInterface {
+  public:
+    void begin() override {}
+    void clear() override {}
+    void show() override {}
+    void hide() override {}
+    void draw(uint8_t) override {}
+    void draw(const char*) override {}
+    void setCursor(uint8_t, uint8_t) override {}
+    void setBacklight(bool) override {}
+};
+
+class StubRenderer : public MenuRenderer {
+  public:
+    StubDisplay display;
+    StubRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
+
+    void draw(uint8_t) override {}
+    void drawItem(const char*, const char*, bool) override {}
+    void clearBlinker() override {}
+    void drawBlinker() override {}
+    uint8_t getEffectiveCols() const override { return maxCols; }
+};
 
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
@@ -40,6 +68,13 @@ unittest(can_set_input_value) {
     assertEqual("", (static_cast<ItemInput*>(mainItems[ITEM_INPUT_INDEX]))->getValue());
     (static_cast<ItemInput*>(mainItems[ITEM_INPUT_INDEX]))->setValue(expected);
     assertEqual(expected, (static_cast<ItemInput*>(mainItems[ITEM_INPUT_INDEX]))->getValue());
+}
+
+unittest(cursor_clamped_when_out_of_range) {
+    StubRenderer renderer;
+    uint8_t outOfRange = 100;
+    mainScreen->setCursor(&renderer, outOfRange);
+    assertEqual(mainScreen->size() - 1, mainScreen->getCursor());
 }
 
 unittest_main()
