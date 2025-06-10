@@ -111,7 +111,7 @@ class MenuRenderer {
      * @brief Updates the display timer and hides the display if the timeout is reached.
      */
     virtual void updateTimer() {
-        if (millis() != startTime + DISPLAY_TIMEOUT) {
+        if (millis() - startTime < DISPLAY_TIMEOUT) {
             return;
         }
         LOG(F("MenuRenderer::timeout"));
