@@ -3,7 +3,7 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include <utils/utils.h>
+#include "utils/std.h"
 
 /**
  * @brief Item that allows user to input string information.
@@ -60,7 +60,7 @@ class ItemInput : public MenuItem {
      * The call back that will be executed when edit will be finished.
      * First parameter will be a `value` string.
      */
-    fptrStr callback;
+    std::function<void(const char*)> callback;
 
   public:
     /**
@@ -71,7 +71,7 @@ class ItemInput : public MenuItem {
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
      */
-    ItemInput(const char* text, char* value, fptrStr callback)
+    ItemInput(const char* text, char* value, std::function<void(const char*)> callback)
         : MenuItem(text), value(value), callback(callback) {}
     /**
      * Construct a new ItemInput object with no initial value.
@@ -80,7 +80,7 @@ class ItemInput : public MenuItem {
      * @param callback A reference to the callback function to be invoked when
      * the input is submitted.
      */
-    ItemInput(const char* text, fptrStr callback)
+    ItemInput(const char* text, std::function<void(const char*)> callback)
         : ItemInput(text, (char*)"", callback) {}
     /**
      * Get the current input value for this item.
@@ -110,7 +110,7 @@ class ItemInput : public MenuItem {
      *
      * @return The function pointer to the callback function.
      */
-    fptrStr getCallbackStr() { return callback; }
+    std::function<void(const char*)> getCallbackStr() { return callback; }
 
   protected:
     void draw(MenuRenderer* renderer) override {
@@ -302,6 +302,32 @@ class ItemInput : public MenuItem {
     }
 };
 
-#define ITEM_INPUT(...) (new ItemInput(__VA_ARGS__))
+/**
+ * @brief Function to create a new ItemInput object.
+ *
+ * @param text The text to display for the item.
+ * @param value The initial value for the input.
+ * @param callback A reference to the callback function to be invoked when
+ * the input is submitted.
+ */
+inline MenuItem* ITEM_INPUT(
+    const char* text,
+    char* value,
+    std::function<void(const char*)> callback) {
+    return new ItemInput(text, value, callback);
+}
+
+/**
+ * @brief Function to create a new ItemInput object with no initial value.
+ *
+ * @param text The text to display for the item.
+ * @param callback A reference to the callback function to be invoked when
+ * the input is submitted.
+ */
+inline MenuItem* ITEM_INPUT(
+    const char* text,
+    std::function<void(const char*)> callback) {
+    return new ItemInput(text, callback);
+}
 
 #endif  // ITEM_INPUT_H

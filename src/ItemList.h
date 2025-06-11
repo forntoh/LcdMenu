@@ -29,7 +29,7 @@ class ItemList : public ItemWidget<V> {
         const uint8_t cursorOffset,
         const bool cycle,
         typename ItemWidget<V>::CallbackType callback) : ItemWidget<V>(text,
-                                                                       new WidgetList<T, V>(values, activePosition, format, cursorOffset, cycle, nullptr),
+                                                                       new WidgetList<T, V>(values, activePosition, format, cursorOffset, cycle, {}),
                                                                        callback) {}
 };
 
@@ -51,7 +51,7 @@ template <typename T>
 inline ItemList<T, uint8_t>* ITEM_LIST(
     const char* text,
     const std::vector<T>& values,
-    void (*callback)(const uint8_t),
+    std::function<void(const uint8_t)> callback,
     const uint8_t activePosition = 0,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,
@@ -78,7 +78,7 @@ template <typename T>
 inline ItemList<T, Ref<uint8_t>>* ITEM_LIST_REF(
     const char* text,
     const std::vector<T>& values,
-    void (*callback)(const Ref<uint8_t>),
+    std::function<void(const Ref<uint8_t>)> callback,
     uint8_t& activePosition,
     const char* format = "%s",
     const uint8_t cursorOffset = 0,

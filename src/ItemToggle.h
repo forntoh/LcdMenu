@@ -3,7 +3,6 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include <utils/utils.h>
 
 /**
  * @brief Item that allows user to toggle between ON/OFF states.
@@ -21,7 +20,7 @@ class ItemToggle : public MenuItem {
     bool enabled = false;
     const char* textOn = NULL;
     const char* textOff = NULL;
-    fptrBool callback = NULL;
+    std::function<void(bool)> callback = {};
 
   public:
     /**
@@ -30,7 +29,7 @@ class ItemToggle : public MenuItem {
      * @param key key of the item
      * @param callback reference to callback function
      */
-    ItemToggle(const char* key, fptrBool callback)
+    ItemToggle(const char* key, std::function<void(bool)> callback)
         : ItemToggle(key, false, callback) {}
 
     /**
@@ -41,7 +40,7 @@ class ItemToggle : public MenuItem {
      * @param enabled
      * @param callback
      */
-    ItemToggle(const char* text, boolean enabled, fptrBool callback)
+    ItemToggle(const char* text, boolean enabled, std::function<void(bool)> callback)
         : ItemToggle(text, "ON", "OFF", callback) {
         this->enabled = enabled;
     }
@@ -53,7 +52,7 @@ class ItemToggle : public MenuItem {
      * @param textOff display text when OFF
      * @param callback reference to callback function
      */
-    ItemToggle(const char* text, const char* textOn, const char* textOff, fptrBool callback)
+    ItemToggle(const char* text, const char* textOn, const char* textOff, std::function<void(bool)> callback)
         : MenuItem(text),
           textOn(textOn),
           textOff(textOff),
@@ -63,7 +62,7 @@ class ItemToggle : public MenuItem {
      * @brief Get the integer callback function of this item.
      * @return the integer callback function
      */
-    fptrBool getCallbackInt() { return callback; }
+    std::function<void(bool)> getCallbackInt() { return callback; }
 
     /**
      * @brief Get the current state of this toggle item.
@@ -107,6 +106,58 @@ class ItemToggle : public MenuItem {
     }
 };
 
-#define ITEM_TOGGLE(...) (new ItemToggle(__VA_ARGS__))
+/**
+ * @brief Create a new toggle item.
+ *
+ * @param text The text to display for the item.
+ * @param textOn The display text when ON.
+ * @param textOff The display text when OFF.
+ * @param callback The function to call when the item is toggled.
+ * @return MenuItem* The created item. Caller takes ownership of the returned pointer.
+ *
+ * @example
+ *   auto item = ITEM_TOGGLE("Toggle", "ON", "OFF", [](bool enabled) { Serial.println(enabled); });
+ */
+inline MenuItem* ITEM_TOGGLE(
+    const char* text,
+    const char* textOn,
+    const char* textOff,
+    std::function<void(bool)> callback) {
+    return new ItemToggle(text, textOn, textOff, callback);
+}
+
+/**
+ * @brief Create a new toggle item with default ON/OFF texts.
+ *
+ * @param text The text to display for the item.
+ * @param enabled The initial state of the toggle.
+ * @param callback The function to call when the item is toggled.
+ * @return MenuItem* The created item. Caller takes ownership of the returned pointer.
+ *
+ * @example
+ *   auto item = ITEM_TOGGLE("Toggle", true, [](bool enabled) { Serial.println(enabled); });
+ */
+inline MenuItem* ITEM_TOGGLE(
+    const char* text,
+    boolean enabled,
+    std::function<void(bool)> callback) {
+    return new ItemToggle(text, enabled, callback);
+}
+
+/**
+ * @brief Create a new toggle item with default OFF state.
+ *
+ * @param text The text to display for the item.
+ * @param callback The function to call when the item is toggled.
+ * @return MenuItem* The created item. Caller takes ownership of the returned pointer.
+ *
+ * @example
+ *   auto item = ITEM_TOGGLE("Toggle", [](bool enabled) { Serial.println(enabled); });
+ */
+inline MenuItem* ITEM_TOGGLE(
+    const char* text,
+    std::function<void(bool)> callback) {
+    return new ItemToggle(text, callback);
+}
 
 #endif

@@ -19,21 +19,6 @@
 uint8_t temperature1, temperature2, temperature3;
 bool relay1State, relay2State, relay3State;
 
-// Relay 1 Toggle
-void toggleRelay1(bool isOn) {
-    relay1State = isOn;
-}
-
-// Relay 2 Toggle
-void toggleRelay2(bool isOn) {
-    relay2State = isOn;
-}
-
-// Relay 3 Toggle
-void toggleRelay3(bool isOn) {
-    relay3State = isOn;
-}
-
 LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
 CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
@@ -54,9 +39,9 @@ MENU_SCREEN(mainScreen, mainItems,
 // Sub Menu 1: Relays
 // clang-format off
 MENU_SCREEN(relayScreen, relayItems, 
-    ITEM_TOGGLE("Relay 1", toggleRelay1), 
-    ITEM_TOGGLE("Relay 2", toggleRelay2), 
-    ITEM_TOGGLE("Relay 3", toggleRelay3));
+    ITEM_TOGGLE("Relay 1", [&](bool isOn) { relay1State = isOn; }), 
+    ITEM_TOGGLE("Relay 2", [&](bool isOn) { relay2State = isOn; }), 
+    ITEM_TOGGLE("Relay 3", [&](bool isOn) { relay3State = isOn; }));
 // clang-format on
 
 // Sub Menu 2: Temperature Values
