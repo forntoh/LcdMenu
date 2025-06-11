@@ -6,7 +6,7 @@
 #include <renderer/MenuRenderer.h>
 #include "Godmode.h"
 
-#define LCD_ROWS 2
+#define LCD_ROWS 1
 #define LCD_COLS 16
 
 class CaptureDisplay : public DisplayInterface {
