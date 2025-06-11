@@ -17,22 +17,17 @@
 // Fake hardware helpers
 // --------------------------------------------------
 
-class FakeButton {
+class FakeButton : public Button {
 public:
     bool state;
     FakeButton(bool pressed = false) : state(pressed) {}
-    bool pressed() {
+    bool pressed() override {
         bool ret = state;
         state = false;
         return ret;
     }
 };
 
-static int16_t fakeAnalogValue = ButtonConfig::MAX_VALUE;
-int16_t analogRead(uint8_t) { return fakeAnalogValue; }
-
-static unsigned long fakeMillis = 0;
-unsigned long millis() { return fakeMillis; }
 
 class FakeStream : public Stream {
     std::queue<unsigned char> data;
@@ -51,7 +46,7 @@ public:
     size_t write(uint8_t) override { return 1; }
 };
 
-class FakeRotary {
+class FakeRotary : public SimpleRotary {
     std::queue<uint8_t> rotations;
     std::queue<uint8_t> pushes;
 public:
@@ -59,13 +54,13 @@ public:
         for (auto v : r) rotations.push(v);
         for (auto v : p) pushes.push(v);
     }
-    uint8_t rotate() {
+    uint8_t rotate() override {
         if (rotations.empty()) return 0;
         uint8_t v = rotations.front();
         rotations.pop();
         return v;
     }
-    uint8_t pushType(int) {
+    uint8_t pushType(int) override {
         if (pushes.empty()) return 0;
         uint8_t v = pushes.front();
         pushes.pop();
@@ -138,15 +133,16 @@ unittest(button_adapter_sends_command) {
 unittest(analog_button_debounce) {
     MenuFixture f;
     AnalogButtonAdapter adapter(&f.menu, 0, 500, 10, RIGHT);
-    fakeAnalogValue = 500;
-    fakeMillis = 0;
+    GODMODE()->analogPin[0] = 500;
+    GODMODE()->micros = 0;
     adapter.observe();
     assertEqual(RIGHT, f.item.lastCommand);
     f.item.lastCommand = 0;
-    fakeMillis += 100; // within debounce window
+    GODMODE()->micros += 100000; // within debounce window
     adapter.observe();
     assertEqual((unsigned char)0, f.item.lastCommand);
-    fakeMillis += 400; // beyond debounce window
+    GODMODE()->micros += 400000; // beyond debounce window
+    GODMODE()->analogPin[0] = 500;
     adapter.observe();
     assertEqual(RIGHT, f.item.lastCommand);
 }
@@ -165,10 +161,10 @@ unittest(simple_rotary_double_press_backspace) {
     MenuFixture f;
     FakeRotary rot({}, {1,1});
     SimpleRotaryAdapter adapter(&f.menu, &rot);
-    fakeMillis = 0;
+    GODMODE()->micros = 0;
     adapter.observe(); // first short press
     assertEqual((unsigned char)0, f.item.lastCommand);
-    fakeMillis += 100; // < threshold
+    GODMODE()->micros += 100000; // < threshold
     adapter.observe(); // second short press within threshold
     assertEqual(BACKSPACE, f.item.lastCommand);
 }
@@ -177,9 +173,9 @@ unittest(simple_rotary_single_press_enter) {
     MenuFixture f;
     FakeRotary rot({}, {1});
     SimpleRotaryAdapter adapter(&f.menu, &rot);
-    fakeMillis = 0;
+    GODMODE()->micros = 0;
     adapter.observe(); // set pending
-    fakeMillis += DOUBLE_PRESS_THRESHOLD + 1;
+    GODMODE()->micros += (DOUBLE_PRESS_THRESHOLD + 1) * 1000; // wait beyond threshold
     adapter.observe(); // should trigger ENTER
     assertEqual(ENTER, f.item.lastCommand);
 }
@@ -188,7 +184,7 @@ unittest(simple_rotary_long_press_back) {
     MenuFixture f;
     FakeRotary rot({}, {2});
     SimpleRotaryAdapter adapter(&f.menu, &rot);
-    fakeMillis = 0;
+    GODMODE()->micros = 0;
     adapter.observe();
     assertEqual(BACK, f.item.lastCommand);
 }
@@ -197,7 +193,7 @@ unittest(simple_rotary_rotation) {
     MenuFixture f;
     FakeRotary rot({1,2}, {});
     SimpleRotaryAdapter adapter(&f.menu, &rot);
-    fakeMillis = 0;
+    GODMODE()->micros = 0;
     adapter.observe();
     assertEqual(DOWN, f.item.lastCommand);
     f.item.lastCommand = 0;
@@ -206,3 +202,4 @@ unittest(simple_rotary_rotation) {
 }
 
 unittest_main()
+
