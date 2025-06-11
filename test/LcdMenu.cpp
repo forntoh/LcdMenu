@@ -115,6 +115,7 @@ unittest(clear_command_empties_input_and_resets_cursor) {
     assertEqual("", item.getValue());
     assertEqual((uint8_t)0, item.cursor);
     assertEqual((uint8_t)0, item.view);
+    assertTrue(renderer.isInEditMode());
 }
 
 unittest(hide_disables_and_clears_display) {
