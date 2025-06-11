@@ -59,17 +59,22 @@ unittest(menu_screen_dynamic_item_management) {
     screen.setCursor(&renderer, screen.getCursor());
     assertEqual((uint8_t)2, screen.getCursor());
     assertEqual(i3, screen.getItemAt(2));
+    delete i4; // removed item no longer used
 
     screen.removeLastItem();
     assertEqual((size_t)2, screen.size());
     screen.setCursor(&renderer, screen.getCursor());
     assertEqual((uint8_t)1, screen.getCursor());
     assertEqual(i2, screen.getItemAt(1));
+    delete i3; // removed last item
 
     screen.clear();
     assertEqual((size_t)0, screen.size());
     screen.setCursor(&renderer, 0);
     assertEqual((uint8_t)0, screen.getCursor());
+
+    delete i1;
+    delete i2;
 }
 
 unittest_main()
