@@ -1,5 +1,7 @@
 #define ARDUINO_UNIT_TEST
 #include <ArduinoUnitTests.h>
+// Unit tests use fake hardware implementations
+
 #include "stubs/Button.h"
 #include "stubs/SimpleRotary.h"
 #include <input/ButtonAdapter.h>
