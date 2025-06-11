@@ -46,12 +46,23 @@ class AnalogButtonAdapter : public InputInterface {
     bool wasPressed = false;
 
   public:
-    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, uint16_t margin, byte command,
-                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0)
+    AnalogButtonAdapter(
+        LcdMenu* menu,
+        uint8_t pinNumber,
+        uint16_t triggerValue,
+        uint16_t margin,
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0)
         : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
           margin(margin), command(command), repeatDelay(repeatDelay), repeatInterval(repeatInterval) {}
-    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, byte command,
-                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0)
+    AnalogButtonAdapter(
+        LcdMenu* menu,
+        uint8_t pinNumber,
+        uint16_t triggerValue,
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0)
         : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
           margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeatDelay(repeatDelay),
           repeatInterval(repeatInterval) {}
