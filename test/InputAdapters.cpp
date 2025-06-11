@@ -137,6 +137,7 @@ unittest(button_adapter_sends_command) {
 unittest(analog_button_debounce) {
     MenuFixture f;
     AnalogButtonAdapter adapter(&f.menu, 0, 500, 10, RIGHT);
+    // feed a press value after the initial debounce period
     GODMODE()->analogPin[0] = 500;
     GODMODE()->micros = (ButtonConfig::PRESS_TIME_MS + 1) * 1000;
     adapter.observe();
