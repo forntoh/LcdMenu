@@ -1,9 +1,9 @@
 #define protected public
 #include <MenuScreen.h>
+#include <ItemInput.h>
 #undef protected
 #include <ArduinoUnitTests.h>
 #include <ItemCommand.h>
-#include <ItemInput.h>
 #include <ItemToggle.h>
 #include <display/DisplayInterface.h>
 #include <renderer/MenuRenderer.h>
@@ -75,6 +75,20 @@ unittest(cursor_clamped_when_out_of_range) {
     uint8_t outOfRange = 100;
     mainScreen->setCursor(&renderer, outOfRange);
     assertEqual(mainScreen->size() - 1, mainScreen->getCursor());
+}
+
+unittest(clear_command_empties_input_and_resets_cursor) {
+    char value[] = "HELLO";
+    ItemInput item("Name", value, NULL);
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+
+    item.process(&menu, ENTER);
+    item.process(&menu, CLEAR);
+
+    assertEqual("", item.getValue());
+    assertEqual((uint8_t)0, item.cursor);
+    assertEqual((uint8_t)0, item.view);
 }
 
 unittest_main()
