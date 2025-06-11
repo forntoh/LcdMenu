@@ -1,7 +1,9 @@
 #pragma once
 
 #include "InputInterface.h"
-#include <Button.h>
+#ifndef ARDUINO_UNIT_TEST
+#  include <Button.h>
+#endif
 
 /**
  * @class ButtonAdapter

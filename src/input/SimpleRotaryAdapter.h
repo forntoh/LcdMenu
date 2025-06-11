@@ -23,7 +23,9 @@
 #endif
 //
 #include "InputInterface.h"
-#include <SimpleRotary.h>
+#ifndef ARDUINO_UNIT_TEST
+#  include <SimpleRotary.h>
+#endif
 
 /**
  * @class SimpleRotaryAdapter
