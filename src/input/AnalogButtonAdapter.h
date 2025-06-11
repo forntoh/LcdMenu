@@ -43,9 +43,15 @@ struct RepeatState {
 
     bool enabled() const { return delay && interval; }
 
-    void reset() { pressStart = 0; lastRepeat = 0; }
+    void reset() {
+        pressStart = 0;
+        lastRepeat = 0;
+    }
 
-    void start(unsigned long now) { pressStart = now; lastRepeat = 0; }
+    void start(unsigned long now) {
+        pressStart = now;
+        lastRepeat = 0;
+    }
 
     bool shouldRepeat(unsigned long now) {
         if (!enabled()) return false;
@@ -70,26 +76,23 @@ class AnalogButtonAdapter : public InputInterface {
     bool wasPressed = false;
 
   public:
-                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0,
-                        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
-          margin(margin), command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
-                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0,
-                        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
-          margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeat(repeatDelay, repeatInterval),
+    AnalogButtonAdapter(
+        LcdMenu* menu,
+        uint8_t pinNumber,
+        uint16_t triggerValue,
+        uint16_t margin,
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0,
+        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
+        : InputInterface(menu), margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeat(repeatDelay, repeatInterval),
           debounceTime(debounceTime) {}
-            repeat.reset();
-            repeat.reset();
-            if (currentTime - lastPressTime <= debounceTime) {
-            repeat.start(currentTime);
-        } else if (repeat.shouldRepeat(currentTime)) {
-            menu->process(command);
 
     void observe() override {
         int16_t analogValue = analogRead(pinNumber);
         if (analogValue >= ButtonConfig::MAX_VALUE) {
             wasPressed = false;
-            pressStart = 0;
-            lastRepeat = 0;
+            repeat.reset();
             return;
         }
 
@@ -98,28 +101,20 @@ class AnalogButtonAdapter : public InputInterface {
 
         if (!pressed) {
             wasPressed = false;
-            pressStart = 0;
-            lastRepeat = 0;
+            repeat.reset();
             return;
         }
 
         if (!wasPressed) {
-            if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS) {
+            if (currentTime - lastPressTime <= debounceTime) {
                 return;
             }
             lastPressTime = currentTime;
             wasPressed = true;
             menu->process(command);
-            if (repeatDelay && repeatInterval) {
-                pressStart = currentTime;
-                lastRepeat = 0;
-            }
-        } else if (repeatDelay && repeatInterval) {
-            if (currentTime - pressStart >= repeatDelay &&
-                (lastRepeat == 0 || currentTime - lastRepeat >= repeatInterval)) {
-                menu->process(command);
-                lastRepeat = currentTime;
-            }
+            repeat.start(currentTime);
+        } else if (repeat.shouldRepeat(currentTime)) {
+            menu->process(command);
         }
     }
 };
