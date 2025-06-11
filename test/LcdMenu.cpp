@@ -83,8 +83,8 @@ unittest(clear_command_empties_input_and_resets_cursor) {
     StubRenderer renderer;
     LcdMenu menu(renderer);
 
-    item.process(&menu, ENTER);
-    item.process(&menu, CLEAR);
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, CLEAR));
 
     assertEqual("", item.getValue());
     assertEqual((uint8_t)0, item.cursor);
