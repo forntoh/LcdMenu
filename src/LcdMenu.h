@@ -129,4 +129,9 @@ class LcdMenu {
      * @param pollInterval the interval to update the menu in milliseconds (default is 1000)
      */
     void poll(uint16_t pollInterval = 1000);
+    /**
+     * @brief Get the current status of the menu, enabled / disabled
+     * @return the value of private var 'enabled'
+     */
+    bool isEnabled(void);
 };
