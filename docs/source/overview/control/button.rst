@@ -25,10 +25,14 @@ Next, you need to create a ButtonAdapter object and pass the Button object and t
 
 .. code-block:: cpp
 
-    ButtonAdapter upButtonA(&menu, &upButton, UP);
-    ButtonAdapter downButtonA(&menu, &downButton, DOWN);
+    ButtonAdapter upButtonA(&menu, &upButton, UP, 500, 200);  // hold to repeat
+    ButtonAdapter downButtonA(&menu, &downButton, DOWN, 500, 200);
     ButtonAdapter enterButtonA(&menu, &enterButton, ENTER);
     ButtonAdapter backButtonA(&menu, &backButton, BACK);
+
+The last two parameters define the *repeat delay* and the *repeat interval* in
+milliseconds. When provided, keeping the button pressed will repeatedly send the
+same command after the delay has elapsed.
 
 
 Then you need to call the begin function in the setup function:

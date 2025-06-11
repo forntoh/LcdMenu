@@ -23,17 +23,44 @@ class ButtonAdapter : public InputInterface {
   private:
     Button* button;
     byte command;
+    unsigned long repeatDelay;
+    unsigned long repeatInterval;
+    unsigned long pressStart = 0;
+    unsigned long lastRepeat = 0;
+    bool holding = false;
 
   public:
     ButtonAdapter(
         LcdMenu* menu,
         Button* button,
-        byte command)
-        : InputInterface(menu), button(button), command(command) {}
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0)
+        : InputInterface(menu),
+          button(button),
+          command(command),
+          repeatDelay(repeatDelay),
+          repeatInterval(repeatInterval) {}
 
     void observe() override {
         if (button->pressed()) {
             menu->process(command);
+            holding = true;
+            if (repeatDelay && repeatInterval) {
+                pressStart = millis();
+                lastRepeat = 0;
+            }
+        } else if (button->released()) {
+            holding = false;
+            pressStart = 0;
+            lastRepeat = 0;
+        } else if (repeatDelay && repeatInterval && holding) {
+            unsigned long now = millis();
+            if (now - pressStart >= repeatDelay &&
+                (lastRepeat == 0 || now - lastRepeat >= repeatInterval)) {
+                menu->process(command);
+                lastRepeat = now;
+            }
         }
     }
 };

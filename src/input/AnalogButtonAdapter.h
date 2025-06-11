@@ -39,36 +39,59 @@ class AnalogButtonAdapter : public InputInterface {
     uint16_t margin;
     byte command;
     unsigned long lastPressTime = 0;  // Last time the button was pressed
+    unsigned long repeatDelay;
+    unsigned long repeatInterval;
+    unsigned long pressStart = 0;
+    unsigned long lastRepeat = 0;
+    bool wasPressed = false;
 
   public:
-    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, uint16_t margin, byte command)
+    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, uint16_t margin, byte command,
+                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0)
         : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(margin), command(command) {}
-    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, byte command)
+          margin(margin), command(command), repeatDelay(repeatDelay), repeatInterval(repeatInterval) {}
+    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, byte command,
+                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0)
         : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(ButtonConfig::DEFAULT_MARGIN), command(command) {}
+          margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeatDelay(repeatDelay),
+          repeatInterval(repeatInterval) {}
 
     void observe() override {
-        // Read analog value from pin
-        int16_t analogValue = analogRead(pinNumber);  // Read value from pin
-
-        // Ignore readings above the maximum possible value (no button pressed)
+        int16_t analogValue = analogRead(pinNumber);
         if (analogValue >= ButtonConfig::MAX_VALUE) {
+            wasPressed = false;
+            pressStart = 0;
+            lastRepeat = 0;
             return;
         }
 
-        // Apply debouncing
+        bool pressed = analogValue <= (triggerValue + margin) && analogValue >= (triggerValue - margin);
         unsigned long currentTime = millis();
-        if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS) {
+
+        if (!pressed) {
+            wasPressed = false;
+            pressStart = 0;
+            lastRepeat = 0;
             return;
         }
 
-        // Process button press
-        lastPressTime = currentTime;
-
-        if (analogValue <= (triggerValue + margin) &&
-            analogValue >= (triggerValue - margin)) {
+        if (!wasPressed) {
+            if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS) {
+                return;
+            }
+            lastPressTime = currentTime;
+            wasPressed = true;
             menu->process(command);
+            if (repeatDelay && repeatInterval) {
+                pressStart = currentTime;
+                lastRepeat = 0;
+            }
+        } else if (repeatDelay && repeatInterval) {
+            if (currentTime - pressStart >= repeatDelay &&
+                (lastRepeat == 0 || currentTime - lastRepeat >= repeatInterval)) {
+                menu->process(command);
+                lastRepeat = currentTime;
+            }
         }
     }
 };

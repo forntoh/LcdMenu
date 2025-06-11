@@ -27,7 +27,7 @@ LcdMenu menu(renderer);
 
 AnalogButtonAdapter ButtonBackSpace(&menu, A0, 20, BACKSPACE);
 AnalogButtonAdapter ButtonUp(&menu, A0, 100, 20, UP);
-AnalogButtonAdapter ButtonDown(&menu, A0, 250, 20, DOWN);
+AnalogButtonAdapter ButtonDown(&menu, A0, 250, 20, DOWN, 500, 200);
 AnalogButtonAdapter ButtonBack(&menu, A0, 400, 20, BACK);
 AnalogButtonAdapter ButtonEnter(&menu, A0, 640, 20, ENTER);
 
