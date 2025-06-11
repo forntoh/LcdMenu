@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import shutil
 
 
 def replace_lines(file_path, replacements):
@@ -24,7 +25,7 @@ if __name__ == "__main__":
     # Change the file extension to .cpp
     base = os.path.splitext(file_path)[0]
     new_file_path = base + '.cpp'
-    os.rename(file_path, new_file_path)
+    shutil.copyfile(file_path, new_file_path)
 
     with open(new_file_path, 'r') as f:
         content = f.read()

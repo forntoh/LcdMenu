@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InputInterface.h"
+#include "RepeatState.h"
 #include <Button.h>
 
 /**
@@ -23,10 +24,7 @@ class ButtonAdapter : public InputInterface {
   private:
     Button* button;
     byte command;
-    unsigned long repeatDelay;
-    unsigned long repeatInterval;
-    unsigned long pressStart = 0;
-    unsigned long lastRepeat = 0;
+    RepeatState repeat;
     bool holding = false;
 
   public:
@@ -39,28 +37,20 @@ class ButtonAdapter : public InputInterface {
         : InputInterface(menu),
           button(button),
           command(command),
-          repeatDelay(repeatDelay),
-          repeatInterval(repeatInterval) {}
+          repeat(repeatDelay, repeatInterval) {}
 
     void observe() override {
         if (button->pressed()) {
             menu->process(command);
             holding = true;
-            if (repeatDelay && repeatInterval) {
-                pressStart = millis();
-                lastRepeat = 0;
+            if (repeat.enabled()) {
+                repeat.start(millis());
             }
         } else if (button->released()) {
             holding = false;
-            pressStart = 0;
-            lastRepeat = 0;
-        } else if (repeatDelay && repeatInterval && holding) {
-            unsigned long now = millis();
-            if (now - pressStart >= repeatDelay &&
-                (lastRepeat == 0 || now - lastRepeat >= repeatInterval)) {
-                menu->process(command);
-                lastRepeat = now;
-            }
+            repeat.reset();
+        } else if (repeat.enabled() && holding && repeat.shouldRepeat(millis())) {
+            menu->process(command);
         }
     }
 };
