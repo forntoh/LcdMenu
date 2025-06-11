@@ -11,12 +11,17 @@ struct RepeatState {
 
     bool enabled() const { return delay && interval; }
 
-    void reset() { pressStart = 0; lastRepeat = 0; }
+    void reset() {
+        pressStart = 0;
+        lastRepeat = 0;
+    }
 
-    void start(unsigned long now) { pressStart = now; lastRepeat = 0; }
+    void start(unsigned long now) {
+        pressStart = now;
+        lastRepeat = 0;
+    }
 
-    bool startIfDebounced(unsigned long now, unsigned long& lastPress,
-                          unsigned long debounceTime) {
+    bool startIfDebounced(unsigned long now, unsigned long& lastPress, unsigned long debounceTime) {
         if (now - lastPress <= debounceTime) {
             return false;
         }
