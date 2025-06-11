@@ -33,16 +33,17 @@ class ButtonConfig {
     static constexpr uint16_t DEFAULT_MARGIN = 20;
 };
 
-            return true;
-        }
-        return false;
-    }
-};
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(margin),
+          command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
 
-class AnalogButtonAdapter : public InputInterface {
-  private:
-    uint8_t pinNumber;
-    uint16_t triggerValue;
+        : AnalogButtonAdapter(menu, pinNumber, triggerValue, ButtonConfig::DEFAULT_MARGIN, command,
+                              repeatDelay, repeatInterval, debounceTime) {}
+
+        int16_t center = static_cast<int16_t>(triggerValue);
+        int16_t lower = center - static_cast<int16_t>(margin);
+        int16_t upper = center + static_cast<int16_t>(margin);
+        bool pressed = analogValue <= upper && analogValue >= lower;
+            if (!repeat.startIfDebounced(currentTime, lastPressTime, debounceTime)) {
     uint16_t margin;
     byte command;
     unsigned long lastPressTime = 0;  // Last time the button was pressed

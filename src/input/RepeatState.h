@@ -15,6 +15,16 @@ struct RepeatState {
 
     void start(unsigned long now) { pressStart = now; lastRepeat = 0; }
 
+    bool startIfDebounced(unsigned long now, unsigned long& lastPress,
+                          unsigned long debounceTime) {
+        if (now - lastPress <= debounceTime) {
+            return false;
+        }
+        lastPress = now;
+        start(now);
+        return true;
+    }
+
     bool shouldRepeat(unsigned long now) {
         if (!enabled()) return false;
         if (now - pressStart >= delay &&
