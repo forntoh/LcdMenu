@@ -1,10 +1,10 @@
+#define protected public
+#include <MenuScreen.h>
+#undef protected
 #include <ArduinoUnitTests.h>
 #include <ItemCommand.h>
 #include <ItemInput.h>
 #include <ItemToggle.h>
-#define protected public
-#include <MenuScreen.h>
-#undef protected
 #include <display/DisplayInterface.h>
 #include <renderer/MenuRenderer.h>
 
