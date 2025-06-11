@@ -72,7 +72,6 @@ void LcdMenu::poll(uint16_t pollInterval) {
     }
     screen->poll(&renderer, pollInterval < 100 ? 100 : pollInterval);
 }
-
-bool LcdMenu::isEnabled(void) {
+bool LcdMenu::isEnabled() const {
     return enabled;
 }
