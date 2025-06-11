@@ -136,7 +136,7 @@ unittest(analog_button_debounce) {
     MenuFixture f;
     AnalogButtonAdapter adapter(&f.menu, 0, 500, 10, RIGHT);
     GODMODE()->analogPin[0] = 500;
-    GODMODE()->micros = 0;
+    GODMODE()->micros = (ButtonConfig::PRESS_TIME_MS + 1) * 1000;
     adapter.observe();
     assertEqual(RIGHT, f.item.lastCommand);
     f.item.lastCommand = 0;
@@ -163,6 +163,7 @@ unittest(simple_rotary_double_press_backspace) {
     MenuFixture f;
     FakeRotary rot({}, {1,1});
     SimpleRotaryAdapter adapter(&f.menu, &rot);
+    f.renderer.setEditMode(true);
     GODMODE()->micros = 0;
     adapter.observe(); // first short press
     assertEqual((unsigned char)0, f.item.lastCommand);
@@ -175,6 +176,7 @@ unittest(simple_rotary_single_press_enter) {
     MenuFixture f;
     FakeRotary rot({}, {1});
     SimpleRotaryAdapter adapter(&f.menu, &rot);
+    f.renderer.setEditMode(true);
     GODMODE()->micros = 0;
     adapter.observe(); // set pending
     GODMODE()->micros += (DOUBLE_PRESS_THRESHOLD + 1) * 1000; // wait beyond threshold
