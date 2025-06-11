@@ -26,10 +26,10 @@ CharacterDisplayRenderer renderer(new LiquidCrystalAdapter(&lcd, LCD_COLS, LCD_R
 LcdMenu menu(renderer);
 
 AnalogButtonAdapter ButtonBackSpace(&menu, A0, 20, BACKSPACE);
-AnalogButtonAdapter ButtonUp(&menu, A0, 100, 20, UP);
-AnalogButtonAdapter ButtonDown(&menu, A0, 250, 20, DOWN, 500, 200);
-AnalogButtonAdapter ButtonBack(&menu, A0, 400, 20, BACK);
-AnalogButtonAdapter ButtonEnter(&menu, A0, 640, 20, ENTER);
+AnalogButtonAdapter ButtonUp(&menu, A0, 100, UP);
+AnalogButtonAdapter ButtonDown(&menu, A0, 250, DOWN, 500UL, 200UL);
+AnalogButtonAdapter ButtonBack(&menu, A0, 400, BACK);
+AnalogButtonAdapter ButtonEnter(&menu, A0, 640, ENTER);
 
 void setup() {
     Serial.begin(9600);
