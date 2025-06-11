@@ -32,6 +32,32 @@ class ButtonConfig {
     static constexpr uint16_t DEFAULT_MARGIN = 20;
 };
 
+struct RepeatState {
+    unsigned long delay;
+    unsigned long interval;
+    unsigned long pressStart = 0;
+    unsigned long lastRepeat = 0;
+
+    RepeatState(unsigned long d = 0, unsigned long i = 0)
+        : delay(d), interval(i) {}
+
+    bool enabled() const { return delay && interval; }
+
+    void reset() { pressStart = 0; lastRepeat = 0; }
+
+    void start(unsigned long now) { pressStart = now; lastRepeat = 0; }
+
+    bool shouldRepeat(unsigned long now) {
+        if (!enabled()) return false;
+        if (now - pressStart >= delay &&
+            (lastRepeat == 0 || now - lastRepeat >= interval)) {
+            lastRepeat = now;
+            return true;
+        }
+        return false;
+    }
+};
+
 class AnalogButtonAdapter : public InputInterface {
   private:
     uint8_t pinNumber;
@@ -39,33 +65,24 @@ class AnalogButtonAdapter : public InputInterface {
     uint16_t margin;
     byte command;
     unsigned long lastPressTime = 0;  // Last time the button was pressed
-    unsigned long repeatDelay;
-    unsigned long repeatInterval;
-    unsigned long pressStart = 0;
-    unsigned long lastRepeat = 0;
+    RepeatState repeat;
+    unsigned long debounceTime;
     bool wasPressed = false;
 
   public:
-    AnalogButtonAdapter(
-        LcdMenu* menu,
-        uint8_t pinNumber,
-        uint16_t triggerValue,
-        uint16_t margin,
-        byte command,
-        unsigned long repeatDelay = 0,
-        unsigned long repeatInterval = 0)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(margin), command(command), repeatDelay(repeatDelay), repeatInterval(repeatInterval) {}
-    AnalogButtonAdapter(
-        LcdMenu* menu,
-        uint8_t pinNumber,
-        uint16_t triggerValue,
-        byte command,
-        unsigned long repeatDelay = 0,
-        unsigned long repeatInterval = 0)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeatDelay(repeatDelay),
-          repeatInterval(repeatInterval) {}
+                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0,
+                        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
+          margin(margin), command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
+                        unsigned long repeatDelay = 0, unsigned long repeatInterval = 0,
+                        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
+          margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeat(repeatDelay, repeatInterval),
+          debounceTime(debounceTime) {}
+            repeat.reset();
+            repeat.reset();
+            if (currentTime - lastPressTime <= debounceTime) {
+            repeat.start(currentTime);
+        } else if (repeat.shouldRepeat(currentTime)) {
+            menu->process(command);
 
     void observe() override {
         int16_t analogValue = analogRead(pinNumber);

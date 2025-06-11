@@ -1,30 +1,18 @@
 import os
 import re
 import sys
-import shutil
 
 
 def replace_lines(file_path, replacements):
-    with open(file_path, "r") as file:
+    with open(file_path, 'r') as file:
         lines = file.readlines()
 
-    seen = set()
-    new_lines = []
-
-    for line in lines:
-        replaced = False
-        for pattern, (replacement, key) in replacements.items():
-            if re.search(pattern, line):
-                if key not in seen:
-                    new_lines.append(replacement + "\n")
-                    seen.add(key)
-                replaced = True
-                break
-        if not replaced:
-            new_lines.append(line)
-
-    with open(file_path, "w") as file:
-        file.writelines(new_lines)
+    with open(file_path, 'w') as file:
+        for line in lines:
+            for pattern, replacement in replacements.items():
+                if re.search(pattern, line):
+                    line = replacement + '\n'
+            file.write(line)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -33,10 +21,16 @@ if __name__ == "__main__":
 
     file_path = sys.argv[1]
 
-    # Change the file extension to .cpp but keep the original file intact
+    # Change the file extension to .cpp
     base = os.path.splitext(file_path)[0]
-    new_file_path = base + ".cpp"
-    shutil.copyfile(file_path, new_file_path)
+    new_file_path = base + '.cpp'
+    os.rename(file_path, new_file_path)
+
+    with open(new_file_path, 'r') as f:
+        content = f.read()
+        if re.search(r'^\s*(?:Button|ButtonAdapter|AnalogButtonAdapter)\s+', content, re.MULTILINE):
+            print(new_file_path)
+            sys.exit(0)
 
     replacement1 = """
 #include <Button.h>
@@ -82,11 +76,11 @@ ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);"""
 #include <LcdMenu.h>"""
 
     replacements = {
-        r"#include <(Button.h|input/ButtonAdapter.h)>": (replacement1, "includes"),
-        r"^\s*Button(?:Adapter)? .*\);": (replacement2, "buttons"),
-        r".*\.observe\(\);": (replacement3, "observes"),
-        r"^\s*(?:upBtn|downBtn|enterBtn|backBtn|leftBtn|rightBtn|backspaceBtn)\.begin\(\);|Serial.begin\(.*\);": (replacement4, "setup"),
-        r"#include <LcdMenu.h>": (replacement5, "menu")
+        r"#include <input/.*Adapter.h>": replacement1,
+        r".*Adapter .*\(&menu, .*\);": replacement2,
+        r".*\.observe\(\);": replacement3,
+        r".*Serial.begin\(.*\);": replacement4,
+        r"#include <LcdMenu.h>": replacement5
     }
 
     replace_lines(new_file_path, replacements)

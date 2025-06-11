@@ -31,8 +31,8 @@ Next, you need to create a ButtonAdapter object and pass the Button object and t
     ButtonAdapter backButtonA(&menu, &backButton, BACK);
 
 The last two parameters define the *repeat delay* and the *repeat interval* in
-milliseconds. When provided, keeping the button pressed will repeatedly send the
-same command after the delay has elapsed.
+milliseconds. After the delay passes while the button is held, the command is
+sent again every interval until the button is released.
 
 
 Then you need to call the begin function in the setup function:
