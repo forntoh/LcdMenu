@@ -19,6 +19,8 @@
  * @param menu Pointer to the LcdMenu object that this adapter will interact with.
  * @param button The Button object that will be used for input.
  * @param command The command byte that will be sent to the menu when the button is pressed.
+ * @param repeatDelay Delay before the first repeat command is sent (default is 0).
+ * @param repeatInterval Interval between repeated commands (default is 0).
  */
 class ButtonAdapter : public InputInterface {
   private:

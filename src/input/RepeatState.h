@@ -5,6 +5,7 @@ struct RepeatState {
     unsigned long interval;
     unsigned long pressStart = 0;
     unsigned long lastRepeat = 0;
+    unsigned long lastPress = 0;
 
     RepeatState(unsigned long d = 0, unsigned long i = 0)
         : delay(d), interval(i) {}
@@ -19,16 +20,18 @@ struct RepeatState {
     void start(unsigned long now) {
         pressStart = now;
         lastRepeat = 0;
+        lastPress = now;
     }
 
-    bool startIfDebounced(unsigned long now, unsigned long& lastPress, unsigned long debounceTime) {
+    bool startIfDebounced(unsigned long now, unsigned long debounceTime) {
         if (now - lastPress <= debounceTime) {
             return false;
         }
-        lastPress = now;
         start(now);
         return true;
     }
+
+    unsigned long lastEvent() const { return lastPress; }
 
     bool shouldRepeat(unsigned long now) {
         if (!enabled()) return false;

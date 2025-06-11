@@ -39,7 +39,6 @@ class AnalogButtonAdapter : public InputInterface {
     uint16_t triggerValue;
     uint16_t margin;
     byte command;
-    unsigned long lastPressTime = 0;  // Last time the button was pressed
     RepeatState repeat;
     unsigned long debounceTime;
     bool wasPressed = false;
@@ -88,7 +87,7 @@ class AnalogButtonAdapter : public InputInterface {
         }
 
         if (!wasPressed) {
-            if (!repeat.startIfDebounced(currentTime, lastPressTime, debounceTime)) {
+            if (!repeat.startIfDebounced(currentTime, debounceTime)) {
                 return;
             }
             wasPressed = true;
