@@ -33,17 +33,10 @@ class ButtonConfig {
     static constexpr uint16_t DEFAULT_MARGIN = 20;
 };
 
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(margin),
-          command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
-
-        : AnalogButtonAdapter(menu, pinNumber, triggerValue, ButtonConfig::DEFAULT_MARGIN, command,
-                              repeatDelay, repeatInterval, debounceTime) {}
-
-        int16_t center = static_cast<int16_t>(triggerValue);
-        int16_t lower = center - static_cast<int16_t>(margin);
-        int16_t upper = center + static_cast<int16_t>(margin);
-        bool pressed = analogValue <= upper && analogValue >= lower;
-            if (!repeat.startIfDebounced(currentTime, lastPressTime, debounceTime)) {
+class AnalogButtonAdapter : public InputInterface {
+  private:
+    uint8_t pinNumber;
+    uint16_t triggerValue;
     uint16_t margin;
     byte command;
     unsigned long lastPressTime = 0;  // Last time the button was pressed
@@ -61,8 +54,8 @@ class ButtonConfig {
         unsigned long repeatDelay = 0,
         unsigned long repeatInterval = 0,
         unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(margin), command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(margin),
+          command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
 
     AnalogButtonAdapter(
         LcdMenu* menu,
@@ -72,9 +65,7 @@ class ButtonConfig {
         unsigned long repeatDelay = 0,
         unsigned long repeatInterval = 0,
         unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeat(repeatDelay, repeatInterval),
-          debounceTime(debounceTime) {}
+        : AnalogButtonAdapter(menu, pinNumber, triggerValue, ButtonConfig::DEFAULT_MARGIN, command, repeatDelay, repeatInterval, debounceTime) {}
 
     void observe() override {
         int16_t analogValue = analogRead(pinNumber);
@@ -84,7 +75,10 @@ class ButtonConfig {
             return;
         }
 
-        bool pressed = analogValue <= (triggerValue + margin) && analogValue >= (triggerValue - margin);
+        int16_t center = static_cast<int16_t>(triggerValue);
+        int16_t lower = center - static_cast<int16_t>(margin);
+        int16_t upper = center + static_cast<int16_t>(margin);
+        bool pressed = analogValue <= upper && analogValue >= lower;
         unsigned long currentTime = millis();
 
         if (!pressed) {
@@ -94,13 +88,11 @@ class ButtonConfig {
         }
 
         if (!wasPressed) {
-            if (currentTime - lastPressTime <= debounceTime) {
+            if (!repeat.startIfDebounced(currentTime, lastPressTime, debounceTime)) {
                 return;
             }
-            lastPressTime = currentTime;
             wasPressed = true;
             menu->process(command);
-            repeat.start(currentTime);
         } else if (repeat.shouldRepeat(currentTime)) {
             menu->process(command);
         }
