@@ -75,7 +75,7 @@ class LcdMenu {
     /**
      * @brief Set new screen to display.
      * The only place that clears whole screen.
-     * Then it Will `draw` of new screen screen using the renderer.
+     * Then it will draw the new screen using the renderer.
      * @param screen the new screen to display
      */
     void setScreen(MenuScreen* screen);
