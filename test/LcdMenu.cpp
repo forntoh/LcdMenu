@@ -1,6 +1,6 @@
 #define protected public
-#include <MenuScreen.h>
 #include <ItemInput.h>
+#include <MenuScreen.h>
 #undef protected
 #include <ArduinoUnitTests.h>
 #include <ItemCommand.h>
