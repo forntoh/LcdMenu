@@ -85,7 +85,19 @@ class AnalogButtonAdapter : public InputInterface {
         unsigned long repeatDelay = 0,
         unsigned long repeatInterval = 0,
         unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
-        : InputInterface(menu), margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeat(repeatDelay, repeatInterval),
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
+          margin(margin), command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
+
+    AnalogButtonAdapter(
+        LcdMenu* menu,
+        uint8_t pinNumber,
+        uint16_t triggerValue,
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0,
+        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
+          margin(ButtonConfig::DEFAULT_MARGIN), command(command), repeat(repeatDelay, repeatInterval),
           debounceTime(debounceTime) {}
 
     void observe() override {
