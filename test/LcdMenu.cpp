@@ -44,6 +44,32 @@ class StubRenderer : public MenuRenderer {
     uint8_t getEffectiveCols() const override { return maxCols; }
 };
 
+class TrackingDisplay : public DisplayInterface {
+  public:
+    bool cleared = false;
+    void begin() override {}
+    void clear() override { cleared = true; }
+    void show() override {}
+    void hide() override {}
+    void draw(uint8_t) override {}
+    void draw(const char*) override {}
+    void setCursor(uint8_t, uint8_t) override {}
+    void setBacklight(bool) override {}
+};
+
+class TrackingRenderer : public MenuRenderer {
+  public:
+    TrackingDisplay display;
+    bool itemDrawn = false;
+    TrackingRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
+
+    void draw(uint8_t) override {}
+    void drawItem(const char*, const char*, bool) override { itemDrawn = true; }
+    void clearBlinker() override {}
+    void drawBlinker() override {}
+    uint8_t getEffectiveCols() const override { return maxCols; }
+};
+
 // clang-format off
 MENU_SCREEN(mainScreen, mainItems,
     ITEM_INPUT("Random", NULL),
@@ -89,6 +115,29 @@ unittest(clear_command_empties_input_and_resets_cursor) {
     assertEqual("", item.getValue());
     assertEqual((uint8_t)0, item.cursor);
     assertEqual((uint8_t)0, item.view);
+}
+
+unittest(hide_disables_and_clears_display) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    menu.setScreen(mainScreen);
+    renderer.display.cleared = false;
+    menu.hide();
+    assertFalse(menu.isEnabled());
+    assertTrue(renderer.display.cleared);
+}
+
+unittest(show_enables_and_draws_active_screen) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    menu.setScreen(mainScreen);
+    menu.hide();
+    renderer.display.cleared = false;
+    renderer.itemDrawn = false;
+    menu.show();
+    assertTrue(menu.isEnabled());
+    assertTrue(renderer.display.cleared);
+    assertTrue(renderer.itemDrawn);
 }
 
 unittest_main()
