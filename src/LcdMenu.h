@@ -133,5 +133,5 @@ class LcdMenu {
      * @brief Get the current status of the menu, enabled / disabled
      * @return the value of private var 'enabled'
      */
-    bool isEnabled(void);
+    bool isEnabled() const;
 };
