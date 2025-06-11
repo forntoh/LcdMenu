@@ -23,15 +23,7 @@
 #endif
 //
 #include "InputInterface.h"
-#ifdef ARDUINO_UNIT_TEST
-class SimpleRotary {
-  public:
-    virtual uint8_t rotate() { return 0; }
-    virtual uint8_t pushType(int) { return 0; }
-};
-#else
 #include <SimpleRotary.h>
-#endif
 
 /**
  * @class SimpleRotaryAdapter

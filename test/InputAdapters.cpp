@@ -1,5 +1,7 @@
 #define ARDUINO_UNIT_TEST
 #include <ArduinoUnitTests.h>
+#include "stubs/Button.h"
+#include "stubs/SimpleRotary.h"
 #include <input/ButtonAdapter.h>
 #include <input/AnalogButtonAdapter.h>
 #include <input/KeyboardAdapter.h>
