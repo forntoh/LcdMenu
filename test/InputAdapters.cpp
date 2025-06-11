@@ -1,3 +1,4 @@
+#define ARDUINO_UNIT_TEST
 #include <ArduinoUnitTests.h>
 #include <input/ButtonAdapter.h>
 #include <input/AnalogButtonAdapter.h>

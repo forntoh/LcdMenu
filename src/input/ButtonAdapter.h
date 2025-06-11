@@ -1,7 +1,14 @@
 #pragma once
 
 #include "InputInterface.h"
+#ifdef ARDUINO_UNIT_TEST
+class Button {
+  public:
+    virtual bool pressed() { return false; }
+};
+#else
 #include <Button.h>
+#endif
 
 /**
  * @class ButtonAdapter
