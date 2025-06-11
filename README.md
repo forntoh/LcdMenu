@@ -93,30 +93,5 @@ For detailed information on how to use LcdMenu, check out the [official docs](ht
 
 ---
 
-## Running Unit Tests
-
-The library includes unit tests that can be compiled with `g++` using the
-headers provided by the `arduino_ci` gem. After installing dependencies with
-`bundle install`, build and run the tests with a command similar to the one
-below:
-
-```bash
-bundle install --path vendor/bundle
-mkdir -p .arduino_ci
-g++ -std=c++0x \
-  -I$(bundle show arduino_ci)/cpp/arduino \
-  -I$(bundle show arduino_ci)/cpp/unittest \
-  -Isrc -Isrc/display -Isrc/input -Isrc/renderer -Isrc/utils -Isrc/widget \
-  -Itest/stubs \
-  $(bundle show arduino_ci)/cpp/unittest/ArduinoUnitTests.cpp \
-  $(bundle show arduino_ci)/cpp/arduino/Arduino.cpp \
-  $(bundle show arduino_ci)/cpp/arduino/Godmode.cpp \
-  $(bundle show arduino_ci)/cpp/arduino/stdlib.cpp \
-  test/DisplayAdapters.cpp -o .arduino_ci/DisplayAdapters.bin
-./.arduino_ci/DisplayAdapters.bin
-```
-
-This will execute all unit tests and print their results.
-
 
 **Have a question/doubt? Check the [Discussions](https://github.com/forntoh/LcdMenu/discussions) tab, maybe your question has already been answered 😉**
