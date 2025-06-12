@@ -37,22 +37,19 @@ def button_up_template(button_name):
   - delay: {wait_time_after_release}ms
   """
 
-def replace_lines(file_path, replacements):
+def replace_lines(file_path, compiled_replacements):
     total_wait_time = 0
     with open(file_path, "r") as file:
         lines = file.readlines()
 
     with open(file_path, "w") as file:
         for line in lines:
-            replaced = False
-            for pattern, (replacement, wait_time) in replacements.items():
-                if re.search(pattern, line):
+            for regex, (replacement, wait_time) in compiled_replacements:
+                if regex.search(line):
                     line = replacement + "\n"
                     total_wait_time += wait_time
-                    replaced = True
                     break
             file.write(line)
-    
     return total_wait_time
 
 if __name__ == "__main__":
@@ -101,6 +98,12 @@ if __name__ == "__main__":
         r".*- simulate: backspaceButton-up": (button_up_template("btn7"), up_wait),
     }
 
-    total_wait_time = replace_lines(file_path, replacements)
+    # Pre-compile regex patterns for efficiency
+    compiled_replacements = [
+        (re.compile(pattern), replacement_tuple)
+        for pattern, replacement_tuple in replacements.items()
+    ]
+
+    total_wait_time = replace_lines(file_path, compiled_replacements)
 
     print(total_wait_time)
