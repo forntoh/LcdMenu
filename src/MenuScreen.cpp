@@ -32,7 +32,7 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
     } else if (constrained > (view + (viewSize - 1))) {
         view = constrained - (viewSize - 1);
     }
-    cursor = position;
+    cursor = constrained;
     draw(renderer);
 }
 

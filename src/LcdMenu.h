@@ -75,7 +75,7 @@ class LcdMenu {
     /**
      * @brief Set new screen to display.
      * The only place that clears whole screen.
-     * Then it Will `draw` of new screen screen using the renderer.
+     * Then it will draw the new screen using the renderer.
      * @param screen the new screen to display
      */
     void setScreen(MenuScreen* screen);
@@ -129,4 +129,9 @@ class LcdMenu {
      * @param pollInterval the interval to update the menu in milliseconds (default is 1000)
      */
     void poll(uint16_t pollInterval = 1000);
+    /**
+     * @brief Get the current status of the menu, enabled / disabled
+     * @return the value of private var 'enabled'
+     */
+    bool isEnabled() const;
 };

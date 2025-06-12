@@ -46,7 +46,6 @@ WidgetRange	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-ARDUINO_ARCH_STM32	KEYWORD2
 abortCharEdit	KEYWORD2
 addWidget	KEYWORD2
 addWidgetAt	KEYWORD2

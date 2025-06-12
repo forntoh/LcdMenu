@@ -75,9 +75,9 @@ class MenuRenderer {
      * @brief Draws an item on the display.
      * @param text Text of the item to be drawn.
      * @param value Value of the item to be drawn.
-     * @param paddWithBlanks Flag indicating whether to pad the text with spaces.
+     * @param padWithBlanks Flag indicating whether to pad the text with spaces.
      */
-    virtual void drawItem(const char* text, const char* value, bool paddWithBlanks = true) = 0;
+    virtual void drawItem(const char* text, const char* value, bool padWithBlanks = true) = 0;
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -111,7 +111,7 @@ class MenuRenderer {
      * @brief Updates the display timer and hides the display if the timeout is reached.
      */
     virtual void updateTimer() {
-        if (millis() != startTime + DISPLAY_TIMEOUT) {
+        if (millis() - startTime < DISPLAY_TIMEOUT) {
             return;
         }
         LOG(F("MenuRenderer::timeout"));
