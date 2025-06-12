@@ -15,6 +15,7 @@ struct RepeatState {
     void reset() {
         pressStart = 0;
         lastRepeat = 0;
+        lastPress  = 0;
     }
 
     void start(unsigned long now) {
