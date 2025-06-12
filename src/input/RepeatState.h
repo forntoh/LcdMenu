@@ -38,6 +38,7 @@ struct RepeatState {
         if (now - pressStart >= delay &&
             (lastRepeat == 0 || now - lastRepeat >= interval)) {
             lastRepeat = now;
+            lastPress = now;
             return true;
         }
         return false;
