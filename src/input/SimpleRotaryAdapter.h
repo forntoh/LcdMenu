@@ -46,10 +46,12 @@
  * @param encoder Pointer to the SimpleRotary instance representing the rotary encoder.
  */
 class SimpleRotaryAdapter : public InputInterface {
+  protected:
+    SimpleRotary* encoder;            // Pointer to the SimpleRotary instance
+    
   private:
     unsigned long lastPressTime = 0;  // Last time the button was pressed
     bool pendingEnter = false;        // Flag to indicate if an enter action is pending
-    SimpleRotary* encoder;            // Pointer to the SimpleRotary instance
 
   public:
     SimpleRotaryAdapter(LcdMenu* menu, SimpleRotary* encoder)
