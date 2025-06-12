@@ -27,7 +27,7 @@ steps:
 
 - wait-serial: Waits for a specific serial output.
 - simulate: Simulates a button press or other input.
-  - There are currently 7 supported actions:
+  - There are currently 9 supported actions:
     - `upButton-press`: Simulates pressing the up button.
     - `downButton-press`: Simulates pressing the down button.
     - `leftButton-press`: Simulates pressing the left button.
@@ -35,6 +35,8 @@ steps:
     - `enterButton-press`: Simulates pressing the enter button.
     - `backButton-press`: Simulates pressing the back button.
     - `backspaceButton-press`: Simulates pressing the backspace button.
+    - `*-down`: Presses a button without releasing it (used for hold tests).
+    - `*-up`: Releases a previously held button.
 
 ## Example Test Files
 
@@ -60,5 +62,12 @@ Each YAML file in this directory matches an example sketch in the [`examples`](/
 > ```bash
 > act -W .github/workflows/wokwi_ci.yml pull_request
 > ```
+
+To run tests that interact with the Wokwi simulator you must set the
+`WOKWI_CLI_TOKEN` environment variable to your personal token. You can obtain
+this token from the [Wokwi dashboard](https://wokwi.com/dashboard/ci).
+
+The workflow calculates the required timeout for each test using
+`.scripts/prepare_workflow.py` before launching `wokwi-cli`.
 
 By following these guidelines, you can create consistent and effective functionality tests for your feature/enhancement.

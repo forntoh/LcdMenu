@@ -1,6 +1,7 @@
 #pragma once
 
-#include "./InputInterface.h"
+#include "InputInterface.h"
+#include "RepeatState.h"
 /**
  * @class AnalogButtonAdapter
  * @brief Adapter class to handle analog button array as input for an LCD menu.
@@ -38,36 +39,60 @@ class AnalogButtonAdapter : public InputInterface {
     uint16_t triggerValue;
     uint16_t margin;
     byte command;
-    unsigned long lastPressTime = 0;  // Last time the button was pressed
+    RepeatState repeat;
+    unsigned long debounceTime;
+    bool wasPressed = false;
 
   public:
-    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, uint16_t margin, byte command)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(margin), command(command) {}
-    AnalogButtonAdapter(LcdMenu* menu, uint8_t pinNumber, uint16_t triggerValue, byte command)
-        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue),
-          margin(ButtonConfig::DEFAULT_MARGIN), command(command) {}
+    AnalogButtonAdapter(
+        LcdMenu* menu,
+        uint8_t pinNumber,
+        uint16_t triggerValue,
+        uint16_t margin,
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0,
+        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
+        : InputInterface(menu), pinNumber(pinNumber), triggerValue(triggerValue), margin(margin),
+          command(command), repeat(repeatDelay, repeatInterval), debounceTime(debounceTime) {}
+
+    AnalogButtonAdapter(
+        LcdMenu* menu,
+        uint8_t pinNumber,
+        uint16_t triggerValue,
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0,
+        unsigned long debounceTime = ButtonConfig::PRESS_TIME_MS)
+        : AnalogButtonAdapter(menu, pinNumber, triggerValue, ButtonConfig::DEFAULT_MARGIN, command, repeatDelay, repeatInterval, debounceTime) {}
 
     void observe() override {
-        // Read analog value from pin
-        int16_t analogValue = analogRead(pinNumber);  // Read value from pin
-
-        // Ignore readings above the maximum possible value (no button pressed)
+        int16_t analogValue = analogRead(pinNumber);
         if (analogValue >= ButtonConfig::MAX_VALUE) {
+            wasPressed = false;
+            repeat.reset();
             return;
         }
 
-        // Apply debouncing
+        int16_t center = static_cast<int16_t>(triggerValue);
+        int16_t lower = center - static_cast<int16_t>(margin);
+        int16_t upper = center + static_cast<int16_t>(margin);
+        bool pressed = analogValue <= upper && analogValue >= lower;
         unsigned long currentTime = millis();
-        if (currentTime - lastPressTime <= ButtonConfig::PRESS_TIME_MS) {
+
+        if (!pressed) {
+            wasPressed = false;
+            repeat.reset();
             return;
         }
 
-        // Process button press
-        lastPressTime = currentTime;
-
-        if (analogValue <= (triggerValue + margin) &&
-            analogValue >= (triggerValue - margin)) {
+        if (!wasPressed) {
+            if (!repeat.startIfDebounced(currentTime, debounceTime)) {
+                return;
+            }
+            wasPressed = true;
+            menu->process(command);
+        } else if (repeat.shouldRepeat(currentTime)) {
             menu->process(command);
         }
     }

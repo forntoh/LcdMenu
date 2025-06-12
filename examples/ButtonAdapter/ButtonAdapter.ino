@@ -26,9 +26,9 @@ LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
 CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
 LcdMenu menu(renderer);
 Button upBtn(5);
-ButtonAdapter upBtnA(&menu, &upBtn, UP);
+ButtonAdapter upBtnA(&menu, &upBtn, UP, 500, 200);  // hold to repeat
 Button downBtn(6);
-ButtonAdapter downBtnA(&menu, &downBtn, DOWN);
+ButtonAdapter downBtnA(&menu, &downBtn, DOWN, 500, 200);
 Button enterBtn(7);
 ButtonAdapter enterBtnA(&menu, &enterBtn, ENTER);
 
