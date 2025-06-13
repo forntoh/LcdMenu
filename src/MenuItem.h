@@ -71,6 +71,12 @@ class MenuItem {
         this->text = text;
     };
 
+
+    /**
+     * @brief Check if the item can be selected by the cursor.
+     */
+    virtual bool isSelectable() const { return true; }
+
     // Destructor
     virtual ~MenuItem() noexcept = default;
 
