@@ -184,7 +184,7 @@ class BaseItemManyWidgets : public MenuItem {
         }
         if (command == ENTER) {
             for (auto* w : widgets)
-                w->startEdit();
+                if (w) w->startEdit();
             renderer->setEditMode(true);
             draw(renderer);
             renderer->drawBlinker();
@@ -224,7 +224,7 @@ class BaseItemManyWidgets : public MenuItem {
         renderer->setEditMode(false);
         renderer->viewShift = 0;
         for (auto* w : widgets)
-            w->cancelEdit();
+            if (w) w->cancelEdit();
         reset();
         renderer->clearBlinker();
         draw(renderer);
