@@ -98,9 +98,9 @@ class WidgetList : public BaseWidgetValue<V> {
         return false;
     }
 
-    void startEdit() { originalValue = static_cast<V>(this->value); }
+    void startEdit() override { originalValue = static_cast<V>(this->value); }
 
-    void cancelEdit() { this->value = originalValue; }
+    void cancelEdit() override { this->value = originalValue; }
 };
 
 /**

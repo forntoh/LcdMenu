@@ -108,9 +108,9 @@ class WidgetRange : public BaseWidgetValue<V> {
         return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, static_cast<T>(this->value));
     }
 
-    void startEdit() { originalValue = static_cast<T>(this->value); }
+    void startEdit() override { originalValue = static_cast<T>(this->value); }
 
-    void cancelEdit() { this->value = originalValue; }
+    void cancelEdit() override { this->value = originalValue; }
 };
 
 /**
