@@ -105,9 +105,17 @@ class BaseItemManyWidgets : public MenuItem {
         uint8_t index = 0;
         uint8_t cursorCol = 0;
 
-        for (uint8_t i = 0; i < widgets.size(); i++) {
-            index += widgets[i]->draw(buf, index);
+        for (size_t i = 0; i < widgets.size(); i++) {
+            uint8_t widgetLength = widgets[i]->draw(buf, index);
+            index += widgetLength;
             if (i == activeWidget && renderer->isInEditMode()) {
+                if (renderer->isBlinkerOn() == false && renderer->hasFocus) {
+                    index -= widgetLength;
+                    for (uint8_t j = 0; j < widgetLength; j++) {
+                        buf[index] = ' ';  // clear the widget
+                        index++;
+                    }
+                }
                 // Calculate the available space for the widgets after the text
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
                 // Adjust the view shift to ensure the active widget is visible
@@ -148,7 +156,9 @@ class BaseItemManyWidgets : public MenuItem {
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
+
         if (renderer->isInEditMode()) {
+            renderer->resetBlinkerOn();
             if (widgets[activeWidget]->process(menu, command)) {
                 draw(renderer);
                 return true;
@@ -186,7 +196,7 @@ class BaseItemManyWidgets : public MenuItem {
 
     void left(MenuRenderer* renderer) {
         if (activeWidget == 0) {
-            activeWidget = widgets.size() - 1;
+            activeWidget = widgets.size() - 1;  // wrap around
         } else {
             activeWidget--;
         }
@@ -205,7 +215,7 @@ class BaseItemManyWidgets : public MenuItem {
         renderer->viewShift = 0;
         reset();
         handleCommit();
-        renderer->clearBlinker();
+        //renderer->clearBlinker();
         draw(renderer);
         LOG(F("ItemWidget::exitEditMode"), this->text);
     }

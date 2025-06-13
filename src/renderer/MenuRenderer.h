@@ -29,19 +29,23 @@ class MenuRenderer {
      */
     bool hasHiddenItemsBelow = false;
 
-    /**
-     * @brief Flag indicating that the current item has focus.
-     */
-    bool hasFocus = false;
-
     uint8_t cursorCol;
     uint8_t cursorRow;
 
     bool inEditMode;
 
     unsigned long startTime = 0;
+    unsigned long blinkerLastTime = 0;
+    /**
+     * @brief Flag indicating whether the blinking portion is on.
+     */
+    bool blinkerOn = true;
 
   public:
+    /**
+     * @brief Flag indicating that the current item has focus.
+     */
+    bool hasFocus = false;
     /**
      * @brief Number of columns to shift the current item's view by.
      */
@@ -88,6 +92,17 @@ class MenuRenderer {
      * @brief Function to draw the blinker on the display.
      */
     virtual void drawBlinker() = 0;
+
+    /**
+     * @brief Timer. Checks if the blinking portion of the text is currently on.
+     * @return True if the blinker is on, false otherwise.
+     */
+    virtual bool isBlinkerOn() = 0;
+
+    /**
+     * @brief Resets the blinking portion to the "ON" state. Intended for bringing the text back immediately when button is pressed.
+     */
+    virtual void resetBlinkerOn() = 0;
 
     /**
      * @brief Moves the cursor to a specified position.
