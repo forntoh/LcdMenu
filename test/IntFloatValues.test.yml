@@ -19,6 +19,12 @@ steps:
   - wait-serial: "#LOG# WidgetRange::decrement=101"
   - simulate: backButton-press
   - wait-serial: "#LOG# ItemWidget::exitEditMode=Dist"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Dist"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetRange::increment=101"
+  - simulate: backButton-press
+  - wait-serial: "#LOG# ItemWidget::exitEditMode=Dist"
   - simulate: downButton-press
   - wait-serial: "#LOG# MenuScreen::down=2"
   - simulate: enterButton-press

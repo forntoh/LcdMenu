@@ -168,13 +168,14 @@ class BaseItemManyWidgets : public MenuItem {
                     left(renderer);
                     return true;
                 case BACK:
-                    back(renderer);
+                    cancel(renderer);
                     return true;
                 default:
                     return false;
             }
         }
         if (command == ENTER) {
+            for (auto* w : widgets) w->startEdit();
             renderer->setEditMode(true);
             draw(renderer);
             renderer->drawBlinker();
@@ -208,6 +209,16 @@ class BaseItemManyWidgets : public MenuItem {
         renderer->clearBlinker();
         draw(renderer);
         LOG(F("ItemWidget::exitEditMode"), this->text);
+    }
+
+    void cancel(MenuRenderer* renderer) {
+        renderer->setEditMode(false);
+        renderer->viewShift = 0;
+        for (auto* w : widgets) w->cancelEdit();
+        reset();
+        renderer->clearBlinker();
+        draw(renderer);
+        LOG(F("ItemWidget::cancelEditMode"), this->text);
     }
 };
 

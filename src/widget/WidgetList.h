@@ -22,6 +22,7 @@ class WidgetList : public BaseWidgetValue<V> {
   protected:
     const bool cycle;
     const std::vector<T>& values;
+    V originalValue;
 
   public:
     WidgetList(
@@ -33,7 +34,8 @@ class WidgetList : public BaseWidgetValue<V> {
         void (*callback)(const V&))
         : BaseWidgetValue<V>(activePosition, format, cursorOffset, callback),
           cycle(cycle),
-          values(values) {}
+          values(values),
+          originalValue(static_cast<V>(activePosition)) {}
 
   protected:
     /**
@@ -95,6 +97,10 @@ class WidgetList : public BaseWidgetValue<V> {
         }
         return false;
     }
+
+    void startEdit() { originalValue = static_cast<V>(this->value); }
+
+    void cancelEdit() { this->value = originalValue; }
 };
 
 /**
