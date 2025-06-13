@@ -14,6 +14,16 @@ steps:
   - simulate: upButton-press
   - wait-serial: "#LOG# WidgetList::nextValue=3"
   - simulate: backButton-press
+  - wait-serial: "#LOG# ItemWidget::cancelEditMode=Color"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Color"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=1"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=2"
+  - simulate: upButton-press
+  - wait-serial: "#LOG# WidgetList::nextValue=3"
+  - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::exitEditMode=Color"
   - simulate: downButton-press
   - wait-serial: "#LOG# MenuScreen::down=2"
@@ -30,4 +40,4 @@ steps:
   - simulate: upButton-press
   - wait-serial: "#LOG# WidgetList::nextValue=1"
   - simulate: backButton-press
-  - wait-serial: "#LOG# ItemWidget::exitEditMode=Num"
+  - wait-serial: "#LOG# ItemWidget::cancelEditMode=Num"

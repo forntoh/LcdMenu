@@ -47,6 +47,10 @@ class BaseWidget {
      */
     virtual uint8_t draw(char* buffer, const uint8_t start = 0) = 0;
 
+    virtual void startEdit() {}
+
+    virtual void cancelEdit() {}
+
   public:
     virtual ~BaseWidget() = default;
 };
