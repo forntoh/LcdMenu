@@ -94,16 +94,16 @@ unittest(menu_screen_draw_clamps_view) {
     MenuScreen screen(items);
     StubRenderer renderer;
 
-    screen.setCursor(&renderer, 4); // move cursor to last item, view becomes 3
+    screen.setCursor(&renderer, 4);  // move cursor to last item, view becomes 3
 
     screen.removeLastItem();
-    screen.removeLastItem(); // remove down to 3 items, view still 3
+    screen.removeLastItem();  // remove down to 3 items, view still 3
 
     screen.draw(&renderer);
 
     assertEqual((uint8_t)0, i1->drawCount);
     assertEqual((uint8_t)0, i2->drawCount);
-    assertEqual((uint8_t)0, i3->drawCount); // no items drawn but no crash
+    assertEqual((uint8_t)0, i3->drawCount);  // no items drawn but no crash
 
     delete i1;
     delete i2;
