@@ -31,9 +31,11 @@ Next, you need to create a AnalogButtonAdapter object and pass the analog Pin, v
 
             AnalogButtonAdapter ButtonBackSpace(&menu, A0, 20, BACKSPACE);
             AnalogButtonAdapter ButtonUp(&menu, A0, 100, UP);
-            AnalogButtonAdapter ButtonDown(&menu, A0, 250, DOWN);
+            AnalogButtonAdapter ButtonDown(&menu, A0, 250, DOWN, 500, 200);
             AnalogButtonAdapter ButtonBack(&menu, A0, 400, BACK);
             AnalogButtonAdapter ButtonEnter(&menu, A0, 640, ENTER);
+
+The additional parameters configure hold behaviour similarly to ``ButtonAdapter``.
 
     .. tab-item:: With custom margin
     
