@@ -46,7 +46,7 @@ class MenuScreen {
      * When `up` or `down` then this position will be moved over the items accordingly.
      * Always in range [`view`, `view` + `renderer.getMaxRows()` - 1].
      */
-    size_t cursor = 0;
+    uint8_t cursor = 0;
     /**
      * @brief First visible item's position in the menu array.
      *
@@ -67,7 +67,7 @@ class MenuScreen {
      * When number of items < `renderer.getMaxRows()` this index should be 0.
      * The size of the view is always the same and equals to `renderer.getMaxRows()`.
      */
-    size_t view = 0;
+    uint8_t view = 0;
 
   public:
     /**
