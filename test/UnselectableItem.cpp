@@ -1,7 +1,9 @@
+#define protected public
+#include <MenuScreen.h>
+#undef protected
 #include <ArduinoUnitTests.h>
 #include <ItemLabel.h>
 #include <MenuItem.h>
-#include <MenuScreen.h>
 #include <display/DisplayInterface.h>
 #include <renderer/MenuRenderer.h>
 
