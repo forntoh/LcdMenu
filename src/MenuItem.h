@@ -71,7 +71,6 @@ class MenuItem {
         this->text = text;
     };
 
-
     /**
      * @brief Check if the item can be selected by the cursor.
      */
