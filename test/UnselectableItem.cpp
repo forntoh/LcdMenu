@@ -42,4 +42,14 @@ unittest(cursor_skips_unselectable_items) {
     assertEqual(1, screen.getCursor());
 }
 
+unittest(cursor_down_skips_multiple_labels) {
+    std::vector<MenuItem*> items = {ITEM_BASIC("A"), ITEM_LABEL("Label1"), ITEM_LABEL("Label2"), ITEM_BASIC("B")};
+    MenuScreen screen(items);
+    DummyRenderer renderer;
+    screen.setCursor(&renderer, 0);
+    assertEqual(0, screen.getCursor());
+    screen.down(&renderer);
+    assertEqual(3, screen.getCursor());
+}
+
 unittest_main()

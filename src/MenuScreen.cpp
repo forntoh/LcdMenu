@@ -128,7 +128,10 @@ void MenuScreen::down(MenuRenderer* renderer) {
         ++cursor;
         if (items[cursor]->isSelectable()) break;
     }
-    if (cursor > view + renderer->maxRows - 1) view++;
+    uint8_t viewSize = renderer->maxRows;
+    if (cursor > view + viewSize - 1) {
+        view = cursor - (viewSize - 1);
+    }
     draw(renderer);
     LOG(F("MenuScreen::down"), cursor);
 }
