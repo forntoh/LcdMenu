@@ -109,9 +109,18 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
 }
 
 void MenuScreen::up(MenuRenderer* renderer) {
+    if (items.empty()) {
+        cursor = 0;
+        draw(renderer);
+        return;
+    }
+    uint8_t original = cursor;
     while (cursor > 0) {
         --cursor;
         if (items[cursor]->isSelectable()) break;
+    }
+    if (!items[cursor]->isSelectable()) {
+        cursor = original;
     }
     if (cursor < view) view = cursor;
     draw(renderer);
