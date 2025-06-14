@@ -18,6 +18,7 @@ class WidgetRange : public BaseWidgetValue<V> {
     const T minValue;
     const T maxValue;
     const bool cycle;
+    T originalValue;
 
   public:
     WidgetRange(
@@ -33,7 +34,8 @@ class WidgetRange : public BaseWidgetValue<V> {
           step(step),
           minValue(min),
           maxValue(max),
-          cycle(cycle) {}
+          cycle(cycle),
+          originalValue(static_cast<T>(value)) {}
 
     /**
      * @brief Sets the value.
@@ -105,6 +107,10 @@ class WidgetRange : public BaseWidgetValue<V> {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
         return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, static_cast<T>(this->value));
     }
+
+    void startEdit() override { originalValue = static_cast<T>(this->value); }
+
+    void cancelEdit() override { this->value = originalValue; }
 };
 
 /**

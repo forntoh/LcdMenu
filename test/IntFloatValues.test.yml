@@ -17,7 +17,7 @@ steps:
   - wait-serial: "#LOG# WidgetRange::decrement=102"
   - simulate: downButton-press
   - wait-serial: "#LOG# WidgetRange::decrement=101"
-  - simulate: backButton-press
+  - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::exitEditMode=Dist"
   - simulate: downButton-press
   - wait-serial: "#LOG# MenuScreen::down=2"
@@ -35,7 +35,7 @@ steps:
   - wait-serial: "#LOG# WidgetRange::decrement=-0.97"
   - simulate: downButton-press
   - wait-serial: "#LOG# WidgetRange::decrement=-0.98"
-  - simulate: backButton-press
+  - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::exitEditMode=Curr"
   - simulate: downButton-press
   - wait-serial: "#LOG# MenuScreen::down=3"

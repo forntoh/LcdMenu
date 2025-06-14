@@ -16,6 +16,7 @@ class WidgetBool : public BaseWidgetValue<V> {
   protected:
     const char* textOn;
     const char* textOff;
+    bool originalValue;
 
   public:
     WidgetBool(
@@ -25,7 +26,10 @@ class WidgetBool : public BaseWidgetValue<V> {
         const char* format,
         const uint8_t cursorOffset,
         void (*callback)(const V&) = nullptr)
-        : BaseWidgetValue<V>(value, format, cursorOffset, callback), textOn(textOn), textOff(textOff) {}
+        : BaseWidgetValue<V>(value, format, cursorOffset, callback),
+          textOn(textOn),
+          textOff(textOff),
+          originalValue(static_cast<bool>(value)) {}
 
   protected:
     uint8_t draw(char* buffer, const uint8_t start) override {
@@ -50,6 +54,10 @@ class WidgetBool : public BaseWidgetValue<V> {
         }
         return false;
     }
+
+    void startEdit() override { originalValue = static_cast<bool>(this->value); }
+
+    void cancelEdit() override { this->value = originalValue; }
 };
 
 /**
