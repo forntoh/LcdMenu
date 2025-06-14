@@ -12,7 +12,7 @@ void LcdMenu::setScreen(MenuScreen* screen) {
     LOG(F("LcdMenu::setScreen"));
     this->screen = screen;
     renderer.display->clear();
-    this->screen->draw(&renderer);
+    this->screen->reset(&renderer);
 }
 
 bool LcdMenu::process(const unsigned char c) {
