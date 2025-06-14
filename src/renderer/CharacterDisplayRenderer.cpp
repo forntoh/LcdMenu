@@ -15,6 +15,11 @@ CharacterDisplayRenderer::CharacterDisplayRenderer(
       editCursorIcon(editCursorIcon),
       availableColumns(maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0)) {}
 
+CharacterDisplayRenderer::~CharacterDisplayRenderer() {
+    delete[] upArrow;
+    delete[] downArrow;
+}
+
 void CharacterDisplayRenderer::begin() {
     MenuRenderer::begin();
     if (upArrow != NULL && downArrow != NULL) {
