@@ -52,7 +52,7 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
 }
 
 void MenuScreen::draw(MenuRenderer* renderer) {
-    for (uint8_t i = 0; i < renderer->maxRows && i < items.size(); i++) {
+    for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
             break;

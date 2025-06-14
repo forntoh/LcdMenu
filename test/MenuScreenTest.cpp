@@ -30,6 +30,13 @@ class StubRenderer : public MenuRenderer {
     uint8_t getEffectiveCols() const override { return maxCols; }
 };
 
+class CountingItem : public MenuItem {
+  public:
+    uint8_t drawCount = 0;
+    CountingItem(const char* t) : MenuItem(t) {}
+    void draw(MenuRenderer*) override { drawCount++; }
+};
+
 unittest(menu_screen_dynamic_item_management) {
     MenuItem* i1 = ITEM_BASIC("One");
     MenuItem* i2 = ITEM_BASIC("Two");
@@ -75,6 +82,34 @@ unittest(menu_screen_dynamic_item_management) {
 
     delete i1;
     delete i2;
+}
+
+unittest(menu_screen_draw_clamps_view) {
+    CountingItem* i1 = new CountingItem("One");
+    CountingItem* i2 = new CountingItem("Two");
+    CountingItem* i3 = new CountingItem("Three");
+    CountingItem* i4 = new CountingItem("Four");
+    CountingItem* i5 = new CountingItem("Five");
+    std::vector<MenuItem*> items = {i1, i2, i3, i4, i5};
+    MenuScreen screen(items);
+    StubRenderer renderer;
+
+    screen.setCursor(&renderer, 4);  // move cursor to last item, view becomes 3
+
+    screen.removeLastItem();
+    screen.removeLastItem();  // remove down to 3 items, view still 3
+
+    screen.draw(&renderer);
+
+    assertEqual((uint8_t)0, i1->drawCount);
+    assertEqual((uint8_t)0, i2->drawCount);
+    assertEqual((uint8_t)0, i3->drawCount);  // no items drawn but no crash
+
+    delete i1;
+    delete i2;
+    delete i3;
+    delete i4;
+    delete i5;
 }
 
 unittest_main()

@@ -1,0 +1,17 @@
+name: Button Adapter Navigation Test
+version: 1
+author: Codex
+steps:
+  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - simulate: downButton-down
+  - wait-serial: "#LOG# MenuScreen::down=1"
+  - wait-serial: "#LOG# MenuScreen::down=2"
+  - wait-serial: "#LOG# MenuScreen::down=3"
+  - wait-serial: "#LOG# MenuScreen::down=4"
+  - simulate: downButton-up
+  - simulate: upButton-down
+  - wait-serial: "#LOG# MenuScreen::up=3"
+  - wait-serial: "#LOG# MenuScreen::up=2"
+  - wait-serial: "#LOG# MenuScreen::up=1"
+  - wait-serial: "#LOG# MenuScreen::up=0"
+  - simulate: upButton-up

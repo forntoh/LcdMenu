@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InputInterface.h"
+#include "RepeatState.h"
 #include <Button.h>
 
 /**
@@ -18,21 +19,39 @@
  * @param menu Pointer to the LcdMenu object that this adapter will interact with.
  * @param button The Button object that will be used for input.
  * @param command The command byte that will be sent to the menu when the button is pressed.
+ * @param repeatDelay Delay before the first repeat command is sent (default is 0).
+ * @param repeatInterval Interval between repeated commands (default is 0).
  */
 class ButtonAdapter : public InputInterface {
   private:
     Button* button;
     byte command;
+    RepeatState repeat;
+    bool holding = false;
 
   public:
     ButtonAdapter(
         LcdMenu* menu,
         Button* button,
-        byte command)
-        : InputInterface(menu), button(button), command(command) {}
+        byte command,
+        unsigned long repeatDelay = 0,
+        unsigned long repeatInterval = 0)
+        : InputInterface(menu),
+          button(button),
+          command(command),
+          repeat(repeatDelay, repeatInterval) {}
 
     void observe() override {
         if (button->pressed()) {
+            menu->process(command);
+            holding = true;
+            if (repeat.enabled()) {
+                repeat.start(millis());
+            }
+        } else if (button->released()) {
+            holding = false;
+            repeat.reset();
+        } else if (repeat.enabled() && holding && repeat.shouldRepeat(millis())) {
             menu->process(command);
         }
     }
