@@ -77,6 +77,14 @@ class CharacterDisplayRenderer : public MenuRenderer {
         uint8_t* downArrow = new uint8_t[8]{0x04, 0x04, 0x04, 0x04, 0x04, 0x1F, 0x0E, 0x04});
 
     /**
+     * @brief Destructor.
+     *
+     * Frees the memory used by the arrow icons. The renderer assumes ownership
+     * of the upArrow and downArrow arrays, so they must not be freed elsewhere.
+     */
+    virtual ~CharacterDisplayRenderer();
+
+    /**
      * @brief Initializes the renderer and creates custom characters on the display.
      */
     void begin() override;
