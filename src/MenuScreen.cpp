@@ -114,16 +114,15 @@ void MenuScreen::up(MenuRenderer* renderer) {
         draw(renderer);
         return;
     }
-    uint8_t original = cursor;
-    while (cursor > 0) {
-        --cursor;
-        if (items[cursor]->isSelectable()) break;
+    uint8_t target = cursor;
+    while (target > 0) {
+        --target;
+        if (items[target]->isSelectable()) break;
     }
-    if (!items[cursor]->isSelectable()) {
-        cursor = original;
+    if (!items[target]->isSelectable()) {
+        target = cursor;
     }
-    if (cursor < view) view = cursor;
-    draw(renderer);
+    setCursor(renderer, target);
     LOG(F("MenuScreen::up"), cursor);
 }
 
