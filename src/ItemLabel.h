@@ -6,7 +6,7 @@
  * @class ItemLabel
  * @brief An unselectable menu item used for titles or separators.
  */
-class ItemLabel : public MenuItem {
+class ItemLabel final : public MenuItem {
   public:
     explicit ItemLabel(const char* text) : MenuItem(text) {}
 
@@ -17,6 +17,6 @@ class ItemLabel : public MenuItem {
  * @brief Create a new unselectable label item.
  *
  * @param text The text to display for the item.
- * @return MenuItem* The created item. Caller takes ownership of the returned pointer.
+ * @return ItemLabel* The created item. Caller takes ownership of the returned pointer.
  */
-inline MenuItem* ITEM_LABEL(const char* text) { return new ItemLabel(text); }
+inline ItemLabel* ITEM_LABEL(const char* text) { return new ItemLabel(text); }
