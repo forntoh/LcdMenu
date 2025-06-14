@@ -62,6 +62,7 @@ class BaseItemManyWidgets : public MenuItem {
      */
     void removeWidget(uint8_t index) {
         if (widgets.size() > 1 && index < widgets.size()) {
+            delete widgets[index];
             widgets.erase(widgets.begin() + index);
             if (activeWidget >= widgets.size()) {
                 activeWidget = widgets.size() - 1;
