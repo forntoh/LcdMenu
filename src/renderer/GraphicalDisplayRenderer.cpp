@@ -68,7 +68,6 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     if (hasFocus) moveCursor((displayWidth - scrollbarWidth) / charWidth, cursorRow);
 
     if (cursorRow == 0) drawScrollBar();
-    gDisplay->sendBuffer();
 }
 
 void GraphicalDisplayRenderer::clearBlinker() {}
@@ -95,5 +94,4 @@ void GraphicalDisplayRenderer::drawScrollBar() {
     if (totalItems > maxRows) posRatio = (float)viewStart / (totalItems - maxRows);
     uint8_t y = posRatio * (displayHeight - h);
     gDisplay->drawBox(x, y, scrollbarWidth, h);
-    gDisplay->sendBuffer();
 }
