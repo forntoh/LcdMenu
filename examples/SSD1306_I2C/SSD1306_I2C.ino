@@ -14,7 +14,7 @@ MENU_SCREEN(mainScreen, mainItems,
     ITEM_BASIC("Blink random"));
 // clang-format on
 
-U8G2_ST7920_128X64_F_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* reset=*/8);
+U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 U8g2DisplayAdapter lcdAdapter(&u8g2);
 GraphicalDisplayRenderer renderer(&lcdAdapter, 128, 64, 6, 8);
 LcdMenu menu(renderer);
