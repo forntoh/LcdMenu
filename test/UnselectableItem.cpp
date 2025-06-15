@@ -1,6 +1,8 @@
+#define private public
 #define protected public
 #include <MenuScreen.h>
 #undef protected
+#undef private
 #include <ArduinoUnitTests.h>
 #include <ItemLabel.h>
 #include <MenuItem.h>
@@ -64,6 +66,23 @@ unittest(cursor_down_skips_multiple_labels) {
     delete l1;
     delete l2;
     delete b;
+}
+
+unittest(up_shifts_view_when_label_offscreen) {
+    MenuItem* label = ITEM_LABEL("Title");
+    MenuItem* first = ITEM_BASIC("First");
+    MenuItem* second = ITEM_BASIC("Second");
+    std::vector<MenuItem*> items = {label, first, second};
+    MenuScreen screen(items);
+    DummyRenderer renderer;
+    screen.setCursor(&renderer, 2);  // view=1, cursor=2
+    screen.setCursor(&renderer, 1);  // keep view=1
+    screen.up(&renderer);
+    assertEqual((uint8_t)1, screen.getCursor());
+    assertEqual((uint8_t)0, screen.view);
+    delete label;
+    delete first;
+    delete second;
 }
 
 unittest_main()
