@@ -1,4 +1,5 @@
 #include "MenuScreen.h"
+#include "display/GraphicalDisplayInterface.h"
 
 void MenuScreen::setParent(MenuScreen* parent) {
     this->parent = parent;
@@ -37,6 +38,11 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
 }
 
 void MenuScreen::draw(MenuRenderer* renderer) {
+    GraphicalDisplayInterface* gDisplay =
+        renderer->display->isGraphical()
+            ? static_cast<GraphicalDisplayInterface*>(renderer->display)
+            : nullptr;
+    if (gDisplay) gDisplay->clearBuffer();
     for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
@@ -45,6 +51,7 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         syncIndicators(i, renderer);
         item->draw(renderer);
     }
+    if (gDisplay) gDisplay->sendBuffer();
 }
 
 void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
@@ -52,6 +59,8 @@ void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
     renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < items.size();
     renderer->hasFocus = cursor == view + index;
     renderer->cursorRow = index;
+    renderer->viewStart = view;
+    renderer->totalItems = items.size();
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {

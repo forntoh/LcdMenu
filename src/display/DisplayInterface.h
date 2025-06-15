@@ -22,6 +22,7 @@ class DisplayInterface {
     virtual void draw(const char* text) = 0;
     virtual void setCursor(uint8_t col, uint8_t row) = 0;
     virtual void setBacklight(bool enabled) = 0;
+    virtual bool isGraphical() const { return false; }
     virtual ~DisplayInterface() {}
 };
 
