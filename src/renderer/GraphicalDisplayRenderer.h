@@ -10,8 +10,8 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     const uint8_t charHeight;
     const uint8_t displayWidth;
     const uint8_t displayHeight;
-    const uint8_t cursorIcon;
-    const uint8_t editCursorIcon;
+    const char* cursorIcon;
+    const char* editCursorIcon;
     const uint8_t scrollbarWidth;
 
     void drawScrollBar();
@@ -23,8 +23,8 @@ class GraphicalDisplayRenderer : public MenuRenderer {
                              uint8_t displayHeight,
                              uint8_t charWidth,
                              uint8_t charHeight,
-                             uint8_t cursorIcon = '>',
-                             uint8_t editCursorIcon = '<',
+                             const char* cursorIcon = ">",
+                             const char* editCursorIcon = "<",
                              uint8_t scrollbarWidth = 4);
 
     void begin() override;

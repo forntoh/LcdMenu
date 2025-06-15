@@ -6,8 +6,8 @@ GraphicalDisplayRenderer::GraphicalDisplayRenderer(
     uint8_t dispHeight,
     uint8_t chWidth,
     uint8_t chHeight,
-    uint8_t cursorIcon,
-    uint8_t editCursorIcon,
+    const char* cursorIcon,
+    const char* editCursorIcon,
     uint8_t scrollbarWidth)
     : MenuRenderer(display, (dispWidth - scrollbarWidth) / chWidth, dispHeight / chHeight),
       gDisplay(display),
@@ -33,8 +33,8 @@ void GraphicalDisplayRenderer::draw(uint8_t byte) {
 void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, bool) {
     uint8_t x = 0;
     uint8_t y = (cursorRow + 1) * charHeight;
-    if (cursorIcon != 0 || editCursorIcon != 0) {
-        char ic[2] = {static_cast<char>(hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' '), '\0'};
+    if (cursorIcon != nullptr || editCursorIcon != nullptr) {
+        const char* ic = hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : " ";
         gDisplay->setCursor(x, y);
         gDisplay->draw(ic);
         x += gDisplay->getTextWidth(ic);
@@ -81,7 +81,11 @@ void GraphicalDisplayRenderer::moveCursor(uint8_t col, uint8_t row) {
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
-    return (displayWidth - scrollbarWidth) / charWidth - (cursorIcon != 0 || editCursorIcon != 0 ? 1 : 0);
+    return (displayWidth - scrollbarWidth) / charWidth -
+           ((cursorIcon != nullptr && cursorIcon[0] != '\0') ||
+                    (editCursorIcon != nullptr && editCursorIcon[0] != '\0')
+                ? 1
+                : 0);
 }
 
 void GraphicalDisplayRenderer::drawScrollBar() {
