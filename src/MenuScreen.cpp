@@ -52,6 +52,8 @@ void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
     renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < items.size();
     renderer->hasFocus = cursor == view + index;
     renderer->cursorRow = index;
+    renderer->viewStart = view;
+    renderer->totalItems = items.size();
 }
 
 bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {

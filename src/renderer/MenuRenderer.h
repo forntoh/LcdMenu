@@ -39,6 +39,9 @@ class MenuRenderer {
 
     bool inEditMode;
 
+    uint8_t viewStart = 0;
+    uint8_t totalItems = 0;
+
     unsigned long startTime = 0;
 
   public:
