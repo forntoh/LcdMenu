@@ -34,10 +34,10 @@ class U8g2DisplayAdapter : public GraphicalDisplayInterface {
 
     void draw(uint8_t byte) override {
         char c[2] = {static_cast<char>(byte), '\0'};
-        u8g2->drawStr(cursorX, cursorY, c);
+        u8g2->drawUTF8(cursorX, cursorY, c);
     }
 
-    void draw(const char* text) override { u8g2->drawStr(cursorX, cursorY, text); }
+    void draw(const char* text) override { u8g2->drawUTF8(cursorX, cursorY, text); }
 
     void setCursor(uint8_t col, uint8_t row) override {
         cursorX = col;
@@ -51,7 +51,7 @@ class U8g2DisplayAdapter : public GraphicalDisplayInterface {
     uint8_t getDisplayHeight() const override { return u8g2->getDisplayHeight(); }
     uint8_t getFontWidth() const override { return u8g2->getMaxCharWidth(); }
     uint8_t getFontHeight() const override { return u8g2->getMaxCharHeight(); }
-    uint8_t getTextWidth(const char* text) override { return u8g2->getStrWidth(text); }
+    uint8_t getTextWidth(const char* text) override { return u8g2->getUTF8Width(text); }
     void drawBox(uint8_t x, uint8_t y, uint8_t w, uint8_t h) override {
         u8g2->drawBox(x, y, w, h);
     }
