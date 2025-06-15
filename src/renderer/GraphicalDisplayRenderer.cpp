@@ -22,6 +22,7 @@ GraphicalDisplayRenderer::GraphicalDisplayRenderer(
 void GraphicalDisplayRenderer::begin() {
     MenuRenderer::begin();
     drawScrollBar();
+    gDisplay->sendBuffer();
 }
 
 void GraphicalDisplayRenderer::draw(uint8_t byte) {
@@ -67,11 +68,12 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     if (hasFocus) moveCursor((displayWidth - scrollbarWidth) / charWidth, cursorRow);
 
     if (cursorRow == 0) drawScrollBar();
+    gDisplay->sendBuffer();
 }
 
 void GraphicalDisplayRenderer::clearBlinker() {}
 
-void GraphicalDisplayRenderer::drawBlinker() {}
+void GraphicalDisplayRenderer::drawBlinker() { gDisplay->sendBuffer(); }
 
 void GraphicalDisplayRenderer::moveCursor(uint8_t col, uint8_t row) {
     MenuRenderer::moveCursor(col, row);
@@ -93,4 +95,5 @@ void GraphicalDisplayRenderer::drawScrollBar() {
     if (totalItems > maxRows) posRatio = (float)viewStart / (totalItems - maxRows);
     uint8_t y = posRatio * (displayHeight - h);
     gDisplay->drawBox(x, y, scrollbarWidth, h);
+    gDisplay->sendBuffer();
 }
