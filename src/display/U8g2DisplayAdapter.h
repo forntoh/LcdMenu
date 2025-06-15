@@ -51,6 +51,7 @@ class U8g2DisplayAdapter : public GraphicalDisplayInterface {
     uint8_t getDisplayHeight() const override { return u8g2->getDisplayHeight(); }
     uint8_t getFontWidth() const override { return u8g2->getMaxCharWidth(); }
     uint8_t getFontHeight() const override { return u8g2->getMaxCharHeight(); }
+    uint8_t getTextWidth(const char* text) override { return u8g2->getStrWidth(text); }
     void drawBox(uint8_t x, uint8_t y, uint8_t w, uint8_t h) override {
         u8g2->drawBox(x, y, w, h);
     }

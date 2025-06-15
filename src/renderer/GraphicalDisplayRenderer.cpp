@@ -37,7 +37,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
         char ic[2] = {static_cast<char>(hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' '), '\0'};
         gDisplay->setCursor(x, y);
         gDisplay->draw(ic);
-        x += charWidth;
+        x += gDisplay->getTextWidth(ic);
     }
 
     const char* textPtr = text;
@@ -47,12 +47,12 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     }
     gDisplay->setCursor(x, y);
     gDisplay->draw(textPtr);
-    x += strlen(textPtr) * charWidth;
+    x += gDisplay->getTextWidth(textPtr);
 
     if (value) {
         gDisplay->setCursor(x, y);
         gDisplay->draw(":");
-        x += charWidth;
+        x += gDisplay->getTextWidth(":");
         const char* valPtr = value;
         if (hasFocus) {
             uint8_t textLen = strlen(text);
@@ -63,6 +63,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
         }
         gDisplay->setCursor(x, y);
         gDisplay->draw(valPtr);
+        x += gDisplay->getTextWidth(valPtr);
     }
 
     if (hasFocus) moveCursor((displayWidth - scrollbarWidth) / charWidth, cursorRow);
