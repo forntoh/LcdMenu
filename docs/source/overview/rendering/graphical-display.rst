@@ -3,7 +3,8 @@ Graphical display renderer
 
 The graphical display renderer works with dot-matrix displays using the
 :cpp:class:`GraphicalDisplayInterface`. It is ideal for OLED or graphical
-LCD modules driven by the `U8g2` library.
+LCD modules driven by the `U8g2` library, including classic ST7920 128x64
+SPI LCDs.
 
 Features
 --------

@@ -24,6 +24,10 @@ class U8g2DisplayAdapter : public GraphicalDisplayInterface {
         u8g2->sendBuffer();
     }
 
+    void clearBuffer() override { u8g2->clearBuffer(); }
+
+    void sendBuffer() override { u8g2->sendBuffer(); }
+
     void show() override { u8g2->setPowerSave(0); }
 
     void hide() override { u8g2->setPowerSave(1); }
