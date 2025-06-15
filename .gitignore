@@ -14,3 +14,5 @@ _site/
 _build/
 docs/doxygen/
 docs/source/reference/api
+vendor/
+.bundle/
