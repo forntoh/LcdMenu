@@ -1,7 +1,7 @@
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <U8g2lib.h>
-#include <display/ST7920_SPIAdapter.h>
+#include <display/U8g2DisplayAdapter.h>
 #include <input/KeyboardAdapter.h>
 #include <renderer/GraphicalDisplayRenderer.h>
 
@@ -15,7 +15,7 @@ MENU_SCREEN(mainScreen, mainItems,
 // clang-format on
 
 U8G2_ST7920_128X64_F_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* reset=*/8);
-ST7920_SPIAdapter lcdAdapter(&u8g2);
+U8g2DisplayAdapter lcdAdapter(&u8g2);
 GraphicalDisplayRenderer renderer(&lcdAdapter, 128, 64, 6, 8);
 LcdMenu menu(renderer);
 KeyboardAdapter keyboard(&menu, &Serial);

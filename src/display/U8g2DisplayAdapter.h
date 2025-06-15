@@ -4,14 +4,14 @@
 
 #include "GraphicalDisplayInterface.h"
 
-class ST7920_SPIAdapter : public GraphicalDisplayInterface {
+class U8g2DisplayAdapter : public GraphicalDisplayInterface {
   private:
     U8G2* u8g2;
     uint8_t cursorX = 0;
     uint8_t cursorY = 0;
 
   public:
-    explicit ST7920_SPIAdapter(U8G2* u8g2) : u8g2(u8g2) {}
+    explicit U8g2DisplayAdapter(U8G2* u8g2) : u8g2(u8g2) {}
 
     void begin() override {
         u8g2->begin();
