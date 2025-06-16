@@ -105,6 +105,11 @@ class ItemInput : public MenuItem {
         }
         return false;
     }
+
+    uint8_t measureValueWidth(GraphicalDisplayInterface* display) override {
+        if (!display) return 0;
+        return display->getTextWidth(value);
+    }
     /**
      * Get the callback function for this item.
      *
