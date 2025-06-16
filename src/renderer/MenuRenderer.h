@@ -72,7 +72,7 @@ class MenuRenderer {
      * @brief Function to draw a byte on the display.
      * @param byte The byte to be drawn.
      */
-    virtual void draw(uint8_t byte) = 0;
+    virtual uint8_t draw(uint8_t byte) = 0;
 
     /**
      * @brief Draws an item on the display.

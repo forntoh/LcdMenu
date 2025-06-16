@@ -9,7 +9,7 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     const uint8_t* font;
     static constexpr uint8_t scrollbarWidth = 1;
     static constexpr uint8_t gutter = 2;
-    uint8_t labelWidth = 0;
+    uint8_t valueWidth = 0;
 
     void drawScrollBar();
     uint8_t getEffectiveCols() const override;
@@ -29,14 +29,14 @@ class GraphicalDisplayRenderer : public MenuRenderer {
                                       const uint8_t* font = nullptr);
 
     void begin() override;
-    void draw(uint8_t byte) override;
+    uint8_t draw(uint8_t byte) override;
     void drawItem(const char* text, const char* value, bool padWithBlanks = true) override;
     void clearBlinker() override;
     void drawBlinker() override;
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override;
     void drawSubMenuIndicator() override;
 
-    void setLabelWidth(uint8_t width) { labelWidth = width; }
+    void setValueWidth(uint8_t width) { valueWidth = width; }
     uint8_t getCharWidth() const { return gDisplay->getFontWidth(); }
     uint8_t getDisplayWidth() const { return gDisplay->getDisplayWidth(); }
     uint8_t getDisplayHeight() const { return gDisplay->getDisplayHeight(); }

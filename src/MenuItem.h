@@ -29,6 +29,7 @@
 
 #define ITEM_DRAW_BUFFER_SIZE 25
 
+#include "display/GraphicalDisplayInterface.h"
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <utils/utils.h>
@@ -73,6 +74,15 @@ class MenuItem {
 
     // Destructor
     virtual ~MenuItem() noexcept = default;
+
+    /**
+     * @brief Measure the width of this item's value using the given display.
+     * @param display Optional graphical display for width calculation.
+     * @return Width in pixels of the value, or 0 if the item has none.
+     */
+    virtual uint8_t measureValueWidth(GraphicalDisplayInterface* display) {
+        return 0;
+    }
 
   protected:
     /**

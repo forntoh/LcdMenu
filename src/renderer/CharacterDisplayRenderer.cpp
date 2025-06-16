@@ -92,8 +92,8 @@ void CharacterDisplayRenderer::drawText(const char* text, uint8_t& col, uint8_t 
     }
 }
 
-void CharacterDisplayRenderer::draw(uint8_t byte) {
-    display->draw(byte);
+uint8_t CharacterDisplayRenderer::draw(uint8_t byte) {
+    return display->draw(byte);
 }
 
 void CharacterDisplayRenderer::drawBlinker() {

@@ -32,12 +32,16 @@ class U8g2DisplayAdapter : public GraphicalDisplayInterface {
 
     void hide() override { u8g2->setPowerSave(1); }
 
-    void draw(uint8_t byte) override {
+    uint8_t draw(uint8_t byte) override {
         char c[2] = {static_cast<char>(byte), '\0'};
         u8g2->drawUTF8(cursorX, cursorY, c);
+        return u8g2->getUTF8Width(c);
     }
 
-    void draw(const char* text) override { u8g2->drawUTF8(cursorX, cursorY, text); }
+    uint8_t draw(const char* text) override {
+        u8g2->drawUTF8(cursorX, cursorY, text);
+        return u8g2->getUTF8Width(text);
+    }
 
     void setCursor(uint8_t col, uint8_t row) override {
         cursorX = col;

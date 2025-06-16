@@ -49,10 +49,12 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         uint8_t widest = 0;
         for (uint8_t i = 0; i < renderer->getMaxRows() && (view + i) < items.size(); i++) {
             MenuItem* it = items[view + i];
-            uint8_t w = gDisplay->getTextWidth(it->getText());
+            uint8_t w = it->measureValueWidth(gDisplay);
             if (w > widest) widest = w;
         }
-        gRenderer->setLabelWidth(widest);
+        uint8_t maxAllowed = gDisplay->getDisplayWidth() / 2;
+        if (widest > maxAllowed) widest = maxAllowed;
+        gRenderer->setValueWidth(widest);
     }
     if (gDisplay) gDisplay->clearBuffer();
     for (uint8_t i = 0; i < renderer->getMaxRows() && (view + i) < items.size(); i++) {

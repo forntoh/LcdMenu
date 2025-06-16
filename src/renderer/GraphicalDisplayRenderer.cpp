@@ -11,16 +11,16 @@ void GraphicalDisplayRenderer::begin() {
         gDisplay->setFont(font);
     }
     if (gDisplay->getFontHeight() == 0) {
-        extern const uint8_t u8g2_font_6x10_tf[];
-        gDisplay->setFont(u8g2_font_6x10_tf);
+        extern const uint8_t u8g2_font_6x12_m_symbols[];
+        gDisplay->setFont(u8g2_font_6x12_m_symbols);
     }
     drawScrollBar();
     gDisplay->sendBuffer();
 }
 
-void GraphicalDisplayRenderer::draw(uint8_t byte) {
+uint8_t GraphicalDisplayRenderer::draw(uint8_t byte) {
     char c[2] = {static_cast<char>(byte), '\0'};
-    gDisplay->draw(c);
+    return gDisplay->draw(c);
 }
 
 void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, bool) {
@@ -33,7 +33,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
 
     if (hasFocus) {
         gDisplay->setDrawColor(1);
-        gDisplay->drawBox(0, top, textAreaWidth, rowHeight);
+        gDisplay->drawBox(0, top + 1, textAreaWidth, rowHeight);
         gDisplay->setDrawColor(0);
     } else {
         gDisplay->setDrawColor(1);
@@ -48,15 +48,12 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     gDisplay->draw(textPtr);
 
     if (value) {
-        uint8_t valX = labelWidth + gutter;
-        gDisplay->setCursor(valX, y);
-        gDisplay->draw(":");
-        valX += gDisplay->getTextWidth(":");
+        uint8_t valX = displayWidth - scrollbarWidth - 1 - valueWidth;
         const char* valPtr = value;
         if (hasFocus) {
             uint8_t textLen = strlen(text);
             if (viewShift > textLen) {
-                uint8_t shift = viewShift - textLen - 1;
+                uint8_t shift = viewShift - textLen;
                 valPtr = shift < strlen(value) ? value + shift : "";
             }
         }

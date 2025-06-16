@@ -71,6 +71,16 @@ class BaseItemManyWidgets : public MenuItem {
         }
     }
 
+    uint8_t measureValueWidth(GraphicalDisplayInterface* display) override {
+        if (!display) return 0;
+        char buf[ITEM_DRAW_BUFFER_SIZE];
+        uint8_t index = 0;
+        for (auto* w : widgets)
+            index += w->draw(buf, index);
+        buf[index] = '\0';
+        return display->getTextWidth(buf);
+    }
+
     virtual ~BaseItemManyWidgets() {
         for (auto widget : widgets) {
             delete widget;

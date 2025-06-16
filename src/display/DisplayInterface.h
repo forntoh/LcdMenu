@@ -18,8 +18,8 @@ class DisplayInterface {
     virtual void clear() = 0;
     virtual void show() = 0;
     virtual void hide() = 0;
-    virtual void draw(uint8_t byte) = 0;
-    virtual void draw(const char* text) = 0;
+    virtual uint8_t draw(uint8_t byte) = 0;
+    virtual uint8_t draw(const char* text) = 0;
     virtual void setCursor(uint8_t col, uint8_t row) = 0;
     virtual void setBacklight(bool enabled) = 0;
     virtual bool isGraphical() const { return false; }
