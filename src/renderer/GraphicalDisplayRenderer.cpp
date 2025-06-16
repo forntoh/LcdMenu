@@ -1,14 +1,13 @@
 #include "GraphicalDisplayRenderer.h"
 
 GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display)
-    : MenuRenderer(display,
-                   (display->getDisplayWidth() - scrollbarWidth) /
-                       display->getFontWidth(),
-                   display->getDisplayHeight() / (display->getFontHeight() + 2)),
-      gDisplay(display) {}
+    : MenuRenderer(display, 0, 0), gDisplay(display) {}
 
 void GraphicalDisplayRenderer::begin() {
     MenuRenderer::begin();
+    setDimensions((gDisplay->getDisplayWidth() - scrollbarWidth) /
+                      gDisplay->getFontWidth(),
+                  gDisplay->getDisplayHeight() / (gDisplay->getFontHeight() + 2));
     drawScrollBar();
     gDisplay->sendBuffer();
 }

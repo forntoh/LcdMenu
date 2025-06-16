@@ -17,8 +17,8 @@ class MenuRenderer {
     friend class MenuScreen;
 
   protected:
-    const uint8_t maxCols;
-    const uint8_t maxRows;
+    uint8_t maxCols;
+    uint8_t maxRows;
 
     /**
      * @brief Flag indicating that there are hidden items above the current view.
@@ -126,6 +126,17 @@ class MenuRenderer {
         }
         LOG(F("MenuRenderer::timeout"));
         display->hide();
+    }
+
+    /**
+     * @brief Update the renderer dimensions.
+     *
+     * Called by specialized renderers when display metrics become
+     * available.
+     */
+    void setDimensions(uint8_t cols, uint8_t rows) {
+        maxCols = cols;
+        maxRows = rows;
     }
 
     /**
