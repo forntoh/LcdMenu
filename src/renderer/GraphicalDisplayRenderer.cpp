@@ -153,8 +153,7 @@ void GraphicalDisplayRenderer::drawScrollBar() {
     uint8_t rows = getMaxRows();
     if (totalItems <= rows) return;
     uint8_t displayWidth = gDisplay->getDisplayWidth();
-    uint8_t areaHeight = getMaxRows() * gDisplay->getFontHeight() +
-                         gDisplay->getFontHeight();
+    uint8_t areaHeight = getMaxRows() * gDisplay->getFontHeight();
     if (areaHeight > gDisplay->getDisplayHeight())
         areaHeight = gDisplay->getDisplayHeight();
     uint8_t x = displayWidth - scrollbarWidth;
@@ -163,6 +162,6 @@ void GraphicalDisplayRenderer::drawScrollBar() {
     if (h < 2) h = 2;
     float posRatio = 0.0f;
     if (totalItems > rows) posRatio = static_cast<float>(viewStart) / (totalItems - rows);
-    uint8_t y = posRatio * (areaHeight - h);
+    uint8_t y = posRatio * (areaHeight - h) + 1;
     gDisplay->drawBox(x, y, scrollbarWidth, h);
 }
