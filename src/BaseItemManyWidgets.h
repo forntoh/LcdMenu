@@ -129,12 +129,12 @@ class BaseItemManyWidgets : public MenuItem {
             if (i == activeWidget && renderer->isInEditMode()) {
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
                 renderer->viewShift = index > v_size ? index - v_size : 0;
-                renderer->drawItem(text, buf);
+                renderer->drawItem(text, buf, i == widgets.size() - 1);
                 cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
         renderer->drawItem(text, buf);
-        if (!renderer->isInEditMode() && hasListWidget) renderer->drawListIndicator();
+        if (hasListWidget) renderer->drawListIndicator();
 
         if (renderer->isInEditMode()) {
             renderer->moveCursor(cursorCol, renderer->getCursorRow());

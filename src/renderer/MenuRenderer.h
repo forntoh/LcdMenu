@@ -78,9 +78,9 @@ class MenuRenderer {
      * @brief Draws an item on the display.
      * @param text Text of the item to be drawn.
      * @param value Value of the item to be drawn.
-     * @param padWithBlanks Flag indicating whether to pad the text with spaces.
+     * @param lastValue Flag indicating that the value drawn is the last one.
      */
-    virtual void drawItem(const char* text, const char* value, bool padWithBlanks = true) = 0;
+    virtual void drawItem(const char* text, const char* value, bool lastValue = true) = 0;
 
     /**
      * @brief Function to clear the blinker from the display.
