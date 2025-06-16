@@ -56,7 +56,6 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         if (widest > maxAllowed) widest = maxAllowed;
         gRenderer->setValueWidth(widest);
     }
-    if (gDisplay) gDisplay->clearBuffer();
     for (uint8_t i = 0; i < renderer->getMaxRows() && (view + i) < items.size(); i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
@@ -65,7 +64,6 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         syncIndicators(i, renderer);
         item->draw(renderer);
     }
-    if (gDisplay) gDisplay->sendBuffer();
 }
 
 void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
