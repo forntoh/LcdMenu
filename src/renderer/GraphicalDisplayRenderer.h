@@ -6,6 +6,7 @@
 class GraphicalDisplayRenderer : public MenuRenderer {
   private:
     GraphicalDisplayInterface* gDisplay;
+    const uint8_t* font;
     static constexpr uint8_t scrollbarWidth = 1;
     static constexpr uint8_t gutter = 2;
     uint8_t labelWidth = 0;
@@ -13,12 +14,19 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     void drawScrollBar();
     uint8_t getEffectiveCols() const override;
     uint8_t getMaxRows() const override {
-        return gDisplay->getDisplayHeight() / gDisplay->getFontHeight();
+        uint8_t fh = gDisplay->getFontHeight();
+        if (fh == 0) return 0;
+        return gDisplay->getDisplayHeight() / fh;
     }
-    uint8_t getMaxCols() const override { return (gDisplay->getDisplayWidth() - scrollbarWidth) / gDisplay->getFontWidth(); }
+    uint8_t getMaxCols() const override {
+        uint8_t fw = gDisplay->getFontWidth();
+        if (fw == 0) return 0;
+        return (gDisplay->getDisplayWidth() - scrollbarWidth) / fw;
+    }
 
   public:
-    explicit GraphicalDisplayRenderer(GraphicalDisplayInterface* display);
+    explicit GraphicalDisplayRenderer(GraphicalDisplayInterface* display,
+                                      const uint8_t* font = nullptr);
 
     void begin() override;
     void draw(uint8_t byte) override;

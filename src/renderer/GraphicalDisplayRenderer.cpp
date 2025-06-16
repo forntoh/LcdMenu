@@ -1,10 +1,19 @@
 #include "GraphicalDisplayRenderer.h"
+#include <U8g2lib.h>
 
-GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display)
-    : MenuRenderer(display, 0, 0), gDisplay(display) {}
+GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display,
+                                                   const uint8_t* font)
+    : MenuRenderer(display, 0, 0), gDisplay(display), font(font) {}
 
 void GraphicalDisplayRenderer::begin() {
     MenuRenderer::begin();
+    if (font) {
+        gDisplay->setFont(font);
+    }
+    if (gDisplay->getFontHeight() == 0) {
+        extern const uint8_t u8g2_font_6x10_tf[];
+        gDisplay->setFont(u8g2_font_6x10_tf);
+    }
     drawScrollBar();
     gDisplay->sendBuffer();
 }
@@ -18,7 +27,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     uint8_t fontHeight = gDisplay->getFontHeight();
     uint8_t rowHeight = fontHeight;
     uint8_t top = cursorRow * rowHeight;
-    uint8_t y = top + fontHeight;
+    uint8_t y = top + fontHeight - 1;
     uint8_t displayWidth = gDisplay->getDisplayWidth();
     uint8_t textAreaWidth = displayWidth - scrollbarWidth - 1;
 
@@ -71,13 +80,13 @@ void GraphicalDisplayRenderer::moveCursor(uint8_t col, uint8_t row) {
     uint8_t fontHeight = gDisplay->getFontHeight();
     uint8_t rowHeight = fontHeight;
     gDisplay->setCursor(col * gDisplay->getFontWidth(),
-                        row * rowHeight + fontHeight);
+                        row * rowHeight + fontHeight - 1);
 }
 
 void GraphicalDisplayRenderer::drawSubMenuIndicator() {
     uint8_t fontHeight = gDisplay->getFontHeight();
     uint8_t rowHeight = fontHeight;
-    uint8_t y = cursorRow * rowHeight + fontHeight;
+    uint8_t y = cursorRow * rowHeight + fontHeight - 1;
     uint8_t arrowWidth = gDisplay->getTextWidth("\u25B8");
     uint8_t displayWidth = gDisplay->getDisplayWidth();
     uint8_t x = displayWidth - scrollbarWidth - arrowWidth - 1;
