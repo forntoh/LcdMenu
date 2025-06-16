@@ -2,22 +2,14 @@
 
 GraphicalDisplayRenderer::GraphicalDisplayRenderer(
     GraphicalDisplayInterface* display,
-    uint8_t dispWidth,
-    uint8_t dispHeight,
-    uint8_t chWidth,
-    uint8_t chHeight,
-    const char* cursorIcon,
-    const char* editCursorIcon,
-    uint8_t scrollbarWidth)
-    : MenuRenderer(display, (dispWidth - scrollbarWidth) / chWidth, dispHeight / chHeight),
+    uint8_t chWidth)
+    : MenuRenderer(display,
+                   (display->getDisplayWidth() - scrollbarWidth) / chWidth,
+                   display->getDisplayHeight() / (display->getFontHeight() + 2)),
       gDisplay(display),
       charWidth(chWidth),
-      charHeight(chHeight),
-      displayWidth(dispWidth),
-      displayHeight(dispHeight),
-      cursorIcon(cursorIcon),
-      editCursorIcon(editCursorIcon),
-      scrollbarWidth(scrollbarWidth) {}
+      displayWidth(display->getDisplayWidth()),
+      displayHeight(display->getDisplayHeight()) {}
 
 void GraphicalDisplayRenderer::begin() {
     MenuRenderer::begin();
@@ -31,13 +23,15 @@ void GraphicalDisplayRenderer::draw(uint8_t byte) {
 }
 
 void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, bool) {
-    uint8_t y = (cursorRow + 1) * charHeight;
-    uint8_t top = y - charHeight;
+    uint8_t fontHeight = gDisplay->getFontHeight();
+    uint8_t rowHeight = fontHeight + 2;
+    uint8_t top = cursorRow * rowHeight;
+    uint8_t y = top + fontHeight;
     uint8_t textAreaWidth = displayWidth - scrollbarWidth - 1;
 
     if (hasFocus) {
         gDisplay->setDrawColor(1);
-        gDisplay->drawBox(0, top, textAreaWidth, charHeight);
+        gDisplay->drawBox(0, top, textAreaWidth, rowHeight);
         gDisplay->setDrawColor(0);
     } else {
         gDisplay->setDrawColor(1);
@@ -81,35 +75,34 @@ void GraphicalDisplayRenderer::drawBlinker() { gDisplay->sendBuffer(); }
 
 void GraphicalDisplayRenderer::moveCursor(uint8_t col, uint8_t row) {
     MenuRenderer::moveCursor(col, row);
-    gDisplay->setCursor(col * charWidth, (row + 1) * charHeight);
+    uint8_t fontHeight = gDisplay->getFontHeight();
+    uint8_t rowHeight = fontHeight + 2;
+    gDisplay->setCursor(col * charWidth, row * rowHeight + fontHeight);
 }
 
 void GraphicalDisplayRenderer::drawSubMenuIndicator() {
-    uint8_t y = (cursorRow + 1) * charHeight;
-    uint8_t arrowWidth = gDisplay->getTextWidth(">");
+    uint8_t fontHeight = gDisplay->getFontHeight();
+    uint8_t rowHeight = fontHeight + 2;
+    uint8_t y = cursorRow * rowHeight + fontHeight;
+    uint8_t arrowWidth = gDisplay->getTextWidth("\u25B8");
     uint8_t x = displayWidth - scrollbarWidth - arrowWidth - 1;
     gDisplay->setCursor(x, y);
     if (hasFocus) {
         gDisplay->setDrawColor(0);
-        gDisplay->draw(">");
+        gDisplay->draw("\u25B8");
         gDisplay->setDrawColor(1);
     } else {
-        gDisplay->draw(">");
+        gDisplay->draw("\u25B8");
     }
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
-    return (displayWidth - scrollbarWidth) / charWidth -
-           ((cursorIcon != nullptr && cursorIcon[0] != '\0') ||
-                    (editCursorIcon != nullptr && editCursorIcon[0] != '\0')
-                ? 1
-                : 0);
+    return (displayWidth - scrollbarWidth) / charWidth;
 }
 
 void GraphicalDisplayRenderer::drawScrollBar() {
     if (totalItems <= maxRows) return;
     uint8_t x = displayWidth - scrollbarWidth;
-    gDisplay->drawFrame(x, 0, scrollbarWidth, displayHeight);
     float ratio = (float)maxRows / totalItems;
     uint8_t h = ratio * displayHeight;
     if (h < 2) h = 2;

@@ -7,12 +7,9 @@ class GraphicalDisplayRenderer : public MenuRenderer {
   private:
     GraphicalDisplayInterface* gDisplay;
     const uint8_t charWidth;
-    const uint8_t charHeight;
     const uint8_t displayWidth;
     const uint8_t displayHeight;
-    const char* cursorIcon;
-    const char* editCursorIcon;
-    const uint8_t scrollbarWidth;
+    static constexpr uint8_t scrollbarWidth = 1;
     uint8_t labelWidth = 0;
     const uint8_t gutter = 2;
 
@@ -21,13 +18,7 @@ class GraphicalDisplayRenderer : public MenuRenderer {
 
   public:
     GraphicalDisplayRenderer(GraphicalDisplayInterface* display,
-                             uint8_t displayWidth,
-                             uint8_t displayHeight,
-                             uint8_t charWidth,
-                             uint8_t charHeight,
-                             const char* cursorIcon = ">",
-                             const char* editCursorIcon = "<",
-                             uint8_t scrollbarWidth = 1);
+                             uint8_t charWidth);
 
     void begin() override;
     void draw(uint8_t byte) override;

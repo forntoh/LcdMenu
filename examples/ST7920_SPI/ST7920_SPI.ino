@@ -16,7 +16,7 @@ MENU_SCREEN(mainScreen, mainItems,
 
 U8G2_ST7920_128X64_F_HW_SPI u8g2(U8G2_R0, 10, U8X8_PIN_NONE);
 U8g2DisplayAdapter lcdAdapter(&u8g2);
-GraphicalDisplayRenderer renderer(&lcdAdapter, 128, 64, 6, 8);
+GraphicalDisplayRenderer renderer(&lcdAdapter, 6);
 LcdMenu menu(renderer);
 KeyboardAdapter keyboard(&menu, &Serial);
 
