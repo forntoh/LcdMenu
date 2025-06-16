@@ -12,7 +12,9 @@ class GraphicalDisplayRenderer : public MenuRenderer {
 
     void drawScrollBar();
     uint8_t getEffectiveCols() const override;
-    uint8_t getMaxRows() const override { return (gDisplay->getDisplayHeight() / (gDisplay->getFontHeight() + 2)); }
+    uint8_t getMaxRows() const override {
+        return gDisplay->getDisplayHeight() / gDisplay->getFontHeight();
+    }
     uint8_t getMaxCols() const override { return (gDisplay->getDisplayWidth() - scrollbarWidth) / gDisplay->getFontWidth(); }
 
   public:

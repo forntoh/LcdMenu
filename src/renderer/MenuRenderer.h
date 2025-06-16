@@ -129,17 +129,6 @@ class MenuRenderer {
     }
 
     /**
-     * @brief Update the renderer dimensions.
-     *
-     * Called by specialized renderers when display metrics become
-     * available.
-     */
-    void setDimensions(uint8_t cols, uint8_t rows) {
-        maxCols = cols;
-        maxRows = rows;
-    }
-
-    /**
      * @brief Checks if the menu is in edit mode.
      * @return True if in edit mode, false otherwise.
      */

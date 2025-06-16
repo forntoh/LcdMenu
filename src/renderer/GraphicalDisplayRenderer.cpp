@@ -16,7 +16,7 @@ void GraphicalDisplayRenderer::draw(uint8_t byte) {
 
 void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, bool) {
     uint8_t fontHeight = gDisplay->getFontHeight();
-    uint8_t rowHeight = fontHeight + 2;
+    uint8_t rowHeight = fontHeight;
     uint8_t top = cursorRow * rowHeight;
     uint8_t y = top + fontHeight;
     uint8_t displayWidth = gDisplay->getDisplayWidth();
@@ -69,14 +69,14 @@ void GraphicalDisplayRenderer::drawBlinker() { gDisplay->sendBuffer(); }
 void GraphicalDisplayRenderer::moveCursor(uint8_t col, uint8_t row) {
     MenuRenderer::moveCursor(col, row);
     uint8_t fontHeight = gDisplay->getFontHeight();
-    uint8_t rowHeight = fontHeight + 2;
+    uint8_t rowHeight = fontHeight;
     gDisplay->setCursor(col * gDisplay->getFontWidth(),
                         row * rowHeight + fontHeight);
 }
 
 void GraphicalDisplayRenderer::drawSubMenuIndicator() {
     uint8_t fontHeight = gDisplay->getFontHeight();
-    uint8_t rowHeight = fontHeight + 2;
+    uint8_t rowHeight = fontHeight;
     uint8_t y = cursorRow * rowHeight + fontHeight;
     uint8_t arrowWidth = gDisplay->getTextWidth("\u25B8");
     uint8_t displayWidth = gDisplay->getDisplayWidth();
