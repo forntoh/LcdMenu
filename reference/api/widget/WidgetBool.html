@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../overview/menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../../overview/items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
@@ -327,6 +330,14 @@
 </dd>
 </dl>
 </dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10WidgetBool9startEditEv">
+<span id="_CPPv3N10WidgetBool9startEditEv"></span><span id="_CPPv2N10WidgetBool9startEditEv"></span><span id="WidgetBool::startEdit"></span><span class="target" id="classWidgetBool_1a606a277231b5d80109384ce52ae97782"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startEdit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N10WidgetBool9startEditEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10WidgetBool9startEditEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10WidgetBool10cancelEditEv">
+<span id="_CPPv3N10WidgetBool10cancelEditEv"></span><span id="_CPPv2N10WidgetBool10cancelEditEv"></span><span id="WidgetBool::cancelEdit"></span><span class="target" id="classWidgetBool_1a7d6d87695b0341a01d903d3fc559cb74"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cancelEdit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N10WidgetBool10cancelEditEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10WidgetBool10cancelEditEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
@@ -337,6 +348,10 @@
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N10WidgetBool7textOffE">
 <span id="_CPPv3N10WidgetBool7textOffE"></span><span id="_CPPv2N10WidgetBool7textOffE"></span><span id="WidgetBool::textOff__cCP"></span><span class="target" id="classWidgetBool_1a656a9eee25005e67a442ab20dd44e743"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">textOff</span></span></span><a class="headerlink" href="#_CPPv4N10WidgetBool7textOffE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10WidgetBool7textOffE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10WidgetBool13originalValueE">
+<span id="_CPPv3N10WidgetBool13originalValueE"></span><span id="_CPPv2N10WidgetBool13originalValueE"></span><span id="WidgetBool::originalValue__b"></span><span class="target" id="classWidgetBool_1ac65868c16950ba9855ad15173626fa7c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">originalValue</span></span></span><a class="headerlink" href="#_CPPv4N10WidgetBool13originalValueE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N10WidgetBool13originalValueE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 </dd></dl>
@@ -367,8 +382,11 @@
 <li><a :data-current="activeSection === '#_CPPv4N10WidgetBool10WidgetBoolE1VPKcPKcPKcK7uint8_tPFvRK1VE'" class="reference internal" href="#_CPPv4N10WidgetBool10WidgetBoolE1VPKcPKcPKcK7uint8_tPFvRK1VE"><code class="docutils literal notranslate"><span class="pre">WidgetBool()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10WidgetBool4drawEPcK7uint8_t'" class="reference internal" href="#_CPPv4N10WidgetBool4drawEPcK7uint8_t"><code class="docutils literal notranslate"><span class="pre">draw()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10WidgetBool7processEP7LcdMenuKh'" class="reference internal" href="#_CPPv4N10WidgetBool7processEP7LcdMenuKh"><code class="docutils literal notranslate"><span class="pre">process()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10WidgetBool9startEditEv'" class="reference internal" href="#_CPPv4N10WidgetBool9startEditEv"><code class="docutils literal notranslate"><span class="pre">startEdit()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10WidgetBool10cancelEditEv'" class="reference internal" href="#_CPPv4N10WidgetBool10cancelEditEv"><code class="docutils literal notranslate"><span class="pre">cancelEdit()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10WidgetBool6textOnE'" class="reference internal" href="#_CPPv4N10WidgetBool6textOnE"><code class="docutils literal notranslate"><span class="pre">textOn</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N10WidgetBool7textOffE'" class="reference internal" href="#_CPPv4N10WidgetBool7textOffE"><code class="docutils literal notranslate"><span class="pre">textOff</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N10WidgetBool13originalValueE'" class="reference internal" href="#_CPPv4N10WidgetBool13originalValueE"><code class="docutils literal notranslate"><span class="pre">originalValue</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../overview/menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../../overview/items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
@@ -274,6 +277,12 @@
 </ul>
 </dd>
 </dl>
+</dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N24CharacterDisplayRendererD0Ev">
+<span id="_CPPv3N24CharacterDisplayRendererD0Ev"></span><span id="_CPPv2N24CharacterDisplayRendererD0Ev"></span><span id="CharacterDisplayRenderer::~CharacterDisplayRenderer"></span><span class="target" id="classCharacterDisplayRenderer_1a3d0c4b9a8c8a33410e1a91c3cf312f6c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~CharacterDisplayRenderer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N24CharacterDisplayRendererD0Ev" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N24CharacterDisplayRendererD0Ev'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><p>Destructor. </p>
+<p>Frees the memory used by the arrow icons. The renderer assumes ownership of the upArrow and downArrow arrays, so they must not be freed elsewhere. </p>
 </dd></dl>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N24CharacterDisplayRenderer5beginEv">
@@ -405,6 +414,7 @@
 <ul>
 <li><a :data-current="activeSection === '#_CPPv424CharacterDisplayRenderer'" class="reference internal" href="#_CPPv424CharacterDisplayRenderer"><code class="docutils literal notranslate"><span class="pre">CharacterDisplayRenderer</span></code></a><ul>
 <li><a :data-current="activeSection === '#_CPPv4N24CharacterDisplayRenderer24CharacterDisplayRendererEP25CharacterDisplayInterfaceK7uint8_tK7uint8_tK7uint8_tK7uint8_tP7uint8_tP7uint8_t'" class="reference internal" href="#_CPPv4N24CharacterDisplayRenderer24CharacterDisplayRendererEP25CharacterDisplayInterfaceK7uint8_tK7uint8_tK7uint8_tK7uint8_tP7uint8_tP7uint8_t"><code class="docutils literal notranslate"><span class="pre">CharacterDisplayRenderer()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N24CharacterDisplayRendererD0Ev'" class="reference internal" href="#_CPPv4N24CharacterDisplayRendererD0Ev"><code class="docutils literal notranslate"><span class="pre">~CharacterDisplayRenderer()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N24CharacterDisplayRenderer5beginEv'" class="reference internal" href="#_CPPv4N24CharacterDisplayRenderer5beginEv"><code class="docutils literal notranslate"><span class="pre">begin()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N24CharacterDisplayRenderer8drawItemEPKcPKcb'" class="reference internal" href="#_CPPv4N24CharacterDisplayRenderer8drawItemEPKcPKcb"><code class="docutils literal notranslate"><span class="pre">drawItem()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N24CharacterDisplayRenderer4drawE7uint8_t'" class="reference internal" href="#_CPPv4N24CharacterDisplayRenderer4drawE7uint8_t"><code class="docutils literal notranslate"><span class="pre">draw()</span></code></a></li>

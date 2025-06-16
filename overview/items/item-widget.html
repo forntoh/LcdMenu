@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
@@ -256,6 +259,7 @@ It is used to create a menu item that can display one or more widgets on the scr
 </ul>
 <p>ItemWidget can host one or more widgets.
 The widgets can be of different types and can be used to display different types of data.</p>
+<p>When editing a widget, pressing <strong>BACK</strong> restores the original value of the item instead of saving the changes.</p>
 <p>You can add widget items dynamically to the ItemWidget using <a class="reference internal" href="../../reference/api/BaseItemManyWidgets.html#_CPPv4N19BaseItemManyWidgets9addWidgetEP10BaseWidget" title="BaseItemManyWidgets::addWidget"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">BaseItemManyWidgets::addWidget()</span></code></a>, <a class="reference internal" href="../../reference/api/BaseItemManyWidgets.html#_CPPv4N19BaseItemManyWidgets11addWidgetAtE7uint8_tP10BaseWidget" title="BaseItemManyWidgets::addWidgetAt"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">BaseItemManyWidgets::addWidgetAt()</span></code></a> functions or
 remove them using the <a class="reference internal" href="../../reference/api/BaseItemManyWidgets.html#_CPPv4N19BaseItemManyWidgets12removeWidgetE7uint8_t" title="BaseItemManyWidgets::removeWidget"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">BaseItemManyWidgets::removeWidget()</span></code></a> function at runtime to update the widgets based on user input or other conditions.</p>
 <p>When dynamically adding or removing widgets, ensure proper memory management. Each widget is allocated dynamically, and failing to release unused widgets can lead to memory leaks,

@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>display | LcdMenu</title>
-<meta content="display | LcdMenu" property="og:title"/>
-<meta content="display | LcdMenu" name="twitter:title"/>
+<title>RepeatState | LcdMenu</title>
+<meta content="RepeatState | LcdMenu" property="og:title"/>
+<meta content="RepeatState | LcdMenu" name="twitter:title"/>
 <link href="../../../_static/pygments.css?v=2c5fd357" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../../_static/favicon.png" rel="icon"/>
 <link href="../../../search.html" rel="search" title="Search"/>
 <link href="../../../genindex.html" rel="index" title="Index"/>
-<link href="LiquidCrystalAdapter.html" rel="next" title="LiquidCrystalAdapter"/>
-<link href="../input/ButtonAdapter.html" rel="prev" title="ButtonAdapter"/>
+<link href="SimpleRotaryAdapter.html" rel="next" title="SimpleRotaryAdapter"/>
+<link href="KeyboardAdapter.html" rel="prev" title="KeyboardAdapter"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -177,8 +177,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemWidget.html">ItemWidget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../input/index.html">input</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">display</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../display/index.html">display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widget/index.html">widget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../renderer/index.html">renderer</a></li>
 </ul>
@@ -194,7 +194,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/display/index.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/reference/api/input/RepeatState.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -236,41 +236,109 @@
 </svg>
 </a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../index.html">API reference</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">display</span>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">input</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">RepeatState</span>
 </nav>
 <div id="content" role="main">
-<section id="display">
-<h1>display<a class="headerlink" href="#display" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">display</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="LiquidCrystalAdapter.html">LiquidCrystalAdapter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LCD_I2CAdapter.html">LCD_I2CAdapter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DisplayInterface.html">DisplayInterface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LiquidCrystal_I2CAdapter.html">LiquidCrystal_I2CAdapter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SSD1803A_I2CAdapter.html">SSD1803A_I2CAdapter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CharacterDisplayInterface.html">CharacterDisplayInterface</a></li>
-</ul>
+<section id="repeatstate">
+<h1>RepeatState<a class="headerlink" href="#repeatstate" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv411RepeatState">
+<span id="_CPPv311RepeatState"></span><span id="_CPPv211RepeatState"></span><span id="RepeatState"></span><span class="target" id="structRepeatState"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RepeatState</span></span></span><a class="headerlink" href="#_CPPv411RepeatState" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv411RepeatState'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState11RepeatStateEmm">
+<span id="_CPPv3N11RepeatState11RepeatStateEmm"></span><span id="_CPPv2N11RepeatState11RepeatStateEmm"></span><span id="RepeatState::RepeatState__unsigned-l.unsigned-l"></span><span class="target" id="structRepeatState_1a66bd16f8163f8acb4a4c0607a7c9a1a9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RepeatState</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">d</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11RepeatState11RepeatStateEmm" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState11RepeatStateEmm'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11RepeatState7enabledEv">
+<span id="_CPPv3NK11RepeatState7enabledEv"></span><span id="_CPPv2NK11RepeatState7enabledEv"></span><span id="RepeatState::enabledC"></span><span class="target" id="structRepeatState_1add117f11a103d66717828eac066e8b26"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enabled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11RepeatState7enabledEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK11RepeatState7enabledEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState5resetEv">
+<span id="_CPPv3N11RepeatState5resetEv"></span><span id="_CPPv2N11RepeatState5resetEv"></span><span id="RepeatState::reset"></span><span class="target" id="structRepeatState_1a7a1f41a26329e1c616e46208229e0e8c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11RepeatState5resetEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState5resetEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState5startEm">
+<span id="_CPPv3N11RepeatState5startEm"></span><span id="_CPPv2N11RepeatState5startEm"></span><span id="RepeatState::start__unsigned-l"></span><span class="target" id="structRepeatState_1a86a079ad66eab10397bc7b7cd3e2078c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">now</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11RepeatState5startEm" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState5startEm'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState16startIfDebouncedEmm">
+<span id="_CPPv3N11RepeatState16startIfDebouncedEmm"></span><span id="_CPPv2N11RepeatState16startIfDebouncedEmm"></span><span id="RepeatState::startIfDebounced__unsigned-l.unsigned-l"></span><span class="target" id="structRepeatState_1a062f090194cba416440a573895b30363"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startIfDebounced</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">now</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">debounceTime</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11RepeatState16startIfDebouncedEmm" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState16startIfDebouncedEmm'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11RepeatState9lastEventEv">
+<span id="_CPPv3NK11RepeatState9lastEventEv"></span><span id="_CPPv2NK11RepeatState9lastEventEv"></span><span id="RepeatState::lastEventC"></span><span class="target" id="structRepeatState_1ac198bf55c11a6ae379ce46b30f351e79"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastEvent</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11RepeatState9lastEventEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK11RepeatState9lastEventEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState12shouldRepeatEm">
+<span id="_CPPv3N11RepeatState12shouldRepeatEm"></span><span id="_CPPv2N11RepeatState12shouldRepeatEm"></span><span id="RepeatState::shouldRepeat__unsigned-l"></span><span class="target" id="structRepeatState_1a03fbb3888d3d7651cf7abb5a2816d27d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shouldRepeat</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">now</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11RepeatState12shouldRepeatEm" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState12shouldRepeatEm'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState5delayE">
+<span id="_CPPv3N11RepeatState5delayE"></span><span id="_CPPv2N11RepeatState5delayE"></span><span id="RepeatState::delay__unsigned-l"></span><span class="target" id="structRepeatState_1af9c171cd1ee428e5c1718f31d1014fdd"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">delay</span></span></span><a class="headerlink" href="#_CPPv4N11RepeatState5delayE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState5delayE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState8intervalE">
+<span id="_CPPv3N11RepeatState8intervalE"></span><span id="_CPPv2N11RepeatState8intervalE"></span><span id="RepeatState::interval__unsigned-l"></span><span class="target" id="structRepeatState_1a04182489696f452e6650e3cc1bfb93cf"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interval</span></span></span><a class="headerlink" href="#_CPPv4N11RepeatState8intervalE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState8intervalE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState10pressStartE">
+<span id="_CPPv3N11RepeatState10pressStartE"></span><span id="_CPPv2N11RepeatState10pressStartE"></span><span id="RepeatState::pressStart__unsigned-l"></span><span class="target" id="structRepeatState_1aacbe08be076ed4891e798f3b88e44a1c"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pressStart</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N11RepeatState10pressStartE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState10pressStartE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState10lastRepeatE">
+<span id="_CPPv3N11RepeatState10lastRepeatE"></span><span id="_CPPv2N11RepeatState10lastRepeatE"></span><span id="RepeatState::lastRepeat__unsigned-l"></span><span class="target" id="structRepeatState_1a8293a30ee1536f72569d7120bd5e4d0a"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastRepeat</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N11RepeatState10lastRepeatE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState10lastRepeatE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11RepeatState9lastPressE">
+<span id="_CPPv3N11RepeatState9lastPressE"></span><span id="_CPPv2N11RepeatState9lastPressE"></span><span id="RepeatState::lastPress__unsigned-l"></span><span class="target" id="structRepeatState_1a962e6eb04b2e6e5aff07ac192f331335"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lastPress</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N11RepeatState9lastPressE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11RepeatState9lastPressE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+</div>
+</dd></dl>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../input/ButtonAdapter.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="KeyboardAdapter.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        ButtonAdapter
+        KeyboardAdapter
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="LiquidCrystalAdapter.html">
-        LiquidCrystalAdapter
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="SimpleRotaryAdapter.html">
+        SimpleRotaryAdapter
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
 </a>
 </div>
-</div></div>
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#_CPPv411RepeatState'" class="reference internal" href="#_CPPv411RepeatState"><code class="docutils literal notranslate"><span class="pre">RepeatState</span></code></a><ul>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState11RepeatStateEmm'" class="reference internal" href="#_CPPv4N11RepeatState11RepeatStateEmm"><code class="docutils literal notranslate"><span class="pre">RepeatState()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK11RepeatState7enabledEv'" class="reference internal" href="#_CPPv4NK11RepeatState7enabledEv"><code class="docutils literal notranslate"><span class="pre">enabled()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState5resetEv'" class="reference internal" href="#_CPPv4N11RepeatState5resetEv"><code class="docutils literal notranslate"><span class="pre">reset()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState5startEm'" class="reference internal" href="#_CPPv4N11RepeatState5startEm"><code class="docutils literal notranslate"><span class="pre">start()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState16startIfDebouncedEmm'" class="reference internal" href="#_CPPv4N11RepeatState16startIfDebouncedEmm"><code class="docutils literal notranslate"><span class="pre">startIfDebounced()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK11RepeatState9lastEventEv'" class="reference internal" href="#_CPPv4NK11RepeatState9lastEventEv"><code class="docutils literal notranslate"><span class="pre">lastEvent()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState12shouldRepeatEm'" class="reference internal" href="#_CPPv4N11RepeatState12shouldRepeatEm"><code class="docutils literal notranslate"><span class="pre">shouldRepeat()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState5delayE'" class="reference internal" href="#_CPPv4N11RepeatState5delayE"><code class="docutils literal notranslate"><span class="pre">delay</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState8intervalE'" class="reference internal" href="#_CPPv4N11RepeatState8intervalE"><code class="docutils literal notranslate"><span class="pre">interval</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState10pressStartE'" class="reference internal" href="#_CPPv4N11RepeatState10pressStartE"><code class="docutils literal notranslate"><span class="pre">pressStart</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState10lastRepeatE'" class="reference internal" href="#_CPPv4N11RepeatState10lastRepeatE"><code class="docutils literal notranslate"><span class="pre">lastRepeat</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11RepeatState9lastPressE'" class="reference internal" href="#_CPPv4N11RepeatState9lastPressE"><code class="docutils literal notranslate"><span class="pre">lastPress</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</aside>
 </main>
 </div>
 </div><footer class="py-6 border-t border-border md:py-0">

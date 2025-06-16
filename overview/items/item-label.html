@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Item List | LcdMenu</title>
-<meta content="Item List | LcdMenu" property="og:title"/>
-<meta content="Item List | LcdMenu" name="twitter:title"/>
+<title>Item label | LcdMenu</title>
+<meta content="Item label | LcdMenu" property="og:title"/>
+<meta content="Item label | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=2c5fd357" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
@@ -18,8 +18,8 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="item-range.html" rel="next" title="Item Range"/>
-<link href="../widgets/widget-range.html" rel="prev" title="WidgetRange"/>
+<link href="item-value.html" rel="next" title="Value display item"/>
+<link href="basic.html" rel="prev" title="Basic menu item"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -100,12 +100,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="basic.html">Basic menu item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="item-label.html">Item label</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="submenu.html">Sub-menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="item-widget.html">Item Widget</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Item List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="item-list.html">Item List</a></li>
 <li class="toctree-l2"><a class="reference internal" href="item-range.html">Item Range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="item-bool.html">Item Bool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input.html">Input item</a></li>
@@ -194,7 +194,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/items/item-list.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/items/item-label.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -236,83 +236,43 @@
 </svg>
 </a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">Item overview</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Item List</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Item label</span>
 </nav>
 <div id="content" role="main">
-<section id="item-list">
-<h1>Item List<a class="headerlink" href="#item-list" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The <a class="reference internal" href="../../reference/api/ItemList.html#_CPPv4I00E8ItemList" title="ItemList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemList</span></code></a> class is a wrapper around the <a class="reference internal" href="../../reference/api/ItemWidget.html#_CPPv4IDpE10ItemWidget" title="ItemWidget"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemWidget</span></code></a> class that simplifies the creation of menu items with a single <a class="reference internal" href="../../reference/api/widget/WidgetList.html#_CPPv4I00E10WidgetList" title="WidgetList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetList</span></code></a>. It reduces boilerplate code when you want to create an item with only one widget, making your code cleaner and easier to maintain.</p>
-<p>This widget is particularly useful when you need to present a list of selectable options to the user, such as colors, days of the week, or numeric values.</p>
+<section id="item-label">
+<h1>Item label<a class="headerlink" href="#item-label" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">ItemLabel</span></code> class represents an unselectable item that can be used as a title or separator within a menu screen. It is useful when you want to display static text without allowing the cursor to stop on it.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#usage'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>The <a class="reference internal" href="../../reference/api/ItemList.html#_CPPv4I00E8ItemList" title="ItemList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemList</span></code></a> class allows you to create a menu item that displays a list of values. It provides two main functions:</p>
-<ol class="arabic simple">
-<li><p><strong>`ITEM_LIST`</strong>: Creates an item with a list of values.</p></li>
-<li><p><strong>`ITEM_LIST_REF`</strong>: Creates an item with a list of values, using a reference to track the currently selected value.</p></li>
-</ol>
-<p>Both functions are wrappers around the <a class="reference internal" href="../../reference/api/ItemWidget.html#_CPPv4IDpE10ItemWidget" title="ItemWidget"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemWidget</span></code></a> class with a <a class="reference internal" href="../../reference/api/widget/WidgetList.html#_CPPv4I00E10WidgetList" title="WidgetList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetList</span></code></a> as the widget.</p>
-<section id="example-simple-list">
-<h3>Example: Simple List<a class="headerlink" href="#example-simple-list" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#example-simple-list'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">"Red"</span><span class="p">,</span><span class="w"> </span><span class="s">"Green"</span><span class="p">,</span><span class="w"> </span><span class="s">"Blue"</span><span class="p">};</span>
-</span><span id="line-2">
-</span><span id="line-3"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
-</span><span id="line-4"><span class="w">    </span><span class="n">ITEM_LIST</span><span class="p">(</span><span class="s">"Color"</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-5"><span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="n">color</span><span class="p">]);</span>
-</span><span id="line-6"><span class="w">    </span><span class="p">})</span>
-</span><span id="line-7"><span class="p">);</span>
+<p>Create a label item using <code class="docutils literal notranslate"><span class="pre">ITEM_LABEL</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
+</span><span id="line-2"><span class="w">    </span><span class="n">ITEM_LABEL</span><span class="p">(</span><span class="s">"Main Menu"</span><span class="p">),</span>
+</span><span id="line-3"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"First"</span><span class="p">),</span>
+</span><span id="line-4"><span class="w">    </span><span class="n">ITEM_BASIC</span><span class="p">(</span><span class="s">"Second"</span><span class="p">));</span>
 </span></code></pre></div>
 </div>
-<p>In this example, the <a class="reference internal" href="../../reference/api/ItemList.html#_CPPv4I00E8ItemList" title="ItemList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemList</span></code></a> allows the user to select a color from the list. The selected color is printed to the serial monitor.</p>
-</section>
-<section id="example-list-with-reference">
-<h3>Example: List with Reference<a class="headerlink" href="#example-list-with-reference" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#example-list-with-reference'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">uint8_t</span><span class="w"> </span><span class="n">selectedColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-</span><span id="line-2"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">"Red"</span><span class="p">,</span><span class="w"> </span><span class="s">"Green"</span><span class="p">,</span><span class="w"> </span><span class="s">"Blue"</span><span class="p">};</span>
-</span><span id="line-3">
-</span><span id="line-4"><span class="n">MENU_SCREEN</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">,</span><span class="w"> </span><span class="n">mainItems</span><span class="p">,</span>
-</span><span id="line-5"><span class="w">    </span><span class="n">ITEM_LIST_REF</span><span class="p">(</span><span class="s">"Color"</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">Ref</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-6"><span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="n">color</span><span class="p">.</span><span class="n">value</span><span class="p">]);</span>
-</span><span id="line-7"><span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="n">selectedColor</span><span class="p">)</span>
-</span><span id="line-8"><span class="p">);</span>
-</span></code></pre></div>
+<p>When <code class="docutils literal notranslate"><span class="pre">mainScreen</span></code> is displayed, the cursor will automatically skip the label and land on the first selectable item.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you place two or more <code class="docutils literal notranslate"><span class="pre">ItemLabel</span></code> instances sequentially, items beyond
+the first may never become visible because the cursor cannot stop on these
+labels to scroll the view.</p>
 </div>
-<p>In this example, the <a class="reference internal" href="../../reference/api/ItemList.html#_CPPv4I00E8ItemList" title="ItemList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemList</span></code></a> uses a reference to track the currently selected color. This is useful when the selected value needs to be updated externally.</p>
-</section>
-</section>
-<section id="scenarios">
-<h2>Scenarios<a class="headerlink" href="#scenarios" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#scenarios'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>The <a class="reference internal" href="../../reference/api/ItemList.html#_CPPv4I00E8ItemList" title="ItemList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemList</span></code></a> is ideal for scenarios where you need to:</p>
-<ul class="simple">
-<li><p>Present a list of options to the user.</p></li>
-<li><p>Reduce boilerplate code when creating items with a single <a class="reference internal" href="../../reference/api/widget/WidgetList.html#_CPPv4I00E10WidgetList" title="WidgetList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetList</span></code></a>.</p></li>
-<li><p>Dynamically update the selected value using a reference.</p></li>
-</ul>
-</section>
-<section id="best-practices">
-<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#best-practices'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<p>When using <a class="reference internal" href="../../reference/api/ItemList.html#_CPPv4I00E8ItemList" title="ItemList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemList</span></code></a>, consider the following best practices:</p>
-<ul class="simple">
-<li><p>Ensure the list of options is not too long to avoid overwhelming the user.</p></li>
-<li><p>Use meaningful labels for the options to make it easier for the user to understand their choices.</p></li>
-<li><p>For performance-critical applications, use simple types (e.g., <code class="docutils literal notranslate"><span class="pre">uint8_t</span></code>, <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code>) for the list items rather than complex types.</p></li>
-<li><p>The list values are stored in memory, so ensure that the list is not too large to avoid memory issues.</p></li>
-<li><p>When using <a class="reference internal" href="../../reference/api/ItemList.html#_CPPv4I0E13ITEM_LIST_REFP8ItemListI1T3RefI7uint8_tEEPKcRKNSt6vectorI1TEEPFvK3RefI7uint8_tEER7uint8_tPKcK7uint8_tKb" title="ITEM_LIST_REF"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ITEM_LIST_REF()</span></code></a>, be aware that external changes to the referenced value will be reflected in the menu display.</p></li>
-</ul>
-<p>For more details, refer to the <a class="reference internal" href="../../reference/api/widget/WidgetList.html#_CPPv4I00E10WidgetList" title="WidgetList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetList</span></code></a> documentation: <a class="reference internal" href="../widgets/widget-list.html"><span class="doc">WidgetList</span></a>.</p>
+<p>Refer to the <a class="reference internal" href="../../reference/api/ItemLabel.html#_CPPv49ItemLabel" title="ItemLabel"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">ItemLabel</span></code></a> API reference for more details.</p>
 </section>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../widgets/widget-range.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="basic.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        WidgetRange
+        Basic menu item
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="item-range.html">
-        Item Range
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="item-value.html">
+        Value display item
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -321,13 +281,7 @@
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#usage'" class="reference internal" href="#usage">Usage</a><ul>
-<li><a :data-current="activeSection === '#example-simple-list'" class="reference internal" href="#example-simple-list">Example: Simple List</a></li>
-<li><a :data-current="activeSection === '#example-list-with-reference'" class="reference internal" href="#example-list-with-reference">Example: List with Reference</a></li>
-</ul>
-</li>
-<li><a :data-current="activeSection === '#scenarios'" class="reference internal" href="#scenarios">Scenarios</a></li>
-<li><a :data-current="activeSection === '#best-practices'" class="reference internal" href="#best-practices">Best Practices</a></li>
+<li><a :data-current="activeSection === '#usage'" class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </div>
 </aside>

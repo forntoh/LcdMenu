@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
@@ -255,15 +258,18 @@
 With default margin</label><div class="sd-tab-content docutils">
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonBackSpace</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">BACKSPACE</span><span class="p">);</span>
 </span><span id="line-2"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonUp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">);</span>
-</span><span id="line-3"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonDown</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">);</span>
+</span><span id="line-3"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonDown</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span>
 </span><span id="line-4"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonBack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="n">BACK</span><span class="p">);</span>
 </span><span id="line-5"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonEnter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w"> </span><span class="n">ENTER</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
 </div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
-<label class="sd-tab-label" for="sd-tab-item-1">
-With custom margin</label><div class="sd-tab-content docutils">
+</div>
+<p>The additional parameters configure hold behaviour similarly to <code class="docutils literal notranslate"><span class="pre">ButtonAdapter</span></code>.</p>
+<blockquote>
+<div><div class="sd-tab-item docutils">
+<p class="sd-tab-label rubric">With custom margin</p>
+<div class="sd-tab-content docutils">
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonBackSpace</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">BACKSPACE</span><span class="p">);</span>
 </span><span id="line-2"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonUp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">);</span>
 </span><span id="line-3"><span class="n">AnalogButtonAdapter</span><span class="w"> </span><span class="nf">ButtonDown</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">A0</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">);</span>
@@ -273,6 +279,7 @@ With custom margin</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
+</div></blockquote>
 <p>Finally, you need to observe the AnalogButtonAdapter object in the loop function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 </span><span id="line-2"><span class="w">      </span><span class="n">ButtonBackSpace</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>

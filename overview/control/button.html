@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
@@ -253,12 +256,15 @@
 </span></code></pre></div>
 </div>
 <p>Next, you need to create a ButtonAdapter object and pass the Button object and the menu object to it:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">upButtonA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">upButton</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">);</span>
-</span><span id="line-2"><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">downButtonA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">downButton</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">upButtonA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">upButton</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span><span class="w">  </span><span class="c1">// hold to repeat</span>
+</span><span id="line-2"><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">downButtonA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">downButton</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span>
 </span><span id="line-3"><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">enterButtonA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">enterButton</span><span class="p">,</span><span class="w"> </span><span class="n">ENTER</span><span class="p">);</span>
 </span><span id="line-4"><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">backButtonA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">backButton</span><span class="p">,</span><span class="w"> </span><span class="n">BACK</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
+<p>The last two parameters define the <em>repeat delay</em> and the <em>repeat interval</em> in
+milliseconds. After the delay passes while the button is held, the command is
+sent again every interval until the button is released.</p>
 <p>Then you need to call the begin function in the setup function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 </span><span id="line-2"><span class="w">    </span><span class="n">upButton</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>

@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../overview/menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../../overview/items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
@@ -257,12 +260,18 @@
 <dt class="field-odd">Param command<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The command byte that will be sent to the menu when the button is pressed. </p>
 </dd>
+<dt class="field-even">Param repeatDelay<span class="colon">:</span></dt>
+<dd class="field-even"><p>Delay before the first repeat command is sent (default is 0). </p>
+</dd>
+<dt class="field-odd">Param repeatInterval<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Interval between repeated commands (default is 0). </p>
+</dd>
 </dl>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte">
-<span id="_CPPv3N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte"></span><span id="_CPPv2N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte"></span><span id="ButtonAdapter::ButtonAdapter__LcdMenuP.ButtonP.byte"></span><span class="target" id="classButtonAdapter_1a1135a5aba44d39bbbf0a8196b93b745e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ButtonAdapter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="n"><span class="pre">Button</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">button</span></span>, <span class="n"><span class="pre">byte</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm">
+<span id="_CPPv3N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm"></span><span id="_CPPv2N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm"></span><span id="ButtonAdapter::ButtonAdapter__LcdMenuP.ButtonP.byte.unsigned-l.unsigned-l"></span><span class="target" id="classButtonAdapter_1aa5c938c8b16c580e358d6d3e83660310"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ButtonAdapter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../LcdMenu.html#_CPPv47LcdMenu" title="LcdMenu"><span class="n"><span class="pre">LcdMenu</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">menu</span></span>, <span class="n"><span class="pre">Button</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">button</span></span>, <span class="n"><span class="pre">byte</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">command</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">repeatDelay</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">repeatInterval</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13ButtonAdapter7observeEv">
@@ -278,6 +287,14 @@
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13ButtonAdapter7commandE">
 <span id="_CPPv3N13ButtonAdapter7commandE"></span><span id="_CPPv2N13ButtonAdapter7commandE"></span><span id="ButtonAdapter::command__byte"></span><span class="target" id="classButtonAdapter_1aa9839f781496dfe02c748bf19155a3b6"></span><span class="n"><span class="pre">byte</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">command</span></span></span><a class="headerlink" href="#_CPPv4N13ButtonAdapter7commandE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N13ButtonAdapter7commandE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13ButtonAdapter6repeatE">
+<span id="_CPPv3N13ButtonAdapter6repeatE"></span><span id="_CPPv2N13ButtonAdapter6repeatE"></span><span id="ButtonAdapter::repeat__RepeatState"></span><span class="target" id="classButtonAdapter_1ad4bb442be0cfbf76dbe4ac8bf22a67e7"></span><a class="reference internal" href="RepeatState.html#_CPPv411RepeatState" title="RepeatState"><span class="n"><span class="pre">RepeatState</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">repeat</span></span></span><a class="headerlink" href="#_CPPv4N13ButtonAdapter6repeatE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N13ButtonAdapter6repeatE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N13ButtonAdapter7holdingE">
+<span id="_CPPv3N13ButtonAdapter7holdingE"></span><span id="_CPPv2N13ButtonAdapter7holdingE"></span><span id="ButtonAdapter::holding__b"></span><span class="target" id="classButtonAdapter_1a9bee88f98592cbb22b18a61cd5711dea"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">holding</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N13ButtonAdapter7holdingE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N13ButtonAdapter7holdingE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 </dd></dl>
@@ -303,10 +320,12 @@
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
 <li><a :data-current="activeSection === '#_CPPv413ButtonAdapter'" class="reference internal" href="#_CPPv413ButtonAdapter"><code class="docutils literal notranslate"><span class="pre">ButtonAdapter</span></code></a><ul>
-<li><a :data-current="activeSection === '#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte'" class="reference internal" href="#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte"><code class="docutils literal notranslate"><span class="pre">ButtonAdapter()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm'" class="reference internal" href="#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm"><code class="docutils literal notranslate"><span class="pre">ButtonAdapter()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N13ButtonAdapter7observeEv'" class="reference internal" href="#_CPPv4N13ButtonAdapter7observeEv"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N13ButtonAdapter6buttonE'" class="reference internal" href="#_CPPv4N13ButtonAdapter6buttonE"><code class="docutils literal notranslate"><span class="pre">button</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N13ButtonAdapter7commandE'" class="reference internal" href="#_CPPv4N13ButtonAdapter7commandE"><code class="docutils literal notranslate"><span class="pre">command</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N13ButtonAdapter6repeatE'" class="reference internal" href="#_CPPv4N13ButtonAdapter6repeatE"><code class="docutils literal notranslate"><span class="pre">repeat</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N13ButtonAdapter7holdingE'" class="reference internal" href="#_CPPv4N13ButtonAdapter7holdingE"><code class="docutils literal notranslate"><span class="pre">holding</span></code></a></li>
 </ul>
 </li>
 </ul>

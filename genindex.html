@@ -135,6 +135,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview/menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview/items/index.html">Item overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview/items/submenu.html">Sub-menu item</a></li>
@@ -187,6 +188,7 @@
 <li class="toctree-l2"><a class="reference internal" href="reference/samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -199,6 +201,7 @@
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/api/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
@@ -291,21 +294,25 @@
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv419AnalogButtonAdapter">AnalogButtonAdapter (C++ class)</a>
 </li>
-      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4byte">AnalogButtonAdapter::AnalogButtonAdapter (C++ function)</a>, <a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4byte">[1]</a>
+      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t4bytemmm">AnalogButtonAdapter::AnalogButtonAdapter (C++ function)</a>, <a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter19AnalogButtonAdapterEP7LcdMenu7uint8_t8uint16_t8uint16_t4bytemmm">[1]</a>
 </li>
       <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter7commandE">AnalogButtonAdapter::command (C++ member)</a>
 </li>
-      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter13lastPressTimeE">AnalogButtonAdapter::lastPressTime (C++ member)</a>
+      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter12debounceTimeE">AnalogButtonAdapter::debounceTime (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter6marginE">AnalogButtonAdapter::margin (C++ member)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
-      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter6marginE">AnalogButtonAdapter::margin (C++ member)</a>
-</li>
       <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter7observeEv">AnalogButtonAdapter::observe (C++ function)</a>
 </li>
       <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter9pinNumberE">AnalogButtonAdapter::pinNumber (C++ member)</a>
 </li>
+      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter6repeatE">AnalogButtonAdapter::repeat (C++ member)</a>
+</li>
       <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter12triggerValueE">AnalogButtonAdapter::triggerValue (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv4N19AnalogButtonAdapter10wasPressedE">AnalogButtonAdapter::wasPressed (C++ member)</a>
 </li>
   </ul></td>
   </tr>
@@ -325,6 +332,8 @@
       <li><a href="reference/api/BaseItemManyWidgets.html#_CPPv4N19BaseItemManyWidgets4backEP12MenuRenderer">BaseItemManyWidgets::back (C++ function)</a>
 </li>
       <li><a href="reference/api/BaseItemManyWidgets.html#_CPPv4N19BaseItemManyWidgets19BaseItemManyWidgetsEPKcNSt6vectorIP10BaseWidgetEE7uint8_t">BaseItemManyWidgets::BaseItemManyWidgets (C++ function)</a>
+</li>
+      <li><a href="reference/api/BaseItemManyWidgets.html#_CPPv4N19BaseItemManyWidgets6cancelEP12MenuRenderer">BaseItemManyWidgets::cancel (C++ function)</a>
 </li>
       <li><a href="reference/api/BaseItemManyWidgets.html#_CPPv4N19BaseItemManyWidgets4drawEP12MenuRenderer">BaseItemManyWidgets::draw (C++ function)</a>
 </li>
@@ -364,15 +373,19 @@
 </li>
       <li><a href="reference/api/widget/BaseWidget.html#_CPPv410BaseWidget">BaseWidget (C++ class)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/widget/BaseWidget.html#_CPPv4N10BaseWidget10BaseWidgetEK7uint8_t">BaseWidget::BaseWidget (C++ function)</a>
 </li>
+      <li><a href="reference/api/widget/BaseWidget.html#_CPPv4N10BaseWidget10cancelEditEv">BaseWidget::cancelEdit (C++ function)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/widget/BaseWidget.html#_CPPv4N10BaseWidget12cursorOffsetE">BaseWidget::cursorOffset (C++ member)</a>
 </li>
       <li><a href="reference/api/widget/BaseWidget.html#_CPPv4N10BaseWidget4drawEPcK7uint8_t">BaseWidget::draw (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/BaseWidget.html#_CPPv4N10BaseWidget7processEP7LcdMenuh">BaseWidget::process (C++ function)</a>
+</li>
+      <li><a href="reference/api/widget/BaseWidget.html#_CPPv4N10BaseWidget9startEditEv">BaseWidget::startEdit (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/BaseWidget.html#_CPPv4N10BaseWidgetD0Ev">BaseWidget::~BaseWidget (C++ function)</a>
 </li>
@@ -404,11 +417,15 @@
 </li>
       <li><a href="reference/api/input/ButtonAdapter.html#_CPPv4N13ButtonAdapter6buttonE">ButtonAdapter::button (C++ member)</a>
 </li>
-      <li><a href="reference/api/input/ButtonAdapter.html#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4byte">ButtonAdapter::ButtonAdapter (C++ function)</a>
+      <li><a href="reference/api/input/ButtonAdapter.html#_CPPv4N13ButtonAdapter13ButtonAdapterEP7LcdMenuP6Button4bytemm">ButtonAdapter::ButtonAdapter (C++ function)</a>
 </li>
       <li><a href="reference/api/input/ButtonAdapter.html#_CPPv4N13ButtonAdapter7commandE">ButtonAdapter::command (C++ member)</a>
 </li>
+      <li><a href="reference/api/input/ButtonAdapter.html#_CPPv4N13ButtonAdapter7holdingE">ButtonAdapter::holding (C++ member)</a>
+</li>
       <li><a href="reference/api/input/ButtonAdapter.html#_CPPv4N13ButtonAdapter7observeEv">ButtonAdapter::observe (C++ function)</a>
+</li>
+      <li><a href="reference/api/input/ButtonAdapter.html#_CPPv4N13ButtonAdapter6repeatE">ButtonAdapter::repeat (C++ member)</a>
 </li>
       <li><a href="reference/api/input/AnalogButtonAdapter.html#_CPPv412ButtonConfig">ButtonConfig (C++ class)</a>
 </li>
@@ -470,6 +487,8 @@
       <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer10moveCursorE7uint8_t7uint8_t">CharacterDisplayRenderer::moveCursor (C++ function)</a>
 </li>
       <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRenderer7upArrowE">CharacterDisplayRenderer::upArrow (C++ member)</a>
+</li>
+      <li><a href="reference/api/renderer/CharacterDisplayRenderer.html#_CPPv4N24CharacterDisplayRendererD0Ev">CharacterDisplayRenderer::~CharacterDisplayRenderer (C++ function)</a>
 </li>
       <li><a href="reference/api/input/KeyboardAdapter.html#c.CR">CR (C macro)</a>
 </li>
@@ -552,6 +571,8 @@
 </li>
       <li><a href="reference/api/ItemInputCharset.html#c.ITEM_INPUT_CHARSET">ITEM_INPUT_CHARSET (C macro)</a>
 </li>
+      <li><a href="reference/api/ItemLabel.html#_CPPv410ITEM_LABELPKc">ITEM_LABEL (C++ function)</a>
+</li>
       <li><a href="reference/api/ItemList.html#_CPPv4I0E9ITEM_LISTP8ItemListI1T7uint8_tEPKcRKNSt6vectorI1TEEPFvK7uint8_tEK7uint8_tPKcK7uint8_tKb">ITEM_LIST (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemList.html#_CPPv4I0E13ITEM_LIST_REFP8ItemListI1T3RefI7uint8_tEEPKcRKNSt6vectorI1TEEPFvK3RefI7uint8_tEER7uint8_tPKcK7uint8_tKb">ITEM_LIST_REF (C++ function)</a>
@@ -626,10 +647,10 @@
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv416ItemInputCharset">ItemInputCharset (C++ class)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset13abortCharEditEP12MenuRenderer">ItemInputCharset::abortCharEdit (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset8charEditE">ItemInputCharset::charEdit (C++ member)</a>
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset7charsetE">ItemInputCharset::charset (C++ member)</a>
@@ -649,6 +670,12 @@
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset12showNextCharEP12MenuRenderer">ItemInputCharset::showNextChar (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemInputCharset.html#_CPPv4N16ItemInputCharset16showPreviousCharEP12MenuRenderer">ItemInputCharset::showPreviousChar (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemLabel.html#_CPPv49ItemLabel">ItemLabel (C++ class)</a>
+</li>
+      <li><a href="reference/api/ItemLabel.html#_CPPv4NK9ItemLabel12isSelectableEv">ItemLabel::isSelectable (C++ function)</a>
+</li>
+      <li><a href="reference/api/ItemLabel.html#_CPPv4N9ItemLabel9ItemLabelEPKc">ItemLabel::ItemLabel (C++ function)</a>
 </li>
       <li><a href="reference/api/ItemList.html#_CPPv4I00E8ItemList">ItemList (C++ class)</a>
 </li>
@@ -935,6 +962,8 @@
 </li>
       <li><a href="reference/api/MenuItem.html#_CPPv4NK8MenuItem11getViewSizeEP12MenuRenderer">MenuItem::getViewSize (C++ function)</a>
 </li>
+      <li><a href="reference/api/MenuItem.html#_CPPv4NK8MenuItem12isSelectableEv">MenuItem::isSelectable (C++ function)</a>
+</li>
       <li><a href="reference/api/MenuItem.html#_CPPv4N8MenuItem8MenuItemEPKc">MenuItem::MenuItem (C++ function)</a>
 </li>
       <li><a href="reference/api/MenuItem.html#_CPPv4N8MenuItem7pollingE">MenuItem::polling (C++ member)</a>
@@ -983,10 +1012,10 @@
 </li>
       <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer10inEditModeE">MenuRenderer::inEditMode (C++ member)</a>
 </li>
-      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer12isInEditModeEv">MenuRenderer::isInEditMode (C++ function)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4NK12MenuRenderer12isInEditModeEv">MenuRenderer::isInEditMode (C++ function)</a>
+</li>
       <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer7maxColsE">MenuRenderer::maxCols (C++ member)</a>
 </li>
       <li><a href="reference/api/renderer/MenuRenderer.html#_CPPv4N12MenuRenderer7maxRowsE">MenuRenderer::maxRows (C++ member)</a>
@@ -1074,8 +1103,6 @@
 </li>
       <li><a href="reference/api/widget/BaseWidgetValue.html#_CPPv4N3RefmmEi">Ref::operator-- (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/widget/BaseWidgetValue.html#_CPPv4NK3RefltERK1T">Ref::operator&lt; (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/BaseWidgetValue.html#_CPPv4NK3RefleERK1T">Ref::operator&lt;= (C++ function)</a>
@@ -1090,7 +1117,35 @@
 </li>
       <li><a href="reference/api/widget/BaseWidgetValue.html#_CPPv4N3Ref3RefER1T">Ref::Ref (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li><a href="reference/api/widget/BaseWidgetValue.html#_CPPv4N3Ref5valueE">Ref::value (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv411RepeatState">RepeatState (C++ struct)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState5delayE">RepeatState::delay (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4NK11RepeatState7enabledEv">RepeatState::enabled (C++ function)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState8intervalE">RepeatState::interval (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4NK11RepeatState9lastEventEv">RepeatState::lastEvent (C++ function)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState9lastPressE">RepeatState::lastPress (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState10lastRepeatE">RepeatState::lastRepeat (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState10pressStartE">RepeatState::pressStart (C++ member)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState11RepeatStateEmm">RepeatState::RepeatState (C++ function)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState5resetEv">RepeatState::reset (C++ function)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState12shouldRepeatEm">RepeatState::shouldRepeat (C++ function)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState5startEm">RepeatState::start (C++ function)</a>
+</li>
+      <li><a href="reference/api/input/RepeatState.html#_CPPv4N11RepeatState16startIfDebouncedEmm">RepeatState::startIfDebounced (C++ function)</a>
 </li>
   </ul></td>
   </tr>
@@ -1169,9 +1224,15 @@
 </li>
       <li><a href="reference/api/widget/WidgetBool.html#_CPPv4I0E10WidgetBool">WidgetBool (C++ class)</a>
 </li>
+      <li><a href="reference/api/widget/WidgetBool.html#_CPPv4N10WidgetBool10cancelEditEv">WidgetBool::cancelEdit (C++ function)</a>
+</li>
       <li><a href="reference/api/widget/WidgetBool.html#_CPPv4N10WidgetBool4drawEPcK7uint8_t">WidgetBool::draw (C++ function)</a>
 </li>
+      <li><a href="reference/api/widget/WidgetBool.html#_CPPv4N10WidgetBool13originalValueE">WidgetBool::originalValue (C++ member)</a>
+</li>
       <li><a href="reference/api/widget/WidgetBool.html#_CPPv4N10WidgetBool7processEP7LcdMenuKh">WidgetBool::process (C++ function)</a>
+</li>
+      <li><a href="reference/api/widget/WidgetBool.html#_CPPv4N10WidgetBool9startEditEv">WidgetBool::startEdit (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/WidgetBool.html#_CPPv4N10WidgetBool7textOffE">WidgetBool::textOff (C++ member)</a>
 </li>
@@ -1181,6 +1242,8 @@
 </li>
       <li><a href="reference/api/widget/WidgetList.html#_CPPv4I00E10WidgetList">WidgetList (C++ class)</a>
 </li>
+      <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList10cancelEditEv">WidgetList::cancelEdit (C++ function)</a>
+</li>
       <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList5cycleE">WidgetList::cycle (C++ member)</a>
 </li>
       <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList4drawEPcK7uint8_t">WidgetList::draw (C++ function)</a>
@@ -1189,9 +1252,13 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList13originalValueE">WidgetList::originalValue (C++ member)</a>
+</li>
       <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList13previousValueEv">WidgetList::previousValue (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList7processEP7LcdMenuKh">WidgetList::process (C++ function)</a>
+</li>
+      <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList9startEditEv">WidgetList::startEdit (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList11updateValueEPK19__FlashStringHelper">WidgetList::updateValue (C++ function)</a>
 </li>
@@ -1200,6 +1267,8 @@
       <li><a href="reference/api/widget/WidgetList.html#_CPPv4N10WidgetList10WidgetListERKNSt6vectorI1TEEK1VPKcK7uint8_tKbPFvRK1VE">WidgetList::WidgetList (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/WidgetRange.html#_CPPv4I00E11WidgetRange">WidgetRange (C++ class)</a>
+</li>
+      <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange10cancelEditEv">WidgetRange::cancelEdit (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange5cycleE">WidgetRange::cycle (C++ member)</a>
 </li>
@@ -1213,9 +1282,13 @@
 </li>
       <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange8minValueE">WidgetRange::minValue (C++ member)</a>
 </li>
+      <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange13originalValueE">WidgetRange::originalValue (C++ member)</a>
+</li>
       <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange7processEP7LcdMenuKh">WidgetRange::process (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange8setValueERK1V">WidgetRange::setValue (C++ function)</a>
+</li>
+      <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange9startEditEv">WidgetRange::startEdit (C++ function)</a>
 </li>
       <li><a href="reference/api/widget/WidgetRange.html#_CPPv4N11WidgetRange4stepE">WidgetRange::step (C++ member)</a>
 </li>

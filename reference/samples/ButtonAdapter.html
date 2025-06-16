@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../overview/items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/ItemSubMenu.html">ItemSubMenu</a></li>
@@ -266,9 +269,9 @@
 </span><span id="line-26"><span class="linenos">26</span><span class="n">CharacterDisplayRenderer</span><span class="w"> </span><span class="nf">renderer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdAdapter</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_COLS</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_ROWS</span><span class="p">);</span>
 </span><span id="line-27"><span class="linenos">27</span><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
 </span><span id="line-28"><span class="linenos">28</span><span class="n">Button</span><span class="w"> </span><span class="nf">upBtn</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-</span><span id="line-29"><span class="linenos">29</span><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">upBtnA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">upBtn</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">);</span>
+</span><span id="line-29"><span class="linenos">29</span><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">upBtnA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">upBtn</span><span class="p">,</span><span class="w"> </span><span class="n">UP</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span><span class="w">  </span><span class="c1">// hold to repeat</span>
 </span><span id="line-30"><span class="linenos">30</span><span class="n">Button</span><span class="w"> </span><span class="nf">downBtn</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
-</span><span id="line-31"><span class="linenos">31</span><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">downBtnA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">downBtn</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">);</span>
+</span><span id="line-31"><span class="linenos">31</span><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">downBtnA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">downBtn</span><span class="p">,</span><span class="w"> </span><span class="n">DOWN</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span>
 </span><span id="line-32"><span class="linenos">32</span><span class="n">Button</span><span class="w"> </span><span class="nf">enterBtn</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
 </span><span id="line-33"><span class="linenos">33</span><span class="n">ButtonAdapter</span><span class="w"> </span><span class="nf">enterBtnA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">enterBtn</span><span class="p">,</span><span class="w"> </span><span class="n">ENTER</span><span class="p">);</span>
 </span><span id="line-34"><span class="linenos">34</span>

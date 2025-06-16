@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../overview/menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../../overview/items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../overview/items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ItemSubMenu.html">ItemSubMenu</a></li>
@@ -370,6 +373,14 @@
 </dd>
 </dl>
 </dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11WidgetRange9startEditEv">
+<span id="_CPPv3N11WidgetRange9startEditEv"></span><span id="_CPPv2N11WidgetRange9startEditEv"></span><span id="WidgetRange::startEdit"></span><span class="target" id="classWidgetRange_1a834a18b9e6ae3e7679d4e0a00157320a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">startEdit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N11WidgetRange9startEditEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11WidgetRange9startEditEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11WidgetRange10cancelEditEv">
+<span id="_CPPv3N11WidgetRange10cancelEditEv"></span><span id="_CPPv2N11WidgetRange10cancelEditEv"></span><span id="WidgetRange::cancelEdit"></span><span class="target" id="classWidgetRange_1ae4411b41cefbb2de2a0546dd0d3400a6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cancelEdit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N11WidgetRange10cancelEditEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11WidgetRange10cancelEditEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
@@ -388,6 +399,10 @@
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N11WidgetRange5cycleE">
 <span id="_CPPv3N11WidgetRange5cycleE"></span><span id="_CPPv2N11WidgetRange5cycleE"></span><span id="WidgetRange::cycle__bC"></span><span class="target" id="classWidgetRange_1a18d3d9ec6b7759085db4d2c6469a147a"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cycle</span></span></span><a class="headerlink" href="#_CPPv4N11WidgetRange5cycleE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11WidgetRange5cycleE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd></dd></dl>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11WidgetRange13originalValueE">
+<span id="_CPPv3N11WidgetRange13originalValueE"></span><span id="_CPPv2N11WidgetRange13originalValueE"></span><span id="WidgetRange::originalValue__T"></span><span class="target" id="classWidgetRange_1a325f1d606a5fae1a3a4278406adb19dc"></span><a class="reference internal" href="#_CPPv4I00E11WidgetRange" title="WidgetRange::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">originalValue</span></span></span><a class="headerlink" href="#_CPPv4N11WidgetRange13originalValueE" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4N11WidgetRange13originalValueE'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
 <dd></dd></dl>
 </div>
 </dd></dl>
@@ -421,10 +436,13 @@
 <li><a :data-current="activeSection === '#_CPPv4N11WidgetRange9incrementEv'" class="reference internal" href="#_CPPv4N11WidgetRange9incrementEv"><code class="docutils literal notranslate"><span class="pre">increment()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N11WidgetRange9decrementEv'" class="reference internal" href="#_CPPv4N11WidgetRange9decrementEv"><code class="docutils literal notranslate"><span class="pre">decrement()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N11WidgetRange4drawEPcK7uint8_t'" class="reference internal" href="#_CPPv4N11WidgetRange4drawEPcK7uint8_t"><code class="docutils literal notranslate"><span class="pre">draw()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11WidgetRange9startEditEv'" class="reference internal" href="#_CPPv4N11WidgetRange9startEditEv"><code class="docutils literal notranslate"><span class="pre">startEdit()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11WidgetRange10cancelEditEv'" class="reference internal" href="#_CPPv4N11WidgetRange10cancelEditEv"><code class="docutils literal notranslate"><span class="pre">cancelEdit()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N11WidgetRange4stepE'" class="reference internal" href="#_CPPv4N11WidgetRange4stepE"><code class="docutils literal notranslate"><span class="pre">step</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N11WidgetRange8minValueE'" class="reference internal" href="#_CPPv4N11WidgetRange8minValueE"><code class="docutils literal notranslate"><span class="pre">minValue</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N11WidgetRange8maxValueE'" class="reference internal" href="#_CPPv4N11WidgetRange8maxValueE"><code class="docutils literal notranslate"><span class="pre">maxValue</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N11WidgetRange5cycleE'" class="reference internal" href="#_CPPv4N11WidgetRange5cycleE"><code class="docutils literal notranslate"><span class="pre">cycle</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4N11WidgetRange13originalValueE'" class="reference internal" href="#_CPPv4N11WidgetRange13originalValueE"><code class="docutils literal notranslate"><span class="pre">originalValue</span></code></a></li>
 </ul>
 </li>
 </ul>

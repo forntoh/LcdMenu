@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../overview/menu-screen.html">Menu Screen</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../overview/items/index.html">Item overview<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/basic.html">Basic menu item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-label.html">Item label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/item-value.html">Value display item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/command.html">Command menu item</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../overview/items/submenu.html">Sub-menu item</a></li>
@@ -152,6 +153,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../samples/MenuTimeout.html">MenuTimeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/CharsetInput.html">CharsetInput</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samples/ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/RTOS.html">RTOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/InputRotary.html">InputRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../samples/ButtonAdapter.html">ButtonAdapter</a></li>
@@ -164,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ItemCommand.html">ItemCommand</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemValue.html">ItemValue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LcdMenu.html">LcdMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ItemLabel.html">ItemLabel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ItemSubMenu.html">ItemSubMenu</a></li>
@@ -260,7 +263,7 @@
 </span><span id="line-3">└────────────────────────────┘
 </span></code></pre></div>
 </div>
-<p>Subclassed by <a class="reference internal" href="BaseItemManyWidgets.html#classBaseItemManyWidgets"><span class="std std-ref">BaseItemManyWidgets</span></a>, <a class="reference internal" href="BaseItemZeroWidget.html#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a>, <a class="reference internal" href="ItemInput.html#classItemInput"><span class="std std-ref">ItemInput</span></a>, <a class="reference internal" href="ItemToggle.html#classItemToggle"><span class="std std-ref">ItemToggle</span></a></p>
+<p>Subclassed by <a class="reference internal" href="BaseItemManyWidgets.html#classBaseItemManyWidgets"><span class="std std-ref">BaseItemManyWidgets</span></a>, <a class="reference internal" href="BaseItemZeroWidget.html#classBaseItemZeroWidget"><span class="std std-ref">BaseItemZeroWidget</span></a>, <a class="reference internal" href="ItemInput.html#classItemInput"><span class="std std-ref">ItemInput</span></a>, <a class="reference internal" href="ItemLabel.html#classItemLabel"><span class="std std-ref">ItemLabel</span></a>, <a class="reference internal" href="ItemToggle.html#classItemToggle"><span class="std std-ref">ItemToggle</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -290,6 +293,11 @@
 <dd class="field-odd"><p><strong>text</strong> – text to display for the item </p>
 </dd>
 </dl>
+</dd></dl>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8MenuItem12isSelectableEv">
+<span id="_CPPv3NK8MenuItem12isSelectableEv"></span><span id="_CPPv2NK8MenuItem12isSelectableEv"></span><span id="MenuItem::isSelectableC"></span><span class="target" id="classMenuItem_1a3abeefaa2feeeaa416911abb0bd81519"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isSelectable</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8MenuItem12isSelectableEv" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#_CPPv4NK8MenuItem12isSelectableEv'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a><br/></dt>
+<dd><p>Check if the item can be selected by the cursor. </p>
 </dd></dl>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8MenuItemD0Ev">
@@ -384,6 +392,7 @@
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItem8MenuItemEPKc'" class="reference internal" href="#_CPPv4N8MenuItem8MenuItemEPKc"><code class="docutils literal notranslate"><span class="pre">MenuItem()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItem7getTextEv'" class="reference internal" href="#_CPPv4N8MenuItem7getTextEv"><code class="docutils literal notranslate"><span class="pre">getText()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItem7setTextEPKc'" class="reference internal" href="#_CPPv4N8MenuItem7setTextEPKc"><code class="docutils literal notranslate"><span class="pre">setText()</span></code></a></li>
+<li><a :data-current="activeSection === '#_CPPv4NK8MenuItem12isSelectableEv'" class="reference internal" href="#_CPPv4NK8MenuItem12isSelectableEv"><code class="docutils literal notranslate"><span class="pre">isSelectable()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItemD0Ev'" class="reference internal" href="#_CPPv4N8MenuItemD0Ev"><code class="docutils literal notranslate"><span class="pre">~MenuItem()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4NK8MenuItem11getViewSizeEP12MenuRenderer'" class="reference internal" href="#_CPPv4NK8MenuItem11getViewSizeEP12MenuRenderer"><code class="docutils literal notranslate"><span class="pre">getViewSize()</span></code></a></li>
 <li><a :data-current="activeSection === '#_CPPv4N8MenuItem7processEP7LcdMenuKh'" class="reference internal" href="#_CPPv4N8MenuItem7processEP7LcdMenuKh"><code class="docutils literal notranslate"><span class="pre">process()</span></code></a></li>
