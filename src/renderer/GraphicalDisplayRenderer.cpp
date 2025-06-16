@@ -1,5 +1,24 @@
 #include "GraphicalDisplayRenderer.h"
 #include <U8g2lib.h>
+#include <string.h>
+
+static const uint8_t updown_glyph[] = {
+    0x00,
+    0x18,
+    0x3C,
+    0x7E,
+    0xFF,
+    0x7E,
+    0x3C,
+    0x18,
+    0x18,
+    0x3C,
+    0x7E,
+    0xFF,
+    0x7E,
+    0x3C,
+    0x18,
+    0x00};
 
 GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display,
                                                    const uint8_t* font)
@@ -102,6 +121,15 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
     } else {
         gDisplay->draw("\u25B8");
     }
+}
+
+void GraphicalDisplayRenderer::drawListIndicator() {
+    uint8_t displayWidth = gDisplay->getDisplayWidth();
+    bool showScrollBar = totalItems > getMaxRows();
+    uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
+    uint8_t x = displayWidth - rightGap - 8 - valueOffsetRight;
+    uint8_t top = cursorRow * gDisplay->getFontHeight();
+    gDisplay->drawXbm(x, top, 8, 16, updown_glyph);
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {

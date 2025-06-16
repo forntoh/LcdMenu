@@ -63,4 +63,7 @@ class U8g2DisplayAdapter : public GraphicalDisplayInterface {
     void drawFrame(uint8_t x, uint8_t y, uint8_t w, uint8_t h) override {
         u8g2->drawFrame(x, y, w, h);
     }
+    void drawXbm(uint8_t x, uint8_t y, uint8_t w, uint8_t h, const uint8_t* bitmap) override {
+        u8g2->drawXBM(x, y, w, h, bitmap);
+    }
 };

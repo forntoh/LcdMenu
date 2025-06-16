@@ -36,6 +36,7 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     void drawBlinker() override;
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override;
     void drawSubMenuIndicator() override;
+    void drawListIndicator() override;
 
     void setValueWidth(uint8_t width) { valueWidth = width; }
     uint8_t getCharWidth() const { return gDisplay->getFontWidth(); }

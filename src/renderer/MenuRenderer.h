@@ -107,6 +107,13 @@ class MenuRenderer {
     virtual void drawSubMenuIndicator() {}
 
     /**
+     * @brief Draw an indicator showing that the value can be adjusted with
+     *        up/down commands. Default implementation does nothing and can be
+     *        overridden by specialized renderers.
+     */
+    virtual void drawListIndicator() {}
+
+    /**
      * @brief Sets the edit mode for the menu.
      * @param inEditMode Flag indicating whether to enter or exit edit mode.
      */
