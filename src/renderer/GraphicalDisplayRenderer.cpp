@@ -3,13 +3,22 @@
 #include <string.h>
 
 static const uint8_t updown_glyph[] = {
-    0x08,
-    0x1C,
-    0x3E,
     0x00,
-    0x3E,
-    0x1C,
-    0x08,
+    0x18,
+    0x3C,
+    0x7E,
+    0xFF,
+    0x7E,
+    0x3C,
+    0x18,
+    0x18,
+    0x3C,
+    0x7E,
+    0xFF,
+    0x7E,
+    0x3C,
+    0x18,
+    0x00,
 };
 
 GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display,
@@ -61,7 +70,10 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     gDisplay->draw(textPtr);
 
     if (value) {
-        uint8_t valX = displayWidth - rightGap - valueOffsetRight - valueWidth;
+        uint8_t indicatorSpace = drawListNext ? listGlyphWidth + listGap : 0;
+        uint8_t valX =
+            displayWidth - rightGap - valueOffsetRight - indicatorSpace -
+            valueWidth;
         const char* valPtr = value;
         if (hasFocus) {
             uint8_t textLen = strlen(text);
@@ -77,7 +89,8 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     gDisplay->setDrawColor(1);
 
     if (hasFocus)
-        moveCursor((displayWidth - rightGap - valueOffsetRight) /
+        moveCursor((displayWidth - rightGap - valueOffsetRight -
+                    (drawListNext ? listGlyphWidth + listGap : 0)) /
                        gDisplay->getFontWidth(),
                    cursorRow);
 
@@ -118,14 +131,15 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
 void GraphicalDisplayRenderer::drawListIndicator() {
     uint8_t displayWidth = gDisplay->getDisplayWidth();
     bool showScrollBar = totalItems > getMaxRows();
-    uint8_t glyphWidth = 7;
-    uint8_t glyphHeight = 8;
     uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
-    uint8_t x = displayWidth - rightGap - glyphWidth - valueOffsetRight;
-    uint8_t top = cursorRow * gDisplay->getFontHeight() + (glyphHeight / 2);
+    uint8_t x = displayWidth - rightGap - listGlyphWidth - valueOffsetRight;
+    int16_t top = cursorRow * gDisplay->getFontHeight() +
+                  ((int16_t)gDisplay->getFontHeight() - listGlyphHeight) / 2;
+    if (top < 0) top = 0;
     if (hasFocus) gDisplay->setDrawColor(0);
-    gDisplay->drawXbm(x, top, glyphWidth, glyphHeight, updown_glyph);
+    gDisplay->drawXbm(x, top, listGlyphWidth, listGlyphHeight, updown_glyph);
     if (hasFocus) gDisplay->setDrawColor(1);
+    drawListNext = false;
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {

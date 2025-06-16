@@ -10,7 +10,11 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     static constexpr uint8_t scrollbarWidth = 1;
     static constexpr uint8_t gutter = 2;
     static constexpr uint8_t valueOffsetRight = 1;
+    static constexpr uint8_t listGlyphWidth = 8;
+    static constexpr uint8_t listGlyphHeight = 16;
+    static constexpr uint8_t listGap = 1;
     uint8_t valueWidth = 0;
+    bool drawListNext = false;
 
     void drawScrollBar();
     uint8_t getEffectiveCols() const override;
@@ -37,6 +41,8 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override;
     void drawSubMenuIndicator() override;
     void drawListIndicator() override;
+
+    void setNextListIndicator(bool enable) override { drawListNext = enable; }
 
     void setValueWidth(uint8_t width) { valueWidth = width; }
     uint8_t getCharWidth() const { return gDisplay->getFontWidth(); }

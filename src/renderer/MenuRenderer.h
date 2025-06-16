@@ -113,6 +113,8 @@ class MenuRenderer {
      */
     virtual void drawListIndicator() {}
 
+    virtual void setNextListIndicator(bool) {}
+
     /**
      * @brief Sets the edit mode for the menu.
      * @param inEditMode Flag indicating whether to enter or exit edit mode.
