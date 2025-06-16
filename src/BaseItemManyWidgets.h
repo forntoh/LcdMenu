@@ -121,18 +121,34 @@ class BaseItemManyWidgets : public MenuItem {
 
         uint8_t index = 0;
         uint8_t cursorCol = 0;
+        uint8_t activeStart = 0;
         bool hasListWidget = false;
 
         for (uint8_t i = 0; i < widgets.size(); i++) {
+            uint8_t startIndex = index;
             index += widgets[i]->draw(buf, index);
             if (widgets[i]->isList()) hasListWidget = true;
             if (i == activeWidget && renderer->isInEditMode()) {
+                activeStart = startIndex;
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
                 renderer->viewShift = index > v_size ? index - v_size : 0;
                 renderer->setNextListIndicator(widgets[i]->isList());
+                GraphicalDisplayInterface* gDisp =
+                    renderer->display->isGraphical()
+                        ? static_cast<GraphicalDisplayInterface*>(renderer->display)
+                        : nullptr;
+                if (gDisp) {
+                    char tmp = buf[startIndex];
+                    buf[startIndex] = '\0';
+                    renderer->setHighlightOffset(gDisp->getTextWidth(buf));
+                    buf[startIndex] = tmp;
+                }
+                char saved = buf[index];
+                buf[index] = '\0';
                 renderer->setHighlightValue(true);
-                renderer->drawItem(text, buf, i == widgets.size() - 1);
+                renderer->drawItem(text, buf + startIndex, i == widgets.size() - 1);
                 renderer->setHighlightValue(false);
+                buf[index] = saved;
                 if (widgets[i]->isList()) renderer->drawListIndicator();
                 cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
