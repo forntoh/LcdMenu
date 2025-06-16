@@ -34,8 +34,6 @@ class MenuRenderer {
      */
     bool hasFocus = false;
 
-    bool highlightValue = false;
-
     uint8_t cursorCol;
     uint8_t cursorRow;
 
@@ -114,10 +112,6 @@ class MenuRenderer {
      *        overridden by specialized renderers.
      */
     virtual void drawListIndicator() {}
-
-    virtual void setNextListIndicator(bool) {}
-
-    virtual void setHighlightValue(bool enable) { highlightValue = enable; }
 
     /**
      * @brief Sets the edit mode for the menu.

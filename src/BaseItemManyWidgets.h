@@ -121,31 +121,22 @@ class BaseItemManyWidgets : public MenuItem {
 
         uint8_t index = 0;
         uint8_t cursorCol = 0;
-        uint8_t activeStart = 0;
         bool hasListWidget = false;
 
         for (uint8_t i = 0; i < widgets.size(); i++) {
-            uint8_t startIndex = index;
             index += widgets[i]->draw(buf, index);
             if (widgets[i]->isList()) hasListWidget = true;
-            if (i == activeWidget) {
-                activeStart = startIndex;
+            if (i == activeWidget && renderer->isInEditMode()) {
+                size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
+                renderer->viewShift = index > v_size ? index - v_size : 0;
+                renderer->drawItem(text, buf);
+                cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
-        buf[index] = '\0';
-        renderer->setNextListIndicator(hasListWidget);
-        if (renderer->isInEditMode()) {
-            size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
-            renderer->viewShift = index > v_size ? index - v_size : 0;
-            renderer->setHighlightValue(true);
-        }
         renderer->drawItem(text, buf);
-        renderer->setHighlightValue(false);
         if (!renderer->isInEditMode() && hasListWidget) renderer->drawListIndicator();
 
         if (renderer->isInEditMode()) {
-            uint8_t finalCol = renderer->getCursorCol();
-            cursorCol = finalCol - (index - (activeStart + widgets[activeWidget]->cursorOffset));
             renderer->moveCursor(cursorCol, renderer->getCursorRow());
         }
     }

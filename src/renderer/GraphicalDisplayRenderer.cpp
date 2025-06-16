@@ -45,7 +45,6 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     uint8_t textAreaWidth = displayWidth - rightGap;
 
     bool highlightRow = hasFocus && !isInEditMode();
-    bool highlightVal = hasFocus && isInEditMode() && highlightValue;
     if (highlightRow) {
         gDisplay->setDrawColor(1);
         gDisplay->drawBox(0, top + 1, textAreaWidth, rowHeight);
@@ -63,7 +62,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     gDisplay->draw(textPtr);
 
     if (value) {
-        uint8_t indicatorSpace = drawListNext ? listGlyphWidth + listGap : 0;
+        uint8_t indicatorSpace = listGlyphWidth + listGap;
         uint8_t valX =
             displayWidth - rightGap - valueOffsetRight - indicatorSpace -
             valueWidth;
@@ -75,22 +74,15 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
                 valPtr = shift < strlen(value) ? value + shift : "";
             }
         }
-        if (highlightVal) {
-            uint8_t valW = gDisplay->getTextWidth(valPtr);
-            uint8_t highlightW = valW + 2;
-            gDisplay->drawBox(valX - 1, top + 1, highlightW, rowHeight);
-            gDisplay->setDrawColor(0);
-        }
         gDisplay->setCursor(valX, y);
         gDisplay->draw(valPtr);
-        if (highlightVal) gDisplay->setDrawColor(1);
     }
 
     gDisplay->setDrawColor(1);
 
     if (hasFocus)
         moveCursor((displayWidth - rightGap - valueOffsetRight -
-                    (drawListNext ? listGlyphWidth + listGap : 0)) /
+                    (listGlyphWidth + listGap)) /
                        gDisplay->getFontWidth(),
                    cursorRow);
 
@@ -138,7 +130,6 @@ void GraphicalDisplayRenderer::drawListIndicator() {
     if (hasFocus) gDisplay->setDrawColor(0);
     gDisplay->drawXbm(x, top, listGlyphWidth, listGlyphHeight, updown_glyph);
     if (hasFocus) gDisplay->setDrawColor(1);
-    drawListNext = false;
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
