@@ -9,6 +9,7 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     const uint8_t* font;
     static constexpr uint8_t scrollbarWidth = 1;
     static constexpr uint8_t gutter = 2;
+    static constexpr uint8_t valueOffsetRight = 1;
     uint8_t valueWidth = 0;
 
     void drawScrollBar();

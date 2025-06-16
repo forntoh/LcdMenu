@@ -29,7 +29,9 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     uint8_t top = cursorRow * rowHeight;
     uint8_t y = top + fontHeight - 1;
     uint8_t displayWidth = gDisplay->getDisplayWidth();
-    uint8_t textAreaWidth = displayWidth - scrollbarWidth - 1;
+    bool showScrollBar = totalItems > getMaxRows();
+    uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
+    uint8_t textAreaWidth = displayWidth - rightGap;
 
     if (hasFocus) {
         gDisplay->setDrawColor(1);
@@ -48,7 +50,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     gDisplay->draw(textPtr);
 
     if (value) {
-        uint8_t valX = displayWidth - scrollbarWidth - 1 - valueWidth;
+        uint8_t valX = displayWidth - rightGap - valueOffsetRight - valueWidth;
         const char* valPtr = value;
         if (hasFocus) {
             uint8_t textLen = strlen(text);
@@ -63,7 +65,10 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
 
     gDisplay->setDrawColor(1);
 
-    if (hasFocus) moveCursor((displayWidth - scrollbarWidth) / gDisplay->getFontWidth(), cursorRow);
+    if (hasFocus)
+        moveCursor((displayWidth - rightGap - valueOffsetRight) /
+                       gDisplay->getFontWidth(),
+                   cursorRow);
 
     if (cursorRow == 0) drawScrollBar();
 }
@@ -86,7 +91,9 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
     uint8_t y = cursorRow * rowHeight + fontHeight - 1;
     uint8_t arrowWidth = gDisplay->getTextWidth("\u25B8");
     uint8_t displayWidth = gDisplay->getDisplayWidth();
-    uint8_t x = displayWidth - scrollbarWidth - arrowWidth - 1;
+    bool showScrollBar = totalItems > getMaxRows();
+    uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
+    uint8_t x = displayWidth - rightGap - arrowWidth - valueOffsetRight;
     gDisplay->setCursor(x, y);
     if (hasFocus) {
         gDisplay->setDrawColor(0);
@@ -98,7 +105,9 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
-    return (gDisplay->getDisplayWidth() - scrollbarWidth) /
+    bool showScrollBar = totalItems > getMaxRows();
+    uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
+    return (gDisplay->getDisplayWidth() - rightGap - valueOffsetRight) /
            gDisplay->getFontWidth();
 }
 
