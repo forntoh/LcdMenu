@@ -3,22 +3,13 @@
 #include <string.h>
 
 static const uint8_t updown_glyph[] = {
+    0x08,
+    0x1C,
+    0x3E,
     0x00,
-    0x18,
-    0x3C,
-    0x7E,
-    0xFF,
-    0x7E,
-    0x3C,
-    0x18,
-    0x18,
-    0x3C,
-    0x7E,
-    0xFF,
-    0x7E,
-    0x3C,
-    0x18,
-    0x00,
+    0x3E,
+    0x1C,
+    0x08,
 };
 
 GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display,
@@ -53,7 +44,9 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
     uint8_t textAreaWidth = displayWidth - rightGap;
 
-    if (hasFocus) {
+    bool highlightRow = hasFocus && !isInEditMode();
+    bool highlightVal = hasFocus && isInEditMode() && highlightValue;
+    if (highlightRow) {
         gDisplay->setDrawColor(1);
         gDisplay->drawBox(0, top + 1, textAreaWidth, rowHeight);
         gDisplay->setDrawColor(0);
@@ -82,8 +75,14 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
                 valPtr = shift < strlen(value) ? value + shift : "";
             }
         }
+        if (highlightVal) {
+            uint8_t valW = gDisplay->getTextWidth(valPtr);
+            gDisplay->drawBox(valX - 1, top + 1, valW + 2, rowHeight);
+            gDisplay->setDrawColor(0);
+        }
         gDisplay->setCursor(valX, y);
         gDisplay->draw(valPtr);
+        if (highlightVal) gDisplay->setDrawColor(1);
     }
 
     gDisplay->setDrawColor(1);
@@ -153,13 +152,16 @@ void GraphicalDisplayRenderer::drawScrollBar() {
     uint8_t rows = getMaxRows();
     if (totalItems <= rows) return;
     uint8_t displayWidth = gDisplay->getDisplayWidth();
-    uint8_t displayHeight = gDisplay->getDisplayHeight();
+    uint8_t areaHeight = getMaxRows() * gDisplay->getFontHeight() +
+                         gDisplay->getFontHeight();
+    if (areaHeight > gDisplay->getDisplayHeight())
+        areaHeight = gDisplay->getDisplayHeight();
     uint8_t x = displayWidth - scrollbarWidth;
     float ratio = static_cast<float>(rows) / totalItems;
-    uint8_t h = ratio * displayHeight;
+    uint8_t h = ratio * areaHeight;
     if (h < 2) h = 2;
     float posRatio = 0.0f;
     if (totalItems > rows) posRatio = static_cast<float>(viewStart) / (totalItems - rows);
-    uint8_t y = posRatio * (displayHeight - h);
+    uint8_t y = posRatio * (areaHeight - h);
     gDisplay->drawBox(x, y, scrollbarWidth, h);
 }

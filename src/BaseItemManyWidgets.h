@@ -130,12 +130,15 @@ class BaseItemManyWidgets : public MenuItem {
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
                 renderer->viewShift = index > v_size ? index - v_size : 0;
                 renderer->setNextListIndicator(widgets[i]->isList());
+                renderer->setHighlightValue(true);
                 renderer->drawItem(text, buf, i == widgets.size() - 1);
+                renderer->setHighlightValue(false);
                 if (widgets[i]->isList()) renderer->drawListIndicator();
                 cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
         renderer->setNextListIndicator(hasListWidget);
+        renderer->setHighlightValue(false);
         renderer->drawItem(text, buf);
         if (!renderer->isInEditMode() && hasListWidget) renderer->drawListIndicator();
 
