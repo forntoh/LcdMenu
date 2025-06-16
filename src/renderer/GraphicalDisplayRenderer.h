@@ -14,7 +14,6 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     static constexpr uint8_t listGlyphHeight = 8;
     static constexpr uint8_t listGap = 1;
     uint8_t valueWidth = 0;
-    uint8_t highlightOffset = 0;
     bool drawListNext = false;
 
     void drawScrollBar();
@@ -46,8 +45,6 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     void setHighlightValue(bool enable) override { MenuRenderer::highlightValue = enable; }
 
     void setNextListIndicator(bool enable) override { drawListNext = enable; }
-
-    void setHighlightOffset(uint8_t offset) { highlightOffset = offset; }
 
     void setValueWidth(uint8_t width) { valueWidth = width; }
     uint8_t getCharWidth() const { return gDisplay->getFontWidth(); }

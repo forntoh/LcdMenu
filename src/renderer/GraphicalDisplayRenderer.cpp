@@ -78,7 +78,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
         if (highlightVal) {
             uint8_t valW = gDisplay->getTextWidth(valPtr);
             uint8_t highlightW = valW + 2;
-            gDisplay->drawBox(valX + highlightOffset - 1, top + 1, highlightW, rowHeight);
+            gDisplay->drawBox(valX - 1, top + 1, highlightW, rowHeight);
             gDisplay->setDrawColor(0);
         }
         gDisplay->setCursor(valX, y);
@@ -95,7 +95,6 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
                    cursorRow);
 
     if (cursorRow == 0) drawScrollBar();
-    highlightOffset = 0;
 }
 
 void GraphicalDisplayRenderer::clearBlinker() {}

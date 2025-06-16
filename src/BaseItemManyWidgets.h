@@ -128,37 +128,24 @@ class BaseItemManyWidgets : public MenuItem {
             uint8_t startIndex = index;
             index += widgets[i]->draw(buf, index);
             if (widgets[i]->isList()) hasListWidget = true;
-            if (i == activeWidget && renderer->isInEditMode()) {
+            if (i == activeWidget) {
                 activeStart = startIndex;
-                size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
-                renderer->viewShift = index > v_size ? index - v_size : 0;
-                renderer->setNextListIndicator(widgets[i]->isList());
-                GraphicalDisplayInterface* gDisp =
-                    renderer->display->isGraphical()
-                        ? static_cast<GraphicalDisplayInterface*>(renderer->display)
-                        : nullptr;
-                if (gDisp) {
-                    char tmp = buf[startIndex];
-                    buf[startIndex] = '\0';
-                    renderer->setHighlightOffset(gDisp->getTextWidth(buf));
-                    buf[startIndex] = tmp;
-                }
-                char saved = buf[index];
-                buf[index] = '\0';
-                renderer->setHighlightValue(true);
-                renderer->drawItem(text, buf + startIndex, i == widgets.size() - 1);
-                renderer->setHighlightValue(false);
-                buf[index] = saved;
-                if (widgets[i]->isList()) renderer->drawListIndicator();
-                cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
+        buf[index] = '\0';
         renderer->setNextListIndicator(hasListWidget);
-        renderer->setHighlightValue(false);
+        if (renderer->isInEditMode()) {
+            size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
+            renderer->viewShift = index > v_size ? index - v_size : 0;
+            renderer->setHighlightValue(true);
+        }
         renderer->drawItem(text, buf);
+        renderer->setHighlightValue(false);
         if (!renderer->isInEditMode() && hasListWidget) renderer->drawListIndicator();
 
         if (renderer->isInEditMode()) {
+            uint8_t finalCol = renderer->getCursorCol();
+            cursorCol = finalCol - (index - (activeStart + widgets[activeWidget]->cursorOffset));
             renderer->moveCursor(cursorCol, renderer->getCursorRow());
         }
     }
