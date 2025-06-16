@@ -46,6 +46,7 @@ void MenuScreen::draw(MenuRenderer* renderer) {
     GraphicalDisplayRenderer* gRenderer =
         gDisplay ? static_cast<GraphicalDisplayRenderer*>(renderer) : nullptr;
     if (gRenderer) {
+        gDisplay->clearBuffer();
         uint8_t widest = 0;
         for (uint8_t i = 0; i < renderer->getMaxRows() && (view + i) < items.size(); i++) {
             MenuItem* it = items[view + i];
