@@ -34,7 +34,7 @@ uint8_t GraphicalDisplayRenderer::draw(uint8_t byte) {
     return gDisplay->draw(c);
 }
 
-void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, bool) {
+void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, bool lastValue) {
     uint8_t fontHeight = gDisplay->getFontHeight();
     uint8_t rowHeight = fontHeight;
     uint8_t top = cursorRow * rowHeight;
@@ -77,7 +77,10 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
         }
         if (highlightVal) {
             uint8_t valW = gDisplay->getTextWidth(valPtr);
-            gDisplay->drawBox(valX - 1, top + 1, valW + 2, rowHeight);
+            uint8_t highlightW = valW + 2;
+            if (lastValue)
+                highlightW = displayWidth - rightGap - valueOffsetRight - valX;
+            gDisplay->drawBox(valX - 1, top + 1, highlightW, rowHeight);
             gDisplay->setDrawColor(0);
         }
         gDisplay->setCursor(valX, y);
@@ -132,8 +135,7 @@ void GraphicalDisplayRenderer::drawListIndicator() {
     bool showScrollBar = totalItems > getMaxRows();
     uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
     uint8_t x = displayWidth - rightGap - listGlyphWidth - valueOffsetRight;
-    int16_t top = cursorRow * gDisplay->getFontHeight() +
-                  ((int16_t)gDisplay->getFontHeight() - listGlyphHeight) / 2;
+    int8_t top = cursorRow * gDisplay->getFontHeight() + (listGlyphHeight / 2);
     if (top < 0) top = 0;
     if (hasFocus) gDisplay->setDrawColor(0);
     gDisplay->drawXbm(x, top, listGlyphWidth, listGlyphHeight, updown_glyph);

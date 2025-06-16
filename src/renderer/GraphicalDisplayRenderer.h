@@ -35,7 +35,7 @@ class GraphicalDisplayRenderer : public MenuRenderer {
 
     void begin() override;
     uint8_t draw(uint8_t byte) override;
-    void drawItem(const char* text, const char* value, bool padWithBlanks = true) override;
+    void drawItem(const char* text, const char* value, bool lastValue = true) override;
     void clearBlinker() override;
     void drawBlinker() override;
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override;
