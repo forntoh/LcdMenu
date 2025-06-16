@@ -161,13 +161,13 @@ class MenuRenderer {
      * @brief Gets the maximum number of rows in the display.
      * @return Maximum number of rows.
      */
-    uint8_t getMaxRows() const;
+    virtual uint8_t getMaxRows() const;
 
     /**
      * @brief Gets the maximum number of columns in the display.
      * @return Maximum number of columns.
      */
-    uint8_t getMaxCols() const;
+    virtual uint8_t getMaxCols() const;
 
     /**
      * @brief Calculates the available horizontal space for displaying content.

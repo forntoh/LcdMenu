@@ -28,7 +28,7 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
     if (constrained == cursor) {
         return;
     }
-    uint8_t viewSize = renderer->maxRows;
+    uint8_t viewSize = renderer->getMaxRows();
     if (constrained < view) {
         view = constrained;
     } else if (constrained > (view + (viewSize - 1))) {
@@ -47,7 +47,7 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         gDisplay ? static_cast<GraphicalDisplayRenderer*>(renderer) : nullptr;
     if (gRenderer) {
         uint8_t widest = 0;
-        for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
+        for (uint8_t i = 0; i < renderer->getMaxRows() && (view + i) < items.size(); i++) {
             MenuItem* it = items[view + i];
             uint8_t w = gDisplay->getTextWidth(it->getText());
             if (w > widest) widest = w;
@@ -55,7 +55,7 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         gRenderer->setLabelWidth(widest);
     }
     if (gDisplay) gDisplay->clearBuffer();
-    for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
+    for (uint8_t i = 0; i < renderer->getMaxRows() && (view + i) < items.size(); i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {
             break;
@@ -68,7 +68,7 @@ void MenuScreen::draw(MenuRenderer* renderer) {
 
 void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
     renderer->hasHiddenItemsAbove = index == 0 && view > 0;
-    renderer->hasHiddenItemsBelow = index == renderer->maxRows - 1 && (view + renderer->maxRows) < items.size();
+    renderer->hasHiddenItemsBelow = index == renderer->getMaxRows() - 1 && (view + renderer->getMaxRows()) < items.size();
     renderer->hasFocus = cursor == view + index;
     renderer->cursorRow = index;
     renderer->viewStart = view;
@@ -96,7 +96,7 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
             LOG(F("MenuScreen::back"));
             return true;
         case RIGHT:
-            if (renderer->cursorCol >= renderer->maxCols - 1) {
+            if (renderer->cursorCol >= renderer->getMaxCols() - 1) {
                 renderer->viewShift++;
                 draw(renderer);
             }
@@ -129,7 +129,7 @@ void MenuScreen::down(MenuRenderer* renderer) {
         return;
     }
     if (cursor < items.size() - 1) {
-        if (++cursor > view + renderer->maxRows - 1) view++;
+        if (++cursor > view + renderer->getMaxRows() - 1) view++;
         draw(renderer);
     }
     LOG(F("MenuScreen::down"), cursor);
@@ -172,7 +172,7 @@ void MenuScreen::clear() {
 void MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
     static unsigned long lastPollTime = 0;
     if (millis() - lastPollTime >= pollInterval) {
-        for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
+        for (uint8_t i = 0; i < renderer->getMaxRows() && (view + i) < items.size(); i++) {
             MenuItem* item = this->items[view + i];
             if (item == nullptr || !item->polling || renderer->isInEditMode()) continue;
             syncIndicators(i, renderer);

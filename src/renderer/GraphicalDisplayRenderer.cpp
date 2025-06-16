@@ -5,9 +5,6 @@ GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* di
 
 void GraphicalDisplayRenderer::begin() {
     MenuRenderer::begin();
-    setDimensions((gDisplay->getDisplayWidth() - scrollbarWidth) /
-                      gDisplay->getFontWidth(),
-                  gDisplay->getDisplayHeight() / (gDisplay->getFontHeight() + 2));
     drawScrollBar();
     gDisplay->sendBuffer();
 }
@@ -100,15 +97,16 @@ uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
 }
 
 void GraphicalDisplayRenderer::drawScrollBar() {
-    if (totalItems <= maxRows) return;
+    uint8_t rows = getMaxRows();
+    if (totalItems <= rows) return;
     uint8_t displayWidth = gDisplay->getDisplayWidth();
     uint8_t displayHeight = gDisplay->getDisplayHeight();
     uint8_t x = displayWidth - scrollbarWidth;
-    float ratio = (float)maxRows / totalItems;
+    float ratio = static_cast<float>(rows) / totalItems;
     uint8_t h = ratio * displayHeight;
     if (h < 2) h = 2;
     float posRatio = 0.0f;
-    if (totalItems > maxRows) posRatio = (float)viewStart / (totalItems - maxRows);
+    if (totalItems > rows) posRatio = static_cast<float>(viewStart) / (totalItems - rows);
     uint8_t y = posRatio * (displayHeight - h);
     gDisplay->drawBox(x, y, scrollbarWidth, h);
 }
