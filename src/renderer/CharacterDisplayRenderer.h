@@ -23,8 +23,8 @@ class CharacterDisplayRenderer : public MenuRenderer {
   protected:
     uint8_t* upArrow;
     uint8_t* downArrow;
-    const uint8_t cursorIcon;
-    const uint8_t editCursorIcon;
+    const char* cursorIcon;
+    const char* editCursorIcon;
     const uint8_t availableColumns;
     /**
      * @brief Calculates the available horizontal space for displaying content.
@@ -62,8 +62,8 @@ class CharacterDisplayRenderer : public MenuRenderer {
      * @param display A pointer to the CharacterDisplayInterface object.
      * @param maxCols The maximum number of columns on the display.
      * @param maxRows The maximum number of rows on the display.
-     * @param cursorIcon A byte representing the cursor icon, default is →, if 0, cursor will not be displayed
-     * @param editCursorIcon A byte representing the edit cursor icon, default is ←, if 0, edit cursor will not be displayed
+     * @param cursorIcon A UTF-8 string representing the cursor icon. Default is "\x7E".
+     * @param editCursorIcon A UTF-8 string representing the edit cursor icon. Default is "\x7F".
      * @param upArrow A pointer to an array of bytes representing the up arrow icon, default is ↑, if null, up arrow will not be displayed
      * @param downArrow A pointer to an array of bytes representing the down arrow icon, default is ↓, if null, down arrow will not be displayed
      */
@@ -71,8 +71,8 @@ class CharacterDisplayRenderer : public MenuRenderer {
         CharacterDisplayInterface* display,
         const uint8_t maxCols,
         const uint8_t maxRows,
-        const uint8_t cursorIcon = 0x7E,
-        const uint8_t editCursorIcon = 0x7F,
+        const char* cursorIcon = "\x7E",
+        const char* editCursorIcon = "\x7F",
         uint8_t* upArrow = new uint8_t[8]{0x04, 0x0E, 0x1F, 0x04, 0x04, 0x04, 0x04, 0x04},
         uint8_t* downArrow = new uint8_t[8]{0x04, 0x04, 0x04, 0x04, 0x04, 0x1F, 0x0E, 0x04});
 
