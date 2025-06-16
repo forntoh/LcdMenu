@@ -1,15 +1,11 @@
 #include "GraphicalDisplayRenderer.h"
 
-GraphicalDisplayRenderer::GraphicalDisplayRenderer(
-    GraphicalDisplayInterface* display,
-    uint8_t chWidth)
+GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display)
     : MenuRenderer(display,
-                   (display->getDisplayWidth() - scrollbarWidth) / chWidth,
+                   (display->getDisplayWidth() - scrollbarWidth) /
+                       display->getFontWidth(),
                    display->getDisplayHeight() / (display->getFontHeight() + 2)),
-      gDisplay(display),
-      charWidth(chWidth),
-      displayWidth(display->getDisplayWidth()),
-      displayHeight(display->getDisplayHeight()) {}
+      gDisplay(display) {}
 
 void GraphicalDisplayRenderer::begin() {
     MenuRenderer::begin();
@@ -27,6 +23,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     uint8_t rowHeight = fontHeight + 2;
     uint8_t top = cursorRow * rowHeight;
     uint8_t y = top + fontHeight;
+    uint8_t displayWidth = gDisplay->getDisplayWidth();
     uint8_t textAreaWidth = displayWidth - scrollbarWidth - 1;
 
     if (hasFocus) {
@@ -64,7 +61,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
 
     gDisplay->setDrawColor(1);
 
-    if (hasFocus) moveCursor((displayWidth - scrollbarWidth) / charWidth, cursorRow);
+    if (hasFocus) moveCursor((displayWidth - scrollbarWidth) / gDisplay->getFontWidth(), cursorRow);
 
     if (cursorRow == 0) drawScrollBar();
 }
@@ -77,7 +74,8 @@ void GraphicalDisplayRenderer::moveCursor(uint8_t col, uint8_t row) {
     MenuRenderer::moveCursor(col, row);
     uint8_t fontHeight = gDisplay->getFontHeight();
     uint8_t rowHeight = fontHeight + 2;
-    gDisplay->setCursor(col * charWidth, row * rowHeight + fontHeight);
+    gDisplay->setCursor(col * gDisplay->getFontWidth(),
+                        row * rowHeight + fontHeight);
 }
 
 void GraphicalDisplayRenderer::drawSubMenuIndicator() {
@@ -85,6 +83,7 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
     uint8_t rowHeight = fontHeight + 2;
     uint8_t y = cursorRow * rowHeight + fontHeight;
     uint8_t arrowWidth = gDisplay->getTextWidth("\u25B8");
+    uint8_t displayWidth = gDisplay->getDisplayWidth();
     uint8_t x = displayWidth - scrollbarWidth - arrowWidth - 1;
     gDisplay->setCursor(x, y);
     if (hasFocus) {
@@ -97,11 +96,14 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
-    return (displayWidth - scrollbarWidth) / charWidth;
+    return (gDisplay->getDisplayWidth() - scrollbarWidth) /
+           gDisplay->getFontWidth();
 }
 
 void GraphicalDisplayRenderer::drawScrollBar() {
     if (totalItems <= maxRows) return;
+    uint8_t displayWidth = gDisplay->getDisplayWidth();
+    uint8_t displayHeight = gDisplay->getDisplayHeight();
     uint8_t x = displayWidth - scrollbarWidth;
     float ratio = (float)maxRows / totalItems;
     uint8_t h = ratio * displayHeight;
