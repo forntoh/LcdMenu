@@ -4,8 +4,8 @@ CharacterDisplayRenderer::CharacterDisplayRenderer(
     CharacterDisplayInterface* display,
     const uint8_t maxCols,
     const uint8_t maxRows,
-    const char* cursorIcon,
-    const char* editCursorIcon,
+    const uint8_t cursorIcon,
+    const uint8_t editCursorIcon,
     uint8_t* upArrow,
     uint8_t* downArrow)
     : MenuRenderer(display, maxCols, maxRows),
@@ -33,18 +33,24 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value, boo
     display->setCursor(cursorCol, cursorRow);
 
     // Draw cursor or empty space based on focus and edit mode
-    if ((cursorIcon && *cursorIcon) || (editCursorIcon && *editCursorIcon)) {
-        display->draw(hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : " ");
+    if (cursorIcon != 0 || editCursorIcon != 0) {
+        display->draw(hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ');
         cursorCol++;
     }
 
     // Draw text
     drawText(text, cursorCol, viewShift);
 
+    // Draw colon separator if value is present and within bounds
+    if (value && cursorCol < availableColumns && (!hasFocus || viewShift < strlen(text) + 1)) {
+        display->draw(':');
+        cursorCol++;
+    }
+
     // Draw value if present
     if (value) {
         uint8_t textLen = strlen(text);
-        uint8_t valueViewShift = (viewShift > textLen) ? viewShift - textLen : 0;
+        uint8_t valueViewShift = (viewShift > textLen) ? viewShift - textLen - 1 : 0;
         drawText(value, cursorCol, valueViewShift);
     }
 
@@ -104,6 +110,5 @@ void CharacterDisplayRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) 
 }
 
 uint8_t CharacterDisplayRenderer::getEffectiveCols() const {
-    bool hasCursor = (cursorIcon && *cursorIcon) || (editCursorIcon && *editCursorIcon);
-    return availableColumns - (hasCursor ? 1 : 0);
+    return availableColumns - (cursorIcon != 0 || editCursorIcon != 0 ? 1 : 0);
 }
