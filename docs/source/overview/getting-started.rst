@@ -23,7 +23,7 @@ Follow `this guide <https://www.ardu-badge.com/LcdMenu>`_ to install the library
     .. code-block:: bash
     
         lib_deps =
-            forntoh/LcdMenu@^5.11.3
+            forntoh/LcdMenu@^5.12.0
 
 4. Save the changes to the platformio.ini file.
 

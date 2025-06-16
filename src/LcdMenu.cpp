@@ -13,6 +13,7 @@ void LcdMenu::setScreen(MenuScreen* screen) {
     LOG(F("LcdMenu::setScreen"));
     this->screen = screen;
     renderer.display->clear();
+    this->screen->reset(&renderer);
     this->screen->draw(&renderer);
     if (renderer.display->isGraphical())
         static_cast<GraphicalDisplayInterface*>(renderer.display)->sendBuffer();

@@ -25,6 +25,21 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
         return;
     }
     uint8_t constrained = constrain(position, 0, items.size() - 1);
+    if (!items[constrained]->isSelectable()) {
+        uint8_t forward = constrained;
+        while (forward < items.size() && !items[forward]->isSelectable()) {
+            forward++;
+        }
+        if (forward < items.size()) {
+            constrained = forward;
+        } else {
+            int8_t backward = constrained;
+            while (backward >= 0 && !items[backward]->isSelectable()) {
+                backward--;
+            }
+            constrained = backward < 0 ? constrained : static_cast<uint8_t>(backward);
+        }
+    }
     if (constrained == cursor) {
         return;
     }
@@ -116,8 +131,15 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
 }
 
 void MenuScreen::up(MenuRenderer* renderer) {
+    if (items.empty()) {
+        cursor = 0;
+        draw(renderer);
+        return;
+    }
     if (cursor > 0) {
-        if (--cursor < view) view--;
+        setCursor(renderer, cursor - 1);
+    } else if (view > 0) {
+        view--;
         draw(renderer);
     }
     LOG(F("MenuScreen::up"), cursor);
@@ -139,7 +161,11 @@ void MenuScreen::down(MenuRenderer* renderer) {
 void MenuScreen::reset(MenuRenderer* renderer) {
     cursor = 0;
     view = 0;
-    draw(renderer);
+    if (!items.empty() && !items[cursor]->isSelectable()) {
+        setCursor(renderer, cursor);
+    } else {
+        draw(renderer);
+    }
 }
 
 MenuScreen::MenuScreen(const std::vector<MenuItem*>& items) : items(items) {}

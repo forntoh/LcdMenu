@@ -4,6 +4,7 @@
 #undef protected
 #include <ArduinoUnitTests.h>
 #include <ItemCommand.h>
+#include <ItemLabel.h>
 #include <ItemToggle.h>
 #include <display/DisplayInterface.h>
 #include <renderer/MenuRenderer.h>
@@ -139,6 +140,19 @@ unittest(show_enables_and_draws_active_screen) {
     assertTrue(menu.isEnabled());
     assertTrue(renderer.display.cleared);
     assertTrue(renderer.itemDrawn);
+}
+
+unittest(set_screen_skips_initial_label) {
+    MenuItem* label = ITEM_LABEL("Title");
+    MenuItem* item = ITEM_BASIC("Run");
+    std::vector<MenuItem*> items = {label, item};
+    MenuScreen screen(items);
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    menu.setScreen(&screen);
+    assertEqual((uint8_t)1, menu.getCursor());
+    delete label;
+    delete item;
 }
 
 unittest_main()

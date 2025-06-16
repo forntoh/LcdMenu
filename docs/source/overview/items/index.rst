@@ -10,6 +10,7 @@ A menu item is a basic building block of a menu screen in |project|. Each menu i
     :caption: Here are some of the built-in menu items:
 
     basic
+    item-label
     item-value
     command
     submenu
