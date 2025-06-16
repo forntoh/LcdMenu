@@ -45,6 +45,7 @@ class U8g2DisplayAdapter : public GraphicalDisplayInterface {
     }
 
     void setBacklight(bool) override {}
+    void setDrawColor(uint8_t color) override { u8g2->setDrawColor(color); }
 
     void setFont(const uint8_t* font) override { u8g2->setFont(font); }
     uint8_t getDisplayWidth() const override { return u8g2->getDisplayWidth(); }

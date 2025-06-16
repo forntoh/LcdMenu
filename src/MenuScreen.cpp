@@ -1,5 +1,6 @@
 #include "MenuScreen.h"
 #include "display/GraphicalDisplayInterface.h"
+#include "renderer/GraphicalDisplayRenderer.h"
 
 void MenuScreen::setParent(MenuScreen* parent) {
     this->parent = parent;
@@ -42,6 +43,17 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         renderer->display->isGraphical()
             ? static_cast<GraphicalDisplayInterface*>(renderer->display)
             : nullptr;
+    GraphicalDisplayRenderer* gRenderer =
+        gDisplay ? static_cast<GraphicalDisplayRenderer*>(renderer) : nullptr;
+    if (gRenderer) {
+        uint8_t widest = 0;
+        for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
+            MenuItem* it = items[view + i];
+            uint8_t w = gDisplay->getTextWidth(it->getText());
+            if (w > widest) widest = w;
+        }
+        gRenderer->setLabelWidth(widest);
+    }
     if (gDisplay) gDisplay->clearBuffer();
     for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
         MenuItem* item = this->items[view + i];

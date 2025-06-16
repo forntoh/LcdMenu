@@ -34,6 +34,11 @@ class ItemSubMenu : public BaseItemZeroWidget {
     }
 
   protected:
+    void draw(MenuRenderer* renderer) override {
+        renderer->drawItem(text, nullptr);
+        renderer->drawSubMenuIndicator();
+    }
+
     void handleCommit(LcdMenu* menu) override {
         LOG(F("ItemSubMenu::changeScreen"), text);
         screen->setParent(menu->getScreen());

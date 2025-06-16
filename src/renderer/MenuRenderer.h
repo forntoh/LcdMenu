@@ -100,6 +100,13 @@ class MenuRenderer {
     virtual void moveCursor(uint8_t cursorCol, uint8_t cursorRow);
 
     /**
+     * @brief Draw a submenu indicator at the end of the current row.
+     *        Default implementation does nothing and can be overridden by
+     *        specialized renderers.
+     */
+    virtual void drawSubMenuIndicator() {}
+
+    /**
      * @brief Sets the edit mode for the menu.
      * @param inEditMode Flag indicating whether to enter or exit edit mode.
      */

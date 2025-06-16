@@ -13,6 +13,8 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     const char* cursorIcon;
     const char* editCursorIcon;
     const uint8_t scrollbarWidth;
+    uint8_t labelWidth = 0;
+    const uint8_t gutter = 2;
 
     void drawScrollBar();
     uint8_t getEffectiveCols() const override;
@@ -25,7 +27,7 @@ class GraphicalDisplayRenderer : public MenuRenderer {
                              uint8_t charHeight,
                              const char* cursorIcon = ">",
                              const char* editCursorIcon = "<",
-                             uint8_t scrollbarWidth = 4);
+                             uint8_t scrollbarWidth = 1);
 
     void begin() override;
     void draw(uint8_t byte) override;
@@ -33,4 +35,7 @@ class GraphicalDisplayRenderer : public MenuRenderer {
     void clearBlinker() override;
     void drawBlinker() override;
     void moveCursor(uint8_t cursorCol, uint8_t cursorRow) override;
+    void drawSubMenuIndicator() override;
+
+    void setLabelWidth(uint8_t width) { labelWidth = width; }
 };
