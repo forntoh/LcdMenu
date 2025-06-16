@@ -3,22 +3,14 @@
 #include <string.h>
 
 static const uint8_t updown_glyph[] = {
+    0x08,
+    0x1C,
+    0x3E,
     0x00,
-    0x18,
-    0x3C,
-    0x7E,
-    0xFF,
-    0x7E,
-    0x3C,
-    0x18,
-    0x18,
-    0x3C,
-    0x7E,
-    0xFF,
-    0x7E,
-    0x3C,
-    0x18,
-    0x00};
+    0x3E,
+    0x1C,
+    0x08,
+};
 
 GraphicalDisplayRenderer::GraphicalDisplayRenderer(GraphicalDisplayInterface* display,
                                                    const uint8_t* font)
@@ -60,7 +52,7 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
         gDisplay->setDrawColor(1);
     }
 
-    gDisplay->setCursor(0, y);
+    gDisplay->setCursor(1, y);
     const char* textPtr = text;
     if (hasFocus) {
         uint8_t len = strlen(text);
@@ -126,10 +118,14 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
 void GraphicalDisplayRenderer::drawListIndicator() {
     uint8_t displayWidth = gDisplay->getDisplayWidth();
     bool showScrollBar = totalItems > getMaxRows();
+    uint8_t glyphWidth = 7;
+    uint8_t glyphHeight = 8;
     uint8_t rightGap = showScrollBar ? scrollbarWidth + 1 : 0;
-    uint8_t x = displayWidth - rightGap - 8 - valueOffsetRight;
-    uint8_t top = cursorRow * gDisplay->getFontHeight();
-    gDisplay->drawXbm(x, top, 8, 16, updown_glyph);
+    uint8_t x = displayWidth - rightGap - glyphWidth - valueOffsetRight;
+    uint8_t top = cursorRow * gDisplay->getFontHeight() + (glyphHeight / 2);
+    if (hasFocus) gDisplay->setDrawColor(0);
+    gDisplay->drawXbm(x, top, glyphWidth, glyphHeight, updown_glyph);
+    if (hasFocus) gDisplay->setDrawColor(1);
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
