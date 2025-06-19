@@ -15,7 +15,10 @@ class BaseItemManyWidgets : public MenuItem {
     uint8_t activeWidget = 0;
 
   public:
-    BaseItemManyWidgets(const char* text, std::vector<BaseWidget*> widgets, uint8_t activeWidget = 0)
+    BaseItemManyWidgets(
+        const char* text,
+        std::vector<BaseWidget*> widgets,
+        uint8_t activeWidget = 0)
         : MenuItem(text), widgets(widgets), activeWidget(constrain(activeWidget, 0, widgets.size())) {
         this->polling = true;
     }
@@ -36,9 +39,7 @@ class BaseItemManyWidgets : public MenuItem {
      *
      * @param widget The widget to be added.
      */
-    void addWidget(BaseWidget* widget) {
-        widgets.push_back(widget);
-    }
+    void addWidget(BaseWidget* widget) { widgets.push_back(widget); }
 
     /**
      * @brief Add a widget to the item at the specified index.
@@ -62,6 +63,7 @@ class BaseItemManyWidgets : public MenuItem {
      */
     void removeWidget(uint8_t index) {
         if (widgets.size() > 1 && index < widgets.size()) {
+            delete widgets[index];
             widgets.erase(widgets.begin() + index);
             if (activeWidget >= widgets.size()) {
                 activeWidget = widgets.size() - 1;
@@ -85,19 +87,24 @@ class BaseItemManyWidgets : public MenuItem {
     /**
      * @brief Draws the menu item using the provided renderer.
      *
-     * This function is responsible for rendering the menu item and its associated widgets.
-     * It iterates through each widget, drawing them into a buffer, and then uses the renderer
-     * to display the combined result. If the renderer is in edit mode, it also handles the
-     * cursor positioning for editing.
+     * This function is responsible for rendering the menu item and its associated
+     * widgets. It iterates through each widget, drawing them into a buffer, and
+     * then uses the renderer to display the combined result. If the renderer is
+     * in edit mode, it also handles the cursor positioning for editing.
      *
-     * @param renderer A pointer to the MenuRenderer object used for drawing the item.
+     * @param renderer A pointer to the MenuRenderer object used for drawing the
+     * item.
      *
      * The function performs the following steps:
-     * 1. Initializes a buffer to hold the drawn content and variables for indexing and cursor positioning.
-     * 2. Iterates through each widget, drawing it into the buffer and updating the index.
-     * 3. If the active widget is being edited, it draws the item using the renderer and calculates the cursor position.
+     * 1. Initializes a buffer to hold the drawn content and variables for
+     * indexing and cursor positioning.
+     * 2. Iterates through each widget, drawing it into the buffer and updating
+     * the index.
+     * 3. If the active widget is being edited, it draws the item using the
+     * renderer and calculates the cursor position.
      * 4. Draws the final item using the renderer.
-     * 5. If in edit mode, moves the cursor to the appropriate position for editing.
+     * 5. If in edit mode, moves the cursor to the appropriate position for
+     * editing.
      */
     void draw(MenuRenderer* renderer) override {
         char buf[ITEM_DRAW_BUFFER_SIZE];
@@ -128,19 +135,21 @@ class BaseItemManyWidgets : public MenuItem {
     /**
      * @brief Processes a command for the active widget in the menu.
      *
-     * This function handles the processing of commands for the active widget in the menu.
-     * It first attempts to process the command using the active widget. If the widget
-     * processes the command successfully, it redraws the menu and returns true.
+     * This function handles the processing of commands for the active widget in
+     * the menu. It first attempts to process the command using the active widget.
+     * If the widget processes the command successfully, it redraws the menu and
+     * returns true.
      *
-     * If the renderer is in edit mode, it handles navigation commands (ENTER, RIGHT, LEFT, BACK)
-     * to navigate through the widgets or exit edit mode.
+     * If the renderer is in edit mode, it handles navigation commands (ENTER,
+     * RIGHT, LEFT, BACK) to navigate through the widgets or exit edit mode.
      *
-     * When the ENTER command is received while the renderer is in edit mode and the active widget
-     * is not the last widget, it moves to the next widget. If the active widget is the last widget,
-     * it exits edit mode and calls the handleCommit function to commit the changes.
+     * When the ENTER command is received while the renderer is in edit mode and
+     * the active widget is not the last widget, it moves to the next widget. If
+     * the active widget is the last widget, it exits edit mode and calls the
+     * handleCommit function to commit the changes.
      *
-     * If the renderer is not in edit mode and the ENTER command is received, it sets the renderer
-     * to edit mode, redraws the menu, and draws a blinker.
+     * If the renderer is not in edit mode and the ENTER command is received, it
+     * sets the renderer to edit mode, redraws the menu, and draws a blinker.
      *
      * @param menu Pointer to the LcdMenu object.
      * @param command The command to be processed.
@@ -168,13 +177,15 @@ class BaseItemManyWidgets : public MenuItem {
                     left(renderer);
                     return true;
                 case BACK:
-                    back(renderer);
+                    cancel(renderer);
                     return true;
                 default:
                     return false;
             }
         }
         if (command == ENTER) {
+            for (auto* w : widgets)
+                if (w) w->startEdit();
             renderer->setEditMode(true);
             draw(renderer);
             renderer->drawBlinker();
@@ -208,6 +219,17 @@ class BaseItemManyWidgets : public MenuItem {
         renderer->clearBlinker();
         draw(renderer);
         LOG(F("ItemWidget::exitEditMode"), this->text);
+    }
+
+    void cancel(MenuRenderer* renderer) {
+        renderer->setEditMode(false);
+        renderer->viewShift = 0;
+        for (auto* w : widgets)
+            if (w) w->cancelEdit();
+        reset();
+        renderer->clearBlinker();
+        draw(renderer);
+        LOG(F("ItemWidget::cancelEditMode"), this->text);
     }
 };
 

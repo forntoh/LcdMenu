@@ -15,6 +15,11 @@ CharacterDisplayRenderer::CharacterDisplayRenderer(
       editCursorIcon(editCursorIcon),
       availableColumns(maxCols - (upArrow != NULL || downArrow != NULL ? 1 : 0)) {}
 
+CharacterDisplayRenderer::~CharacterDisplayRenderer() {
+    delete[] upArrow;
+    delete[] downArrow;
+}
+
 void CharacterDisplayRenderer::begin() {
     MenuRenderer::begin();
     if (upArrow != NULL && downArrow != NULL) {
@@ -23,7 +28,7 @@ void CharacterDisplayRenderer::begin() {
     }
 }
 
-void CharacterDisplayRenderer::drawItem(const char* text, const char* value, bool paddWithBlanks) {
+void CharacterDisplayRenderer::drawItem(const char* text, const char* value, bool padWithBlanks) {
     uint8_t cursorCol = 0;
     display->setCursor(cursorCol, cursorRow);
 
@@ -51,8 +56,8 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value, boo
 
     uint8_t cursorColEnd = cursorCol;
 
-    // Fill remaining space with whitespace only when paddWithBlanks is true
-    if (paddWithBlanks) {
+    // Fill remaining space with whitespace only when padWithBlanks is true
+    if (padWithBlanks) {
         for (; cursorCol < availableColumns; cursorCol++) {
             display->draw(' ');
         }

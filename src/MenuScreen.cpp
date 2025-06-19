@@ -23,6 +23,21 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
         return;
     }
     uint8_t constrained = constrain(position, 0, items.size() - 1);
+    if (!items[constrained]->isSelectable()) {
+        uint8_t forward = constrained;
+        while (forward < items.size() && !items[forward]->isSelectable()) {
+            forward++;
+        }
+        if (forward < items.size()) {
+            constrained = forward;
+        } else {
+            int8_t backward = constrained;
+            while (backward >= 0 && !items[backward]->isSelectable()) {
+                backward--;
+            }
+            constrained = backward < 0 ? constrained : static_cast<uint8_t>(backward);
+        }
+    }
     if (constrained == cursor) {
         return;
     }
@@ -32,7 +47,7 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
     } else if (constrained > (view + (viewSize - 1))) {
         view = constrained - (viewSize - 1);
     }
-    cursor = position;
+    cursor = constrained;
     draw(renderer);
 }
 
@@ -94,8 +109,15 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
 }
 
 void MenuScreen::up(MenuRenderer* renderer) {
+    if (items.empty()) {
+        cursor = 0;
+        draw(renderer);
+        return;
+    }
     if (cursor > 0) {
-        if (--cursor < view) view--;
+        setCursor(renderer, cursor - 1);
+    } else if (view > 0) {
+        view--;
         draw(renderer);
     }
     LOG(F("MenuScreen::up"), cursor);
@@ -108,7 +130,9 @@ void MenuScreen::down(MenuRenderer* renderer) {
         return;
     }
     if (cursor < items.size() - 1) {
-        if (++cursor > view + renderer->maxRows - 1) view++;
+        setCursor(renderer, cursor + 1);
+    } else if (view + renderer->maxRows < items.size()) {
+        view++;
         draw(renderer);
     }
     LOG(F("MenuScreen::down"), cursor);
@@ -117,7 +141,11 @@ void MenuScreen::down(MenuRenderer* renderer) {
 void MenuScreen::reset(MenuRenderer* renderer) {
     cursor = 0;
     view = 0;
-    draw(renderer);
+    if (!items.empty() && !items[cursor]->isSelectable()) {
+        setCursor(renderer, cursor);
+    } else {
+        draw(renderer);
+    }
 }
 
 MenuScreen::MenuScreen(const std::vector<MenuItem*>& items) : items(items) {}
@@ -151,7 +179,7 @@ void MenuScreen::clear() {
 void MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
     static unsigned long lastPollTime = 0;
     if (millis() - lastPollTime >= pollInterval) {
-        for (uint8_t i = 0; i < renderer->maxRows; i++) {
+        for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
             MenuItem* item = this->items[view + i];
             if (item == nullptr || !item->polling || renderer->isInEditMode()) continue;
             syncIndicators(i, renderer);

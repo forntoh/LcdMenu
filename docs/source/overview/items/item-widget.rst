@@ -21,6 +21,8 @@ ItemWidget has the following properties:
 ItemWidget can host one or more widgets.
 The widgets can be of different types and can be used to display different types of data.
 
+When editing a widget, pressing **BACK** restores the original value of the item instead of saving the changes.
+
 You can add widget items dynamically to the ItemWidget using :cpp:func:`BaseItemManyWidgets::addWidget`, :cpp:func:`BaseItemManyWidgets::addWidgetAt` functions or
 remove them using the :cpp:func:`BaseItemManyWidgets::removeWidget` function at runtime to update the widgets based on user input or other conditions.
 

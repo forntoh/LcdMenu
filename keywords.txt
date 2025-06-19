@@ -22,6 +22,7 @@ ItemBool	KEYWORD1
 ItemCommand	KEYWORD1
 ItemInput	KEYWORD1
 ItemInputCharset	KEYWORD1
+ItemLabel	KEYWORD1
 ItemList	KEYWORD1
 ItemRange	KEYWORD1
 ItemSubMenu	KEYWORD1
@@ -46,14 +47,14 @@ WidgetRange	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-ARDUINO_ARCH_STM32	KEYWORD2
 abortCharEdit	KEYWORD2
 addWidget	KEYWORD2
 addWidgetAt	KEYWORD2
-analogValue	KEYWORD2
 back	KEYWORD2
 backspace	KEYWORD2
 begin	KEYWORD2
+cancel	KEYWORD2
+cancelEdit	KEYWORD2
 clear	KEYWORD2
 clearBlinker	KEYWORD2
 commitCharEdit	KEYWORD2
@@ -64,6 +65,7 @@ decrement	KEYWORD2
 draw	KEYWORD2
 drawBlinker	KEYWORD2
 drawChar	KEYWORD2
+enabled	KEYWORD2
 enter	KEYWORD2
 getActiveWidget	KEYWORD2
 getCallbackInt	KEYWORD2
@@ -84,8 +86,10 @@ increment	KEYWORD2
 initCharEdit	KEYWORD2
 invokeCallback	KEYWORD2
 isOn	KEYWORD2
+isSelectable	KEYWORD2
 left	KEYWORD2
 log	KEYWORD2
+long	KEYWORD2
 nextValue	KEYWORD2
 observe	KEYWORD2
 previousValue	KEYWORD2
@@ -104,10 +108,14 @@ setText	KEYWORD2
 setValue	KEYWORD2
 setValues	KEYWORD2
 setValuesImpl	KEYWORD2
+shouldRepeat	KEYWORD2
 show	KEYWORD2
 showNextChar	KEYWORD2
 showPreviousChar	KEYWORD2
 size	KEYWORD2
+start	KEYWORD2
+startEdit	KEYWORD2
+startIfDebounced	KEYWORD2
 substring	KEYWORD2
 toggle	KEYWORD2
 typeChar	KEYWORD2

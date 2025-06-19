@@ -12,7 +12,7 @@ void LcdMenu::setScreen(MenuScreen* screen) {
     LOG(F("LcdMenu::setScreen"));
     this->screen = screen;
     renderer.display->clear();
-    this->screen->draw(&renderer);
+    this->screen->reset(&renderer);
 }
 
 bool LcdMenu::process(const unsigned char c) {
@@ -71,4 +71,7 @@ void LcdMenu::poll(uint16_t pollInterval) {
         return;
     }
     screen->poll(&renderer, pollInterval < 100 ? 100 : pollInterval);
+}
+bool LcdMenu::isEnabled() const {
+    return enabled;
 }
