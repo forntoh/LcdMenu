@@ -47,6 +47,8 @@ class BaseWidget {
      */
     virtual uint8_t draw(char* buffer, const uint8_t start = 0) = 0;
 
+    virtual bool isList() const { return false; }
+
     virtual void startEdit() {}
 
     virtual void cancelEdit() {}

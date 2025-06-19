@@ -88,6 +88,12 @@ class BaseWidgetValue : public BaseWidget {
         }
     }
 
+    /**
+     * @brief Indicates whether the widget represents a list of selectable
+     *        values.
+     */
+    virtual bool isList() const { return false; }
+
   protected:
     /**
      * @brief Draw the widget into specified buffer.
