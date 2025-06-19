@@ -8,7 +8,8 @@ analog stick.
 The horizontal axis is mapped to ``BACK`` and ``RIGHT`` while the
 vertical axis controls ``UP`` and ``DOWN``. The joystick's button can
 be handled separately using a :cpp:class:`ButtonAdapter`. All axis
-commands can be customised when creating the adapter.
+commands can be customised when creating the adapter, and the centre
+value can be adjusted from its default of ``512`` if necessary.
 
 Include the adapter header and create an instance:
 
@@ -35,8 +36,9 @@ The joystick button can be handled separately using a
     }
 
 The adapter handles the dead zone around the centre value so only
-distinct movements generate commands. You can override the default
-commands by passing them to the constructor:
+distinct movements generate commands. The centre value defaults to ``512`` but
+can be set explicitly along with the margin. You can also override the
+command mapping when creating the adapter:
 
 .. code-block:: cpp
 
@@ -45,6 +47,7 @@ commands by passing them to the constructor:
         &menu,
         A2,
         A3,
+        600,   // custom centre value
         100,
         BACK,
         ENTER,
