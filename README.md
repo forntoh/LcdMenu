@@ -23,7 +23,7 @@
 
 LcdMenu is an open-source Arduino library for creating menu systems. It is designed to be easy to use and flexible enough to support a wide range of use cases.
 
-With LcdMenu, you can create a menu system for your Arduino project with minimal effort. The library provides a simple API for creating menus and handling user input. There are also a number of built-in [display interfaces](reference/api/display/index) to choose from, including LCD displays and OLED displays _(coming soon)_.
+With LcdMenu, you can create a menu system for your Arduino project with minimal effort. The library provides a simple API for creating menus and handling user input. There are also a number of built-in [display interfaces](reference/api/display/index) to choose from, including classic character LCDs and graphical displays driven by the U8g2 library, such as SSD1306 or ST7920 modules.
 
 <p align="center">
   <img src="https://i.imgur.com/nViET8b.gif" alt="Example of a menu system created with LcdMenu">

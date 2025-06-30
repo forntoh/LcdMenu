@@ -31,6 +31,13 @@ class ItemValue : public BaseItemZeroWidget {
         snprintf(buffer, ITEM_DRAW_BUFFER_SIZE, format, value);
         renderer->drawItem(text, buffer);
     }
+
+    uint8_t measureValueWidth(GraphicalDisplayInterface* display) override {
+        if (!display) return 0;
+        char buffer[ITEM_DRAW_BUFFER_SIZE];
+        snprintf(buffer, ITEM_DRAW_BUFFER_SIZE, format, value);
+        return display->getTextWidth(buffer);
+    }
 };
 
 /**

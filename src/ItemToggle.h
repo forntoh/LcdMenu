@@ -82,6 +82,13 @@ class ItemToggle : public MenuItem {
 
     const char* getTextOff() { return this->textOff; }
 
+    uint8_t measureValueWidth(GraphicalDisplayInterface* display) override {
+        if (!display) return 0;
+        uint8_t wOn = display->getTextWidth(textOn ? textOn : "");
+        uint8_t wOff = display->getTextWidth(textOff ? textOff : "");
+        return wOn > wOff ? wOn : wOff;
+    }
+
     void draw(MenuRenderer* renderer) override {
         renderer->drawItem(text, enabled ? textOn : textOff);
     };

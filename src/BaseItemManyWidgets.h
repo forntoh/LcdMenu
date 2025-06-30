@@ -71,6 +71,16 @@ class BaseItemManyWidgets : public MenuItem {
         }
     }
 
+    uint8_t measureValueWidth(GraphicalDisplayInterface* display) override {
+        if (!display) return 0;
+        char buf[ITEM_DRAW_BUFFER_SIZE];
+        uint8_t index = 0;
+        for (auto* w : widgets)
+            index += w->draw(buf, index);
+        buf[index] = '\0';
+        return display->getTextWidth(buf);
+    }
+
     virtual ~BaseItemManyWidgets() {
         for (auto widget : widgets) {
             delete widget;
@@ -111,21 +121,20 @@ class BaseItemManyWidgets : public MenuItem {
 
         uint8_t index = 0;
         uint8_t cursorCol = 0;
+        bool hasListWidget = false;
 
         for (uint8_t i = 0; i < widgets.size(); i++) {
             index += widgets[i]->draw(buf, index);
+            if (widgets[i]->isList()) hasListWidget = true;
             if (i == activeWidget && renderer->isInEditMode()) {
-                // Calculate the available space for the widgets after the text
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
-                // Adjust the view shift to ensure the active widget is visible
                 renderer->viewShift = index > v_size ? index - v_size : 0;
-                // Draw the item with the renderer, indicating if it's the last widget
                 renderer->drawItem(text, buf, i == widgets.size() - 1);
-                // Calculate the cursor column position for the active widget
                 cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
             }
         }
         renderer->drawItem(text, buf);
+        if (hasListWidget) renderer->drawListIndicator();
 
         if (renderer->isInEditMode()) {
             renderer->moveCursor(cursorCol, renderer->getCursorRow());

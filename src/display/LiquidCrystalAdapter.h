@@ -51,12 +51,14 @@ class LiquidCrystalAdapter : public CharacterDisplayInterface {
         lcd->setCursor(col, row);
     }
 
-    void draw(const char* text) override {
+    uint8_t draw(const char* text) override {
         lcd->print(text);
+        return strlen(text);
     }
 
-    void draw(uint8_t byte) override {
+    uint8_t draw(uint8_t byte) override {
         lcd->write(byte);
+        return 1;
     }
 
     void drawBlinker() {
