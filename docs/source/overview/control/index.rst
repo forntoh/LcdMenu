@@ -35,6 +35,7 @@ The menu system provides a set of built-in input adapters that you can use out o
     button
     rotary-encoder
     analogButton
+    joystick
 
 .. hint::
     The left and right controls (if not already mapped by the item) is mapped to scroll through an item that is too long to fit on the screen.
