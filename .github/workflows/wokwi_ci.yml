@@ -89,7 +89,7 @@ jobs:
           LOCAL_BUILD: 1
 
       - name: Running ${{ env.TEST_FILE }} on Wokwi
-        uses: wokwi/wokwi-ci-action@v1
+        uses: wokwi/wokwi-ci-server-action@v1
         with:
           token: ${{ secrets.WOKWI_CLI_TOKEN }}
           scenario: ${{ env.TEST_FILE }}
