@@ -6,6 +6,7 @@ on:
       - "src/**"
       - "test/**/*.yml"
       - "platformio.ini"
+      - ".github/workflows/wokwi_ci.yml"
     types: [ready_for_review]
 
 jobs:
