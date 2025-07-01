@@ -87,6 +87,9 @@ jobs:
         run: pio run
         env:
           LOCAL_BUILD: 1
+          
+      - name: Run a Wokwi CI server
+        uses: wokwi/wokwi-ci-server-action@v1
 
       - name: Running ${{ env.TEST_FILE }} on Wokwi
         uses: wokwi/wokwi-ci-action@v1
