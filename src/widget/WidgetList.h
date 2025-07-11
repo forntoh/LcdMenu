@@ -61,6 +61,8 @@ class WidgetList : public BaseWidgetValue<V> {
                 return false;
         }
     }
+
+    bool isList() const override { return true; }
     void updateValue(const __FlashStringHelper* action) {
         BaseWidgetValue<V>::handleChange();
         LOG(action, (uint8_t)this->value);

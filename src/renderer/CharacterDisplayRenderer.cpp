@@ -28,7 +28,7 @@ void CharacterDisplayRenderer::begin() {
     }
 }
 
-void CharacterDisplayRenderer::drawItem(const char* text, const char* value, bool padWithBlanks) {
+void CharacterDisplayRenderer::drawItem(const char* text, const char* value, bool lastValue) {
     uint8_t cursorCol = 0;
     display->setCursor(cursorCol, cursorRow);
 
@@ -56,8 +56,8 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value, boo
 
     uint8_t cursorColEnd = cursorCol;
 
-    // Fill remaining space with whitespace only when padWithBlanks is true
-    if (padWithBlanks) {
+    // Fill remaining space with whitespace only when lastValue is true
+    if (lastValue) {
         for (; cursorCol < availableColumns; cursorCol++) {
             display->draw(' ');
         }
@@ -92,8 +92,8 @@ void CharacterDisplayRenderer::drawText(const char* text, uint8_t& col, uint8_t 
     }
 }
 
-void CharacterDisplayRenderer::draw(uint8_t byte) {
-    display->draw(byte);
+uint8_t CharacterDisplayRenderer::draw(uint8_t byte) {
+    return display->draw(byte);
 }
 
 void CharacterDisplayRenderer::drawBlinker() {

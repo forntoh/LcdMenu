@@ -17,8 +17,8 @@ class MenuRenderer {
     friend class MenuScreen;
 
   protected:
-    const uint8_t maxCols;
-    const uint8_t maxRows;
+    uint8_t maxCols;
+    uint8_t maxRows;
 
     /**
      * @brief Flag indicating that there are hidden items above the current view.
@@ -38,6 +38,9 @@ class MenuRenderer {
     uint8_t cursorRow;
 
     bool inEditMode;
+
+    uint8_t viewStart = 0;
+    uint8_t totalItems = 0;
 
     unsigned long startTime = 0;
 
@@ -69,15 +72,15 @@ class MenuRenderer {
      * @brief Function to draw a byte on the display.
      * @param byte The byte to be drawn.
      */
-    virtual void draw(uint8_t byte) = 0;
+    virtual uint8_t draw(uint8_t byte) = 0;
 
     /**
      * @brief Draws an item on the display.
      * @param text Text of the item to be drawn.
      * @param value Value of the item to be drawn.
-     * @param padWithBlanks Flag indicating whether to pad the text with spaces.
+     * @param lastValue Flag indicating that the value drawn is the last one.
      */
-    virtual void drawItem(const char* text, const char* value, bool padWithBlanks = true) = 0;
+    virtual void drawItem(const char* text, const char* value, bool lastValue = true) = 0;
 
     /**
      * @brief Function to clear the blinker from the display.
@@ -95,6 +98,20 @@ class MenuRenderer {
      * @param cursorRow Row position to move the cursor to.
      */
     virtual void moveCursor(uint8_t cursorCol, uint8_t cursorRow);
+
+    /**
+     * @brief Draw a submenu indicator at the end of the current row.
+     *        Default implementation does nothing and can be overridden by
+     *        specialized renderers.
+     */
+    virtual void drawSubMenuIndicator() {}
+
+    /**
+     * @brief Draw an indicator showing that the value can be adjusted with
+     *        up/down commands. Default implementation does nothing and can be
+     *        overridden by specialized renderers.
+     */
+    virtual void drawListIndicator() {}
 
     /**
      * @brief Sets the edit mode for the menu.
@@ -140,13 +157,13 @@ class MenuRenderer {
      * @brief Gets the maximum number of rows in the display.
      * @return Maximum number of rows.
      */
-    uint8_t getMaxRows() const;
+    virtual uint8_t getMaxRows() const;
 
     /**
      * @brief Gets the maximum number of columns in the display.
      * @return Maximum number of columns.
      */
-    uint8_t getMaxCols() const;
+    virtual uint8_t getMaxCols() const;
 
     /**
      * @brief Calculates the available horizontal space for displaying content.
