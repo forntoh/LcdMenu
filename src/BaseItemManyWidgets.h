@@ -114,7 +114,7 @@ class BaseItemManyWidgets : public MenuItem {
 
         for (uint8_t i = 0; i < widgets.size(); i++) {
             index += widgets[i]->draw(buf, index);
-            if (i == activeWidget && renderer->isInEditMode()) {
+            if (i == activeWidget && MenuItem::isEditing()) {
                 // Calculate the available space for the widgets after the text
                 size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
                 // Adjust the view shift to ensure the active widget is visible
@@ -127,7 +127,7 @@ class BaseItemManyWidgets : public MenuItem {
         }
         renderer->drawItem(text, buf);
 
-        if (renderer->isInEditMode()) {
+        if (MenuItem::isEditing()) {
             renderer->moveCursor(cursorCol, renderer->getCursorRow());
         }
     }
@@ -157,7 +157,7 @@ class BaseItemManyWidgets : public MenuItem {
      */
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
-        if (renderer->isInEditMode()) {
+        if (MenuItem::isEditing()) {
             if (widgets[activeWidget]->process(menu, command)) {
                 draw(renderer);
                 return true;
@@ -186,7 +186,7 @@ class BaseItemManyWidgets : public MenuItem {
         if (command == ENTER) {
             for (auto* w : widgets)
                 if (w) w->startEdit();
-            renderer->setEditMode(true);
+            MenuItem::beginEdit();
             draw(renderer);
             renderer->drawBlinker();
             LOG(F("ItemWidget::enterEditMode"), this->text);
@@ -212,7 +212,7 @@ class BaseItemManyWidgets : public MenuItem {
     }
 
     void back(MenuRenderer* renderer) {
-        renderer->setEditMode(false);
+        MenuItem::endEdit();
         renderer->viewShift = 0;
         reset();
         handleCommit();
@@ -222,7 +222,7 @@ class BaseItemManyWidgets : public MenuItem {
     }
 
     void cancel(MenuRenderer* renderer) {
-        renderer->setEditMode(false);
+        MenuItem::endEdit();
         renderer->viewShift = 0;
         for (auto* w : widgets)
             if (w) w->cancelEdit();

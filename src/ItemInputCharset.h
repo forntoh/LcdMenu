@@ -38,7 +38,7 @@ class ItemInputCharset : public ItemInput {
   protected:
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
-        if (renderer->isInEditMode()) {
+        if (MenuItem::isEditing()) {
             switch (command) {
                 case ENTER:
                     if (charEdit) {
