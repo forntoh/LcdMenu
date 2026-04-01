@@ -14,6 +14,7 @@ def button_press_template(button_name):
       part-id: {button_name}
       control: pressed
       value: 0
+  - delay: {wait_time_after_release}ms
   """
 
 
@@ -72,7 +73,7 @@ if __name__ == "__main__":
 
     hold_time = press_holding_time * 10
 
-    press_wait = press_holding_time + serial_wait_time
+    press_wait = press_holding_time + wait_time_after_release + serial_wait_time
     down_wait = hold_time + serial_wait_time
     up_wait = wait_time_after_release + serial_wait_time
 
