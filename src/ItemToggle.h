@@ -3,7 +3,7 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
-#include <utils/utils.h>
+#include <utils/lcd_menu_utils.h>
 
 /**
  * @brief Item that allows user to toggle between ON/OFF states.

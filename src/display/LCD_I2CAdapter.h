@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include <LCD_I2C.h>
 #include <utils/constants.h>
-#include <utils/utils.h>
+#include <utils/lcd_menu_utils.h>
 
 #include "CharacterDisplayInterface.h"
 

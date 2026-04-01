@@ -29,7 +29,7 @@
 #include "renderer/MenuRenderer.h"
 #include "utils/constants.h"
 #include <MenuItem.h>
-#include <utils/utils.h>
+#include <utils/lcd_menu_utils.h>
 
 /**
  * @class LcdMenu
