@@ -94,6 +94,8 @@ def replace_lines(file_path, compiled_replacements):
 
             if re.match(r"^(\s*)-\s*wait-serial:", line):
                 if pending_release:
+                    if not line.endswith("\n"):
+                        line += "\n"
                     line += button_release_template(pending_release)
                     total_wait_time += wait_time_after_release
                     pending_release = ""
