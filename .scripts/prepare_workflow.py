@@ -14,7 +14,6 @@ def button_press_template(button_name):
       part-id: {button_name}
       control: pressed
       value: 0
-  - delay: {wait_time_after_release}ms
   """
 
 
@@ -44,7 +43,7 @@ def replace_lines(file_path, compiled_replacements):
         lines = file.readlines()
 
     with open(file_path, "w") as file:
-        for line in lines:
+        for i, line in enumerate(lines):
             line = re.sub(
                 r'^(\s*-\s*wait-serial:\s*")#LOG#\s*',
                 r"\1",
@@ -55,6 +54,18 @@ def replace_lines(file_path, compiled_replacements):
                     line = replacement + "\n"
                     total_wait_time += wait_time
                     break
+
+            wait_serial_match = re.match(r"^(\s*)-\s*wait-serial:", line)
+            if wait_serial_match:
+                next_non_empty = ""
+                for future_line in lines[i + 1 :]:
+                    if future_line.strip():
+                        next_non_empty = future_line
+                        break
+                if re.search(r".*- simulate: .*Button-press", next_non_empty):
+                    line += f"{wait_serial_match.group(1)}- delay: {wait_time_after_release}ms\n"
+                    total_wait_time += wait_time_after_release
+
             file.write(line)
     return total_wait_time
 
@@ -73,7 +84,7 @@ if __name__ == "__main__":
 
     hold_time = press_holding_time * 10
 
-    press_wait = press_holding_time + wait_time_after_release + serial_wait_time
+    press_wait = press_holding_time + serial_wait_time
     down_wait = hold_time + serial_wait_time
     up_wait = wait_time_after_release + serial_wait_time
 
