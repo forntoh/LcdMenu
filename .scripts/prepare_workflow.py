@@ -37,6 +37,7 @@ def button_up_template(button_name):
   - delay: {wait_time_after_release}ms
   """
 
+
 def replace_lines(file_path, compiled_replacements):
     total_wait_time = 0
     with open(file_path, "r") as file:
@@ -44,6 +45,11 @@ def replace_lines(file_path, compiled_replacements):
 
     with open(file_path, "w") as file:
         for line in lines:
+            line = re.sub(
+                r'^(\s*-\s*wait-serial:\s*")#LOG#\s*',
+                r"\1",
+                line,
+            )
             for regex, (replacement, wait_time) in compiled_replacements:
                 if regex.search(line):
                     line = replacement + "\n"
@@ -52,9 +58,12 @@ def replace_lines(file_path, compiled_replacements):
             file.write(line)
     return total_wait_time
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: python prepare_workflow.py <file_path> <serial_wait_time> <wait_time_after_release> <press_holding_time>")
+        print(
+            "Usage: python prepare_workflow.py <file_path> <serial_wait_time> <wait_time_after_release> <press_holding_time>"
+        )
         sys.exit(1)
 
     file_path = sys.argv[1]
@@ -72,29 +81,29 @@ if __name__ == "__main__":
         r".*- simulate: upButton-press": (button_press_template("btn1"), press_wait),
         r".*- simulate: upButton-down": (button_down_template("btn1"), down_wait),
         r".*- simulate: upButton-up": (button_up_template("btn1"), up_wait),
-
         r".*- simulate: downButton-press": (button_press_template("btn2"), press_wait),
         r".*- simulate: downButton-down": (button_down_template("btn2"), down_wait),
         r".*- simulate: downButton-up": (button_up_template("btn2"), up_wait),
-
         r".*- simulate: enterButton-press": (button_press_template("btn3"), press_wait),
         r".*- simulate: enterButton-down": (button_down_template("btn3"), down_wait),
         r".*- simulate: enterButton-up": (button_up_template("btn3"), up_wait),
-
         r".*- simulate: backButton-press": (button_press_template("btn4"), press_wait),
         r".*- simulate: backButton-down": (button_down_template("btn4"), down_wait),
         r".*- simulate: backButton-up": (button_up_template("btn4"), up_wait),
-
         r".*- simulate: leftButton-press": (button_press_template("btn5"), press_wait),
         r".*- simulate: leftButton-down": (button_down_template("btn5"), down_wait),
         r".*- simulate: leftButton-up": (button_up_template("btn5"), up_wait),
-
         r".*- simulate: rightButton-press": (button_press_template("btn6"), press_wait),
         r".*- simulate: rightButton-down": (button_down_template("btn6"), down_wait),
         r".*- simulate: rightButton-up": (button_up_template("btn6"), up_wait),
-
-        r".*- simulate: backspaceButton-press": (button_press_template("btn7"), press_wait),
-        r".*- simulate: backspaceButton-down": (button_down_template("btn7"), down_wait),
+        r".*- simulate: backspaceButton-press": (
+            button_press_template("btn7"),
+            press_wait,
+        ),
+        r".*- simulate: backspaceButton-down": (
+            button_down_template("btn7"),
+            down_wait,
+        ),
         r".*- simulate: backspaceButton-up": (button_up_template("btn7"), up_wait),
     }
 
