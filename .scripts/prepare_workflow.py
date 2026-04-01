@@ -4,42 +4,42 @@ import sys
 
 
 def button_press_template(button_name):
-    return f"""
-  - set-control:
-      part-id: {button_name}
-      control: pressed
-      value: 1
-  """
+    return (
+        "  - set-control:\n"
+        f"      part-id: {button_name}\n"
+        "      control: pressed\n"
+        "      value: 1\n"
+    )
 
 
 def button_release_template(button_name):
-    return f"""
-  - set-control:
-      part-id: {button_name}
-      control: pressed
-      value: 0
-  - delay: {wait_time_after_release}ms
-  """
+    return (
+        "  - set-control:\n"
+        f"      part-id: {button_name}\n"
+        "      control: pressed\n"
+        "      value: 0\n"
+        f"  - delay: {wait_time_after_release}ms\n"
+    )
 
 
 def button_down_template(button_name):
-    return f"""
-  - set-control:
-      part-id: {button_name}
-      control: pressed
-      value: 1
-  - delay: {hold_time}ms
-  """
+    return (
+        "  - set-control:\n"
+        f"      part-id: {button_name}\n"
+        "      control: pressed\n"
+        "      value: 1\n"
+        f"  - delay: {hold_time}ms\n"
+    )
 
 
 def button_up_template(button_name):
-    return f"""
-  - set-control:
-      part-id: {button_name}
-      control: pressed
-      value: 0
-  - delay: {wait_time_after_release}ms
-  """
+    return (
+        "  - set-control:\n"
+        f"      part-id: {button_name}\n"
+        "      control: pressed\n"
+        "      value: 0\n"
+        f"  - delay: {wait_time_after_release}ms\n"
+    )
 
 
 def replace_lines(file_path, compiled_replacements):
