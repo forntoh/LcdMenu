@@ -30,7 +30,7 @@
 #define ITEM_DRAW_BUFFER_SIZE 25
 
 #include "renderer/MenuRenderer.h"
-#include "utils/constants.h"
+#include "utils/lcd_menu_constants.h"
 #include <utils/lcd_menu_utils.h>
 
 class LcdMenu;

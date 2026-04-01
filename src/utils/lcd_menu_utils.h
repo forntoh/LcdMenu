@@ -1,7 +1,7 @@
 #ifndef LCD_MENU_UTILS_H
 #define LCD_MENU_UTILS_H
 
-#include "constants.h"
+#include "lcd_menu_constants.h"
 #include <Arduino.h>
 
 inline void substring(const char* str, uint8_t start, uint8_t size, char* substr) {
