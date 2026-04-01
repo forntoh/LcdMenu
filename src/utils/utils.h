@@ -42,16 +42,18 @@ inline void remove(char* str, uint8_t index, uint8_t count) {
 #ifdef DEBUG
 #define LOG(...) log(__VA_ARGS__)
 inline void log(const __FlashStringHelper* command) {
-    Serial.print(F("#LOG# "));
-    Serial.println(command);
+    String message(F("#LOG# "));
+    message += command;
+    Serial.println(message);
 }
 
 template <typename T>
 inline void log(const __FlashStringHelper* command, T value) {
-    Serial.print(F("#LOG# "));
-    Serial.print(command);
-    Serial.print(F("="));
-    Serial.println(value);
+    String message(F("#LOG# "));
+    message += command;
+    message += F("=");
+    message += String(value);
+    Serial.println(message);
 }
 #else
 #define LOG(...)  // No-op
