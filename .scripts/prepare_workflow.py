@@ -12,13 +12,14 @@ def button_press_template(button_name):
     )
 
 
-def button_release_template(button_name):
+def button_release_template(button_name, with_delay):
+    delay_line = f"  - delay: {wait_time_after_release}ms\n" if with_delay else ""
     return (
         "  - set-control:\n"
         f"      part-id: {button_name}\n"
         "      control: pressed\n"
         "      value: 0\n"
-        f"  - delay: {wait_time_after_release}ms\n"
+        f"{delay_line}"
     )
 
 
@@ -58,7 +59,7 @@ def replace_lines(file_path, compiled_replacements):
         lines = file.readlines()
 
     with open(file_path, "w") as file:
-        for line in lines:
+        for i, line in enumerate(lines):
             line = re.sub(
                 r'^(\s*-\s*wait-serial:\s*")#LOG#\s*',
                 r"\1",
@@ -80,7 +81,7 @@ def replace_lines(file_path, compiled_replacements):
                 if regex.search(line):
                     if pending_release:
                         line = (
-                            button_release_template(pending_release)
+                            button_release_template(pending_release, True)
                             + "\n"
                             + replacement
                             + "\n"
@@ -94,16 +95,27 @@ def replace_lines(file_path, compiled_replacements):
 
             if re.match(r"^(\s*)-\s*wait-serial:", line):
                 if pending_release:
+                    next_non_empty = ""
+                    for future_line in lines[i + 1 :]:
+                        if future_line.strip():
+                            next_non_empty = future_line
+                            break
+                    release_with_delay = bool(
+                        re.search(
+                            r".*- simulate: .*Button-(press|down|up)", next_non_empty
+                        )
+                    )
                     if not line.endswith("\n"):
                         line += "\n"
-                    line += button_release_template(pending_release)
-                    total_wait_time += wait_time_after_release
+                    line += button_release_template(pending_release, release_with_delay)
+                    if release_with_delay:
+                        total_wait_time += wait_time_after_release
                     pending_release = ""
 
             file.write(line)
 
         if pending_release:
-            file.write(button_release_template(pending_release))
+            file.write(button_release_template(pending_release, True))
             total_wait_time += wait_time_after_release
     return total_wait_time
 
