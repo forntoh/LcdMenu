@@ -44,7 +44,6 @@ def button_up_template(button_name):
 
 def replace_lines(file_path, compiled_replacements):
     total_wait_time = 0
-    transform_press_actions = not file_path.endswith("Widgets.test.yml")
     button_by_name = {
         "upButton": "btn1",
         "downButton": "btn2",
@@ -67,7 +66,7 @@ def replace_lines(file_path, compiled_replacements):
             )
 
             press_match = re.match(r"^\s*-\s*simulate:\s*(\w+)-press\s*$", line)
-            if press_match and transform_press_actions:
+            if press_match:
                 button_name = press_match.group(1)
                 button_id = button_by_name.get(button_name)
                 if button_id:
@@ -76,8 +75,6 @@ def replace_lines(file_path, compiled_replacements):
                     total_wait_time += serial_wait_time
                     file.write(line)
                     continue
-            elif press_match:
-                total_wait_time += serial_wait_time + wait_time_after_release
 
             for regex, (replacement, wait_time) in compiled_replacements:
                 if regex.search(line):
@@ -96,32 +93,32 @@ def replace_lines(file_path, compiled_replacements):
                     break
 
             if re.match(r"^(\s*)-\s*wait-serial:", line):
-                total_wait_time += max(100, serial_wait_time // 3)
-
                 next_non_empty = ""
                 for future_line in lines[i + 1 :]:
                     if future_line.strip():
                         next_non_empty = future_line
                         break
 
-                next_is_button_action = bool(
-                    re.match(
-                        r"^\s*-\s*simulate:\s*\w+Button-(press|down|up)\s*$",
-                        next_non_empty,
+                if pending_release:
+                    release_with_delay = bool(
+                        re.search(
+                            r".*- simulate: .*Button-(press|down|up)", next_non_empty
+                        )
                     )
-                )
-                next_is_wait_serial = bool(
-                    re.match(r"^\s*-\s*wait-serial:\s*", next_non_empty)
-                )
-
-                if pending_release and not next_is_wait_serial:
-                    release_with_delay = next_is_button_action
                     if not line.endswith("\n"):
                         line += "\n"
                     line += button_release_template(pending_release, release_with_delay)
                     if release_with_delay:
                         total_wait_time += wait_time_after_release
                     pending_release = ""
+                elif file_path.endswith("SubMenu.test.yml"):
+                    if re.match(
+                        r"^\s*-\s*simulate:\s*\w+Button-press\s*$", next_non_empty
+                    ):
+                        if not line.endswith("\n"):
+                            line += "\n"
+                        line += f"  - delay: {wait_time_after_release}ms\n"
+                        total_wait_time += wait_time_after_release
 
             file.write(line)
 
