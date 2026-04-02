@@ -1,7 +1,7 @@
-#ifndef MenuUtils_H
-#define MenuUtils_H
+#ifndef LCD_MENU_UTILS_H
+#define LCD_MENU_UTILS_H
 
-#include "constants.h"
+#include "lcd_menu_constants.h"
 #include <Arduino.h>
 
 inline void substring(const char* str, uint8_t start, uint8_t size, char* substr) {
@@ -63,4 +63,4 @@ inline void log(const __FlashStringHelper* command, T value) {
 #define LOG(...)  // No-op
 #endif
 
-#endif  // MenuUtils_H
+#endif  // LCD_MENU_UTILS_H

@@ -3,7 +3,7 @@
 
 #include "display/DisplayInterface.h"
 #include <Arduino.h>
-#include <utils/utils.h>
+#include <utils/lcd_menu_utils.h>
 
 /**
  * @class MenuRenderer

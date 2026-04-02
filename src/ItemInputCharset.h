@@ -3,7 +3,7 @@
 
 #include "ItemInput.h"
 #include "LcdMenu.h"
-#include <utils/utils.h>
+#include <utils/lcd_menu_utils.h>
 
 class ItemInputCharset : public ItemInput {
   private:
