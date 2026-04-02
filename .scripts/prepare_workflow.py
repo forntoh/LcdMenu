@@ -93,6 +93,8 @@ def replace_lines(file_path, compiled_replacements):
                     break
 
             if re.match(r"^(\s*)-\s*wait-serial:", line):
+                total_wait_time += max(100, serial_wait_time // 3)
+
                 next_non_empty = ""
                 for future_line in lines[i + 1 :]:
                     if future_line.strip():
