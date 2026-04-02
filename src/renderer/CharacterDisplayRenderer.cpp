@@ -1,4 +1,5 @@
 #include "CharacterDisplayRenderer.h"
+#include "MenuItem.h"
 
 CharacterDisplayRenderer::CharacterDisplayRenderer(
     CharacterDisplayInterface* display,
@@ -34,7 +35,7 @@ void CharacterDisplayRenderer::drawItem(const char* text, const char* value, boo
 
     // Draw cursor or empty space based on focus and edit mode
     if (cursorIcon != 0 || editCursorIcon != 0) {
-        display->draw(hasFocus ? (inEditMode ? editCursorIcon : cursorIcon) : ' ');
+        display->draw(hasFocus ? (MenuItem::isEditing() ? editCursorIcon : cursorIcon) : ' ');
         cursorCol++;
     }
 

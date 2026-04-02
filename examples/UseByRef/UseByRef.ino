@@ -2,6 +2,7 @@
 #include <ItemList.h>
 #include <ItemRange.h>
 #include <LcdMenu.h>
+#include <MenuItem.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
 #include <input/KeyboardAdapter.h>
@@ -71,7 +72,7 @@ void loop() {
     menu.poll();
     unsigned long now = millis();
     if (now - last > 1000) {
-        if (!menu.getRenderer()->isInEditMode()) {
+        if (!MenuItem::isEditing()) {
             hour++;
             hour %= 24;
             day++;

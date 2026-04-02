@@ -37,8 +37,6 @@ class MenuRenderer {
     uint8_t cursorCol;
     uint8_t cursorRow;
 
-    bool inEditMode;
-
     unsigned long startTime = 0;
 
   public:
@@ -97,12 +95,6 @@ class MenuRenderer {
     virtual void moveCursor(uint8_t cursorCol, uint8_t cursorRow);
 
     /**
-     * @brief Sets the edit mode for the menu.
-     * @param inEditMode Flag indicating whether to enter or exit edit mode.
-     */
-    void setEditMode(bool inEditMode);
-
-    /**
      * @brief Restarts the display timer and shows the display.
      */
     virtual void restartTimer();
@@ -117,12 +109,6 @@ class MenuRenderer {
         LOG(F("MenuRenderer::timeout"));
         display->hide();
     }
-
-    /**
-     * @brief Checks if the menu is in edit mode.
-     * @return True if in edit mode, false otherwise.
-     */
-    bool isInEditMode() const;
 
     /**
      * @brief Gets the current column position of the cursor.

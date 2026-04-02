@@ -53,7 +53,12 @@ class MenuItem {
     const char* text = NULL;
     bool polling = false;
 
+    static bool _isEditing;
+
   public:
+    static bool isEditing();
+    static void beginEdit();
+    static void endEdit();
     MenuItem(const char* text) : text(text) {}
     /**
      * @brief Get the text of the item

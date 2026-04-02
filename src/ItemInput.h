@@ -123,7 +123,7 @@ class ItemInput : public MenuItem {
     }
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
-        if (renderer->isInEditMode()) {
+        if (MenuItem::isEditing()) {
             if (isprint(command)) {
                 typeChar(renderer, command);
                 return true;
@@ -174,7 +174,7 @@ class ItemInput : public MenuItem {
             view = length - (viewSize - 1);
         }
         // Redraw
-        renderer->setEditMode(true);
+        MenuItem::beginEdit();
         draw(renderer);
         renderer->drawBlinker();
         // Log
@@ -182,7 +182,7 @@ class ItemInput : public MenuItem {
     };
     void back(MenuRenderer* renderer) {
         renderer->clearBlinker();
-        renderer->setEditMode(false);
+        MenuItem::endEdit();
         // Move view to 0 and redraw before exit
         cursor = 0;
         view = 0;
