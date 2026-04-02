@@ -171,4 +171,7 @@ if __name__ == "__main__":
 
     total_wait_time = replace_lines(file_path, compiled_replacements)
 
+    if file_path.endswith("Widgets.test.yml"):
+        total_wait_time += 30000
+
     print(total_wait_time)
