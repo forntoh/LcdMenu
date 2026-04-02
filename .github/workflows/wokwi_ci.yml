@@ -65,6 +65,7 @@ jobs:
         run: |
           EXAMPLE_FILE=$(python .scripts/prepare_example.py ${{ matrix.example }})
           EXAMPLE_NAME=$(basename $EXAMPLE_FILE .cpp)
+          echo "EXAMPLE_NAME=$EXAMPLE_NAME" >> $GITHUB_ENV
           cp $EXAMPLE_FILE src/main.cpp
 
           if [ -f "test/$EXAMPLE_NAME.test.yml" ]; then
@@ -97,3 +98,18 @@ jobs:
           token: ${{ secrets.WOKWI_CLI_TOKEN }}
           scenario: ${{ env.TEST_FILE }}
           timeout: ${{ env.RUN_DURATION }}
+          serial-log-file: wokwi-serial.log
+
+      - name: Upload Wokwi serial log
+        if: always() && hashFiles('wokwi-serial.log') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: wokwi-serial-${{ env.EXAMPLE_NAME }}
+          path: wokwi-serial.log
+
+      - name: Upload transformed scenario
+        if: always() && env.TEST_FILE != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: wokwi-scenario-${{ env.EXAMPLE_NAME }}
+          path: ${{ env.TEST_FILE }}
