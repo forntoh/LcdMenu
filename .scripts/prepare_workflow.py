@@ -105,15 +105,11 @@ def replace_lines(file_path, compiled_replacements):
                         next_non_empty,
                     )
                 )
-                next_is_button_press = bool(
-                    re.match(
-                        r"^\s*-\s*simulate:\s*\w+Button-press\s*$",
-                        next_non_empty,
-                    )
+                next_is_wait_serial = bool(
+                    re.match(r"^\s*-\s*wait-serial:\s*", next_non_empty)
                 )
 
-                had_pending_release = bool(pending_release)
-                if had_pending_release:
+                if pending_release and not next_is_wait_serial:
                     release_with_delay = next_is_button_action
                     if not line.endswith("\n"):
                         line += "\n"
@@ -121,12 +117,6 @@ def replace_lines(file_path, compiled_replacements):
                     if release_with_delay:
                         total_wait_time += wait_time_after_release
                     pending_release = ""
-
-                if (not had_pending_release) and next_is_button_press:
-                    if not line.endswith("\n"):
-                        line += "\n"
-                    line += f"  - delay: {wait_time_after_release}ms\n"
-                    total_wait_time += wait_time_after_release
 
             file.write(line)
 
