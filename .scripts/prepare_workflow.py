@@ -93,23 +93,40 @@ def replace_lines(file_path, compiled_replacements):
                     break
 
             if re.match(r"^(\s*)-\s*wait-serial:", line):
-                if pending_release:
-                    next_non_empty = ""
-                    for future_line in lines[i + 1 :]:
-                        if future_line.strip():
-                            next_non_empty = future_line
-                            break
-                    release_with_delay = bool(
-                        re.search(
-                            r".*- simulate: .*Button-(press|down|up)", next_non_empty
-                        )
+                next_non_empty = ""
+                for future_line in lines[i + 1 :]:
+                    if future_line.strip():
+                        next_non_empty = future_line
+                        break
+
+                next_is_button_action = bool(
+                    re.match(
+                        r"^\s*-\s*simulate:\s*\w+Button-(press|down|up)\s*$",
+                        next_non_empty,
                     )
+                )
+                next_is_button_press = bool(
+                    re.match(
+                        r"^\s*-\s*simulate:\s*\w+Button-press\s*$",
+                        next_non_empty,
+                    )
+                )
+
+                had_pending_release = bool(pending_release)
+                if had_pending_release:
+                    release_with_delay = next_is_button_action
                     if not line.endswith("\n"):
                         line += "\n"
                     line += button_release_template(pending_release, release_with_delay)
                     if release_with_delay:
                         total_wait_time += wait_time_after_release
                     pending_release = ""
+
+                if (not had_pending_release) and next_is_button_press:
+                    if not line.endswith("\n"):
+                        line += "\n"
+                    line += f"  - delay: {wait_time_after_release}ms\n"
+                    total_wait_time += wait_time_after_release
 
             file.write(line)
 
