@@ -29,7 +29,6 @@ def button_down_template(button_name):
         f"      part-id: {button_name}\n"
         "      control: pressed\n"
         "      value: 1\n"
-        f"  - delay: {hold_time}ms\n"
     )
 
 
@@ -132,9 +131,7 @@ if __name__ == "__main__":
     press_holding_time = int(sys.argv[3])
     wait_time_after_release = int(sys.argv[4])
 
-    hold_time = press_holding_time * 10
-
-    down_wait = hold_time + serial_wait_time
+    down_wait = serial_wait_time
     up_wait = wait_time_after_release + serial_wait_time
 
     replacements = {
