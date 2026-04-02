@@ -70,18 +70,6 @@ def replace_lines(file_path, compiled_replacements):
                 button_name = press_match.group(1)
                 button_id = button_by_name.get(button_name)
                 if button_id:
-                    if file_path.endswith("Widgets.test.yml"):
-                        line = (
-                            button_press_template(button_id)
-                            + f"  - delay: {press_holding_time}ms\n"
-                            + button_release_template(button_id, True)
-                            + "\n"
-                        )
-                        total_wait_time += press_holding_time + wait_time_after_release
-                        pending_release = ""
-                        file.write(line)
-                        continue
-
                     line = button_press_template(button_id) + "\n"
                     pending_release = button_id
                     total_wait_time += serial_wait_time

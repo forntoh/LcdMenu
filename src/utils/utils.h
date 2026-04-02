@@ -44,7 +44,9 @@ inline void remove(char* str, uint8_t index, uint8_t count) {
 inline void log(const __FlashStringHelper* command) {
     String message(F("#LOG# "));
     message += command;
-    Serial.println(message);
+    message += '\n';
+    Serial.print(message);
+    Serial.flush();
 }
 
 template <typename T>
@@ -53,7 +55,9 @@ inline void log(const __FlashStringHelper* command, T value) {
     message += command;
     message += F("=");
     message += String(value);
-    Serial.println(message);
+    message += '\n';
+    Serial.print(message);
+    Serial.flush();
 }
 #else
 #define LOG(...)  // No-op
