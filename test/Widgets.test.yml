@@ -2,4 +2,13 @@ name: Widgets Test
 version: 1
 author: Thomas Forntoh
 steps:
-  - wait-serial: "#LOG# LcdMenu::setScreen"
+  - delay: 1000ms
+  - simulate: enterButton-press
+  - delay: 1000ms
+  - simulate: upButton-press
+  - delay: 400ms
+  - simulate: upButton-press
+  - delay: 400ms
+  - simulate: enterButton-press
+  - wait-serial: "Buy"
+  - wait-serial: "0"
