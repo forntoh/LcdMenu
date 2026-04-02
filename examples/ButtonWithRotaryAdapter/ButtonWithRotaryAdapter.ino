@@ -1,4 +1,4 @@
-// Disable double press detection
+// Disable SimpleRotary double press detection and use dedicated BACKSPACE button.
 #define DOUBLE_PRESS_THRESHOLD 0
 
 #include <Button.h>
