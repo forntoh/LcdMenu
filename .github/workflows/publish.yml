@@ -19,22 +19,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Generate GitHub App token
+        id: app_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.LCDMENU_PUBLISH_APP_ID }}
+          private-key: ${{ secrets.LCDMENU_PUBLISH_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: |
+            ${{ github.event.repository.name }}
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-          token: ${{ secrets.GH_PAT }}
-
-      - name: Verify GH_PAT identity
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GH_PAT }}
-          script: |
-            const { data: user } = await github.rest.users.getAuthenticated();
-            core.info(`GH_PAT owner: ${user.login}`);
-            if (user.login !== context.repo.owner) {
-              core.setFailed(`GH_PAT owner (${user.login}) does not match repo owner (${context.repo.owner}).`);
-            }
+          token: ${{ steps.app_token.outputs.token }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -57,11 +56,12 @@ jobs:
 
       - name: Check if tag exists
         id: check_tag
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
+          github-token: ${{ steps.app_token.outputs.token }}
           script: |
             const tag = '${{ env.UPDATED_VERSION }}';
-            const { data: tags } = await github.rest.repos.listTags({
+            const tags = await github.paginate(github.rest.repos.listTags, {
               owner: context.repo.owner,
               repo: context.repo.repo
             });
@@ -119,11 +119,12 @@ jobs:
 
       - name: Generate Release Notes
         id: generate_release_notes
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         env:
           CURRENT_TAG: ${{ env.UPDATED_VERSION }}
           BRANCH_REF: ${{ github.ref }}
         with:
+          github-token: ${{ steps.app_token.outputs.token }}
           script: |
             const generateReleaseNotes = require('.scripts/release_notes.js');
             const releaseNotes = await generateReleaseNotes(github, context);
@@ -132,8 +133,6 @@ jobs:
       - name: Create GitHub Release
         if: steps.check_tag.outputs.tag_exists == 'false'
         uses: softprops/action-gh-release@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.UPDATED_VERSION }}
           name: LcdMenu v${{ env.UPDATED_VERSION }}
@@ -142,15 +141,14 @@ jobs:
           generate_release_notes: false
           make_latest: true
           target_commitish: ${{ github.sha }}
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ steps.app_token.outputs.token }}
           body: ${{ steps.generate_release_notes.outputs.release_notes }}
 
       - name: Update GitHub Release
         if: steps.check_tag.outputs.tag_exists == 'true'
-        uses: actions/github-script@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v7
         with:
+          github-token: ${{ steps.app_token.outputs.token }}
           script: |
             const { data: releases } = await github.rest.repos.listReleases({
               owner: context.repo.owner,
