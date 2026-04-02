@@ -2,8 +2,8 @@
 
 #include <Arduino.h>
 #include <SSD1803A_I2C.h>
-#include <utils/constants.h>
-#include <utils/utils.h>
+#include <utils/lcd_menu_constants.h>
+#include <utils/lcd_menu_utils.h>
 
 #include "CharacterDisplayInterface.h"
 

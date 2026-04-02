@@ -2,7 +2,7 @@
 #define DISPLAY_INTERFACE_H
 
 #include <stdint.h>
-#include <utils/constants.h>
+#include <utils/lcd_menu_constants.h>
 
 /**
  * @class DisplayInterface
