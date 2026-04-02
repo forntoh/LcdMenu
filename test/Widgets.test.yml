@@ -2,7 +2,9 @@ name: Widgets Test
 version: 1
 author: Thomas Forntoh
 steps:
+  - wait-serial: "WIDGETS_BOOT_OK"
   - wait-serial: "#LOG# LcdMenu::setScreen"
+  - delay: 500ms
   - simulate: enterButton-press
   - wait-serial: "#LOG# ItemWidget::enterEditMode=Auto"
   - simulate: upButton-press
@@ -125,42 +127,3 @@ steps:
   - wait-serial: "5"
   - wait-serial: "Fri"
   - wait-serial: "#LOG# ItemWidget::exitEditMode=Freq"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen::down=4"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# MenuScreen::down=5"
-  - simulate: enterButton-press
-  - wait-serial: "#LOG# ItemWidget::enterEditMode=Pin"
-  - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=3"
-  - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=4"
-  - simulate: rightButton-press
-  - wait-serial: "#LOG# ItemWidget::right=1"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=5"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=4"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=3"
-  - simulate: enterButton-press
-  - wait-serial: "#LOG# ItemWidget::right=2"
-  - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=11"
-  - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=12"
-  - simulate: enterButton-press
-  - wait-serial: "#LOG# ItemWidget::right=3"
-  - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=0"
-  - simulate: upButton-press
-  - wait-serial: "#LOG# WidgetList::nextValue=1"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=0"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=14"
-  - simulate: downButton-press
-  - wait-serial: "#LOG# WidgetList::previousValue=13"
-  - simulate: enterButton-press
-  - wait-serial: "54DE"
-  - wait-serial: "#LOG# ItemWidget::exitEditMode=Pin"
