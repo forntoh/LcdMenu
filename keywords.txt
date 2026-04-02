@@ -29,6 +29,7 @@ ItemSubMenu	KEYWORD1
 ItemToggle	KEYWORD1
 ItemValue	KEYWORD1
 ItemWidget	KEYWORD1
+JoystickAdapter	KEYWORD1
 KeyboardAdapter	KEYWORD1
 LCD_I2CAdapter	KEYWORD1
 LcdMenu	KEYWORD1
@@ -55,6 +56,7 @@ backspace	KEYWORD2
 begin	KEYWORD2
 cancel	KEYWORD2
 cancelEdit	KEYWORD2
+center	KEYWORD2
 clear	KEYWORD2
 clearBlinker	KEYWORD2
 commitCharEdit	KEYWORD2
@@ -94,6 +96,7 @@ nextValue	KEYWORD2
 observe	KEYWORD2
 previousValue	KEYWORD2
 process	KEYWORD2
+readAxis	KEYWORD2
 remove	KEYWORD2
 removeWidget	KEYWORD2
 reset	KEYWORD2
