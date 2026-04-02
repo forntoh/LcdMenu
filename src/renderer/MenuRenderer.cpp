@@ -1,5 +1,4 @@
 #include "MenuRenderer.h"
-#include "MenuItem.h"
 
 MenuRenderer::MenuRenderer(DisplayInterface* display, uint8_t maxCols, uint8_t maxRows)
     : maxCols(maxCols), maxRows(maxRows), display(display) {}
