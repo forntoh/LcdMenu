@@ -44,6 +44,7 @@ def button_up_template(button_name):
 
 def replace_lines(file_path, compiled_replacements):
     total_wait_time = 0
+    transform_press_actions = not file_path.endswith("Widgets.test.yml")
     button_by_name = {
         "upButton": "btn1",
         "downButton": "btn2",
@@ -66,7 +67,7 @@ def replace_lines(file_path, compiled_replacements):
             )
 
             press_match = re.match(r"^\s*-\s*simulate:\s*(\w+)-press\s*$", line)
-            if press_match:
+            if press_match and transform_press_actions:
                 button_name = press_match.group(1)
                 button_id = button_by_name.get(button_name)
                 if button_id:
@@ -75,6 +76,8 @@ def replace_lines(file_path, compiled_replacements):
                     total_wait_time += serial_wait_time
                     file.write(line)
                     continue
+            elif press_match:
+                total_wait_time += serial_wait_time + wait_time_after_release
 
             for regex, (replacement, wait_time) in compiled_replacements:
                 if regex.search(line):
