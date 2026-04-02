@@ -77,11 +77,7 @@ def replace_lines(file_path, compiled_replacements):
                             + button_release_template(button_id, True)
                             + "\n"
                         )
-                        total_wait_time += (
-                            serial_wait_time
-                            + press_holding_time
-                            + wait_time_after_release
-                        )
+                        total_wait_time += press_holding_time + wait_time_after_release
                         pending_release = ""
                         file.write(line)
                         continue
