@@ -65,11 +65,12 @@ def load_changed_files(args: argparse.Namespace) -> list[str]:
 
     if args.changed_files_file:
         path = Path(args.changed_files_file)
-        if path.exists():
-            for line in path.read_text().splitlines():
-                cleaned = normalize_path(line)
-                if cleaned:
-                    files.append(cleaned)
+        if not path.exists():
+            raise SystemExit(f"Changed files manifest not found: {path}")
+        for line in path.read_text().splitlines():
+            cleaned = normalize_path(line)
+            if cleaned:
+                files.append(cleaned)
 
     deduped: list[str] = []
     seen: set[str] = set()
@@ -94,9 +95,8 @@ def select_by_changes(
             selected_names.add(test_match.group(1))
             continue
 
-        example_match = re.match(r"^examples/[^/]+/([^/]+)\.ino$", path)
-        if example_match:
-            selected_names.add(example_match.group(1))
+        if path.startswith("examples/") and path.endswith(".ino"):
+            selected_names.add(Path(path).stem)
             continue
 
         if path.startswith("src/") or path in WIDE_CHANGE_PATHS:
