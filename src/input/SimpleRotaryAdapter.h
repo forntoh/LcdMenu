@@ -15,11 +15,22 @@
  * @brief Threshold for detecting a double press in milliseconds.
  *
  * This value defines the maximum time interval (in milliseconds) between two
- * consecutive button presses to be considered a double press. The default value
- * is 300 milliseconds.
+ * consecutive button presses to be considered a double press.
+ *
+ * SimpleRotary samples button state every 200ms internally, so thresholds below
+ * 500ms are too short for reliable double-press detection. To keep BACKSPACE
+ * usable out of the box, the adapter clamps positive values below that minimum.
  */
+#ifndef SIMPLE_ROTARY_BUTTON_DEBOUNCE_DELAY
+#define SIMPLE_ROTARY_BUTTON_DEBOUNCE_DELAY 200
+#endif
+
+#ifndef SIMPLE_ROTARY_MIN_DOUBLE_PRESS_THRESHOLD
+#define SIMPLE_ROTARY_MIN_DOUBLE_PRESS_THRESHOLD ((SIMPLE_ROTARY_BUTTON_DEBOUNCE_DELAY * 2) + 100)
+#endif
+
 #ifndef DOUBLE_PRESS_THRESHOLD
-#define DOUBLE_PRESS_THRESHOLD 300
+#define DOUBLE_PRESS_THRESHOLD SIMPLE_ROTARY_MIN_DOUBLE_PRESS_THRESHOLD
 #endif
 //
 #include "InputInterface.h"
@@ -48,6 +59,13 @@
  */
 class SimpleRotaryAdapter : public InputInterface {
   private:
+    static constexpr unsigned long doublePressThreshold =
+        DOUBLE_PRESS_THRESHOLD == 0
+            ? 0
+            : (DOUBLE_PRESS_THRESHOLD < SIMPLE_ROTARY_MIN_DOUBLE_PRESS_THRESHOLD
+                   ? SIMPLE_ROTARY_MIN_DOUBLE_PRESS_THRESHOLD
+                   : DOUBLE_PRESS_THRESHOLD);
+
     unsigned long lastPressTime = 0;  // Last time the button was pressed
     bool pendingEnter = false;        // Flag to indicate if an enter action is pending
     SimpleRotary* encoder;            // Pointer to the SimpleRotary instance
@@ -72,7 +90,7 @@ class SimpleRotaryAdapter : public InputInterface {
 
         if (pressType == 1) {
             if (pendingEnter) {
-                if (DOUBLE_PRESS_THRESHOLD > 0 && currentTime - lastPressTime < DOUBLE_PRESS_THRESHOLD) {
+                if (doublePressThreshold > 0 && currentTime - lastPressTime <= doublePressThreshold) {
                     menu->process(BACKSPACE);  // Call BACKSPACE action (double press)
                     pendingEnter = false;
                 }
@@ -87,7 +105,7 @@ class SimpleRotaryAdapter : public InputInterface {
 
         // Check if the doublePressThreshold has elapsed for pending enter action
         if ((!MenuItem::isEditing() && pendingEnter) ||
-            (pendingEnter && (currentTime - lastPressTime >= DOUBLE_PRESS_THRESHOLD))) {
+            (pendingEnter && (doublePressThreshold == 0 || (currentTime - lastPressTime >= doublePressThreshold)))) {
             menu->process(ENTER);  // Call ENTER action (short press)
             pendingEnter = false;
         }
