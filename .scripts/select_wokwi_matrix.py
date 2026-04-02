@@ -85,7 +85,6 @@ def select_by_changes(
     changed_files: Iterable[str],
     smoke_scenarios: list[str],
 ) -> list[Scenario]:
-    by_name = {scenario.name: scenario for scenario in scenarios}
     selected_names: set[str] = set()
     require_smoke = False
 
@@ -106,11 +105,7 @@ def select_by_changes(
     if require_smoke:
         selected_names.update(smoke_scenarios)
 
-    ordered: list[Scenario] = []
-    for scenario in scenarios:
-        if scenario.name in selected_names and scenario.name in by_name:
-            ordered.append(scenario)
-    return ordered
+    return [scenario for scenario in scenarios if scenario.name in selected_names]
 
 
 def select_scenarios(
@@ -155,17 +150,21 @@ def main() -> int:
     args = parser.parse_args()
 
     scenarios = discover_scenarios()
-    if not scenarios:
-        raise SystemExit("No Wokwi scenarios discovered.")
-
-    smoke_scenarios = parse_smoke_scenarios(args.smoke_scenarios)
     changed_files = load_changed_files(args)
-    selected = select_scenarios(args.mode, scenarios, changed_files, smoke_scenarios)
+
+    selected: list[Scenario]
+    mode = args.mode
+    if not scenarios:
+        mode = "skip"
+        selected = []
+    else:
+        smoke_scenarios = parse_smoke_scenarios(args.smoke_scenarios)
+        selected = select_scenarios(mode, scenarios, changed_files, smoke_scenarios)
 
     matrix = [scenario.example_path for scenario in selected]
     names = [scenario.name for scenario in selected]
     payload = {
-        "mode": args.mode,
+        "mode": mode,
         "count": len(selected),
         "names": names,
         "matrix": matrix,
@@ -177,7 +176,7 @@ def main() -> int:
         write_github_output(
             args.github_output,
             {
-                "mode": args.mode,
+                "mode": mode,
                 "count": str(len(selected)),
                 "names": ",".join(names),
                 "matrix": json.dumps(matrix),
