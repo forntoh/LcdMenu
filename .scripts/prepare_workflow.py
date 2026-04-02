@@ -109,9 +109,6 @@ def replace_lines(file_path, compiled_replacements):
                     break
 
             if re.match(r"^(\s*)-\s*wait-serial:", line):
-                if file_path.endswith("Widgets.test.yml"):
-                    total_wait_time += max(100, serial_wait_time // 3)
-
                 next_non_empty = ""
                 for future_line in lines[i + 1 :]:
                     if future_line.strip():
@@ -191,6 +188,6 @@ if __name__ == "__main__":
     total_wait_time = replace_lines(file_path, compiled_replacements)
 
     if file_path.endswith("Widgets.test.yml"):
-        total_wait_time += 90000
+        total_wait_time += 5000
 
     print(total_wait_time)

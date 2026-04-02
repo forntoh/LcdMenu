@@ -2,13 +2,13 @@ name: Widgets Test
 version: 1
 author: Thomas Forntoh
 steps:
-  - delay: 1000ms
+  - wait-serial: "WIDGETS_BOOT_OK"
+  - wait-serial: "#LOG# LcdMenu::setScreen"
   - simulate: enterButton-press
-  - delay: 1000ms
-  - simulate: upButton-press
-  - delay: 400ms
-  - simulate: upButton-press
-  - delay: 400ms
+  - wait-serial: "#LOG# ItemWidget::enterEditMode=Auto"
+  - simulate: enterButton-press
+  - wait-serial: "#LOG# ItemWidget::right=1"
   - simulate: enterButton-press
   - wait-serial: "Buy"
   - wait-serial: "0"
+  - wait-serial: "#LOG# ItemWidget::exitEditMode=Auto"
