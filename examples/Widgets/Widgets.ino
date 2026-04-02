@@ -1,8 +1,9 @@
+#include <Button.h>
 #include <ItemWidget.h>
 #include <LcdMenu.h>
 #include <MenuScreen.h>
 #include <display/LiquidCrystal_I2CAdapter.h>
-#include <input/KeyboardAdapter.h>
+#include <input/ButtonAdapter.h>
 #include <renderer/CharacterDisplayRenderer.h>
 #include <widget/WidgetBool.h>
 #include <widget/WidgetList.h>
@@ -61,9 +62,29 @@ LiquidCrystal_I2C lcd(LCD_ADDR, LCD_COLS, LCD_ROWS);
 LiquidCrystal_I2CAdapter lcdAdapter(&lcd);
 CharacterDisplayRenderer renderer(&lcdAdapter, LCD_COLS, LCD_ROWS);
 LcdMenu menu(renderer);
-KeyboardAdapter keyboard(&menu, &Serial);
+Button upBtn(5);
+ButtonAdapter upBtnA(&menu, &upBtn, UP);
+Button downBtn(6);
+ButtonAdapter downBtnA(&menu, &downBtn, DOWN);
+Button enterBtn(7);
+ButtonAdapter enterBtnA(&menu, &enterBtn, ENTER);
+Button backBtn(8);
+ButtonAdapter backBtnA(&menu, &backBtn, BACK);
+Button leftBtn(9);
+ButtonAdapter leftBtnA(&menu, &leftBtn, LEFT);
+Button rightBtn(10);
+ButtonAdapter rightBtnA(&menu, &rightBtn, RIGHT);
+Button backspaceBtn(11);
+ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);
 
 void setup() {
+    upBtn.begin();
+    downBtn.begin();
+    enterBtn.begin();
+    backBtn.begin();
+    leftBtn.begin();
+    rightBtn.begin();
+    backspaceBtn.begin();
     Serial.begin(9600);
     renderer.begin();
     menu.setScreen(mainScreen);
@@ -72,5 +93,11 @@ void setup() {
 }
 
 void loop() {
-    keyboard.observe();
+    upBtnA.observe();
+    downBtnA.observe();
+    enterBtnA.observe();
+    backBtnA.observe();
+    leftBtnA.observe();
+    rightBtnA.observe();
+    backspaceBtnA.observe();
 }
