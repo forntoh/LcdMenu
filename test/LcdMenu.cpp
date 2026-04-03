@@ -74,6 +74,20 @@ class TrackingRenderer : public MenuRenderer, public FrameLifecycleRenderer {
     uint8_t getEffectiveCols() const override { return maxCols; }
     void beginFrame() override {}
     void endFrame() override { endFrameCalls++; }
+
+    void* queryExtension(uint8_t extensionId) override {
+        if (extensionId == FrameLifecycleRenderer::extensionId()) {
+            return static_cast<FrameLifecycleRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+
+    const void* queryExtension(uint8_t extensionId) const override {
+        if (extensionId == FrameLifecycleRenderer::extensionId()) {
+            return static_cast<const FrameLifecycleRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
 };
 
 // clang-format off
