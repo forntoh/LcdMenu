@@ -43,6 +43,11 @@ jobs:
 
       SKETCHES_REPORTS_PATH: sketches-reports
 
+      # Board-scoped sketches are appended at runtime in "Prepare sketch paths"
+      # to avoid compiling hardware-specific examples on incompatible targets.
+      ESP32_ONLY_SKETCH_PATHS: |
+        - examples/ST7920_SPI
+
     strategy:
       fail-fast: false
       matrix:
@@ -114,6 +119,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare sketch paths
+        shell: bash
+        run: |
+          {
+            echo "COMPILE_SKETCH_PATHS<<EOF"
+            echo "${{ matrix.sketch-paths }}"
+            echo "${{ env.UNIVERSAL_SKETCH_PATHS }}"
+
+            # ST7920_SPI is hardware-specific. Compile it only for ESP32 jobs
+            # and only when the example exists on the current branch.
+            if [[ "${{ matrix.board.type }}" == "esp32" && -d "examples/ST7920_SPI" ]]; then
+              echo "${{ env.ESP32_ONLY_SKETCH_PATHS }}"
+            fi
+
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
       - name: Compile sketches
         uses: arduino/compile-sketches@v1
         with:
@@ -123,9 +145,7 @@ jobs:
           libraries: |
             ${{ env.UNIVERSAL_LIBRARIES }}
             ${{ matrix.libraries }}
-          sketch-paths: |
-            ${{ matrix.sketch-paths }}
-            ${{ env.UNIVERSAL_SKETCH_PATHS }}
+          sketch-paths: ${{ env.COMPILE_SKETCH_PATHS }}
           enable-deltas-report: true
           enable-warnings-report: true
 

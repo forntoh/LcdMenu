@@ -25,3 +25,8 @@ Here are some that would be cool to have:
 - Web renderer
 - TFT renderer
 - OLED renderer
+
+.. note::
+
+    CI compiles hardware-specific rendering examples only on compatible board
+    jobs. For example, ``examples/ST7920_SPI`` is compiled on ESP32 jobs.
