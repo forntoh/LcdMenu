@@ -1,4 +1,14 @@
 #include "MenuScreen.h"
+#include "renderer/FrameLifecycleRenderer.h"
+
+namespace {
+FrameLifecycleRenderer* toFrameLifecycle(MenuRenderer* renderer) {
+    if (renderer == NULL) {
+        return NULL;
+    }
+    return static_cast<FrameLifecycleRenderer*>(renderer->queryExtension(FrameLifecycleRenderer::extensionId()));
+}
+}  // namespace
 
 void MenuScreen::setParent(MenuScreen* parent) {
     this->parent = parent;
@@ -52,6 +62,11 @@ void MenuScreen::setCursor(MenuRenderer* renderer, uint8_t position) {
 }
 
 void MenuScreen::draw(MenuRenderer* renderer) {
+    FrameLifecycleRenderer* frameLifecycle = toFrameLifecycle(renderer);
+    if (frameLifecycle != NULL) {
+        frameLifecycle->beginFrame();
+    }
+
     for (uint8_t i = 0; i < renderer->maxRows && i < items.size(); i++) {
         MenuItem* item = this->items[view + i];
         if (item == nullptr) {

@@ -84,6 +84,16 @@ class MenuItem {
     // Destructor
     virtual ~MenuItem() noexcept = default;
 
+    /**
+     * @brief Optional capability lookup for item-specific extensions.
+     *
+     * Returns NULL when capability is not supported.
+     */
+    virtual const void* queryCapability(uint8_t capabilityId) const {
+        (void)capabilityId;
+        return NULL;
+    }
+
   protected:
     /**
      * @brief The number of available columns for the potential value of the item.
