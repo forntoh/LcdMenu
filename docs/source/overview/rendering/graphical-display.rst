@@ -17,6 +17,13 @@ Features
 - Buffered drawing with renderer-managed frame flushing
 - Per-item custom fonts (any U8g2 font)
 
+Menu integration
+----------------
+
+``MenuScreen`` provides viewport and active-item context to graphical renderers
+through ``GraphicalRendererContext``. This lets the renderer recompute visible
+rows and value-column widths when fonts differ per item.
+
 Basic usage
 -----------
 
