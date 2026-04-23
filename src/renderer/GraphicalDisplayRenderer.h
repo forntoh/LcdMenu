@@ -4,7 +4,6 @@
 #include "GraphicalIndicatorRenderer.h"
 #include "GraphicalItemFont.h"
 #include "GraphicalRendererContext.h"
-#include "GraphicalValueSelectionRenderer.h"
 #include "MenuRenderer.h"
 #include "display/GraphicalDisplayInterface.h"
 #include "utils/std.h"
@@ -16,7 +15,6 @@
 class GraphicalDisplayRenderer : public MenuRenderer,
                                  public FrameLifecycleRenderer,
                                  public GraphicalIndicatorRenderer,
-                                 public GraphicalValueSelectionRenderer,
                                  public GraphicalRendererContext {
   private:
     GraphicalDisplayInterface* gDisplay;
@@ -31,10 +29,6 @@ class GraphicalDisplayRenderer : public MenuRenderer,
     uint8_t cursorPixelY = 0;
     uint8_t maxRowHeight = 8;
     uint8_t maxFontWidth = 1;
-
-    bool hasValueSelection = false;
-    uint8_t valueSelectionStart = 0;
-    uint8_t valueSelectionLength = 0;
 
     const char* cursorIcon;
     const char* editCursorIcon;
@@ -80,9 +74,6 @@ class GraphicalDisplayRenderer : public MenuRenderer,
     void setValueAreaWidth(uint8_t width) override;
     void setActiveItem(const MenuItem* item) override;
     GraphicalDisplayInterface* getGraphicalDisplay() override;
-
-    void setValueSelection(uint8_t start, uint8_t length) override;
-    void clearValueSelection() override;
 
     void* queryExtension(uint8_t extensionId) override;
     const void* queryExtension(uint8_t extensionId) const override;

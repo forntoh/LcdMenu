@@ -6,15 +6,7 @@
 #include <string.h>
 
 namespace {
-const uint8_t listGlyph[] = {
-    0x08,
-    0x1C,
-    0x3E,
-    0x00,
-    0x3E,
-    0x1C,
-    0x08,
-};
+const uint8_t listGlyph[] = {0x08, 0x1C, 0x3E, 0x00, 0x3E, 0x1C, 0x08};
 
 const GraphicalMenuItem* asGraphical(const MenuItem* item) {
     if (item == NULL) {
@@ -115,27 +107,12 @@ GraphicalDisplayInterface* GraphicalDisplayRenderer::getGraphicalDisplay() {
     return gDisplay;
 }
 
-void GraphicalDisplayRenderer::setValueSelection(uint8_t start, uint8_t length) {
-    valueSelectionStart = start;
-    valueSelectionLength = length;
-    hasValueSelection = length > 0;
-}
-
-void GraphicalDisplayRenderer::clearValueSelection() {
-    valueSelectionStart = 0;
-    valueSelectionLength = 0;
-    hasValueSelection = false;
-}
-
 void* GraphicalDisplayRenderer::queryExtension(uint8_t extensionId) {
     if (extensionId == FrameLifecycleRenderer::extensionId()) {
         return static_cast<FrameLifecycleRenderer*>(this);
     }
     if (extensionId == GraphicalIndicatorRenderer::extensionId()) {
         return static_cast<GraphicalIndicatorRenderer*>(this);
-    }
-    if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
-        return static_cast<GraphicalValueSelectionRenderer*>(this);
     }
     if (extensionId == GraphicalRendererContext::extensionId()) {
         return static_cast<GraphicalRendererContext*>(this);
@@ -149,9 +126,6 @@ const void* GraphicalDisplayRenderer::queryExtension(uint8_t extensionId) const 
     }
     if (extensionId == GraphicalIndicatorRenderer::extensionId()) {
         return static_cast<const GraphicalIndicatorRenderer*>(this);
-    }
-    if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
-        return static_cast<const GraphicalValueSelectionRenderer*>(this);
     }
     if (extensionId == GraphicalRendererContext::extensionId()) {
         return static_cast<const GraphicalRendererContext*>(this);
@@ -252,8 +226,7 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
     uint8_t h = rowHeight();
     uint8_t top = cursorRow * h;
     uint8_t rightInset = totalItems > getMaxRows() ? scrollbarWidth + scrollbarGap : 0;
-    uint8_t contentRight =
-        gDisplay->getDisplayWidth() > rightInset ? gDisplay->getDisplayWidth() - rightInset : gDisplay->getDisplayWidth();
+    uint8_t contentRight = gDisplay->getDisplayWidth() > rightInset ? gDisplay->getDisplayWidth() - rightInset : gDisplay->getDisplayWidth();
     uint8_t x = contentRight > rightPadding + submenuGlyphWidth ? contentRight - rightPadding - submenuGlyphWidth : leftPadding;
     uint8_t y = top + (h > submenuGlyphHeight ? (h - submenuGlyphHeight) / 2 : 0);
     gDisplay->drawBox(x, y, 1, 1);
@@ -267,8 +240,7 @@ void GraphicalDisplayRenderer::drawListIndicator() {
     uint8_t h = rowHeight();
     uint8_t top = cursorRow * h;
     uint8_t rightInset = totalItems > getMaxRows() ? scrollbarWidth + scrollbarGap : 0;
-    uint8_t contentRight =
-        gDisplay->getDisplayWidth() > rightInset ? gDisplay->getDisplayWidth() - rightInset : gDisplay->getDisplayWidth();
+    uint8_t contentRight = gDisplay->getDisplayWidth() > rightInset ? gDisplay->getDisplayWidth() - rightInset : gDisplay->getDisplayWidth();
     uint8_t x = contentRight > rightPadding + listGlyphWidth ? contentRight - rightPadding - listGlyphWidth : leftPadding;
     uint8_t y = top + (h > listGlyphHeight ? (h - listGlyphHeight) / 2 : 0);
     gDisplay->drawXbm(x, y, listGlyphWidth, listGlyphHeight, listGlyph);
@@ -287,7 +259,7 @@ uint8_t GraphicalDisplayRenderer::toggleIndicatorWidth() const {
 }
 
 uint8_t GraphicalDisplayRenderer::rowHeight() const {
-    return maxRowHeight == 0 ? 8 : static_cast<uint8_t>(maxRowHeight + 2);
+    return maxRowHeight == 0 ? 8 : maxRowHeight + 2;
 }
 
 uint8_t GraphicalDisplayRenderer::getMaxRows() const {
