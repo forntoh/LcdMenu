@@ -16,6 +16,7 @@ For example, you could create a renderer for a TFT display, a touchscreen, or ev
     :caption: The library comes with the following built-in renderers:
 
     character-display
+    graphical-display
 
 Don't see a renderer for your favorite output device? Feel free to create a new one and share it with the community!
 
