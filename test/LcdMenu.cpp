@@ -1,4 +1,5 @@
 #define protected public
+#include "Godmode.h"
 #include <ItemInput.h>
 #include <MenuScreen.h>
 #undef protected
@@ -189,17 +190,29 @@ unittest(refresh_flushes_renderer_frame) {
     assertEqual((uint8_t)1, renderer.endFrameCalls);
 }
 
-unittest(process_flushes_renderer_when_screen_redraws) {
+unittest(process_flushes_renderer_when_back_navigates_and_redraws) {
     TrackingRenderer renderer;
     LcdMenu menu(renderer);
-    menu.setScreen(mainScreen);
+    MenuItem* parentItem = ITEM_BASIC("Parent");
+    MenuItem* childItem = ITEM_BASIC("Child");
+    std::vector<MenuItem*> parentItems = {parentItem};
+    std::vector<MenuItem*> childItems = {childItem};
+    MenuScreen parent(parentItems);
+    MenuScreen child(childItems);
+    child.setParent(&parent);
+    menu.setScreen(&child);
+
+    MenuItem::endEdit();
 
     renderer.beginFrameCalls = 0;
     renderer.endFrameCalls = 0;
 
-    assertTrue(menu.process(DOWN));
+    assertTrue(menu.process(BACK));
     assertEqual((uint8_t)1, renderer.beginFrameCalls);
     assertEqual((uint8_t)1, renderer.endFrameCalls);
+
+    delete parentItem;
+    delete childItem;
 }
 
 unittest(poll_flushes_renderer_when_polled_item_redraws) {
@@ -211,10 +224,11 @@ unittest(poll_flushes_renderer_when_polled_item_redraws) {
 
     menu.setScreen(&screen);
 
+    MenuItem::endEdit();
+    GODMODE()->micros += 200000;
+
     polledItem.wasDrawn = false;
     renderer.endFrameCalls = 0;
-
-    delay(120);
     menu.poll(100);
 
     assertTrue(polledItem.wasDrawn);
