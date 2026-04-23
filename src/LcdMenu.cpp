@@ -1,4 +1,11 @@
 #include "LcdMenu.h"
+#include "renderer/FrameLifecycleRenderer.h"
+
+namespace {
+FrameLifecycleRenderer* frameLifecycle(MenuRenderer& renderer) {
+    return static_cast<FrameLifecycleRenderer*>(renderer.queryExtension(FrameLifecycleRenderer::extensionId()));
+}
+}  // namespace
 
 MenuRenderer* LcdMenu::getRenderer() {
     return &renderer;
@@ -20,7 +27,8 @@ bool LcdMenu::process(const unsigned char c) {
         return false;
     }
     renderer.restartTimer();
-    return screen->process(this, c);
+    bool handled = screen->process(this, c);
+    return handled;
 };
 
 void LcdMenu::reset() {
@@ -70,7 +78,13 @@ void LcdMenu::poll(uint16_t pollInterval) {
     if (!enabled || pollInterval == 0) {
         return;
     }
-    screen->poll(&renderer, pollInterval < 100 ? 100 : pollInterval);
+    bool redrawn = screen->poll(&renderer, pollInterval < 100 ? 100 : pollInterval);
+    if (redrawn) {
+        FrameLifecycleRenderer* frame = frameLifecycle(renderer);
+        if (frame != NULL) {
+            frame->endFrame();
+        }
+    }
 }
 bool LcdMenu::isEnabled() const {
     return enabled;

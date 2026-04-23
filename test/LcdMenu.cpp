@@ -1,4 +1,5 @@
 #define protected public
+#include "Godmode.h"
 #include <ItemInput.h>
 #include <MenuScreen.h>
 #undef protected
@@ -8,6 +9,7 @@
 #include <ItemToggle.h>
 #include <MenuItem.h>
 #include <display/DisplayInterface.h>
+#include <renderer/FrameLifecycleRenderer.h>
 #include <renderer/MenuRenderer.h>
 
 #define LCD_ROWS 2
@@ -59,10 +61,12 @@ class TrackingDisplay : public DisplayInterface {
     void setBacklight(bool) override {}
 };
 
-class TrackingRenderer : public MenuRenderer {
+class TrackingRenderer : public MenuRenderer, public FrameLifecycleRenderer {
   public:
     TrackingDisplay display;
     bool itemDrawn = false;
+    uint8_t beginFrameCalls = 0;
+    uint8_t endFrameCalls = 0;
     TrackingRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
 
     void draw(uint8_t) override {}
@@ -70,6 +74,36 @@ class TrackingRenderer : public MenuRenderer {
     void clearBlinker() override {}
     void drawBlinker() override {}
     uint8_t getEffectiveCols() const override { return maxCols; }
+    void beginFrame() override { beginFrameCalls++; }
+    void endFrame() override { endFrameCalls++; }
+
+    void* queryExtension(uint8_t extensionId) override {
+        if (extensionId == FrameLifecycleRenderer::extensionId()) {
+            return static_cast<FrameLifecycleRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+
+    const void* queryExtension(uint8_t extensionId) const override {
+        if (extensionId == FrameLifecycleRenderer::extensionId()) {
+            return static_cast<const FrameLifecycleRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+};
+
+class PollingMenuItem : public MenuItem {
+  public:
+    bool wasDrawn = false;
+
+    PollingMenuItem() : MenuItem("Polled") {
+        polling = true;
+    }
+
+    void draw(MenuRenderer* renderer) override {
+        wasDrawn = true;
+        renderer->drawItem(text, NULL);
+    }
 };
 
 // clang-format off
@@ -141,6 +175,64 @@ unittest(show_enables_and_draws_active_screen) {
     assertTrue(menu.isEnabled());
     assertTrue(renderer.display.cleared);
     assertTrue(renderer.itemDrawn);
+}
+
+unittest(refresh_flushes_renderer_frame) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    menu.setScreen(mainScreen);
+
+    renderer.beginFrameCalls = 0;
+    renderer.endFrameCalls = 0;
+    menu.refresh();
+
+    assertEqual((uint8_t)1, renderer.beginFrameCalls);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
+}
+
+unittest(process_flushes_renderer_when_back_navigates_and_redraws) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    MenuItem* parentItem = ITEM_BASIC("Parent");
+    MenuItem* childItem = ITEM_BASIC("Child");
+    std::vector<MenuItem*> parentItems = {parentItem};
+    std::vector<MenuItem*> childItems = {childItem};
+    MenuScreen parent(parentItems);
+    MenuScreen child(childItems);
+    child.setParent(&parent);
+    menu.setScreen(&child);
+
+    MenuItem::endEdit();
+
+    renderer.beginFrameCalls = 0;
+    renderer.endFrameCalls = 0;
+
+    assertTrue(menu.process(BACK));
+    assertEqual((uint8_t)1, renderer.beginFrameCalls);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
+
+    delete parentItem;
+    delete childItem;
+}
+
+unittest(poll_flushes_renderer_when_polled_item_redraws) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    PollingMenuItem polledItem;
+    std::vector<MenuItem*> items = {&polledItem};
+    MenuScreen screen(items);
+
+    menu.setScreen(&screen);
+
+    MenuItem::endEdit();
+    GODMODE()->micros += 200000;
+
+    polledItem.wasDrawn = false;
+    renderer.endFrameCalls = 0;
+    menu.poll(100);
+
+    assertTrue(polledItem.wasDrawn);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
 }
 
 unittest(set_screen_skips_initial_label) {

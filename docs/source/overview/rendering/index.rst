@@ -30,3 +30,14 @@ Here are some that would be cool to have:
 
     CI compiles hardware-specific rendering examples only on compatible board
     jobs. For example, ``examples/ST7920_SPI`` is compiled on ESP32 jobs.
+
+Renderer extension hooks
+------------------------
+
+Advanced renderers can expose optional capabilities through
+``MenuRenderer::queryExtension()``. Menu items can similarly expose optional
+capabilities through ``MenuItem::queryCapability()``.
+
+This extension model keeps the base APIs small for character displays, while
+still allowing specialized renderers to opt into features such as explicit
+frame lifecycle hooks.
