@@ -64,6 +64,7 @@ class TrackingRenderer : public MenuRenderer, public FrameLifecycleRenderer {
   public:
     TrackingDisplay display;
     bool itemDrawn = false;
+    uint8_t beginFrameCalls = 0;
     uint8_t endFrameCalls = 0;
     TrackingRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
 
@@ -72,7 +73,7 @@ class TrackingRenderer : public MenuRenderer, public FrameLifecycleRenderer {
     void clearBlinker() override {}
     void drawBlinker() override {}
     uint8_t getEffectiveCols() const override { return maxCols; }
-    void beginFrame() override {}
+    void beginFrame() override { beginFrameCalls++; }
     void endFrame() override { endFrameCalls++; }
 
     void* queryExtension(uint8_t extensionId) override {
@@ -87,6 +88,20 @@ class TrackingRenderer : public MenuRenderer, public FrameLifecycleRenderer {
             return static_cast<const FrameLifecycleRenderer*>(this);
         }
         return MenuRenderer::queryExtension(extensionId);
+    }
+};
+
+class PollingMenuItem : public MenuItem {
+  public:
+    bool wasDrawn = false;
+
+    PollingMenuItem() : MenuItem("Polled") {
+        polling = true;
+    }
+
+    void draw(MenuRenderer* renderer) override {
+        wasDrawn = true;
+        renderer->drawItem(text, NULL);
     }
 };
 
@@ -166,20 +181,43 @@ unittest(refresh_flushes_renderer_frame) {
     LcdMenu menu(renderer);
     menu.setScreen(mainScreen);
 
+    renderer.beginFrameCalls = 0;
     renderer.endFrameCalls = 0;
     menu.refresh();
 
+    assertEqual((uint8_t)1, renderer.beginFrameCalls);
     assertEqual((uint8_t)1, renderer.endFrameCalls);
 }
 
-unittest(process_flushes_renderer_when_command_handled) {
+unittest(process_flushes_renderer_when_screen_redraws) {
     TrackingRenderer renderer;
     LcdMenu menu(renderer);
     menu.setScreen(mainScreen);
-    menu.setCursor(ITEM_TOGGLE_INDEX);
 
+    renderer.beginFrameCalls = 0;
     renderer.endFrameCalls = 0;
-    assertTrue(menu.process(ENTER));
+
+    assertTrue(menu.process(DOWN));
+    assertEqual((uint8_t)1, renderer.beginFrameCalls);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
+}
+
+unittest(poll_flushes_renderer_when_polled_item_redraws) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    PollingMenuItem polledItem;
+    std::vector<MenuItem*> items = {&polledItem};
+    MenuScreen screen(items);
+
+    menu.setScreen(&screen);
+
+    polledItem.wasDrawn = false;
+    renderer.endFrameCalls = 0;
+
+    delay(120);
+    menu.poll(100);
+
+    assertTrue(polledItem.wasDrawn);
     assertEqual((uint8_t)1, renderer.endFrameCalls);
 }
 

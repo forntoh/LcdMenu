@@ -156,8 +156,9 @@ class MenuScreen {
      * @brief Poll the screen for changes.
      * @param renderer The renderer to use for drawing.
      * @param pollInterval The interval to poll the screen.
+     * @return `true` when at least one polled item was redrawn.
      */
-    void poll(MenuRenderer* renderer, uint16_t pollInterval);
+    bool poll(MenuRenderer* renderer, uint16_t pollInterval);
 };
 
 #define MENU_SCREEN(screen, items, ...)           \

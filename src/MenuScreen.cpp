@@ -75,6 +75,10 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         syncIndicators(i, renderer);
         item->draw(renderer);
     }
+
+    if (frameLifecycle != NULL) {
+        frameLifecycle->endFrame();
+    }
 }
 
 void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
@@ -191,15 +195,21 @@ void MenuScreen::clear() {
     items.clear();
 }
 
-void MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
+bool MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
     static unsigned long lastPollTime = 0;
-    if (millis() - lastPollTime >= pollInterval) {
-        for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
-            MenuItem* item = this->items[view + i];
-            if (item == nullptr || !item->polling || MenuItem::isEditing()) continue;
-            syncIndicators(i, renderer);
-            item->draw(renderer);
-        }
-        lastPollTime = millis();
+    if (millis() - lastPollTime < pollInterval) {
+        return false;
     }
+
+    bool redrawn = false;
+    for (uint8_t i = 0; i < renderer->maxRows && (view + i) < items.size(); i++) {
+        MenuItem* item = this->items[view + i];
+        if (item == nullptr || !item->polling || MenuItem::isEditing()) continue;
+        syncIndicators(i, renderer);
+        item->draw(renderer);
+        redrawn = true;
+    }
+
+    lastPollTime = millis();
+    return redrawn;
 }
