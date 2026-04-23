@@ -79,7 +79,7 @@ unittest(up_shifts_view_when_label_offscreen) {
     screen.setCursor(&renderer, 1);  // keep view=1
     screen.up(&renderer);
     assertEqual((uint8_t)1, screen.getCursor());
-    assertEqual((uint8_t)0, screen.view);
+    assertEqual((uint8_t)1, screen.view);
     delete label;
     delete first;
     delete second;

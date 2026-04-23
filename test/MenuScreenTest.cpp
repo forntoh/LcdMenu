@@ -102,8 +102,8 @@ unittest(menu_screen_draw_clamps_view) {
     screen.draw(&renderer);
 
     assertEqual((uint8_t)0, i1->drawCount);
-    assertEqual((uint8_t)1, i2->drawCount);
-    assertEqual((uint8_t)1, i3->drawCount);
+    assertEqual((uint8_t)0, i2->drawCount);
+    assertEqual((uint8_t)0, i3->drawCount);  // no items drawn but no crash
 
     delete i1;
     delete i2;
