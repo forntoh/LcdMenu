@@ -24,6 +24,18 @@ You can create an input item by specifying the label and the default value:
 
 When the ``Name`` menu item is selected, an input field will be displayed on the screen, allowing the user to enter a string value.
 
+Graphical rendering
+~~~~~~~~~~~~~~~~~~~
+
+``ItemInput`` exposes optional graphical capabilities through
+``GraphicalMenuItem`` and reports its value width for right-aligned graphical
+layouts.
+
+When a renderer exposes ``GraphicalValueSelectionRenderer`` via
+``queryExtension()``, the input item highlights the active character instead of
+using a blinking character cursor. Character-display renderers continue to use
+the standard blinking cursor behavior.
+
 .. image:: images/item-input.gif
     :width: 400px
     :alt: Example of an input menu item

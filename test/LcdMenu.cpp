@@ -9,8 +9,12 @@
 #include <ItemToggle.h>
 #include <MenuItem.h>
 #include <display/DisplayInterface.h>
+#include <display/GraphicalDisplayInterface.h>
 #include <renderer/FrameLifecycleRenderer.h>
+#include <renderer/GraphicalMenuItem.h>
+#include <renderer/GraphicalValueSelectionRenderer.h>
 #include <renderer/MenuRenderer.h>
+#include <string.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -92,6 +96,79 @@ class TrackingRenderer : public MenuRenderer, public FrameLifecycleRenderer {
     }
 };
 
+class GraphicalMeasureDisplay : public GraphicalDisplayInterface {
+  public:
+    static const uint8_t kCharWidth = 6;
+    void begin() override {}
+    void clear() override {}
+    void show() override {}
+    void hide() override {}
+    void draw(uint8_t) override {}
+    void draw(const char*) override {}
+    void setCursor(uint8_t, uint8_t) override {}
+    void setBacklight(bool) override {}
+    void setFont(const uint8_t*) override {}
+    uint8_t getDisplayWidth() const override { return 128; }
+    uint8_t getDisplayHeight() const override { return 64; }
+    uint8_t getFontWidth() const override { return kCharWidth; }
+    uint8_t getFontHeight() const override { return 8; }
+    uint8_t getTextWidth(const char* text) override {
+        if (text == NULL) {
+            return 0;
+        }
+        return static_cast<uint8_t>(strlen(text) * kCharWidth);
+    }
+    void setDrawColor(uint8_t) override {}
+    void clearBuffer() override {}
+    void sendBuffer() override {}
+    void drawBox(uint8_t, uint8_t, uint8_t, uint8_t) override {}
+    void drawFrame(uint8_t, uint8_t, uint8_t, uint8_t) override {}
+    void drawXbm(uint8_t, uint8_t, uint8_t, uint8_t, const uint8_t*) override {}
+};
+
+class SelectionTrackingRenderer : public MenuRenderer, public GraphicalValueSelectionRenderer {
+  public:
+    StubDisplay display;
+    uint8_t blinkerDrawCalls = 0;
+    uint8_t selectionStart = 0;
+    uint8_t selectionLength = 0;
+    bool hasSelection = false;
+
+    SelectionTrackingRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
+
+    void draw(uint8_t) override {}
+    void drawItem(const char*, const char*, bool) override {}
+    void clearBlinker() override {}
+    void drawBlinker() override { blinkerDrawCalls++; }
+    uint8_t getEffectiveCols() const override { return maxCols; }
+
+    void setValueSelection(uint8_t start, uint8_t length) override {
+        selectionStart = start;
+        selectionLength = length;
+        hasSelection = length > 0;
+    }
+
+    void clearValueSelection() override {
+        selectionStart = 0;
+        selectionLength = 0;
+        hasSelection = false;
+    }
+
+    void* queryExtension(uint8_t extensionId) override {
+        if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
+            return static_cast<GraphicalValueSelectionRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+
+    const void* queryExtension(uint8_t extensionId) const override {
+        if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
+            return static_cast<const GraphicalValueSelectionRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+};
+
 class PollingMenuItem : public MenuItem {
   public:
     bool wasDrawn = false;
@@ -130,6 +207,35 @@ unittest(can_set_input_value) {
     assertEqual("", (static_cast<ItemInput*>(mainItems[ITEM_INPUT_INDEX]))->getValue());
     (static_cast<ItemInput*>(mainItems[ITEM_INPUT_INDEX]))->setValue(expected);
     assertEqual(expected, (static_cast<ItemInput*>(mainItems[ITEM_INPUT_INDEX]))->getValue());
+}
+
+unittest(input_item_exposes_graphical_capability) {
+    GraphicalMeasureDisplay display;
+    char value[] = "AB";
+    ItemInput item("Name", value, NULL);
+
+    const GraphicalMenuItem* capability = static_cast<const GraphicalMenuItem*>(item.queryCapability(GraphicalMenuItem::capabilityId()));
+    assertTrue(capability != NULL);
+    assertTrue(capability->useTightGraphicalSelectionBox());
+    assertEqual((uint8_t)(2 * GraphicalMeasureDisplay::kCharWidth), capability->measureGraphicalValueWidth(&display));
+}
+
+unittest(input_item_uses_graphical_selection_extension_in_edit_mode) {
+    char value[] = "TEST";
+    ItemInput item("Name", value, NULL);
+    SelectionTrackingRenderer renderer;
+    LcdMenu menu(renderer);
+
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(MenuItem::isEditing());
+    assertEqual((uint8_t)3, item.cursor);
+    assertEqual((uint8_t)0, renderer.blinkerDrawCalls);
+
+    assertTrue(item.process(&menu, LEFT));
+    assertEqual((uint8_t)2, item.cursor);
+
+    assertTrue(item.process(&menu, BACK));
+    assertFalse(MenuItem::isEditing());
 }
 
 unittest(cursor_clamped_when_out_of_range) {

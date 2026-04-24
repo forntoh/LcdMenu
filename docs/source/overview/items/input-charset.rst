@@ -29,6 +29,10 @@ The charset input item can be created using the following syntax:
 When the ``Pass`` menu item is selected, an input field will be displayed on the screen, allowing the user to enter a string value.
 The input value will be restricted to the characters specified in the charset.
 
+With graphical renderers that expose ``GraphicalValueSelectionRenderer``,
+character preview and selection are rendered through the value-area highlight,
+so charset cycling remains visible without relying on a text cursor blinker.
+
 .. image:: images/item-charset-input.gif
     :width: 400px
     :alt: Example of a charset input menu item
