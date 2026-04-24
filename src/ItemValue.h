@@ -1,5 +1,6 @@
 #pragma once
 
+#include "display/GraphicalDisplayInterface.h"
 #include "utils/custom_printf.h"
 
 #include "BaseItemZeroWidget.h"
@@ -30,6 +31,15 @@ class ItemValue : public BaseItemZeroWidget {
         char buffer[ITEM_DRAW_BUFFER_SIZE];
         snprintf(buffer, ITEM_DRAW_BUFFER_SIZE, format, value);
         renderer->drawItem(text, buffer);
+    }
+
+    uint8_t measureGraphicalValueWidth(GraphicalDisplayInterface* display) const override {
+        if (display == NULL) {
+            return 0;
+        }
+        char buffer[ITEM_DRAW_BUFFER_SIZE];
+        snprintf(buffer, ITEM_DRAW_BUFFER_SIZE, format, value);
+        return display->getTextWidth(buffer);
     }
 };
 

@@ -27,8 +27,9 @@
 #ifndef MenuItem_H
 #define MenuItem_H
 
-#define ITEM_DRAW_BUFFER_SIZE 25
+#define ITEM_DRAW_BUFFER_SIZE 64
 
+#include "renderer/GraphicalMenuItem.h"
 #include "renderer/MenuRenderer.h"
 #include "utils/lcd_menu_constants.h"
 #include <utils/lcd_menu_utils.h>
@@ -109,7 +110,9 @@ class MenuItem {
      * Effectively const, but initialized lately when renderer is injected.
      */
     inline uint8_t getViewSize(MenuRenderer* renderer) const {
-        return renderer->getEffectiveCols() - strlen(text) - 1 + renderer->viewShift;
+        const char* label = text == NULL ? "" : text;
+        int16_t viewSize = static_cast<int16_t>(renderer->getEffectiveCols()) - static_cast<int16_t>(strlen(label)) - 1 + renderer->viewShift;
+        return viewSize > 0 ? static_cast<uint8_t>(viewSize) : 0;
     };
     /**
      * @brief Process a command decoded in 1 byte.
@@ -134,6 +137,18 @@ class MenuItem {
     };
 };
 
-#define ITEM_BASIC(...) (new MenuItem(__VA_ARGS__))
+class BasicItem : public MenuItem, public GraphicalMenuItem {
+  public:
+    explicit BasicItem(const char* text) : MenuItem(text) {}
+
+    const void* queryCapability(uint8_t capabilityId) const override {
+        if (capabilityId == GraphicalMenuItem::capabilityId()) {
+            return static_cast<const GraphicalMenuItem*>(this);
+        }
+        return MenuItem::queryCapability(capabilityId);
+    }
+};
+
+#define ITEM_BASIC(...) (new BasicItem(__VA_ARGS__))
 
 #endif

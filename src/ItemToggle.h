@@ -3,6 +3,8 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
+#include "display/GraphicalDisplayInterface.h"
+#include "renderer/GraphicalMenuItem.h"
 #include <utils/lcd_menu_utils.h>
 
 /**
@@ -16,7 +18,7 @@
  *
  * Additionally to `text` this item has ON/OFF `enabled` state.
  */
-class ItemToggle : public MenuItem {
+class ItemToggle : public MenuItem, public GraphicalMenuItem {
   private:
     bool enabled = false;
     const char* textOn = NULL;
@@ -81,6 +83,34 @@ class ItemToggle : public MenuItem {
     const char* getTextOn() { return this->textOn; }
 
     const char* getTextOff() { return this->textOff; }
+
+    uint8_t measureGraphicalValueWidth(GraphicalDisplayInterface* display) const override {
+        if (display == NULL) {
+            return 0;
+        }
+        uint8_t toggleWidth = display->getFontHeight();
+        if (toggleWidth > 4) {
+            toggleWidth -= 4;
+        }
+        if (toggleWidth < 3) {
+            toggleWidth = 3;
+        }
+        uint8_t onWidth = display->getTextWidth(textOn == NULL ? "" : textOn);
+        uint8_t offWidth = display->getTextWidth(textOff == NULL ? "" : textOff);
+        uint8_t textWidth = onWidth > offWidth ? onWidth : offWidth;
+        return toggleWidth > textWidth ? toggleWidth : textWidth;
+    }
+
+    bool hasGraphicalToggle() const override { return true; }
+
+    bool graphicalToggleState() const override { return enabled; }
+
+    const void* queryCapability(uint8_t capabilityId) const override {
+        if (capabilityId == GraphicalMenuItem::capabilityId()) {
+            return static_cast<const GraphicalMenuItem*>(this);
+        }
+        return MenuItem::queryCapability(capabilityId);
+    }
 
     void draw(MenuRenderer* renderer) override {
         renderer->drawItem(text, enabled ? textOn : textOff);

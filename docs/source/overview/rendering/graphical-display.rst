@@ -24,6 +24,22 @@ Menu integration
 through ``GraphicalRendererContext``. This lets the renderer recompute visible
 rows and value-column widths when fonts differ per item.
 
+Item capabilities
+-----------------
+
+Built-in items now expose graphical capabilities through
+``GraphicalMenuItem`` without RTTI:
+
+- ``ITEM_BASIC`` and ``ITEM_LABEL`` opt into graphical-item capabilities.
+- ``ITEM_BOOL`` and ``ITEM_TOGGLE`` expose toggle state for checkbox drawing.
+- Widget-based items (for example ``ITEM_LIST`` and ``ITEM_RANGE``) expose
+  list-indicator support.
+- ``ITEM_VALUE`` reports the rendered value width for right-aligned layout.
+
+Renderer-specific enhancements remain optional through ``queryExtension()``.
+For example, indicators use ``GraphicalIndicatorRenderer`` and value selection
+highlighting can be added with ``GraphicalValueSelectionRenderer``.
+
 Basic usage
 -----------
 

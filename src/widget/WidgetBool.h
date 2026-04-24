@@ -34,7 +34,14 @@ class WidgetBool : public BaseWidgetValue<V> {
   protected:
     uint8_t draw(char* buffer, const uint8_t start) override {
         if (start >= ITEM_DRAW_BUFFER_SIZE) return 0;
-        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, this->format, static_cast<bool>(this->value) ? textOn : textOff);
+
+        const char* selectedText = static_cast<bool>(this->value) ? textOn : textOff;
+        if (selectedText == NULL) {
+            selectedText = "";
+        }
+
+        const char* format = this->format == NULL ? "%s" : this->format;
+        return snprintf(buffer + start, ITEM_DRAW_BUFFER_SIZE - start, format, selectedText);
     }
     /**
      * @brief Process command.
