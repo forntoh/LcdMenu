@@ -57,6 +57,56 @@ GraphicalDisplayInterface* toGraphicalDisplay(MenuRenderer* renderer) {
     }
     return context->getGraphicalDisplay();
 }
+
+void clampViewport(uint8_t& cursor, uint8_t& view, size_t itemCount, uint8_t rows) {
+    if (itemCount == 0 || rows == 0) {
+        return;
+    }
+
+    if (cursor >= itemCount) {
+        cursor = itemCount - 1;
+    }
+
+    uint8_t maxView = itemCount > rows ? itemCount - rows : 0;
+    if (view > maxView) {
+        view = maxView;
+    }
+
+    if (cursor < view) {
+        cursor = view;
+    } else if (cursor >= view + rows) {
+        cursor = view + rows - 1;
+    }
+}
+
+uint8_t prepareViewport(
+    const std::vector<MenuItem*>& items,
+    uint8_t& cursor,
+    uint8_t& view,
+    MenuRenderer* renderer,
+    GraphicalRendererContext* graphicalContext,
+    GraphicalDisplayInterface* graphicalDisplay,
+    uint8_t rows) {
+    clampViewport(cursor, view, items.size(), rows);
+
+    graphicalContext->setViewportContext(view, items.size());
+
+    uint8_t valueWidth = getVisibleGraphicalValueWidth(items, view, rows, graphicalDisplay, graphicalContext);
+    uint8_t recalculatedRows = renderer->getMaxRows();
+    if (recalculatedRows == 0) {
+        recalculatedRows = 1;
+    }
+
+    if (recalculatedRows != rows) {
+        rows = recalculatedRows;
+        clampViewport(cursor, view, items.size(), rows);
+        graphicalContext->setViewportContext(view, items.size());
+        valueWidth = getVisibleGraphicalValueWidth(items, view, rows, graphicalDisplay, graphicalContext);
+    }
+
+    graphicalContext->setValueAreaWidth(valueWidth);
+    return rows;
+}
 }  // namespace
 
 void MenuScreen::setParent(MenuScreen* parent) {
@@ -146,47 +196,10 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         return;
     }
 
-    if (cursor >= items.size()) {
-        cursor = items.size() - 1;
-    }
-
-    uint8_t maxView = items.size() > rows ? items.size() - rows : 0;
-    if (view > maxView) {
-        view = maxView;
-    }
-
-    if (cursor < view) {
-        cursor = view;
-    } else if (cursor >= view + rows) {
-        cursor = view + rows - 1;
-    }
-
     if (graphicalContext != NULL) {
-        graphicalContext->setViewportContext(view, items.size());
-
-        uint8_t valueWidth = getVisibleGraphicalValueWidth(items, view, rows, graphicalDisplay, graphicalContext);
-        uint8_t recalculatedRows = renderer->getMaxRows();
-        if (recalculatedRows == 0) {
-            recalculatedRows = 1;
-        }
-
-        if (recalculatedRows != rows) {
-            rows = recalculatedRows;
-            maxView = items.size() > rows ? items.size() - rows : 0;
-            if (view > maxView) {
-                view = maxView;
-            }
-            if (cursor < view) {
-                cursor = view;
-            } else if (cursor >= view + rows) {
-                cursor = view + rows - 1;
-            }
-
-            graphicalContext->setViewportContext(view, items.size());
-            valueWidth = getVisibleGraphicalValueWidth(items, view, rows, graphicalDisplay, graphicalContext);
-        }
-
-        graphicalContext->setValueAreaWidth(valueWidth);
+        rows = prepareViewport(items, cursor, view, renderer, graphicalContext, graphicalDisplay, rows);
+    } else {
+        clampViewport(cursor, view, items.size(), rows);
     }
 
     if (frameLifecycle != NULL) {
@@ -232,7 +245,6 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
 
     if (graphicalContext != NULL) {
         graphicalContext->setActiveItem(NULL);
-        graphicalContext->setViewportContext(view, items.size());
     }
 
     if (!items.empty()) {
@@ -411,45 +423,10 @@ bool MenuScreen::poll(MenuRenderer* renderer, uint16_t pollInterval) {
         return false;
     }
 
-    if (cursor >= items.size()) {
-        cursor = items.size() - 1;
-    }
-
-    uint8_t maxView = items.size() > rows ? items.size() - rows : 0;
-    if (view > maxView) {
-        view = maxView;
-    }
-
-    if (cursor < view) {
-        cursor = view;
-    } else if (cursor >= view + rows) {
-        cursor = view + rows - 1;
-    }
-
     if (graphicalContext != NULL) {
-        uint8_t valueWidth = getVisibleGraphicalValueWidth(items, view, rows, graphicalDisplay, graphicalContext);
-        uint8_t recalculatedRows = renderer->getMaxRows();
-        if (recalculatedRows == 0) {
-            recalculatedRows = 1;
-        }
-
-        if (recalculatedRows != rows) {
-            rows = recalculatedRows;
-            maxView = items.size() > rows ? items.size() - rows : 0;
-            if (view > maxView) {
-                view = maxView;
-            }
-            if (cursor < view) {
-                cursor = view;
-            } else if (cursor >= view + rows) {
-                cursor = view + rows - 1;
-            }
-
-            graphicalContext->setViewportContext(view, items.size());
-            valueWidth = getVisibleGraphicalValueWidth(items, view, rows, graphicalDisplay, graphicalContext);
-        }
-
-        graphicalContext->setValueAreaWidth(valueWidth);
+        rows = prepareViewport(items, cursor, view, renderer, graphicalContext, graphicalDisplay, rows);
+    } else {
+        clampViewport(cursor, view, items.size(), rows);
     }
 
     bool redrawn = false;
