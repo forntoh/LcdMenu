@@ -128,16 +128,21 @@ unittest(value_and_widget_items_measure_graphical_width) {
 
     int value = 123;
     ItemValue<int> valueItem("Count", value, "%d");
-    assertEqual((uint8_t)(3 * GraphicalMeasureDisplay::kCharWidth), valueItem.measureGraphicalValueWidth(&display));
+    const GraphicalMenuItem* valueCapability = static_cast<const GraphicalMenuItem*>(valueItem.queryCapability(GraphicalMenuItem::capabilityId()));
+    assertTrue(valueCapability != NULL);
+    assertEqual((uint8_t)(3 * GraphicalMeasureDisplay::kCharWidth), valueCapability->measureGraphicalValueWidth(&display));
 
     ItemBool<bool> boolItem("Enabled", false, "YES", "NO", "%s", 0, nullptr);
-    assertEqual((uint8_t)(3 * GraphicalMeasureDisplay::kCharWidth), boolItem.measureGraphicalValueWidth(&display));
+    const GraphicalMenuItem* boolCapability = static_cast<const GraphicalMenuItem*>(boolItem.queryCapability(GraphicalMenuItem::capabilityId()));
+    assertTrue(boolCapability != NULL);
+    assertEqual((uint8_t)(3 * GraphicalMeasureDisplay::kCharWidth), boolCapability->measureGraphicalValueWidth(&display));
 }
 
 unittest(list_and_range_items_report_graphical_list_indicator) {
     std::vector<const char*> values = {"A", "B", "C"};
     ItemList<const char*, uint8_t>* listItem = ITEM_LIST("Mode", values, nullptr);
-    ItemRange<int, int>* rangeItem = ITEM_RANGE("Speed", 3, 1, 0, 9, nullptr, "%d");
+    void (*rangeCallback)(const int) = nullptr;
+    ItemRange<int, int>* rangeItem = ITEM_RANGE("Speed", 3, 1, 0, 9, rangeCallback, "%d");
 
     const GraphicalMenuItem* listCapability = static_cast<const GraphicalMenuItem*>(listItem->queryCapability(GraphicalMenuItem::capabilityId()));
     const GraphicalMenuItem* rangeCapability = static_cast<const GraphicalMenuItem*>(rangeItem->queryCapability(GraphicalMenuItem::capabilityId()));
