@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ItemWidget.h>
+#include <display/GraphicalDisplayInterface.h>
 #include <widget/WidgetBool.h>
 
 /**
@@ -15,6 +16,10 @@
  */
 template <typename V = bool>
 class ItemBool : public ItemWidget<V> {
+  private:
+    const char* textOn = NULL;
+    const char* textOff = NULL;
+
   public:
     virtual ~ItemBool() = default;
 
@@ -26,7 +31,40 @@ class ItemBool : public ItemWidget<V> {
         const char* format,
         const uint8_t cursorOffset,
         typename ItemWidget<V>::CallbackType callback)
-        : ItemWidget<V>(text, new WidgetBool<V>(value, textOn, textOff, format, cursorOffset), callback) {}
+        : ItemWidget<V>(text, new WidgetBool<V>(value, textOn, textOff, format, cursorOffset), callback),
+          textOn(textOn),
+          textOff(textOff) {}
+
+    uint8_t measureGraphicalValueWidth(GraphicalDisplayInterface* display) const override {
+        if (display == NULL) {
+            return 0;
+        }
+        uint8_t toggleWidth = display->getFontHeight();
+        if (toggleWidth > 4) {
+            toggleWidth -= 4;
+        }
+
+        if (toggleWidth < 3) {
+            toggleWidth = 3;
+        }
+
+        uint8_t onWidth = display->getTextWidth(textOn == NULL ? "" : textOn);
+        uint8_t offWidth = display->getTextWidth(textOff == NULL ? "" : textOff);
+        uint8_t textWidth = onWidth > offWidth ? onWidth : offWidth;
+
+        return toggleWidth > textWidth ? toggleWidth : textWidth;
+    }
+
+    bool hasGraphicalToggle() const override { return true; }
+
+    bool graphicalToggleState() const override {
+        BaseWidget* widget = this->getWidgetAt(0);
+        if (widget == nullptr) {
+            return false;
+        }
+        BaseWidgetValue<V>* boolWidget = static_cast<BaseWidgetValue<V>*>(widget);
+        return static_cast<bool>(boolWidget->getValue());
+    }
 };
 
 /**

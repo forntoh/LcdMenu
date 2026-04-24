@@ -4,12 +4,16 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
+#include "display/GraphicalDisplayInterface.h"
+#include "renderer/GraphicalIndicatorRenderer.h"
+#include "renderer/GraphicalMenuItem.h"
+#include "renderer/GraphicalValueSelectionRenderer.h"
 #include "utils/lcd_menu_utils.h"
 #include "utils/std.h"
 #include "widget/BaseWidget.h"
 #include <vector>
 
-class BaseItemManyWidgets : public MenuItem {
+class BaseItemManyWidgets : public MenuItem, public GraphicalMenuItem {
   protected:
     std::vector<BaseWidget*> widgets;
     uint8_t activeWidget = 0;
@@ -71,6 +75,38 @@ class BaseItemManyWidgets : public MenuItem {
         }
     }
 
+    uint8_t measureGraphicalValueWidth(GraphicalDisplayInterface* display) const override {
+        if (display == NULL) {
+            return 0;
+        }
+
+        char buf[ITEM_DRAW_BUFFER_SIZE];
+        uint8_t index = 0;
+        for (size_t i = 0; i < widgets.size() && index < ITEM_DRAW_BUFFER_SIZE - 1; i++) {
+            uint8_t written = widgets[i]->draw(buf, index);
+            uint8_t maxWritable = static_cast<uint8_t>(ITEM_DRAW_BUFFER_SIZE - 1 - index);
+            index += written > maxWritable ? maxWritable : written;
+        }
+        buf[index] = '\0';
+        return display->getTextWidth(buf);
+    }
+
+    bool hasGraphicalListIndicator() const override {
+        for (size_t i = 0; i < widgets.size(); i++) {
+            if (widgets[i] != NULL && widgets[i]->isList()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const void* queryCapability(uint8_t capabilityId) const override {
+        if (capabilityId == GraphicalMenuItem::capabilityId()) {
+            return static_cast<const GraphicalMenuItem*>(this);
+        }
+        return MenuItem::queryCapability(capabilityId);
+    }
+
     virtual ~BaseItemManyWidgets() {
         for (auto widget : widgets) {
             delete widget;
@@ -111,21 +147,67 @@ class BaseItemManyWidgets : public MenuItem {
 
         uint8_t index = 0;
         uint8_t cursorCol = 0;
+        bool hasListWidget = false;
+        uint8_t activeSegmentStart = 0;
+        uint8_t activeSegmentLength = 0;
+
+        GraphicalValueSelectionRenderer* valueSelectionRenderer =
+            static_cast<GraphicalValueSelectionRenderer*>(renderer->queryExtension(GraphicalValueSelectionRenderer::extensionId()));
 
         for (uint8_t i = 0; i < widgets.size(); i++) {
-            index += widgets[i]->draw(buf, index);
+            uint8_t widgetStart = index;
+            uint8_t written = widgets[i]->draw(buf, index);
+            uint8_t maxWritable = index < ITEM_DRAW_BUFFER_SIZE - 1 ? static_cast<uint8_t>(ITEM_DRAW_BUFFER_SIZE - 1 - index) : 0;
+            index += written > maxWritable ? maxWritable : written;
+            hasListWidget = hasListWidget || widgets[i]->isList();
             if (i == activeWidget && MenuItem::isEditing()) {
-                // Calculate the available space for the widgets after the text
-                size_t v_size = renderer->getEffectiveCols() - strlen(text) - 1;
-                // Adjust the view shift to ensure the active widget is visible
-                renderer->viewShift = index > v_size ? index - v_size : 0;
+                activeSegmentStart = widgetStart;
+                activeSegmentLength = index > widgetStart ? static_cast<uint8_t>(index - widgetStart) : 0;
+
+                const char* label = text == NULL ? "" : text;
+                int16_t valueArea = static_cast<int16_t>(renderer->getEffectiveCols()) - static_cast<int16_t>(strlen(label)) - 1;
+                int16_t shift = static_cast<int16_t>(index) - valueArea;
+                renderer->viewShift = shift > 0 ? static_cast<uint8_t>(shift) : 0;
+
+                if (valueSelectionRenderer != NULL) {
+                    if (activeSegmentLength > 0) {
+                        valueSelectionRenderer->setValueSelection(activeSegmentStart, activeSegmentLength);
+                    } else {
+                        valueSelectionRenderer->clearValueSelection();
+                    }
+                }
+
                 // Draw the item with the renderer, indicating if it's the last widget
                 renderer->drawItem(text, buf, i == widgets.size() - 1);
                 // Calculate the cursor column position for the active widget
-                cursorCol = renderer->getCursorCol() - 1 - widgets[i]->cursorOffset;
+                uint8_t endCol = renderer->getCursorCol();
+                uint8_t offset = static_cast<uint8_t>(1 + widgets[i]->cursorOffset);
+                cursorCol = endCol > offset ? endCol - offset : 0;
             }
         }
+        buf[index < ITEM_DRAW_BUFFER_SIZE ? index : ITEM_DRAW_BUFFER_SIZE - 1] = '\0';
+
+        if (valueSelectionRenderer != NULL) {
+            if (MenuItem::isEditing() && activeSegmentLength > 0) {
+                valueSelectionRenderer->setValueSelection(activeSegmentStart, activeSegmentLength);
+            } else {
+                valueSelectionRenderer->clearValueSelection();
+            }
+        }
+
         renderer->drawItem(text, buf);
+
+        if (valueSelectionRenderer != NULL) {
+            valueSelectionRenderer->clearValueSelection();
+        }
+
+        if (hasListWidget) {
+            GraphicalIndicatorRenderer* indicatorRenderer =
+                static_cast<GraphicalIndicatorRenderer*>(renderer->queryExtension(GraphicalIndicatorRenderer::extensionId()));
+            if (indicatorRenderer != NULL) {
+                indicatorRenderer->drawListIndicator();
+            }
+        }
 
         if (MenuItem::isEditing()) {
             renderer->moveCursor(cursorCol, renderer->getCursorRow());
