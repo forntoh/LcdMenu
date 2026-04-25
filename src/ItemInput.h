@@ -3,7 +3,12 @@
 
 #include "LcdMenu.h"
 #include "MenuItem.h"
+#include "display/GraphicalDisplayInterface.h"
+#include "renderer/GraphicalMenuItem.h"
+#include "renderer/GraphicalValueSelectionRenderer.h"
 #include <utils/lcd_menu_utils.h>
+
+#include <string.h>
 
 /**
  * @brief Item that allows user to input string information.
@@ -18,7 +23,7 @@
  * Has internal `edit` state.
  * Value area is scrollable, see `view`.
  */
-class ItemInput : public MenuItem {
+class ItemInput : public MenuItem, public GraphicalMenuItem {
   protected:
     /**
      * @brief String value of item.
@@ -61,6 +66,13 @@ class ItemInput : public MenuItem {
      * First parameter will be a `value` string.
      */
     fptrStr callback;
+
+    inline GraphicalValueSelectionRenderer* getGraphicalValueSelectionRenderer(MenuRenderer* renderer) const {
+        if (renderer == NULL) {
+            return NULL;
+        }
+        return static_cast<GraphicalValueSelectionRenderer*>(renderer->queryExtension(GraphicalValueSelectionRenderer::extensionId()));
+    }
 
   public:
     /**
@@ -105,6 +117,22 @@ class ItemInput : public MenuItem {
         }
         return false;
     }
+
+    uint8_t measureGraphicalValueWidth(GraphicalDisplayInterface* display) const override {
+        return display == NULL ? 0 : display->getTextWidth(value);
+    }
+
+    bool useTightGraphicalSelectionBox() const override {
+        return true;
+    }
+
+    const void* queryCapability(uint8_t capabilityId) const override {
+        if (capabilityId == GraphicalMenuItem::capabilityId()) {
+            return static_cast<const GraphicalMenuItem*>(this);
+        }
+        return MenuItem::queryCapability(capabilityId);
+    }
+
     /**
      * Get the callback function for this item.
      *
@@ -114,9 +142,48 @@ class ItemInput : public MenuItem {
 
   protected:
     void draw(MenuRenderer* renderer) override {
+        GraphicalValueSelectionRenderer* selectionRenderer = getGraphicalValueSelectionRenderer(renderer);
+        if (selectionRenderer != NULL) {
+            char* graphicalValue = value;
+            char* insertionBuffer = NULL;
+            bool editing = MenuItem::isEditing();
+
+            if (editing) {
+                renderer->viewShift = 0;
+                uint8_t len = strlen(value);
+                uint8_t selectionStart = cursor > len ? len : cursor;
+                uint8_t selectionLength = 1;
+
+                if (selectionStart >= len) {
+                    insertionBuffer = new char[len + 2];
+                    memcpy(insertionBuffer, value, len);
+                    insertionBuffer[len] = ' ';
+                    insertionBuffer[len + 1] = '\0';
+                    graphicalValue = insertionBuffer;
+                }
+
+                selectionRenderer->setValueSelection(selectionStart, selectionLength);
+            } else {
+                selectionRenderer->clearValueSelection();
+            }
+
+            renderer->drawItem(text, graphicalValue);
+            if (editing) {
+                selectionRenderer->clearValueSelection();
+            }
+
+            if (insertionBuffer != NULL) {
+                delete[] insertionBuffer;
+            }
+
+            return;
+        }
+
         const uint8_t viewSize = getViewSize(renderer);
         char* vbuf = new char[viewSize + 1];
-        substring(value, view, viewSize, vbuf);
+        if (viewSize > 0) {
+            substring(value, view, viewSize, vbuf);
+        }
         vbuf[viewSize] = '\0';
         renderer->drawItem(text, vbuf);
         delete[] vbuf;
@@ -165,31 +232,54 @@ class ItemInput : public MenuItem {
         }
     }
     void enter(MenuRenderer* renderer) {
-        // Move cursor to the latest index
+        bool graphicalSelection = getGraphicalValueSelectionRenderer(renderer) != NULL;
+
+        // Move cursor to the latest editable index
         uint8_t length = strlen(value);
-        cursor = length;
-        // Move view if needed
-        uint8_t viewSize = getViewSize(renderer);
-        if (cursor > viewSize) {
-            view = length - (viewSize - 1);
+        if (graphicalSelection && length > 0) {
+            cursor = length - 1;
+        } else {
+            cursor = length;
         }
+
+        if (graphicalSelection) {
+            view = 0;
+            renderer->viewShift = 0;
+        } else {
+            // Move view if needed
+            uint8_t viewSize = getViewSize(renderer);
+            if (viewSize == 0) {
+                viewSize = 1;
+            }
+            if (cursor > viewSize) {
+                view = length - (viewSize - 1);
+            }
+        }
+
         // Redraw
         MenuItem::beginEdit();
         draw(renderer);
-        renderer->drawBlinker();
+        if (!graphicalSelection) {
+            renderer->drawBlinker();
+        }
         // Log
         LOG(F("ItemInput::enterEditMode"), value);
     };
     void back(MenuRenderer* renderer) {
         renderer->clearBlinker();
         MenuItem::endEdit();
+
+        renderer->viewShift = 0;
+
+        if (callback != NULL) {
+            callback(value);
+        }
+
         // Move view to 0 and redraw before exit
         cursor = 0;
         view = 0;
         draw(renderer);
-        if (callback != NULL) {
-            callback(value);
-        }
+
         // Log
         LOG(F("ItemInput::exitEditMode"), value);
     };
@@ -198,8 +288,15 @@ class ItemInput : public MenuItem {
             return;
         }
         cursor--;
+
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            draw(renderer);
+            LOG(F("ItemInput::left"), value);
+            return;
+        }
+
         uint8_t cursorCol = renderer->getCursorCol();
-        if (cursor <= view - 1) {
+        if (view > 0 && cursor < view) {
             view--;
             draw(renderer);
         } else {
@@ -218,7 +315,17 @@ class ItemInput : public MenuItem {
             return;
         }
         cursor++;
+
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            draw(renderer);
+            LOG(F("ItemInput::right"), value);
+            return;
+        }
+
         uint8_t viewSize = getViewSize(renderer);
+        if (viewSize == 0) {
+            viewSize = 1;
+        }
         uint8_t cursorCol = renderer->getCursorCol();
         if (cursor > (view + viewSize - 1)) {
             view++;
@@ -240,6 +347,13 @@ class ItemInput : public MenuItem {
         }
         remove(value, cursor - 1, 1);
         cursor--;
+
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            draw(renderer);
+            LOG(F("ItemInput::backspace"), value);
+            return;
+        }
+
         uint8_t cursorCol = renderer->getCursorCol();
         if (view > 0) {
             view--;
@@ -279,7 +393,17 @@ class ItemInput : public MenuItem {
         delete[] value;
         value = buf;
         cursor++;
+
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            draw(renderer);
+            LOG(F("ItemInput::typeChar"), character);
+            return;
+        }
+
         uint8_t viewSize = getViewSize(renderer);
+        if (viewSize == 0) {
+            viewSize = 1;
+        }
         if (cursor > (view + viewSize - 1)) {
             view++;
         }
@@ -296,7 +420,9 @@ class ItemInput : public MenuItem {
         cursor = 0;
         view = 0;
         draw(renderer);
-        renderer->drawBlinker();
+        if (getGraphicalValueSelectionRenderer(renderer) == NULL) {
+            renderer->drawBlinker();
+        }
         // Log
         LOG(F("ItemInput::clear"), value);
     }

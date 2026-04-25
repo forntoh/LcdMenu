@@ -5,6 +5,8 @@
 #include "LcdMenu.h"
 #include <utils/lcd_menu_utils.h>
 
+#include <string.h>
+
 class ItemInputCharset : public ItemInput {
   private:
     const char* charset;
@@ -117,6 +119,14 @@ class ItemInputCharset : public ItemInput {
      */
     void abortCharEdit(MenuRenderer* renderer) {
         charEdit = false;
+
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            renderer->viewShift = 0;
+            ItemInput::draw(renderer);
+            LOG(F("ItemInputCharset::abortCharEdit"));
+            return;
+        }
+
         uint8_t cursorCol = renderer->getCursorCol();
         if (cursor < strlen(value)) {
             renderer->draw(value[cursor]);
@@ -167,6 +177,34 @@ class ItemInputCharset : public ItemInput {
     }
 
     void drawChar(MenuRenderer* renderer) {
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            renderer->viewShift = 0;
+            uint8_t length = strlen(value);
+
+            // Update in place when cursor points to an existing character; when cursor
+            // is at the insertion position, render through a temporary preview buffer
+            // to avoid writing past the current string bounds.
+            if (cursor < length) {
+                char original = value[cursor];
+                value[cursor] = charset[charsetPosition];
+                ItemInput::draw(renderer);
+                value[cursor] = original;
+            } else {
+                char* preview = new char[length + 2];
+                memcpy(preview, value, length);
+                preview[length] = charset[charsetPosition];
+                preview[length + 1] = '\0';
+
+                char* originalValue = value;
+                value = preview;
+                ItemInput::draw(renderer);
+                value = originalValue;
+
+                delete[] preview;
+            }
+            return;
+        }
+
         renderer->moveCursor(renderer->getCursorCol(), renderer->getCursorRow());
         renderer->draw(charset[charsetPosition]);
         renderer->moveCursor(renderer->getCursorCol(), renderer->getCursorRow());
