@@ -7,6 +7,30 @@
 
 namespace {
 const uint8_t listGlyph[] = {0x08, 0x1C, 0x3E, 0x00, 0x3E, 0x1C, 0x08, 0x00};
+const uint8_t textBufferSize = ITEM_DRAW_BUFFER_SIZE;
+
+uint8_t safeLength(const char* text) {
+    if (text == NULL) {
+        return 0;
+    }
+    size_t len = strlen(text);
+    return len > 255 ? 255 : static_cast<uint8_t>(len);
+}
+
+void copyTextRange(const char* text, uint8_t start, uint8_t count, char* out) {
+    if (text == NULL || count == 0) {
+        out[0] = '\0';
+        return;
+    }
+
+    uint8_t i = 0;
+    while (text[start] != '\0' && i < count && i < textBufferSize - 1) {
+        out[i] = text[start];
+        i++;
+        start++;
+    }
+    out[i] = '\0';
+}
 
 const GraphicalMenuItem* asGraphical(const MenuItem* item) {
     if (item == NULL) {
@@ -100,11 +124,24 @@ void GraphicalDisplayRenderer::setValueAreaWidth(uint8_t width) {
 
 void GraphicalDisplayRenderer::setActiveItem(const MenuItem* item) {
     activeItem = item;
+    clearValueSelection();
     applyItemFont(item);
 }
 
 GraphicalDisplayInterface* GraphicalDisplayRenderer::getGraphicalDisplay() {
     return gDisplay;
+}
+
+void GraphicalDisplayRenderer::setValueSelection(uint8_t start, uint8_t length) {
+    valueSelectionStart = start;
+    valueSelectionLength = length;
+    hasValueSelection = length > 0;
+}
+
+void GraphicalDisplayRenderer::clearValueSelection() {
+    valueSelectionStart = 0;
+    valueSelectionLength = 0;
+    hasValueSelection = false;
 }
 
 void* GraphicalDisplayRenderer::queryExtension(uint8_t extensionId) {
@@ -113,6 +150,9 @@ void* GraphicalDisplayRenderer::queryExtension(uint8_t extensionId) {
     }
     if (extensionId == GraphicalIndicatorRenderer::extensionId()) {
         return static_cast<GraphicalIndicatorRenderer*>(this);
+    }
+    if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
+        return static_cast<GraphicalValueSelectionRenderer*>(this);
     }
     if (extensionId == GraphicalRendererContext::extensionId()) {
         return static_cast<GraphicalRendererContext*>(this);
@@ -126,6 +166,9 @@ const void* GraphicalDisplayRenderer::queryExtension(uint8_t extensionId) const 
     }
     if (extensionId == GraphicalIndicatorRenderer::extensionId()) {
         return static_cast<const GraphicalIndicatorRenderer*>(this);
+    }
+    if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
+        return static_cast<const GraphicalValueSelectionRenderer*>(this);
     }
     if (extensionId == GraphicalRendererContext::extensionId()) {
         return static_cast<const GraphicalRendererContext*>(this);
@@ -174,6 +217,9 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
     gDisplay->draw(label);
     x += measureText(label) + 1;
 
+    const GraphicalMenuItem* graphicalItem = asGraphical(activeItem);
+    bool tightSelection = graphicalItem != NULL && graphicalItem->useTightGraphicalSelectionBox();
+
     if (value != NULL && value[0] != '\0') {
         uint8_t valueWidth = valueAreaWidth;
         if (valueWidth == 0) {
@@ -183,8 +229,51 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
         uint8_t valueX = valueRight > valueWidth ? valueRight - valueWidth : x;
         gDisplay->setCursor(valueX, baseline);
         gDisplay->draw(value);
+
+        if (hasFocus && MenuItem::isEditing() && hasValueSelection) {
+            uint8_t valueLen = safeLength(value);
+            uint8_t selectionStart = valueSelectionStart > valueLen ? valueLen : valueSelectionStart;
+            uint16_t rawEnd = static_cast<uint16_t>(valueSelectionStart) + valueSelectionLength;
+            uint8_t selectionEnd = rawEnd > valueLen ? valueLen : static_cast<uint8_t>(rawEnd);
+
+            if (selectionEnd <= selectionStart && selectionStart < valueLen) {
+                selectionEnd = selectionStart + 1;
+            }
+
+            if (selectionEnd > selectionStart) {
+                char prefixBuf[textBufferSize];
+                char selectedBuf[textBufferSize];
+                copyTextRange(value, 0, selectionStart, prefixBuf);
+                copyTextRange(value, selectionStart, static_cast<uint8_t>(selectionEnd - selectionStart), selectedBuf);
+
+                uint8_t prefixWidth = measureText(prefixBuf);
+                uint8_t selectedWidth = measureText(selectedBuf);
+                if (selectedWidth == 0) {
+                    selectedWidth = gDisplay->getFontWidth() == 0 ? 1 : gDisplay->getFontWidth();
+                }
+
+                uint8_t selectedX = valueX + prefixWidth;
+                uint8_t pad = tightSelection ? 0 : 1;
+                uint8_t highlightX = selectedX > pad ? static_cast<uint8_t>(selectedX - pad) : 0;
+                uint16_t highlightRight = static_cast<uint16_t>(selectedX) + selectedWidth + pad;
+                if (highlightRight > valueRight) {
+                    highlightRight = valueRight;
+                }
+
+                uint8_t highlightWidth = highlightRight > highlightX
+                                             ? static_cast<uint8_t>(highlightRight - highlightX)
+                                             : 0;
+                if (highlightWidth > 0) {
+                    gDisplay->setDrawColor(1);
+                    gDisplay->drawBox(highlightX, yTop, highlightWidth, h);
+                    gDisplay->setDrawColor(0);
+                    gDisplay->setCursor(selectedX, baseline);
+                    gDisplay->draw(selectedBuf);
+                    gDisplay->setDrawColor(1);
+                }
+            }
+        }
     } else {
-        const GraphicalMenuItem* graphicalItem = asGraphical(activeItem);
         if (graphicalItem != NULL && graphicalItem->hasGraphicalToggle()) {
             uint8_t box = toggleIndicatorWidth();
             uint8_t xBox = contentRight > rightPadding + box ? contentRight - rightPadding - box : x;
