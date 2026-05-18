@@ -49,11 +49,17 @@ GraphicalDisplayRenderer::GraphicalDisplayRenderer(
     : MenuRenderer(display, 0, 0),
       gDisplay(display),
       defaultFont(defaultFont),
-      cursorIcon(cursorIcon == NULL ? ">" : cursorIcon),
-      editCursorIcon(editCursorIcon == NULL ? "*" : editCursorIcon) {}
+      cursorIcon(cursorIcon),
+      editCursorIcon(editCursorIcon) {}
 
 void GraphicalDisplayRenderer::setDefaultFont(const uint8_t* font) {
     defaultFont = font;
+
+    if (defaultFont != NULL) {
+        gDisplay->setFont(defaultFont);
+    }
+    captureCurrentFontMetrics();
+
     applyItemFont(activeItem);
 }
 
@@ -61,6 +67,12 @@ bool GraphicalDisplayRenderer::setItemFont(MenuItem* item, const uint8_t* font) 
     if (!::setItemFont(item, font)) {
         return false;
     }
+
+    if (font != NULL) {
+        gDisplay->setFont(font);
+        captureCurrentFontMetrics();
+    }
+
     applyItemFont(activeItem);
     return true;
 }
@@ -98,9 +110,16 @@ void GraphicalDisplayRenderer::applyItemFont(const MenuItem* item) {
 
 void GraphicalDisplayRenderer::begin() {
     MenuRenderer::begin();
+
     maxRowHeight = 8;
     maxFontWidth = 1;
-    applyItemFont(NULL);
+
+    if (defaultFont != NULL) {
+        gDisplay->setFont(defaultFont);
+    }
+    captureCurrentFontMetrics();
+    applyItemFont(activeItem);
+
     beginFrame();
     endFrame();
 }
@@ -318,11 +337,14 @@ void GraphicalDisplayRenderer::drawSubMenuIndicator() {
     uint8_t contentRight = gDisplay->getDisplayWidth() > rightInset ? gDisplay->getDisplayWidth() - rightInset : gDisplay->getDisplayWidth();
     uint8_t x = contentRight > rightPadding + submenuGlyphWidth ? contentRight - rightPadding - submenuGlyphWidth : leftPadding;
     uint8_t y = top + (h > submenuGlyphHeight ? (h - submenuGlyphHeight) / 2 : 0);
+
+    gDisplay->setDrawColor(hasFocus && !MenuItem::isEditing() ? 0 : 1);
     gDisplay->drawBox(x, y, 1, 1);
     gDisplay->drawBox(x, y + 1, 2, 1);
     gDisplay->drawBox(x, y + 2, 3, 1);
     gDisplay->drawBox(x, y + 3, 2, 1);
     gDisplay->drawBox(x, y + 4, 1, 1);
+    gDisplay->setDrawColor(1);
 }
 
 void GraphicalDisplayRenderer::drawListIndicator() {
@@ -332,7 +354,10 @@ void GraphicalDisplayRenderer::drawListIndicator() {
     uint8_t contentRight = gDisplay->getDisplayWidth() > rightInset ? gDisplay->getDisplayWidth() - rightInset : gDisplay->getDisplayWidth();
     uint8_t x = contentRight > rightPadding + listGlyphWidth ? contentRight - rightPadding - listGlyphWidth : leftPadding;
     uint8_t y = top + (h > listGlyphHeight ? (h - listGlyphHeight) / 2 : 0);
+
+    gDisplay->setDrawColor(hasFocus && !MenuItem::isEditing() ? 0 : 1);
     gDisplay->drawXbm(x, y, listGlyphWidth, listGlyphHeight, listGlyph);
+    gDisplay->setDrawColor(1);
 }
 
 uint8_t GraphicalDisplayRenderer::measureText(const char* text) const {
@@ -348,7 +373,7 @@ uint8_t GraphicalDisplayRenderer::toggleIndicatorWidth() const {
 }
 
 uint8_t GraphicalDisplayRenderer::rowHeight() const {
-    return maxRowHeight == 0 ? 8 : maxRowHeight + 2;
+    return maxRowHeight == 0 ? 8 : maxRowHeight;
 }
 
 uint8_t GraphicalDisplayRenderer::getMaxRows() const {
