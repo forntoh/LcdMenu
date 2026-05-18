@@ -5,6 +5,12 @@
 
 class StubGraphicalDisplay : public GraphicalDisplayInterface {
   public:
+    uint8_t drawBoxCount = 0;
+    uint8_t drawXbmCount = 0;
+    uint8_t drawColorCount = 0;
+    uint8_t drawColors[4] = {0, 0, 0, 0};
+    uint8_t lastDrawBoxHeight = 0;
+
     void begin() override {}
     void clear() override {}
     void show() override {}
@@ -29,12 +35,31 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
         }
         return static_cast<uint8_t>(len * 6);
     }
-    void setDrawColor(uint8_t) override {}
+    void setDrawColor(uint8_t color) override {
+        if (drawColorCount < 4) {
+            drawColors[drawColorCount] = color;
+        }
+        drawColorCount++;
+    }
     void clearBuffer() override {}
     void sendBuffer() override {}
-    void drawBox(uint8_t, uint8_t, uint8_t, uint8_t) override {}
+    void drawBox(uint8_t, uint8_t, uint8_t, uint8_t h) override {
+        drawBoxCount++;
+        lastDrawBoxHeight = h;
+    }
     void drawFrame(uint8_t, uint8_t, uint8_t, uint8_t) override {}
-    void drawXbm(uint8_t, uint8_t, uint8_t, uint8_t, const uint8_t*) override {}
+    void drawXbm(uint8_t, uint8_t, uint8_t, uint8_t, const uint8_t*) override {
+        drawXbmCount++;
+    }
+};
+
+class FocusableGraphicalDisplayRenderer : public GraphicalDisplayRenderer {
+  public:
+    using GraphicalDisplayRenderer::GraphicalDisplayRenderer;
+
+    void setFocusForTest(bool focused) {
+        hasFocus = focused;
+    }
 };
 
 unittest(graphical_renderer_exposes_value_selection_extension) {
@@ -47,6 +72,40 @@ unittest(graphical_renderer_exposes_value_selection_extension) {
     GraphicalValueSelectionRenderer* selection = static_cast<GraphicalValueSelectionRenderer*>(extension);
     selection->setValueSelection(1, 2);
     selection->clearValueSelection();
+}
+
+unittest(graphical_renderer_uses_tight_row_height) {
+    StubGraphicalDisplay display;
+    GraphicalDisplayRenderer renderer(&display);
+
+    renderer.drawItem("Label", NULL);
+
+    assertEqual(1, display.drawBoxCount);
+    assertEqual(8, display.lastDrawBoxHeight);
+}
+
+unittest(graphical_renderer_colors_indicators_when_focused) {
+    StubGraphicalDisplay display;
+    FocusableGraphicalDisplayRenderer renderer(&display);
+
+    renderer.setFocusForTest(true);
+    renderer.drawListIndicator();
+
+    assertEqual(2, display.drawColorCount);
+    assertEqual(0, display.drawColors[0]);
+    assertEqual(1, display.drawColors[1]);
+    assertEqual(1, display.drawXbmCount);
+
+    display.drawColorCount = 0;
+    display.drawXbmCount = 0;
+    display.drawBoxCount = 0;
+
+    renderer.drawSubMenuIndicator();
+
+    assertEqual(2, display.drawColorCount);
+    assertEqual(0, display.drawColors[0]);
+    assertEqual(1, display.drawColors[1]);
+    assertEqual(5, display.drawBoxCount);
 }
 
 unittest_main()
