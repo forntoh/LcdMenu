@@ -40,6 +40,10 @@ Renderer-specific enhancements remain optional through ``queryExtension()``.
 For example, indicators use ``GraphicalIndicatorRenderer`` and value selection
 highlighting can be added with ``GraphicalValueSelectionRenderer``.
 
+``GraphicalDisplayRenderer`` now exposes ``GraphicalValueSelectionRenderer`` so
+``ItemInput`` and ``ItemInputCharset`` can render active-character selection on
+graphical displays.
+
 Basic usage
 -----------
 
