@@ -382,18 +382,45 @@ uint8_t GraphicalDisplayRenderer::getMaxRows() const {
 }
 
 uint8_t GraphicalDisplayRenderer::getMaxCols() const {
-    uint8_t w = maxFontWidth == 0 ? 1 : maxFontWidth;
+    uint8_t w = maxFontWidth;
+    if (w == 0) {
+        w = gDisplay->getFontWidth();
+    }
+    if (w == 0) {
+        w = 1;
+    }
     return gDisplay->getDisplayWidth() / w;
 }
 
 uint8_t GraphicalDisplayRenderer::getEffectiveCols() const {
-    uint8_t w = gDisplay->getFontWidth();
-    if (w == 0) {
-        w = 1;
+    uint8_t charW = gDisplay->getFontWidth();
+    if (charW == 0) {
+        charW = 1;
     }
+
     uint8_t rightInset = totalItems > getMaxRows() ? scrollbarWidth + scrollbarGap : 0;
-    uint8_t usable = gDisplay->getDisplayWidth() > rightInset ? gDisplay->getDisplayWidth() - rightInset : 0;
-    return usable / w;
+    uint8_t usable = gDisplay->getDisplayWidth();
+    if (usable <= rightInset + leftPadding) {
+        return 0;
+    }
+    usable -= rightInset + leftPadding;
+
+    uint8_t cols = usable / charW;
+
+    uint8_t iconWidth = measureText(cursorIcon);
+    uint8_t editIconWidth = measureText(editCursorIcon);
+    if (editIconWidth > iconWidth) {
+        iconWidth = editIconWidth;
+    }
+
+    uint8_t iconCols = static_cast<uint8_t>((iconWidth + charW - 1) / charW);
+    if (cols > iconCols) {
+        cols -= iconCols;
+    } else {
+        cols = 0;
+    }
+
+    return cols;
 }
 
 void GraphicalDisplayRenderer::drawScrollBar() {
