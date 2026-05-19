@@ -57,9 +57,9 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
 
 class FocusableGraphicalDisplayRenderer : public GraphicalDisplayRenderer {
   public:
-    using GraphicalDisplayRenderer::GraphicalDisplayRenderer;
     using GraphicalDisplayRenderer::getEffectiveCols;
     using GraphicalDisplayRenderer::getMaxCols;
+    using GraphicalDisplayRenderer::GraphicalDisplayRenderer;
 
     void setFocusForTest(bool focused) {
         hasFocus = focused;
@@ -95,7 +95,8 @@ unittest(graphical_renderer_exposes_value_selection_extension) {
     void* extension = renderer.queryExtension(GraphicalValueSelectionRenderer::extensionId());
     assertTrue(extension != NULL);
 
-    GraphicalValueSelectionRenderer* selection = static_cast<GraphicalValueSelectionRenderer*>(extension);
+    GraphicalValueSelectionRenderer* selection =
+        static_cast<GraphicalValueSelectionRenderer*>(extension);
     selection->setValueSelection(1, 2);
     selection->clearValueSelection();
 }
