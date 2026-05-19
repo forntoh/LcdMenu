@@ -10,6 +10,7 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
     uint8_t drawColorCount = 0;
     uint8_t drawColors[4] = {0, 0, 0, 0};
     uint8_t lastDrawBoxHeight = 0;
+    uint8_t lastDrawBoxY = 0;
 
     void begin() override {}
     void clear() override {}
@@ -43,8 +44,9 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
     }
     void clearBuffer() override {}
     void sendBuffer() override {}
-    void drawBox(uint8_t, uint8_t, uint8_t, uint8_t h) override {
+    void drawBox(uint8_t, uint8_t y, uint8_t, uint8_t h) override {
         drawBoxCount++;
+        lastDrawBoxY = y;
         lastDrawBoxHeight = h;
     }
     void drawFrame(uint8_t, uint8_t, uint8_t, uint8_t) override {}
@@ -82,6 +84,21 @@ unittest(graphical_renderer_uses_tight_row_height) {
 
     assertEqual(1, display.drawBoxCount);
     assertEqual(8, display.lastDrawBoxHeight);
+}
+
+unittest(graphical_renderer_clears_scrollbar_track_before_handle) {
+    StubGraphicalDisplay display;
+    GraphicalDisplayRenderer renderer(&display);
+
+    renderer.setViewportContext(0, 9);
+    renderer.drawItem("Label", NULL);
+
+    assertEqual(3, display.drawBoxCount);
+    assertEqual(0, display.drawColors[0]);
+    assertEqual(1, display.drawColors[1]);
+    assertEqual(0, display.drawColors[2]);
+    assertEqual(1, display.drawColors[3]);
+    assertEqual(0, display.lastDrawBoxY);
 }
 
 unittest(graphical_renderer_colors_indicators_when_focused) {

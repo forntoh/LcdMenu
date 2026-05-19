@@ -402,19 +402,26 @@ void GraphicalDisplayRenderer::drawScrollBar() {
         return;
     }
 
-    uint8_t x = gDisplay->getDisplayWidth() - scrollbarWidth;
-    uint8_t areaHeight = rows * rowHeight();
-    if (areaHeight > gDisplay->getDisplayHeight()) {
-        areaHeight = gDisplay->getDisplayHeight();
+    uint8_t displayWidth = gDisplay->getDisplayWidth();
+    uint16_t areaHeight16 = static_cast<uint16_t>(rows) * rowHeight();
+    if (areaHeight16 > gDisplay->getDisplayHeight()) {
+        areaHeight16 = gDisplay->getDisplayHeight();
     }
+    uint8_t areaHeight = static_cast<uint8_t>(areaHeight16);
+
+    uint8_t x = displayWidth - scrollbarWidth;
+
+    gDisplay->setDrawColor(0);
+    gDisplay->drawBox(x, 0, scrollbarWidth, areaHeight);
+    gDisplay->setDrawColor(1);
 
     uint8_t handleHeight = (static_cast<uint16_t>(rows) * areaHeight) / totalItems;
     if (handleHeight < 2) {
         handleHeight = 2;
     }
 
-    uint16_t scrollRange = totalItems - rows;
-    uint16_t trackRange = areaHeight - handleHeight;
-    uint8_t y = scrollRange == 0 ? 0 : (static_cast<uint16_t>(viewStart) * trackRange) / scrollRange;
+    uint16_t trackRange = areaHeight > handleHeight ? areaHeight - handleHeight : 0;
+    uint16_t scrollRange = totalItems > rows ? totalItems - rows : 1;
+    uint8_t y = (static_cast<uint16_t>(viewStart) * trackRange) / scrollRange;
     gDisplay->drawBox(x, y, scrollbarWidth, handleHeight);
 }
