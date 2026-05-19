@@ -304,10 +304,11 @@ void GraphicalDisplayRenderer::drawItem(const char* text, const char* value, boo
         }
     }
 
-    gDisplay->setDrawColor(1);
     if (cursorRow == 0) {
         drawScrollBar();
     }
+
+    gDisplay->setDrawColor(1);
 }
 
 void GraphicalDisplayRenderer::clearBlinker() {}
