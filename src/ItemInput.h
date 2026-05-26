@@ -146,9 +146,8 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
         if (selectionRenderer != NULL) {
             char* graphicalValue = value;
             char* insertionBuffer = NULL;
-            bool editing = MenuItem::isEditing();
 
-            if (editing) {
+            if (MenuItem::isEditing()) {
                 renderer->viewShift = 0;
                 uint8_t len = strlen(value);
                 uint8_t selectionStart = cursor > len ? len : cursor;
@@ -168,9 +167,7 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
             }
 
             renderer->drawItem(text, graphicalValue);
-            if (editing) {
-                selectionRenderer->clearValueSelection();
-            }
+            selectionRenderer->clearValueSelection();
 
             if (insertionBuffer != NULL) {
                 delete[] insertionBuffer;
