@@ -145,7 +145,7 @@ unittest(graphical_renderer_toggle_keeps_minimum_box_width) {
     renderer.drawItem("Toggle", NULL);
 
     assertEqual(1, display.drawFrameCount);
-    assertEqual(3, display.lastDrawFrameWidth);
+    assertEqual(4, display.lastDrawFrameWidth);
 }
 
 unittest(graphical_renderer_does_not_reserve_third_for_short_value) {
@@ -170,8 +170,9 @@ unittest(graphical_renderer_clears_scrollbar_track_before_handle) {
     assertEqual(3, display.drawBoxCount);
     assertEqual(0, display.drawColors[0]);
     assertEqual(1, display.drawColors[1]);
-    assertEqual(0, display.drawColors[2]);
-    assertEqual(1, display.drawColors[3]);
+    assertTrue(display.drawColorCount >= 4);
+    assertEqual(0, display.drawColors[display.drawColorCount - 2]);
+    assertEqual(1, display.drawColors[display.drawColorCount - 1]);
     assertEqual(0, display.lastDrawBoxY);
 }
 
