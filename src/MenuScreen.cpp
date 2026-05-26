@@ -191,7 +191,6 @@ void MenuScreen::draw(MenuRenderer* renderer) {
 
         if (frameLifecycle != NULL) {
             frameLifecycle->beginFrame();
-            frameLifecycle->endFrame();
         }
         return;
     }
@@ -225,9 +224,6 @@ void MenuScreen::draw(MenuRenderer* renderer) {
         graphicalContext->setActiveItem(NULL);
     }
 
-    if (frameLifecycle != NULL) {
-        frameLifecycle->endFrame();
-    }
 }
 
 void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
@@ -245,6 +241,7 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
 
     if (graphicalContext != NULL) {
         graphicalContext->setActiveItem(NULL);
+        graphicalContext->setViewportContext(view, items.size());
     }
 
     if (!items.empty()) {
