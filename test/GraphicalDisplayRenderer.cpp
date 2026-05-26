@@ -57,12 +57,36 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
 
 class FocusableGraphicalDisplayRenderer : public GraphicalDisplayRenderer {
   public:
+    using GraphicalDisplayRenderer::getEffectiveCols;
+    using GraphicalDisplayRenderer::getMaxCols;
     using GraphicalDisplayRenderer::GraphicalDisplayRenderer;
 
     void setFocusForTest(bool focused) {
         hasFocus = focused;
     }
 };
+
+unittest(graphical_renderer_reports_effective_cols_with_cursor_icons) {
+    StubGraphicalDisplay display;
+
+    FocusableGraphicalDisplayRenderer plain(&display);
+    FocusableGraphicalDisplayRenderer iconed(&display, NULL, "[]", "[e]");
+
+    assertEqual(21, plain.getEffectiveCols());
+    assertEqual(18, iconed.getEffectiveCols());
+
+    iconed.setViewportContext(0, 9);
+    assertEqual(17, iconed.getEffectiveCols());
+}
+
+unittest(graphical_renderer_reports_max_cols_from_font_width) {
+    StubGraphicalDisplay display;
+    FocusableGraphicalDisplayRenderer renderer(&display);
+
+    renderer.begin();
+
+    assertEqual(21, renderer.getMaxCols());
+}
 
 unittest(graphical_renderer_exposes_value_selection_extension) {
     StubGraphicalDisplay display;
@@ -71,7 +95,8 @@ unittest(graphical_renderer_exposes_value_selection_extension) {
     void* extension = renderer.queryExtension(GraphicalValueSelectionRenderer::extensionId());
     assertTrue(extension != NULL);
 
-    GraphicalValueSelectionRenderer* selection = static_cast<GraphicalValueSelectionRenderer*>(extension);
+    GraphicalValueSelectionRenderer* selection =
+        static_cast<GraphicalValueSelectionRenderer*>(extension);
     selection->setValueSelection(1, 2);
     selection->clearValueSelection();
 }

@@ -19,6 +19,8 @@ class GraphicalDisplayRenderer : public MenuRenderer,
                                  public GraphicalValueSelectionRenderer,
                                  public GraphicalRendererContext {
   private:
+    friend class FocusableGraphicalDisplayRenderer;
+
     GraphicalDisplayInterface* gDisplay;
     const uint8_t* defaultFont = NULL;
 
