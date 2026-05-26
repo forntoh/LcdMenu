@@ -223,7 +223,6 @@ void MenuScreen::draw(MenuRenderer* renderer) {
     if (graphicalContext != NULL) {
         graphicalContext->setActiveItem(NULL);
     }
-
 }
 
 void MenuScreen::syncIndicators(uint8_t index, MenuRenderer* renderer) {
