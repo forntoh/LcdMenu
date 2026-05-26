@@ -181,9 +181,6 @@ class ItemInputCharset : public ItemInput {
             renderer->viewShift = 0;
             uint8_t length = strlen(value);
 
-            // Update in place when cursor points to an existing character; when cursor
-            // is at the insertion position, render through a temporary preview buffer
-            // to avoid writing past the current string bounds.
             if (cursor < length) {
                 char original = value[cursor];
                 value[cursor] = charset[charsetPosition];

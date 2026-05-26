@@ -133,6 +133,10 @@ class SelectionTrackingRenderer : public MenuRenderer, public GraphicalValueSele
     uint8_t selectionStart = 0;
     uint8_t selectionLength = 0;
     bool hasSelection = false;
+    uint8_t setValueSelectionCalls = 0;
+    uint8_t clearValueSelectionCalls = 0;
+    uint8_t lastSelectionStart = 0;
+    uint8_t lastSelectionLength = 0;
 
     SelectionTrackingRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
 
@@ -143,12 +147,16 @@ class SelectionTrackingRenderer : public MenuRenderer, public GraphicalValueSele
     uint8_t getEffectiveCols() const override { return maxCols; }
 
     void setValueSelection(uint8_t start, uint8_t length) override {
+        setValueSelectionCalls++;
+        lastSelectionStart = start;
+        lastSelectionLength = length;
         selectionStart = start;
         selectionLength = length;
         hasSelection = length > 0;
     }
 
     void clearValueSelection() override {
+        clearValueSelectionCalls++;
         selectionStart = 0;
         selectionLength = 0;
         hasSelection = false;
@@ -230,9 +238,19 @@ unittest(input_item_uses_graphical_selection_extension_in_edit_mode) {
     assertTrue(MenuItem::isEditing());
     assertEqual((uint8_t)3, item.cursor);
     assertEqual((uint8_t)0, renderer.blinkerDrawCalls);
+    assertEqual((uint8_t)1, renderer.setValueSelectionCalls);
+    assertEqual((uint8_t)1, renderer.clearValueSelectionCalls);
+    assertEqual((uint8_t)3, renderer.lastSelectionStart);
+    assertEqual((uint8_t)1, renderer.lastSelectionLength);
+    assertFalse(renderer.hasSelection);
 
     assertTrue(item.process(&menu, LEFT));
     assertEqual((uint8_t)2, item.cursor);
+    assertEqual((uint8_t)2, renderer.setValueSelectionCalls);
+    assertEqual((uint8_t)2, renderer.clearValueSelectionCalls);
+    assertEqual((uint8_t)2, renderer.lastSelectionStart);
+    assertEqual((uint8_t)1, renderer.lastSelectionLength);
+    assertFalse(renderer.hasSelection);
 
     assertTrue(item.process(&menu, BACK));
     assertFalse(MenuItem::isEditing());
