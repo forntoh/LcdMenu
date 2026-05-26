@@ -38,6 +38,7 @@ class MenuRenderer {
     uint8_t cursorRow;
 
     unsigned long startTime = 0;
+    bool timeoutTriggered = false;
 
   public:
     /**
@@ -103,9 +104,10 @@ class MenuRenderer {
      * @brief Updates the display timer and hides the display if the timeout is reached.
      */
     virtual void updateTimer() {
-        if (millis() - startTime < DISPLAY_TIMEOUT) {
+        if (timeoutTriggered || millis() - startTime < DISPLAY_TIMEOUT) {
             return;
         }
+        timeoutTriggered = true;
         LOG(F("MenuRenderer::timeout"));
         display->hide();
     }

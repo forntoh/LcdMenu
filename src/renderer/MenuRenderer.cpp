@@ -6,6 +6,7 @@ MenuRenderer::MenuRenderer(DisplayInterface* display, uint8_t maxCols, uint8_t m
 void MenuRenderer::begin() {
     display->begin();
     startTime = millis();
+    timeoutTriggered = false;
 }
 
 void MenuRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) {
@@ -15,6 +16,7 @@ void MenuRenderer::moveCursor(uint8_t cursorCol, uint8_t cursorRow) {
 
 void MenuRenderer::restartTimer() {
     this->startTime = millis();
+    timeoutTriggered = false;
     display->show();
 }
 
