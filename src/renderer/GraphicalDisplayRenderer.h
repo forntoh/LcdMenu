@@ -19,8 +19,6 @@ class GraphicalDisplayRenderer : public MenuRenderer,
                                  public GraphicalValueSelectionRenderer,
                                  public GraphicalRendererContext {
   private:
-    friend class FocusableGraphicalDisplayRenderer;
-
     GraphicalDisplayInterface* gDisplay;
     const uint8_t* defaultFont = NULL;
 
@@ -33,6 +31,7 @@ class GraphicalDisplayRenderer : public MenuRenderer,
     uint8_t cursorPixelY = 0;
     uint8_t maxRowHeight = 8;
     uint8_t maxFontWidth = 1;
+
     bool hasValueSelection = false;
     uint8_t valueSelectionStart = 0;
     uint8_t valueSelectionLength = 0;
@@ -81,6 +80,7 @@ class GraphicalDisplayRenderer : public MenuRenderer,
     void setValueAreaWidth(uint8_t width) override;
     void setActiveItem(const MenuItem* item) override;
     GraphicalDisplayInterface* getGraphicalDisplay() override;
+
     void setValueSelection(uint8_t start, uint8_t length) override;
     void clearValueSelection() override;
 

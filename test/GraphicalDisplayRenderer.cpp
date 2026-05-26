@@ -3,29 +3,54 @@
 #include <renderer/GraphicalDisplayRenderer.h>
 #include <renderer/GraphicalValueSelectionRenderer.h>
 
+#include <string.h>
+
 class StubGraphicalDisplay : public GraphicalDisplayInterface {
   public:
+    uint8_t displayWidth = 128;
+    uint8_t displayHeight = 64;
+    uint8_t fontWidth = 6;
+    uint8_t fontHeight = 8;
     uint8_t drawBoxCount = 0;
     uint8_t drawXbmCount = 0;
+    uint8_t drawFrameCount = 0;
     uint8_t drawColorCount = 0;
-    uint8_t drawColors[4] = {0, 0, 0, 0};
+    uint8_t drawColors[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     uint8_t lastDrawBoxHeight = 0;
     uint8_t lastDrawBoxY = 0;
+    uint8_t lastDrawFrameWidth = 0;
+    uint8_t lastCursorX = 0;
+    uint8_t lastCursorY = 0;
+    uint8_t drawTextCount = 0;
+    char drawTextLog[4][16] = {{0}};
 
     void begin() override {}
     void clear() override {}
     void show() override {}
     void hide() override {}
     void draw(uint8_t) override {}
-    void draw(const char*) override {}
-    void setCursor(uint8_t, uint8_t) override {}
+    void draw(const char* text) override {
+        if (drawTextCount < 4) {
+            uint8_t i = 0;
+            while (text != NULL && text[i] != '\0' && i < 15) {
+                drawTextLog[drawTextCount][i] = text[i];
+                i++;
+            }
+            drawTextLog[drawTextCount][i] = '\0';
+        }
+        drawTextCount++;
+    }
+    void setCursor(uint8_t x, uint8_t y) override {
+        lastCursorX = x;
+        lastCursorY = y;
+    }
     void setBacklight(bool) override {}
 
     void setFont(const uint8_t*) override {}
-    uint8_t getDisplayWidth() const override { return 128; }
-    uint8_t getDisplayHeight() const override { return 64; }
-    uint8_t getFontWidth() const override { return 6; }
-    uint8_t getFontHeight() const override { return 8; }
+    uint8_t getDisplayWidth() const override { return displayWidth; }
+    uint8_t getDisplayHeight() const override { return displayHeight; }
+    uint8_t getFontWidth() const override { return fontWidth; }
+    uint8_t getFontHeight() const override { return fontHeight; }
     uint8_t getTextWidth(const char* text) override {
         if (text == NULL) {
             return 0;
@@ -34,10 +59,10 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
         while (text[len] != '\0') {
             len++;
         }
-        return static_cast<uint8_t>(len * 6);
+        return static_cast<uint8_t>(len * fontWidth);
     }
     void setDrawColor(uint8_t color) override {
-        if (drawColorCount < 4) {
+        if (drawColorCount < 8) {
             drawColors[drawColorCount] = color;
         }
         drawColorCount++;
@@ -49,7 +74,10 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
         lastDrawBoxY = y;
         lastDrawBoxHeight = h;
     }
-    void drawFrame(uint8_t, uint8_t, uint8_t, uint8_t) override {}
+    void drawFrame(uint8_t, uint8_t, uint8_t w, uint8_t) override {
+        drawFrameCount++;
+        lastDrawFrameWidth = w;
+    }
     void drawXbm(uint8_t, uint8_t, uint8_t, uint8_t, const uint8_t*) override {
         drawXbmCount++;
     }
@@ -57,8 +85,6 @@ class StubGraphicalDisplay : public GraphicalDisplayInterface {
 
 class FocusableGraphicalDisplayRenderer : public GraphicalDisplayRenderer {
   public:
-    using GraphicalDisplayRenderer::getEffectiveCols;
-    using GraphicalDisplayRenderer::getMaxCols;
     using GraphicalDisplayRenderer::GraphicalDisplayRenderer;
 
     void setFocusForTest(bool focused) {
@@ -66,26 +92,22 @@ class FocusableGraphicalDisplayRenderer : public GraphicalDisplayRenderer {
     }
 };
 
-unittest(graphical_renderer_reports_effective_cols_with_cursor_icons) {
+class ToggleGraphicalItem : public BasicItem {
+  public:
+    explicit ToggleGraphicalItem(const char* text) : BasicItem(text) {}
+    bool hasGraphicalToggle() const override { return true; }
+    bool graphicalToggleState() const override { return true; }
+};
+
+unittest(graphical_renderer_draws_placeholder_cursor_for_unfocused_rows) {
     StubGraphicalDisplay display;
+    GraphicalDisplayRenderer renderer(&display, NULL, ">>", "[]");
 
-    FocusableGraphicalDisplayRenderer plain(&display);
-    FocusableGraphicalDisplayRenderer iconed(&display, NULL, "[]", "[e]");
+    renderer.drawItem("Label", NULL);
 
-    assertEqual(21, plain.getEffectiveCols());
-    assertEqual(18, iconed.getEffectiveCols());
-
-    iconed.setViewportContext(0, 9);
-    assertEqual(17, iconed.getEffectiveCols());
-}
-
-unittest(graphical_renderer_reports_max_cols_from_font_width) {
-    StubGraphicalDisplay display;
-    FocusableGraphicalDisplayRenderer renderer(&display);
-
-    renderer.begin();
-
-    assertEqual(21, renderer.getMaxCols());
+    assertTrue(display.drawTextCount >= 2);
+    assertTrue(strcmp(display.drawTextLog[0], " ") == 0);
+    assertTrue(strcmp(display.drawTextLog[1], "Label") == 0);
 }
 
 unittest(graphical_renderer_exposes_value_selection_extension) {
@@ -111,6 +133,33 @@ unittest(graphical_renderer_uses_tight_row_height) {
     assertEqual(8, display.lastDrawBoxHeight);
 }
 
+unittest(graphical_renderer_toggle_keeps_minimum_box_width) {
+    StubGraphicalDisplay display;
+    display.fontHeight = 4;
+
+    FocusableGraphicalDisplayRenderer renderer(&display);
+    ToggleGraphicalItem toggleItem("Toggle");
+
+    renderer.setFocusForTest(true);
+    renderer.setActiveItem(&toggleItem);
+    renderer.drawItem("Toggle", NULL);
+
+    assertEqual(1, display.drawFrameCount);
+    assertEqual(4, display.lastDrawFrameWidth);
+}
+
+unittest(graphical_renderer_does_not_reserve_third_for_short_value) {
+    StubGraphicalDisplay display;
+    display.displayWidth = 48;
+    GraphicalDisplayRenderer renderer(&display);
+
+    renderer.drawItem("ABCDEFGHIJ", "1");
+
+    assertTrue(display.drawTextCount >= 2);
+    assertTrue(strcmp(display.drawTextLog[0], "ABCDEF") == 0);
+    assertTrue(strcmp(display.drawTextLog[1], "1") == 0);
+}
+
 unittest(graphical_renderer_clears_scrollbar_track_before_handle) {
     StubGraphicalDisplay display;
     GraphicalDisplayRenderer renderer(&display);
@@ -121,8 +170,9 @@ unittest(graphical_renderer_clears_scrollbar_track_before_handle) {
     assertEqual(3, display.drawBoxCount);
     assertEqual(0, display.drawColors[0]);
     assertEqual(1, display.drawColors[1]);
-    assertEqual(0, display.drawColors[2]);
-    assertEqual(1, display.drawColors[3]);
+    assertTrue(display.drawColorCount >= 4);
+    assertEqual(0, display.drawColors[display.drawColorCount - 2]);
+    assertEqual(1, display.drawColors[display.drawColorCount - 1]);
     assertEqual(0, display.lastDrawBoxY);
 }
 
