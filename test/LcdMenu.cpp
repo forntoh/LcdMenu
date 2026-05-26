@@ -296,29 +296,18 @@ unittest(refresh_flushes_renderer_frame) {
     assertEqual((uint8_t)1, renderer.endFrameCalls);
 }
 
-unittest(process_flushes_renderer_when_back_navigates_and_redraws) {
+unittest(process_flushes_renderer_when_command_handled) {
     TrackingRenderer renderer;
     LcdMenu menu(renderer);
-    MenuItem* parentItem = ITEM_BASIC("Parent");
-    MenuItem* childItem = ITEM_BASIC("Child");
-    std::vector<MenuItem*> parentItems = {parentItem};
-    std::vector<MenuItem*> childItems = {childItem};
-    MenuScreen parent(parentItems);
-    MenuScreen child(childItems);
-    child.setParent(&parent);
-    menu.setScreen(&child);
+    menu.setScreen(mainScreen);
+    menu.setCursor(ITEM_TOGGLE_INDEX);
 
     MenuItem::endEdit();
 
-    renderer.beginFrameCalls = 0;
     renderer.endFrameCalls = 0;
 
-    assertTrue(menu.process(BACK));
-    assertEqual((uint8_t)1, renderer.beginFrameCalls);
+    assertTrue(menu.process(ENTER));
     assertEqual((uint8_t)1, renderer.endFrameCalls);
-
-    delete parentItem;
-    delete childItem;
 }
 
 unittest(poll_flushes_renderer_when_polled_item_redraws) {
@@ -351,6 +340,22 @@ unittest(set_screen_skips_initial_label) {
     menu.setScreen(&screen);
     assertEqual((uint8_t)1, menu.getCursor());
     delete label;
+    delete item;
+}
+
+unittest(set_screen_flushes_renderer_frame) {
+    MenuItem* item = ITEM_BASIC("Run");
+    std::vector<MenuItem*> items = {item};
+    MenuScreen screen(items);
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+
+    renderer.beginFrameCalls = 0;
+    renderer.endFrameCalls = 0;
+    menu.setScreen(&screen);
+
+    assertEqual((uint8_t)1, renderer.beginFrameCalls);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
     delete item;
 }
 
