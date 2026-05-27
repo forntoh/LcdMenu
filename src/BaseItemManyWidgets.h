@@ -82,9 +82,18 @@ class BaseItemManyWidgets : public MenuItem, public GraphicalMenuItem {
 
         char buf[ITEM_DRAW_BUFFER_SIZE];
         uint8_t index = 0;
-        for (size_t i = 0; i < widgets.size() && index < ITEM_DRAW_BUFFER_SIZE - 1; i++) {
-            uint8_t written = widgets[i]->draw(buf, index);
-            uint8_t maxWritable = static_cast<uint8_t>(ITEM_DRAW_BUFFER_SIZE - 1 - index);
+        for (size_t i = 0; i < widgets.size(); i++) {
+            BaseWidget* widget = widgets[i];
+            if (widget == NULL) {
+                continue;
+            }
+
+            uint8_t maxWritable = index < ITEM_DRAW_BUFFER_SIZE - 1 ? static_cast<uint8_t>(ITEM_DRAW_BUFFER_SIZE - 1 - index) : 0;
+            if (maxWritable == 0) {
+                break;
+            }
+
+            uint8_t written = widget->draw(buf, index);
             index += written > maxWritable ? maxWritable : written;
         }
         buf[index] = '\0';
@@ -155,11 +164,21 @@ class BaseItemManyWidgets : public MenuItem, public GraphicalMenuItem {
             static_cast<GraphicalValueSelectionRenderer*>(renderer->queryExtension(GraphicalValueSelectionRenderer::extensionId()));
 
         for (uint8_t i = 0; i < widgets.size(); i++) {
+            BaseWidget* widget = widgets[i];
+            if (widget == NULL) {
+                continue;
+            }
+
             uint8_t widgetStart = index;
-            uint8_t written = widgets[i]->draw(buf, index);
+            hasListWidget = hasListWidget || widget->isList();
+
             uint8_t maxWritable = index < ITEM_DRAW_BUFFER_SIZE - 1 ? static_cast<uint8_t>(ITEM_DRAW_BUFFER_SIZE - 1 - index) : 0;
+            if (maxWritable == 0) {
+                continue;
+            }
+
+            uint8_t written = widget->draw(buf, index);
             index += written > maxWritable ? maxWritable : written;
-            hasListWidget = hasListWidget || widgets[i]->isList();
             if (i == activeWidget && MenuItem::isEditing()) {
                 activeSegmentStart = widgetStart;
                 activeSegmentLength = index > widgetStart ? static_cast<uint8_t>(index - widgetStart) : 0;
@@ -240,7 +259,8 @@ class BaseItemManyWidgets : public MenuItem, public GraphicalMenuItem {
     bool process(LcdMenu* menu, const unsigned char command) override {
         MenuRenderer* renderer = menu->getRenderer();
         if (MenuItem::isEditing()) {
-            if (widgets[activeWidget]->process(menu, command)) {
+            BaseWidget* activeWidgetPtr = activeWidget < widgets.size() ? widgets[activeWidget] : NULL;
+            if (activeWidgetPtr != NULL && activeWidgetPtr->process(menu, command)) {
                 draw(renderer);
                 return true;
             }

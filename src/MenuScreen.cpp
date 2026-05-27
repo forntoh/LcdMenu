@@ -244,13 +244,15 @@ bool MenuScreen::process(LcdMenu* menu, const unsigned char command) {
     }
 
     if (!items.empty()) {
-        uint8_t focusIndex = cursor >= view ? cursor - view : 0;
+        size_t safeIndex = cursor < items.size() ? cursor : items.size() - 1;
+        uint8_t safeCursor = static_cast<uint8_t>(safeIndex);
+        uint8_t focusIndex = safeCursor >= view ? safeCursor - view : 0;
         syncIndicators(focusIndex, renderer);
         if (graphicalContext != NULL) {
-            graphicalContext->setActiveItem(items[cursor]);
+            graphicalContext->setActiveItem(items[safeIndex]);
         }
 
-        if (items[cursor]->process(menu, command)) {
+        if (items[safeIndex]->process(menu, command)) {
             if (graphicalContext != NULL) {
                 graphicalContext->setActiveItem(NULL);
             }
