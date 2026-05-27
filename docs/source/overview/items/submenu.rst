@@ -28,9 +28,19 @@ Then you can create a sub-menu item entry that links to the sub-menu screen in t
 
 When the ``Sub-menu 1`` menu item is selected, the sub-menu screen will be displayed, showing the list of sub-items.
 
-.. image:: images/item-submenu.gif
-    :width: 400px
-    :alt: Example of a sub-menu item
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-submenu.gif
+            :width: 400px
+            :alt: Example of a sub-menu item
+
+    .. tab-item:: Graphical display
+
+        .. image:: images/graphical-item-submenu.gif
+            :width: 400px
+            :alt: Submenu item on a graphical display
 
 You can create multiple levels of sub-menus by nesting sub-menu items within other sub-menu screens.
 
