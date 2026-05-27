@@ -143,11 +143,16 @@ class ItemInputCharset : public ItemInput {
     void commitCharEdit(MenuRenderer* renderer) {
         uint8_t length = strlen(value);
         if (cursor < length) {
+            ensureOwnedValue();
             value[cursor] = charset[charsetPosition];
         } else {
             char* buf = new char[length + 2];
             concat(value, charset[charsetPosition], buf);
+            if (ownsValue && value != NULL) {
+                delete[] value;
+            }
             value = buf;
+            ownsValue = true;
         }
         abortCharEdit(renderer);
         LOG(F("ItemInputCharset::commitCharEdit"), charset[charsetPosition]);
@@ -182,10 +187,16 @@ class ItemInputCharset : public ItemInput {
             uint8_t length = strlen(value);
 
             if (cursor < length) {
-                char original = value[cursor];
-                value[cursor] = charset[charsetPosition];
+                char* preview = new char[length + 1];
+                memcpy(preview, value, length + 1);
+                preview[cursor] = charset[charsetPosition];
+
+                char* originalValue = value;
+                value = preview;
                 ItemInput::draw(renderer);
-                value[cursor] = original;
+                value = originalValue;
+
+                delete[] preview;
             } else {
                 char* preview = new char[length + 2];
                 memcpy(preview, value, length);
