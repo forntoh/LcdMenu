@@ -34,9 +34,9 @@ When the ``Name`` menu item is selected, an input field will be displayed on the
 
     .. tab-item:: Graphical display
 
-        Graphical display GIF placeholder: add
-        ``images/graphical-item-input.gif`` showing active character selection
-        highlighting on ``GraphicalDisplayRenderer``.
+        .. image:: images/graphical-item-input.gif
+            :width: 400px
+            :alt: Input menu item on a graphical display
 
 You can create multiple input items in the same menu screen, each with its own label and default value.
 

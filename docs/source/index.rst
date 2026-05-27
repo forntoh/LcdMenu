@@ -28,13 +28,11 @@ and :doc:`graphical displays <overview/rendering/graphical-display>`, including 
 
         **Graphical display**
 
-        .. admonition:: Graphical display demo coming soon
+        .. image:: images/home-graphical-display.gif
+            :alt: Example of a menu system created with |project| on a graphical display
+            :align: center
 
-            This space is reserved for a future graphical-display screenshot, GIF, or video
-            showing |project| on OLED-style targets. Expected media filename:
-            ``images/home-graphical-display.gif``.
-
-            Learn more about :doc:`graphical display rendering <overview/rendering/graphical-display>`.
+        Learn more about :doc:`graphical display rendering <overview/rendering/graphical-display>`.
 
 .. grid:: 1 2 2 2
 

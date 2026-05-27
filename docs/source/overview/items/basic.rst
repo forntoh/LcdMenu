@@ -25,8 +25,8 @@ This is how a basic menu item can be rendered:
 
     .. tab-item:: Graphical display
 
-        Graphical display screenshot placeholder: add
-        ``images/graphical-item-basic.png`` showing the same basic item rendered
-        by ``GraphicalDisplayRenderer``.
+        .. image:: images/graphical-item-basic.png
+            :width: 400px
+            :alt: Basic menu item on a graphical display
 
 Find more information about the basic menu item in the :cpp:class:`API reference <MenuItem>`.

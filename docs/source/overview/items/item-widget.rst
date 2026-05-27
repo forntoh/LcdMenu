@@ -51,9 +51,9 @@ The following are examples of how to create ItemWidget widgets.
 
     .. tab-item:: Graphical display
 
-        Graphical display GIF placeholder: add
-        ``images/graphical-item-widget-auto.gif`` showing list and boolean
-        widget editing with active value highlighting.
+        .. image:: images/graphical-item-widget-auto.gif
+            :width: 400px
+            :alt: List and boolean item widget on a graphical display
 
 Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
@@ -80,9 +80,9 @@ The user is able to select if the option (Buy or Sell) is carried out automatica
 
     .. tab-item:: Graphical display
 
-        Graphical display GIF placeholder: add
-        ``images/graphical-item-widget-qty.gif`` showing multiple range widgets
-        and active value highlighting.
+        .. image:: images/graphical-item-widget-qty.gif
+            :width: 400px
+            :alt: Multiple range item widget on a graphical display
 
 In the above example, the ItemWidget allows the user to select a quantity between 1.0 and 100.0 in steps of 0.1 and also select a tolerance between 0 and 100 in steps of 1.
 The selected quantity will be displayed as **"1.0±10%"**, **"1.1±14%"**, **"1.2±17%"**, etc.
@@ -109,9 +109,9 @@ The user is able to select the quantity and tolerance for a particular trade.
 
     .. tab-item:: Graphical display
 
-        Graphical display GIF placeholder: add
-        ``images/graphical-item-widget-freq.gif`` showing range and list widget
-        selection on a graphical display.
+        .. image:: images/graphical-item-widget-freq.gif
+            :width: 400px
+            :alt: Range and list item widget on a graphical display
 
 Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
@@ -138,9 +138,9 @@ The selected frequency will be displayed as **"00:00 on Mon"**, **"00:01 on Tue"
 
     .. tab-item:: Graphical display
 
-        Graphical display GIF placeholder: add
-        ``images/graphical-item-widget-date.gif`` showing date range widget
-        editing on a graphical display.
+        .. image:: images/graphical-item-widget-date.gif
+            :width: 400px
+            :alt: Date range item widget on a graphical display
 
 In the above example, the ItemWidget allows the user to select a start date for a particular task.
 The user is able to select the day, month, and year for the task.

@@ -39,9 +39,9 @@ The input value will be restricted to the characters specified in the charset.
 
     .. tab-item:: Graphical display
 
-        Graphical display GIF placeholder: add
-        ``images/graphical-item-charset-input.gif`` showing charset cycling with
-        active character highlighting on ``GraphicalDisplayRenderer``.
+        .. image:: images/graphical-item-charset-input.gif
+            :width: 400px
+            :alt: Charset input menu item on a graphical display
 
 You can create multiple charset input items in the same menu screen, each with its own label, default value, and charset.
 

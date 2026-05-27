@@ -110,6 +110,6 @@ When the "Toggle LED" menu item is selected, the LED connected to the ``LED_PIN`
 
     .. tab-item:: Graphical display
 
-        Graphical display screenshot placeholder: add
-        ``images/graphical-item-toggle.png`` showing the graphical
-        checkbox/toggle rendering for this toggle command.
+        .. image:: images/graphical-item-toggle.png
+            :width: 400px
+            :alt: Toggle menu item on a graphical display

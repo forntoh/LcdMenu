@@ -40,9 +40,9 @@ In this example, the :cpp:class:`ItemList` allows the user to select a color fro
 
     .. tab-item:: Graphical display
 
-        Graphical display GIF placeholder: add
-        ``images/graphical-item-list.gif`` showing list selection with the
-        graphical list indicator and active value highlighting.
+        .. image:: images/graphical-item-list.gif
+            :width: 400px
+            :alt: List menu item on a graphical display
 
 Example: List with Reference
 ############################

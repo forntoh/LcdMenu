@@ -31,7 +31,9 @@ Graphical displays are first-class targets: use custom fonts and glyphs, highlig
   <img src="https://i.imgur.com/nViET8b.gif" alt="Example of a menu system created with LcdMenu">
 </p>
 
-<p align="center"><strong>Graphical/OLED demo coming soon:</strong> this space is reserved for a future screenshot or GIF showing the U8g2 renderer in action.</p>
+<p align="center">
+  <img src="docs/source/images/home-graphical-display.gif" alt="Example of a menu system created with LcdMenu on a graphical display">
+</p>
 
 ## Quick Start
 

@@ -41,10 +41,13 @@ In this example, the :cpp:class:`ItemRange` allows the user to select a volume l
 
     .. tab-item:: Graphical display
 
-        Graphical display media placeholders: add
-        ``images/graphical-item-int-range.gif`` for integer range editing and
-        ``images/graphical-item-float-range.png`` for float range
-        display/editing.
+        .. image:: images/graphical-item-int-range.gif
+            :width: 400px
+            :alt: Integer range menu item on a graphical display
+
+        .. image:: images/graphical-item-float-range.png
+            :width: 400px
+            :alt: Float range menu item on a graphical display
 
 Example: Range with Reference
 #############################
