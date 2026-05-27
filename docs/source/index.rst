@@ -32,8 +32,6 @@ and :doc:`graphical displays <overview/rendering/graphical-display>`, including 
             :alt: Example of a menu system created with |project| on a graphical display
             :align: center
 
-        Learn more about :doc:`graphical display rendering <overview/rendering/graphical-display>`.
-
 .. grid:: 1 2 2 2
 
     .. grid-item-card:: :octicon:`home;3.5em`
