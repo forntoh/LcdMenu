@@ -14,16 +14,19 @@ and :doc:`graphical displays <overview/rendering/graphical-display>`, including 
 
 .. grid:: 1 1 2 2
 
-    .. grid-item-card:: Character display
+    .. grid-item::
         :columns: 12 12 6 6
-        :text-align: center
+
+        **Character display**
 
         .. image:: https://i.imgur.com/nViET8b.gif
             :alt: Example of a menu system created with |project| on a character display
             :align: center
 
-    .. grid-item-card:: Graphical display
+    .. grid-item::
         :columns: 12 12 6 6
+
+        **Graphical display**
 
         .. admonition:: Graphical display demo coming soon
 
