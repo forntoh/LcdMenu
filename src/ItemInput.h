@@ -29,6 +29,7 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
      * @brief String value of item.
      */
     char* value;
+    bool ownsValue;
     /**
      * @brief The index of first visible character.
      *
@@ -67,6 +68,33 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
      */
     fptrStr callback;
 
+    char* cloneValue(const char* src) const {
+        const char* source = src == NULL ? "" : src;
+        size_t length = strlen(source);
+        char* clonedValue = new char[length + 1];
+        memcpy(clonedValue, source, length);
+        clonedValue[length] = '\0';
+        return clonedValue;
+    }
+
+    bool setOwnedValue(const char* newValue) {
+        char* clonedValue = cloneValue(newValue);
+        if (ownsValue && value != NULL) {
+            delete[] value;
+        }
+        value = clonedValue;
+        ownsValue = true;
+        return true;
+    }
+
+    bool ensureOwnedValue() {
+        if (ownsValue) {
+            return false;
+        }
+        setOwnedValue(value);
+        return true;
+    }
+
     inline GraphicalValueSelectionRenderer* getGraphicalValueSelectionRenderer(MenuRenderer* renderer) const {
         if (renderer == NULL) {
             return NULL;
@@ -84,7 +112,11 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
      * the input is submitted.
      */
     ItemInput(const char* text, char* value, fptrStr callback)
-        : MenuItem(text), value(value), callback(callback) {}
+        : MenuItem(text), value(value), ownsValue(false), callback(callback) {
+        if (value == NULL) {
+            setOwnedValue("");
+        }
+    }
     /**
      * Construct a new ItemInput object with no initial value.
      *
@@ -93,7 +125,15 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
      * the input is submitted.
      */
     ItemInput(const char* text, fptrStr callback)
-        : ItemInput(text, (char*)"", callback) {}
+        : MenuItem(text), value(NULL), ownsValue(false), callback(callback) {
+        setOwnedValue("");
+    }
+
+    ~ItemInput() {
+        if (ownsValue && value != NULL) {
+            delete[] value;
+        }
+    }
     /**
      * Get the current input value for this item.
      *
@@ -111,7 +151,16 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
      */
     bool setValue(char* value) {
         if (this->value != value) {
+            if (ownsValue && this->value != NULL) {
+                delete[] this->value;
+            }
+
             this->value = value;
+            ownsValue = false;
+            if (this->value == NULL) {
+                setOwnedValue("");
+            }
+
             LOG(F("ItemInput::setValue"), value);
             return true;
         }
@@ -342,6 +391,7 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
         if (strlen(value) == 0 || cursor == 0) {
             return;
         }
+        ensureOwnedValue();
         remove(value, cursor - 1, 1);
         cursor--;
 
@@ -387,8 +437,11 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
         } else {
             concat(value, character, buf);
         }
-        delete[] value;
+        if (ownsValue && value != NULL) {
+            delete[] value;
+        }
         value = buf;
+        ownsValue = true;
         cursor++;
 
         if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
@@ -413,6 +466,7 @@ class ItemInput : public MenuItem, public GraphicalMenuItem {
      * @brief Clear the value of the input field
      */
     void clear(MenuRenderer* renderer) {
+        ensureOwnedValue();
         value[0] = '\0';
         cursor = 0;
         view = 0;

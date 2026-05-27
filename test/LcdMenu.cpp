@@ -278,6 +278,61 @@ unittest(clear_command_empties_input_and_resets_cursor) {
     assertTrue(MenuItem::isEditing());
 }
 
+unittest(default_empty_input_types_first_char_safely) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    ItemInput item("Name", NULL);
+
+    assertTrue(item.ownsValue);
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, 'A'));
+
+    assertEqual("A", item.getValue());
+    assertTrue(item.ownsValue);
+}
+
+unittest(set_value_static_empty_types_safely) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    ItemInput item("Name", NULL);
+
+    item.setValue((char*)"");
+    assertFalse(item.ownsValue);
+
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, 'B'));
+
+    assertEqual("B", item.getValue());
+    assertTrue(item.ownsValue);
+}
+
+unittest(stack_initial_value_types_safely) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    char stackValue[] = "X";
+    ItemInput item("Name", stackValue, NULL);
+
+    assertFalse(item.ownsValue);
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, 'Y'));
+
+    assertEqual("XY", item.getValue());
+    assertTrue(item.ownsValue);
+    assertEqual("X", stackValue);
+}
+
+unittest(clear_on_default_empty_input_is_safe) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    ItemInput item("Name", NULL);
+
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, CLEAR));
+
+    assertEqual("", item.getValue());
+    assertTrue(item.ownsValue);
+}
+
 unittest(hide_disables_and_clears_display) {
     TrackingRenderer renderer;
     LcdMenu menu(renderer);
