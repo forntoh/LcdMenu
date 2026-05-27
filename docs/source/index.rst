@@ -12,9 +12,23 @@ There are also built-in :doc:`display interfaces <reference/api/display/index>` 
 :doc:`character LCD displays <overview/rendering/character-display>`, including 16x2-style targets,
 and :doc:`graphical displays <overview/rendering/graphical-display>`, including OLED targets.
 
-.. image:: https://i.imgur.com/nViET8b.gif
-    :alt: Example of a menu system created with |project|
-    :align: center
+.. tab-set::
+
+    .. tab-item:: Character display
+
+        .. image:: https://i.imgur.com/nViET8b.gif
+            :alt: Example of a menu system created with |project| on a character display
+            :align: center
+
+    .. tab-item:: Graphical display
+
+        .. admonition:: Graphical display demo coming soon
+
+            This space is reserved for a future graphical-display screenshot, GIF, or video
+            showing |project| on OLED-style targets. Expected media filename:
+            ``images/home-graphical-display.gif``.
+
+            Learn more about :doc:`graphical display rendering <overview/rendering/graphical-display>`.
 
 .. grid:: 1 2 2 2
 
