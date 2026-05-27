@@ -12,15 +12,18 @@ There are also built-in :doc:`display interfaces <reference/api/display/index>` 
 :doc:`character LCD displays <overview/rendering/character-display>`, including 16x2-style targets,
 and :doc:`graphical displays <overview/rendering/graphical-display>`, including OLED targets.
 
-.. tab-set::
+.. grid:: 1 1 2 2
 
-    .. tab-item:: Character display
+    .. grid-item-card:: Character display
+        :columns: 12 12 6 6
+        :text-align: center
 
         .. image:: https://i.imgur.com/nViET8b.gif
             :alt: Example of a menu system created with |project| on a character display
             :align: center
 
-    .. tab-item:: Graphical display
+    .. grid-item-card:: Graphical display
+        :columns: 12 12 6 6
 
         .. admonition:: Graphical display demo coming soon
 
