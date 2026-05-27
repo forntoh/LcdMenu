@@ -41,9 +41,19 @@ The following are examples of how to create ItemWidget widgets.
         WIDGET_LIST(options, 0, "%s", 0, true),
         WIDGET_BOOL(false, "Yes", "No", ",%s")),
 
-.. image:: images/item-widget-auto.gif
-    :width: 400px
-    :alt: Example of an item widget with a list and a boolean widget
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-widget-auto.gif
+            :width: 400px
+            :alt: Example of an item widget with a list and a boolean widget
+
+    .. tab-item:: Graphical display
+
+        Graphical display GIF placeholder: add
+        ``images/graphical-item-widget-auto.gif`` showing list and boolean
+        widget editing with active value highlighting.
 
 Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
@@ -60,9 +70,19 @@ The user is able to select if the option (Buy or Sell) is carried out automatica
         WIDGET_RANGE(1.0f, 0.1f, 0.1f, 100.0f, "%.1f", 0),
         WIDGET_RANGE(10, 1, 0, 100, "\002%d%%", 1)),
 
-.. image:: images/item-widget-qty.gif
-    :width: 400px
-    :alt: Example of an item widget with two range widgets
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-widget-qty.gif
+            :width: 400px
+            :alt: Example of an item widget with two range widgets
+
+    .. tab-item:: Graphical display
+
+        Graphical display GIF placeholder: add
+        ``images/graphical-item-widget-qty.gif`` showing multiple range widgets
+        and active value highlighting.
 
 In the above example, the ItemWidget allows the user to select a quantity between 1.0 and 100.0 in steps of 0.1 and also select a tolerance between 0 and 100 in steps of 1.
 The selected quantity will be displayed as **"1.0±10%"**, **"1.1±14%"**, **"1.2±17%"**, etc.
@@ -79,9 +99,19 @@ The user is able to select the quantity and tolerance for a particular trade.
         WIDGET_RANGE(0, 1, 0, 59, ":%02d", 0, false),
         WIDGET_LIST(days, 0, " on %s", 0, true)),
 
-.. image:: images/item-widget-freq.gif
-    :width: 400px
-    :alt: Example of an item widget with two range widgets and a list widget
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-widget-freq.gif
+            :width: 400px
+            :alt: Example of an item widget with two range widgets and a list widget
+
+    .. tab-item:: Graphical display
+
+        Graphical display GIF placeholder: add
+        ``images/graphical-item-widget-freq.gif`` showing range and list widget
+        selection on a graphical display.
 
 Note: The callback receives the index of the selected option (0-based), not the actual string value. 
 
@@ -98,9 +128,19 @@ The selected frequency will be displayed as **"00:00 on Mon"**, **"00:01 on Tue"
         WIDGET_RANGE(1, 1, 1, 12, "/%02d", 0, true),
         WIDGET_RANGE(2021, 1, 2020, 2050, "/%04d", 0, true)),
 
-.. image:: images/item-widget-date.gif
-    :width: 400px
-    :alt: Example of an item widget with three range widgets
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-widget-date.gif
+            :width: 400px
+            :alt: Example of an item widget with three range widgets
+
+    .. tab-item:: Graphical display
+
+        Graphical display GIF placeholder: add
+        ``images/graphical-item-widget-date.gif`` showing date range widget
+        editing on a graphical display.
 
 In the above example, the ItemWidget allows the user to select a start date for a particular task.
 The user is able to select the day, month, and year for the task.

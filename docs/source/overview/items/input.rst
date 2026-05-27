@@ -24,9 +24,19 @@ You can create an input item by specifying the label and the default value:
 
 When the ``Name`` menu item is selected, an input field will be displayed on the screen, allowing the user to enter a string value.
 
-.. image:: images/item-input.gif
-    :width: 400px
-    :alt: Example of an input menu item
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-input.gif
+            :width: 400px
+            :alt: Example of an input menu item
+
+    .. tab-item:: Graphical display
+
+        Graphical display GIF placeholder: add
+        ``images/graphical-item-input.gif`` showing active character selection
+        highlighting on ``GraphicalDisplayRenderer``.
 
 You can create multiple input items in the same menu screen, each with its own label and default value.
 

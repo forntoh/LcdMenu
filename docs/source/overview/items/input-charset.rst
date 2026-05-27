@@ -29,9 +29,19 @@ The charset input item can be created using the following syntax:
 When the ``Pass`` menu item is selected, an input field will be displayed on the screen, allowing the user to enter a string value.
 The input value will be restricted to the characters specified in the charset.
 
-.. image:: images/item-charset-input.gif
-    :width: 400px
-    :alt: Example of a charset input menu item
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-charset-input.gif
+            :width: 400px
+            :alt: Example of a charset input menu item
+
+    .. tab-item:: Graphical display
+
+        Graphical display GIF placeholder: add
+        ``images/graphical-item-charset-input.gif`` showing charset cycling with
+        active character highlighting on ``GraphicalDisplayRenderer``.
 
 You can create multiple charset input items in the same menu screen, each with its own label, default value, and charset.
 

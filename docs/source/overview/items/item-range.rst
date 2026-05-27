@@ -27,6 +27,25 @@ Both functions are wrappers around the :cpp:class:`ItemWidget` class with a :cpp
 
 In this example, the :cpp:class:`ItemRange` allows the user to select a volume level between 0% and 100% in steps of 5%. The selected value is printed to the serial monitor.
 
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-int-range.gif
+            :width: 400px
+            :alt: Example of an integer range menu item
+
+        .. image:: images/item-float-range.png
+            :width: 400px
+            :alt: Example of a float range menu item
+
+    .. tab-item:: Graphical display
+
+        Graphical display media placeholders: add
+        ``images/graphical-item-int-range.gif`` for integer range editing and
+        ``images/graphical-item-float-range.png`` for float range
+        display/editing.
+
 Example: Range with Reference
 #############################
 

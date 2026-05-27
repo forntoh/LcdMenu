@@ -13,10 +13,20 @@ A basic menu item can be created using the following syntax:
 
     ITEM_BASIC("Item 1")
 
-This is how a basic menu item is rendered on a 16x2 LCD screen:
+This is how a basic menu item can be rendered:
 
-.. image:: images/item-basic.png
-    :width: 400px
-    :alt: Basic menu item
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-basic.png
+            :width: 400px
+            :alt: Basic menu item
+
+    .. tab-item:: Graphical display
+
+        Graphical display screenshot placeholder: add
+        ``images/graphical-item-basic.png`` showing the same basic item rendered
+        by ``GraphicalDisplayRenderer``.
 
 Find more information about the basic menu item in the :cpp:class:`API reference <MenuItem>`.

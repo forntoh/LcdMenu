@@ -100,6 +100,16 @@ Let's take a look at an example of a toggle command menu item that toggles an LE
 
 When the "Toggle LED" menu item is selected, the LED connected to the ``LED_PIN`` pin will be toggled on and off.
 
-.. image:: images/item-toggle.png
-    :width: 400px
-    :alt: Toggle menu item
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-toggle.png
+            :width: 400px
+            :alt: Toggle menu item
+
+    .. tab-item:: Graphical display
+
+        Graphical display screenshot placeholder: add
+        ``images/graphical-item-toggle.png`` showing the graphical
+        checkbox/toggle rendering for this toggle command.
