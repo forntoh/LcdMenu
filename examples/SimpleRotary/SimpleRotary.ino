@@ -11,6 +11,9 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
+// For SimpleRotary double-press actions, keep DOUBLE_PRESS_THRESHOLD >= 500.
+// Set DOUBLE_PRESS_THRESHOLD to 0 to disable double-press handling entirely.
+
 // Declare the callbacks
 void callback(int pos);
 void toggleBacklight(bool isOn);

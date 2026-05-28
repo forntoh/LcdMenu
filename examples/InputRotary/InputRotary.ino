@@ -12,6 +12,10 @@
 #define LCD_ROWS 2
 #define LCD_COLS 16
 
+// SimpleRotary samples button state every 200ms internally.
+// Keep DOUBLE_PRESS_THRESHOLD >= 500 for reliable BACKSPACE detection.
+// Set DOUBLE_PRESS_THRESHOLD to 0 if you want to disable double-press handling.
+
 // Create your charset
 const char* charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
