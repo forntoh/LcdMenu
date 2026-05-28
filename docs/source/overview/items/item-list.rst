@@ -30,6 +30,20 @@ Example: Simple List
 
 In this example, the :cpp:class:`ItemList` allows the user to select a color from the list. The selected color is printed to the serial monitor.
 
+.. tab-set::
+
+    .. tab-item:: 16x2 I2C character display
+
+        .. image:: images/item-list.gif
+            :width: 400px
+            :alt: Example of a list menu item
+
+    .. tab-item:: Graphical display
+
+        .. image:: images/graphical-item-list.gif
+            :width: 400px
+            :alt: List menu item on a graphical display
+
 Example: List with Reference
 ############################
 

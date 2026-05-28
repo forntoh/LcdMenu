@@ -1,4 +1,11 @@
 #include "LcdMenu.h"
+#include "renderer/FrameLifecycleRenderer.h"
+
+namespace {
+FrameLifecycleRenderer* frameLifecycle(MenuRenderer& renderer) {
+    return static_cast<FrameLifecycleRenderer*>(renderer.queryExtension(FrameLifecycleRenderer::extensionId()));
+}
+}  // namespace
 
 MenuRenderer* LcdMenu::getRenderer() {
     return &renderer;
@@ -13,6 +20,10 @@ void LcdMenu::setScreen(MenuScreen* screen) {
     this->screen = screen;
     renderer.display->clear();
     this->screen->reset(&renderer);
+    FrameLifecycleRenderer* frame = frameLifecycle(renderer);
+    if (frame != NULL) {
+        frame->endFrame();
+    }
 }
 
 bool LcdMenu::process(const unsigned char c) {
@@ -20,7 +31,14 @@ bool LcdMenu::process(const unsigned char c) {
         return false;
     }
     renderer.restartTimer();
-    return screen->process(this, c);
+    bool handled = screen->process(this, c);
+    if (handled) {
+        FrameLifecycleRenderer* frame = frameLifecycle(renderer);
+        if (frame != NULL) {
+            frame->endFrame();
+        }
+    }
+    return handled;
 };
 
 void LcdMenu::reset() {
@@ -42,6 +60,10 @@ void LcdMenu::show() {
     enabled = true;
     renderer.display->clear();
     screen->draw(&renderer);
+    FrameLifecycleRenderer* frame = frameLifecycle(renderer);
+    if (frame != NULL) {
+        frame->endFrame();
+    }
 }
 
 uint8_t LcdMenu::getCursor() {
@@ -64,13 +86,23 @@ void LcdMenu::refresh() {
         return;
     }
     screen->draw(&renderer);
+    FrameLifecycleRenderer* frame = frameLifecycle(renderer);
+    if (frame != NULL) {
+        frame->endFrame();
+    }
 }
 
 void LcdMenu::poll(uint16_t pollInterval) {
     if (!enabled || pollInterval == 0) {
         return;
     }
-    screen->poll(&renderer, pollInterval < 100 ? 100 : pollInterval);
+    bool redrawn = screen->poll(&renderer, pollInterval < 100 ? 100 : pollInterval);
+    if (redrawn) {
+        FrameLifecycleRenderer* frame = frameLifecycle(renderer);
+        if (frame != NULL) {
+            frame->endFrame();
+        }
+    }
 }
 bool LcdMenu::isEnabled() const {
     return enabled;

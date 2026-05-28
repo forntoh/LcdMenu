@@ -6,9 +6,9 @@
  * @class ItemLabel
  * @brief An unselectable menu item used for titles or separators.
  */
-class ItemLabel final : public MenuItem {
+class ItemLabel final : public BasicItem {
   public:
-    explicit ItemLabel(const char* text) : MenuItem(text) {}
+    explicit ItemLabel(const char* text) : BasicItem(text) {}
 
     bool isSelectable() const override { return false; }
 };
