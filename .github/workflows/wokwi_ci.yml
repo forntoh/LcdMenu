@@ -164,7 +164,7 @@ jobs:
         run: pio lib install
 
       - name: Build PlatformIO
-        run: pio run
+        run: pio run -e esp32
         env:
           LOCAL_BUILD: 1
           
@@ -177,7 +177,7 @@ jobs:
           token: ${{ secrets.WOKWI_CLI_TOKEN }}
           scenario: ${{ env.TEST_FILE }}
           timeout: ${{ env.RUN_DURATION }}
-          serial-log-file: wokwi-serial.log
+          serial_log_file: wokwi-serial.log
 
       - name: Upload Wokwi serial log
         if: always() && hashFiles('wokwi-serial.log') != ''
