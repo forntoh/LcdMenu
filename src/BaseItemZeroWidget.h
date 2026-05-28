@@ -3,6 +3,7 @@
 #define BASE_ITEM_ZERO_WIDGET_H
 
 #include "MenuItem.h"
+#include "renderer/GraphicalMenuItem.h"
 
 /**
  * @class BaseItemZeroWidget
@@ -15,7 +16,7 @@
  * @note This class is intended to be used as a base class for other menu items.
  *       It should not be instantiated directly.
  */
-class BaseItemZeroWidget : public MenuItem {
+class BaseItemZeroWidget : public MenuItem, public GraphicalMenuItem {
   public:
     virtual ~BaseItemZeroWidget() = default;
     /**
@@ -24,6 +25,13 @@ class BaseItemZeroWidget : public MenuItem {
      * @param text The text to display for the menu item.
      */
     explicit BaseItemZeroWidget(const char* text) : MenuItem(text) {}
+
+    const void* queryCapability(uint8_t capabilityId) const override {
+        if (capabilityId == GraphicalMenuItem::capabilityId()) {
+            return static_cast<const GraphicalMenuItem*>(this);
+        }
+        return MenuItem::queryCapability(capabilityId);
+    }
 
   protected:
     virtual void handleCommit(LcdMenu* menu) = 0;

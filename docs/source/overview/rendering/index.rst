@@ -16,6 +16,7 @@ For example, you could create a renderer for a TFT display, a touchscreen, or ev
     :caption: The library comes with the following built-in renderers:
 
     character-display
+    graphical-display
 
 Don't see a renderer for your favorite output device? Feel free to create a new one and share it with the community!
 
@@ -24,4 +25,14 @@ Here are some that would be cool to have:
 - Serial renderer
 - Web renderer
 - TFT renderer
-- OLED renderer
+
+Renderer extension hooks
+------------------------
+
+Advanced renderers can expose optional capabilities through
+``MenuRenderer::queryExtension()``. Menu items can similarly expose optional
+capabilities through ``MenuItem::queryCapability()``.
+
+This extension model keeps the base APIs small for character displays, while
+still allowing specialized renderers to opt into features such as explicit
+frame lifecycle hooks.

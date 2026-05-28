@@ -3,6 +3,7 @@
 #include "BaseItemZeroWidget.h"
 #include "LcdMenu.h"
 #include "MenuScreen.h"
+#include "renderer/GraphicalIndicatorRenderer.h"
 
 /**
  * @class ItemSubMenu
@@ -34,6 +35,15 @@ class ItemSubMenu : public BaseItemZeroWidget {
     }
 
   protected:
+    void draw(MenuRenderer* renderer) override {
+        renderer->drawItem(text, nullptr);
+        GraphicalIndicatorRenderer* indicatorRenderer =
+            static_cast<GraphicalIndicatorRenderer*>(renderer->queryExtension(GraphicalIndicatorRenderer::extensionId()));
+        if (indicatorRenderer != NULL) {
+            indicatorRenderer->drawSubMenuIndicator();
+        }
+    }
+
     void handleCommit(LcdMenu* menu) override {
         LOG(F("ItemSubMenu::changeScreen"), text);
         screen->setParent(menu->getScreen());

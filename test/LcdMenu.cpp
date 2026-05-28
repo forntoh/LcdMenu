@@ -1,4 +1,5 @@
 #define protected public
+#include "Godmode.h"
 #include <ItemInput.h>
 #include <MenuScreen.h>
 #undef protected
@@ -8,7 +9,12 @@
 #include <ItemToggle.h>
 #include <MenuItem.h>
 #include <display/DisplayInterface.h>
+#include <display/GraphicalDisplayInterface.h>
+#include <renderer/FrameLifecycleRenderer.h>
+#include <renderer/GraphicalMenuItem.h>
+#include <renderer/GraphicalValueSelectionRenderer.h>
 #include <renderer/MenuRenderer.h>
+#include <string.h>
 
 #define LCD_ROWS 2
 #define LCD_COLS 16
@@ -59,10 +65,12 @@ class TrackingDisplay : public DisplayInterface {
     void setBacklight(bool) override {}
 };
 
-class TrackingRenderer : public MenuRenderer {
+class TrackingRenderer : public MenuRenderer, public FrameLifecycleRenderer {
   public:
     TrackingDisplay display;
     bool itemDrawn = false;
+    uint8_t beginFrameCalls = 0;
+    uint8_t endFrameCalls = 0;
     TrackingRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
 
     void draw(uint8_t) override {}
@@ -70,6 +78,117 @@ class TrackingRenderer : public MenuRenderer {
     void clearBlinker() override {}
     void drawBlinker() override {}
     uint8_t getEffectiveCols() const override { return maxCols; }
+    void beginFrame() override { beginFrameCalls++; }
+    void endFrame() override { endFrameCalls++; }
+
+    void* queryExtension(uint8_t extensionId) override {
+        if (extensionId == FrameLifecycleRenderer::extensionId()) {
+            return static_cast<FrameLifecycleRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+
+    const void* queryExtension(uint8_t extensionId) const override {
+        if (extensionId == FrameLifecycleRenderer::extensionId()) {
+            return static_cast<const FrameLifecycleRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+};
+
+class GraphicalMeasureDisplay : public GraphicalDisplayInterface {
+  public:
+    static const uint8_t kCharWidth = 6;
+    void begin() override {}
+    void clear() override {}
+    void show() override {}
+    void hide() override {}
+    void draw(uint8_t) override {}
+    void draw(const char*) override {}
+    void setCursor(uint8_t, uint8_t) override {}
+    void setBacklight(bool) override {}
+    void setFont(const uint8_t*) override {}
+    uint8_t getDisplayWidth() const override { return 128; }
+    uint8_t getDisplayHeight() const override { return 64; }
+    uint8_t getFontWidth() const override { return kCharWidth; }
+    uint8_t getFontHeight() const override { return 8; }
+    uint8_t getTextWidth(const char* text) override {
+        if (text == NULL) {
+            return 0;
+        }
+        return static_cast<uint8_t>(strlen(text) * kCharWidth);
+    }
+    void setDrawColor(uint8_t) override {}
+    void clearBuffer() override {}
+    void sendBuffer() override {}
+    void drawBox(uint8_t, uint8_t, uint8_t, uint8_t) override {}
+    void drawFrame(uint8_t, uint8_t, uint8_t, uint8_t) override {}
+    void drawXbm(uint8_t, uint8_t, uint8_t, uint8_t, const uint8_t*) override {}
+};
+
+class SelectionTrackingRenderer : public MenuRenderer, public GraphicalValueSelectionRenderer {
+  public:
+    StubDisplay display;
+    uint8_t blinkerDrawCalls = 0;
+    uint8_t selectionStart = 0;
+    uint8_t selectionLength = 0;
+    bool hasSelection = false;
+    uint8_t setValueSelectionCalls = 0;
+    uint8_t clearValueSelectionCalls = 0;
+    uint8_t lastSelectionStart = 0;
+    uint8_t lastSelectionLength = 0;
+
+    SelectionTrackingRenderer() : MenuRenderer(&display, LCD_COLS, LCD_ROWS) {}
+
+    void draw(uint8_t) override {}
+    void drawItem(const char*, const char*, bool) override {}
+    void clearBlinker() override {}
+    void drawBlinker() override { blinkerDrawCalls++; }
+    uint8_t getEffectiveCols() const override { return maxCols; }
+
+    void setValueSelection(uint8_t start, uint8_t length) override {
+        setValueSelectionCalls++;
+        lastSelectionStart = start;
+        lastSelectionLength = length;
+        selectionStart = start;
+        selectionLength = length;
+        hasSelection = length > 0;
+    }
+
+    void clearValueSelection() override {
+        clearValueSelectionCalls++;
+        selectionStart = 0;
+        selectionLength = 0;
+        hasSelection = false;
+    }
+
+    void* queryExtension(uint8_t extensionId) override {
+        if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
+            return static_cast<GraphicalValueSelectionRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+
+    const void* queryExtension(uint8_t extensionId) const override {
+        if (extensionId == GraphicalValueSelectionRenderer::extensionId()) {
+            return static_cast<const GraphicalValueSelectionRenderer*>(this);
+        }
+        return MenuRenderer::queryExtension(extensionId);
+    }
+};
+
+class PollingMenuItem : public MenuItem {
+  public:
+    bool wasDrawn = false;
+
+    PollingMenuItem() : MenuItem("Polled") {
+        polling = true;
+    }
+
+    void draw(MenuRenderer* renderer) override {
+        wasDrawn = true;
+        renderer->drawItem(text, NULL);
+    }
 };
 
 // clang-format off
@@ -98,6 +217,45 @@ unittest(can_set_input_value) {
     assertEqual(expected, (static_cast<ItemInput*>(mainItems[ITEM_INPUT_INDEX]))->getValue());
 }
 
+unittest(input_item_exposes_graphical_capability) {
+    GraphicalMeasureDisplay display;
+    char value[] = "AB";
+    ItemInput item("Name", value, NULL);
+
+    const GraphicalMenuItem* capability = static_cast<const GraphicalMenuItem*>(item.queryCapability(GraphicalMenuItem::capabilityId()));
+    assertTrue(capability != NULL);
+    assertTrue(capability->useTightGraphicalSelectionBox());
+    assertEqual((uint8_t)(2 * GraphicalMeasureDisplay::kCharWidth), capability->measureGraphicalValueWidth(&display));
+}
+
+unittest(input_item_uses_graphical_selection_extension_in_edit_mode) {
+    char value[] = "TEST";
+    ItemInput item("Name", value, NULL);
+    SelectionTrackingRenderer renderer;
+    LcdMenu menu(renderer);
+
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(MenuItem::isEditing());
+    assertEqual((uint8_t)3, item.cursor);
+    assertEqual((uint8_t)0, renderer.blinkerDrawCalls);
+    assertEqual((uint8_t)1, renderer.setValueSelectionCalls);
+    assertEqual((uint8_t)1, renderer.clearValueSelectionCalls);
+    assertEqual((uint8_t)3, renderer.lastSelectionStart);
+    assertEqual((uint8_t)1, renderer.lastSelectionLength);
+    assertFalse(renderer.hasSelection);
+
+    assertTrue(item.process(&menu, LEFT));
+    assertEqual((uint8_t)2, item.cursor);
+    assertEqual((uint8_t)2, renderer.setValueSelectionCalls);
+    assertEqual((uint8_t)2, renderer.clearValueSelectionCalls);
+    assertEqual((uint8_t)2, renderer.lastSelectionStart);
+    assertEqual((uint8_t)1, renderer.lastSelectionLength);
+    assertFalse(renderer.hasSelection);
+
+    assertTrue(item.process(&menu, BACK));
+    assertFalse(MenuItem::isEditing());
+}
+
 unittest(cursor_clamped_when_out_of_range) {
     StubRenderer renderer;
     uint8_t outOfRange = 100;
@@ -118,6 +276,61 @@ unittest(clear_command_empties_input_and_resets_cursor) {
     assertEqual((uint8_t)0, item.cursor);
     assertEqual((uint8_t)0, item.view);
     assertTrue(MenuItem::isEditing());
+}
+
+unittest(default_empty_input_types_first_char_safely) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    ItemInput item("Name", NULL);
+
+    assertTrue(item.ownsValue);
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, 'A'));
+
+    assertEqual("A", item.getValue());
+    assertTrue(item.ownsValue);
+}
+
+unittest(set_value_static_empty_types_safely) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    ItemInput item("Name", NULL);
+
+    item.setValue((char*)"");
+    assertFalse(item.ownsValue);
+
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, 'B'));
+
+    assertEqual("B", item.getValue());
+    assertTrue(item.ownsValue);
+}
+
+unittest(stack_initial_value_types_safely) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    char stackValue[] = "X";
+    ItemInput item("Name", stackValue, NULL);
+
+    assertFalse(item.ownsValue);
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, 'Y'));
+
+    assertEqual("XY", item.getValue());
+    assertTrue(item.ownsValue);
+    assertEqual("X", stackValue);
+}
+
+unittest(clear_on_default_empty_input_is_safe) {
+    StubRenderer renderer;
+    LcdMenu menu(renderer);
+    ItemInput item("Name", NULL);
+
+    assertTrue(item.process(&menu, ENTER));
+    assertTrue(item.process(&menu, CLEAR));
+
+    assertEqual("", item.getValue());
+    assertTrue(item.ownsValue);
 }
 
 unittest(hide_disables_and_clears_display) {
@@ -143,6 +356,53 @@ unittest(show_enables_and_draws_active_screen) {
     assertTrue(renderer.itemDrawn);
 }
 
+unittest(refresh_flushes_renderer_frame) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    menu.setScreen(mainScreen);
+
+    renderer.beginFrameCalls = 0;
+    renderer.endFrameCalls = 0;
+    menu.refresh();
+
+    assertEqual((uint8_t)1, renderer.beginFrameCalls);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
+}
+
+unittest(process_flushes_renderer_when_command_handled) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    menu.setScreen(mainScreen);
+    menu.setCursor(ITEM_TOGGLE_INDEX);
+
+    MenuItem::endEdit();
+
+    renderer.endFrameCalls = 0;
+
+    assertTrue(menu.process(ENTER));
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
+}
+
+unittest(poll_flushes_renderer_when_polled_item_redraws) {
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+    PollingMenuItem polledItem;
+    std::vector<MenuItem*> items = {&polledItem};
+    MenuScreen screen(items);
+
+    menu.setScreen(&screen);
+
+    MenuItem::endEdit();
+    GODMODE()->micros += 200000;
+
+    polledItem.wasDrawn = false;
+    renderer.endFrameCalls = 0;
+    menu.poll(100);
+
+    assertTrue(polledItem.wasDrawn);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
+}
+
 unittest(set_screen_skips_initial_label) {
     MenuItem* label = ITEM_LABEL("Title");
     MenuItem* item = ITEM_BASIC("Run");
@@ -153,6 +413,22 @@ unittest(set_screen_skips_initial_label) {
     menu.setScreen(&screen);
     assertEqual((uint8_t)1, menu.getCursor());
     delete label;
+    delete item;
+}
+
+unittest(set_screen_flushes_renderer_frame) {
+    MenuItem* item = ITEM_BASIC("Run");
+    std::vector<MenuItem*> items = {item};
+    MenuScreen screen(items);
+    TrackingRenderer renderer;
+    LcdMenu menu(renderer);
+
+    renderer.beginFrameCalls = 0;
+    renderer.endFrameCalls = 0;
+    menu.setScreen(&screen);
+
+    assertEqual((uint8_t)1, renderer.beginFrameCalls);
+    assertEqual((uint8_t)1, renderer.endFrameCalls);
     delete item;
 }
 

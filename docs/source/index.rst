@@ -8,12 +8,29 @@ It is designed to be easy to use and flexible enough to support a wide range of 
 
 With |project|, you can create a menu system for your Arduino project with minimal effort.
 The library provides a simple API for creating menus and handling user input.
-There are also a number of built-in :doc:`display interfaces <reference/api/display/index>` to choose from,
-including LCD displays and OLED displays *(coming soon)*.
+There are also built-in :doc:`display interfaces <reference/api/display/index>` for
+:doc:`character LCD displays <overview/rendering/character-display>`, including 16x2-style targets,
+and :doc:`graphical displays <overview/rendering/graphical-display>`, including OLED targets.
 
-.. image:: https://i.imgur.com/nViET8b.gif
-    :alt: Example of a menu system created with |project|
-    :align: center
+.. grid:: 1 1 2 2
+
+    .. grid-item::
+        :columns: 12 12 6 6
+
+        **Character display**
+
+        .. image:: https://i.imgur.com/nViET8b.gif
+            :alt: Example of a menu system created with |project| on a character display
+            :align: center
+
+    .. grid-item::
+        :columns: 12 12 6 6
+
+        **Graphical display**
+
+        .. image:: images/home-graphical-display.gif
+            :alt: Example of a menu system created with |project| on a graphical display
+            :align: center
 
 .. grid:: 1 2 2 2
 
@@ -86,4 +103,3 @@ including LCD displays and OLED displays *(coming soon)*.
     reference/api/index
     reference/migration/index
     reference/faq
-

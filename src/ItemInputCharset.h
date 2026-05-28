@@ -5,6 +5,8 @@
 #include "LcdMenu.h"
 #include <utils/lcd_menu_utils.h>
 
+#include <string.h>
+
 class ItemInputCharset : public ItemInput {
   private:
     const char* charset;
@@ -117,6 +119,14 @@ class ItemInputCharset : public ItemInput {
      */
     void abortCharEdit(MenuRenderer* renderer) {
         charEdit = false;
+
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            renderer->viewShift = 0;
+            ItemInput::draw(renderer);
+            LOG(F("ItemInputCharset::abortCharEdit"));
+            return;
+        }
+
         uint8_t cursorCol = renderer->getCursorCol();
         if (cursor < strlen(value)) {
             renderer->draw(value[cursor]);
@@ -133,11 +143,16 @@ class ItemInputCharset : public ItemInput {
     void commitCharEdit(MenuRenderer* renderer) {
         uint8_t length = strlen(value);
         if (cursor < length) {
+            ensureOwnedValue();
             value[cursor] = charset[charsetPosition];
         } else {
             char* buf = new char[length + 2];
             concat(value, charset[charsetPosition], buf);
+            if (ownsValue && value != NULL) {
+                delete[] value;
+            }
             value = buf;
+            ownsValue = true;
         }
         abortCharEdit(renderer);
         LOG(F("ItemInputCharset::commitCharEdit"), charset[charsetPosition]);
@@ -167,6 +182,37 @@ class ItemInputCharset : public ItemInput {
     }
 
     void drawChar(MenuRenderer* renderer) {
+        if (getGraphicalValueSelectionRenderer(renderer) != NULL) {
+            renderer->viewShift = 0;
+            uint8_t length = strlen(value);
+
+            if (cursor < length) {
+                char* preview = new char[length + 1];
+                memcpy(preview, value, length + 1);
+                preview[cursor] = charset[charsetPosition];
+
+                char* originalValue = value;
+                value = preview;
+                ItemInput::draw(renderer);
+                value = originalValue;
+
+                delete[] preview;
+            } else {
+                char* preview = new char[length + 2];
+                memcpy(preview, value, length);
+                preview[length] = charset[charsetPosition];
+                preview[length + 1] = '\0';
+
+                char* originalValue = value;
+                value = preview;
+                ItemInput::draw(renderer);
+                value = originalValue;
+
+                delete[] preview;
+            }
+            return;
+        }
+
         renderer->moveCursor(renderer->getCursorCol(), renderer->getCursorRow());
         renderer->draw(charset[charsetPosition]);
         renderer->moveCursor(renderer->getCursorCol(), renderer->getCursorRow());
