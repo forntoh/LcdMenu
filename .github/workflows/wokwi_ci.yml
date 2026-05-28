@@ -177,7 +177,7 @@ jobs:
           token: ${{ secrets.WOKWI_CLI_TOKEN }}
           scenario: ${{ env.TEST_FILE }}
           timeout: ${{ env.RUN_DURATION }}
-          serial_log_file: wokwi-serial.log
+          serial-log-file: wokwi-serial.log
 
       - name: Upload Wokwi serial log
         if: always() && hashFiles('wokwi-serial.log') != ''
