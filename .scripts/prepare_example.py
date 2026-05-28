@@ -38,19 +38,19 @@ if __name__ == "__main__":
 #include <input/ButtonAdapter.h>"""
 
     replacement2 = """
-Button upBtn(5);
+Button upBtn(25);
 ButtonAdapter upBtnA(&menu, &upBtn, UP);
-Button downBtn(6);
+Button downBtn(26);
 ButtonAdapter downBtnA(&menu, &downBtn, DOWN);
-Button enterBtn(7);
+Button enterBtn(27);
 ButtonAdapter enterBtnA(&menu, &enterBtn, ENTER);
-Button backBtn(8);
+Button backBtn(32);
 ButtonAdapter backBtnA(&menu, &backBtn, BACK);
-Button leftBtn(9);
+Button leftBtn(33);
 ButtonAdapter leftBtnA(&menu, &leftBtn, LEFT);
-Button rightBtn(10);
+Button rightBtn(18);
 ButtonAdapter rightBtnA(&menu, &rightBtn, RIGHT);
-Button backspaceBtn(11);
+Button backspaceBtn(19);
 ButtonAdapter backspaceBtnA(&menu, &backspaceBtn, BACKSPACE);"""
 
     replacement3 = """
