@@ -26,10 +26,10 @@
 <meta content="Item Widget | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=0a3749eb" rel="stylesheet" type="text/css"/>
 <link href="../../_static/pygments_dark.css" id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
-<link href="../../_static/theme.css?v=73505e79" rel="stylesheet" type="text/css"/>
+<link href="../../_static/theme.css?v=979577e3" rel="stylesheet" type="text/css"/>
 <link href="../../_static/sphinx-design.min.css?v=95c83b7e" rel="stylesheet" type="text/css"/>
 <link href="../../_static/custom.css" rel="stylesheet" type="text/css"/>
-<link href="../../_static/awesome-sphinx-design.css?v=c54898a4" rel="stylesheet" type="text/css"/>
+<link href="../../_static/awesome-sphinx-design.css?v=b1d4564d" rel="stylesheet" type="text/css"/>
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
@@ -131,61 +131,64 @@
 </li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../rendering/index.html">Rendering the menu<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="../rendering/character-display.html">Character display renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rendering/graphical-display.html">Graphical display renderer</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../reference/samples/index.html">Code samples<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/List.html">List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ViewShifting.html">ViewShifting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/InputRotary.html">InputRotary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemBack.html">ItemBack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SimpleInput.html">SimpleInput</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/MenuTimeout.html">MenuTimeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/Callbacks.html">Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemLabel.html">ItemLabel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/DynamicMenu.html">DynamicMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/JoystickAdapter.html">JoystickAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemValue.html">ItemValue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/pcf8574_i2c.html">pcf8574_i2c</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeypadShield.html">KeypadShield</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ViewShifting.html">ViewShifting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/RTOS.html">RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ST7920_SPI.html">ST7920_SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SimpleRotary.html">SimpleRotary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SubMenu.html">SubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemValue.html">ItemValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/InputRotary.html">InputRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/pcf8574_i2c.html">pcf8574_i2c</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/DynamicMenu.html">DynamicMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonWithRotaryAdapter.html">ButtonWithRotaryAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/List.html">List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeyboardAdapter.html">KeyboardAdapter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/Widgets.html">Widgets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/UseByRef.html">UseByRef</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ButtonAdapter.html">ButtonAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/CharsetInput.html">CharsetInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/JoystickAdapter.html">JoystickAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/MenuTimeout.html">MenuTimeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/samples/IntFloatValues.html">IntFloatValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SimpleRotary.html">SimpleRotary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/KeypadShield.html">KeypadShield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/Callbacks.html">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SSD1306_I2C.html">SSD1306_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/Basic.html">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SSD1803A_I2C.html">SSD1803A_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/samples/SimpleInput.html">SimpleInput</a></li>
 </ul>
 </li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../../reference/api/index.html">API reference<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBool.html">ItemBool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemInput.html">ItemInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemToggle.html">ItemToggle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/LcdMenu.html">LcdMenu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBack.html">ItemBack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemList.html">ItemList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemZeroWidget.html">BaseItemZeroWidget</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemCommand.html">ItemCommand</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemLabel.html">ItemLabel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/MenuScreen.html">MenuScreen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemRange.html">ItemRange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemValue.html">ItemValue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemInputCharset.html">ItemInputCharset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/LcdMenu.html">LcdMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemToggle.html">ItemToggle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemWidget.html">ItemWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemValue.html">ItemValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemSubMenu.html">ItemSubMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemLabel.html">ItemLabel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemInputCharset.html">ItemInputCharset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemBool.html">ItemBool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemInput.html">ItemInput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemCommand.html">ItemCommand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/MenuScreen.html">MenuScreen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/BaseItemManyWidgets.html">BaseItemManyWidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/ItemRange.html">ItemRange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/renderer/index.html">renderer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/display/index.html">display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/api/widget/index.html">widget</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/api/input/index.html">input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/api/widget/index.html">widget</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/migration/index.html">Migration</a></li>
@@ -279,8 +282,20 @@ especially in long-running applications. Always delete or reuse widgets appropri
 </span><span id="line-7"><span class="w">    </span><span class="n">WIDGET_BOOL</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="s">"Yes"</span><span class="p">,</span><span class="w"> </span><span class="s">"No"</span><span class="p">,</span><span class="w"> </span><span class="s">",%s"</span><span class="p">)),</span>
 </span></code></pre></div>
 </div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-0">
+16x2 I2C character display</label><div class="sd-tab-content docutils">
 <a class="reference internal image-reference" href="../../_images/item-widget-auto.gif"><img alt="Example of an item widget with a list and a boolean widget" src="../../_images/item-widget-auto.gif" style="width: 400px;"/>
 </a>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-1">
+Graphical display</label><div class="sd-tab-content docutils">
+<a class="reference internal image-reference" href="../../_images/graphical-item-widget-auto.gif"><img alt="List and boolean item widget on a graphical display" src="../../_images/graphical-item-widget-auto.gif" style="width: 400px;"/>
+</a>
+</div>
+</div>
 <p>Note: The callback receives the index of the selected option (0-based), not the actual string value.</p>
 <p>In the above example, the ItemWidget allows the user to select an option from “Buy” or “Sell” and also toggle between “Yes” and “No”.
 The user is able to select if the option (Buy or Sell) is carried out automatically or not.</p>
@@ -293,8 +308,20 @@ The user is able to select if the option (Buy or Sell) is carried out automatica
 </span><span id="line-7"><span class="w">    </span><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s">"</span><span class="se">\002</span><span class="s">%d%%"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)),</span>
 </span></code></pre></div>
 </div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-2">
+16x2 I2C character display</label><div class="sd-tab-content docutils">
 <a class="reference internal image-reference" href="../../_images/item-widget-qty.gif"><img alt="Example of an item widget with two range widgets" src="../../_images/item-widget-qty.gif" style="width: 400px;"/>
 </a>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-3">
+Graphical display</label><div class="sd-tab-content docutils">
+<a class="reference internal image-reference" href="../../_images/graphical-item-widget-qty.gif"><img alt="Multiple range item widget on a graphical display" src="../../_images/graphical-item-widget-qty.gif" style="width: 400px;"/>
+</a>
+</div>
+</div>
 <p>In the above example, the ItemWidget allows the user to select a quantity between 1.0 and 100.0 in steps of 0.1 and also select a tolerance between 0 and 100 in steps of 1.
 The selected quantity will be displayed as <strong>“1.0±10%”</strong>, <strong>“1.1±14%”</strong>, <strong>“1.2±17%”</strong>, etc.
 The user is able to select the quantity and tolerance for a particular trade.</p>
@@ -308,8 +335,20 @@ The user is able to select the quantity and tolerance for a particular trade.</p
 </span><span id="line-8"><span class="w">    </span><span class="n">WIDGET_LIST</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">" on %s"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)),</span>
 </span></code></pre></div>
 </div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-4">
+16x2 I2C character display</label><div class="sd-tab-content docutils">
 <a class="reference internal image-reference" href="../../_images/item-widget-freq.gif"><img alt="Example of an item widget with two range widgets and a list widget" src="../../_images/item-widget-freq.gif" style="width: 400px;"/>
 </a>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-5">
+Graphical display</label><div class="sd-tab-content docutils">
+<a class="reference internal image-reference" href="../../_images/graphical-item-widget-freq.gif"><img alt="Range and list item widget on a graphical display" src="../../_images/graphical-item-widget-freq.gif" style="width: 400px;"/>
+</a>
+</div>
+</div>
 <p>Note: The callback receives the index of the selected option (0-based), not the actual string value.</p>
 <p>In the above example, the ItemWidget allows the user to select a frequency for a particular task.
 The user is able to select the hour, minute, and day of the week for the task.
@@ -322,8 +361,20 @@ The selected frequency will be displayed as <strong>“00:00 on Mon”</strong>,
 </span><span id="line-6"><span class="w">    </span><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2020</span><span class="p">,</span><span class="w"> </span><span class="mi">2050</span><span class="p">,</span><span class="w"> </span><span class="s">"/%04d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)),</span>
 </span></code></pre></div>
 </div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-6">
+16x2 I2C character display</label><div class="sd-tab-content docutils">
 <a class="reference internal image-reference" href="../../_images/item-widget-date.gif"><img alt="Example of an item widget with three range widgets" src="../../_images/item-widget-date.gif" style="width: 400px;"/>
 </a>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio"/>
+<label class="sd-tab-label" for="sd-tab-item-7">
+Graphical display</label><div class="sd-tab-content docutils">
+<a class="reference internal image-reference" href="../../_images/graphical-item-widget-date.gif"><img alt="Date range item widget on a graphical display" src="../../_images/graphical-item-widget-date.gif" style="width: 400px;"/>
+</a>
+</div>
+</div>
 <p>In the above example, the ItemWidget allows the user to select a start date for a particular task.
 The user is able to select the day, month, and year for the task.
 The selected date will be displayed as <strong>“01/01/2021”</strong>, <strong>“01/02/2021”</strong>, <strong>“01/03/2021”</strong>, etc.</p>
@@ -380,7 +431,7 @@ The selected pin will be displayed as <strong>“1234”</strong>, <strong>“56
 <script src="../../_static/documentation_options.js?v=7f41d439"></script>
 <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
 <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-<script defer="defer" src="../../_static/theme.js?v=582b20c5"></script>
+<script defer="defer" src="../../_static/theme.js?v=d6a9845b"></script>
 <script src="../../_static/design-tabs.js?v=f930bc37"></script>
 </body>
 </html>
