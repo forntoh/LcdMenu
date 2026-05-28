@@ -59,9 +59,7 @@ jobs:
           - fqbn: arduino:avr:uno
             type: avr
             artifact-name-suffix: arduino-avr-uno
-          - fqbn: esp8266:esp8266:huzzah
-            type: esp8266
-            artifact-name-suffix: esp8266-esp8266-huzzah
+
           - fqbn: arduino:samd:mkr1000
             type: mkr1000
             artifact-name-suffix: arduino-samd-mkr1000
