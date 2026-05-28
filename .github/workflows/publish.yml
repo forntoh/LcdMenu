@@ -56,17 +56,12 @@ jobs:
 
       - name: Check if tag exists
         id: check_tag
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ steps.app_token.outputs.token }}
-          script: |
-            const tag = '${{ env.UPDATED_VERSION }}';
-            const tags = await github.paginate(github.rest.repos.listTags, {
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-            const tagExists = tags.some(t => t.name === tag);
-            core.setOutput('tag_exists', tagExists);
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/$UPDATED_VERSION"; then
+            echo "tag_exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag_exists=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Commit changes
         if: steps.check_tag.outputs.tag_exists == 'false'
@@ -102,7 +97,7 @@ jobs:
         continue-on-error: true
 
       - name: Revert push and delete tag if publish fails
-        if: failure()
+        if: steps.publish.outcome == 'failure' && steps.check_tag.outputs.tag_exists == 'false'
         run: |
           git revert --no-edit HEAD
           git push origin HEAD:${{ github.ref_name }}
