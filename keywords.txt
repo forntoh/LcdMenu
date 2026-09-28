@@ -89,6 +89,7 @@ drawXbm	KEYWORD2
 enabled	KEYWORD2
 ensureOwnedValue	KEYWORD2
 enter	KEYWORD2
+getActiveItem	KEYWORD2
 getActiveWidget	KEYWORD2
 getCallbackInt	KEYWORD2
 getCallbackStr	KEYWORD2
@@ -116,6 +117,7 @@ hide	KEYWORD2
 increment	KEYWORD2
 initCharEdit	KEYWORD2
 invokeCallback	KEYWORD2
+isActiveItem	KEYWORD2
 isList	KEYWORD2
 isOn	KEYWORD2
 isSelectable	KEYWORD2
