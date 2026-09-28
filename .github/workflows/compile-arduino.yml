@@ -89,15 +89,6 @@ jobs:
             libraries:
             sketch-paths: |
               - examples/RTOS
-          # ESP8266 boards
-          - board:
-              type: esp8266
-            platforms: |
-              # Install ESP8266 platform via Boards Manager
-              - name: esp8266:esp8266
-                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
-            libraries:
-            sketch-paths:
           # SAMD boards
           - board:
               type: mkr1000

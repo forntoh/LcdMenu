@@ -10,3 +10,4 @@ Widgets are interactive components that can be added to menu items to provide va
     ../widgets/widget-bool
     ../widgets/widget-list
     ../widgets/widget-range
+    ../widgets/custom-widget

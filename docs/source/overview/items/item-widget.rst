@@ -11,6 +11,7 @@ It is used to create a menu item that can display one or more widgets on the scr
     ../widgets/widget-bool
     ../widgets/widget-list
     ../widgets/widget-range
+    ../widgets/custom-widget
 
 ItemWidget has the following properties:
 
