@@ -53,6 +53,7 @@ class GraphicalDisplayRenderer : public MenuRenderer,
     void captureCurrentFontMetrics();
     void applyItemFont(const MenuItem* item);
 
+  protected:
     uint8_t measureText(const char* text) const;
     uint8_t toggleIndicatorWidth() const;
     uint8_t rowHeight() const;
@@ -71,6 +72,19 @@ class GraphicalDisplayRenderer : public MenuRenderer,
 
     void setDefaultFont(const uint8_t* font);
     bool setItemFont(MenuItem* item, const uint8_t* font);
+
+    /**
+     * @brief Gets the item currently rendered as active (focused).
+     * @return Pointer to the active item, or NULL when no item is active.
+     */
+    const MenuItem* getActiveItem() const { return activeItem; }
+
+    /**
+     * @brief Checks whether the given item is the currently active item.
+     * @param item Item to check, may be NULL.
+     * @return true when the given item matches the active item.
+     */
+    bool isActiveItem(const MenuItem* item) const { return activeItem != NULL && activeItem == item; }
 
     void begin() override;
     void beginFrame() override;
