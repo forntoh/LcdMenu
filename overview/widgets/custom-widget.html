@@ -21,9 +21,9 @@
 <meta content="#ffffff" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="#030711" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>WidgetRange | LcdMenu</title>
-<meta content="WidgetRange | LcdMenu" property="og:title"/>
-<meta content="WidgetRange | LcdMenu" name="twitter:title"/>
+<title>Custom Widgets | LcdMenu</title>
+<meta content="Custom Widgets | LcdMenu" property="og:title"/>
+<meta content="Custom Widgets | LcdMenu" name="twitter:title"/>
 <link href="../../_static/pygments.css?v=0a3749eb" rel="stylesheet" type="text/css"/>
 <link href="../../_static/pygments_dark.css" id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
 <link href="../../_static/theme.css?v=d6d7c91b" rel="stylesheet" type="text/css"/>
@@ -33,8 +33,8 @@
 <link href="../../_static/favicon.png" rel="icon"/>
 <link href="../../search.html" rel="search" title="Search"/>
 <link href="../../genindex.html" rel="index" title="Index"/>
-<link href="custom-widget.html" rel="next" title="Custom Widgets"/>
-<link href="widget-list.html" rel="prev" title="WidgetList"/>
+<link href="../items/item-list.html" rel="next" title="Item List"/>
+<link href="widget-range.html" rel="prev" title="WidgetRange"/>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" @scroll.window="showScrollTop = pageYOffset &gt; 100" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false, showScrollTop: false }">
 <div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
@@ -118,8 +118,8 @@
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Widget overview<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="widget-bool.html">WidgetBool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widget-list.html">WidgetList</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">WidgetRange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom-widget.html">Custom Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="widget-range.html">WidgetRange</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Custom Widgets</a></li>
 </ul>
 </li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../control/index.html">Controlling the menu<button @click.prevent.stop="expanded = !expanded" type="button" x-cloak=""><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-cloak="" x-show="expanded">
@@ -203,7 +203,7 @@
     </a>
 </div>
 <div class="edit-on-github">
-<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/widgets/widget-range.rst" target="_blank">
+<a aria-label="Edit forntoh/LcdMenu on GitHub" class="github-button" data-icon="octicon-pencil" data-size="large" href="https://github.com/forntoh/LcdMenu/edit/master/docs/source/overview/widgets/custom-widget.rst" target="_blank">
       Edit on GitHub
     </a>
 </div>
@@ -246,90 +246,130 @@
 </a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../items/index.html">Item overview</a>
 <div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="../items/item-widget.html">Item Widget</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">WidgetRange</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Custom Widgets</span>
 </nav>
 <div id="content" role="main">
-<section id="widgetrange">
-<h1>WidgetRange<a class="headerlink" href="#widgetrange" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
-<p>The WidgetRange widget is a widget that allows the user to select a value within a range of values by either
-incrementing or decrementing the value.</p>
-<p>Some use cases for the WidgetRange widget include volume control, brightness control, time selection, temperature control, etc.</p>
-<p>The WidgetRange widget has the following properties:</p>
+<section id="custom-widgets">
+<h1>Custom Widgets<a class="headerlink" href="#custom-widgets" title="Link to this heading"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h1>
+<p>The built-in widgets display their value with a printf-style format string (for example <code class="docutils literal notranslate"><span class="pre">"%d"</span></code> or <code class="docutils literal notranslate"><span class="pre">"</span> <span class="pre">on</span> <span class="pre">%s"</span></code>).
+Sometimes that is not enough: you may want to derive the displayed text from a function, look it up in your own tables, or format several state variables at once.</p>
+<p>For such cases the library provides an escape hatch that requires no library changes: every widget renders itself through a <code class="docutils literal notranslate"><span class="pre">protected</span></code> virtual <code class="docutils literal notranslate"><span class="pre">draw</span></code> method, so you can subclass an existing widget and override only how it displays its value.</p>
+<section id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#how-it-works'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>Every widget inherits from <a class="reference internal" href="../../reference/api/widget/BaseWidget.html#_CPPv410BaseWidget" title="BaseWidget"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">BaseWidget</span></code></a>, which declares the method that turns the widget’s state into display text:</p>
+<p><code class="docutils literal notranslate"><span class="pre">uint8_t</span> <span class="pre">draw(char*</span> <span class="pre">buffer,</span> <span class="pre">const</span> <span class="pre">uint8_t</span> <span class="pre">start</span> <span class="pre">=</span> <span class="pre">0)</span></code></p>
+<p>When a menu item is rendered, it draws each of its widgets into a shared character buffer:</p>
 <ul class="simple">
-<li><p><strong>value</strong>: The initial value of the widget.</p></li>
-<li><p><strong>step</strong>: The amount by which the value should be incremented or decremented.</p></li>
-<li><p><strong>min</strong>: The minimum value that the widget can take.</p></li>
-<li><p><strong>max</strong>: The maximum value that the widget can take.</p></li>
-<li><p><strong>format</strong>: The format string used to display the value (default: “%d”).</p></li>
-<li><p><strong>cursorOffset</strong>: The offset of the cursor from the end of the widget when the widget is focused (default: 0).</p></li>
-<li><p><strong>cycle</strong>: Whether the selection should cycle back to the beginning when the end of the range is reached (default: false).</p></li>
-<li><p><strong>callback</strong>: A callback function that will be called when the value is changed (default: nullptr).
-The callback is not required if you have multiple widgets in a WidgetItem and you want to handle the selection in the WidgetItem callback.</p></li>
+<li><p><strong>buffer</strong>: the buffer to draw into. It is <code class="docutils literal notranslate"><span class="pre">ITEM_DRAW_BUFFER_SIZE</span></code> (64) bytes long.</p></li>
+<li><p><strong>start</strong>: the index in the buffer where this widget must start writing. An item hosting several widgets draws them one after another into the same buffer.</p></li>
+<li><p><strong>return value</strong>: the number of characters written into the buffer. The item uses it to place the next widget on the same line.</p></li>
 </ul>
-<p>The following are examples of how to create WidgetRange widgets:</p>
-<section id="price-picker">
-<h2>Price picker<a class="headerlink" href="#price-picker" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#price-picker'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="s">"%.1d€"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-</span></code></pre></div>
-</div>
-<p>In the above example the WidgetRange allows the user to select a price between 0€ and 1000€ in steps of 5€.
-The selected price will be displayed as <strong>“10€”</strong>, <strong>“15€”</strong>, <strong>“20€”</strong>, etc with the cursor placed at the end of the value ie. on the ‘€’.</p>
+<p>The built-in widgets implement this method with <code class="docutils literal notranslate"><span class="pre">snprintf</span></code> and the widget’s <code class="docutils literal notranslate"><span class="pre">format</span></code> string:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../reference/api/widget/BaseWidgetValue.html#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">BaseWidgetValue</span></code></a> formats the raw value.</p></li>
+<li><p><a class="reference internal" href="../../reference/api/widget/WidgetRange.html#_CPPv4I00E11WidgetRange" title="WidgetRange"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetRange</span></code></a> formats the current range value.</p></li>
+<li><p><a class="reference internal" href="../../reference/api/widget/WidgetList.html#_CPPv4I00E10WidgetList" title="WidgetList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetList</span></code></a> formats the <strong>selected list entry</strong> (not the raw index).</p></li>
+</ul>
+<p>To create a custom widget:</p>
+<ol class="arabic simple">
+<li><p>Subclass an existing widget (<a class="reference internal" href="../../reference/api/widget/WidgetRange.html#_CPPv4I00E11WidgetRange" title="WidgetRange"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetRange</span></code></a>, <a class="reference internal" href="../../reference/api/widget/WidgetList.html#_CPPv4I00E10WidgetList" title="WidgetList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetList</span></code></a>, <a class="reference internal" href="../../reference/api/widget/WidgetBool.html#_CPPv4I0E10WidgetBool" title="WidgetBool"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetBool</span></code></a>) or <a class="reference internal" href="../../reference/api/widget/BaseWidgetValue.html#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">BaseWidgetValue</span></code></a> directly. Subclassing an existing widget keeps all of its editing behavior (UP/DOWN handling, range clamping, cycling, cancel/restore on BACK) and lets you change only the display.</p></li>
+<li><p>Override the <code class="docutils literal notranslate"><span class="pre">protected</span></code> virtual <code class="docutils literal notranslate"><span class="pre">draw</span></code> method. Write your display text into <code class="docutils literal notranslate"><span class="pre">buffer</span></code> starting at <code class="docutils literal notranslate"><span class="pre">start</span></code>, never write past <code class="docutils literal notranslate"><span class="pre">ITEM_DRAW_BUFFER_SIZE</span></code>, and return the number of characters written.</p></li>
+<li><p>Compose the widget into a menu item with <code class="docutils literal notranslate"><span class="pre">ITEM_WIDGET</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">ITEM_RANGE</span></code>/<code class="docutils literal notranslate"><span class="pre">ITEM_LIST</span></code> convenience macros. <code class="docutils literal notranslate"><span class="pre">ITEM_WIDGET</span></code> accepts any <code class="docutils literal notranslate"><span class="pre">BaseWidgetValue&lt;T&gt;*</span></code>, including pointers to your own subclasses.</p></li>
+</ol>
 </section>
-<section id="time-picker">
-<h2>Time picker<a class="headerlink" href="#time-picker" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#time-picker'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="p">...</span>
-</span><span id="line-2"><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="s">"%02d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">),</span>
-</span><span id="line-3"><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w"> </span><span class="s">":%02d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">),</span>
-</span><span id="line-4"><span class="p">...</span>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#example'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
+<p>The following example shows a custom range widget whose value is displayed using a <code class="docutils literal notranslate"><span class="pre">stringForValue</span></code> function instead of a printf format string.
+The value is still adjusted between 0 and 100 in steps of 1 (all inherited from <a class="reference internal" href="../../reference/api/widget/WidgetRange.html#_CPPv4I00E11WidgetRange" title="WidgetRange"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetRange</span></code></a>), but the widget displays <strong>“Low”</strong>, <strong>“Medium”</strong> or <strong>“High”</strong>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ItemWidget.h&gt;</span>
+</span><span id="line-2"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;LcdMenu.h&gt;</span>
+</span><span id="line-3"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;MenuScreen.h&gt;</span>
+</span><span id="line-4"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;display/LiquidCrystal_I2CAdapter.h&gt;</span>
+</span><span id="line-5"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;input/KeyboardAdapter.h&gt;</span>
+</span><span id="line-6"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;renderer/CharacterDisplayRenderer.h&gt;</span>
+</span><span id="line-7"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;widget/WidgetRange.h&gt;</span>
+</span><span id="line-8">
+</span><span id="line-9"><span class="cp">#define LCD_ROWS 2</span>
+</span><span id="line-10"><span class="cp">#define LCD_COLS 16</span>
+</span><span id="line-11"><span class="cp">#define LCD_ADDR 0x27</span>
+</span><span id="line-12">
+</span><span id="line-13"><span class="c1">// The function that decides how the value is displayed.</span>
+</span><span id="line-14"><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="nf">stringForValue</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-15"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"Low"</span><span class="p">;</span>
+</span><span id="line-16"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">67</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"Medium"</span><span class="p">;</span>
+</span><span id="line-17"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">"High"</span><span class="p">;</span>
+</span><span id="line-18"><span class="p">}</span>
+</span><span id="line-19">
+</span><span id="line-20"><span class="c1">// A range widget that draws its value with stringForValue()</span>
+</span><span id="line-21"><span class="c1">// instead of a printf format string.</span>
+</span><span id="line-22"><span class="k">class</span><span class="w"> </span><span class="nc">WidgetLevel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">WidgetRange</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-23"><span class="w">  </span><span class="k">public</span><span class="o">:</span>
+</span><span id="line-24"><span class="w">    </span><span class="n">WidgetLevel</span><span class="p">(</span>
+</span><span id="line-25"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">,</span>
+</span><span id="line-26"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">step</span><span class="p">,</span>
+</span><span id="line-27"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">min</span><span class="p">,</span>
+</span><span id="line-28"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="p">,</span>
+</span><span id="line-29"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">cursorOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="line-30"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">cycle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
+</span><span id="line-31"><span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">callback</span><span class="p">)(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span>
+</span><span id="line-32"><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">WidgetRange</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">step</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">,</span><span class="w"> </span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="n">cursorOffset</span><span class="p">,</span><span class="w"> </span><span class="n">cycle</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="line-33">
+</span><span id="line-34"><span class="w">  </span><span class="k">protected</span><span class="o">:</span>
+</span><span id="line-35"><span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-36"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">ITEM_DRAW_BUFFER_SIZE</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="line-37"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">snprintf</span><span class="p">(</span><span class="n">buffer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">ITEM_DRAW_BUFFER_SIZE</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="s">"%s"</span><span class="p">,</span><span class="w"> </span><span class="n">stringForValue</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">));</span>
+</span><span id="line-38"><span class="w">    </span><span class="p">}</span>
+</span><span id="line-39"><span class="p">};</span>
+</span><span id="line-40">
+</span><span id="line-41"><span class="n">MENU_SCREEN</span><span class="p">(</span>
+</span><span id="line-42"><span class="w">    </span><span class="n">mainScreen</span><span class="p">,</span>
+</span><span id="line-43"><span class="w">    </span><span class="n">mainItems</span><span class="p">,</span>
+</span><span id="line-44"><span class="w">    </span><span class="n">ITEM_WIDGET</span><span class="p">(</span>
+</span><span id="line-45"><span class="w">        </span><span class="s">"Level"</span><span class="p">,</span>
+</span><span id="line-46"><span class="w">        </span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">level</span><span class="p">);</span><span class="w"> </span><span class="p">},</span>
+</span><span id="line-47"><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">WidgetLevel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)));</span>
+</span><span id="line-48">
+</span><span id="line-49"><span class="n">LiquidCrystal_I2C</span><span class="w"> </span><span class="nf">lcd</span><span class="p">(</span><span class="n">LCD_ADDR</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_COLS</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_ROWS</span><span class="p">);</span>
+</span><span id="line-50"><span class="n">LiquidCrystal_I2CAdapter</span><span class="w"> </span><span class="nf">lcdAdapter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd</span><span class="p">);</span>
+</span><span id="line-51"><span class="n">CharacterDisplayRenderer</span><span class="w"> </span><span class="nf">renderer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdAdapter</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_COLS</span><span class="p">,</span><span class="w"> </span><span class="n">LCD_ROWS</span><span class="p">);</span>
+</span><span id="line-52"><span class="n">LcdMenu</span><span class="w"> </span><span class="nf">menu</span><span class="p">(</span><span class="n">renderer</span><span class="p">);</span>
+</span><span id="line-53"><span class="n">KeyboardAdapter</span><span class="w"> </span><span class="nf">keyboard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Serial</span><span class="p">);</span>
+</span><span id="line-54">
+</span><span id="line-55"><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-56"><span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+</span><span id="line-57"><span class="w">    </span><span class="n">renderer</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span><span id="line-58"><span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="n">setScreen</span><span class="p">(</span><span class="n">mainScreen</span><span class="p">);</span>
+</span><span id="line-59"><span class="p">}</span>
+</span><span id="line-60">
+</span><span id="line-61"><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-62"><span class="w">    </span><span class="n">keyboard</span><span class="p">.</span><span class="n">observe</span><span class="p">();</span>
+</span><span id="line-63"><span class="p">}</span>
 </span></code></pre></div>
 </div>
-<p>In the above example the WidgetRange allows the user to select a time between 00:00 and 23:59.
-The selected time will be displayed as <strong>“00:00”</strong>, <strong>“00:01”</strong>, <strong>“00:02”</strong>, etc with the cursor placed at the end of the value ie. on the last digit.</p>
-</section>
-<section id="date-picker">
-<h2>Date picker<a class="headerlink" href="#date-picker" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#date-picker'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="p">...</span>
-</span><span id="line-2"><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="s">"%02d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">),</span>
-</span><span id="line-3"><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s">"/%02d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">),</span>
-</span><span id="line-4"><span class="n">WIDGET_RANGE</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2021</span><span class="p">,</span><span class="w"> </span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="s">"/%04d"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">),</span>
-</span><span id="line-5"><span class="p">...</span>
-</span></code></pre></div>
-</div>
-<p>In the above example the WidgetRange allows the user to select a date between 01/01/2021 and 31/12/2025.
-The selected date will be displayed as <strong>“01/01/2021”</strong>, <strong>“01/02/2021”</strong>, <strong>“01/03/2021”</strong>, etc with the cursor placed at the end of the value ie. on the last digit.</p>
-</section>
-<section id="temperature-picker-with-reference-value">
-<h2>Temperature picker (with reference value)<a class="headerlink" href="#temperature-picker-with-reference-value" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#temperature-picker-with-reference-value'"><svg height="1em" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">int8_t</span><span class="w"> </span><span class="n">selectedTemperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
-</span><span id="line-2">
-</span><span id="line-3"><span class="n">WIDGET_RANGE_REF</span><span class="p">(</span><span class="n">selectedTemperature</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="s">"%d°C"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
-</span></code></pre></div>
-</div>
-<p>In the above example the WidgetRange allows the user to select a temperature between 0°C and 40°C.
-The selected temperature value can be updated by changing the value of the <strong>selectedTemperature</strong> variable.
-After the value is updated, the WidgetRange will automatically update the selected temperature on the next polling cycle (if <a class="reference internal" href="../../reference/api/LcdMenu.html#_CPPv4N7LcdMenu4pollE8uint16_t" title="LcdMenu::poll"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">polling</span></code></a> is enabled) or
-immediately if you call the <a class="reference internal" href="../../reference/api/LcdMenu.html#_CPPv4N7LcdMenu7refreshEv" title="LcdMenu::refresh"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">refresh</span></code></a> function.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The referenced variable (<code class="docutils literal notranslate"><span class="pre">selectedTemperature</span></code>) must remain valid for the widget’s lifetime to ensure proper and predictable updates.
-Invalidating the referenced variable (e.g., by going out of scope or being deleted) can lead to undefined behavior.
-Ensure that the variable’s lifetime exceeds or matches the widget’s lifetime to avoid such issues.</p>
-</div>
-<p>For a complete example of using <code class="docutils literal notranslate"><span class="pre">WIDGET_RANGE_REF</span></code>, see the <a class="reference internal" href="../../reference/samples/UseByRef.html"><span class="doc">use by ref example</span></a>.</p>
+<p>In the above example the item displays <strong>“Low”</strong> for values below 34, <strong>“Medium”</strong> for values below 67 and <strong>“High”</strong> otherwise, as determined by <code class="docutils literal notranslate"><span class="pre">stringForValue</span></code>.
+The ItemWidget callback receives the widget’s actual value (an <code class="docutils literal notranslate"><span class="pre">int</span></code>), not the displayed text.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>The override should stay in a <code class="docutils literal notranslate"><span class="pre">protected</span></code> section of your subclass, matching how the built-in widgets declare <code class="docutils literal notranslate"><span class="pre">draw</span></code> (it is declared <code class="docutils literal notranslate"><span class="pre">protected</span></code> in <a class="reference internal" href="../../reference/api/widget/BaseWidget.html#_CPPv410BaseWidget" title="BaseWidget"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">BaseWidget</span></code></a>).</p></li>
+<li><p>Always respect the <code class="docutils literal notranslate"><span class="pre">start</span></code> offset and the <code class="docutils literal notranslate"><span class="pre">ITEM_DRAW_BUFFER_SIZE</span></code> limit, and return the number of characters written, exactly like the built-in widgets do.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">format</span></code> string is still required by the <a class="reference internal" href="../../reference/api/widget/WidgetRange.html#_CPPv4I00E11WidgetRange" title="WidgetRange"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">WidgetRange</span></code></a> constructor, but it is ignored by the custom <code class="docutils literal notranslate"><span class="pre">draw</span></code> method.</p></li>
+<li><p>Custom widgets are composed with <code class="docutils literal notranslate"><span class="pre">ITEM_WIDGET</span></code> (see the <a class="reference internal" href="../items/item-widget.html"><span class="doc">ItemWidget</span></a> page); the behavior you inherit comes from <a class="reference internal" href="widget-range.html"><span class="doc">WidgetRange</span></a>, <a class="reference internal" href="widget-list.html"><span class="doc">WidgetList</span></a> and <a class="reference internal" href="widget-bool.html"><span class="doc">WidgetBool</span></a>.</p></li>
+</ul>
+<p>Find more information about the base classes in the <a class="reference internal" href="../../reference/api/widget/BaseWidgetValue.html#_CPPv4I0E15BaseWidgetValue" title="BaseWidgetValue"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">API</span> <span class="pre">reference</span></code></a>.</p>
 </section>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="widget-list.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="widget-range.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        WidgetList
+        WidgetRange
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="custom-widget.html">
-        Custom Widgets
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../items/item-list.html">
+        Item List
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>
@@ -338,10 +378,8 @@ Ensure that the variable’s lifetime exceeds or matches the widget’s lifetime
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] h-full overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#price-picker'" class="reference internal" href="#price-picker">Price picker</a></li>
-<li><a :data-current="activeSection === '#time-picker'" class="reference internal" href="#time-picker">Time picker</a></li>
-<li><a :data-current="activeSection === '#date-picker'" class="reference internal" href="#date-picker">Date picker</a></li>
-<li><a :data-current="activeSection === '#temperature-picker-with-reference-value'" class="reference internal" href="#temperature-picker-with-reference-value">Temperature picker (with reference value)</a></li>
+<li><a :data-current="activeSection === '#how-it-works'" class="reference internal" href="#how-it-works">How it works</a></li>
+<li><a :data-current="activeSection === '#example'" class="reference internal" href="#example">Example</a></li>
 </ul>
 </div>
 </aside>
